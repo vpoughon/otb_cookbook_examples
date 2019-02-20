@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ComputeConfusionMatrix &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ComputeImagesStatistics" href="app_ComputeImagesStatistics.html" />
+    <link rel="prev" title="ClassificationMapRegularization" href="app_ClassificationMapRegularization.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Learning.html">Learning</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ClassificationMapRegularization.html">ClassificationMapRegularization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ComputeConfusionMatrix</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeImagesStatistics.html">ComputeImagesStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_FusionOfClassifications.html">FusionOfClassifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageClassifier.html">ImageClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageDimensionalityReduction.html">ImageDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_KMeansClassification.html">KMeansClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MultiImageSamplingRate.html">MultiImageSamplingRate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_PolygonClassStatistics.html">PolygonClassStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_PredictRegression.html">PredictRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SOMClassification.html">SOMClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleAugmentation.html">SampleAugmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleExtraction.html">SampleExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleSelection.html">SampleSelection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainDimensionalityReduction.html">TrainDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainImagesClassifier.html">TrainImagesClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainRegression.html">TrainRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainVectorClassifier.html">TrainVectorClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorClassifier.html">VectorClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDimensionalityReduction.html">VectorDimensionalityReduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Learning.html">Learning</a> &raquo;</li>
+        
+      <li>ComputeConfusionMatrix</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_ComputeConfusionMatrix.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="computeconfusionmatrix">
+<span id="app-computeconfusionmatrix"></span><h1>ComputeConfusionMatrix<a class="headerlink" href="#computeconfusionmatrix" title="Permalink to this headline">¶</a></h1>
+<p>Computes the confusion matrix of a classification</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application computes the confusion matrix of a classification map relative to a ground truth dataset. This ground truth can be given as a raster or a vector data. Only reference and produced pixels with values different from NoData are handled in the calculation of the confusion matrix. The confusion matrix is organized the following way: rows = reference labels, columns = produced labels. In the header of the output file, the reference and produced class labels are ordered according to the rows/columns of the confusion matrix.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#ground-truth-as-a-raster-image-options" id="id1">Ground truth as a raster image options</a></li>
+<li><a class="reference internal" href="#ground-truth-as-a-vector-data-file-options" id="id2">Ground truth as a vector data file options</a></li>
+</ul>
+</div>
+<p><strong>Input Image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The input classification image.</p>
+<p><strong>Matrix output</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Filename to store the output matrix (csv format)</p>
+<p><strong>set the output format to contingency table or confusion matrix</strong> <code class="code docutils literal notranslate"><span class="pre">-format</span> <span class="pre">[confusionmatrix|contingencytable]</span></code> <em>Default value: confusionmatrix</em> <br />
+Choice of the output format as a contingency table for unsupervised algorithmsor confusion matrix for supervised ones.</p>
+<ul class="simple">
+<li><strong>Choice of a confusion matrix as output.</strong> <br /></li>
+<li><strong>Choice of a contingency table as output.</strong> <br /></li>
+</ul>
+<p><strong>Ground truth</strong> <code class="code docutils literal notranslate"><span class="pre">-ref</span> <span class="pre">[raster|vector]</span></code> <em>Default value: raster</em> <br />
+Choice of ground truth format</p>
+<ul class="simple">
+<li><strong>Ground truth as a raster image</strong> <br /></li>
+<li><strong>Ground truth as a vector data file</strong> <br /></li>
+</ul>
+<div class="section" id="ground-truth-as-a-raster-image-options">
+<h3><a class="toc-backref" href="#id1">Ground truth as a raster image options</a><a class="headerlink" href="#ground-truth-as-a-raster-image-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Input reference image</strong> <code class="code docutils literal notranslate"><span class="pre">-ref.raster.in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+Input image containing the ground truth labels</p>
+<p><strong>Value for nodata pixels in ref raster</strong> <code class="code docutils literal notranslate"><span class="pre">-ref.raster.nodata</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Label to be treated as no data in ref raster.</p>
+</div>
+<div class="section" id="ground-truth-as-a-vector-data-file-options">
+<h3><a class="toc-backref" href="#id2">Ground truth as a vector data file options</a><a class="headerlink" href="#ground-truth-as-a-vector-data-file-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Input reference vector data</strong> <code class="code docutils literal notranslate"><span class="pre">-ref.vector.in</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Input vector data of the ground truth</p>
+<p><strong>Field name</strong> <code class="code docutils literal notranslate"><span class="pre">-ref.vector.field</span> <span class="pre">string</span></code> <br />
+Field name containing the label values</p>
+<p><strong>Value for nodata pixels in ref vector</strong> <code class="code docutils literal notranslate"><span class="pre">-ref.vector.nodata</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Label to be treated as no data in ref vector. Please note that this value is always used in vector mode, to generate default values. Please set it to a value that does not correspond to a class label.</p>
+<hr class="docutils" />
+<p><strong>Value for nodata pixels in input image</strong> <code class="code docutils literal notranslate"><span class="pre">-nodatalabel</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Label to be treated as no data in input image</p>
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_ComputeConfusionMatrix -in clLabeledImageQB1.tif -out ConfusionMatrix.csv -ref vector -ref.vector.in VectorData_QB1_bis.shp -ref.vector.field Class -ref.vector.nodata <span class="m">255</span>
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;ComputeConfusionMatrix&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;clLabeledImageQB1.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;ConfusionMatrix.csv&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;ref.vector.in&quot;</span><span class="p">,</span> <span class="s2">&quot;VectorData_QB1_bis.shp&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_ComputeImagesStatistics.html" class="btn btn-neutral float-right" title="ComputeImagesStatistics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_ClassificationMapRegularization.html" class="btn btn-neutral" title="ClassificationMapRegularization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

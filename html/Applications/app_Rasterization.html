@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Rasterization &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="VectorDataExtractROI" href="app_VectorDataExtractROI.html" />
+    <link rel="prev" title="OSMDownloader" href="app_OSMDownloader.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ConcatenateVectorData.html">ConcatenateVectorData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_KmzExport.html">KmzExport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_OSMDownloader.html">OSMDownloader</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Rasterization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDataExtractROI.html">VectorDataExtractROI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDataReprojection.html">VectorDataReprojection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDataSetField.html">VectorDataSetField</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDataTransform.html">VectorDataTransform</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Vector_Data_Manipulation.html">Vector Data Manipulation</a> &raquo;</li>
+        
+      <li>Rasterization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_Rasterization.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rasterization">
+<span id="app-rasterization"></span><h1>Rasterization<a class="headerlink" href="#rasterization" title="Permalink to this headline">¶</a></h1>
+<p>Reproject and rasterize a vector dataset</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Reproject and rasterize a vector dataset. The grid of the rasterized output can be set by using a reference image, or by setting all parmeters (origin, size, spacing) by hand. In the latter case, at least the spacing (ground sampling distance) is needed (other parameters are computed automatically). The rasterized output can also be in a different projection reference system than the input dataset.</p>
+<p>There are two rasterize mode available in the application. The first is the binary mode: it allows rendering all pixels belonging to a geometry of the input dataset in the foreground color, while rendering the other in background color. The second one allows rendering pixels belonging to a geometry with respect to an attribute of this geometry. The field of the attribute to render can be set by the user. In the second mode, the background value is still used for unassociated pixels.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#binary-mode-options" id="id1">Binary mode options</a></li>
+<li><a class="reference internal" href="#attribute-burning-mode-options" id="id2">Attribute burning mode options</a></li>
+</ul>
+</div>
+<p><strong>Input vector dataset</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">vectorfile</span></code> <em>Mandatory</em> <br />
+The input vector dataset to be rasterized</p>
+<p><strong>Output image</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+An output image containing the rasterized vector dataset</p>
+<p><strong>Input reference image</strong> <code class="code docutils literal notranslate"><span class="pre">-im</span> <span class="pre">image</span></code> <br />
+A reference image from which to import output grid and projection reference system information.</p>
+<p><strong>Output size x</strong> <code class="code docutils literal notranslate"><span class="pre">-szx</span> <span class="pre">int</span></code> <br />
+Output size along x axis (useless if support image is given)</p>
+<p><strong>Output size y</strong> <code class="code docutils literal notranslate"><span class="pre">-szy</span> <span class="pre">int</span></code> <br />
+Output size along y axis (useless if support image is given)</p>
+<p><strong>Output EPSG code</strong> <code class="code docutils literal notranslate"><span class="pre">-epsg</span> <span class="pre">int</span></code> <br />
+EPSG code for the output projection reference system (EPSG 4326 for WGS84, 32631 for UTM31N…,useless if support image is given)</p>
+<p><strong>Output Upper-left x</strong> <code class="code docutils literal notranslate"><span class="pre">-orx</span> <span class="pre">float</span></code> <br />
+Output upper-left corner x coordinate (useless if support image is given)</p>
+<p><strong>Output Upper-left y</strong> <code class="code docutils literal notranslate"><span class="pre">-ory</span> <span class="pre">float</span></code> <br />
+Output upper-left corner y coordinate (useless if support image is given)</p>
+<p><strong>Spacing (GSD) x</strong> <code class="code docutils literal notranslate"><span class="pre">-spx</span> <span class="pre">float</span></code> <br />
+Spacing (ground sampling distance) along x axis (useless if support image is given)</p>
+<p><strong>Spacing (GSD) y</strong> <code class="code docutils literal notranslate"><span class="pre">-spy</span> <span class="pre">float</span></code> <br />
+Spacing (ground sampling distance) along y axis (useless if support image is given)</p>
+<p><strong>Background value</strong> <code class="code docutils literal notranslate"><span class="pre">-background</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+Default value for pixels not belonging to any geometry</p>
+<p><strong>Rasterization mode</strong> <code class="code docutils literal notranslate"><span class="pre">-mode</span> <span class="pre">[binary|attribute]</span></code> <em>Default value: binary</em> <br />
+Choice of rasterization modes</p>
+<ul class="simple">
+<li><strong>Binary mode</strong> <br /> In this mode, pixels within a geometry will hold the user-defined foreground value</li>
+<li><strong>Attribute burning mode</strong> <br /> In this mode, pixels within a geometry will hold the value of a user-defined field extracted from this geometry.</li>
+</ul>
+<div class="section" id="binary-mode-options">
+<h3><a class="toc-backref" href="#id1">Binary mode options</a><a class="headerlink" href="#binary-mode-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Foreground value</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.binary.foreground</span> <span class="pre">float</span></code> <em>Default value: 255</em> <br />
+Value for pixels inside a geometry</p>
+</div>
+<div class="section" id="attribute-burning-mode-options">
+<h3><a class="toc-backref" href="#id2">Attribute burning mode options</a><a class="headerlink" href="#attribute-burning-mode-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>The attribute field to burn</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.attribute.field</span> <span class="pre">string</span></code> <em>Default value: DN</em> <br />
+Name of the attribute field to burn</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_Rasterization -in qb_RoadExtract_classification.shp -out rasterImage.tif -spx <span class="m">1</span>. -spy <span class="m">1</span>.
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;Rasterization&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;qb_RoadExtract_classification.shp&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;rasterImage.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;spx&quot;</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;spy&quot;</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">For now, support of input dataset with multiple layers having different projection reference system is limited.</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_VectorDataExtractROI.html" class="btn btn-neutral float-right" title="VectorDataExtractROI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_OSMDownloader.html" class="btn btn-neutral" title="OSMDownloader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

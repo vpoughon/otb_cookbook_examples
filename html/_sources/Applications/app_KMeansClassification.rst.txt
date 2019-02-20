@@ -1,0 +1,142 @@
+.. _app-KMeansClassification:
+
+KMeansClassification
+====================
+
+
+Unsupervised KMeans image classification
+
+Description
+-----------
+
+Unsupervised KMeans image classification. This is a composite application, using existing training and classification applications. The SharkKMeans model is used.
+
+This application is only available if OTB is compiled with Shark support(CMake option :code:`OTB_USE_SHARK=ON`).
+
+The steps of this composite application:
+
+1) :ref:`app-ImageEnvelope`: create a shapefile (1 polygon),
+2) :ref:`app-PolygonClassStatistics`: compute the statistics,
+3) :ref:`app-SampleSelection`: select the samples by constant strategy in the shapefile (1000000 samples max),
+4) :ref:`app-SampleExtraction`: extract the samples descriptors (update of :ref:`app-SampleSelection` output file),
+5) :ref:`app-ComputeImagesStatistics`: compute images second order statistics,
+6) :ref:`app-TrainVectorClassifier`: train the SharkKMeans model,
+7) :ref:`app-ImageClassifier`: perform the classification of the input image according to a model file.
+
+It's possible to choice random/periodic modes of the :ref:`app-SampleSelection` application.
+If you want keep the temporary files (sample selected, model file, ...), initialize cleanup parameter.
+For more information on shark KMeans algorithm [1].
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image filename.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image containing class labels
+
+**Number of classes** :code:`-nc int` *Default value: 5* |br|
+Number of modes, which will be used to generate class membership.
+
+**Training set size** :code:`-ts int` *Default value: 100* |br|
+Size of the training set (in pixels).
+
+**Maximum number of iterations** :code:`-maxit int` *Default value: 1000* |br|
+Maximum number of iterations for the learning step.
+
+**Centroid filename** :code:`-outmeans filename [dtype]` |br|
+Output text file containing centroid positions
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Sampler type** :code:`-sampler [periodic|random]` *Default value: periodic* |br|
+Type of sampling (periodic, pattern based, random)
+
+* **Periodic sampler** |br| Takes samples regularly spaced
+
+* **Random sampler** |br| The positions to select are randomly shuffled.
+
+
+
+Periodic sampler options
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Jitter amplitude** :code:`-sampler.periodic.jitter int` *Default value: 0* |br|
+Jitter amplitude added during sample selection (0 = no jitter)
+
+
+
+------------
+
+**Validity Mask** :code:`-vm image` |br|
+Validity mask, only non-zero pixels will be used to estimate KMeans modes.
+
+**Label mask value** :code:`-nodatalabel int` *Default value: 0* |br|
+By default, hidden pixels will have the assigned label 0 in the output image. It's possible to define the label mask by another value, but be careful to not take a label from another class. This application initialize the labels from 0 to N-1, N is the number of class (defined by 'nc' parameter).
+
+**Temporary files cleaning** :code:`-cleanup bool` *Default value: true* |br|
+If activated, the application will try to clean all temporary files it created
+
+**Random seed** :code:`-rand int` |br|
+Set a specific random seed with integer value.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_KMeansClassification -in QB_1_ortho.tif -ts 1000 -nc 5 -maxit 1000 -out ClassificationFilterOutput.tif uint8
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("KMeansClassification")
+
+	app.SetParameterString("in", "QB_1_ortho.tif")
+	app.SetParameterInt("ts", 1000)
+	app.SetParameterInt("nc", 5)
+	app.SetParameterInt("maxit", 1000)
+	app.SetParameterString("out", "ClassificationFilterOutput.tif")
+	app.SetParameterOutputImagePixelType("out", 1)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The application doesn't support NaN in the input image
+
+See also
+--------
+
+| :ref:`app-ImageEnvelope`, :ref:`app-PolygonClassStatistics`, :ref:`app-SampleSelection`, :ref:`app-SampleExtraction`, :ref:`app-PolygonClassStatistics`, :ref:`app-TrainVectorClassifier`, :ref:`app-ImageClassifier`.
+| 
+| [1] http://image.diku.dk/shark/sphinx_pages/build/html/rest_sources/tutorials/algorithms/kmeans.html

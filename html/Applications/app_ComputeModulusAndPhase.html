@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ComputeModulusAndPhase &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SARBurstExtraction" href="app_SARBurstExtraction.html" />
+    <link rel="prev" title="SAR" href="SAR.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="SAR.html">SAR</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ComputeModulusAndPhase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_SARBurstExtraction.html">SARBurstExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SARConcatenateBursts.html">SARConcatenateBursts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SARDeburst.html">SARDeburst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SARDecompositions.html">SARDecompositions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SARPolarMatrixConvert.html">SARPolarMatrixConvert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SARPolarSynth.html">SARPolarSynth</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="SAR.html">SAR</a> &raquo;</li>
+        
+      <li>ComputeModulusAndPhase</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_ComputeModulusAndPhase.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="computemodulusandphase">
+<span id="app-computemodulusandphase"></span><h1>ComputeModulusAndPhase<a class="headerlink" href="#computemodulusandphase" title="Permalink to this headline">¶</a></h1>
+<p>This application computes the modulus and the phase of a complex SAR image or an image with 2 components (real and imaginary parts).</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application computes the modulus and the phase of a complex SAR image. The input should be a single band image with complex pixels or a 2 bands image (real and imaginary components in separate bands).</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p><strong>Input Image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+Input image (complex single band or 2 bands (real/imaginary parts))</p>
+<p><strong>Modulus</strong> <code class="code docutils literal notranslate"><span class="pre">-modulus</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Modulus of the input image computes with the
+following formula: <img class="math" src="../_images/math/e2c95308ece0f92d783ce2bc5588999414deb7e5.png" alt="\sqrt{real*real + imag*imag}"/> where real and imag
+are respectively the real and the imaginary part of the input complex image.</p>
+<p><strong>Phase</strong> <code class="code docutils literal notranslate"><span class="pre">-phase</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Phase of the input image computes with the following formula:
+<img class="math" src="../_images/math/64dc241a4984ba4d436f59f26d6f97aaf398f61b.png" alt="\tan^{-1}(\frac{imag}{real})"/> where real and imag are respectively the real and
+the imaginary part of the input complex image.</p>
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_ComputeModulusAndPhase -in monobandComplexFloat.tif -modulus modulus.tif -phase phase.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;ComputeModulusAndPhase&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;monobandComplexFloat.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;modulus&quot;</span><span class="p">,</span> <span class="s2">&quot;modulus.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;phase.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>The application takes as input single band image with complex pixels or a 2 bands image (real and imaginary part in separate bands).</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="app_Despeckle.html#app-despeckle"><span class="std std-ref">Despeckle</span></a>, <a class="reference internal" href="app_SARPolarMatrixConvert.html#app-sarpolarmatrixconvert"><span class="std std-ref">SARPolarMatrixConvert</span></a>, <a class="reference internal" href="app_SARPolarSynth.html#app-sarpolarsynth"><span class="std std-ref">SARPolarSynth</span></a></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_SARBurstExtraction.html" class="btn btn-neutral float-right" title="SARBurstExtraction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SAR.html" class="btn btn-neutral" title="SAR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TrainVectorClassifier &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="VectorClassifier" href="app_VectorClassifier.html" />
+    <link rel="prev" title="TrainRegression" href="app_TrainRegression.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Learning.html">Learning</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ClassificationMapRegularization.html">ClassificationMapRegularization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeConfusionMatrix.html">ComputeConfusionMatrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeImagesStatistics.html">ComputeImagesStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_FusionOfClassifications.html">FusionOfClassifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageClassifier.html">ImageClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageDimensionalityReduction.html">ImageDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_KMeansClassification.html">KMeansClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MultiImageSamplingRate.html">MultiImageSamplingRate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_PolygonClassStatistics.html">PolygonClassStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_PredictRegression.html">PredictRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SOMClassification.html">SOMClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleAugmentation.html">SampleAugmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleExtraction.html">SampleExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleSelection.html">SampleSelection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainDimensionalityReduction.html">TrainDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainImagesClassifier.html">TrainImagesClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainRegression.html">TrainRegression</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">TrainVectorClassifier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorClassifier.html">VectorClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDimensionalityReduction.html">VectorDimensionalityReduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Learning.html">Learning</a> &raquo;</li>
+        
+      <li>TrainVectorClassifier</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_TrainVectorClassifier.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="trainvectorclassifier">
+<span id="app-trainvectorclassifier"></span><h1>TrainVectorClassifier<a class="headerlink" href="#trainvectorclassifier" title="Permalink to this headline">¶</a></h1>
+<p>Train a classifier based on labeled geometries and a list of features to consider.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application trains a classifier based on labeled geometries and a list of features to consider for classification.
+This application is based on LibSVM, OpenCV Machine Learning (2.3.1 and later), and Shark ML The output of this application is a text model file, whose format corresponds to the ML model type chosen. There is no image nor vector data output.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#input-and-output-data" id="id1">Input and output data</a></li>
+<li><a class="reference internal" href="#validation-data" id="id2">Validation data</a></li>
+<li><a class="reference internal" href="#libsvm-classifier-options" id="id3">LibSVM classifier options</a></li>
+<li><a class="reference internal" href="#boost-classifier-options" id="id4">Boost classifier options</a></li>
+<li><a class="reference internal" href="#decision-tree-classifier-options" id="id5">Decision Tree classifier options</a></li>
+<li><a class="reference internal" href="#artificial-neural-network-classifier-options" id="id6">Artificial Neural Network classifier options</a></li>
+<li><a class="reference internal" href="#random-forests-classifier-options" id="id7">Random forests classifier options</a></li>
+<li><a class="reference internal" href="#knn-classifier-options" id="id8">KNN classifier options</a></li>
+<li><a class="reference internal" href="#shark-random-forests-classifier-options" id="id9">Shark Random forests classifier options</a></li>
+<li><a class="reference internal" href="#shark-kmeans-classifier-options" id="id10">Shark kmeans classifier options</a></li>
+</ul>
+</div>
+<div class="section" id="input-and-output-data">
+<h3><a class="toc-backref" href="#id1">Input and output data</a><a class="headerlink" href="#input-and-output-data" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows setting input and output data.</p>
+<p><strong>Input Vector Data</strong> <code class="code docutils literal notranslate"><span class="pre">-io.vd</span> <span class="pre">vectorfile1</span> <span class="pre">vectorfile2...</span></code> <em>Mandatory</em> <br />
+Input geometries used for training (note: all geometries from the layer will be used)</p>
+<p><strong>Input XML image statistics file</strong> <code class="code docutils literal notranslate"><span class="pre">-io.stats</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+XML file containing mean and variance of each feature.</p>
+<p><strong>Output model</strong> <code class="code docutils literal notranslate"><span class="pre">-io.out</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Output file containing the model estimated (.txt format).</p>
+<p><strong>Output confusion matrix or contingency table</strong> <code class="code docutils literal notranslate"><span class="pre">-io.confmatout</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Output file containing the confusion matrix or contingency table (.csv format).The contingency table is output when we unsupervised algorithms is used otherwise the confusion matrix is output.</p>
+<hr class="docutils" />
+<p><strong>Layer Index</strong> <code class="code docutils literal notranslate"><span class="pre">-layer</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Index of the layer to use in the input vector file.</p>
+<p><strong>Field names for training features</strong> <code class="code docutils literal notranslate"><span class="pre">-feat</span> <span class="pre">string1</span> <span class="pre">string2...</span></code> <br />
+List of field names in the input vector data to be used as features for training.</p>
+</div>
+<div class="section" id="validation-data">
+<h3><a class="toc-backref" href="#id2">Validation data</a><a class="headerlink" href="#validation-data" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters defines validation data.</p>
+<p><strong>Validation Vector Data</strong> <code class="code docutils literal notranslate"><span class="pre">-valid.vd</span> <span class="pre">vectorfile1</span> <span class="pre">vectorfile2...</span></code> <br />
+Geometries used for validation (must contain the same fields used for training, all geometries from the layer will be used)</p>
+<p><strong>Layer Index</strong> <code class="code docutils literal notranslate"><span class="pre">-valid.layer</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Index of the layer to use in the validation vector file.</p>
+<hr class="docutils" />
+<p><strong>Field containing the class integer label for supervision</strong> <code class="code docutils literal notranslate"><span class="pre">-cfield</span> <span class="pre">string</span></code> <br />
+Field containing the class id for supervision. The values in this field shall be cast into integers. Only geometries with this field available will be taken into account.</p>
+<p><strong>Verbose mode</strong> <code class="code docutils literal notranslate"><span class="pre">-v</span> <span class="pre">bool</span></code> <em>Default value: true</em> <br />
+Verbose mode, display the contingency table result.</p>
+<p><strong>Classifier to use for the training</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier</span> <span class="pre">[libsvm|boost|dt|ann|bayes|rf|knn|sharkrf|sharkkm]</span></code> <em>Default value: libsvm</em> <br />
+Choice of the classifier to use for the training.</p>
+<ul class="simple">
+<li><strong>LibSVM classifier</strong> <br /> This group of parameters allows setting SVM classifier parameters.</li>
+<li><strong>Boost classifier</strong> <br /> <a class="reference external" href="http://docs.opencv.org/modules/ml/doc/boosting.html">http://docs.opencv.org/modules/ml/doc/boosting.html</a></li>
+<li><strong>Decision Tree classifier</strong> <br /> <a class="reference external" href="http://docs.opencv.org/modules/ml/doc/decision_trees.html">http://docs.opencv.org/modules/ml/doc/decision_trees.html</a></li>
+<li><strong>Artificial Neural Network classifier</strong> <br /> <a class="reference external" href="http://docs.opencv.org/modules/ml/doc/neural_networks.html">http://docs.opencv.org/modules/ml/doc/neural_networks.html</a></li>
+<li><strong>Normal Bayes classifier</strong> <br /> <a class="reference external" href="http://docs.opencv.org/modules/ml/doc/normal_bayes_classifier.html">http://docs.opencv.org/modules/ml/doc/normal_bayes_classifier.html</a></li>
+<li><strong>Random forests classifier</strong> <br /> <a class="reference external" href="http://docs.opencv.org/modules/ml/doc/random_trees.html">http://docs.opencv.org/modules/ml/doc/random_trees.html</a></li>
+<li><strong>KNN classifier</strong> <br /> <a class="reference external" href="http://docs.opencv.org/modules/ml/doc/k_nearest_neighbors.html">http://docs.opencv.org/modules/ml/doc/k_nearest_neighbors.html</a></li>
+<li><strong>Shark Random forests classifier</strong> <br /> <a class="reference external" href="http://image.diku.dk/shark/doxygen_pages/html/classshark_1_1_r_f_trainer.html">http://image.diku.dk/shark/doxygen_pages/html/classshark_1_1_r_f_trainer.html</a>. <br />  It is noteworthy that training is parallel.</li>
+<li><strong>Shark kmeans classifier</strong> <br /> <a class="reference external" href="http://image.diku.dk/shark/sphinx_pages/build/html/rest_sources/tutorials/algorithms/kmeans.html">http://image.diku.dk/shark/sphinx_pages/build/html/rest_sources/tutorials/algorithms/kmeans.html</a></li>
+</ul>
+</div>
+<div class="section" id="libsvm-classifier-options">
+<h3><a class="toc-backref" href="#id3">LibSVM classifier options</a><a class="headerlink" href="#libsvm-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>SVM Kernel Type</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.libsvm.k</span> <span class="pre">[linear|rbf|poly|sigmoid]</span></code> <em>Default value: linear</em> <br />
+SVM Kernel Type.</p>
+<ul class="simple">
+<li><strong>Linear</strong> <br /> Linear Kernel, no mapping is done, this is the fastest option.</li>
+<li><strong>Gaussian radial basis function</strong> <br /> This kernel is a good choice in most of the case. It is an exponential function of the euclidian distance between the vectors.</li>
+<li><strong>Polynomial</strong> <br /> Polynomial Kernel, the mapping is a polynomial function.</li>
+<li><strong>Sigmoid</strong> <br /> The kernel is a hyperbolic tangente function of the vectors.</li>
+</ul>
+<p><strong>SVM Model Type</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.libsvm.m</span> <span class="pre">[csvc|nusvc|oneclass]</span></code> <em>Default value: csvc</em> <br />
+Type of SVM formulation.</p>
+<ul class="simple">
+<li><strong>C support vector classification</strong> <br /> This formulation allows imperfect separation of classes. The penalty is set through the cost parameter C.</li>
+<li><strong>Nu support vector classification</strong> <br /> This formulation allows imperfect separation of classes. The penalty is set through the cost parameter Nu. As compared to C, Nu is harder to optimize, and may not be as fast.</li>
+<li><strong>Distribution estimation (One Class SVM)</strong> <br /> All the training data are from the same class, SVM builds a boundary that separates the class from the rest of the feature space.</li>
+</ul>
+<p><strong>Cost parameter C</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.libsvm.c</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+SVM models have a cost parameter C (1 by default) to control the trade-off between training errors and forcing rigid margins.</p>
+<p><strong>Cost parameter Nu</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.libsvm.nu</span> <span class="pre">float</span></code> <em>Default value: 0.5</em> <br />
+Cost parameter Nu, in the range 0..1, the larger the value, the smoother the decision.</p>
+<p><strong>Parameters optimization</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.libsvm.opt</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+SVM parameters optimization flag.</p>
+<p><strong>Probability estimation</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.libsvm.prob</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+Probability estimation flag.</p>
+</div>
+<div class="section" id="boost-classifier-options">
+<h3><a class="toc-backref" href="#id4">Boost classifier options</a><a class="headerlink" href="#boost-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Boost Type</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.boost.t</span> <span class="pre">[discrete|real|logit|gentle]</span></code> <em>Default value: real</em> <br />
+Type of Boosting algorithm.</p>
+<ul class="simple">
+<li><strong>Discrete AdaBoost</strong> <br /> This procedure trains the classifiers on weighted versions of the training sample, giving higher weight to cases that are currently misclassified. This is done for a sequence of weighter samples, and then the final classifier is defined as a linear combination of the classifier from each stage.</li>
+<li><strong>Real AdaBoost (technique using confidence-rated predictions and working well with categorical data)</strong> <br /> Adaptation of the Discrete Adaboost algorithm with Real value</li>
+<li><strong>LogitBoost (technique producing good regression fits)</strong> <br /> This procedure is an adaptive Newton algorithm for fitting an additive logistic regression model. Beware it can produce numeric instability.</li>
+<li><strong>Gentle AdaBoost (technique setting less weight on outlier data points and, for that reason, being often good with regression data)</strong> <br /> A modified version of the Real Adaboost algorithm, using Newton stepping rather than exact optimization at each step.</li>
+</ul>
+<p><strong>Weak count</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.boost.w</span> <span class="pre">int</span></code> <em>Default value: 100</em> <br />
+The number of weak classifiers.</p>
+<p><strong>Weight Trim Rate</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.boost.r</span> <span class="pre">float</span></code> <em>Default value: 0.95</em> <br />
+A threshold between 0 and 1 used to save computational time. Samples with summary weight &lt;= (1 - weight_trim_rate) do not participate in the next iteration of training. Set this parameter to 0 to turn off this functionality.</p>
+<p><strong>Maximum depth of the tree</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.boost.m</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Maximum depth of the tree.</p>
+</div>
+<div class="section" id="decision-tree-classifier-options">
+<h3><a class="toc-backref" href="#id5">Decision Tree classifier options</a><a class="headerlink" href="#decision-tree-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Maximum depth of the tree</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.dt.max</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+The training algorithm attempts to split each node while its depth is smaller than the maximum possible depth of the tree. The actual depth may be smaller if the other termination criteria are met, and/or if the tree is pruned.</p>
+<p><strong>Minimum number of samples in each node</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.dt.min</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+If the number of samples in a node is smaller than this parameter, then this node will not be split.</p>
+<p><strong>Termination criteria for regression tree</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.dt.ra</span> <span class="pre">float</span></code> <em>Default value: 0.01</em> <br />
+If all absolute differences between an estimated value in a node and the values of the train samples in this node are smaller than this regression accuracy parameter, then the node will not be split further.</p>
+<p><strong>Cluster possible values of a categorical variable into K &lt;= cat clusters to find a suboptimal split</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.dt.cat</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+Cluster possible values of a categorical variable into K &lt;= cat clusters to find a suboptimal split.</p>
+<p><strong>K-fold cross-validations</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.dt.f</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+If cv_folds &gt; 1, then it prunes a tree with K-fold cross-validation where K is equal to cv_folds.</p>
+<p><strong>Set Use1seRule flag to false</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.dt.r</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+If true, then a pruning will be harsher. This will make a tree more compact and more resistant to the training data noise but a bit less accurate.</p>
+<p><strong>Set TruncatePrunedTree flag to false</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.dt.t</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+If true, then pruned branches are physically removed from the tree.</p>
+</div>
+<div class="section" id="artificial-neural-network-classifier-options">
+<h3><a class="toc-backref" href="#id6">Artificial Neural Network classifier options</a><a class="headerlink" href="#artificial-neural-network-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Train Method Type</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.t</span> <span class="pre">[back|reg]</span></code> <em>Default value: reg</em> <br />
+Type of training method for the multilayer perceptron (MLP) neural network.</p>
+<ul class="simple">
+<li><strong>Back-propagation algorithm</strong> <br /> Method to compute the gradient of the loss function and adjust weights in the network to optimize the result.</li>
+<li><strong>Resilient Back-propagation algorithm</strong> <br /> Almost the same as the Back-prop algorithm except that it does not take into account the magnitude of the partial derivative (coordinate of the gradient) but only its sign.</li>
+</ul>
+<p><strong>Number of neurons in each intermediate layer</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.sizes</span> <span class="pre">string1</span> <span class="pre">string2...</span></code> <em>Mandatory</em> <br />
+The number of neurons in each intermediate layer (excluding input and output layers).</p>
+<p><strong>Neuron activation function type</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.f</span> <span class="pre">[ident|sig|gau]</span></code> <em>Default value: sig</em> <br />
+This function determine whether the output of the node is positive or not depending on the output of the transfert function.</p>
+<ul class="simple">
+<li><strong>Identity function</strong> <br /></li>
+<li><strong>Symmetrical Sigmoid function</strong> <br /></li>
+<li><strong>Gaussian function (Not completely supported)</strong> <br /></li>
+</ul>
+<p><strong>Alpha parameter of the activation function</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.a</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Alpha parameter of the activation function (used only with sigmoid and gaussian functions).</p>
+<p><strong>Beta parameter of the activation function</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.b</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Beta parameter of the activation function (used only with sigmoid and gaussian functions).</p>
+<p><strong>Strength of the weight gradient term in the BACKPROP method</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.bpdw</span> <span class="pre">float</span></code> <em>Default value: 0.1</em> <br />
+Strength of the weight gradient term in the BACKPROP method. The recommended value is about 0.1.</p>
+<p><strong>Strength of the momentum term (the difference between weights on the 2 previous iterations)</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.bpms</span> <span class="pre">float</span></code> <em>Default value: 0.1</em> <br />
+Strength of the momentum term (the difference between weights on the 2 previous iterations). This parameter provides some inertia to smooth the random fluctuations of the weights. It can vary from 0 (the feature is disabled) to 1 and beyond. The value 0.1 or so is good enough.</p>
+<p><strong>Initial value Delta_0 of update-values Delta_{ij} in RPROP method</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.rdw</span> <span class="pre">float</span></code> <em>Default value: 0.1</em> <br />
+Initial value Delta_0 of update-values Delta_{ij} in RPROP method (default = 0.1).</p>
+<p><strong>Update-values lower limit Delta_{min} in RPROP method</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.rdwm</span> <span class="pre">float</span></code> <em>Default value: 1e-07</em> <br />
+Update-values lower limit Delta_{min} in RPROP method. It must be positive (default = 1e-7).</p>
+<p><strong>Termination criteria</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.term</span> <span class="pre">[iter|eps|all]</span></code> <em>Default value: all</em> <br />
+Termination criteria.</p>
+<ul class="simple">
+<li><strong>Maximum number of iterations</strong> <br /> Set the number of iterations allowed to the network for its training. Training will stop regardless of the result when this number is reached</li>
+<li><strong>Epsilon</strong> <br /> Training will focus on result and will stop once the precision isat most epsilon</li>
+<li><strong>Max. iterations + Epsilon</strong> <br /> Both termination criteria are used. Training stop at the first reached</li>
+</ul>
+<p><strong>Epsilon value used in the Termination criteria</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.eps</span> <span class="pre">float</span></code> <em>Default value: 0.01</em> <br />
+Epsilon value used in the Termination criteria.</p>
+<p><strong>Maximum number of iterations used in the Termination criteria</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.ann.iter</span> <span class="pre">int</span></code> <em>Default value: 1000</em> <br />
+Maximum number of iterations used in the Termination criteria.</p>
+</div>
+<div class="section" id="random-forests-classifier-options">
+<h3><a class="toc-backref" href="#id7">Random forests classifier options</a><a class="headerlink" href="#random-forests-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Maximum depth of the tree</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.rf.max</span> <span class="pre">int</span></code> <em>Default value: 5</em> <br />
+The depth of the tree. A low value will likely underfit and conversely a high value will likely overfit. The optimal value can be obtained using cross validation or other suitable methods.</p>
+<p><strong>Minimum number of samples in each node</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.rf.min</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+If the number of samples in a node is smaller than this parameter, then the node will not be split. A reasonable value is a small percentage of the total data e.g. 1 percent.</p>
+<p><strong>Termination Criteria for regression tree</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.rf.ra</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+If all absolute differences between an estimated value in a node and the values of the train samples in this node are smaller than this regression accuracy parameter, then the node will not be split.</p>
+<p><strong>Cluster possible values of a categorical variable into K &lt;= cat clusters to find a suboptimal split</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.rf.cat</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+Cluster possible values of a categorical variable into K &lt;= cat clusters to find a suboptimal split.</p>
+<p><strong>Size of the randomly selected subset of features at each tree node</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.rf.var</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+The size of the subset of features, randomly selected at each tree node, that are used to find the best split(s). If you set it to 0, then the size will be set to the square root of the total number of features.</p>
+<p><strong>Maximum number of trees in the forest</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.rf.nbtrees</span> <span class="pre">int</span></code> <em>Default value: 100</em> <br />
+The maximum number of trees in the forest. Typically, the more trees you have, the better the accuracy. However, the improvement in accuracy generally diminishes and reaches an asymptote for a certain number of trees. Also to keep in mind, increasing the number of trees increases the prediction time linearly.</p>
+<p><strong>Sufficient accuracy (OOB error)</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.rf.acc</span> <span class="pre">float</span></code> <em>Default value: 0.01</em> <br />
+Sufficient accuracy (OOB error).</p>
+</div>
+<div class="section" id="knn-classifier-options">
+<h3><a class="toc-backref" href="#id8">KNN classifier options</a><a class="headerlink" href="#knn-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Number of Neighbors</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.knn.k</span> <span class="pre">int</span></code> <em>Default value: 32</em> <br />
+The number of neighbors to use.</p>
+</div>
+<div class="section" id="shark-random-forests-classifier-options">
+<h3><a class="toc-backref" href="#id9">Shark Random forests classifier options</a><a class="headerlink" href="#shark-random-forests-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Maximum number of trees in the forest</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.sharkrf.nbtrees</span> <span class="pre">int</span></code> <em>Default value: 100</em> <br />
+The maximum number of trees in the forest. Typically, the more trees you have, the better the accuracy. However, the improvement in accuracy generally diminishes and reaches an asymptote for a certain number of trees. Also to keep in mind, increasing the number of trees increases the prediction time linearly.</p>
+<p><strong>Min size of the node for a split</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.sharkrf.nodesize</span> <span class="pre">int</span></code> <em>Default value: 25</em> <br />
+If the number of samples in a node is smaller than this parameter, then the node will not be split. A reasonable value is a small percentage of the total data e.g. 1 percent.</p>
+<p><strong>Number of features tested at each node</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.sharkrf.mtry</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+The number of features (variables) which will be tested at each node in order to compute the split. If set to zero, the square root of the number of features is used.</p>
+<p><strong>Out of bound ratio</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.sharkrf.oobr</span> <span class="pre">float</span></code> <em>Default value: 0.66</em> <br />
+Set the fraction of the original training dataset to use as the out of bag sample.A good default value is 0.66.</p>
+</div>
+<div class="section" id="shark-kmeans-classifier-options">
+<h3><a class="toc-backref" href="#id10">Shark kmeans classifier options</a><a class="headerlink" href="#shark-kmeans-classifier-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Maximum number of iterations for the kmeans algorithm</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.sharkkm.maxiter</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+The maximum number of iterations for the kmeans algorithm. 0=unlimited</p>
+<p><strong>Number of classes for the kmeans algorithm</strong> <code class="code docutils literal notranslate"><span class="pre">-classifier.sharkkm.k</span> <span class="pre">int</span></code> <em>Default value: 2</em> <br />
+The number of classes used for the kmeans algorithm. Default set to 2 class</p>
+<hr class="docutils" />
+<p><strong>Random seed</strong> <code class="code docutils literal notranslate"><span class="pre">-rand</span> <span class="pre">int</span></code> <br />
+Set a specific random seed with integer value.</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_TrainVectorClassifier -io.vd vectorData.shp -io.stats meanVar.xml -io.out svmModel.svm -feat perimeter  area  width -cfield predicted
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;TrainVectorClassifier&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterStringList</span><span class="p">(</span><span class="s2">&quot;io.vd&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;vectorData.shp&#39;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.stats&quot;</span><span class="p">,</span> <span class="s2">&quot;meanVar.xml&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.out&quot;</span><span class="p">,</span> <span class="s2">&quot;svmModel.svm&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_VectorClassifier.html" class="btn btn-neutral float-right" title="VectorClassifier" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_TrainRegression.html" class="btn btn-neutral" title="TrainRegression" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

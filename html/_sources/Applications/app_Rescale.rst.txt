@@ -1,0 +1,82 @@
+.. _app-Rescale:
+
+Rescale
+=======
+
+
+Rescale the image between two given values.
+
+Description
+-----------
+
+This application scales the given image pixel intensity between two given values.
+By default min (resp. max) value is set to 0 (resp. 255).
+Input minimum and maximum values is automatically computed for all image bands.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The image to scale.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The rescaled image filename.
+
+**Output min value** :code:`-outmin float` *Default value: 0* |br|
+Minimum value of the output image.
+
+**Output max value** :code:`-outmax float` *Default value: 255* |br|
+Maximum value of the output image.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_Rescale -in QB_Toulouse_Ortho_PAN.tif -out rescaledImage.png uchar -outmin 0 -outmax 255
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Rescale")
+
+	app.SetParameterString("in", "QB_Toulouse_Ortho_PAN.tif")
+	app.SetParameterString("out", "rescaledImage.png")
+	app.SetParameterOutputImagePixelType("out", 1)
+	app.SetParameterFloat("outmin", 0)
+	app.SetParameterFloat("outmax", 255)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

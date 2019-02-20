@@ -1,0 +1,142 @@
+.. _app-HaralickTextureExtraction:
+
+HaralickTextureExtraction
+=========================
+
+
+Computes Haralick textural features on the selected channel of the input image
+
+Description
+-----------
+
+This application computes three sets of Haralick features [1][2].
+
+* simple: a set of 8 local Haralick features: Energy (texture uniformity) , Entropy (measure of randomness of intensity image), Correlation (how correlated a pixel is to its neighborhood), Inverse Difference Moment (measures the texture homogeneity), Inertia (intensity contrast between a pixel and its neighborhood), Cluster Shade, Cluster Prominence, Haralick Correlation;
+
+* advanced: a set of 10 advanced Haralick features: Mean, Variance (measures the texture heterogeneity), Dissimilarity, Sum Average, Sum Variance, Sum Entropy, Difference of Entropies, Difference of Variances, IC1, IC2;
+
+* higher: a set of 11 higher Haralick features: Short Run Emphasis (measures the texture sharpness), Long Run Emphasis (measures the texture roughness), Grey-Level Nonuniformity, Run Length Nonuniformity, Run Percentage (measures the texture sharpness homogeneity), Low Grey-Level Run Emphasis, High Grey-Level Run Emphasis, Short Run Low Grey-Level Emphasis, Short Run High Grey-Level Emphasis, Long Run Low Grey-Level Emphasis and Long Run High Grey-Level Emphasis.
+
+The documentation of textures (description are formulas) are available in the OTB Software Guide (section Textures) and also in corresponding doxygen documentation of filters (see section *Detailed Description* in doxygen):
+* **simple**: otbScalarImageToTexturesFilter
+* **advanced**: otbScalarImageToAdvancedTexturesFilter
+* **higher**: otbScalarImageToHigherOrderTexturesFilter
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to compute the features on.
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index
+
+**Computation step** :code:`-step int` *Default value: 1* |br|
+Step (in pixels) to compute output texture values. The first computed pixel position is shifted by (step-1)/2 in both directions.
+
+Texture feature parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows one to define texture parameters.
+
+**X Radius** :code:`-parameters.xrad int` *Default value: 2* |br|
+X Radius
+
+**Y Radius** :code:`-parameters.yrad int` *Default value: 2* |br|
+Y Radius
+
+**X Offset** :code:`-parameters.xoff int` *Default value: 1* |br|
+X Offset
+
+**Y Offset** :code:`-parameters.yoff int` *Default value: 1* |br|
+Y Offset
+
+**Image Minimum** :code:`-parameters.min float` *Default value: 0* |br|
+Image Minimum
+
+**Image Maximum** :code:`-parameters.max float` *Default value: 255* |br|
+Image Maximum
+
+**Histogram number of bin** :code:`-parameters.nbbin int` *Default value: 8* |br|
+Histogram number of bin
+
+
+
+------------
+
+**Texture Set Selection** :code:`-texture [simple|advanced|higher]` *Default value: simple* |br|
+Choice of The Texture Set
+
+* **Simple Haralick Texture Features** |br| This group of parameters defines the 8 local Haralick texture feature output image. The image channels are: Energy, Entropy, Correlation, Inverse Difference Moment, Inertia, Cluster Shade, Cluster Prominence and Haralick Correlation
+
+* **Advanced Texture Features** |br| This group of parameters defines the 10 advanced texture feature output image. The image channels are: Mean, Variance, Dissimilarity, Sum Average, Sum Variance, Sum Entropy, Difference of Entropies, Difference of Variances, IC1 and IC2
+
+* **Higher Order Texture Features** |br| This group of parameters defines the 11 higher order texture feature output image. The image channels are: Short Run Emphasis, Long Run Emphasis, Grey-Level Nonuniformity, Run Length Nonuniformity, Run Percentage, Low Grey-Level Run Emphasis, High Grey-Level Run Emphasis, Short Run Low Grey-Level Emphasis, Short Run High Grey-Level Emphasis, Long Run Low Grey-Level Emphasis and Long Run High Grey-Level Emphasis
+
+
+
+**Output Image** :code:`-out image [dtype]` |br|
+Output image containing the selected texture features.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_HaralickTextureExtraction -in qb_RoadExtract.tif -channel 2 -parameters.xrad 3 -parameters.yrad 3 -texture simple -out HaralickTextures.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("HaralickTextureExtraction")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterInt("channel", 2)
+	app.SetParameterInt("parameters.xrad", 3)
+	app.SetParameterInt("parameters.yrad", 3)
+	app.SetParameterString("texture","simple")
+	app.SetParameterString("out", "HaralickTextures.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The computation of the features is based on a Gray Level Co-occurrence matrix (GLCM) from the quantized input image. Consequently the quantization parameters (min, max, nbbin) must be appropriate to the range of the pixel values.
+
+See also
+--------
+
+| [1] HARALICK, Robert M., SHANMUGAM, Karthikeyan, et al. Textural features for image classification. IEEE Transactions on systems, man, and cybernetics, 1973, no 6, p. 610-621.
+| [2] otbScalarImageToTexturesFilter, otbScalarImageToAdvancedTexturesFilter and otbScalarImageToHigherOrderTexturesFilter classes

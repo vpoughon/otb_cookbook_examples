@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SIFTExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SIFTDisparityMapEstimation.cxx" href="SIFTDisparityMapEstimation.html" />
+    <link rel="prev" title="SIFTDensityExample.cxx" href="SIFTDensityExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Patented.html">Patented</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SIFTFastExample.html">SIFTFastExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SIFTDensityExample.html">SIFTDensityExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SIFTExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SIFTDisparityMapEstimation.html">SIFTDisparityMapEstimation.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Patented.html">Patented</a> &raquo;</li>
+        
+      <li>SIFTExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Patented/SIFTExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="siftexample-cxx">
+<span id="example-siftexample"></span><h1>SIFTExample.cxx<a class="headerlink" href="#siftexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./SIFTExample Input/ROISpot5.png Output/ROISpot5SIFT0.png Output/SIFT0.txt <span class="m">2</span> <span class="m">3</span> <span class="m">0</span> <span class="m">0</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTExample.cxx?inline=false">SIFTExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the use of the \doxygen{otb}{ImageToSIFTKeyPointSetFilter}.</span>
+<span class="c1">// The Scale-Invariant Feature Transform (or SIFT) is an algorithm in</span>
+<span class="c1">// computer vision to detect and describe local features in</span>
+<span class="c1">// images. The algorithm was published by David Lowe</span>
+<span class="c1">// \cite{LoweSIFT}. The detection and description of local image</span>
+<span class="c1">// features can help in object recognition and image registration. The</span>
+<span class="c1">// SIFT features are local and based on the appearance of the object</span>
+<span class="c1">// at particular interest points, and are invariant to image scale and</span>
+<span class="c1">// rotation. They are also robust to changes in illumination, noise,</span>
+<span class="c1">// occlusion and minor changes in viewpoint.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step required to use this filter is to include its header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageToSIFTKeyPointSetFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkPointSet.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkVariableLengthVector.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRGBPixel.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkImageRegionIterator.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; InputImage OutputImage OutputSIFTFile octaves scales threshold ratio&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">infname</span>             <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outfname</span>            <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputImageFilename</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">octaves</span>   <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">scales</span>    <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="kt">float</span>              <span class="n">threshold</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="kt">float</span>              <span class="n">ratio</span>     <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+
+  <span class="k">typedef</span> <span class="kt">float</span>      <span class="n">RealType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// The \doxygen{otb}{ImageToSIFTKeyPointSetFilter} is templated over</span>
+  <span class="c1">// its input image type and the output point set type. Therefore, we</span>
+  <span class="c1">// start by defining the needed types.</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">RealType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>          <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">VariableLengthVector</span><span class="o">&lt;</span><span class="n">RealType</span><span class="o">&gt;</span>      <span class="n">RealVectorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>          <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">PointSet</span><span class="o">&lt;</span><span class="n">RealVectorType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">PointSetType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToSIFTKeyPointSetFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">PointSetType</span><span class="o">&gt;</span> <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="p">;</span>
+
+  <span class="c1">// Since the SIFT detector produces a point set, we will need</span>
+  <span class="c1">// iterators for the coordinates of the points and the data associated</span>
+  <span class="c1">// with them.</span>
+  <span class="k">typedef</span> <span class="n">PointSetType</span><span class="o">::</span><span class="n">PointsContainer</span> <span class="n">PointsContainerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">PointsContainerType</span><span class="o">::</span><span class="n">Iterator</span> <span class="n">PointsIteratorType</span><span class="p">;</span>
+
+  <span class="c1">// We can now instantiate the reader and the SIFT filter and plug the pipeline.</span>
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>                       <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">infname</span><span class="p">);</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// The SIFT filter needs the following parameters:</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item the number of octaves, that is, the number of levels of undersampling,</span>
+  <span class="c1">// \item the number of scales (blurring) per octave,</span>
+  <span class="c1">// \item the low contrast threshold to be applied to each point for the detection</span>
+  <span class="c1">// on the difference of Gaussians image,</span>
+  <span class="c1">// \item the threshold on the responses to consider a point as an edge.</span>
+  <span class="c1">// \end{itemize}</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetOctavesNumber</span><span class="p">(</span><span class="n">octaves</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetScalesNumber</span><span class="p">(</span><span class="n">scales</span><span class="p">);</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetDoGThreshold</span><span class="p">(</span><span class="n">threshold</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetEdgeThreshold</span><span class="p">(</span><span class="n">ratio</span><span class="p">);</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:SIFT} shows the result of applying the SIFT</span>
+  <span class="c1">// point detector to a small patch extracted from a Spot 5 image</span>
+  <span class="c1">// using different threshold values.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.22\textwidth]{ROISpot5.eps}</span>
+  <span class="c1">// \includegraphics[width=0.22\textwidth]{ROISpot5SIFT0.eps}</span>
+  <span class="c1">// \includegraphics[width=0.22\textwidth]{ROISpot5SIFT1.eps}</span>
+  <span class="c1">// \includegraphics[width=0.22\textwidth]{ROISpot5SIFT2.eps}</span>
+  <span class="c1">// \itkcaption[SIFT Application]{Result of applying the</span>
+  <span class="c1">// \doxygen{otb}{ImageToSIFTKeyPointSetFilter} to a Spot 5</span>
+  <span class="c1">// image. Left to right: original image and SIFT with thresholds 0,</span>
+  <span class="c1">// 1 and 2 respectively.}</span>
+  <span class="c1">// \label{fig:SIFT}</span>
+  <span class="c1">// \end{figure}</span>
+  <span class="c1">// Figure~\ref{fig:SIFT2} shows the result of applying the SIFT</span>
+  <span class="c1">// point detector to a small patch extracted from a Spot 5 image</span>
+  <span class="c1">// using different threshold values.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.30\textwidth]{QB_Suburb.eps}</span>
+  <span class="c1">// \includegraphics[width=0.30\textwidth]{QB_SuburbSIFT5.eps}</span>
+  <span class="c1">// \includegraphics[width=0.30\textwidth]{QB_SuburbSIFT5Rotated10.eps}</span>
+  <span class="c1">// \itkcaption[SIFT Application]{Result of applying the</span>
+  <span class="c1">// \doxygen{otb}{ImageToSIFTKeyPointSetFilter} to a high resolution image</span>
+  <span class="c1">// image. Left to right: original image and SIFT on the original</span>
+  <span class="c1">// and a rotated image respectively.}</span>
+  <span class="c1">// \label{fig:SIFT2}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="c1">//</span>
+  <span class="c1">// Building the output image for visualization</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">t</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}};</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">b</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">r</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">l</span> <span class="o">=</span> <span class="p">{{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RGBPixel</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span> <span class="n">RGBPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">RGBPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>  <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">OutputImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">outputImage</span> <span class="o">=</span> <span class="n">OutputImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">OutputImageType</span><span class="o">::</span><span class="n">RegionType</span> <span class="n">region</span><span class="p">;</span>
+  <span class="n">OutputImageType</span><span class="o">::</span><span class="n">SizeType</span>   <span class="n">outputSize</span><span class="p">;</span>
+  <span class="n">outputSize</span> <span class="o">=</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">outputSize</span><span class="p">);</span>
+
+  <span class="n">OutputImageType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">indexStart</span><span class="p">;</span>
+  <span class="n">indexStart</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">indexStart</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">SetIndex</span><span class="p">(</span><span class="n">indexStart</span><span class="p">);</span>
+
+  <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">region</span><span class="p">);</span>
+  <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">iterOutput</span><span class="p">(</span><span class="n">outputImage</span><span class="p">,</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">iterOutput</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span> <span class="o">!</span><span class="n">iterOutput</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">();</span> <span class="o">++</span><span class="n">iterOutput</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">ImageType</span><span class="o">::</span><span class="n">IndexType</span>       <span class="n">index</span>   <span class="o">=</span> <span class="n">iterOutput</span><span class="p">.</span><span class="n">GetIndex</span><span class="p">();</span>
+    <span class="n">ImageType</span><span class="o">::</span><span class="n">PixelType</span>       <span class="n">grayPix</span> <span class="o">=</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+    <span class="n">OutputImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">rgbPixel</span><span class="p">;</span>
+    <span class="n">rgbPixel</span><span class="p">.</span><span class="n">SetRed</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">grayPix</span><span class="p">));</span>
+    <span class="n">rgbPixel</span><span class="p">.</span><span class="n">SetGreen</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">grayPix</span><span class="p">));</span>
+    <span class="n">rgbPixel</span><span class="p">.</span><span class="n">SetBlue</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">grayPix</span><span class="p">));</span>
+
+    <span class="n">iterOutput</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">rgbPixel</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">PointsIteratorType</span>        <span class="n">pIt</span>     <span class="o">=</span> <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetPoints</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Begin</span><span class="p">();</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">SpacingType</span>    <span class="n">spacing</span> <span class="o">=</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetSignedSpacing</span><span class="p">();</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">PointType</span>      <span class="n">origin</span>  <span class="o">=</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetOrigin</span><span class="p">();</span>
+  <span class="n">OutputImageType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">size</span>    <span class="o">=</span> <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">();</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">pIt</span> <span class="o">!=</span> <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetPoints</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">End</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">ImageType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">index</span><span class="p">;</span>
+
+    <span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="n">std</span><span class="o">::</span><span class="n">floor</span><span class="p">((</span><span class="kt">double</span><span class="p">)((</span><span class="n">pIt</span><span class="p">.</span><span class="n">Value</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">spacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)));</span>
+
+    <span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="n">std</span><span class="o">::</span><span class="n">floor</span><span class="p">((</span><span class="kt">double</span><span class="p">)((</span><span class="n">pIt</span><span class="p">.</span><span class="n">Value</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">spacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)));</span>
+
+    <span class="n">OutputImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">keyPixel</span><span class="p">;</span>
+    <span class="n">keyPixel</span><span class="p">.</span><span class="n">SetRed</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">keyPixel</span><span class="p">.</span><span class="n">SetGreen</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+    <span class="n">keyPixel</span><span class="p">.</span><span class="n">SetBlue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="p">{</span>
+      <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetPixel</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">keyPixel</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetPixel</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">t</span><span class="p">,</span> <span class="n">keyPixel</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetPixel</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">keyPixel</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetPixel</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">r</span><span class="p">,</span> <span class="n">keyPixel</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetPixel</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">l</span><span class="p">,</span> <span class="n">keyPixel</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">++</span><span class="n">pIt</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">outfile</span><span class="p">(</span><span class="n">outfname</span><span class="p">);</span>
+  <span class="n">outfile</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span><span class="p">;</span>
+  <span class="n">outfile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">outputImage</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputImageFilename</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SIFTDisparityMapEstimation.html" class="btn btn-neutral float-right" title="SIFTDisparityMapEstimation.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SIFTDensityExample.html" class="btn btn-neutral" title="SIFTDensityExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

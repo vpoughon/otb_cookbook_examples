@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Stereoscopic reconstruction from VHR optical images pair &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OTB processing in Python" href="python.html" />
+    <link rel="prev" title="Feature extraction" href="featextract.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Stereoscopic reconstruction from VHR optical images pair</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#estimate-epipolar-geometry-transformation">Estimate epipolar geometry transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resample-images-in-epipolar-geometry">Resample images in epipolar geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disparity-estimation-block-matching-along-epipolar-lines">Disparity estimation: Block matching along epipolar lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-disparity-to-digital-surface-model">From disparity to Digital Surface Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#one-application-to-rule-them-all-in-multi-stereo-framework-scheme">One application to rule them all in multi stereo framework scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stereo-reconstruction-good-practices">Stereo reconstruction good practices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#algorithm-outline">Algorithm outline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>Stereoscopic reconstruction from VHR optical images pair</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/stereo.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stereoscopic-reconstruction-from-vhr-optical-images-pair">
+<h1>Stereoscopic reconstruction from VHR optical images pair<a class="headerlink" href="#stereoscopic-reconstruction-from-vhr-optical-images-pair" title="Permalink to this headline">¶</a></h1>
+<p>This section describes how to convert pair of stereo images into
+elevation information.</p>
+<p>The standard problem of terrain reconstruction with available <strong>OTB
+Applications</strong> contains the following steps:</p>
+<ul class="simple">
+<li>Estimation of displacements grids for epipolar geometry
+transformation</li>
+<li>Epipolar resampling of the image pair using those grids</li>
+<li>Dense disparity map estimation</li>
+<li>Projection of the disparities on a Digital Surface Model (DSM)</li>
+</ul>
+<p>Let’s go to the third dimension!</p>
+<div class="section" id="estimate-epipolar-geometry-transformation">
+<h2>Estimate epipolar geometry transformation<a class="headerlink" href="#estimate-epipolar-geometry-transformation" title="Permalink to this headline">¶</a></h2>
+<p>The aim of this step is to generate resampled grids to transform
+images into epipolar geometry.
+<a class="reference external" href="http://en.wikipedia.org/wiki/Epipolar_geometry">Epipolar geometry</a> is the
+geometry of stereo vision.
+The operation of stereo rectification determines transformations to
+apply to each image such that pairs of conjugate epipolar lines become
+collinear, parallel to one of the image axes and aligned. In this
+geometry, the objects present on a given row of the left image are also
+located on the same row in the right image.</p>
+<p>Applying this transformation reduces the problem of elevation (or stereo
+correspondences determination) to a 1-D problem. We have two sensor images
+<img class="math" src="../_images/math/7d140701c7be12e158320f562a764730fe9e7b12.png" alt="image1"/> and <img class="math" src="../_images/math/e04fb00f63f57e9f9ee32d3a91dc78d94c6406ca.png" alt="image2"/> over the same area (the stereo pair) and we
+assume that we know the localization functions (forward and inverse) associated
+with each images.</p>
+<p>The forward function allows to go from the image referential to the
+geographic referential. For the first image, this function will be noted:</p>
+<div class="math">
+<p><img src="../_images/math/e3d69a92e393bed6d81145b7ae78c0a57240a3ff.png" alt="(long,lat) = f_{1}(i,j,h)"/></p>
+</div><p>where <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/> is the elevation hypothesis, <img class="math" src="../_images/math/c07d7ddf20cb31710d4f0e8022b1822fc60ae9bc.png" alt="(i,j)"/> are the pixel
+coordinates in image 1 and <img class="math" src="../_images/math/1718c1e7a534aee34fed6dd9e94846f3f64ec6fa.png" alt="(long,lat)"/> are geographic coordinates. As you
+can imagine, the inverse function allows to go from geographic
+coordinates to the image geometry.</p>
+<p>For the second image, in that case, the expression of the inverse
+function is:</p>
+<div class="math">
+<p><img src="../_images/math/10bfe097af4156c3928103ff1a4a28c95cb36d18.png" alt="(i,j) = f^{Inv}_{2}(long,lat,h)"/></p>
+</div><p>Using jointly the forward and inverse functions from the image pair, we
+can construct a co-localization function
+<img class="math" src="../_images/math/fd1b9b5c92d81d0ad7960b64c77763ca69839d60.png" alt="g_{1 \rightarrow 2}"/> between the position of a pixel in
+the first and its position in the second one:</p>
+<div class="math">
+<p><img src="../_images/math/6343e2d54ceaced9ca004da79672f7e191346325.png" alt="(i_{2},j_{2}) = g_{1 \rightarrow 2} (i_{1} , j_{1} , h)"/></p>
+</div><p>The expression of this function is:</p>
+<div class="math">
+<p><img src="../_images/math/16e3e595310cb10cdc967b04b4f11d51ff0e29f9.png" alt="g_{1 \rightarrow 2} (i_{1} , j_{1} , h) =  f^{Inv}_{2} [ f_{1}(i_{1} , j_{1}, h) ]"/></p>
+</div><p>The expression is not really important, what you need to understand is
+that if we are able to determine for a given pixel in image 1 the
+corresponding pixel in image 2, as we know the expression of the
+co-localization function between both images, we can determine by
+identification the information about the elevation (variable h in the
+equation)!</p>
+<p>We now have the mathematical basis to understand how 3-D information can
+be extracted by examination of the relative positions of objects in the
+two 2-D epipolar images.</p>
+<p>The construction of the two epipolar grids is a little bit more
+complicated in the case of VHR optical images. That is because most of
+passive remote sensing from space use a push-broom sensor, which
+corresponds to a line of sensors arranged perpendicularly to the flight
+direction of the spacecraft. This acquisition configuration implies a
+slightly different strategy for stereo-rectification
+(<a class="reference external" href="http://en.wikipedia.org/wiki/Epipolar_geometry#Epipolar_geometry_of_pushbroom_sensor">see here</a> ).</p>
+<p>We will now explain how to use the <em>StereoRectificationGridGenerator</em>
+application to produce two images which are <strong>deformation grids</strong> to
+resample the two images in epipolar geometry.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_StereoRectificationGridGenerator</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">inleft</span> <span class="n">image1</span><span class="o">.</span><span class="n">tif</span>
+                                        <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">inright</span> <span class="n">image2</span><span class="o">.</span><span class="n">tif</span>
+                                        <span class="o">-</span><span class="n">epi</span><span class="o">.</span><span class="n">elevation</span><span class="o">.</span><span class="n">default</span> <span class="mi">50</span>
+                                        <span class="o">-</span><span class="n">epi</span><span class="o">.</span><span class="n">step</span> <span class="mi">10</span>
+                                        <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">outleft</span> <span class="n">grid_image1</span><span class="o">.</span><span class="n">tif</span>
+                                        <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">outright</span> <span class="n">grid_image2</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>The application estimates the displacement to apply to each pixel in
+both input images to obtain epipolar geometry. The application accepts a
+‘step’ parameter to estimate displacements on a coarser grid. Here we
+estimate the displacements every 10 pixels. This is because in most
+cases with a pair of VHR and a small angle between the two images, this
+grid is very smooth. Moreover, the implementation is not <em>streamable</em>
+and uses potentially a lot of memory. Therefore it is generally a good
+idea to estimate the displacement grid at a coarser resolution.</p>
+<p>The application outputs the size of the output images in epipolar
+geometry. <strong>Note these values</strong>, we will use them in the next step to
+resample the two images in epipolar geometry.</p>
+<p>In our case, we have:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span> <span class="n">parameters</span> <span class="n">value</span><span class="p">:</span>
+<span class="n">epi</span><span class="o">.</span><span class="n">rectsizex</span><span class="p">:</span> <span class="mi">4462</span>
+<span class="n">epi</span><span class="o">.</span><span class="n">rectsizey</span><span class="p">:</span> <span class="mi">2951</span>
+<span class="n">epi</span><span class="o">.</span><span class="n">baseline</span><span class="p">:</span>  <span class="mf">0.2094</span>
+</pre></div>
+</div>
+<p>The <em>epi.baseline</em> parameter provides the mean value (in pixels per meters) of
+the baseline to sensor altitude ratio (also called B/H in the litterature).
+It can be used to do an approximate conversion of disparities to physical
+elevation :</p>
+<div class="math">
+<p><img src="../_images/math/3322250557721c4166f48857393537245f76536e.png" alt="h = h_{REF} + \frac{d}{B/H}"/></p>
+</div><p>where <img class="math" src="../_images/math/0f00ede6384b031d75fc04b68a6f23bb2974ad9b.png" alt="h_{REF}"/> is the reference altitude used to generate the epipolar
+grids (here: 50m), and <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/> is a disparity value (in pixels) for a given
+object between images 1 and 2.</p>
+<p>We can now move forward to the resampling in epipolar geometry.</p>
+</div>
+<div class="section" id="resample-images-in-epipolar-geometry">
+<h2>Resample images in epipolar geometry<a class="headerlink" href="#resample-images-in-epipolar-geometry" title="Permalink to this headline">¶</a></h2>
+<p>The former application generates two grids of displacements. The
+<em>GridBasedImageResampling</em> allows to resample the two input images in
+the epipolar geometry using these grids. These grids are intermediary
+results not really useful on their own in most cases. This second step
+<em>only</em> consists in applying the transformation to resample both images.
+This application can obviously be used in a lot of other contexts.</p>
+<p>The two commands to generate epipolar images are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_GridBasedImageResampling</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">image1</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">epi_image1</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">grid</span><span class="o">.</span><span class="ow">in</span> <span class="n">grid_image1</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">out</span><span class="o">.</span><span class="n">sizex</span> <span class="mi">4462</span>
+                                <span class="o">-</span><span class="n">out</span><span class="o">.</span><span class="n">sizey</span> <span class="mi">2951</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_GridBasedImageResampling</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">image2</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">epi_image2</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">grid</span><span class="o">.</span><span class="ow">in</span> <span class="n">grid_image2</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">out</span><span class="o">.</span><span class="n">sizex</span> <span class="mi">4462</span>
+                                <span class="o">-</span><span class="n">out</span><span class="o">.</span><span class="n">sizey</span> <span class="mi">2951</span>
+</pre></div>
+</div>
+<p>As you can see, we set <em>sizex</em> and <em>sizey</em> parameters using output
+values given by the <em>StereoRectificationGridGenerator</em> application to
+set the size of the output epipolar images. The two epipolar images should have
+the same size.</p>
+<div class="figure">
+<img alt="../_images/stereo_image1_epipolar.png" src="../_images/stereo_image1_epipolar.png" />
+</div>
+<div class="figure">
+<img alt="../_images/stereo_image2_epipolar.png" src="../_images/stereo_image2_epipolar.png" />
+</div>
+<p>Figure 1: Extract of resample image1 and image2 in epipolar geometry over Pyramids of Cheops. ©CNES 2012</p>
+<p>We obtain two images in epipolar geometry, as shown in
+<cite>Figure 1</cite>. Note that the application allows to
+resample only a part of the image using the <em>-out.ulx</em> and <em>-out.uly</em>
+parameters.</p>
+</div>
+<div class="section" id="disparity-estimation-block-matching-along-epipolar-lines">
+<h2>Disparity estimation: Block matching along epipolar lines<a class="headerlink" href="#disparity-estimation-block-matching-along-epipolar-lines" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we can begin the stereo correspondences lookup process!</p>
+<p>Things are becoming a little bit more complex but do not worry. First,
+we will describe the power of the <em>BlockMatching</em> application.</p>
+<p>The resampling of our images in epipolar geometry allows us to constrain
+the search along a 1-dimensional line as opposed to both dimensions, but
+what is even more important is that the disparities along the lines,
+i.e. the offset along the lines measured by the block-matching process
+can be directly linked to the local elevation</p>
+<p>An almost complete spectrum of <a class="reference external" href="http://vision.middlebury.edu/stereo/eval3/">stereo correspondence algorithms</a> has been
+published and it is still augmented at a significant rate!
+The <strong>Orfeo ToolBox</strong> implements different local strategies for block
+matching:</p>
+<ul class="simple">
+<li>Sum of Square Distances block-matching (SSD)</li>
+<li>Normalized Cross-Correlation (NCC)</li>
+<li>Lp pseudo-norm (LP)</li>
+</ul>
+<p>An other important parameter (mandatory in the application!) is the
+range of disparities. In theory, the block matching can perform a blind
+exploration and search for a infinite range of disparities between the
+stereo pair. We need now to evaluate a range of disparities where the
+block matching will be performed (in the general case from the deepest
+point on Earth, <a class="reference external" href="http://en.wikipedia.org/wiki/Challenger_Deep">the Challenger Deep</a> . to the Everest
+summit!)</p>
+<p>We deliberately exaggerated but you can imagine that without a smaller
+range the block matching algorithm can take a lot of time. That is why
+these parameters are mandatory for the application and as a consequence
+we need to estimate them manually. This is pretty simple using the two
+epipolar images.</p>
+<p>In our case, we choose one point on a <em>flat</em> area. Its coordinates are
+<img class="math" src="../_images/math/406f613e59fedd4dc3e559c020ded823d8d15a50.png" alt="[1525, 1970]"/> in epipolar image 1 and <img class="math" src="../_images/math/7243b7fffd307d86cb5deb0728ec67e0c9c602be.png" alt="[1526, 1970]"/> in
+epipolar image 2. We then select a second point on a higher region
+(in our case a point near the top of the Pyramid of Cheops!). The image
+coordinates of this pixel are <img class="math" src="../_images/math/1e9bf9dcac844c3265bad3749fba0f0604a7e1da.png" alt="[1661,1299]"/> in image 1 and
+<img class="math" src="../_images/math/f04f7df6aa2eec9398313d12d955726f6c448d1d.png" alt="[1633,1300]"/> in image 2. We check the difference between column
+coordinates in images 1 and 2 in order to derive the useful disparity interval
+for horizontal exploration. In our case, this interval is at least
+<img class="math" src="../_images/math/b068ef56408d801a14ac91ae3bcebf8253fe8dee.png" alt="[-28,1]"/> (the convention for the sign of the disparity range is from
+image 1 to image 2).</p>
+<p>Note that this exploration interval can be reduced using an external DEM in the
+<em>StereoRectificationGridGenerator</em> application. Indeed, the disparities measured
+between the epipolar images are relative to the reference altitude used when
+computing epipolar grids (hence, defining the epipolar geometry). Using an
+external DEM should produce epipolar images where altitude deviations from the
+reference are smaller, and as a consequence, disparities closer to 0.</p>
+<p>Regarding the vertical disparity, in the first step we said that we reduced the
+problem of 2D exploration to a 1D problem, but this is not completely true in
+general cases. There might be small disparities in the vertical direction which
+are due to parallax errors (i.e. epipolar lines exhibit a small shift in
+the vertical direction, around 1 pixel). In fact, the exploration is
+typically smaller along the vertical direction than along
+the horizontal one. You can also estimate them on the epipolar pair (in
+our case we use a range of <img class="math" src="../_images/math/8b058f6323328c6a0fd741e20b35726ecc4ced5f.png" alt="-1"/> to <img class="math" src="../_images/math/d839e144267ecbb8a87acbc8a7dfda7824a1693e.png" alt="1"/>).</p>
+<p>One more time, take care of the sign for minimum and maximum disparities
+(always from image1 to image2).</p>
+<p>The command line for the <em>BlockMatching</em> application is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BlockMatching</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">inleft</span> <span class="n">epi_image1</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">inright</span> <span class="n">epi_image2</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">disparity_map_ncc</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">minhd</span> <span class="o">-</span><span class="mi">45</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">maxhd</span> <span class="mi">5</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">minvd</span> <span class="o">-</span><span class="mi">1</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">maxvd</span> <span class="mi">1</span>
+                     <span class="o">-</span><span class="n">mask</span><span class="o">.</span><span class="n">inleft</span> <span class="n">epi_mask_image1</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">mask</span><span class="o">.</span><span class="n">inright</span> <span class="n">epi_mask_image2</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">outmetric</span> <span class="mi">1</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">metric</span> <span class="n">ncc</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">subpixel</span> <span class="n">dichotomy</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">medianfilter</span><span class="o">.</span><span class="n">radius</span> <span class="mi">5</span>
+                     <span class="o">-</span><span class="n">bm</span><span class="o">.</span><span class="n">medianfilter</span><span class="o">.</span><span class="n">incoherence</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>The application creates by default a two bands image: the horizontal
+and vertical disparities.</p>
+<p>The <em>BlockMatching</em> application gives access to a lot of other powerful
+functionalities to improve the quality of the output disparity map.</p>
+<p>Here are a few of these functionalities:</p>
+<ul>
+<li><p class="first"><strong>io.outmetric</strong>: if the optimal metric values image is activated, it
+will be concatenated to the output image (which will then have three
+bands: horizontal disparity, vertical disparity and metric value)</p>
+</li>
+<li><p class="first"><strong>bm.subpixel</strong>: Perform sub-pixel estimation of disparities</p>
+</li>
+<li><p class="first"><strong>mask.inleft</strong> and <strong>mask.inright</strong>: you can specify a no-data value which
+will discard pixels with this value (for example the epipolar
+geometry can generate large part of images with black pixels). This
+mask can be easily generated using the <em>BandMath</em> application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">epi_image1</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">epi_mask_image1</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;im1b1&lt;=0 ? 0 : 255&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">epi_image2</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">epi_mask_image2</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;im1b1&lt;=0 ? 0 : 255&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>mask.variancet</strong>: The block matching algorithm has difficulties to
+find matches on uniform areas. We can use the variance threshold to
+discard those regions and speed-up computation time.</p>
+</li>
+<li><p class="first"><strong>bm.medianfilter.radius</strong> and <strong>bm.medianfilter.incoherence</strong>:
+Applies a median filter to the disparity map. The median filter
+belongs to the family of nonlinear filters. It is used to smooth an
+image without being biased by outliers or shot noise. The radius
+corresponds to the neighbourhood where the median value is computed.
+A detection of incoherence between the input disparity map and the
+median-filtered one is performed (cases where the absolute difference is
+greater than the threshold, whose default value is 1). Both parameters
+must be defined in the application to activate the filter.</p>
+</li>
+</ul>
+<p>Of course all these parameters can be combined to improve the disparity
+map.</p>
+<div class="figure">
+<img alt="../_images/stereo_disparity_horizontal.png" src="../_images/stereo_disparity_horizontal.png" />
+</div>
+<div class="figure">
+<img alt="../_images/stereo_disparity_metric.png" src="../_images/stereo_disparity_metric.png" />
+</div>
+<p>Figure 2: Horizontal disparity and optimal metric map</p>
+</div>
+<div class="section" id="from-disparity-to-digital-surface-model">
+<h2>From disparity to Digital Surface Model<a class="headerlink" href="#from-disparity-to-digital-surface-model" title="Permalink to this headline">¶</a></h2>
+<p>Using the previous application, we evaluated disparities between epipolar images.
+The next (and last!) step is now to transform the disparity map into an
+elevation information to produce an elevation map. It uses as input the
+disparity maps (horizontal and vertical) to produce a Digital Surface
+Model (DSM) with a regular sampling. The elevation values are computed
+from the triangulation of the “left-right” lines of sight for each matched
+pixels. When several elevations are available on a DSM cell, the highest one
+is kept.</p>
+<p>First, an important point is that it is often a good idea to rework the
+disparity map given by the <em>BlockMatching</em> application to only keep
+relevant disparities. For this purpose, we can use the output optimal
+metric image and filter disparities with respect to this value.</p>
+<p>For example, if we used Normalized Cross-Correlation (NCC), we can keep
+only disparities where optimal metric value is superior to <img class="math" src="../_images/math/2662f7cfdfdf73a63dfe1af2594a5cb350fc2222.png" alt="0.9"/>.
+Disparities below this value can be considered as inaccurate and will not
+be used to compute elevation information (the <em>-io.mask</em> parameter can
+be used for this purpose).</p>
+<p>This filtering can be easily done with <strong>OTB Applications</strong> .</p>
+<p>We first use the <em>BandMath</em> application to filter disparities according
+to their optimal metric value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">disparity_map_ncc</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">thres_disparity</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint8</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;im1b3&gt;0.9 ? 255 : 0&quot;</span>
+</pre></div>
+</div>
+<p>Now, we can use the <em>DisparityMapToElevationMap</em> application to compute
+the elevation map from the filtered disparity maps.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_DisparityMapToElevationMap</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">disparity_map_ncc</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">left</span> <span class="n">image1</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">right</span> <span class="n">image2</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">lgrid</span> <span class="n">grid_image1</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">rgrid</span> <span class="n">grid_image2</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">mask</span> <span class="n">thres_disparity</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">elevation_map</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">hmin</span> <span class="mi">10</span>
+                                  <span class="o">-</span><span class="n">hmax</span> <span class="mi">400</span>
+                                  <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">default</span> <span class="mi">50</span>
+</pre></div>
+</div>
+<p>It produces the elevation map projected in WGS84 (EPSG
+code:<img class="math" src="../_images/math/5963c679cddcaae8458a6d08e3d64afdd2cb4d19.png" alt="4326"/>) over the ground area covered by the stereo pair.
+Pixels values are expressed in meters.</p>
+<div class="figure">
+<img alt="../_images/stereo_dem_zoom.png" src="../_images/stereo_dem_zoom.png" />
+</div>
+<p>Figure 3: Extract of the elevation map over Pyramids of Cheops.</p>
+<p>The <cite>Figure 3</cite> shows the output DEM from the Cheops pair.</p>
+</div>
+<div class="section" id="one-application-to-rule-them-all-in-multi-stereo-framework-scheme">
+<h2>One application to rule them all in multi stereo framework scheme<a class="headerlink" href="#one-application-to-rule-them-all-in-multi-stereo-framework-scheme" title="Permalink to this headline">¶</a></h2>
+<p>An application has been created to fuse one or multiple stereo
+reconstruction(s) using all-in-one approach: <em>StereoFramework</em> . It
+computes the DSM from one or several stereo pairs. First of all the user
+has to choose his input data and defines stereo couples using
+<em>-input.co</em> string parameter. Each couple is defined by 2 image indexes “a b”
+(starting at 0) separated by a space character. The different pairs are
+concatenated with coma. For instance “0 1,0 2” will define the image pairs
+“first with second”, and “first with third”. If left blank,
+images are processed by pairs (which is equivalent as using “ 0 1,2 3,4
+5 ” …). In addition to the usual elevation and projection parameters,
+main parameters have been split in groups detailed below:</p>
+<ul>
+<li><p class="first"><strong>output</strong>: Output parameters (DSM resolution, NoData value, Cell Fusion
+method)</p>
+<blockquote>
+<div><ul class="simple">
+<li>Output projection map selection.</li>
+<li>Spatial Sampling Distance of the output DSM in meters</li>
+<li>DSM empty cells are filled with a float value (-32768 by
+default)</li>
+<li>Choice of fusion strategy in each DSM cell (max, min, mean,
+acc)</li>
+<li>Output DSM</li>
+<li>Extent of output DSM</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>stereorect</strong>: Direct and inverse stereorectification grid subsampling parameters</p>
+<blockquote>
+<div><ul class="simple">
+<li>Step of the direct deformation grid (in pixels)</li>
+<li>Sub-sampling of the inverse epipolar grid</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>bm</strong>: Block Matching parameters.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Block-matching metric choice (robust SSD, SSD, NCC, Lp Norm)</li>
+<li>Radius of blocks for matching filter (in pixels, <img class="math" src="../_images/math/16d14f59441fe3b3d7c57975e6e10cbf2474c220.png" alt="2"/> by
+default)</li>
+<li>Minimum altitude below the selected elevation source (in
+meters, -20.0 by default)</li>
+<li>Maximum altitude above the selected elevation source (in
+meters, 20.0 by default)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>postproc</strong>: Post-Processing parameters</p>
+<blockquote>
+<div><ul class="simple">
+<li>Use bijection consistency. Right to Left correlation is
+computed to validate Left to Right disparities. If bijection is
+not found, pixel is rejected</li>
+<li>Use median disparities filtering (disabled by default)</li>
+<li>Use block matching metric output to discard pixels with low
+correlation value (disabled by default, float value)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>mask</strong>: Compute optional intermediate masks.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mask for left input image (must have the same size for all
+couples)</li>
+<li>Mask for right input image (must have the same size for all
+couples)</li>
+<li>This parameter allows to discard pixels whose local variance is
+too small. The size of the neighborhood is given by the radius
+parameter. (disabled by default)</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="stereo-reconstruction-good-practices">
+<h2>Stereo reconstruction good practices<a class="headerlink" href="#stereo-reconstruction-good-practices" title="Permalink to this headline">¶</a></h2>
+<p>The parameters for altitude offset are used inside the application to derive
+the minimum and maximum horizontal disparity exploration, so they have a
+critical impact on computation time. It is advised to choose an elevation source
+that is not too far from the DSM you want to produce (for instance, an
+SRTM elevation model). Therefore, the altitude from your elevation
+source will be already taken into account in the epipolar geometry and
+the disparities will reveal the elevation offsets (such as buildings).
+It allows you to use a smaller exploration range along the elevation
+axis, causing a smaller exploration along horizontal disparities and
+faster computation.</p>
+<p>To reduce time consumption it would be useful to crop all sensor images
+to the same extent. The easiest way to do that is to choose an image as
+reference, and then apply <em>ExtractROI</em> application on the other sensor
+images using the fit mode option.</p>
+</div>
+<div class="section" id="algorithm-outline">
+<h2>Algorithm outline<a class="headerlink" href="#algorithm-outline" title="Permalink to this headline">¶</a></h2>
+<p>The following algorithms are used in the application: For each sensor
+pair</p>
+<ul class="simple">
+<li>Compute the epipolar deformation grids from the stereo pair (direct
+and inverse)</li>
+<li>Resample into epipolar geometry with BCO interpolator</li>
+<li>Create masks for each epipolar image: remove black borders and
+resample input masks</li>
+<li>Compute horizontal disparities with a block matching algorithm</li>
+<li>Refine disparities to sub-pixel precision with a dichotomy algorithm</li>
+<li>Apply an optional median filter</li>
+<li>Filter disparities based on the correlation score (optional) and
+exploration bounds</li>
+<li>Translate disparities in sensor geometry</li>
+<li>Convert disparity map to 3D map</li>
+</ul>
+<p>Then all 3D maps are fused to produce a DSM with desired geographic or
+cartographic projection and parametrizable extent.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="python.html" class="btn btn-neutral float-right" title="OTB processing in Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="featextract.html" class="btn btn-neutral" title="Feature extraction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

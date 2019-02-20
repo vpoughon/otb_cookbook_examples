@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DimensionalityReduction &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DomainTransform" href="app_DomainTransform.html" />
+    <link rel="prev" title="Despeckle" href="app_Despeckle.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ContrastEnhancement.html">ContrastEnhancement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_Despeckle.html">Despeckle</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DimensionalityReduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_DomainTransform.html">DomainTransform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MeanShiftSmoothing.html">MeanShiftSmoothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_Smoothing.html">Smoothing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Image_Filtering.html">Image Filtering</a> &raquo;</li>
+        
+      <li>DimensionalityReduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_DimensionalityReduction.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dimensionalityreduction">
+<span id="app-dimensionalityreduction"></span><h1>DimensionalityReduction<a class="headerlink" href="#dimensionalityreduction" title="Permalink to this headline">¶</a></h1>
+<p>Perform Dimension reduction of the input image.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Performs dimensionality reduction on input image. PCA,NA-PCA,MAF,ICA methods are available. It is also possible to compute the inverse transform to reconstruct the image. It is also possible to optionally export the transformation matrix to a text file.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#rescale-output" id="id1">Rescale Output</a></li>
+<li><a class="reference internal" href="#na-pca-options" id="id2">NA-PCA options</a></li>
+<li><a class="reference internal" href="#ica-options" id="id3">ICA options</a></li>
+</ul>
+</div>
+<p><strong>Input Image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The input image to apply dimensionality reduction.</p>
+<p><strong>Output Image</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <br />
+output image. Components are ordered by decreasing eigenvalues.</p>
+<div class="section" id="rescale-output">
+<h3><a class="toc-backref" href="#id1">Rescale Output</a><a class="headerlink" href="#rescale-output" title="Permalink to this headline">¶</a></h3>
+<p><strong>Output min value</strong> <code class="code docutils literal notranslate"><span class="pre">-rescale.outmin</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+Minimum value of the output image.</p>
+<p><strong>Output max value</strong> <code class="code docutils literal notranslate"><span class="pre">-rescale.outmax</span> <span class="pre">float</span></code> <em>Default value: 255</em> <br />
+Maximum value of the output image.</p>
+<hr class="docutils" />
+<p>** Inverse Output Image** <code class="code docutils literal notranslate"><span class="pre">-outinv</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <br />
+reconstruct output image.</p>
+<p><strong>Algorithm</strong> <code class="code docutils literal notranslate"><span class="pre">-method</span> <span class="pre">[pca|napca|maf|ica]</span></code> <em>Default value: pca</em> <br />
+Selection of the reduction dimension method.</p>
+<ul class="simple">
+<li><strong>PCA</strong> <br /> Principal Component Analysis.</li>
+<li><strong>NA-PCA</strong> <br /> Noise Adjusted Principal Component Analysis.</li>
+<li><strong>MAF</strong> <br /> Maximum Autocorrelation Factor.</li>
+<li><strong>ICA</strong> <br /> Independent Component Analysis using a stabilized fixed point FastICA algorithm.</li>
+</ul>
+</div>
+<div class="section" id="na-pca-options">
+<h3><a class="toc-backref" href="#id2">NA-PCA options</a><a class="headerlink" href="#na-pca-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Set the x radius of the sliding window</strong> <code class="code docutils literal notranslate"><span class="pre">-method.napca.radiusx</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br /></p>
+<p><strong>Set the y radius of the sliding window</strong> <code class="code docutils literal notranslate"><span class="pre">-method.napca.radiusy</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br /></p>
+</div>
+<div class="section" id="ica-options">
+<h3><a class="toc-backref" href="#id3">ICA options</a><a class="headerlink" href="#ica-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>number of iterations</strong> <code class="code docutils literal notranslate"><span class="pre">-method.ica.iter</span> <span class="pre">int</span></code> <em>Default value: 20</em> <br /></p>
+<p><strong>Give the increment weight of W in [0, 1]</strong> <code class="code docutils literal notranslate"><span class="pre">-method.ica.mu</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br /></p>
+<p><strong>Nonlinearity</strong> <code class="code docutils literal notranslate"><span class="pre">-method.ica.g</span> <span class="pre">[tanh|exp|u3]</span></code> <em>Default value: tanh</em> <br />
+Nonlinearity used in the FastICA algorithm</p>
+<ul class="simple">
+<li><strong>tanh</strong> <br /> g(x) = tanh(x)</li>
+<li><strong>exp</strong> <br /> g(x) = -exp(-x^2/2)</li>
+<li><strong>u^3</strong> <br /> g(x) = u^3(x)</li>
+</ul>
+<hr class="docutils" />
+<p><strong>Number of Components</strong> <code class="code docutils literal notranslate"><span class="pre">-nbcomp</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Number of relevant components kept. By default all components are kept.</p>
+<p><strong>Normalize</strong> <code class="code docutils literal notranslate"><span class="pre">-normalize</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+Center and reduce data before Dimensionality reduction.</p>
+<p><strong>Transformation matrix output (text format)</strong> <code class="code docutils literal notranslate"><span class="pre">-outmatrix</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Filename to store the transformation matrix (csv format)</p>
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_DimensionalityReduction -in cupriteSubHsi.tif -out FilterOutput.tif -method pca
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;DimensionalityReduction&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;cupriteSubHsi.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;FilterOutput.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span><span class="s2">&quot;pca&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>This application does not provide the inverse transform and the transformation matrix export for the MAF.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">“Kernel maximum autocorrelation factor and minimum noise fraction transformations,” IEEE Transactions on Image Processing, vol. 20, no. 3, pp. 612-624, (2011)</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_DomainTransform.html" class="btn btn-neutral float-right" title="DomainTransform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_Despeckle.html" class="btn btn-neutral" title="Despeckle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

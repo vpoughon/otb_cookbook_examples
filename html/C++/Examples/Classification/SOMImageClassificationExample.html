@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SOMImageClassificationExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="OBIA" href="../OBIA.html" />
+    <link rel="prev" title="DempsterShaferFusionOfClassificationMapsExample.cxx" href="DempsterShaferFusionOfClassificationMapsExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../Classification.html">Classification</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ClassificationMapRegularizationExample.html">ClassificationMapRegularizationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SupervisedImageClassificationExample.html">SupervisedImageClassificationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DempsterShaferFusionOfClassificationMapsExample.html">DempsterShaferFusionOfClassificationMapsExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SOMImageClassificationExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Classification.html">Classification</a> &raquo;</li>
+        
+      <li>SOMImageClassificationExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Classification/SOMImageClassificationExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="somimageclassificationexample-cxx">
+<span id="example-somimageclassificationexample"></span><h1>SOMImageClassificationExample.cxx<a class="headerlink" href="#somimageclassificationexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/SOMImageClassificationExample.cxx?inline=false">SOMImageClassificationExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In previous examples, we have used the</span>
+<span class="c1">// \doxygen{otb}{SOMClassifier}, which uses the ITK classification</span>
+<span class="c1">// framework. This good for compatibility with the ITK framework, but</span>
+<span class="c1">// introduces the limitations of not being able to use streaming and</span>
+<span class="c1">// being able to know at compilation time the number of bands of the</span>
+<span class="c1">// image to be classified. In OTB we have avoided this limitation by</span>
+<span class="c1">// developing the \doxygen{otb}{SOMImageClassificationFilter}. In</span>
+<span class="c1">// this example we will illustrate its use. We start by including the</span>
+<span class="c1">// appropriate header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbSOMImageClassificationFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSOMMap.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">infname</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">somfname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outfname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+  <span class="c1">// We will assume double precision input images and will also define</span>
+  <span class="c1">// the type for the labeled pixels.</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>     <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">double</span>         <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">LabeledPixelType</span><span class="p">;</span>
+  <span class="c1">// Our classifier will be generic enough to be able to process images</span>
+  <span class="c1">// with any number of bands. We read the images as</span>
+  <span class="c1">// \doxygen{otb}{VectorImage}s. The labeled image will be a scalar image.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>  <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">LabeledPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">LabeledImageType</span><span class="p">;</span>
+  <span class="c1">// We can now define the type for the classifier filter, which is</span>
+  <span class="c1">// templated over its input and output image types and the SOM type.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SOMMap</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">::</span><span class="n">PixelType</span><span class="o">&gt;</span>                                          <span class="n">SOMMapType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SOMImageClassificationFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">LabeledImageType</span><span class="p">,</span> <span class="n">SOMMapType</span><span class="o">&gt;</span> <span class="n">ClassificationFilterType</span><span class="p">;</span>
+  <span class="c1">// And finally, we define the readers (for the input image and theSOM)</span>
+  <span class="c1">// and the writer. Since the images,</span>
+  <span class="c1">// to classify can be very big, we will use a streamed writer which</span>
+  <span class="c1">// will trigger the streaming ability of the classifier.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>        <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">SOMMapType</span><span class="o">&gt;</span>       <span class="n">SOMReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">LabeledImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+  <span class="c1">// We instantiate the classifier and the reader objects and we set</span>
+  <span class="c1">// the existing SOM obtained in a previous training step.</span>
+
+  <span class="n">ClassificationFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">ClassificationFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">infname</span><span class="p">);</span>
+
+  <span class="n">SOMReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">somreader</span> <span class="o">=</span> <span class="n">SOMReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">somreader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">somfname</span><span class="p">);</span>
+  <span class="n">somreader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetMap</span><span class="p">(</span><span class="n">somreader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// We plug the pipeline and</span>
+  <span class="c1">// trigger its execution by updating the output of the writer.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outfname</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../OBIA.html" class="btn btn-neutral float-right" title="OBIA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DempsterShaferFusionOfClassificationMapsExample.html" class="btn btn-neutral" title="DempsterShaferFusionOfClassificationMapsExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

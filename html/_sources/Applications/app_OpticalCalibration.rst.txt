@@ -1,0 +1,265 @@
+.. _app-OpticalCalibration:
+
+OpticalCalibration
+==================
+
+
+Perform optical calibration TOA/TOC (Top Of Atmosphere/Top Of Canopy). Supported sensors: QuickBird, Ikonos, WorldView2, Formosat, Spot5, Pleiades, Spot6, Spot7. For other sensors the application also allows providing calibration parameters manually.
+
+Description
+-----------
+
+The application allows converting pixel values from DN (for Digital Numbers) to reflectance. Calibrated values are called surface reflectivity and its values lie in the range [0, 1].
+The first level is called Top Of Atmosphere (TOA) reflectivity. It takes into account the sensor gain, sensor spectral response and the solar illuminations.
+The second level is called Top Of Canopy (TOC) reflectivity. In addition to sensor gain and solar illuminations, it takes into account the optical thickness of the atmosphere, the atmospheric pressure, the water vapor amount, the ozone amount, as well as the composition and amount of aerosol gasses.
+It is also possible to indicate an AERONET file which contains atmospheric parameters (version 1 and version 2 of Aeronet file are supported. Note that computing TOC reflectivity will internally compute first TOA and then TOC reflectance. 
+
+--------------------------
+
+If the sensor is not supported by the metadata interface factory of OTB, users still have the possibility to give the needed parameters to the application.
+For TOA conversion, these parameters are: 
+- day and month of acquisition, or flux normalization coefficient, or solar distance (in AU);
+- sun elevation angle;
+- gains and biases, one pair of values for each band (passed by a file);
+- solar illuminations, one value for each band (passed by a file).
+
+For the conversion from DN (for Digital Numbers) to spectral radiance (or 'TOA radiance') L, the following formula is used:
+
+(1)	L(b) = DN(b)/gain(b)+bias(b)	(in W/m2/steradians/micrometers)	with b being a band ID.
+
+These values are provided by the user thanks to a simple txt file with two lines, one for the gains and one for the biases.
+Each value must be separated with colons (:), with eventual spaces. Blank lines are not allowed. If a line begins with the '#' symbol, then it is considered as comments.
+Note that sometimes, the values provided by certain metadata files assume the formula L(b) = gain(b)*DC(b)+bias(b).
+In this case, be sure to provide the inverse gain values so that the application can correctly interpret them.
+
+In order to convert TOA radiance to TOA reflectance, the following formula is used:
+
+(2)	R(b) = (pi*L(b)*d*d) / (ESUN(b)*cos(θ))	(no dimension)	where: 
+
+- L(b) is the spectral radiance for band b 
+- pi is the famous mathematical constant (3.14159...) 
+- d is the earth-sun distance (in astronomical units) and depends on the acquisition's day and month 
+- ESUN(b) is the mean TOA solar irradiance (or solar illumination) in W/m2/micrometers
+- θ is the solar zenith angle in degrees.
+
+Note that the application asks for the solar elevation angle, and will perform the conversion to the zenith angle itself (zenith_angle = 90 - elevation_angle , units: degrees).
+Note also that ESUN(b) not only depends on the band b, but also on the spectral sensitivity of the sensor in this particular band. In other words, the influence of spectral sensitivities is included within the ESUN different values.
+These values are provided by the user thanks to a txt file following the same convention as before.
+Instead of providing the date of acquisition, the user can also provide a flux normalization coefficient or a solar distance (in AU) 'fn'. The formula used instead will be the following : 
+
+(3) 	R(b) = (pi*L(b)) / (ESUN(b)*fn*fn*cos(θ)) 
+
+Whatever the formula used (2 or 3), the user should pay attention to the interpretation of the parameters he will provide to the application, by taking into account the original formula that the metadata files assumes.
+
+Below, we give two examples of txt files containing information about gains/biases and solar illuminations :
+
+- gainbias.txt :
+
+# Gain values for each band. Each value must be separated with colons (:), with eventual spaces. Blank lines not allowed.
+10.4416 : 9.529 : 8.5175 : 14.0063
+# Bias values for each band.
+0.0 : 0.0 : 0.0 : 0.0
+
+- solarillumination.txt : 
+
+# Solar illumination values in watt/m2/micron ('micron' means actually 'for each band').
+# Each value must be separated with colons (:), with eventual spaces. Blank lines not allowed.
+1540.494123 : 1826.087443 : 1982.671954 : 1094.747446
+
+Finally, the 'Logs' tab provides useful messages that can help the user in knowing the process different status.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input** :code:`-in image` *Mandatory* |br|
+Input image filename
+
+**Output** :code:`-out image [dtype]` *Mandatory* |br|
+Output calibrated image filename
+
+**Calibration Level** :code:`-level [toa|toatoim|toc]` *Default value: toa* |br|
+
+
+* **Image to Top Of Atmosphere reflectance** |br| 
+
+* **TOA reflectance to Image** |br| 
+
+* **Image to Top Of Canopy reflectance (atmospheric corrections)** |br| 
+
+
+
+**Convert to milli reflectance** :code:`-milli bool` *Default value: false* |br|
+Flag to use milli-reflectance instead of reflectance.
+This allows saving the image with integer pixel type (in the range [0, 1000]  instead of floating point in the range [0, 1]. In order to do that, use this option and set the output pixel type (-out filename double for example)
+
+**Clamp of reflectivity values between [0, 1]** :code:`-clamp bool` *Default value: true* |br|
+Clamping in the range [0, 1]. It can be useful to preserve area with specular reflectance.
+
+Acquisition parameters
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group allows setting the parameters related to the acquisition conditions.
+
+**Minute** :code:`-acqui.minute int` *Default value: 0* |br|
+Minute (0-59)
+
+**Hour** :code:`-acqui.hour int` *Default value: 12* |br|
+Hour (0-23)
+
+**Day** :code:`-acqui.day int` *Default value: 1* |br|
+Day (1-31)
+
+**Month** :code:`-acqui.month int` *Default value: 1* |br|
+Month (1-12)
+
+**Year** :code:`-acqui.year int` *Default value: 2000* |br|
+Year
+
+**Flux Normalization** :code:`-acqui.fluxnormcoeff float` |br|
+Flux Normalization Coefficient
+
+**Solar distance** :code:`-acqui.solardistance float` |br|
+Solar distance (in AU)
+
+Sun angles
+^^^^^^^^^^
+
+
+
+This group contains the sun angles
+
+**Sun elevation angle (deg)** :code:`-acqui.sun.elev float` *Default value: 90* |br|
+Sun elevation angle (in degrees)
+
+**Sun azimuth angle (deg)** :code:`-acqui.sun.azim float` *Default value: 0* |br|
+Sun azimuth angle (in degrees)
+
+Viewing angles
+^^^^^^^^^^^^^^
+
+
+
+This group contains the sensor viewing angles
+
+**Viewing elevation angle (deg)** :code:`-acqui.view.elev float` *Default value: 90* |br|
+Viewing elevation angle (in degrees)
+
+**Viewing azimuth angle (deg)** :code:`-acqui.view.azim float` *Default value: 0* |br|
+Viewing azimuth angle (in degrees)
+
+
+
+------------
+
+**Gains or biases** :code:`-acqui.gainbias filename [dtype]` |br|
+Gains or biases
+
+**Solar illuminations** :code:`-acqui.solarilluminations filename [dtype]` |br|
+Solar illuminations (one value per band)
+
+Atmospheric parameters (for TOC)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group allows setting the atmospheric parameters.
+
+**Aerosol Model** :code:`-atmo.aerosol [noaersol|continental|maritime|urban|desertic]` *Default value: noaersol* |br|
+
+
+* **No Aerosol Model** |br| 
+
+* **Continental** |br| 
+
+* **Maritime** |br| 
+
+* **Urban** |br| 
+
+* **Desertic** |br| 
+
+
+
+**Ozone Amount** :code:`-atmo.oz float` *Default value: 0* |br|
+Ozone Amount
+
+**Water Vapor Amount** :code:`-atmo.wa float` *Default value: 2.5* |br|
+Water Vapor Amount (in saturation fraction of water)
+
+**Atmospheric Pressure** :code:`-atmo.pressure float` *Default value: 1030* |br|
+Atmospheric Pressure (in hPa)
+
+**Aerosol Optical Thickness** :code:`-atmo.opt float` *Default value: 0.2* |br|
+Aerosol Optical Thickness
+
+**Aeronet File** :code:`-atmo.aeronet filename [dtype]` |br|
+Aeronet file containing atmospheric parameters
+
+**Relative Spectral Response File** :code:`-atmo.rsr filename [dtype]` |br|
+Sensor relative spectral response file
+By default the application gets this information in the metadata
+
+**Window radius (adjacency effects)** :code:`-atmo.radius int` *Default value: 2* |br|
+Window radius for adjacency effects correctionsSetting this parameters will enable the correction ofadjacency effects
+
+**Pixel size (in km)** :code:`-atmo.pixsize float` *Default value: 1* |br|
+Pixel size (in km )used tocompute adjacency effects, it doesn't have tomatch the image spacing
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_OpticalCalibration -in QB_1_ortho.tif -level toa -out OpticalCalibration.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("OpticalCalibration")
+
+	app.SetParameterString("in", "QB_1_ortho.tif")
+	app.SetParameterString("level","toa")
+	app.SetParameterString("out", "OpticalCalibration.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| The OTB CookBook

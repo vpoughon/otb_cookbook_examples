@@ -1,0 +1,84 @@
+.. _app-SmallRegionsMerging:
+
+SmallRegionsMerging
+===================
+
+
+This application merges small regions of a segmentation result.
+
+Description
+-----------
+
+Given a segmentation result and the original image, it will merge segments whose size in pixels is lower than minsize parameter with the adjacent segments with the adjacent segment with closest radiometry and acceptable size. 
+
+Small segments will be processed by increasing size: first all segments for which area is equal to 1 pixel will be merged with adjacent segments, then all segments of area equal to 2 pixels will be processed, until segments of area minsize.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input image** :code:`-in image` *Mandatory* |br|
+The input image, containing initial spectral signatures corresponding to the segmented image (inseg).
+
+**Segmented image** :code:`-inseg image` *Mandatory* |br|
+Segmented image where each pixel value is the unique integer label of the segment it belongs to.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The output image. The output image is the segmented image where the minimal segments have been merged.
+
+**Minimum Segment Size** :code:`-minsize int` *Default value: 50* |br|
+Minimum Segment Size. If, after the  segmentation, a segment is of size strictly lower than this criterion, the segment is merged with the segment that has the closest sepctral signature.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SmallRegionsMerging -in smooth.tif -inseg segmentation.tif -out merged.tif -minsize 50
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SmallRegionsMerging")
+
+	app.SetParameterString("in", "smooth.tif")
+	app.SetParameterString("inseg", "segmentation.tif")
+	app.SetParameterString("out", "merged.tif")
+	app.SetParameterInt("minsize", 50)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-Segmentation`

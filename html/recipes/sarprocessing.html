@@ -1,0 +1,983 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SAR processing &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Residual registration" href="residual_registration.html" />
+    <link rel="prev" title="From raw image to calibrated product" href="optpreproc.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SAR processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#calibration">Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#despeckle">Despeckle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#polarimetry">Polarimetry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matrix-conversions">Matrix conversions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#polarimetric-decompositions">Polarimetric decompositions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#polarimetric-synthetis">Polarimetric synthetis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#polarimetric-data-visualization">Polarimetric data visualization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>SAR processing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/sarprocessing.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sar-processing">
+<h1>SAR processing<a class="headerlink" href="#sar-processing" title="Permalink to this headline">¶</a></h1>
+<p>This section describes how to use the applications related to SAR
+processing.</p>
+<div class="section" id="calibration">
+<h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h2>
+<p>The application SarRadiometricCalibration can deal with the calibration
+of data from four radar sensors: RadarSat2, Sentinel1, COSMO-SkyMed and
+TerraSAR-X.</p>
+<p>Examples:</p>
+<p>If SARimg.tif is a TerraSAR-X or a COSMO-SkyMed image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SarRadiometricCalibration</span> <span class="o">-</span><span class="ow">in</span> <span class="n">SARimg</span><span class="o">.</span><span class="n">tif</span>
+                                 <span class="o">-</span><span class="n">out</span> <span class="n">SARimg</span><span class="o">-</span><span class="n">calibrated</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>If SARimg.tif is a RadarSat2 or a Sentinel1 image, it is possible to
+specify the look-up table (automatically found in the metadata provided
+with such image):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SarRadiometricCalibration</span> <span class="o">-</span><span class="ow">in</span> <span class="n">SARimg</span><span class="o">.</span><span class="n">tif</span>
+                                 <span class="o">-</span><span class="n">lut</span> <span class="n">gamma</span>
+                             <span class="o">-</span><span class="n">out</span> <span class="n">SARimg</span><span class="o">-</span><span class="n">calibrated</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>For TerraSAR-X (and soon for RadarSat2 and Sentinel1), it is also
+possible to use a noise LUT to derive calibrated noise profiles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SarRadiometricCalibration</span> <span class="o">-</span><span class="ow">in</span> <span class="n">SARimg</span><span class="o">.</span><span class="n">tif</span>
+                                 <span class="o">-</span><span class="n">lut</span> <span class="n">gamma</span> <span class="o">-</span><span class="n">noise</span> <span class="mi">1</span>
+                                 <span class="o">-</span><span class="n">out</span> <span class="n">SARimg</span><span class="o">-</span><span class="n">calibrated</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="despeckle">
+<h2>Despeckle<a class="headerlink" href="#despeckle" title="Permalink to this headline">¶</a></h2>
+<p>SAR images are generally corrupted by speckle noise. To suppress speckle
+and improve the radar image analysis lots of filtering techniques have
+been proposed. The module implements to well-known despeckle methods:
+Frost, Lee, Gamma-MAP and Kuan.</p>
+<p>Figure ([ffig:S1VVdespeckledextract] shows an extract of a SLC Sentinel1
+image, band VV, taken over Cape Verde and the result of the Gamma
+filter. The following commands were used to produce the despeckled
+extract:</p>
+<p>First, the original image is converted into an intensity one (real part
+corresponds to band 1, and imaginary part to band 2):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">S1</span><span class="o">-</span><span class="n">VV</span><span class="o">-</span><span class="n">extract</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="n">im1b1</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">im1b2</span><span class="o">^</span><span class="mi">2</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">S1</span><span class="o">-</span><span class="n">VV</span><span class="o">-</span><span class="n">extract</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>Then the intensity image is despeckled with the Gamma-MAP filter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_Despeckle</span> <span class="o">-</span><span class="ow">in</span> <span class="n">S1</span><span class="o">-</span><span class="n">VV</span><span class="o">-</span><span class="n">extract</span><span class="o">-</span><span class="nb">int</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="nb">filter</span><span class="o">.</span><span class="n">gammamap</span><span class="o">.</span><span class="n">rad</span> <span class="mi">5</span>
+                 <span class="o">-</span><span class="nb">filter</span><span class="o">.</span><span class="n">gammamap</span><span class="o">.</span><span class="n">nblooks</span> <span class="mi">1</span>
+                 <span class="o">-</span><span class="n">out</span> <span class="n">S1</span><span class="o">-</span><span class="n">VV</span><span class="o">-</span><span class="n">despeckled</span><span class="o">-</span><span class="n">extract</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>The produced images were then rescaled to intensities ranging from 0 to
+255 in order to be displayed.</p>
+<div class="figure">
+<img alt="../_images/S1-VV-despeckled-extract.png" src="../_images/S1-VV-despeckled-extract.png" />
+</div>
+</div>
+<div class="section" id="polarimetry">
+<h2>Polarimetry<a class="headerlink" href="#polarimetry" title="Permalink to this headline">¶</a></h2>
+<p>In conventional imaging radar, the measurement is a scalar which is
+proportional to the received back-scattered power at a particular
+combination of linear polarization (HH, HV, VH or VV). Polarimetry is
+the measurement and interpretation of the polarization of this
+measurement. It allows for the measurement of various optical properties of a
+material. In polarimetry the basic measurement is a <img class="math" src="../_images/math/fbe81fce1543408b015e3ed1e0a626fc11bd5710.png" alt="2x2"/> complex
+scattering matrix yielding an eight dimensional measurement space
+(Sinclair matrix). For reciprocal targets where <img class="math" src="../_images/math/79f63bead97398e988a2187cc49d7ead04f7d81f.png" alt="HV=VH"/>, this
+space is compressed to five dimensions: three amplitudes (<img class="math" src="../_images/math/2c2d5a3f94b7cecb6f2f4418b486209a494f3fcf.png" alt="|HH|"/>,
+<img class="math" src="../_images/math/7d23cabb275118963030bb06c320dff67ed0cff6.png" alt="|HV|"/>, and <img class="math" src="../_images/math/a7d8bbd8217fb67effabffdaa7ee43d2b2716cb8.png" alt="|VV|"/>); and two phase measurements, (co-pol:
+HH-VV, and cross-pol: HH-HV). (see
+<a class="reference external" href="http://www.grss-ieee.org/technical-briefs/imaging-radar-polarimetry">grss-ieee</a>).</p>
+<div class="section" id="matrix-conversions">
+<h3>Matrix conversions<a class="headerlink" href="#matrix-conversions" title="Permalink to this headline">¶</a></h3>
+<p>This applications allows converting classical polarimetric matrices to
+each other. For instance, it is possible to get the coherency matrix
+from the Sinclair one, or the Mueller matrix from the coherency one. The
+figure below ([fig:polconv]) shows the workflow used in this
+application.</p>
+<div class="figure">
+<img alt="../_images/sarpol_conversion_schema.png" src="../_images/sarpol_conversion_schema.png" />
+</div>
+<p>The filters used in this application never handle matrices, but images
+where each band is related to their elements. As most of the time SAR
+polarimetry handles symmetric matrices, only the relevant elements are
+stored, so that the images representing them have a minimal number of
+bands. For instance, the coherency matrix size is 3x3 in the monostatic
+case, and 4x4 in the bistatic case: it will thus be stored in a 6-band
+or a 10-band complex image (the diagonal and the upper elements of the
+matrix).</p>
+<p>The Sinclair matrix is a special case: it is always represented as 3 or
+4 one-band complex images (for mono- or bistatic case).</p>
+<p>There are 13 available conversions, each one being related to the
+following parameters:</p>
+<ol class="arabic simple">
+<li>msinclairtocoherency</li>
+<li>msinclairtocovariance</li>
+<li>msinclairtocircovariance</li>
+<li>mcoherencytomueller</li>
+<li>mcovariancetocoherencydegree</li>
+<li>mcovariancetocoherency</li>
+<li>mlinearcovariancetocircularcovariance</li>
+<li>muellertomcovariance</li>
+<li>bsinclairtocoherency</li>
+<li>bsinclairtocovariance</li>
+<li>bsinclairtocircovariance</li>
+<li>sinclairtomueller</li>
+<li>muellertopoldegandpower</li>
+</ol>
+<p>For each option parameter, the list below gives the formula used.</p>
+<p>— Monostatic case —</p>
+<ol class="arabic">
+<li><p class="first">msinclairtocoherency (SinclairToReciprocalCoherencyMatrixFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/ab53adfa569740b779da6481afbed0da103511c9.png" alt="0.5 . (S_{hh}+S_{vv}).(S_{hh}+S_{vv})^{*}"/></li>
+<li><img class="math" src="../_images/math/3781593be612573e70660a549f927156d31bec5e.png" alt="0.5 . (S_{hh}+S_{vv}).(S_{hh}-S_{vv})^{*}"/></li>
+<li><img class="math" src="../_images/math/656772487ae90d5f28408bbe1995d332d25734b5.png" alt="0.5 . (S_{hh}+S_{vv}).(2 S_{hv})^{*}"/></li>
+<li><img class="math" src="../_images/math/e109b3b9436d41c77b1066cdcd6ec6c568904ac0.png" alt="0.5 . (S_{hh}-S_{vv}).(S_{hh}-S_{vv})^{*}"/></li>
+<li><img class="math" src="../_images/math/d4f5ad5b8cab8372a90d9ae45ebcefe858d04ae5.png" alt="0.5 . (S_{hh}-S_{vv}).(2 S_{hv})^{*}"/></li>
+<li><img class="math" src="../_images/math/ea4a2732906c39b172d2b31964f4b3203416f0c7.png" alt="0.5 . (2 S_{hv}).(2 S_{hv})^{*}"/></li>
+</ol>
+</li>
+<li><p class="first">msinclairtocovariance (SinclairToReciprocalCovarianceMatrixFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/15b7fd4b4247123d8631fca8903e7c7c710f88b4.png" alt="S_{hh}.S_{hh}^{*}"/></li>
+<li><img class="math" src="../_images/math/8c05f4cde44366bff8dcc1ca247ecf10a87f36f3.png" alt="\sqrt{2}.S_{hh}.S_{hv}^{*}"/></li>
+<li><img class="math" src="../_images/math/b0196ab8f1feececa13f13bf799c45fa114e8566.png" alt="S_{hh}.S_{vv}^{*}"/></li>
+<li><img class="math" src="../_images/math/3e48d17f8142f7d3f9cddf0aa4bc4dc51c1d90fa.png" alt="2.S_{hv}.S_{hv}^{*}"/></li>
+<li><img class="math" src="../_images/math/8042d4936cea731d4d3dbddfd867ae4faae9bfb7.png" alt="\sqrt{2}.S_{hv}.S_{vv}^{*}"/></li>
+<li><img class="math" src="../_images/math/a75899d7b8ad9aa9fdeb7df9c753f2b8d915bfe9.png" alt="S_{vv}.S_{vv}^{*}"/></li>
+</ol>
+</li>
+<li><p class="first">msinclairtocircovariance
+(SinclairToReciprocalCircularCovarianceMatrixFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/8593d71dbdd78e5e526462d196057bde6bc40526.png" alt="S_{ll}.S_{ll}^{*}"/></li>
+<li><img class="math" src="../_images/math/8d18e72e58e945db5b001d26fe7a8596d105b15f.png" alt="S_{ll}.S_{lr}^{*}"/></li>
+<li><img class="math" src="../_images/math/90132c6c06cb5d47805c7cc8a4e84c0aa91534b2.png" alt="S_{ll}.S_{rr}^{*}"/></li>
+<li><img class="math" src="../_images/math/430d4bda3c2f7bad26e555acd58233a95260bff7.png" alt="S_{lr}.S_{lr}^{*}"/></li>
+<li><img class="math" src="../_images/math/fcb7a7db4cf707ca086ecb5d4b6a9165892f4957.png" alt="S_{lr}.S_{rr}^{*}"/></li>
+<li><img class="math" src="../_images/math/b3860352a2283152e0c95b5c02e4ccfff00d661c.png" alt="S_{rr}.S_{rr}^{*}"/></li>
+</ol>
+<p>With:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/484baffcbc90beabdeb0e50832c73f07dd066ae5.png" alt="S_{ll} = 0.5(S_{hh}+2j S_{hv}-S_{vv})"/></li>
+<li><img class="math" src="../_images/math/09e875a714a62151fd8de1fea90cb7844927f984.png" alt="S_{lr} = 0.5(j S_{hh}+j S_{vv})"/></li>
+<li><img class="math" src="../_images/math/f440b4349c4af4f9d265cc05f919edaf35c880b5.png" alt="S_{rr} = 0.5(-S_{hh}+2j S_{hv}+S_{vv})"/></li>
+</ul>
+</li>
+<li><p class="first">mcoherencytomueller (ReciprocalCoherencyToReciprocalMuellerFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/06cfc93d36d6374ae01e94c6d45110cd55c19618.png" alt="0.5*( C_{11}+C_{22}+C_{33} )"/></li>
+<li><img class="math" src="../_images/math/64d78763bdb349a2909214e7f46a235748a0b6e9.png" alt="Re(C_{12}) + Im(C_{22})"/></li>
+<li><img class="math" src="../_images/math/06d2eb64c563f0651e61b3814e2b9119dd722bf4.png" alt="Re(C_{13})"/></li>
+<li><img class="math" src="../_images/math/cbe4844b5038e5ddddcc154f0ef172953804f7a3.png" alt="Im(C_{23})"/></li>
+<li><img class="math" src="../_images/math/9a8af62fd8b6233d827c070e4d2236d527c622bd.png" alt="Re(C_{12})"/></li>
+<li><img class="math" src="../_images/math/b9a486202bb4c130d4fc595c950ebcc89d988f66.png" alt="0.5*( C_{11}+C_{22}-C_{33} )"/></li>
+<li><img class="math" src="../_images/math/93883eb06af157a49af9a989e222a0e9dece5813.png" alt="Re(C_{23})"/></li>
+<li><img class="math" src="../_images/math/e28377f119dcba5ee8d675f469429292694e0aad.png" alt="Im(C_{13})"/></li>
+<li><img class="math" src="../_images/math/ebe22c7301ac40ff2efcaa55ea48afc6d37ecb8f.png" alt="-Re(C_{13})"/></li>
+<li><img class="math" src="../_images/math/eb8d5b7d519eec2e064d4779dff257b05b9b187b.png" alt="-Re(C_{23})"/></li>
+<li><img class="math" src="../_images/math/309e3a8841fd851f5c337e7026679bb933ff4714.png" alt="0.5.Re(VAL1)"/></li>
+<li><img class="math" src="../_images/math/3fd2b5709fcdbc368ee1fc0b45904f63eb391ee3.png" alt="0.5.Im(VAL0)"/></li>
+<li><img class="math" src="../_images/math/cbe4844b5038e5ddddcc154f0ef172953804f7a3.png" alt="Im(C_{23})"/></li>
+<li><img class="math" src="../_images/math/e28377f119dcba5ee8d675f469429292694e0aad.png" alt="Im(C_{13})"/></li>
+<li><img class="math" src="../_images/math/4709944163589b833b544b4ccd19f0411f73377d.png" alt="0.5.Im(VAL1^{*})"/></li>
+<li><img class="math" src="../_images/math/75c6a101dfa171d8f2356529c7948bcceb8f1ac0.png" alt="0.5.Re(VAL0)"/></li>
+</ol>
+<p>With:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/b7c4d6186013a13836db7bf652b1c4f2d77e8d94.png" alt="VAL0 = C_{33}+C_{12}-C_{11}-(C_{12}-C_{22})^{*}"/></li>
+<li><img class="math" src="../_images/math/219e38f93ef1b4f7079f6da48052db3eb1a6f722.png" alt="VAL1 = -C_{33}+C_{12}-C_{11}-(C_{12}-C_{22})^{*}"/></li>
+</ul>
+<p>Where <img class="math" src="../_images/math/4ed77223efc2c4d9753baa716e137897ded9d6a6.png" alt="C_{ij}"/> are related to the elements of the reciprocal
+coherence matrix.</p>
+</li>
+<li><p class="first">mcovariancetocoherencydegree
+(ReciprocalCovarianceToCoherencyDegreeFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/a63256d7966acb35256e5a0691259cb63f961b89.png" alt="abs(S_{hh}.S_{vv}^{*}) / sqrt(S_{hh}.S_{hh}^{*}) / sqrt(S_{vv}.S_{vv}^{*})"/></li>
+<li><img class="math" src="../_images/math/c4608bf7daf4ae560efcfe2c4295915ff05c5f71.png" alt="abs(S_{hv}.S_{vv}^{*}) / sqrt(S_{hv}.S_{hv}^{*}) / sqrt(S_{vv}.S_{vv}^{*})"/></li>
+<li><img class="math" src="../_images/math/20b61ffda204a2538d54ab416e1d67259b3b1aba.png" alt="abs(S_{hh}.S_{hv}^{*}) / sqrt(S_{hh}.S_{hh}^{*}) / sqrt(S_{hv}.S_{hv}^{*})"/></li>
+</ol>
+</li>
+<li><p class="first">mcovariancetocoherency
+(ReciprocalCovarianceToReciprocalCoherencyFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/d362055d52c818a2afa0853e0a6f5b9514596f0b.png" alt="0.5 . ( C_{33} + C_{13} + C_{13}^{*} + C_{11} )"/></li>
+<li><img class="math" src="../_images/math/733de5c1c690fb300ab7751b627650229d5c8b6f.png" alt="0.5 . ( -C_{33} - C_{13} + C_{13}^{*} + C_{11} )"/></li>
+<li><img class="math" src="../_images/math/a960b29cce761e980cfdd64b772b7a3a24b469bb.png" alt="0.5 . ( \sqrt{2}.C_{12} + \sqrt{2}.C_{23}^{*} )"/></li>
+<li><img class="math" src="../_images/math/fbb36236c821328868e5e2033557e23198fcfff8.png" alt="0.5 . ( C_{33} - C_{13} - C_{13}^{*} + C_{11} )"/></li>
+<li><img class="math" src="../_images/math/18da3ebcbe3401a6cf38baded5898df8943640d7.png" alt="0.5 . ( \sqrt{2}.C_{12} - \sqrt{2}.C_{23}^{*} )"/></li>
+<li><img class="math" src="../_images/math/248910025d5bee94327c130e81e7f2e5404abad3.png" alt="0.5 . ( 2 . C_{22} )"/></li>
+</ol>
+<p>Where <img class="math" src="../_images/math/4ed77223efc2c4d9753baa716e137897ded9d6a6.png" alt="C_{ij}"/> are related to the elements of the reciprocal
+linear covariance matrix.</p>
+</li>
+<li><p class="first">mlinearcovariancetocircularcovariance
+(ReciprocalLinearCovarianceToReciprocalCircularCovarianceFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/3db478ea4ab83077fa680d2fe4c5df5373776f61.png" alt="0.25 . ( C_{33}-i.\sqrt{2}.C_{23}-C_{13}+i.\sqrt{2}.C_{23}^{*}-C_{13}^{*}+2.C_{22}-i.\sqrt{2}.C_{12}+i.\sqrt{2}.C_{12}^{*}+C_{11} )"/></li>
+<li><img class="math" src="../_images/math/449d06ac840dd9f9894b508291c248d8db874993.png" alt="0.25 . ( i.\sqrt{2}.C_{33}+2.C_{23}-i.\sqrt{2}.C_{13}+i.\sqrt{2}.C_{13}^{*}+2.C_{12}^{*}-i.\sqrt{2}.C_{11} )"/></li>
+<li><img class="math" src="../_images/math/d779472283fec6e14a415d9934a39b70fa9d2d23.png" alt="0.25 . ( -C_{33}+i.\sqrt{2}.C_{23}+C_{13}+i.\sqrt{2}.C_{23}^{*}+C_{13}^{*}+2.C_{22}-i.\sqrt{2}.C_{12}-i.\sqrt{2}.C_{12}^{*}-C_{11} )"/></li>
+<li><img class="math" src="../_images/math/0fc44969a2ace9efffc5c264497561a3a1eee0a5.png" alt="0.25 . ( 2.C_{33}+2.C_{13}+2.C_{13}^{*}+2.C_{11} )"/></li>
+<li><img class="math" src="../_images/math/69cdf9a235e10a300355b82464bb12d17ade8223.png" alt="0.25 . ( i.\sqrt{2}.C_{33}+i.\sqrt{2}.C_{13}+2.C_{23}^{*}-i.\sqrt{2}.C_{13}^{*}+2.C_{12}-i.\sqrt{2}.C_{11} )"/></li>
+<li><img class="math" src="../_images/math/8cdda662728eb42f54ad6dccb65d294c3a5d1cb6.png" alt="0.25 . ( C_{33}+i.\sqrt{2}.C_{23}-C_{13}-i.\sqrt{2}.C_{23}^{*}-C_{13}^{*}+2.C_{22}+i.\sqrt{2}.C_{12}-i.\sqrt{2}.C_{12}^{*}+C_{11} )"/></li>
+</ol>
+<p>Where <img class="math" src="../_images/math/4ed77223efc2c4d9753baa716e137897ded9d6a6.png" alt="C_{ij}"/> are related to the elements of the reciprocal
+linear covariance matrix.</p>
+</li>
+<li><p class="first">muellertomcovariance (MuellerToReciprocalCovarianceFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/d3d5302c358cac37c2a7f7c2c3a8394cab33d56c.png" alt="0.5.(M_{11}+M_{22}+2.M_{12})"/></li>
+<li><img class="math" src="../_images/math/50fda4c2d8711713055e468e225034260c3bacf3.png" alt="0.5.\sqrt{2}.[(M_{13}+M_{23}) + j.(M_{14}+M_{24})]"/></li>
+<li><img class="math" src="../_images/math/8c6450eb0cbf0c1c55d51b7fb3b086c51c067019.png" alt="-0.5.(M_{33}+M_{44}) - j.M_{34}"/></li>
+<li><img class="math" src="../_images/math/51be1e4ded8fc7f19411912be54b46e378cd5951.png" alt="M_{11}-M_{22}"/></li>
+<li><img class="math" src="../_images/math/57d4a68436909d23bb49126cb711c70bc0b9ef62.png" alt="0.5.\sqrt{2}.[(M_{13}-M_{23}) + j.(M_{14}-M_{24})]"/></li>
+<li><img class="math" src="../_images/math/53e343b39fc0b900372adb2771ec32000ff8e48f.png" alt="0.5.(M_{11}+M_{22}-2.M_{12})"/></li>
+</ol>
+</li>
+</ol>
+<p>— Bistatic case —</p>
+<ol class="arabic">
+<li><p class="first">bsinclairtocoherency (SinclairToCoherencyMatrixFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/cd6f5c1074af463ebf01faa2d7697a09b921285a.png" alt="(S_{hh}+S_{vv}).(S_{hh}+S_{vv})^{*}"/></li>
+<li><img class="math" src="../_images/math/220f3c6d802de90872de4f66082b16ff5e7d593d.png" alt="(S_{hh}+S_{vv}).(S_{hh}-S_{vv})^{*}"/></li>
+<li><img class="math" src="../_images/math/5939071520922f2b5637b38f3169f96580e503d8.png" alt="(S_{hh}+S_{vv}).(S_{hv}+S_{vh})^{*}"/></li>
+<li><img class="math" src="../_images/math/5e138954a7a61fa104c03040049d4a9ff4c1fecc.png" alt="(S_{hh}+S_{vv}).( j (S_{hv}-S_{vh}))^{*}"/></li>
+<li><img class="math" src="../_images/math/3dd72a6b42ed365082d6bc4d0fe193192ef2ce9a.png" alt="(S_{hh}-S_{vv}).(S_{hh}-S_{vv})^{*}"/></li>
+<li><img class="math" src="../_images/math/daffc17784a65bfa41ebd511a2cb4b9b306caf4a.png" alt="(S_{hh}-S_{vv}).(S_{hv}+S_{vh})^{*}"/></li>
+<li><img class="math" src="../_images/math/02cdf5b6d9f561d6e040fba893c7aaab38f19bc3.png" alt="(S_{hh}-S_{vv}).( j (S_{hv}-S_{vh}))^{*}"/></li>
+<li><img class="math" src="../_images/math/ef1d3d0131df5fa4b0859da8a7de79845d33357b.png" alt="(S_{hv}+S_{vh}).(S_{hv}+S_{vh})^{*}"/></li>
+<li><img class="math" src="../_images/math/f19e6f5a25f96453474e3d4c6583929063b6b5ad.png" alt="(S_{hv}+S_{vh}).( j (S_{hv}-S_{vh}))^{*}"/></li>
+<li><img class="math" src="../_images/math/c990147cada82fe4789e0d2c20b17c6a2fd2f14e.png" alt="j (S_{hv}-S_{vh}).( j (S_{hv}-S_{vh}))^{*}"/></li>
+</ol>
+</li>
+<li><p class="first">bsinclairtocovariance (SinclairToCovarianceMatrixFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/15b7fd4b4247123d8631fca8903e7c7c710f88b4.png" alt="S_{hh}.S_{hh}^{*}"/></li>
+<li><img class="math" src="../_images/math/bc7c4db9db78e308be923345a7ec9316565f46e9.png" alt="S_{hh}.S_{hv}^{*}"/></li>
+<li><img class="math" src="../_images/math/023d4c5163106db032f3c063a83338d1e1b5f008.png" alt="S_{hh}.S_{vh}^{*}"/></li>
+<li><img class="math" src="../_images/math/b0196ab8f1feececa13f13bf799c45fa114e8566.png" alt="S_{hh}.S_{vv}^{*}"/></li>
+<li><img class="math" src="../_images/math/30fb855a3afac5959f35070d2cc20a45b9eaf28f.png" alt="S_{hv}.S_{hv}^{*}"/></li>
+<li><img class="math" src="../_images/math/e1e0eed71b2c3c5c9e46509178a96e4c5e80e711.png" alt="S_{hv}.S_{vh}^{*}"/></li>
+<li><img class="math" src="../_images/math/8c69e7bc39b6cda7d271fd170320ff3d1f49515c.png" alt="S_{hv}.S_{vv}^{*}"/></li>
+<li><img class="math" src="../_images/math/51fe4a067eb0ea86dbde0bdb197c3770117e03b0.png" alt="S_{vh}.S_{vh}^{*}"/></li>
+<li><img class="math" src="../_images/math/a556a2fb5a8fdcc434f027c45fdaec78cf855ebf.png" alt="S_{vh}.S_{vv}^{*}"/></li>
+<li><img class="math" src="../_images/math/a75899d7b8ad9aa9fdeb7df9c753f2b8d915bfe9.png" alt="S_{vv}.S_{vv}^{*}"/></li>
+</ol>
+</li>
+<li><p class="first">bsinclairtocircovariance (SinclairToCircularCovarianceMatrixFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/8593d71dbdd78e5e526462d196057bde6bc40526.png" alt="S_{ll}.S_{ll}^{*}"/></li>
+<li><img class="math" src="../_images/math/8d18e72e58e945db5b001d26fe7a8596d105b15f.png" alt="S_{ll}.S_{lr}^{*}"/></li>
+<li><img class="math" src="../_images/math/596390ff3e29b5c38d58afacee9a0943d179cc27.png" alt="S_{ll}.S_{rl}^{*}"/></li>
+<li><img class="math" src="../_images/math/90132c6c06cb5d47805c7cc8a4e84c0aa91534b2.png" alt="S_{ll}.S_{rr}^{*}"/></li>
+<li><img class="math" src="../_images/math/430d4bda3c2f7bad26e555acd58233a95260bff7.png" alt="S_{lr}.S_{lr}^{*}"/></li>
+<li><img class="math" src="../_images/math/36f052b6cb4e58ac44d3e3a6b108b9d386dcdbf0.png" alt="S_{lr}.S_{rl}^{*}"/></li>
+<li><img class="math" src="../_images/math/fcb7a7db4cf707ca086ecb5d4b6a9165892f4957.png" alt="S_{lr}.S_{rr}^{*}"/></li>
+<li><img class="math" src="../_images/math/d176de2872fea7273442e74140c2063bef9d3d71.png" alt="S_{rl}.S_{rl}^{*}"/></li>
+<li><img class="math" src="../_images/math/7813e190360c85e969130b32d34a2b25de06b9c9.png" alt="S_{rl}.S_{rr}^{*}"/></li>
+<li><img class="math" src="../_images/math/b3860352a2283152e0c95b5c02e4ccfff00d661c.png" alt="S_{rr}.S_{rr}^{*}"/></li>
+</ol>
+<p>With:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/fa36de0b4fcb90c2a1a8ddf09398fe915749e4d6.png" alt="S_{ll} = 0.5(S_{hh}+j S_{hv}+j S_{vh}-S_{vv})"/></li>
+<li><img class="math" src="../_images/math/e924593fdfbbbfabc696a8f9e70984ecb67f5509.png" alt="S_{lr} = 0.5(j S_{hh}+S_{hv}-S_{vh}+j S_{vv})"/></li>
+<li><img class="math" src="../_images/math/deb579dee42b2c589825bb9e1d73f191afa3b7e2.png" alt="S_{rl} = 0.5(j S_{hh}-S_{hv}+ S_{vh}+j S_{vv})"/></li>
+<li><img class="math" src="../_images/math/633b077d583e4bc4a34d5060cc25b05c7a199f94.png" alt="S_{rr} = 0.5(-S_{hh}+j S_{hv}+j S_{vh}+S_{vv})"/></li>
+</ul>
+<p>— Both cases —</p>
+</li>
+<li><p class="first">sinclairtomueller (SinclairToMueller)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/880a6d4cb0f6faeceb131b22ff2438856bcd2c3b.png" alt="0.5 Re( T_{xx}.T_{xx}^{*} + T_{xy}.T_{xy}^{*} + T_{yx}.T_{yx}^{*} + T_{yy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/d08fb90cba0f8e8bb6b0d1b38ee58671e3c2c088.png" alt="0.5 Re( T_{xx}.T_{xx}^{*} - T_{xy}.T_{xy}^{*} + T_{yx}.T_{yx}^{*} - T_{yy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/bc5f652483416f60b1f593c16b0e31e3bc358636.png" alt="Re( T_{xx}.T_{xy}^{*} + T_{yx}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/6692142291fc9a99de48990b94af47dcd3f605e2.png" alt="Im( T_{xx}.T_{xy}^{*} + T_{yx}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/c6b9a9ac46b547cef2b8c01946b8d398818aa092.png" alt="0.5 Re( T_{xx}.T_{xx}^{*} + T_{xy}.T_{xy}^{*} - T_{yx}.T_{yx}^{*} - T_{yy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/7a14878a9978c7e36c6aab0d22708be94d73df79.png" alt="0.5 Re( T_{xx}.T_{xx}^{*} - T_{xy}.T_{xy}^{*} - T_{yx}.T_{yx}^{*} + T_{yy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/000eebf192489f62c7e19151cb2d53b26785f676.png" alt="Re( T_{xx}.T_{xy}^{*} - T_{yx}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/ccf9cfb7219230a6ccc502e9125f69d5674aa7c2.png" alt="Im( T_{xx}.T_{xy}^{*} - T_{yx}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/111851d39dadfa461780b528f1069770bc27f232.png" alt="Re( T_{xx}.T_{yx}^{*} + T_{xy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/4bc5db02a7898ea16f6dac9b3628cbeb4bda7c5f.png" alt="Im( T_{xx}.T_{yx}^{*} - T_{xy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/697952d66bd84a9413c74b5edb2d86b0fbb23ef9.png" alt="Re( T_{xx}.T_{yy}^{*} + T_{xy}.T_{yx}^{*} )"/></li>
+<li><img class="math" src="../_images/math/3f09ac60cabe085acad4f6fea17405f981a33e05.png" alt="Im( T_{xx}.T_{yy}^{*} - T_{xy}.T_{yx}^{*} )"/></li>
+<li><img class="math" src="../_images/math/111851d39dadfa461780b528f1069770bc27f232.png" alt="Re( T_{xx}.T_{yx}^{*} + T_{xy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/4bc5db02a7898ea16f6dac9b3628cbeb4bda7c5f.png" alt="Im( T_{xx}.T_{yx}^{*} - T_{xy}.T_{yy}^{*} )"/></li>
+<li><img class="math" src="../_images/math/697952d66bd84a9413c74b5edb2d86b0fbb23ef9.png" alt="Re( T_{xx}.T_{yy}^{*} + T_{xy}.T_{yx}^{*} )"/></li>
+<li><img class="math" src="../_images/math/3f09ac60cabe085acad4f6fea17405f981a33e05.png" alt="Im( T_{xx}.T_{yy}^{*} - T_{xy}.T_{yx}^{*} )"/></li>
+</ol>
+<p>With:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/0308c75709755f51ef1c03850822e15fd1af569e.png" alt="T_{xx} = -S_{hh}"/></li>
+<li><img class="math" src="../_images/math/bbe475471cb31fd1c6460df113804837a634d68e.png" alt="T_{xy} = -S_{hv}"/></li>
+<li><img class="math" src="../_images/math/f5b00e4ff6551ae2f8d6728b0c7c0314c6baab22.png" alt="T_{yx} = S_{vh}"/></li>
+<li><img class="math" src="../_images/math/78a78164c8bc26ee235e56e66c0d7d67a225bdfe.png" alt="T_{yy} = S_{vv}"/></li>
+</ul>
+</li>
+<li><p class="first">muellertopoldegandpower (MuellerToPolarisationDegreeAndPowerFunctor)</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/bc938da5de31e53e37e9ca3ea605a469e068a717.png" alt="P_{min}"/></li>
+<li><img class="math" src="../_images/math/e1b508f830a81b5a5cf2dd5e85655789a6287d2f.png" alt="P_{max}"/></li>
+<li><img class="math" src="../_images/math/83ab7807462f8c6a285bdc3b7c09c202997dc8cb.png" alt="DegP_{min}"/></li>
+<li><img class="math" src="../_images/math/8ef66ac2cbe240269c02d0e934c361a4674172d6.png" alt="DegP_{max}"/></li>
+</ol>
+</li>
+</ol>
+<p>Examples:</p>
+<ol class="arabic">
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imageryC_HH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">inhv</span> <span class="n">imageryC_HV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invv</span> <span class="n">imageryC_VV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">conv</span> <span class="n">msinclairtocoherency</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">coherency</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imageryC_HH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">inhv</span> <span class="n">imageryC_HV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invv</span> <span class="n">imageryC_VV</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">conv</span> <span class="n">msinclairtocovariance</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">covariance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imageryC_HH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">inhv</span> <span class="n">imageryC_HV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invv</span> <span class="n">imageryC_VV</span><span class="o">.</span><span class="n">tif</span>
+                         <span class="o">-</span><span class="n">conv</span> <span class="n">msinclairtocircovariance</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">circ_covariance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inc</span> <span class="n">coherency</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">conv</span> <span class="n">mcoherencytomueller</span>
+                             <span class="o">-</span><span class="n">outf</span> <span class="n">mueller</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inc</span> <span class="n">covariance</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">conv</span> <span class="n">mcovariancetocoherencydegree</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">coherency_degree</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inc</span> <span class="n">covariance</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">conv</span> <span class="n">mcovariancetocoherency</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">coherency</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inc</span> <span class="n">covariance</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">conv</span> <span class="n">mlinearcovariancetocircularcovariance</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">circ_covariance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inf</span> <span class="n">mueller</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">conv</span> <span class="n">muellertomcovariance</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">covariance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imageryC_HH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">inhv</span> <span class="n">imageryC_HV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invh</span> <span class="n">imageryC_VH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invv</span> <span class="n">imageryC_VV</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">conv</span> <span class="n">bsinclairtocoherency</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">bcoherency</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imageryC_HH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">inhv</span> <span class="n">imageryC_HV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invh</span> <span class="n">imageryC_VH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invv</span> <span class="n">imageryC_VV</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">conv</span> <span class="n">bsinclairtocovariance</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">bcovariance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imageryC_HH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">inhv</span> <span class="n">imageryC_HV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invh</span> <span class="n">imageryC_VH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invv</span> <span class="n">imageryC_VV</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">conv</span> <span class="n">bsinclairtocircovariance</span>
+                             <span class="o">-</span><span class="n">outc</span> <span class="n">circ_bcovariance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imageryC_HH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">inhv</span> <span class="n">imageryC_HV</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invh</span> <span class="n">imageryC_VH</span><span class="o">.</span><span class="n">tif</span>
+                             <span class="o">-</span><span class="n">invv</span> <span class="n">imageryC_VV</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">conv</span> <span class="n">sinclairtomueller</span>
+                             <span class="o">-</span><span class="n">outf</span> <span class="n">mueller</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarMatrixConvert</span> <span class="o">-</span><span class="n">inf</span> <span class="n">mueller</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">conv</span> <span class="n">muellertopoldegandpower</span>
+                             <span class="o">-</span><span class="n">outf</span> <span class="n">degreepower</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="polarimetric-decompositions">
+<h3>Polarimetric decompositions<a class="headerlink" href="#polarimetric-decompositions" title="Permalink to this headline">¶</a></h3>
+<p>From one-band complex images (HH, HV, VH, VV), returns the selected
+decomposition. The H-alpha-A decomposition is currently the only one
+available; it is implemented for the monostatic case (transmitter and
+receiver are co-located). User must provide three one-band complex
+images HH, HV or VH, and VV (HV = VH in monostatic case). The H-alpha-A
+decomposition consists in averaging 3x3 complex coherency matrices
+(incoherent analysis): The user must provide the size of the averaging
+window, thanks to the parameter inco.kernelsize. The applications
+returns a float vector image, made of three channels: H(entropy),
+Alpha, A(Anisotropy).</p>
+<p>Here are the formula used (refer to the previous section about how the
+coherence matrix is obtained from the Sinclair one):</p>
+<ol class="arabic simple">
+<li><img class="math" src="../_images/math/52468808896d36e0539e0bb8d79504bce5733e9d.png" alt="entropy = -\sum_{i=0}^{2} \frac{p[i].\log{p[i]}}{\log{3}}"/></li>
+<li><img class="math" src="../_images/math/cd15266598094e83afc24db99c89906a61c237b7.png" alt="\alpha = \sum_{i=0}^{2} p[i].\alpha_{i}"/></li>
+<li><img class="math" src="../_images/math/cdc301afc4276e59ee22b04395e75f36ae64b6ce.png" alt="anisotropy = \frac {SortedEigenValues[1] - SortedEigenValues[2]}{SortedEigenValues[1] + SortedEigenValues[2]}"/></li>
+</ol>
+<p>Where:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/1cc8e351e2d2aa3a5556f6fb5c19a1e5841d6cd3.png" alt="p[i] = max(SortedEigenValues[i], 0) / \sum_{i=0}^{2, SortedEigenValues[i]&gt;0} SortedEigenValues[i]"/></li>
+<li><img class="math" src="../_images/math/eb9f4a55030b723d55caf517d7b14861ec20ac5f.png" alt="\alpha_{i} = \left| SortedEigenVector[i] \right|* \frac{180}{\pi}"/></li>
+</ul>
+<p>Example:</p>
+<p>We first extract a ROI from the original image (not required). Here
+imagery_HH.tif represents the element HH of the Sinclair matrix (and so
+forth).</p>
+<ul>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ExtractROI</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imagery_HH</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">imagery_HH_extract</span><span class="o">.</span><span class="n">tif</span>
+          <span class="o">-</span><span class="n">startx</span> <span class="mi">0</span> <span class="o">-</span><span class="n">starty</span> <span class="mi">0</span>
+                  <span class="o">-</span><span class="n">sizex</span> <span class="mi">1000</span> <span class="o">-</span><span class="n">sizey</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ExtractROI</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imagery_HV</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">imagery_HV_extract</span><span class="o">.</span><span class="n">tif</span>
+          <span class="o">-</span><span class="n">startx</span> <span class="mi">0</span> <span class="o">-</span><span class="n">starty</span> <span class="mi">0</span>
+                  <span class="o">-</span><span class="n">sizex</span> <span class="mi">1000</span> <span class="o">-</span><span class="n">sizey</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ExtractROI</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imagery_VV</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">imagery_VV_extract</span><span class="o">.</span><span class="n">tif</span>
+          <span class="o">-</span><span class="n">startx</span> <span class="mi">0</span> <span class="o">-</span><span class="n">starty</span> <span class="mi">0</span>
+                  <span class="o">-</span><span class="n">sizex</span> <span class="mi">1000</span> <span class="o">-</span><span class="n">sizey</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Next we apply the H-alpha-A decomposition:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARDecompositions</span> <span class="o">-</span><span class="n">inhh</span> <span class="n">imagery_HH_extract</span><span class="o">.</span><span class="n">tif</span>
+                         <span class="o">-</span><span class="n">inhv</span> <span class="n">imagery_HV_extract</span><span class="o">.</span><span class="n">tif</span>
+                         <span class="o">-</span><span class="n">invv</span> <span class="n">imagery_VV_extract</span><span class="o">.</span><span class="n">tif</span>
+             <span class="o">-</span><span class="n">decomp</span> <span class="n">haa</span> <span class="o">-</span><span class="n">inco</span><span class="o">.</span><span class="n">kernelsize</span> <span class="mi">5</span>
+                         <span class="o">-</span><span class="n">out</span> <span class="n">haa_extract</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>The result has three bands: entropy (0..1) - alpha (0..90) - anisotropy
+(0..1). It is split into 3 mono-band images thanks to following
+command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SplitImage</span> <span class="o">-</span><span class="ow">in</span> <span class="n">haa_extract</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">haa_extract_splitted</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>Each image is then colored thanks to a color look-up table ’hot’. Notice
+how minimum and maximum values are provided for each polarimetric
+variable.</p>
+<ul>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ColorMapping</span> <span class="o">-</span><span class="ow">in</span> <span class="n">haa_extract_splitted_0</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">method</span> <span class="n">continuous</span> <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">lut</span> <span class="n">hot</span>
+                    <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">min</span> <span class="mi">0</span>
+                    <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">max</span> <span class="mi">1</span>
+                    <span class="o">-</span><span class="n">out</span> <span class="n">entropy_hot</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ColorMapping</span> <span class="o">-</span><span class="ow">in</span> <span class="n">haa_extract_splitted_1</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">method</span> <span class="n">continuous</span>
+    <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">lut</span> <span class="n">hot</span> <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">min</span> <span class="mi">0</span> <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">max</span>
+    <span class="mi">90</span> <span class="o">-</span><span class="n">out</span> <span class="n">alpha_hot</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ColorMapping</span> <span class="o">-</span><span class="ow">in</span> <span class="n">haa_extract_splitted_2</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">method</span> <span class="n">continuous</span> <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">lut</span> <span class="n">hot</span>
+                    <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">min</span> <span class="mi">0</span>
+                    <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">continuous</span><span class="o">.</span><span class="n">max</span> <span class="mi">1</span>
+                    <span class="o">-</span><span class="n">out</span> <span class="n">anisotropy_hot</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>The results are shown in the figures below ([fig:entropyimage] ,
+[fig:alphaimage] and [fig:anisotropyimage]).</p>
+<div class="figure">
+<img alt="../_images/entropyhot.png" src="../_images/entropyhot.png" />
+</div>
+<div class="figure">
+<img alt="../_images/alphahot.png" src="../_images/alphahot.png" />
+</div>
+<div class="figure">
+<img alt="../_images/anisotropyhot.png" src="../_images/anisotropyhot.png" />
+</div>
+</div>
+<div class="section" id="polarimetric-synthetis">
+<h3>Polarimetric synthetis<a class="headerlink" href="#polarimetric-synthetis" title="Permalink to this headline">¶</a></h3>
+<p>This application gives, for each pixel, the power that would have been
+received by a SAR system with a basis different from the classical (H,V)
+one (polarimetric synthetis). The new basis are indicated through two
+Jones vectors, defined by the user thanks to orientation (psi) and
+ellipticity (khi) parameters. These parameters are namely psii, khii,
+psir and khir. The suffixes (i) and (r) refer to the transmitting
+antenna and the receiving antenna respectively. Orientations and
+ellipticity are given in degrees, and are between -90/90 degrees and
+-45/45 degrees respectively.</p>
+<p>Four polarization architectures can be processed:</p>
+<ol class="arabic simple">
+<li>HH_HV_VH_VV: full polarization, general bistatic case.</li>
+<li>HH_HV_VV or HH_VH_VV: full polarization, monostatic case
+(transmitter and receiver are co-located).</li>
+<li>HH_HV: dual polarization.</li>
+<li>VH_VV: dual polarization.</li>
+</ol>
+<p>The application takes a complex vector image as input, where each band
+correspond to a particular emission/reception polarization scheme. User
+must comply with the band order given above, since the bands are used to
+build the Sinclair matrix.</p>
+<p>In order to determine the architecture, the application first relies on
+the number of bands of the input image.</p>
+<ol class="arabic simple">
+<li>Architecture HH_HV_VH_VV is the only one with four bands, there is
+no possible confusion.</li>
+<li>Concerning HH_HV_VV and HH_VH_VV architectures, both correspond
+to a three channels image. But they are processed in the same way, as
+the Sinclair matrix is symmetric in the monostatic case.</li>
+<li>Finally, the two last architectures (dual-polarization), can’t be
+distinguished only by the number of bands of the input image. User
+must then use the parameters emissionh and emissionv to indicate the
+architecture of the system: emissionh=1 and emissionv=0 for HH_HV,
+emissionh=0 and emissionv=1 for VH_VV.</li>
+</ol>
+<p>Note: if the architecture is HH_HV, khii and psii are automatically
+set to 0/0 degrees; if the architecture is VH_VV, khii and psii are
+automatically set to 0/90 degrees.</p>
+<p>It is also possible to force the calculation to co-polar or cross-polar
+modes. In the co-polar case, values for psir and khir will be ignored
+and forced to psii and khii; same as the cross-polar mode, where khir
+and psir will be forced to psii + 90 degrees and -khii.</p>
+<p>Finally, the result of the polarimetric synthesis is expressed in the
+power domain, through a one-band scalar image.</p>
+<p>The final formula is thus: <img class="math" src="../_images/math/fe68603d0dbb35d704890267fc9bd19f8f4676a5.png" alt="P=\mid B^T.[S].A\mid^2"/> , where A ans
+B are two Jones vectors and S is a Sinclair matrix.</p>
+<p>The two figures below ([fig:polsynthll] and [fig:polsynthlr]) show the
+two images obtained with the basis LL and LR (L for left circular
+polarization and R for right polarization), from a Radarsat-2 image
+taken over Vancouver, Canada. Once the four two-band images imagery_HH
+imagery_HV imagery_VH imagery_VV were merged into a single four
+complex band image imageryC_HH_HV_VH_VV.tif, the following commands
+were used to produce the LL and LR images:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarSynth</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imageryC_HH_HV_VH_VV</span><span class="o">.</span><span class="n">tif</span>
+             <span class="o">-</span><span class="n">psii</span> <span class="mi">0</span> <span class="o">-</span><span class="n">khii</span> <span class="mi">45</span> <span class="o">-</span><span class="n">mode</span> <span class="n">co</span>
+                     <span class="o">-</span><span class="n">out</span> <span class="n">test</span><span class="o">-</span><span class="n">LL</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SARPolarSynth</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imageryC_HH_HV_VH_VV</span><span class="o">.</span><span class="n">tif</span>
+                     <span class="o">-</span><span class="n">psii</span> <span class="mi">0</span> <span class="o">-</span><span class="n">khii</span> <span class="mi">45</span> <span class="o">-</span><span class="n">mode</span> <span class="n">cross</span>
+                     <span class="o">-</span><span class="n">out</span> <span class="n">test</span><span class="o">-</span><span class="n">LR</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>The produced images were then rescaled to intensities ranging from 0 to
+255 in order to be displayed.</p>
+<div class="figure">
+<img alt="../_images/test-left-co-2.png" src="../_images/test-left-co-2.png" />
+</div>
+<div class="figure">
+<img alt="../_images/test-left-cross-2.png" src="../_images/test-left-cross-2.png" />
+</div>
+</div>
+<div class="section" id="polarimetric-data-visualization">
+<h3>Polarimetric data visualization<a class="headerlink" href="#polarimetric-data-visualization" title="Permalink to this headline">¶</a></h3>
+<p>Finally, let’s talk about polarimetric data visualization. There is a
+strong link between polarimetric data visualization and the way they can
+be decomposed into significant physical processes. Indeed, by setting
+the results (or combinations) of such decompositions to RGB channels
+that help in interpreting SAR polarimetric images.</p>
+<p>There is no specific dedicated application yet, but it is possible to
+use a combination of different applications as a replacement. Let’s do
+it with a RADARSAT-2 acquisition over the famous place of the Golden
+Gate Bridge, San Francisco, California.</p>
+<p>We first make an extract from the original image (not mandatory).</p>
+<ul>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ExtractROI</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imagery_HH</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">imagery_HH_extract</span><span class="o">.</span><span class="n">tif</span>
+                  <span class="o">-</span><span class="n">startx</span> <span class="mi">0</span> <span class="o">-</span><span class="n">starty</span> <span class="mi">6300</span>
+                  <span class="o">-</span><span class="n">sizex</span> <span class="mi">2790</span> <span class="o">-</span><span class="n">sizey</span> <span class="mi">2400</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ExtractROI</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imagery_HV</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">imagery_HV_extract</span><span class="o">.</span><span class="n">tif</span>
+                  <span class="o">-</span><span class="n">startx</span> <span class="mi">0</span> <span class="o">-</span><span class="n">starty</span> <span class="mi">6300</span>
+                  <span class="o">-</span><span class="n">sizex</span> <span class="mi">2790</span> <span class="o">-</span><span class="n">sizey</span> <span class="mi">2400</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ExtractROI</span> <span class="o">-</span><span class="ow">in</span> <span class="n">imagery_VV</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">imagery_VV_extract</span><span class="o">.</span><span class="n">tif</span>
+                  <span class="o">-</span><span class="n">startx</span> <span class="mi">0</span> <span class="o">-</span><span class="n">starty</span> <span class="mi">6300</span>
+                  <span class="o">-</span><span class="n">sizex</span> <span class="mi">2790</span> <span class="o">-</span><span class="n">sizey</span> <span class="mi">2400</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Then we compute the amplitude of each band using the <strong>BandMath</strong>
+application:</p>
+<ul>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">imagery_HH_extract</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">HH</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;sqrt(im1b1^2+im1b2^2)&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">imagery_HV_extract</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">HV</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;sqrt(im1b1^2+im1b2^2)&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">imagery_VV_extract</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">VV</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;sqrt(im1b1^2+im1b2^2)&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Note that BandMath application interprets the image
+’imagery_XX_extract.tif’ as an image made of two bands, where the
+first one is related to the real part of the signal, and where the
+second one is related to the imaginary part (that’s why the modulus is
+obtained by the expressions <img class="math" src="../_images/math/55f7e6063df9c40cf672a6b15bf928f1276ff8d2.png" alt="im1b1^2+im1b2^2"/>).</p>
+<p>Then, we rescale the produced images to intensities ranging from 0 to
+255:</p>
+<ul>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_Rescale</span> <span class="o">-</span><span class="ow">in</span> <span class="n">HH</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">HH_res</span><span class="o">.</span><span class="n">png</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_Rescale</span> <span class="o">-</span><span class="ow">in</span> <span class="n">HV</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">HV_res</span><span class="o">.</span><span class="n">png</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_Rescale</span> <span class="o">-</span><span class="ow">in</span> <span class="n">VV</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">VV_res</span><span class="o">.</span><span class="n">png</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Figures below ([fig:hhfrisco] , [fig:hvfrisco] and [fig:vvfrisco]) show
+the images obtained:</p>
+<div class="figure">
+<img alt="../_images/RSAT2_HH_Frisco.png" src="../_images/RSAT2_HH_Frisco.png" />
+</div>
+<div class="figure">
+<img alt="../_images/RSAT2_HV_Frisco.png" src="../_images/RSAT2_HV_Frisco.png" />
+</div>
+<div class="figure">
+<img alt="../_images/RSAT2_VV_Frisco.png" src="../_images/RSAT2_VV_Frisco.png" />
+</div>
+<p>Now the most interesting step. In order to get a friendly coloration of
+these data, we are going to use the Pauli decomposition, defined as
+follows:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/d6cea6bbd0ae3341466c0bbc1d590fa26524aa32.png" alt="a=\frac{|S_{HH}-S_{VV}|}{\sqrt{2}}"/></li>
+<li><img class="math" src="../_images/math/57227c4560fc878d51a849ff0243a05c68d05021.png" alt="b=\sqrt{2}.|S_{HV}|"/></li>
+<li><img class="math" src="../_images/math/6b97b20a84c4a605fdac0a0f53d117ac4c3d9183.png" alt="c=\frac{|S_{HH}+S_{VV}|}{\sqrt{2}}"/></li>
+</ul>
+<p>We use the BandMath application again:</p>
+<ul>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">imagery_HH_extract</span><span class="o">.</span><span class="n">tif</span> <span class="n">imagery_HV_extract</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="n">imagery_VV_extract</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">Channel1</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;sqrt(((im1b1-im3b1)^2+(im1b2-im3b2)^2))&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">imagery_HH_extract</span><span class="o">.</span><span class="n">tif</span> <span class="n">imagery_HV_extract</span><span class="o">.</span><span class="n">tif</span>
+                <span class="n">imagery_VV_extract</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">Channel2</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;sqrt(im2b1^2+im2b2^2)&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">imagery_HH_extract</span><span class="o">.</span><span class="n">tif</span> <span class="n">imagery_HV_extract</span><span class="o">.</span><span class="n">tif</span>
+<span class="n">imagery_VV_extract</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">Channel3</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;sqrt(((im1b1+im3b1)^2+(im1b2+im3b2)^2))&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Note that sqrt(2) factors have been omitted purposely, since their
+effects will be canceled by the rescaling step. Then, we rescale the
+produced images to intensities ranging from 0 to 255:</p>
+<ul>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_Rescale</span> <span class="o">-</span><span class="ow">in</span> <span class="n">Channel1</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">Channel1_res</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_Rescale</span> <span class="o">-</span><span class="ow">in</span> <span class="n">Channel2</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">Channel2_res</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_Rescale</span> <span class="o">-</span><span class="ow">in</span> <span class="n">Channel3</span><span class="o">.</span><span class="n">tif</span> <span class="o">-</span><span class="n">out</span> <span class="n">Channel3_res</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint8</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>And finally, we merge the three bands into a single RGB image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ConcatenateImages</span> <span class="o">-</span><span class="n">il</span> <span class="n">Channel1_res</span><span class="o">.</span><span class="n">tif</span> <span class="n">Channel2_res</span><span class="o">.</span><span class="n">tif</span> <span class="n">Channel3_res</span><span class="o">.</span><span class="n">tif</span>
+<span class="o">-</span><span class="n">out</span> <span class="n">visuPauli</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p>The result is shown in the figure below ([fig:colorfrisco]).</p>
+<div class="figure">
+<img alt="../_images/visuPauli.png" src="../_images/visuPauli.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="residual_registration.html" class="btn btn-neutral float-right" title="Residual registration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="optpreproc.html" class="btn btn-neutral" title="From raw image to calibrated product" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

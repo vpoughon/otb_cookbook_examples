@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image2.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Image1.cxx" href="Image1.html" />
+    <link rel="prev" title="Image3.cxx" href="Image3.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Image.html">Image</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Image3.html">Image3.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Image2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image1.html">Image1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image4.html">Image4.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageListExample.html">ImageListExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorImage.html">VectorImage.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image5.html">Image5.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Image.html">Image</a> &raquo;</li>
+        
+      <li>Image2.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Image/Image2.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="image2-cxx">
+<span id="example-image2"></span><h1>Image2.cxx<a class="headerlink" href="#image2-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Image/Image2.cxx?inline=false">Image2.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 1999-2011 Insight Software Consortium</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+
+<span class="c1">//  The first thing required to read an image from a file is to include</span>
+<span class="c1">//  the header file of the \doxygen{otb}{ImageFileReader} class.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">// Then, the image type should be defined by specifying the</span>
+  <span class="c1">// type used to represent pixels and the dimensions of the image.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="c1">// Using the image type, it is now possible to instantiate the image reader</span>
+  <span class="c1">// class. The image type is used as a template parameter to define how the</span>
+  <span class="c1">// data will be represented once it is loaded into memory. This type does</span>
+  <span class="c1">// not have to correspond exactly to the type stored in the file. However,</span>
+  <span class="c1">// a conversion based on C-style type casting is used, so the type chosen</span>
+  <span class="c1">// to represent the data on disk must be sufficient to characterize it</span>
+  <span class="c1">// accurately. Readers do not apply any transformation to the pixel data</span>
+  <span class="c1">// other than casting from the pixel type of the file to the pixel type of</span>
+  <span class="c1">// the ImageFileReader. The following illustrates a typical</span>
+  <span class="c1">// instantiation of the ImageFileReader type.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImageFileReader!Instantiation}</span>
+  <span class="c1">// \index{otb::Image!read}</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+
+  <span class="c1">// The reader type can now be used to create one reader object.  A</span>
+  <span class="c1">// \doxygen{itk}{SmartPointer} (defined by the \code{::Pointer}</span>
+  <span class="c1">// notation) is used to receive the reference to the newly created</span>
+  <span class="c1">// reader.  The \code{New()}</span>
+  <span class="c1">// method is invoked to create an instance of the image reader.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImageFileReader!New()}</span>
+  <span class="c1">// \index{otb::ImageFileReader!Pointer}</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// The minimum information required by the reader is the filename</span>
+  <span class="c1">// of the image to be loaded in memory. This is provided through</span>
+  <span class="c1">// the \code{SetFileName()} method. The file format here is inferred</span>
+  <span class="c1">// from the filename extension. The user may also explicitly specify the</span>
+  <span class="c1">// data format explicitly using the \doxygen{itk}{ImageIO} (See</span>
+  <span class="c1">// Chapter~\ref{sec:ImagReadWrite} \pageref{sec:ImagReadWrite} for more</span>
+  <span class="c1">// information):</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImageFileReader!SetFileName()}</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+
+  <span class="c1">// Reader objects are referred to as pipeline source objects; they</span>
+  <span class="c1">// respond to pipeline update requests and initiate the data flow in the</span>
+  <span class="c1">// pipeline. The pipeline update mechanism ensures that the reader only</span>
+  <span class="c1">// executes when a data request is made to the reader and the reader has</span>
+  <span class="c1">// not read any data.  In the current example we explicitly invoke the</span>
+  <span class="c1">// \code{Update()} method because the output of the reader is not connected</span>
+  <span class="c1">// to other filters. In normal application the reader&#39;s output is connected</span>
+  <span class="c1">// to the input of an image filter and the update invocation on the filter</span>
+  <span class="c1">// triggers an update of the reader. The following line illustrates how an</span>
+  <span class="c1">// explicit update is invoked on the reader.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImageFileReader!Update()}</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Access to the newly read image can be gained by calling the</span>
+  <span class="c1">// \code{GetOutput()} method on the reader. This method can also be called</span>
+  <span class="c1">// before the update request is sent to the reader.  The reference to the</span>
+  <span class="c1">// image will be valid even though the image will be empty until the reader</span>
+  <span class="c1">// actually executes.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImageFileReader!GetOutput()}</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">image</span> <span class="o">=</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+  <span class="c1">// Any attempt to access image data before the reader executes will yield</span>
+  <span class="c1">// an image with no pixel data. It is likely that a program crash will</span>
+  <span class="c1">// result since the image will not have been properly initialized.</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Image1.html" class="btn btn-neutral float-right" title="Image1.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Image3.html" class="btn btn-neutral" title="Image3.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

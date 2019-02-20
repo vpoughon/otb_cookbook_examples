@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MorphologicalMultiScaleDecomposition &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MorphologicalProfilesAnalysis" href="app_MorphologicalProfilesAnalysis.html" />
+    <link rel="prev" title="MorphologicalClassification" href="app_MorphologicalClassification.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_BinaryMorphologicalOperation.html">BinaryMorphologicalOperation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputePolylineFeatureFromImage.html">ComputePolylineFeatureFromImage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_DSFuzzyModelEstimation.html">DSFuzzyModelEstimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_EdgeExtraction.html">EdgeExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_GrayScaleMorphologicalOperation.html">GrayScaleMorphologicalOperation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_HaralickTextureExtraction.html">HaralickTextureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_HomologousPointsExtraction.html">HomologousPointsExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LineSegmentDetection.html">LineSegmentDetection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LocalStatisticExtraction.html">LocalStatisticExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MorphologicalClassification.html">MorphologicalClassification</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MorphologicalMultiScaleDecomposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_MorphologicalProfilesAnalysis.html">MorphologicalProfilesAnalysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_RadiometricIndices.html">RadiometricIndices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SFSTextureExtraction.html">SFSTextureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDataDSValidation.html">VectorDataDSValidation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Feature_Extraction.html">Feature Extraction</a> &raquo;</li>
+        
+      <li>MorphologicalMultiScaleDecomposition</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_MorphologicalMultiScaleDecomposition.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="morphologicalmultiscaledecomposition">
+<span id="app-morphologicalmultiscaledecomposition"></span><h1>MorphologicalMultiScaleDecomposition<a class="headerlink" href="#morphologicalmultiscaledecomposition" title="Permalink to this headline">¶</a></h1>
+<p>Perform a geodesic morphology based image analysis on an input image channel</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application recursively apply geodesic decomposition.</p>
+<p>This algorithm is derived from the following publication:</p>
+<p>Martino Pesaresi and Jon Alti Benediktsson, Member, IEEE: A new approach for the morphological segmentation of high resolution satellite imagery.
+IEEE Transactions on geoscience and remote sensing, vol. 39, NO. 2, February 2001, p. 309-320.</p>
+<p>It provides a geodesic decomposition of the input image, with the following scheme. Let <img class="math" src="../_images/math/52912b9344b448d9c381dc4c5b6d0adc3b268b50.png" alt="f_0"/> denote the input image, <img class="math" src="../_images/math/8731eedece270bca4c3b41599fd2ca3487f50724.png" alt="\stackrel{\smile}{\mu}_{N}(f)"/> denote the convex membership function, <img class="math" src="../_images/math/f6bd8cf67e93c2e931e09f49edaca314fc0540cc.png" alt="\stackrel{\frown}{\mu}_{N}(f)"/> denote the concave membership function and <img class="math" src="../_images/math/fa13ef5a15bef22fd570f3522bf5eac5ae2c9e4d.png" alt="\psi_{N}(f)"/> denote the leveling function, for a given radius <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> as defined in the documentation
+of the GeodesicMorphologyDecompositionImageFilter. Let <img class="math" src="../_images/math/b06e4f00b7ed0e727eb4117a030fa066dd0f7afa.png" alt="[N_{1},\ldots, N_{n}]"/> denote a range of increasing radius (or scales). The iterative decomposition is defined as follows:</p>
+<p><img class="math" src="../_images/math/32c776976a60205210b12dc2566b5f2b2a81f7bf.png" alt="f_i"/> = <img class="math" src="../_images/math/224808f6c8e47f21181b39dc13ee204c67c8fd1f.png" alt="\psi_{N_i}(f_{i-1})"/></p>
+<p><img class="math" src="../_images/math/e4ead3ebc8a44cea3bc8040288df160e577a1121.png" alt="\stackrel{\frown}{f}_i"/> = <img class="math" src="../_images/math/dc90cbe9455069a4050a5247861d13263e214c53.png" alt="\stackrel{\frown}{\mu}_{N_i}(f_i)"/></p>
+<p><img class="math" src="../_images/math/758b9ae62e37cd79684ca88f4933c882012d9409.png" alt="\stackrel{\smile}{f}_i"/> = <img class="math" src="../_images/math/5bc55a843d4f2e8a28a02becec0635834ade9659.png" alt="\stackrel{\smile}{\mu}_{N_i}(f_i)"/></p>
+<p>The <img class="math" src="../_images/math/9850306cf32ba491305f47996a36432b4ce93c5b.png" alt="\stackrel{\smile}{f}_{i}"/> and <img class="math" src="../_images/math/d1e5c4bfe4c1e481920fb9b4751f3bc91999f30d.png" alt="\stackrel{\frown}{f}_{i}"/> are membership function for the convex
+(resp. concave) objects whose size is comprised between <img class="math" src="../_images/math/68dfb6ca6435554f1bb34238a8b89531faad8b17.png" alt="N_{i-1}"/> and <img class="math" src="../_images/math/46832e8eff2171864496bed218daacc3b7ce0afa.png" alt="N_i"/></p>
+<p>Output convex, concave and leveling images with B bands, where n is the number of levels.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p><strong>Input Image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The input image to be classified.</p>
+<p><strong>Output Convex Image</strong> <code class="code docutils literal notranslate"><span class="pre">-outconvex</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The output convex image with N bands</p>
+<p><strong>Output Concave Image</strong> <code class="code docutils literal notranslate"><span class="pre">-outconcave</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The output concave concave with N bands</p>
+<p><strong>Output Image</strong> <code class="code docutils literal notranslate"><span class="pre">-outleveling</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The output leveling image with N bands</p>
+<p><strong>Selected Channel</strong> <code class="code docutils literal notranslate"><span class="pre">-channel</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+The selected channel index for input image</p>
+<p><strong>Structuring Element Type</strong> <code class="code docutils literal notranslate"><span class="pre">-structype</span> <span class="pre">[ball|cross]</span></code> <em>Default value: ball</em> <br />
+Choice of the structuring element type</p>
+<ul class="simple">
+<li><strong>Ball</strong> <br /></li>
+<li><strong>Cross</strong> <br /></li>
+</ul>
+<p><strong>Initial radius</strong> <code class="code docutils literal notranslate"><span class="pre">-radius</span> <span class="pre">int</span></code> <em>Default value: 5</em> <br />
+Initial radius of the structuring element (in pixels)</p>
+<p><strong>Radius step</strong> <code class="code docutils literal notranslate"><span class="pre">-step</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Radius step along the profile (in pixels)</p>
+<p><strong>Number of levels use for multi scale</strong> <code class="code docutils literal notranslate"><span class="pre">-levels</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Number of levels use for multi scale</p>
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_MorphologicalMultiScaleDecomposition -in ROI_IKO_PAN_LesHalles.tif -structype ball -channel <span class="m">1</span> -radius <span class="m">2</span> -levels <span class="m">2</span> -step <span class="m">3</span> -outconvex convex.tif -outconcave concave.tif -outleveling leveling.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;MorphologicalMultiScaleDecomposition&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;ROI_IKO_PAN_LesHalles.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;structype&quot;</span><span class="p">,</span><span class="s2">&quot;ball&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;levels&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;outconvex&quot;</span><span class="p">,</span> <span class="s2">&quot;convex.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;outconcave&quot;</span><span class="p">,</span> <span class="s2">&quot;concave.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;outleveling&quot;</span><span class="p">,</span> <span class="s2">&quot;leveling.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>Generation of the multi scale decomposition is not streamable, pay attention to this fact when setting the number of iterating levels.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">otbGeodesicMorphologyDecompositionImageFilter class</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_MorphologicalProfilesAnalysis.html" class="btn btn-neutral float-right" title="MorphologicalProfilesAnalysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_MorphologicalClassification.html" class="btn btn-neutral" title="MorphologicalClassification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

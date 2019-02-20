@@ -1,0 +1,84 @@
+.. _app-DownloadSRTMTiles:
+
+DownloadSRTMTiles
+=================
+
+
+Download or list SRTM tiles
+
+Description
+-----------
+
+This application allows selecting the appropriate SRTM tiles that covers a list of images. It builds a list of the required tiles. Two modes are available: the first one download those tiles from the USGS SRTM3 website (http://dds.cr.usgs.gov/srtm/version2_1/SRTM3/), the second one list those tiles in a local directory. In both cases, you need to indicate the directory in which directory  tiles will be download or the location of local SRTM files.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input images list** :code:`-il image1 image2...` |br|
+List of images on which you want to determine corresponding SRTM tiles.
+
+**Input vector data list** :code:`-vl vectorfile1 vectorfile2...` |br|
+List of vector data files on which you want to determine corresponding SRTM tiles.
+
+**Input tile names** :code:`-names string1 string2...` |br|
+List of SRTM tile names to download. This list is added to the tiles derived from input images or vectors.The names should follow the SRTM tile naming convention, for instance N43E001.
+
+**Tiles directory** :code:`-tiledir directory` *Mandatory* |br|
+Directory where SRTM tiles are stored. In download mode, the zipped archives will be downloaded to this directory. You'll need to unzip all tile files before using them in your application. In any case, this directory will be inspected to check which tiles are already downloaded.
+
+**Download/List corresponding SRTM tiles** :code:`-mode [download|list]` *Default value: download* |br|
+
+
+* **Download** |br| Download corresponding tiles on USGE server.
+
+* **List tiles** |br| List tiles in an existing local directory.
+
+
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_DownloadSRTMTiles -il QB_Toulouse_Ortho_XS.tif -mode list -tiledir /home/user/srtm_dir/
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("DownloadSRTMTiles")
+
+	app.SetParameterStringList("il", ['QB_Toulouse_Ortho_XS.tif'])
+	app.SetParameterString("mode","list")
+	app.SetParameterString("tiledir", "/home/user/srtm_dir/")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RadiometricAttributesLabelMapFilterExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="LabelMapToVectorData.cxx" href="LabelMapToVectorData.html" />
+    <link rel="prev" title="HooverMetricsEstimation.cxx" href="HooverMetricsEstimation.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../OBIA.html">OBIA</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="HooverMetricsEstimation.html">HooverMetricsEstimation.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">RadiometricAttributesLabelMapFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LabelMapToVectorData.html">LabelMapToVectorData.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../OBIA.html">OBIA</a> &raquo;</li>
+        
+      <li>RadiometricAttributesLabelMapFilterExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/OBIA/RadiometricAttributesLabelMapFilterExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="radiometricattributeslabelmapfilterexample-cxx">
+<span id="example-radiometricattributeslabelmapfilterexample"></span><h1>RadiometricAttributesLabelMapFilterExample.cxx<a class="headerlink" href="#radiometricattributeslabelmapfilterexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./RadiometricAttributesLabelMapFilterExample Input/qb_RoadExtract.tif <span class="se">\</span>
+                                             Output/OBIARadiometricAttribute1.png <span class="se">\</span>
+                                             Output/qb_ExtractRoad_Radiometry_pretty.jpg <span class="se">\</span>
+                                             STATS::Band1::Mean <span class="se">\</span>
+                                             <span class="m">0</span> <span class="se">\</span>
+                                             <span class="m">0</span>.5 <span class="se">\</span>
+                                             <span class="m">16</span> <span class="se">\</span>
+                                             <span class="m">16</span> <span class="se">\</span>
+                                             <span class="m">50</span> <span class="se">\</span>
+                                             <span class="m">1</span>.0
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/OBIA/RadiometricAttributesLabelMapFilterExample.cxx?inline=false">RadiometricAttributesLabelMapFilterExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  This example shows the basic approach to perform object based analysis on a image.</span>
+<span class="c1">//  The input image is firstly segmented using the \doxygen{otb}{MeanShiftSegmentationFilter}</span>
+<span class="c1">//  Then each segmented region is converted to a Map of labeled objects.</span>
+<span class="c1">//  Afterwards the \doxygen{otb}{otbMultiChannelRAndNIRIndexImageFilter} computes</span>
+<span class="c1">//  radiometric attributes for each object. In this example the NDVI is computed.</span>
+<span class="c1">//  The computed feature is passed to the \doxygen{otb}{BandsStatisticsAttributesLabelMapFilter}</span>
+<span class="c1">//  which computes statistics over the resulting band.</span>
+<span class="c1">//  Therefore, region&#39;s statistics over each band can be access by concatening</span>
+<span class="c1">//  STATS, the band number and the statistical attribute separated by colons. In this example</span>
+<span class="c1">//  the mean of the first band (which contains the NDVI) is access over all the regions</span>
+<span class="c1">//  with the attribute: &#39;STATS::Band1::Mean&#39;.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbMeanShiftSegmentationFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkLabelImageToLabelMapFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbShapeAttributesLabelMapFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbBandsStatisticsAttributesLabelMapFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkLabelMapToBinaryImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbAttributesMapOpeningLabelMapFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelRAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageToVectorImageCastFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">11</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; reffname outfname outprettyfname attribute_name &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;lowerThan tresh spatialRadius rangeRadius minregionsize scale&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">reffname</span>       <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outfname</span>       <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outprettyfname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">attr</span>           <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="kt">bool</span>        <span class="n">lowerThan</span>      <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="kt">double</span>      <span class="n">thresh</span>         <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">spatialRadius</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+  <span class="k">const</span> <span class="kt">double</span>       <span class="n">rangeRadius</span>   <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">minRegionSize</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+  <span class="cm">/* const double       scale                  = atoi(argv[10]); */</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// Labeled image type</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">int</span>                                                                   <span class="n">LabelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                                                                  <span class="n">MaskPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">double</span>                                                                         <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                               <span class="n">LabeledImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">MaskPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                           <span class="n">MaskImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                               <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                         <span class="n">VectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                     <span class="n">OutputVectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">LabeledImageType</span><span class="o">&gt;</span>                                         <span class="n">LabeledReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>                                                <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span>                                          <span class="n">VectorReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">MaskImageType</span><span class="o">&gt;</span>                                            <span class="n">WriterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputVectorImageType</span><span class="o">&gt;</span>                                    <span class="n">VectorWriterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">OutputVectorImageType</span><span class="o">&gt;</span> <span class="n">VectorRescalerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelExtractROI</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span>                      <span class="n">ChannelExtractorType</span><span class="p">;</span>
+  <span class="c1">// Label map typedef</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">AttributesMapLabelObject</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span>                 <span class="n">LabelObjectType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">LabelMap</span><span class="o">&lt;</span><span class="n">LabelObjectType</span><span class="o">&gt;</span>                                              <span class="n">LabelMapType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">LabelImageToLabelMapFilter</span><span class="o">&lt;</span><span class="n">LabeledImageType</span><span class="p">,</span> <span class="n">LabelMapType</span><span class="o">&gt;</span>             <span class="n">LabelMapFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ShapeAttributesLabelMapFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="o">&gt;</span>                            <span class="n">ShapeLabelMapFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">BandsStatisticsAttributesLabelMapFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">RadiometricLabelMapFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">AttributesMapOpeningLabelMapFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="o">&gt;</span>                       <span class="n">OpeningLabelMapFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">LabelMapToBinaryImageFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="p">,</span> <span class="n">MaskImageType</span><span class="o">&gt;</span>               <span class="n">LabelMapToBinaryImageFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelRAndNIRIndexImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span>        <span class="n">NDVIImageFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToVectorImageCastFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span>               <span class="n">ImageToVectorImageCastFilterType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">reffname</span><span class="p">);</span>
+
+  <span class="n">LabeledReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">lreader</span> <span class="o">=</span> <span class="n">LabeledReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">lreader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">reffname</span><span class="p">);</span>
+
+  <span class="n">VectorReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vreader</span> <span class="o">=</span> <span class="n">VectorReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vreader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">reffname</span><span class="p">);</span>
+  <span class="n">vreader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="c1">// Firstly, segment the input image by using the Mean Shift algorithm (see \ref{sec:MeanShift} for deeper</span>
+  <span class="c1">// explanations).</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MeanShiftSegmentationFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">LabeledImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
+  <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                          <span class="n">filter</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetSpatialBandwidth</span><span class="p">(</span><span class="n">spatialRadius</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRangeBandwidth</span><span class="p">(</span><span class="n">rangeRadius</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetMinRegionSize</span><span class="p">(</span><span class="n">minRegionSize</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetThreshold</span><span class="p">(</span><span class="mf">0.1</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetMaxIterationNumber</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+
+  <span class="c1">// For non regression tests, set the number of threads to 1</span>
+  <span class="c1">// because MeanShift results depends on the number of threads</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNumberOfThreads</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="c1">// The \doxygen{otb}{MeanShiftSegmentationFilter} type is instantiated using the image</span>
+  <span class="c1">// types.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vreader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// The \doxygen{itk}{LabelImageToLabelMapFilter} type is instantiated using the output</span>
+  <span class="c1">// of the \doxygen{otb}{MeanShiftSegmentationFilter}. This filter produces a labeled image</span>
+  <span class="c1">// where each segmented region has a unique label.</span>
+  <span class="n">LabelMapFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">labelMapFilter</span> <span class="o">=</span> <span class="n">LabelMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">labelMapFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetLabelOutput</span><span class="p">());</span>
+  <span class="n">labelMapFilter</span><span class="o">-&gt;</span><span class="n">SetBackgroundValue</span><span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">());</span>
+
+  <span class="n">ShapeLabelMapFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">shapeLabelMapFilter</span> <span class="o">=</span> <span class="n">ShapeLabelMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">shapeLabelMapFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">labelMapFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// Instantiate the  \doxygen{otb}{RadiometricLabelMapFilterType} to</span>
+  <span class="c1">// compute statistics of the feature image on each label object.</span>
+  <span class="n">RadiometricLabelMapFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">radiometricLabelMapFilter</span> <span class="o">=</span> <span class="n">RadiometricLabelMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="c1">//  Feature image could be one of the following image:</span>
+  <span class="c1">//  \begin{itemize}</span>
+  <span class="c1">//  \item GEMI</span>
+  <span class="c1">//  \item NDVI</span>
+  <span class="c1">//  \item IR</span>
+  <span class="c1">//  \item IC</span>
+  <span class="c1">//  \item IB</span>
+  <span class="c1">//  \item NDWI2</span>
+  <span class="c1">//  \item Intensity</span>
+  <span class="c1">//  \end{itemize}</span>
+  <span class="c1">//</span>
+  <span class="c1">//  Input image must be convert to the desired coefficient.</span>
+  <span class="c1">//  In our case, statistics are computed on the NDVI coefficient on each label object.</span>
+  <span class="n">NDVIImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">ndviImageFilter</span> <span class="o">=</span> <span class="n">NDVIImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vreader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">ImageToVectorImageCastFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">ndviVectorImageFilter</span> <span class="o">=</span> <span class="n">ImageToVectorImageCastFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ndviVectorImageFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">radiometricLabelMapFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">shapeLabelMapFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">radiometricLabelMapFilter</span><span class="o">-&gt;</span><span class="n">SetFeatureImage</span><span class="p">(</span><span class="n">ndviVectorImageFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// The \doxygen{otb}{AttributesMapOpeningLabelMapFilter} will perform the selection.</span>
+  <span class="c1">// There are three parameters. \code{AttributeName} specifies the radiometric attribute, \code{Lambda}</span>
+  <span class="c1">// controls the thresholding of the input and \code{ReverseOrdering} make this filter to remove the</span>
+  <span class="c1">// object with an attribute value greater than \code{Lambda} instead.</span>
+  <span class="n">OpeningLabelMapFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">opening</span> <span class="o">=</span> <span class="n">OpeningLabelMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">opening</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">radiometricLabelMapFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">opening</span><span class="o">-&gt;</span><span class="n">SetAttributeName</span><span class="p">(</span><span class="n">attr</span><span class="p">);</span>
+  <span class="n">opening</span><span class="o">-&gt;</span><span class="n">SetLambda</span><span class="p">(</span><span class="n">thresh</span><span class="p">);</span>
+  <span class="n">opening</span><span class="o">-&gt;</span><span class="n">SetReverseOrdering</span><span class="p">(</span><span class="n">lowerThan</span><span class="p">);</span>
+  <span class="n">opening</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="c1">//  Then, Label objects selected are transform in a Label Image using the</span>
+  <span class="c1">//  \doxygen{itk}{LabelMapToLabelImageFilter}.</span>
+  <span class="n">LabelMapToBinaryImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">labelMap2LabeledImage</span> <span class="o">=</span> <span class="n">LabelMapToBinaryImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">labelMap2LabeledImage</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">opening</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// And finally, we declare the writer and call its \code{Update()} method to</span>
+  <span class="c1">// trigger the full pipeline execution.</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outfname</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">labelMap2LabeledImage</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">OutputVectorImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">;</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">vreader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">vreader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vr</span> <span class="o">=</span> <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetClusteredOutput</span><span class="p">());</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetClampThreshold</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+
+  <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">selecter</span> <span class="o">=</span> <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vr</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetExtractionRegion</span><span class="p">(</span><span class="n">vreader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectWriter</span> <span class="o">=</span> <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vectWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outprettyfname</span><span class="p">);</span>
+  <span class="n">vectWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">selecter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vectWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Figure~\ref{fig:RADIOMETRIC_LABEL_MAP_FILTER} shows the result of applying</span>
+<span class="c1">// the object selection based on radiometric attributes.</span>
+<span class="c1">// \begin{figure} [htbp]</span>
+<span class="c1">// \center</span>
+<span class="c1">// \includegraphics[width=0.44\textwidth]{qb_ExtractRoad_Radiometry_pretty.eps}</span>
+<span class="c1">// \includegraphics[width=0.44\textwidth]{OBIARadiometricAttribute1.eps}</span>
+<span class="c1">// \itkcaption[Object based extraction based on ]{Vegetation mask resulting from processing.}</span>
+<span class="c1">// \label{fig:RADIOMETRIC_LABEL_MAP_FILTER}</span>
+<span class="c1">// \end{figure}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="LabelMapToVectorData.html" class="btn btn-neutral float-right" title="LabelMapToVectorData.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="HooverMetricsEstimation.html" class="btn btn-neutral" title="HooverMetricsEstimation.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

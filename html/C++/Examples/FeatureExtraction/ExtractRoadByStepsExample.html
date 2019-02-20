@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ExtractRoadByStepsExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ThresholdToPointSetExample.cxx" href="ThresholdToPointSetExample.html" />
+    <link rel="prev" title="TextureExample.cxx" href="TextureExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="CloudDetectionExample.html">CloudDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TextureExample.html">TextureExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ExtractRoadByStepsExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThresholdToPointSetExample.html">ThresholdToPointSetExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentPathExample.html">ComplexMomentPathExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EdgeDensityExample.html">EdgeDensityExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlusserMomentsImageFunctionExample.html">FlusserMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HuMomentsImageFunctionExample.html">HuMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RightAngleDetectionExample.html">RightAngleDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RatioLineDetectorExample.html">RatioLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AsymmetricFusionOfLineDetectorExample.html">AsymmetricFusionOfLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingExample.html">SeamCarvingExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentsImageFunctionExample.html">ComplexMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadExample.html">ExtractRoadExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TouziEdgeDetectorExample.html">TouziEdgeDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LineSegmentDetectorExample.html">LineSegmentDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ParallelLineDetectionExample.html">ParallelLineDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CorrelationLineDetectorExample.html">CorrelationLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PanTexExample.html">PanTexExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingOtherExample.html">SeamCarvingOtherExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SURFExample.html">SURFExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SFSExample.html">SFSExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarrisExample.html">HarrisExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../FeatureExtraction.html">FeatureExtraction</a> &raquo;</li>
+        
+      <li>ExtractRoadByStepsExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/FeatureExtraction/ExtractRoadByStepsExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="extractroadbystepsexample-cxx">
+<span id="example-extractroadbystepsexample"></span><h1>ExtractRoadByStepsExample.cxx<a class="headerlink" href="#extractroadbystepsexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./ExtractRoadByStepsExample Input/qb_RoadExtract.tif Output/ExtractRoadByStepsExampleOutput.jpg Output/qb_ExtractRoad_pretty.jpg <span class="m">337</span> <span class="m">557</span> <span class="m">432</span> <span class="m">859</span> <span class="m">0</span>.00005 <span class="m">1</span>.0
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ExtractRoadByStepsExample.cxx?inline=false">ExtractRoadByStepsExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the details of the \doxygen{otb}{RoadExtractionFilter}.</span>
+<span class="c1">// This filter, described in the previous section,  is a composite filter that includes</span>
+<span class="c1">// all the steps below. Individual filters can be replaced to design a road detector</span>
+<span class="c1">// targeted at SAR images for example.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbPolyLineParametricPathWithValue.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSpectralAngleDistanceImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkGradientRecursiveGaussianImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbNeighborhoodScalarProductFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbRemoveIsolatedByDirectionFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbRemoveWrongDirectionFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbNonMaxRemovalByDirectionFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorizationPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSimplifyPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbBreakAngularPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbRemoveTortuousPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbLinkPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbLikelihoodPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbDrawPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbLikelihoodPathListFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiToMonoChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkSqrtImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkAddImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkSubtractImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRGBPixel.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkComposeImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkThresholdImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkSigmoidImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkThresholdImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkBinaryBallStructuringElement.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkGrayscaleDilateImageFilter.h&quot;</span><span class="cp"></span>
+
+
+
+
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                                 <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">double</span>                                     <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                              <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">CovariantVector</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">VectorPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>           <span class="n">InternalImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>     <span class="n">MultiSpectralImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">VectorPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>     <span class="n">VectorImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PolyLineParametricPathWithValue</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">PathType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">MultiSpectralImageType</span><span class="o">&gt;</span> <span class="n">MultispectralReaderType</span><span class="p">;</span>
+
+  <span class="n">MultispectralReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">multispectralReader</span> <span class="o">=</span> <span class="n">MultispectralReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="c1">// Create an 3 band image for the software guide</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                          <span class="n">OutputVectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputVectorImageType</span><span class="o">&gt;</span>                                           <span class="n">VectorWriterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">MultiSpectralImageType</span><span class="p">,</span> <span class="n">OutputVectorImageType</span><span class="o">&gt;</span> <span class="n">VectorRescalerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelExtractROI</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span>                             <span class="n">ChannelExtractorType</span><span class="p">;</span>
+
+  <span class="c1">// The GenerateOutputInformation() information is required here so</span>
+  <span class="c1">// that the number of component per pixel is update and known to set</span>
+  <span class="c1">// up the maximum and minimum values for the rescaling filter</span>
+  <span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">GenerateOutputInformation</span><span class="p">();</span>
+
+  <span class="n">OutputVectorImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">;</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vr</span> <span class="o">=</span> <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">vr</span><span class="o">-&gt;</span><span class="n">SetClampThreshold</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+
+  <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">selecter</span> <span class="o">=</span> <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vr</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetExtractionRegion</span><span class="p">(</span><span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectWriter</span> <span class="o">=</span> <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vectWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">vectWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">selecter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vectWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">MultiSpectralImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">pixelRef</span><span class="p">;</span>
+  <span class="n">pixelRef</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="n">pixelRef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="n">pixelRef</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="n">pixelRef</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="n">pixelRef</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+
+  <span class="kt">double</span> <span class="n">resolution</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">;</span> <span class="c1">// to get directly from metadata</span>
+  <span class="kt">double</span> <span class="n">alpha</span>      <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+
+  <span class="c1">//  The spectral angle is used to compute a grayscale image from the</span>
+  <span class="c1">//  multispectral original image using</span>
+  <span class="c1">//  \doxygen{otb}{SpectralAngleDistanceImageFilter}. The spectral</span>
+  <span class="c1">//  angle is illustrated on</span>
+  <span class="c1">// Figure~\ref{fig:RoadExtractionSpectralAngleDiagram}. Pixels</span>
+  <span class="c1">// corresponding to roads are in darker color.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.40\textwidth]{RoadExtractionSpectralAngleDiagram.eps}</span>
+  <span class="c1">// \itkcaption[Spectral Angle]{Illustration of the spectral angle</span>
+  <span class="c1">// for one pixel of a three-band image. One of the vector is the</span>
+  <span class="c1">// reference pixel and the other is the current pixel.}</span>
+  <span class="c1">// \label{fig:RoadExtractionSpectralAngleDiagram}</span>
+  <span class="c1">// \end{figure}</span>
+  <span class="c1">//</span>
+  <span class="c1">//</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SpectralAngleDistanceImageFilter</span><span class="o">&lt;</span><span class="n">MultiSpectralImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">SAFilterType</span><span class="p">;</span>
+  <span class="n">SAFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                    <span class="n">saFilter</span> <span class="o">=</span> <span class="n">SAFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">saFilter</span><span class="o">-&gt;</span><span class="n">SetReferencePixel</span><span class="p">(</span><span class="n">pixelRef</span><span class="p">);</span>
+  <span class="n">saFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  A square root is applied to the spectral angle image in order to enhance contrast between</span>
+  <span class="c1">//  darker pixels (which are pixels of interest) with \doxygen{itk}{SqrtImageFilter}.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SqrtImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">SqrtFilterType</span><span class="p">;</span>
+  <span class="n">SqrtFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                            <span class="n">sqrtFilter</span> <span class="o">=</span> <span class="n">SqrtFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">sqrtFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">saFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  Use the Gaussian gradient filter compute the gradient in x and y direction</span>
+  <span class="c1">// respectively</span>
+  <span class="c1">// (\doxygen{itk}{GradientRecursiveGaussianImageFilter}).</span>
+
+  <span class="kt">double</span>                                                                                <span class="n">sigma</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.2</span> <span class="o">/</span> <span class="n">resolution</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">GradientRecursiveGaussianImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">GradientFilterType</span><span class="p">;</span>
+  <span class="n">GradientFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                           <span class="n">gradientFilter</span> <span class="o">=</span> <span class="n">GradientFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">gradientFilter</span><span class="o">-&gt;</span><span class="n">SetSigma</span><span class="p">(</span><span class="n">sigma</span><span class="p">);</span>
+  <span class="n">gradientFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">sqrtFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  Compute the scalar product of the neighboring pixels and keep the</span>
+  <span class="c1">//  minimum value and the direction with \doxygen{otb}{NeighborhoodScalarProductFilter}.</span>
+  <span class="c1">// This is the line detector described</span>
+  <span class="c1">//  in \cite{Lacroix1998}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">NeighborhoodScalarProductFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">NeighborhoodScalarProductType</span><span class="p">;</span>
+  <span class="n">NeighborhoodScalarProductType</span><span class="o">::</span><span class="n">Pointer</span>                                                              <span class="n">scalarFilter</span> <span class="o">=</span> <span class="n">NeighborhoodScalarProductType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">scalarFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">gradientFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  The resulting image is passed to the \doxygen{otb}{RemoveIsolatedByDirectionFilter}</span>
+  <span class="c1">// filter to remove pixels</span>
+  <span class="c1">//  with no neighbor having the same direction.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">RemoveIsolatedByDirectionFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">RemoveIsolatedByDirectionType</span><span class="p">;</span>
+  <span class="n">RemoveIsolatedByDirectionType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">removeIsolatedByDirectionFilter</span> <span class="o">=</span> <span class="n">RemoveIsolatedByDirectionType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">removeIsolatedByDirectionFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">scalarFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">removeIsolatedByDirectionFilter</span><span class="o">-&gt;</span><span class="n">SetInputDirection</span><span class="p">(</span><span class="n">scalarFilter</span><span class="o">-&gt;</span><span class="n">GetOutputDirection</span><span class="p">());</span>
+
+  <span class="c1">//  We remove pixels having a direction corresponding to bright lines</span>
+  <span class="c1">//  as we know that after the spectral angle, roads are in darker color</span>
+  <span class="c1">//  with the \doxygen{otb}{RemoveWrongDirectionFilter} filter.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">RemoveWrongDirectionFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">RemoveWrongDirectionType</span><span class="p">;</span>
+  <span class="n">RemoveWrongDirectionType</span><span class="o">::</span><span class="n">Pointer</span>                                                                <span class="n">removeWrongDirectionFilter</span> <span class="o">=</span> <span class="n">RemoveWrongDirectionType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">removeWrongDirectionFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">removeIsolatedByDirectionFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">removeWrongDirectionFilter</span><span class="o">-&gt;</span><span class="n">SetInputDirection</span><span class="p">(</span><span class="n">scalarFilter</span><span class="o">-&gt;</span><span class="n">GetOutputDirection</span><span class="p">());</span>
+
+  <span class="c1">//  We remove pixels which are not maximum on the direction</span>
+  <span class="c1">//  perpendicular to the road direction with the \doxygen{otb}{NonMaxRemovalByDirectionFilter}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">NonMaxRemovalByDirectionFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">NonMaxRemovalByDirectionType</span><span class="p">;</span>
+  <span class="n">NonMaxRemovalByDirectionType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">nonMaxRemovalByDirectionFilter</span> <span class="o">=</span> <span class="n">NonMaxRemovalByDirectionType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">nonMaxRemovalByDirectionFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">removeWrongDirectionFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">nonMaxRemovalByDirectionFilter</span><span class="o">-&gt;</span><span class="n">SetInputDirection</span><span class="p">(</span><span class="n">scalarFilter</span><span class="o">-&gt;</span><span class="n">GetOutputDirection</span><span class="p">());</span>
+
+  <span class="c1">//  Extracted road are vectorized into polylines with \doxygen{otb}{VectorizationPathListFilter}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorizationPathListFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">PathType</span><span class="o">&gt;</span> <span class="n">VectorizationFilterType</span><span class="p">;</span>
+  <span class="n">VectorizationFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                         <span class="n">vectorizationFilter</span> <span class="o">=</span> <span class="n">VectorizationFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vectorizationFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">nonMaxRemovalByDirectionFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vectorizationFilter</span><span class="o">-&gt;</span><span class="n">SetInputDirection</span><span class="p">(</span><span class="n">scalarFilter</span><span class="o">-&gt;</span><span class="n">GetOutputDirection</span><span class="p">());</span>
+  <span class="n">vectorizationFilter</span><span class="o">-&gt;</span><span class="n">SetAmplitudeThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]));</span>
+
+  <span class="c1">//  However, this vectorization is too simple and need to be refined</span>
+  <span class="c1">//  to be usable. First, we remove all aligned points to make one segment with</span>
+  <span class="c1">// \doxygen{otb}{SimplifyPathListFilter}.</span>
+  <span class="c1">//  Then we break the polylines which have sharp angles as they are probably</span>
+  <span class="c1">//  not road with \doxygen{otb}{BreakAngularPathListFilter}.</span>
+  <span class="c1">// Finally we remove path which are too short with \doxygen{otb}{RemoveTortuousPathListFilter}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SimplifyPathListFilter</span><span class="o">&lt;</span><span class="n">PathType</span><span class="o">&gt;</span> <span class="n">SimplifyPathType</span><span class="p">;</span>
+  <span class="n">SimplifyPathType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">simplifyPathListFilter</span> <span class="o">=</span> <span class="n">SimplifyPathType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">simplifyPathListFilter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetTolerance</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+  <span class="n">simplifyPathListFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vectorizationFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">BreakAngularPathListFilter</span><span class="o">&lt;</span><span class="n">PathType</span><span class="o">&gt;</span> <span class="n">BreakAngularPathType</span><span class="p">;</span>
+  <span class="n">BreakAngularPathType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">breakAngularPathListFilter</span> <span class="o">=</span> <span class="n">BreakAngularPathType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">breakAngularPathListFilter</span><span class="o">-&gt;</span><span class="n">SetMaxAngle</span><span class="p">(</span><span class="n">otb</span><span class="o">::</span><span class="n">CONST_PI</span> <span class="o">/</span> <span class="mf">8.</span><span class="p">);</span>
+  <span class="n">breakAngularPathListFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">simplifyPathListFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">RemoveTortuousPathListFilter</span><span class="o">&lt;</span><span class="n">PathType</span><span class="o">&gt;</span> <span class="n">RemoveTortuousPathType</span><span class="p">;</span>
+  <span class="n">RemoveTortuousPathType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">removeTortuousPathListFilter</span> <span class="o">=</span> <span class="n">RemoveTortuousPathType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">removeTortuousPathListFilter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetThreshold</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+  <span class="n">removeTortuousPathListFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">breakAngularPathListFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  Polylines within a certain range are linked (\doxygen{otb}{LinkPathListFilter}) to</span>
+  <span class="c1">//  try to fill gaps due to occultations by vehicules, trees, etc. before simplifying</span>
+  <span class="c1">//  polylines (\doxygen{otb}{SimplifyPathListFilter}) and</span>
+  <span class="c1">//  removing the shortest ones with \doxygen{otb}{RemoveTortuousPathListFilter}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">LinkPathListFilter</span><span class="o">&lt;</span><span class="n">PathType</span><span class="o">&gt;</span> <span class="n">LinkPathType</span><span class="p">;</span>
+  <span class="n">LinkPathType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">linkPathListFilter</span> <span class="o">=</span> <span class="n">LinkPathType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">linkPathListFilter</span><span class="o">-&gt;</span><span class="n">SetDistanceThreshold</span><span class="p">(</span><span class="mf">25.0</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">);</span>
+  <span class="n">linkPathListFilter</span><span class="o">-&gt;</span><span class="n">SetAngularThreshold</span><span class="p">(</span><span class="n">otb</span><span class="o">::</span><span class="n">CONST_PI</span> <span class="o">/</span> <span class="mi">8</span><span class="p">);</span>
+  <span class="n">linkPathListFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">removeTortuousPathListFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">SimplifyPathType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">simplifyPathListFilter2</span> <span class="o">=</span> <span class="n">SimplifyPathType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">simplifyPathListFilter2</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetTolerance</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+  <span class="n">simplifyPathListFilter2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">linkPathListFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">RemoveTortuousPathType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">removeTortuousPathListFilter2</span> <span class="o">=</span> <span class="n">RemoveTortuousPathType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">removeTortuousPathListFilter2</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetThreshold</span><span class="p">(</span><span class="mf">10.0</span><span class="p">);</span>
+  <span class="n">removeTortuousPathListFilter2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">simplifyPathListFilter2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  A value can be associated with each polyline according to pixel values</span>
+  <span class="c1">// under the polyline with \doxygen{otb}{LikelihoodPathListFilter}. A higher value</span>
+  <span class="c1">// will mean a higher Likelihood to be a road.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">LikelihoodPathListFilter</span><span class="o">&lt;</span><span class="n">PathType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">PathListToPathListWithValueType</span><span class="p">;</span>
+  <span class="n">PathListToPathListWithValueType</span><span class="o">::</span><span class="n">Pointer</span>                           <span class="n">pathListConverter</span> <span class="o">=</span> <span class="n">PathListToPathListWithValueType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">pathListConverter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">removeTortuousPathListFilter2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">pathListConverter</span><span class="o">-&gt;</span><span class="n">SetInputImage</span><span class="p">(</span><span class="n">nonMaxRemovalByDirectionFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// A black background image is built to draw the path on.</span>
+
+  <span class="n">InternalImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">output</span> <span class="o">=</span> <span class="n">InternalImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">CopyInformation</span><span class="p">(</span><span class="n">multispectralReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">FillBuffer</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+
+  <span class="c1">// Polylines are drawn on a black background image with \doxygen{otb}{DrawPathListFilter}.</span>
+  <span class="c1">// The \code{SetUseIternalValues()} tell the drawing filter to draw the path with its Likelihood</span>
+  <span class="c1">// value.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">DrawPathListFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">PathType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">DrawPathType</span><span class="p">;</span>
+  <span class="n">DrawPathType</span><span class="o">::</span><span class="n">Pointer</span>                                                           <span class="n">drawPathListFilter</span> <span class="o">=</span> <span class="n">DrawPathType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">drawPathListFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+  <span class="n">drawPathListFilter</span><span class="o">-&gt;</span><span class="n">SetInputPath</span><span class="p">(</span><span class="n">pathListConverter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">drawPathListFilter</span><span class="o">-&gt;</span><span class="n">SetUseInternalPathValue</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+  <span class="c1">// The output from the drawing filter contains very small values (Likelihood values). Therefore</span>
+  <span class="c1">// the image has to be rescaled to be viewed. The whole pipeline is executed by invoking</span>
+  <span class="c1">// the \code{Update()} method on this last filter.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>                                                          <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">drawPathListFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// this small piece of code aims at producing a pretty RGB png result image.</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiToMonoChannelExtractROI</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">PixelType</span><span class="o">&gt;</span>                                 <span class="n">ChannelExtractionFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">AddImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span>                  <span class="n">AddFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SubtractImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="o">&gt;</span>             <span class="n">SubtractFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ThresholdImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="o">&gt;</span>                                                  <span class="n">ThresholdFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RGBPixel</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="o">&gt;</span>                                                                <span class="n">RGBPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">RGBPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                                           <span class="n">RGBImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ComposeImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">RGBImageType</span><span class="o">&gt;</span>                                      <span class="n">ComposeFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">RGBImageType</span><span class="o">&gt;</span>                                                            <span class="n">RGBWriterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">BinaryBallStructuringElement</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                       <span class="n">StructuringElementType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">GrayscaleDilateImageFilter</span><span class="o">&lt;</span><span class="n">InternalImageType</span><span class="p">,</span> <span class="n">InternalImageType</span><span class="p">,</span> <span class="n">StructuringElementType</span><span class="o">&gt;</span> <span class="n">DilateFilterType</span><span class="p">;</span>
+
+  <span class="n">StructuringElementType</span> <span class="n">se</span><span class="p">;</span>
+  <span class="n">se</span><span class="p">.</span><span class="n">SetRadius</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">se</span><span class="p">.</span><span class="n">CreateStructuringElement</span><span class="p">();</span>
+
+  <span class="c1">// Filters definitions</span>
+  <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">channelExtractor1</span> <span class="o">=</span> <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">channelExtractor2</span> <span class="o">=</span> <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">channelExtractor3</span> <span class="o">=</span> <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">AddFilterType</span><span class="o">::</span><span class="n">Pointer</span>       <span class="n">addFilter</span>   <span class="o">=</span> <span class="n">AddFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">SubtractFilterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">subtract2</span>   <span class="o">=</span> <span class="n">SubtractFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">SubtractFilterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">subtract3</span>   <span class="o">=</span> <span class="n">SubtractFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">threshold11</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">threshold21</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">threshold31</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">threshold12</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">threshold22</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">threshold32</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ComposeFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">composer</span> <span class="o">=</span> <span class="n">ComposeFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">RGBWriterType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">writer</span>   <span class="o">=</span> <span class="n">RGBWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">DilateFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">dilater</span> <span class="o">=</span> <span class="n">DilateFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">dilater</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">dilater</span><span class="o">-&gt;</span><span class="n">SetKernel</span><span class="p">(</span><span class="n">se</span><span class="p">);</span>
+
+  <span class="c1">// Extract each channel</span>
+  <span class="n">channelExtractor1</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vr</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">channelExtractor2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vr</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">channelExtractor3</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vr</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">channelExtractor1</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">channelExtractor2</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">channelExtractor3</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="c1">// Add the path to the red component</span>
+  <span class="n">addFilter</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">channelExtractor1</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">addFilter</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">dilater</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">subtract2</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">channelExtractor2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">subtract2</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">dilater</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">subtract3</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">channelExtractor3</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">subtract3</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">dilater</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// Threshold outside the [0, 255] range</span>
+
+  <span class="n">threshold11</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">addFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">threshold11</span><span class="o">-&gt;</span><span class="n">ThresholdBelow</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">threshold11</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">threshold12</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">threshold11</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">threshold12</span><span class="o">-&gt;</span><span class="n">ThresholdAbove</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">threshold12</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">threshold21</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">subtract2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">threshold21</span><span class="o">-&gt;</span><span class="n">ThresholdBelow</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">threshold21</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">threshold22</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">threshold21</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">threshold22</span><span class="o">-&gt;</span><span class="n">ThresholdAbove</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">threshold22</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">threshold31</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">subtract3</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">threshold31</span><span class="o">-&gt;</span><span class="n">ThresholdBelow</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">threshold31</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">threshold32</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">threshold31</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">threshold32</span><span class="o">-&gt;</span><span class="n">ThresholdAbove</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">threshold32</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="c1">// Compose the output image</span>
+  <span class="n">composer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">threshold12</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">composer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">threshold22</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">composer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">threshold32</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// Write the new rgb image</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">composer</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figures~\ref{fig:ROADEXTRACTIONBYSTEPS} and \ref{fig:ROADEXTRACTIONBYSTEPS2}</span>
+  <span class="c1">// show the result of applying</span>
+  <span class="c1">// the road extraction by steps to a fusionned Quickbird image. The result image</span>
+  <span class="c1">// is a RGB composition showing the extracted path in red. Full processing took</span>
+  <span class="c1">// about 3 seconds for each image.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure}[htbp]</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{qb_ExtractRoad_pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{ExtractRoadByStepsExampleOutput.eps}</span>
+  <span class="c1">// \itkcaption[Road extraction filter application]{Result of applying</span>
+  <span class="c1">// the road extraction by steps pipeline to a fusionned Quickbird</span>
+  <span class="c1">// image. From left to right : original image, extracted road with their</span>
+  <span class="c1">// Likelihood values.}</span>
+  <span class="c1">// \label{fig:ROADEXTRACTIONBYSTEPS}</span>
+  <span class="c1">// \end{figure}</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure}[htbp]</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{qb_ExtractRoad_pretty2.eps}</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{ExtractRoadByStepsExampleOutput2.eps}</span>
+  <span class="c1">// \itkcaption[Road extraction filter application]{Result of applying</span>
+  <span class="c1">// the road extraction by steps pipeline to a fusionned Quickbird</span>
+  <span class="c1">// image. From left to right : original image, extracted road with their</span>
+  <span class="c1">// Likelihood values.}</span>
+  <span class="c1">// \label{fig:ROADEXTRACTIONBYSTEPS2}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ThresholdToPointSetExample.html" class="btn btn-neutral float-right" title="ThresholdToPointSetExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="TextureExample.html" class="btn btn-neutral" title="TextureExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

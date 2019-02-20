@@ -1,0 +1,132 @@
+.. _app-GeneratePlyFile:
+
+GeneratePlyFile
+===============
+
+
+Generate a 3D Ply file from a DEM and a color image.
+
+Description
+-----------
+
+The application converts an image containing elevations into a PLY file, which is a file format to store 3D models. This format is adpated for visualization on software such as MeshLab [2] or CloudCompare [3]
+
+This application is part of the stereo reconstruction framework. The input data can be produced by the application :ref:`app-DisparityMapToElevationMap`.
+
+There are two types of supported input images:
+
+* A DEM image, with a ground projection, containing elevation values. Each elevation value can be considered as a 3D point.
+* A 3D grid image, containing 5 bands (the first 3 are the 3D coordinates of each point, the 5th is a validity mask where valid values are larger or equal to 1)
+
+The user shall also give a support image that contains color values for each 3D point. The color values will be embedded in the PLY file.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**The input DEM image** :code:`-indem image` *Mandatory* |br|
+The image should be either a projected DEM or a 3D grid containing 3D point coordinates and a validity mask.
+
+**Conversion Mode** :code:`-mode [dem|3dgrid]` *Default value: dem* |br|
+
+
+* **DEM** |br| DEM conversion mode (the projection information of the DEM is used to derive the X and Y coordinates of each point)
+
+* **3D grid** |br| 3D grid conversion mode
+
+
+
+**Map Projection** :code:`-map [utm|lambert2|lambert93|wgs|epsg]` *Default value: utm* |br|
+Defines the map projection to be used.
+
+* **Universal Trans-Mercator (UTM)** |br| A system of transverse mercator projections dividing the surface of Earth between 80S and 84N latitude.
+
+* **Lambert II Etendu** |br| This is a Lambert Conformal Conic projection mainly used in France.
+
+* **Lambert93** |br| This is a Lambert 93 projection mainly used in France.
+
+* **WGS 84** |br| This is a Geographical projection
+
+* **EPSG Code** |br| This code is a generic way of identifying map projections, and allows specifying a large amount of them. See www.spatialreference.org to find which EPSG code is associated to your projection;
+
+
+
+Universal Trans-Mercator (UTM) options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Zone number** :code:`-map.utm.zone int` *Default value: 31* |br|
+The zone number ranges from 1 to 60 and allows defining the transverse mercator projection (along with the hemisphere)
+
+**Northern Hemisphere** :code:`-map.utm.northhem bool` *Default value: false* |br|
+The transverse mercator projections are defined by their zone number as well as the hemisphere. Activate this parameter if your image is in the northern hemisphere.
+
+EPSG Code options
+^^^^^^^^^^^^^^^^^
+
+**EPSG Code** :code:`-map.epsg.code int` *Default value: 4326* |br|
+See www.spatialreference.org to find which EPSG code is associated to your projection
+
+
+
+------------
+
+**The input color image** :code:`-incolor image` *Mandatory* |br|
+If the color image has 4 bands it will be interpreted as Red, Green, Blue, NIR. In other cases, only the first one is used (gray scale colors). The color values are expected in the range 0 - 255, and will be embedded with each 3D point of the PLY file.
+
+**The output Ply file** :code:`-out filename [dtype]` *Mandatory* |br|
+The output Ply file will contain as many 3D points as pixels in the input DEM.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_GeneratePlyFile -indem image_dem.tif -out out.ply -incolor image_color.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("GeneratePlyFile")
+
+	app.SetParameterString("indem", "image_dem.tif")
+	app.SetParameterString("out", "out.ply")
+	app.SetParameterString("incolor", "image_color.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The input DEM image has to entirely fit into memory.
+
+See also
+--------
+
+| - [1] :ref:`app-DisparityMapToElevationMap` 
+| - [2] http://www.meshlab.net/ 
+| - [3] http://www.cloudcompare.org/

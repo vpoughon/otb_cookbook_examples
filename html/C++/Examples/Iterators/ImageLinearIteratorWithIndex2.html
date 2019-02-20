@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ImageLinearIteratorWithIndex2.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ShapedNeighborhoodIterators2.cxx" href="ShapedNeighborhoodIterators2.html" />
+    <link rel="prev" title="NeighborhoodIterators4.cxx" href="NeighborhoodIterators4.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Iterators.html">Iterators</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators1.html">ShapedNeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRegionIterator.html">ImageRegionIterator.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators4.html">NeighborhoodIterators4.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ImageLinearIteratorWithIndex2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators2.html">ShapedNeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators1.html">NeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRandomConstIteratorWithIndex.html">ImageRandomConstIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators5.html">NeighborhoodIterators5.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRegionIteratorWithIndex.html">ImageRegionIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators3.html">NeighborhoodIterators3.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageLinearIteratorWithIndex.html">ImageLinearIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators2.html">NeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageSliceIteratorWithIndex.html">ImageSliceIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IteratorsExamples.html">IteratorsExamples.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators6.html">NeighborhoodIterators6.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Iterators.html">Iterators</a> &raquo;</li>
+        
+      <li>ImageLinearIteratorWithIndex2.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Iterators/ImageLinearIteratorWithIndex2.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="imagelineariteratorwithindex2-cxx">
+<span id="example-imagelineariteratorwithindex2"></span><h1>ImageLinearIteratorWithIndex2.cxx<a class="headerlink" href="#imagelineariteratorwithindex2-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageLinearIteratorWithIndex2.cxx?inline=false">ImageLinearIteratorWithIndex2.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example shows how to use the \doxygen{itk}{ImageLinearIteratorWithIndex} for</span>
+<span class="c1">// computing the mean across time of a 4D image where the first three</span>
+<span class="c1">// dimensions correspond to spatial coordinates and the fourth dimension</span>
+<span class="c1">// corresponds to time. The result of the mean across time is to be stored in a</span>
+<span class="c1">// 3D image.</span>
+<span class="c1">//</span>
+<span class="c1">// \index{Iterators!and 4D images}</span>
+<span class="c1">// \index{ImageLinearIteratorWithIndex!4D images}</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkImageLinearConstIteratorWithIndex.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">// Verify the number of parameters on the command line.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing parameters. &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; input4DImageFile output3DImageFile&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// First we declare the types of the images</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>            <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">Image3DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span> <span class="n">Image4DType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">Image4DType</span><span class="o">&gt;</span> <span class="n">Reader4DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">Image3DType</span><span class="o">&gt;</span> <span class="n">Writer3DType</span><span class="p">;</span>
+
+  <span class="n">Reader4DType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader4D</span> <span class="o">=</span> <span class="n">Reader4DType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader4D</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">reader4D</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excp</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error writing the image&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excp</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Image4DType</span><span class="o">::</span><span class="n">ConstPointer</span> <span class="n">image4D</span> <span class="o">=</span> <span class="n">reader4D</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+  <span class="n">Image3DType</span><span class="o">::</span><span class="n">Pointer</span>             <span class="n">image3D</span> <span class="o">=</span> <span class="n">Image3DType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="k">typedef</span> <span class="n">Image3DType</span><span class="o">::</span><span class="n">IndexType</span>   <span class="n">Index3DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Image3DType</span><span class="o">::</span><span class="n">SizeType</span>    <span class="n">Size3DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Image3DType</span><span class="o">::</span><span class="n">RegionType</span>  <span class="n">Region3DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Image3DType</span><span class="o">::</span><span class="n">SpacingType</span> <span class="n">Spacing3DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Image3DType</span><span class="o">::</span><span class="n">PointType</span>   <span class="n">Origin3DType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">Image4DType</span><span class="o">::</span><span class="n">IndexType</span>   <span class="n">Index4DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Image4DType</span><span class="o">::</span><span class="n">SizeType</span>    <span class="n">Size4DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Image4DType</span><span class="o">::</span><span class="n">SpacingType</span> <span class="n">Spacing4DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Image4DType</span><span class="o">::</span><span class="n">PointType</span>   <span class="n">Origin4DType</span><span class="p">;</span>
+
+  <span class="n">Index3DType</span>   <span class="n">index3D</span><span class="p">;</span>
+  <span class="n">Size3DType</span>    <span class="n">size3D</span><span class="p">;</span>
+  <span class="n">Spacing3DType</span> <span class="n">spacing3D</span><span class="p">;</span>
+  <span class="n">Origin3DType</span>  <span class="n">origin3D</span><span class="p">;</span>
+
+  <span class="n">Image4DType</span><span class="o">::</span><span class="n">RegionType</span> <span class="n">region4D</span> <span class="o">=</span> <span class="n">image4D</span><span class="o">-&gt;</span><span class="n">GetBufferedRegion</span><span class="p">();</span>
+
+  <span class="n">Index4DType</span>   <span class="n">index4D</span>   <span class="o">=</span> <span class="n">region4D</span><span class="p">.</span><span class="n">GetIndex</span><span class="p">();</span>
+  <span class="n">Size4DType</span>    <span class="n">size4D</span>    <span class="o">=</span> <span class="n">region4D</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">Spacing4DType</span> <span class="n">spacing4D</span> <span class="o">=</span> <span class="n">image4D</span><span class="o">-&gt;</span><span class="n">GetSignedSpacing</span><span class="p">();</span>
+  <span class="n">Origin4DType</span>  <span class="n">origin4D</span>  <span class="o">=</span> <span class="n">image4D</span><span class="o">-&gt;</span><span class="n">GetOrigin</span><span class="p">();</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">size3D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>    <span class="o">=</span> <span class="n">size4D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">index3D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>   <span class="o">=</span> <span class="n">index4D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">spacing3D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">spacing4D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">origin3D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="o">=</span> <span class="n">origin4D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="n">image3D</span><span class="o">-&gt;</span><span class="n">SetSignedSpacing</span><span class="p">(</span><span class="n">spacing3D</span><span class="p">);</span>
+  <span class="n">image3D</span><span class="o">-&gt;</span><span class="n">SetOrigin</span><span class="p">(</span><span class="n">origin3D</span><span class="p">);</span>
+
+  <span class="n">Region3DType</span> <span class="n">region3D</span><span class="p">;</span>
+  <span class="n">region3D</span><span class="p">.</span><span class="n">SetIndex</span><span class="p">(</span><span class="n">index3D</span><span class="p">);</span>
+  <span class="n">region3D</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">size3D</span><span class="p">);</span>
+
+  <span class="n">image3D</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">region3D</span><span class="p">);</span>
+  <span class="n">image3D</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;::</span><span class="n">AccumulateType</span> <span class="n">SumType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">SumType</span><span class="o">&gt;::</span><span class="n">RealType</span>         <span class="n">MeanType</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">timeLength</span> <span class="o">=</span> <span class="n">region4D</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">3</span><span class="p">];</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageLinearConstIteratorWithIndex</span><span class="o">&lt;</span><span class="n">Image4DType</span><span class="o">&gt;</span> <span class="n">IteratorType</span><span class="p">;</span>
+
+  <span class="n">IteratorType</span> <span class="n">it</span><span class="p">(</span><span class="n">image4D</span><span class="p">,</span> <span class="n">region4D</span><span class="p">);</span>
+  <span class="n">it</span><span class="p">.</span><span class="n">SetDirection</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// Walk along time dimension</span>
+  <span class="n">it</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">it</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">SumType</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">SumType</span><span class="o">&gt;::</span><span class="n">Zero</span><span class="p">;</span>
+    <span class="n">it</span><span class="p">.</span><span class="n">GoToBeginOfLine</span><span class="p">();</span>
+    <span class="n">index4D</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">GetIndex</span><span class="p">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">it</span><span class="p">.</span><span class="n">IsAtEndOfLine</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="n">sum</span> <span class="o">+=</span> <span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">();</span>
+      <span class="o">++</span><span class="n">it</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">MeanType</span> <span class="n">mean</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">MeanType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">sum</span><span class="p">)</span> <span class="o">/</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">MeanType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">timeLength</span><span class="p">);</span>
+
+    <span class="n">index3D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">index4D</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">index3D</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">index4D</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="n">index3D</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">index4D</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+    <span class="n">image3D</span><span class="o">-&gt;</span><span class="n">SetPixel</span><span class="p">(</span><span class="n">index3D</span><span class="p">,</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mean</span><span class="p">));</span>
+    <span class="n">it</span><span class="p">.</span><span class="n">NextLine</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// As you can see, we avoid to use a 3D iterator to walk</span>
+  <span class="c1">// over the mean image. The reason is that there is no</span>
+  <span class="c1">// guarantee that the 3D iterator will walk in the same</span>
+  <span class="c1">// order as the 4D. Iterators just adhere to their contract</span>
+  <span class="c1">// of visiting all the pixel, but do not enforce any particular</span>
+  <span class="c1">// order for the visits.  The linear iterator guarantees to</span>
+  <span class="c1">// visit the pixels along a line of the image in the order</span>
+  <span class="c1">// in which they are placed in the line, but do not states</span>
+  <span class="c1">// in what order one line will be visited with respect to</span>
+  <span class="c1">// other lines.  Here we simply take advantage of knowing</span>
+  <span class="c1">// the first three components of the 4D iterator index,</span>
+  <span class="c1">// and use them to place the resulting mean value in the</span>
+  <span class="c1">// output 3D image.</span>
+
+  <span class="n">Writer3DType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer3D</span> <span class="o">=</span> <span class="n">Writer3DType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer3D</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer3D</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">image3D</span><span class="p">);</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer3D</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excp</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error writing the image&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excp</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ShapedNeighborhoodIterators2.html" class="btn btn-neutral float-right" title="ShapedNeighborhoodIterators2.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="NeighborhoodIterators4.html" class="btn btn-neutral" title="NeighborhoodIterators4.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

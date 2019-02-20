@@ -1,0 +1,101 @@
+.. _app-HooverCompareSegmentation:
+
+HooverCompareSegmentation
+=========================
+
+
+Compare two segmentations with Hoover metrics
+
+Description
+-----------
+
+This application compares a machine segmentation (MS) with a partial ground truth segmentation (GT). The Hoover metrics are used to estimate scores for correct detection, over-segmentation, under-segmentation and missed detection.
+
+The application can output the overall Hoover scores along with coloredimages of the MS and GT segmentation showing the state of each region (correct detection, over-segmentation, under-segmentation, missed).
+
+The Hoover metrics are described in: Hoover et al., "An experimental comparison of range image segmentation algorithms", IEEE PAMI vol. 18, no. 7, July 1996.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input ground truth** :code:`-ingt image` *Mandatory* |br|
+A partial ground truth segmentation image.
+
+**Input machine segmentation** :code:`-inms image` *Mandatory* |br|
+A machine segmentation image.
+
+**Background label** :code:`-bg int` *Default value: 0* |br|
+Label value of the background in the input segmentations
+
+**Overlapping threshold** :code:`-th float` *Default value: 0.75* |br|
+Overlapping threshold used to find Hoover instances.
+
+**Colored ground truth output** :code:`-outgt image [dtype]` |br|
+The colored ground truth output image.
+
+**Colored machine segmentation output** :code:`-outms image [dtype]` |br|
+The colored machine segmentation output image.
+
+**Correct detection score** :code:`-rc float` *Mandatory* |br|
+Overall score for correct detection (RC)
+
+**Over-segmentation score** :code:`-rf float` *Mandatory* |br|
+Overall score for over segmentation (RF)
+
+**Under-segmentation score** :code:`-ra float` *Mandatory* |br|
+Overall score for under segmentation (RA)
+
+**Missed detection score** :code:`-rm float` *Mandatory* |br|
+Overall score for missed detection (RM)
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_HooverCompareSegmentation -ingt maur_GT.tif -inms maur_labelled.tif -outgt maur_colored_GT.tif uint8
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("HooverCompareSegmentation")
+
+	app.SetParameterString("ingt", "maur_GT.tif")
+	app.SetParameterString("inms", "maur_labelled.tif")
+	app.SetParameterString("outgt", "maur_colored_GT.tif")
+	app.SetParameterOutputImagePixelType("outgt", 1)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| otbHooverMatrixFilter, otbHooverInstanceFilter, otbLabelMapToAttributeImageFilter

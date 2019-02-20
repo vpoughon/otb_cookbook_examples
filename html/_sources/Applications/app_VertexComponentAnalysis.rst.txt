@@ -1,0 +1,79 @@
+.. _app-VertexComponentAnalysis:
+
+VertexComponentAnalysis
+=======================
+
+
+Given a set of mixed spectral vectors, estimate reference substances also known as endmembers using the Vertex Component Analysis algorithm.
+
+Description
+-----------
+
+Apply the Vertex Component Analysis [1] to an hyperspectral image to extract endmembers. Given a set of mixed spectral vectors (multispectral or hyperspectral), the application estimates the spectral signature of reference substances also known as endmembers.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input hyperspectral data cube
+
+**Output Endmembers** :code:`-outendm image [dtype]` *Mandatory* |br|
+Endmembers, stored in a one-line multi-spectral image.Each pixel corresponds to one endmembers and each band values corresponds to the spectral signature of the corresponding endmember.
+
+**Number of endmembers** :code:`-ne int` *Default value: 1* |br|
+The number of endmembers to extract from the hyperspectral image.
+
+**Random seed** :code:`-rand int` |br|
+Set a specific random seed with integer value.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_VertexComponentAnalysis -in cupriteSubHsi.tif -ne 5 -outendm VertexComponentAnalysis.tif double
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("VertexComponentAnalysis")
+
+	app.SetParameterString("in", "cupriteSubHsi.tif")
+	app.SetParameterInt("ne", 5)
+	app.SetParameterString("outendm", "VertexComponentAnalysis.tif")
+	app.SetParameterOutputImagePixelType("outendm", 7)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| [1] J. M. P. Nascimento and J. M. B. Dias, Vertex component analysis: a fast algorithm to unmix hyperspectral data, in IEEE Transactions on Geoscience and Remote Sensing, vol. 43, no. 4, pp. 898-910, April 2005.J. M. P. Nascimento and J. M. B. Dias, Vertex component analysis: a fast algorithm to unmix hyperspectral data, in IEEE Transactions on Geoscience and Remote Sensing, vol. 43, no. 4, pp. 898-910, April 2005.

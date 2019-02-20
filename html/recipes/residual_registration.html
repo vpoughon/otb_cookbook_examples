@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Residual registration &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Image processing and information extraction" href="improc.html" />
+    <link rel="prev" title="SAR processing" href="sarprocessing.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Residual registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#extract-metadata-from-the-image-reference">Extract metadata from the image reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-homologous-points-from-images">Extract homologous points from images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geometry-refinement-using-homologous-points">Geometry refinement using homologous points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orthorectify-image-using-the-affine-geometry">Orthorectify image using the affine geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>Residual registration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/residual_registration.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="residual-registration">
+<h1>Residual registration<a class="headerlink" href="#residual-registration" title="Permalink to this headline">¶</a></h1>
+<p>Image registration is a fundamental problem in image processing. The aim
+is to align two or more images of the same scene often taken at
+different times, from different viewpoints, or by different sensors. It
+is a basic step for orthorectification, image stitching, image fusion,
+change detection, and others. But this process is also critical for stereo
+reconstruction process to be able to obtain an accurate estimation of
+epipolar geometry.</p>
+<p>Sensor model is generally not sufficient to provide image registrations.
+Indeed, several sources of geometric distortion can be contained in
+optical remote sensing images including earth rotation, platform
+movement, non linearity, etc.</p>
+<p>They result in geometric errors on scene level, image level and pixel
+level. It is critical to rectify the errors before a thematic map is
+generated, especially when the remote sensing data need to be integrated
+together with other GIS data.</p>
+<p>This figure illustrates the generic workflow in the case of image series
+registration:</p>
+<img alt="../_images/residual_registration-figure.png" src="../_images/residual_registration-figure.png" />
+<p>We will now illustrate this process by applying this workflow to
+register two images. This process can be easily extended to perform
+image series registration.</p>
+<p>The aim of this example is to describe how to register a Level 1
+QuickBird image over an orthorectify Pleiades image over the area of
+Toulouse, France.</p>
+<p><a class="reference internal" href="../_images/registration_pleiades_ql.png"><img alt="image1" src="../_images/registration_pleiades_ql.png" style="width: 783.3px; height: 708.4px;" /></a> <a class="reference internal" href="../_images/registration_quickbird_ql.png"><img alt="image2" src="../_images/registration_quickbird_ql.png" style="width: 549.6px; height: 580.8000000000001px;" /></a></p>
+<p>Figure 4.10: From left to right: Pleiades ortho-image, and original QuickBird image over Toulouse</p>
+<div class="section" id="extract-metadata-from-the-image-reference">
+<h2>Extract metadata from the image reference<a class="headerlink" href="#extract-metadata-from-the-image-reference" title="Permalink to this headline">¶</a></h2>
+<p>We first dump geometry metadata of the image we want to refine in a text
+file. In OTB, we use the extension <em>.geom</em> for this type of file. As you
+will see the application which will estimate a refine geometry only
+needs as input this metadata and a set of homologous points. The
+refinement application will create a new <em>.geom</em> file containing refined
+geometry parameters which can be used after for reprojection for
+example.</p>
+<p>The use of external <em>.geom</em> file is available in OTB since release
+<img class="math" src="../_images/math/fd442162fb4deae3d15fba541649a5202b5ecbd9.png" alt="3.16"/>. See
+<a class="reference external" href="http://wiki.orfeo-toolbox.org/index.php/ExtendedFileName">here</a> for
+more information.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ReadImageInfo</span>   <span class="o">-</span><span class="ow">in</span> <span class="n">slave_image</span>
+                       <span class="o">-</span><span class="n">outkwl</span> <span class="n">TheGeom</span><span class="o">.</span><span class="n">geom</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extract-homologous-points-from-images">
+<h2>Extract homologous points from images<a class="headerlink" href="#extract-homologous-points-from-images" title="Permalink to this headline">¶</a></h2>
+<p>The main idea of the residual registration is to estimate an second
+transformation (after the application of sensors model).</p>
+<p>The homologous point application use interest point detection method to
+get a set of point which match in both images.</p>
+<p>The basic idea is to use this set of homologous points and estimate with
+them a residual transformation between the two images.</p>
+<p>There is a wide variety of keypoint detectors in the literature, and they
+allow for the detection and description of local features in images. These algorithms
+provide for each interesting point a “feature description”. This
+descriptor has the property to be invariant to image translation,
+scaling, and rotation, partially invariant to illumination changes and
+robust to local geometric distortion. keypoints. Features extracted from
+the input images are then matched against each other. These
+correspondences are then used to create the homologous points.</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Scale-invariant_feature_transform">SIFT</a>
+or <a class="reference external" href="http://en.wikipedia.org/wiki/SURF">SURF</a> keypoints can be
+computed in the application. The band on which keypoints are computed
+can be set independently for both images.</p>
+<p>The application offers two modes:</p>
+<ul class="simple">
+<li>the first is the full mode where keypoints are extracted from the
+full extent of both images (please note that in this mode large image
+file are not supported).</li>
+<li>The second mode, called <em>geobins</em>, allows for the set-up of spatial binning
+so as to get fewer points spread across the entire image. In this
+mode, the corresponding spatial bin in the second image is estimated
+using geographical transform or sensor modeling, and is padded
+according to the user defined precision.</li>
+</ul>
+<p>Moreover, in both modes the application can filter matches whose
+co-localization in the first image exceed this precision. Finally, the
+elevation parameters allow to deal more precisely with sensor modelling
+in case of sensor geometry data. The <em>outvector</em> option allows for the creation of
+a vector file with segments corresponding to the localization error
+between the matches.</p>
+<p>Finally, with the <em>2wgs84</em> option, you can match two sensor geometry
+images or a sensor geometry image with an ortho-rectified reference. In
+all cases, you get a list of ground control points spread all over your
+image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_HomologousPointsExtraction</span>   <span class="o">-</span><span class="n">in1</span> <span class="n">slave_image</span>
+                                    <span class="o">-</span><span class="n">in2</span> <span class="n">reference_image</span>
+                                    <span class="o">-</span><span class="n">algorithm</span> <span class="n">surf</span>
+                                    <span class="o">-</span><span class="n">mode</span> <span class="n">geobins</span>
+                                    <span class="o">-</span><span class="n">mode</span><span class="o">.</span><span class="n">geobins</span><span class="o">.</span><span class="n">binstep</span> <span class="mi">512</span>
+                                    <span class="o">-</span><span class="n">mode</span><span class="o">.</span><span class="n">geobins</span><span class="o">.</span><span class="n">binsize</span> <span class="mi">512</span>
+                                    <span class="o">-</span><span class="n">mfilter</span> <span class="mi">1</span>
+                                    <span class="o">-</span><span class="n">precision</span> <span class="mi">20</span>
+                                    <span class="o">-</span><span class="mi">2</span><span class="n">wgs84</span> <span class="mi">1</span>
+                                    <span class="o">-</span><span class="n">out</span> <span class="n">homologous_points</span><span class="o">.</span><span class="n">txt</span>
+                                    <span class="o">-</span><span class="n">outvector</span> <span class="n">points</span><span class="o">.</span><span class="n">shp</span>
+                                    <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">dem</span> <span class="n">dem_path</span><span class="o">/</span><span class="n">SRTM4</span><span class="o">-</span><span class="n">HGT</span><span class="o">/</span>
+                                    <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">geoid</span> <span class="n">OTB</span><span class="o">-</span><span class="n">Data</span><span class="o">/</span><span class="n">Input</span><span class="o">/</span><span class="n">DEM</span><span class="o">/</span><span class="n">egm96</span><span class="o">.</span><span class="n">grd</span>
+</pre></div>
+</div>
+<p>Note that for a proper use of the application, elevation must be
+correctly set (including DEM and geoid file).</p>
+</div>
+<div class="section" id="geometry-refinement-using-homologous-points">
+<h2>Geometry refinement using homologous points<a class="headerlink" href="#geometry-refinement-using-homologous-points" title="Permalink to this headline">¶</a></h2>
+<p>Now that we can use this set of tie points to estimate a residual
+transformation.For this we use the dedicated application called
+<strong>RefineSensorModel</strong>. This application make use of OSSIM capabilities
+to align the sensor model.</p>
+<p>It reads the input geometry metadata file (<em>.geom</em>) which contains the
+sensor model information that we want to refine and the text file
+(homologous_points.txt) containing the list of ground control point. It
+performs a least-square fit of the sensor model adjustable parameters to
+these tie points and produces an updated geometry file as output (the
+extension which is always use is <em>.geom</em>)</p>
+<p>The application can provide as well an optional ground control points
+based statistics file and a vector file containing residues that you can
+display in a GIS software.</p>
+<p>Please note again that for a proper use of the application, elevation
+must be correctly set (including DEM and geoid file). The map parameters
+sets a map projection in which the accuracy will be
+estimated (in meters).</p>
+<p>Accuracy values are provided as output of the application (computed
+using tie points location) and allow also to control the precision of
+the estimated model.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_RefineSensorModel</span>   <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">dem</span> <span class="n">dem_path</span><span class="o">/</span><span class="n">SRTM4</span><span class="o">-</span><span class="n">HGT</span><span class="o">/</span>
+                           <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">geoid</span> <span class="n">OTB</span><span class="o">-</span><span class="n">Data</span><span class="o">/</span><span class="n">Input</span><span class="o">/</span><span class="n">DEM</span><span class="o">/</span><span class="n">egm96</span><span class="o">.</span><span class="n">grd</span>
+                           <span class="o">-</span><span class="n">ingeom</span> <span class="n">slave_image</span><span class="o">.</span><span class="n">geom</span>
+                           <span class="o">-</span><span class="n">outgeom</span> <span class="n">refined_slave_image</span><span class="o">.</span><span class="n">geom</span>
+                           <span class="o">-</span><span class="n">inpoints</span> <span class="n">homologous_points</span><span class="o">.</span><span class="n">txt</span>
+                           <span class="o">-</span><span class="n">outstat</span> <span class="n">stats</span><span class="o">.</span><span class="n">txt</span>
+                           <span class="o">-</span><span class="n">outvector</span> <span class="n">refined_slave_image</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="orthorectify-image-using-the-affine-geometry">
+<h2>Orthorectify image using the affine geometry<a class="headerlink" href="#orthorectify-image-using-the-affine-geometry" title="Permalink to this headline">¶</a></h2>
+<p>Now we will show how we can use this new sensor model. In our case we’ll
+use this sensor model to orthorectify the image over the Pléiades
+reference. <strong>Orfeo ToolBox</strong> offers since version 3.16 the possibility
+to use
+hrefhttp://wiki.orfeo-toolbox.org/index.php/ExtendedFileNameextend image
+path to use different metadata file as input. That’s what we are going
+to use to orthorectify the QuickBird image using the <em>.geom</em> file
+obtained by the <strong>RefineSensorModel</strong> applications. over the first one
+using for the second image estimated sensor model which take into
+account the original sensor model of the slave and which also fit to the
+set of tie points.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>otbcli_OrthoRectification   -io.in slave_image?&amp;geom=TheRefinedGeom.geom
+                            -io.out ortho_slave_image
+                            -elev.dem dem_path/SRTM4-HGT/
+                            -elev.geoid OTB-Data/Input/DEM/egm96.grd
+</pre></div>
+</div>
+<p>As a result, if you’ve got enough homologous points in images and
+control that the residual error between the set of tie points and the
+estimated sensor model is small, you must achieve a good registration
+now between the 2 rectified images. Normally far better than ’only’
+performing separate orthorectification over the 2 images.</p>
+<p>This methodology can be adapt and apply in several cases, for example:</p>
+<ul class="simple">
+<li>register stereo pair of images and estimate accurate epipolar
+geometry</li>
+<li>registration prior to change detection</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="improc.html" class="btn btn-neutral float-right" title="Image processing and information extraction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sarprocessing.html" class="btn btn-neutral" title="SAR processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

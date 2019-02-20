@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HooverMetricsEstimation.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="RadiometricAttributesLabelMapFilterExample.cxx" href="RadiometricAttributesLabelMapFilterExample.html" />
+    <link rel="prev" title="OBIA" href="../OBIA.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../OBIA.html">OBIA</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">HooverMetricsEstimation.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RadiometricAttributesLabelMapFilterExample.html">RadiometricAttributesLabelMapFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LabelMapToVectorData.html">LabelMapToVectorData.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../OBIA.html">OBIA</a> &raquo;</li>
+        
+      <li>HooverMetricsEstimation.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/OBIA/HooverMetricsEstimation.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hoovermetricsestimation-cxx">
+<span id="example-hoovermetricsestimation"></span><h1>HooverMetricsEstimation.cxx<a class="headerlink" href="#hoovermetricsestimation-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./HooverMetricsEstimation Input/maur_GT.tif Input/maur_labelled.tif Output/maur_colored_GT.tif
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/OBIA/HooverMetricsEstimation.cxx?inline=false">HooverMetricsEstimation.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 1999-2011 Insight Software Consortium</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+
+
+
+<span class="c1">// The following example shows how to compare two segmentations, using Hoover</span>
+<span class="c1">// metrics. For instance, it can be used to compare a segmentation produced</span>
+<span class="c1">// by your algorithm against a partial ground truth segmentation. In this</span>
+<span class="c1">// example, the ground truth segmentation will be referred by the letters GT</span>
+<span class="c1">// whereas the machine segmentation will be referred by MS.</span>
+<span class="c1">//</span>
+<span class="c1">// The estimation of Hoover metrics is done with two filters :</span>
+<span class="c1">// \doxygen{otb}{HooverMatrixFilter} and \doxygen{otb}{HooverInstanceFilter}.</span>
+<span class="c1">// The first one produces a matrix containing the number of overlapping pixels</span>
+<span class="c1">// between MS regions and GT regions. The second one classifies each region among</span>
+<span class="c1">// four types (called Hoover instances):</span>
+<span class="c1">// \begin{itemize}</span>
+<span class="c1">// \item Correct detection : a region is matched with an other one in the</span>
+<span class="c1">// opposite segmentation, because they cover nearly the same area.</span>
+<span class="c1">// \item Over-segmentation : a GT region is matched with a group of MS</span>
+<span class="c1">// regions because they cover nearly the same area.</span>
+<span class="c1">// \item Under-segmentation : a MS region is matched with a group of GT</span>
+<span class="c1">// regions because they cover nearly the same area.</span>
+<span class="c1">// \item Missed detection (for GT regions) or Noise (for MS region) :</span>
+<span class="c1">// un-matched regions.</span>
+<span class="c1">// \end{itemize}</span>
+<span class="c1">// Note that a region can be tagged with two types. When the Hoover instance</span>
+<span class="c1">// have been found, the instance filter computes overall scores for each</span>
+<span class="c1">// category : they are the Hoover metrics \footnote{see http://www.trop.mips.uha.fr/pdf/ORASIS-2009.pdf}.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbHooverMatrixFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbHooverInstanceFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbLabelMapToAttributeImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkLabelImageToLabelMapFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; segmentationGT segmentationMS outputAttributeImage&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The filters \doxygen{otb}{HooverMatrixFilter} and \doxygen{otb}{HooverInstanceFilter}</span>
+  <span class="c1">// are designed to handle \doxygen{itk}{LabelMap} images, made with \doxygen{otb}{AttributesMapLabelObject}.</span>
+  <span class="c1">// This type of label object allows storing generic attributes. Each region can store</span>
+  <span class="c1">// a set of attributes: in this case, Hoover instances and metrics will be stored.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">AttributesMapLabelObject</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">LabelObjectType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">LabelMap</span><span class="o">&lt;</span><span class="n">LabelObjectType</span><span class="o">&gt;</span>                        <span class="n">LabelMapType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">HooverMatrixFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="o">&gt;</span>                 <span class="n">HooverMatrixFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">HooverInstanceFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="o">&gt;</span>               <span class="n">InstanceFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                              <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">LabelImageToLabelMapFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">LabelMapType</span><span class="o">&gt;</span> <span class="n">ImageToLabelMapFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                                         <span class="n">VectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">LabelMapToAttributeImageFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">AttributeImageFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>                                    <span class="n">ImageReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span>                              <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">gt_reader</span> <span class="o">=</span> <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">gt_reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">ms_reader</span> <span class="o">=</span> <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ms_reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="c1">// The first step is to convert the images to label maps : we use</span>
+  <span class="c1">// \doxygen{itk}{LabelImageToLabelMapFilter}. The background value sets</span>
+  <span class="c1">// the label value of regions considered as background: there is no label object for the</span>
+  <span class="c1">// background region.</span>
+
+  <span class="n">ImageToLabelMapFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">gt_filter</span> <span class="o">=</span> <span class="n">ImageToLabelMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">gt_filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">gt_reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">gt_filter</span><span class="o">-&gt;</span><span class="n">SetBackgroundValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">ImageToLabelMapFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">ms_filter</span> <span class="o">=</span> <span class="n">ImageToLabelMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ms_filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">ms_reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">ms_filter</span><span class="o">-&gt;</span><span class="n">SetBackgroundValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="c1">// The Hoover matrix filter has to be updated here. This matrix must be computed</span>
+  <span class="c1">// before being given to the instance filter.</span>
+
+  <span class="n">HooverMatrixFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">hooverFilter</span> <span class="o">=</span> <span class="n">HooverMatrixFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">hooverFilter</span><span class="o">-&gt;</span><span class="n">SetGroundTruthLabelMap</span><span class="p">(</span><span class="n">gt_filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">hooverFilter</span><span class="o">-&gt;</span><span class="n">SetMachineSegmentationLabelMap</span><span class="p">(</span><span class="n">ms_filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">hooverFilter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// The instance filter computes the Hoover metrics for each region. These metrics</span>
+  <span class="c1">// are stored as attributes in each label object. The threshold parameter</span>
+  <span class="c1">// corresponds to the overlapping ratio above which two regions can be matched.</span>
+  <span class="c1">// The extended attributes can be used if the user wants to keep a trace of the</span>
+  <span class="c1">// associations between MS and GT regions : i.e. if a GT region has been matched</span>
+  <span class="c1">// as a correct detection, it will carry an attribute containing the label value</span>
+  <span class="c1">// of the associated MS region (the same principle goes for other types of instance).</span>
+
+  <span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">instances</span> <span class="o">=</span> <span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">instances</span><span class="o">-&gt;</span><span class="n">SetGroundTruthLabelMap</span><span class="p">(</span><span class="n">gt_filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">instances</span><span class="o">-&gt;</span><span class="n">SetMachineSegmentationLabelMap</span><span class="p">(</span><span class="n">ms_filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">instances</span><span class="o">-&gt;</span><span class="n">SetThreshold</span><span class="p">(</span><span class="mf">0.75</span><span class="p">);</span>
+  <span class="n">instances</span><span class="o">-&gt;</span><span class="n">SetHooverMatrix</span><span class="p">(</span><span class="n">hooverFilter</span><span class="o">-&gt;</span><span class="n">GetHooverConfusionMatrix</span><span class="p">());</span>
+  <span class="n">instances</span><span class="o">-&gt;</span><span class="n">SetUseExtendedAttributes</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+
+  <span class="c1">// The \doxygen{otb}{LabelMapToAttributeImageFilter} is designed to extract attributes</span>
+  <span class="c1">// values from a label map and output them in the channels of a vector image. We set</span>
+  <span class="c1">// the attribute to plot in each channel.</span>
+
+  <span class="n">AttributeImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">attributeImageGT</span> <span class="o">=</span> <span class="n">AttributeImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">attributeImageGT</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">instances</span><span class="o">-&gt;</span><span class="n">GetOutputGroundTruthLabelMap</span><span class="p">());</span>
+  <span class="n">attributeImageGT</span><span class="o">-&gt;</span><span class="n">SetAttributeForNthChannel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">GetNameFromAttribute</span><span class="p">(</span><span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">ATTRIBUTE_RC</span><span class="p">));</span>
+  <span class="n">attributeImageGT</span><span class="o">-&gt;</span><span class="n">SetAttributeForNthChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">GetNameFromAttribute</span><span class="p">(</span><span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">ATTRIBUTE_RF</span><span class="p">));</span>
+  <span class="n">attributeImageGT</span><span class="o">-&gt;</span><span class="n">SetAttributeForNthChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">GetNameFromAttribute</span><span class="p">(</span><span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">ATTRIBUTE_RA</span><span class="p">));</span>
+  <span class="n">attributeImageGT</span><span class="o">-&gt;</span><span class="n">SetAttributeForNthChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">GetNameFromAttribute</span><span class="p">(</span><span class="n">InstanceFilterType</span><span class="o">::</span><span class="n">ATTRIBUTE_RM</span><span class="p">));</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">attributeImageGT</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// The output image contains for each GT region its correct detection score (&quot;RC&quot;, band 1),</span>
+  <span class="c1">// its over-segmentation score (&quot;RF&quot;, band 2), its under-segmentation score (&quot;RA&quot;, band 3)</span>
+  <span class="c1">// and its missed detection score (&quot;RM&quot;, band 4).</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Mean RC =&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">instances</span><span class="o">-&gt;</span><span class="n">GetMeanRC</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Mean RF =&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">instances</span><span class="o">-&gt;</span><span class="n">GetMeanRF</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Mean RA =&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">instances</span><span class="o">-&gt;</span><span class="n">GetMeanRA</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Mean RM =&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">instances</span><span class="o">-&gt;</span><span class="n">GetMeanRM</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Mean RN =&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">instances</span><span class="o">-&gt;</span><span class="n">GetMeanRN</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// The Hoover scores are also computed for the whole segmentations. Here is some explanation about the score names :</span>
+  <span class="c1">// C = correct, F = fragmentation, A = aggregation, M = missed, N = noise.</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="RadiometricAttributesLabelMapFilterExample.html" class="btn btn-neutral float-right" title="RadiometricAttributesLabelMapFilterExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../OBIA.html" class="btn btn-neutral" title="OBIA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

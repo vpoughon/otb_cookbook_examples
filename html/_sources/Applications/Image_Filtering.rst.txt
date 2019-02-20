@@ -1,0 +1,13 @@
+Image Filtering
+===============
+
+.. toctree::
+	:maxdepth: 1
+
+
+	app_ContrastEnhancement
+	app_Despeckle
+	app_DimensionalityReduction
+	app_DomainTransform
+	app_MeanShiftSmoothing
+	app_Smoothing

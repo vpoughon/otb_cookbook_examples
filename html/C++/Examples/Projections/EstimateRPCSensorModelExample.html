@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EstimateRPCSensorModelExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="OrthoRectificationExample.cxx" href="OrthoRectificationExample.html" />
+    <link rel="prev" title="GeometriesProjectionExample.cxx" href="GeometriesProjectionExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Projections.html">Projections</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="GeometriesProjectionExample.html">GeometriesProjectionExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">EstimateRPCSensorModelExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OrthoRectificationExample.html">OrthoRectificationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PlaceNameToLonLatExample.html">PlaceNameToLonLatExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorDataExtractROIExample.html">VectorDataExtractROIExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorDataProjectionExample.html">VectorDataProjectionExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Projections.html">Projections</a> &raquo;</li>
+        
+      <li>EstimateRPCSensorModelExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Projections/EstimateRPCSensorModelExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="estimaterpcsensormodelexample-cxx">
+<span id="example-estimaterpcsensormodelexample"></span><h1>EstimateRPCSensorModelExample.cxx<a class="headerlink" href="#estimaterpcsensormodelexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/EstimateRPCSensorModelExample.cxx?inline=false">EstimateRPCSensorModelExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{otb::GCPsToRPCSensorModelImageFilter}</span>
+<span class="c1">// \index{otb::GCPsToRPCSensorModelImageFilter!header}</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">// The following example illustrates the application of estimation</span>
+<span class="c1">// of a sensor model to an image (limited to a RPC sensor model for now).</span>
+
+<span class="c1">// The \doxygen{otb}{GCPsToRPCSensorModelImageFilter} estimates a RPC</span>
+<span class="c1">// sensor model from a list of user defined GCPs. Internally, it uses</span>
+<span class="c1">// an ossimRpcSolver, which performs the estimation using the well</span>
+<span class="c1">// known least-square method.</span>
+
+<span class="c1">// Let&#39;s look at the minimal code required to use this</span>
+<span class="c1">// algorithm. First, the following header defining the</span>
+<span class="c1">// \doxygen{otb}{GCPsToRPCSensorModelImageFilter} class must be</span>
+<span class="c1">// included.</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;ios&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbGCPsToRPCSensorModelImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; infname outfname a1x a1y b1x b1y b1z ... aNx aNy bNx bNy bNz&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">argc</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Inconsistent GCPs description!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">infname</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outfname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+  <span class="c1">//  We declare the image type based on a particular pixel type and</span>
+  <span class="c1">//  dimension. In this case the \code{float} type is used for the pixels.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>            <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">GCPsToRPCSensorModelImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">GCPsToSensorModelFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">GCPsToSensorModelFilterType</span><span class="o">::</span><span class="n">Point2DType</span> <span class="n">Point2DType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">GCPsToSensorModelFilterType</span><span class="o">::</span><span class="n">Point3DType</span> <span class="n">Point3DType</span><span class="p">;</span>
+
+  <span class="c1">// We instantiate reader and writer types</span>
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">infname</span><span class="p">);</span>
+
+  <span class="c1">//  The \doxygen{otb}{GCPsToRPCSensorModelImageFilter} is instantiated.</span>
+
+  <span class="n">GCPsToSensorModelFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rpcEstimator</span> <span class="o">=</span> <span class="n">GCPsToSensorModelFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rpcEstimator</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// We retrieve the command line parameters and put them in the</span>
+  <span class="c1">// correct variables. Firstly, We determine the number of GCPs</span>
+  <span class="c1">// set from the command line parameters and they are stored in:</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item \doxygen{otb}{Point3DType} : Store the sensor point (3D ground point)</span>
+  <span class="c1">// \item \doxygen{otb}{Point2DType} : Pixel associated in the image (2D physical coordinates)</span>
+
+  <span class="c1">// Here we do not use DEM or MeanElevation. It is also possible to give a 2D</span>
+  <span class="c1">// ground point and use the DEM or MeanElevation to get</span>
+  <span class="c1">// the corresponding elevation.</span>
+  <span class="c1">// \end{itemize}</span>
+
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nbGCPs</span> <span class="o">=</span> <span class="p">(</span><span class="n">argc</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">5</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Receiving &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">nbGCPs</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; from command line.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">gcpId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">gcpId</span> <span class="o">&lt;</span> <span class="n">nbGCPs</span><span class="p">;</span> <span class="o">++</span><span class="n">gcpId</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">Point2DType</span> <span class="n">sensorPoint</span><span class="p">;</span>
+    <span class="n">sensorPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span> <span class="o">+</span> <span class="n">gcpId</span> <span class="o">*</span> <span class="mi">5</span><span class="p">]);</span>
+    <span class="n">sensorPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="n">gcpId</span> <span class="o">*</span> <span class="mi">5</span><span class="p">]);</span>
+
+    <span class="n">Point3DType</span> <span class="n">geoPoint</span><span class="p">;</span>
+    <span class="n">geoPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">gcpId</span><span class="p">]);</span>
+    <span class="n">geoPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">gcpId</span><span class="p">]);</span>
+    <span class="n">geoPoint</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">gcpId</span><span class="p">]);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Adding GCP sensor: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sensorPoint</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;-&gt; geo: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">geoPoint</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="n">rpcEstimator</span><span class="o">-&gt;</span><span class="n">AddGCP</span><span class="p">(</span><span class="n">sensorPoint</span><span class="p">,</span> <span class="n">geoPoint</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Note that the \doxygen{otb}{GCPsToRPCSensorModelImageFilter} needs</span>
+  <span class="c1">// at least 20 GCPs to estimate a proper RPC sensor model,</span>
+  <span class="c1">// although no warning will be reported to the user if</span>
+  <span class="c1">// the number of GCPs is lower than 20.</span>
+  <span class="c1">// Actual estimation of the sensor model takes place in the</span>
+  <span class="c1">// \code{GenerateOutputInformation()} method.</span>
+
+  <span class="n">rpcEstimator</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+
+  <span class="c1">// The result of the RPC model estimation and the residual ground</span>
+  <span class="c1">// error is then save in a txt file. Note that This filter does</span>
+  <span class="c1">// not modify the image buffer, but only the metadata.</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">ofs</span><span class="p">;</span>
+  <span class="n">ofs</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">outfname</span><span class="p">);</span>
+
+  <span class="c1">// Set floatfield to format properly</span>
+  <span class="n">ofs</span><span class="p">.</span><span class="n">setf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">fixed</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">floatfield</span><span class="p">);</span>
+  <span class="n">ofs</span><span class="p">.</span><span class="n">precision</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+  <span class="n">ofs</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span><span class="p">)</span><span class="n">rpcEstimator</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">ofs</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Residual ground error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">rpcEstimator</span><span class="o">-&gt;</span><span class="n">GetRMSGroundError</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">ofs</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+
+  <span class="c1">// The output image can be now given to the \doxygen{otb}{orthorectificationFilter}.</span>
+  <span class="c1">// Note that this filter allows also to import GCPs from the image</span>
+  <span class="c1">// metadata, if any.</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="OrthoRectificationExample.html" class="btn btn-neutral float-right" title="OrthoRectificationExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GeometriesProjectionExample.html" class="btn btn-neutral" title="GeometriesProjectionExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

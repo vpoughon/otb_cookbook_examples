@@ -1,0 +1,120 @@
+.. _app-SOMClassification:
+
+SOMClassification
+=================
+
+
+SOM image classification.
+
+Description
+-----------
+
+Unsupervised Self Organizing Map image classification.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**InputImage** :code:`-in image` *Mandatory* |br|
+Input image to classify.
+
+**OutputImage** :code:`-out image [dtype]` *Mandatory* |br|
+Output classified image (each pixel contains the index of its corresponding vector in the SOM).
+
+**ValidityMask** :code:`-vm image` |br|
+Validity mask (only pixels corresponding to a mask value greater than 0 will be used for learning)
+
+**TrainingProbability** :code:`-tp float` *Default value: 1* |br|
+Probability for a sample to be selected in the training set
+
+**TrainingSetSize** :code:`-ts int` |br|
+Maximum training set size (in pixels)
+
+**SOM Map** :code:`-som image [dtype]` |br|
+Output image containing the Self-Organizing Map
+
+**SizeX** :code:`-sx int` *Default value: 32* |br|
+X size of the SOM map
+
+**SizeY** :code:`-sy int` *Default value: 32* |br|
+Y size of the SOM map
+
+**NeighborhoodX** :code:`-nx int` *Default value: 10* |br|
+X size of the initial neighborhood in the SOM map
+
+**NeighborhoodY** :code:`-ny int` *Default value: 10* |br|
+Y size of the initial neighborhood in the SOM map
+
+**NumberIteration** :code:`-ni int` *Default value: 5* |br|
+Number of iterations for SOM learning
+
+**BetaInit** :code:`-bi float` *Default value: 1* |br|
+Initial learning coefficient
+
+**BetaFinal** :code:`-bf float` *Default value: 0.1* |br|
+Final learning coefficient
+
+**InitialValue** :code:`-iv float` *Default value: 0* |br|
+Maximum initial neuron weight
+
+**Random seed** :code:`-rand int` |br|
+Set a specific random seed with integer value.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SOMClassification -in QB_1_ortho.tif -out SOMClassification.tif -tp 1.0 -ts 16384 -sx 32 -sy 32 -nx 10 -ny 10 -ni 5 -bi 1.0 -bf 0.1 -iv 0
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SOMClassification")
+
+	app.SetParameterString("in", "QB_1_ortho.tif")
+	app.SetParameterString("out", "SOMClassification.tif")
+	app.SetParameterFloat("tp", 1.0)
+	app.SetParameterInt("ts", 16384)
+	app.SetParameterInt("sx", 32)
+	app.SetParameterInt("sy", 32)
+	app.SetParameterInt("nx", 10)
+	app.SetParameterInt("ny", 10)
+	app.SetParameterInt("ni", 5)
+	app.SetParameterFloat("bi", 1.0)
+	app.SetParameterFloat("bf", 0.1)
+	app.SetParameterFloat("iv", 0)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

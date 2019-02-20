@@ -1,0 +1,143 @@
+.. _app-FineRegistration:
+
+FineRegistration
+================
+
+
+Estimate disparity map between two images.
+
+Description
+-----------
+
+This application computes a disparity map between two images that correspond to the same scene. It is intended for case where small misregistration between images should be estimated and fixed. The search is performed in 2D.
+
+The algorithm uses an iterative approach to estimate a best match between local patches. The typical use case is registration betwween similar bands, or between two acquisitions. The output image contains X and Y offsets, as well as the metric value. A sub-pixel accuracy can be expected. The input images should have the same size and same physical space.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Reference Image** :code:`-ref image` *Mandatory* |br|
+The reference image.
+
+**Secondary Image** :code:`-sec image` *Mandatory* |br|
+The secondary image.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The output image contains 3 bands, for X offset, Y offset and the metric value. It may contain a 4th one with the validity mask (if used).
+
+**Exploration Radius X** :code:`-erx int` *Mandatory* |br|
+The exploration radius along x (in pixels)
+
+**Exploration Radius Y** :code:`-ery int` *Mandatory* |br|
+The exploration radius along y (in pixels)
+
+**Metric Radius X** :code:`-mrx int` *Mandatory* |br|
+Radius along x (in pixels) of the metric computation window
+
+**Metric Radius Y** :code:`-mry int` *Mandatory* |br|
+Radius along y (in pixels) of the metric computation window
+
+**Image To Warp** :code:`-w image` |br|
+The image to warp after disparity estimation is completed.
+
+**Output Warped Image** :code:`-wo image [dtype]` |br|
+The output warped image
+
+**Coarse Offset X** :code:`-cox float` *Default value: 0* |br|
+Coarse offset along x (in physical space) between the two images, used as an initial offset for all pixels.
+
+**Coarse Offset Y** :code:`-coy float` *Default value: 0* |br|
+Coarse offset along y (in physical space) between the two images, used as an initial offset for all pixels.
+
+**Sub-Sampling Rate X** :code:`-ssrx float` *Default value: 1* |br|
+Generates a result at a coarser resolution with a given sub-sampling rate along X
+
+**Sub-Sampling Rate Y** :code:`-ssry float` *Default value: 1* |br|
+Generates a result at a coarser resolution with a given sub-sampling rate along Y
+
+**Reference Gaussian Smoothing X** :code:`-rgsx float` |br|
+Performs a gaussian smoothing of the reference image. Parameter is gaussian sigma (in pixels) in X direction.
+
+**Reference Gaussian Smoothing Y** :code:`-rgsy float` |br|
+Performs a gaussian smoothing of the reference image. Parameter is gaussian sigma (in pixels) in Y direction.
+
+**Secondary Gaussian Smoothing X** :code:`-sgsx float` |br|
+Performs a gaussian smoothing of the secondary image. Parameter is gaussian sigma (in pixels) in X direction.
+
+**Secondary Gaussian Smoothing Y** :code:`-sgsy float` |br|
+Performs a gaussian smoothing of the secondary image. Parameter is gaussian sigma (in pixels) in Y direction.
+
+**Metric** :code:`-m string` |br|
+Choose the metric used for block matching. Available metrics are cross-correlation (CC), cross-correlation with subtracted mean (CCSM), mean-square difference (MSD), mean reciprocal square difference (MRSD) and mutual information (MI). Default is cross-correlation
+
+**SubPixelAccuracy** :code:`-spa float` *Default value: 0.01* |br|
+Metric extrema location will be refined up to the given accuracy. Default is 0.01
+
+**ConvergenceAccuracy** :code:`-cva float` *Default value: 0.01* |br|
+Metric extrema will be refined up to the given accuracy. Default is 0.01
+
+**Validity Mask Lower Threshold** :code:`-vmlt float` |br|
+Lower threshold to compute the validity mask. This mask will be the 4th output band.
+
+**Validity Mask Upper Threshold** :code:`-vmut float` |br|
+Upper threshold to obtain a validity mask. This mask will be the 4th output band.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_FineRegistration -ref StereoFixed.png -sec StereoMoving.png -out FineRegistration.tif -erx 2 -ery 2 -mrx 3 -mry 3 -w StereoMoving.png -wo StereoMoving_FineRegistered.png
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("FineRegistration")
+
+	app.SetParameterString("ref", "StereoFixed.png")
+	app.SetParameterString("sec", "StereoMoving.png")
+	app.SetParameterString("out", "FineRegistration.tif")
+	app.SetParameterInt("erx", 2)
+	app.SetParameterInt("ery", 2)
+	app.SetParameterInt("mrx", 3)
+	app.SetParameterInt("mry", 3)
+	app.SetParameterString("w", "StereoMoving.png")
+	app.SetParameterString("wo", "StereoMoving_FineRegistered.png")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+If the 'warp' option is activated, the pipeline will be executed twice.
+
+

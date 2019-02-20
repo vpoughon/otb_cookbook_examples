@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>StereoRectificationGridGenerator &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Geometry" href="Geometry.html" />
+    <link rel="prev" title="StereoFramework" href="app_StereoFramework.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Stereo.html">Stereo</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_DisparityMapToElevationMap.html">DisparityMapToElevationMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">StereoRectificationGridGenerator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Stereo.html">Stereo</a> &raquo;</li>
+        
+      <li>StereoRectificationGridGenerator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_StereoRectificationGridGenerator.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stereorectificationgridgenerator">
+<span id="app-stereorectificationgridgenerator"></span><h1>StereoRectificationGridGenerator<a class="headerlink" href="#stereorectificationgridgenerator" title="Permalink to this headline">¶</a></h1>
+<p>Generates two deformation fields to resample in epipolar geometry, a pair of stereo images up to the sensor model precision</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application generates a pair of deformation grid to stereo-rectify a pair of stereo images according to sensor modelling and a mean elevation hypothesis.</p>
+<p>This application is the first part of the stereo reconstruction framework. The output deformation grids can be passed to the <a class="reference internal" href="app_GridBasedImageResampling.html#app-gridbasedimageresampling"><span class="std std-ref">GridBasedImageResampling</span></a> application for actual resampling into epipolar geometry.</p>
+<p>There are several ways to set the elevation source:</p>
+<ul class="simple">
+<li>An arbitrary constant elevation</li>
+<li>A DEM directory</li>
+<li>Compute an average elevation from a DEM</li>
+</ul>
+<p>If needed, the application can compute inverse resampling grids (from epipolar to original sensor geometry). Don’t forget to check the other outputs from the application. For instance, the application gives the X and Y size of the rectified images, along with an estimated baseline ratio.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#input-and-output-data" id="id1">Input and output data</a></li>
+<li><a class="reference internal" href="#epipolar-geometry-and-grid-parameters" id="id2">Epipolar  geometry and grid parameters</a></li>
+<li><a class="reference internal" href="#elevation-management" id="id3">Elevation management</a></li>
+<li><a class="reference internal" href="#average-elevation-computed-from-dem" id="id4">Average elevation computed from DEM</a></li>
+<li><a class="reference internal" href="#write-inverse-fields" id="id5">Write inverse fields</a></li>
+</ul>
+</div>
+<div class="section" id="input-and-output-data">
+<h3><a class="toc-backref" href="#id1">Input and output data</a><a class="headerlink" href="#input-and-output-data" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows setting the input and output images.</p>
+<p><strong>Left input image</strong> <code class="code docutils literal notranslate"><span class="pre">-io.inleft</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The left image from the stereo pair, in sensor geometry.</p>
+<p><strong>Right input image</strong> <code class="code docutils literal notranslate"><span class="pre">-io.inright</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The right image from the stereo pair, in sensor geometry.</p>
+<p><strong>Left output deformation grid</strong> <code class="code docutils literal notranslate"><span class="pre">-io.outleft</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The deformation grid to resample the left image from sensor geometry to epipolar geometry.</p>
+<p><strong>Right output deformation grid</strong> <code class="code docutils literal notranslate"><span class="pre">-io.outright</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The deformation grid to resample the right image from sensor geometry to epipolar geometry.</p>
+</div>
+<div class="section" id="epipolar-geometry-and-grid-parameters">
+<h3><a class="toc-backref" href="#id2">Epipolar  geometry and grid parameters</a><a class="headerlink" href="#epipolar-geometry-and-grid-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Parameters of the epipolar geometry and output grids</p>
+</div>
+<div class="section" id="elevation-management">
+<h3><a class="toc-backref" href="#id3">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.</p>
+<p><strong>DEM directory</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.dem</span> <span class="pre">directory</span></code> <br />
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.</p>
+<p><strong>Geoid File</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.geoid</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd">https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd</a>).</p>
+<p><strong>Default elevation</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.default</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.</p>
+</div>
+<div class="section" id="average-elevation-computed-from-dem">
+<h3><a class="toc-backref" href="#id4">Average elevation computed from DEM</a><a class="headerlink" href="#average-elevation-computed-from-dem" title="Permalink to this headline">¶</a></h3>
+<p>Average elevation computed from the provided DEM</p>
+<p><strong>Sub-sampling step</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.avgdem.step</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Step of sub-sampling for average elevation estimation</p>
+<p><strong>Average elevation value</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.avgdem.value</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Average elevation value estimated from DEM</p>
+<p><strong>Minimum disparity from DEM</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.avgdem.mindisp</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Disparity corresponding to estimated minimum elevation over the left image</p>
+<p><strong>Maximum disparity from DEM</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.avgdem.maxdisp</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Disparity corresponding to estimated maximum elevation over the left image</p>
+<hr class="docutils" />
+<p><strong>Scale of epipolar images</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.scale</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+The scale parameter allows generating zoomed-in (scale &lt; 1) or zoomed-out (scale &gt; 1) epipolar images.</p>
+<p><strong>Step of the deformation grid (in number of pixels)</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.step</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Stereo-rectification deformation grid only varies slowly. Therefore, it is recommended to use a coarser grid (higher step value) in case of large images</p>
+<p><strong>Rectified image size X</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.rectsizex</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+The application computes the optimal rectified image size so that the whole left input image fits into the rectified area. However, due to the scale and step parameter, this size may not match the size of the deformation field output. In this case, one can use these output values.</p>
+<p><strong>Rectified image size Y</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.rectsizey</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+The application computes the optimal rectified image size so that the whole left input image fits into the rectified area. However, due to the scale and step parameter, this size may not match the size of the deformation field output. In this case, one can use these output values.</p>
+<p><strong>Mean baseline ratio</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.baseline</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+This parameter is the mean value, in pixels.meters^-1, of the baseline to sensor altitude ratio. It can be used to convert disparities to physical elevation, since a disparity of one pixel will correspond to an elevation offset of the invert of this value with respect to the mean elevation.</p>
+</div>
+<div class="section" id="write-inverse-fields">
+<h3><a class="toc-backref" href="#id5">Write inverse fields</a><a class="headerlink" href="#write-inverse-fields" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameter allows generating the inverse fields as well</p>
+<p><strong>Left inverse deformation grid</strong> <code class="code docutils literal notranslate"><span class="pre">-inverse.outleft</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <br />
+The deformation grid to resample the left image from the epipolar geometry back into its original sensor geometry.</p>
+<p><strong>Right inverse deformation grid</strong> <code class="code docutils literal notranslate"><span class="pre">-inverse.outright</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <br />
+The output deformation grid to resample the right image from the epipolar geometry back into its original sensor geometry.</p>
+<p><strong>Sub-sampling rate for inversion</strong> <code class="code docutils literal notranslate"><span class="pre">-inverse.ssrate</span> <span class="pre">int</span></code> <em>Default value: 16</em> <br />
+Grid inversion is an heavy process that implies spline regression on control points. To avoid eating to much memory, this parameter allows one to first sub-sample the field to invert.</p>
+<hr class="docutils" />
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_StereoRectificationGridGenerator -io.inleft wv2_xs_left.tif -io.inright wv2_xs_left.tif -io.outleft wv2_xs_left_epi_field.tif -io.outright wv2_xs_right_epi_field.tif -epi.elevation.default <span class="m">400</span>
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;StereoRectificationGridGenerator&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.inleft&quot;</span><span class="p">,</span> <span class="s2">&quot;wv2_xs_left.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.inright&quot;</span><span class="p">,</span> <span class="s2">&quot;wv2_xs_left.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.outleft&quot;</span><span class="p">,</span> <span class="s2">&quot;wv2_xs_left_epi_field.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.outright&quot;</span><span class="p">,</span> <span class="s2">&quot;wv2_xs_right_epi_field.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;epi.elevation.default&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>Generation of the deformation grid is not streamable, pay attention to this fact when setting the grid step.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">otb:ref:<cite>app-GridBasedImageResampling</cite></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Geometry.html" class="btn btn-neutral float-right" title="Geometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_StereoFramework.html" class="btn btn-neutral" title="StereoFramework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

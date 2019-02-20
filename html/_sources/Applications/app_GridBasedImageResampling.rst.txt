@@ -1,0 +1,158 @@
+.. _app-GridBasedImageResampling:
+
+GridBasedImageResampling
+========================
+
+
+Resamples an image according to a resampling grid
+
+Description
+-----------
+
+This application allows performing image resampling from an input resampling grid.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input and output data
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows setting the input and output images.
+
+**Input image** :code:`-io.in image` *Mandatory* |br|
+The input image to resample
+
+**Output Image** :code:`-io.out image [dtype]` *Mandatory* |br|
+The resampled output image
+
+Resampling grid parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+**Input resampling grid** :code:`-grid.in image` *Mandatory* |br|
+The resampling grid
+
+**Grid Type** :code:`-grid.type [def|loc]` *Default value: def* |br|
+allows one to choose between two grid types
+
+* **Displacement  grid: $G(x_out,y_out) = (x_in-x_out, y_in-y_out)$** |br| A deformation grid contains at each grid position the offset to apply to this position in order to get to the corresponding point in the input image to resample
+
+* **Localisation grid: $G(x_out,y_out) = (x_in, y_in)$** |br| A localisation grid contains at each grid position the corresponding position in the input image to resample
+
+
+
+Output Image parameters
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Parameters of the output image
+
+**Upper Left X** :code:`-out.ulx float` *Default value: 0* |br|
+X Coordinate of the upper-left pixel of the output resampled image
+
+**Upper Left Y** :code:`-out.uly float` *Default value: 0* |br|
+Y Coordinate of the upper-left pixel of the output resampled image
+
+**Size X** :code:`-out.sizex int` *Mandatory* |br|
+Size of the output resampled image along X (in pixels)
+
+**Size Y** :code:`-out.sizey int` *Mandatory* |br|
+Size of the output resampled image along Y (in pixels)
+
+**Pixel Size X** :code:`-out.spacingx float` *Default value: 1* |br|
+Size of each pixel along X axis
+
+**Pixel Size Y** :code:`-out.spacingy float` *Default value: 1* |br|
+Size of each pixel along Y axis
+
+**Default value** :code:`-out.default float` *Default value: 0* |br|
+The default value to give to pixel that falls outside of the input image.
+
+
+
+------------
+
+**Interpolation** :code:`-interpolator [nn|linear|bco]` *Default value: bco* |br|
+This group of parameters allows one to define how the input image will be interpolated during resampling.
+
+* **Nearest Neighbor interpolation** |br| Nearest neighbor interpolation leads to poor image quality, but it is very fast.
+
+* **Linear interpolation** |br| Linear interpolation leads to average image quality but is quite fast
+
+* **Bicubic interpolation** |br| 
+
+
+
+Bicubic interpolation options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Radius for bicubic interpolation** :code:`-interpolator.bco.radius int` *Default value: 2* |br|
+This parameter allows controlling the size of the bicubic interpolation filter. If the target pixel size is higher than the input pixel size, increasing this parameter will reduce aliasing artifacts.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_GridBasedImageResampling -io.in ROI_IKO_PAN_LesHalles_sub.tif -io.out ROI_IKO_PAN_LesHalles_sub_resampled.tif uint8 -grid.in ROI_IKO_PAN_LesHalles_sub_deformation_field.tif -out.sizex 256 -out.sizey 256 -grid.type def
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("GridBasedImageResampling")
+
+	app.SetParameterString("io.in", "ROI_IKO_PAN_LesHalles_sub.tif")
+	app.SetParameterString("io.out", "ROI_IKO_PAN_LesHalles_sub_resampled.tif")
+	app.SetParameterOutputImagePixelType("io.out", 1)
+	app.SetParameterString("grid.in", "ROI_IKO_PAN_LesHalles_sub_deformation_field.tif")
+	app.SetParameterInt("out.sizex", 256)
+	app.SetParameterInt("out.sizey", 256)
+	app.SetParameterString("grid.type","def")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| otbStereorecificationGridGeneration

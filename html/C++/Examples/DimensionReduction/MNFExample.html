@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MNFExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="MaximumAutocorrelationFactor.cxx" href="MaximumAutocorrelationFactor.html" />
+    <link rel="prev" title="NAPCAExample.cxx" href="NAPCAExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="PCAExample.html">PCAExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ICAExample.html">ICAExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NAPCAExample.html">NAPCAExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">MNFExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MaximumAutocorrelationFactor.html">MaximumAutocorrelationFactor.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../DimensionReduction.html">DimensionReduction</a> &raquo;</li>
+        
+      <li>MNFExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/DimensionReduction/MNFExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mnfexample-cxx">
+<span id="example-mnfexample"></span><h1>MNFExample.cxx<a class="headerlink" href="#mnfexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./MNFExample Input/wv2_cannes_8bands.tif <span class="se">\</span>
+             Output/MNFOutput.tif <span class="se">\</span>
+             Output/InverseMNFOutput.tif <span class="se">\</span>
+             Output/MNF-input-pretty.png <span class="se">\</span>
+             Output/MNF-output-pretty.png <span class="se">\</span>
+             Output/MNF-invoutput-pretty.png <span class="se">\</span>
+             <span class="m">8</span> <span class="se">\</span>
+             <span class="m">1</span> <span class="se">\</span>
+             <span class="m">1</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/MNFExample.cxx?inline=false">MNFExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbPrintableImageFilter.h&quot;</span><span class="cp"></span>
+
+
+
+
+<span class="c1">// This example illustrates the use of the</span>
+<span class="c1">// \doxygen{otb}{MNFImageFilter}.  This filter computes a Maximum</span>
+<span class="c1">// Noise Fraction transform \cite{green1988transformation} using an</span>
+<span class="c1">// efficient method based on the inner product in order to compute the</span>
+<span class="c1">// covariance matrix.</span>
+<span class="c1">//</span>
+<span class="c1">// The Maximum Noise Fraction transform is a sequence of two Principal</span>
+<span class="c1">// Component Analysis transforms. The first transform is based on an</span>
+<span class="c1">// estimated covariance matrix of the noise, and intends to whiten the</span>
+<span class="c1">// input image (noise with unit variance and no correlation between</span>
+<span class="c1">// bands).</span>
+<span class="c1">//</span>
+<span class="c1">// The second Principal Component Analysis is then applied to the</span>
+<span class="c1">// noise-whitened image, giving the Maximum Noise Fraction transform.</span>
+<span class="c1">//</span>
+<span class="c1">// In this implementation, noise is estimated from a local window.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step required to use this filter is to include its header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbMNFImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// We also need to include the header of the noise filter.</span>
+<span class="c1">//</span>
+<span class="c1">// SoftwareGuide : EndLatex</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbLocalActivityVectorImageFilter.h&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">typedef</span> <span class="kt">double</span>     <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span>             <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">inputFileName</span>         <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">outputFilename</span>        <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">outputInverseFilename</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">numberOfPrincipalComponentsRequired</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">inpretty</span>      <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">outpretty</span>     <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">invoutpretty</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span>       <span class="n">vradius</span>       <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+  <span class="kt">bool</span>               <span class="n">normalization</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+
+  <span class="c1">// We start by defining the types for the images, the reader, and</span>
+  <span class="c1">// the writer. We choose to work with a \doxygen{otb}{VectorImage},</span>
+  <span class="c1">// since we will produce a multi-channel image (the principal</span>
+  <span class="c1">// components) from a multi-channel input image.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>        <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>        <span class="n">WriterType</span><span class="p">;</span>
+  <span class="c1">// We instantiate now the image reader and we set the image file name.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFileName</span><span class="p">);</span>
+
+  <span class="c1">// In contrast with standard Principal Component Analysis, MNF</span>
+  <span class="c1">// needs an estimation of the noise correlation matrix</span>
+  <span class="c1">// in the dataset prior to transformation.</span>
+  <span class="c1">//</span>
+  <span class="c1">// A classical approach is to use spatial gradient images</span>
+  <span class="c1">// and infer the noise correlation matrix from it.</span>
+  <span class="c1">// The method of noise estimation can be customized</span>
+  <span class="c1">// by templating the \doxygen{otb}{MNFImageFilter}</span>
+  <span class="c1">// with the desired noise estimation method.</span>
+  <span class="c1">//</span>
+  <span class="c1">// In this implementation, noise is estimated from a local window.</span>
+  <span class="c1">// We define the type of the noise filter.</span>
+
+  <span class="c1">// SoftwareGuide : BeginCodeSnippet</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">LocalActivityVectorImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">NoiseFilterType</span><span class="p">;</span>
+  <span class="c1">// SoftwareGuide : EndCodeSnippet</span>
+
+
+  <span class="c1">// We define the type for the filter. It is templated over the input</span>
+  <span class="c1">// and the output image types and also the transformation direction. The</span>
+  <span class="c1">// internal structure of this filter is a filter-to-filter like structure.</span>
+  <span class="c1">// We can now the instantiate the filter.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MNFImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">NoiseFilterType</span><span class="p">,</span> <span class="n">otb</span><span class="o">::</span><span class="n">Transform</span><span class="o">::</span><span class="n">FORWARD</span><span class="o">&gt;</span> <span class="n">MNFFilterType</span><span class="p">;</span>
+  <span class="n">MNFFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                      <span class="n">MNFfilter</span> <span class="o">=</span> <span class="n">MNFFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// We then set the number of principal</span>
+  <span class="c1">// components required as output. We can choose to get less PCs than</span>
+  <span class="c1">// the number of input bands.</span>
+
+  <span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">SetNumberOfPrincipalComponentsRequired</span><span class="p">(</span><span class="n">numberOfPrincipalComponentsRequired</span><span class="p">);</span>
+
+  <span class="c1">// We set the radius of the sliding window for noise estimation.</span>
+
+  <span class="n">NoiseFilterType</span><span class="o">::</span><span class="n">RadiusType</span> <span class="n">radius</span> <span class="o">=</span> <span class="p">{{</span><span class="n">vradius</span><span class="p">,</span> <span class="n">vradius</span><span class="p">}};</span>
+  <span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">GetNoiseImageFilter</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="n">radius</span><span class="p">);</span>
+
+  <span class="c1">// Last, we can activate normalisation.</span>
+
+  <span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">SetUseNormalization</span><span class="p">(</span><span class="n">normalization</span><span class="p">);</span>
+
+  <span class="c1">// We now instantiate the writer and set the file name for the</span>
+  <span class="c1">// output image.</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">);</span>
+  <span class="c1">// We finally plug the pipeline and trigger the MNF computation with</span>
+  <span class="c1">// the method \code{Update()} of the writer.</span>
+
+  <span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// \doxygen{otb}{MNFImageFilter} allows also to compute inverse</span>
+  <span class="c1">// transformation from MNF coefficients. In reverse mode, the</span>
+  <span class="c1">// covariance matrix or the transformation matrix</span>
+  <span class="c1">// (which may not be square) has to be given.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MNFImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">NoiseFilterType</span><span class="p">,</span> <span class="n">otb</span><span class="o">::</span><span class="n">Transform</span><span class="o">::</span><span class="n">INVERSE</span><span class="o">&gt;</span> <span class="n">InvMNFFilterType</span><span class="p">;</span>
+  <span class="n">InvMNFFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                   <span class="n">invFilter</span> <span class="o">=</span> <span class="n">InvMNFFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">SetMeanValues</span><span class="p">(</span><span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">GetMeanValues</span><span class="p">());</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">normalization</span><span class="p">)</span>
+    <span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">SetStdDevValues</span><span class="p">(</span><span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">GetStdDevValues</span><span class="p">());</span>
+  <span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">SetTransformationMatrix</span><span class="p">(</span><span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">GetTransformationMatrix</span><span class="p">());</span>
+  <span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">invWriter</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">invWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputInverseFilename</span><span class="p">);</span>
+  <span class="n">invWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">invWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:MNF_FILTER} shows the result of applying forward</span>
+  <span class="c1">// and reverse MNF transformation to a 8 bands Worldview2 image.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{MNF-input-pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{MNF-output-pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{MNF-invoutput-pretty.eps}</span>
+  <span class="c1">// \itkcaption[PCA Filter (forward trasnformation)]{Result of applying the</span>
+  <span class="c1">// \doxygen{otb}{MNFImageFilter} to an image. From left</span>
+  <span class="c1">// to right:</span>
+  <span class="c1">// original image, color composition with first three principal</span>
+  <span class="c1">// components and output of the</span>
+  <span class="c1">// inverse mode (the input RGB image).}</span>
+  <span class="c1">// \label{fig:MNF_FILTER}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="c1">// This is for rendering in software guide</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PrintableImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">PrintFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">OutputImageType</span>                <span class="n">VisuImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">VisuImageType</span><span class="o">&gt;</span>             <span class="n">VisuWriterType</span><span class="p">;</span>
+
+  <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">inputPrintFilter</span>        <span class="o">=</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">outputPrintFilter</span>       <span class="o">=</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">invertOutputPrintFilter</span> <span class="o">=</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">inputVisuWriter</span>         <span class="o">=</span> <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">outputVisuWriter</span>        <span class="o">=</span> <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">invertOutputVisuWriter</span>  <span class="o">=</span> <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">MNFfilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="n">inputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">outputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">invertOutputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">inputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inpretty</span><span class="p">);</span>
+  <span class="n">outputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outpretty</span><span class="p">);</span>
+  <span class="n">invertOutputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">invoutpretty</span><span class="p">);</span>
+
+  <span class="n">inputVisuWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="n">outputVisuWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="n">invertOutputVisuWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MaximumAutocorrelationFactor.html" class="btn btn-neutral float-right" title="MaximumAutocorrelationFactor.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="NAPCAExample.html" class="btn btn-neutral" title="NAPCAExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

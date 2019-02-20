@@ -1,0 +1,152 @@
+.. _app-SARPolarMatrixConvert:
+
+SARPolarMatrixConvert
+=====================
+
+
+This applications allows converting classical polarimetric matrices to each other.
+
+Description
+-----------
+
+This application allows converting classical polarimetric matrices to each other.
+For instance, it is possible to get the coherency matrix from the Sinclar one, or the Mueller matrix from the coherency one.
+The filters used in this application never handle matrices, but images where each band is related to their elements.
+As most of the time SAR polarimetry handles symmetric/hermitian matrices, only the relevant elements are stored, so that the images representing them have a minimal number of bands.
+For instance, the coherency matrix size is 3x3 in the monostatic case, and 4x4 in the bistatic case: it will thus be stored in a 6-band or a 10-band complex image (the diagonal and the upper elements of the matrix).
+
+The Sinclair matrix is a special case: it is always represented as 3 or 4 one-band complex images (for mono or bistatic case).
+The available conversions are listed below:
+
+--- Monostatic case ---
+1 msinclairtocoherency --> Sinclair matrix to coherency matrix (input: 3 x 1 complex channel (HH, HV or VH, VV) | output:  6 complex channels)
+2 msinclairtocovariance --> Sinclair matrix to covariance matrix (input: 3 x 1 complex channel (HH, HV or VH, VV) | output:  6 complex channels)
+3 msinclairtocircovariance --> Sinclair matrix to circular covariance matrix (input: 3 x 1 complex channel (HH, HV or VH, VV) | output:  6 complex channels)
+4 mcoherencytomueller --> Coherency matrix to Mueller matrix (input: 6 complex channels | 16 real channels)
+5 mcovariancetocoherencydegree --> Covariance matrix to coherency degree (input: 6 complex channels | 3 complex channels)
+6 mcovariancetocoherency --> Covariance matrix to coherency matrix (input: 6 complex channels | 6 complex channels)
+7 mlinearcovariancetocircularcovariance --> Covariance matrix to circular covariance matrix (input: 6 complex channels | output: 6 complex channels)
+
+--- Bistatic case ---
+8 bsinclairtocoherency --> Sinclair matrix to coherency matrix (input: 4 x 1 complex channel (HH, HV, VH, VV) | 10 complex channels)
+9 bsinclairtocovariance --> Sinclair matrix to covariance matrix (input: 4 x 1 complex channel (HH, HV, VH, VV) | output: 10 complex channels)
+10 bsinclairtocircovariance --> Sinclair matrix to circular covariance matrix (input: 4 x 1 complex channel (HH, HV, VH, VV) | output: 10 complex channels)
+
+--- Both cases ---
+11 sinclairtomueller --> Sinclair matrix to Mueller matrix (input: 4 x 1 complex channel (HH, HV, VH, VV) | output: 16 real channels)
+12 muellertomcovariance --> Mueller matrix to covariance matrix (input: 16 real channels | output: 6 complex channels)
+13 muellertopoldegandpower --> Mueller matrix to polarization degree and power (input: 16 real channels | output: 4 real channels)
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input multi-band complex image** :code:`-inc image` |br|
+Input: multi-band complex image
+
+**Input multi-band real image** :code:`-inf image` |br|
+Input: multi-band real image
+
+**Input one-band complex image (HH)** :code:`-inhh image` |br|
+Input: one-band complex image (HH)
+
+**Input one-band complex image (HV)** :code:`-inhv image` |br|
+Input: one-band complex image (HV)
+
+**Input one-band complex image (VH)** :code:`-invh image` |br|
+Input: one-band complex image (VH)
+
+**Input one-band complex image (VV)** :code:`-invv image` |br|
+Input: one-band complex image (VV)
+
+**Output Complex Image** :code:`-outc image [dtype]` |br|
+Output Complex image.
+
+**Output Real Image** :code:`-outf image [dtype]` |br|
+Output Real image.
+
+**Conversion** :code:`-conv [msinclairtocoherency|msinclairtocovariance|msinclairtocircovariance|mcoherencytomueller|mcovariancetocoherencydegree|mcovariancetocoherency|mlinearcovariancetocircularcovariance|muellertomcovariance|bsinclairtocoherency|bsinclairtocovariance|bsinclairtocircovariance|sinclairtomueller|muellertopoldegandpower]` *Default value: msinclairtocoherency* |br|
+
+
+* **1 Monostatic: Sinclair matrix to coherency matrix (complex output)** |br| 1 Monostatic: Sinclair matrix to coherency matrix (complex output)
+
+* **2 Monostatic: Sinclair matrix to covariance matrix (complex output)** |br| 2 Monostatic: Sinclair matrix to covariance matrix (complex output)
+
+* **3 Monostatic: Sinclair matrix to circular covariance matrix (complex output)** |br| 3 Monostatic: Sinclair matrix to circular covariance matrix (complex output)
+
+* **4 Monostatic: Coherency matrix to Mueller matrix** |br| 4 Monostatic: Coherency matrix to Mueller matrix
+
+* **5 Monostatic: Covariance matrix to coherency degree** |br| 5 Monostatic: Covariance matrix to coherency degree 
+
+* **6 Monostatic: Covariance matrix to coherency matrix (complex output)** |br| 6 Monostatic: Covariance matrix to coherency matrix (complex output)
+
+* **7 Monostatic: Covariance matrix to circular covariance matrix (complex output)** |br| 7 Monostatic: Covariance matrix to circular covariance matrix (complex output)
+
+* **8 Bi/mono: Mueller matrix to monostatic covariance matrix** |br| 8 Bi/mono: Mueller matrix to monostatic covariance matrix
+
+* **9 Bistatic: Sinclair matrix to coherency matrix (complex output)** |br| 9 Bistatic: Sinclair matrix to coherency matrix (complex output)
+
+* **10 Bistatic: Sinclair matrix to covariance matrix (complex output)** |br| 10 Bistatic: Sinclair matrix to covariance matrix (complex output)
+
+* **11 Bistatic: Sinclair matrix to circular covariance matrix (complex output)** |br| 11 Bistatic: Sinclair matrix to circular covariance matrix (complex output)
+
+* **12 Bi/mono: Sinclair matrix to Mueller matrix** |br| 12 Bi/mono: Sinclair matrix to Mueller matrix
+
+* **13 Bi/mono: Mueller matrix to polarisation degree and power** |br| 13 Bi/mono: Mueller matrix to polarisation degree and power
+
+
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SARPolarMatrixConvert -inhh HH.tif -invh VH.tif -invv VV.tif -conv msinclairtocoherency -outc mcoherency.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SARPolarMatrixConvert")
+
+	app.SetParameterString("inhh", "HH.tif")
+	app.SetParameterString("invh", "VH.tif")
+	app.SetParameterString("invv", "VV.tif")
+	app.SetParameterString("conv","msinclairtocoherency")
+	app.SetParameterString("outc", "mcoherency.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-SARPolarSynth`, :ref:`app-SARDecompositions`

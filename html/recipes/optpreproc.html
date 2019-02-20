@@ -1,0 +1,652 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>From raw image to calibrated product &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SAR processing" href="sarprocessing.html" />
+    <link rel="prev" title="Recipes" href="../Recipes.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">From raw image to calibrated product</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#optical-radiometric-calibration">Optical radiometric calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pan-sharpening">Pan-sharpening</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#digital-elevation-model-management">Digital Elevation Model management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ortho-rectification-and-map-projections">Ortho-rectification and map projections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#beware-of-ortho-ready-products">Beware of “ortho-ready” products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ortho-rectification-with-otb-applications">Ortho-rectification with <strong>OTB Applications</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>From raw image to calibrated product</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/optpreproc.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="from-raw-image-to-calibrated-product">
+<h1>From raw image to calibrated product<a class="headerlink" href="#from-raw-image-to-calibrated-product" title="Permalink to this headline">¶</a></h1>
+<p>This section presents various pre-processing tasks that are presented in
+a standard order to obtain a calibrated, pan-sharpened image.</p>
+<div class="section" id="optical-radiometric-calibration">
+<h2>Optical radiometric calibration<a class="headerlink" href="#optical-radiometric-calibration" title="Permalink to this headline">¶</a></h2>
+<p>In remote sensing imagery, pixel values are referred to as Digital
+Numbers (DN) and they cannot be physically interpreted or compared. They are
+influenced by various factors such as the amount of light flowing through
+the sensor, the gain of the detectors and the analogue to digital
+converter.</p>
+<p>Depending on the season, the light and atmospheric conditions, the
+position of the sun or the sensor internal parameters, these DN can
+drastically change for a given pixel (apart from any ground change
+effects). Moreover, these effects are not uniform over the spectrum: for
+instance aerosol amount and type has usually more impact on the blue
+channel.</p>
+<p>Therefore, it is necessary to calibrate the pixel values before any
+physical interpretation is made out of them. In particular, this
+processing is mandatory before any comparison of pixel spectrum between
+several images (from the same sensor), and to train a classifier without
+dependence to the atmospheric conditions at the acquisition time.</p>
+<p>Calibrated values are called surface reflectivity, which is a ratio
+denoting the fraction of light that is reflected by the underlying
+surface in the given spectral range. As such, its values lie in the
+range <img class="math" src="../_images/math/62f34fae2b08036cedb90a3ebf47f74a61dcb1be.png" alt="[0,1]"/>. For convenience, images are often stored in
+thousandth of reflectivity, so that they can be encoded with an integer
+type. Two levels of calibration are usually distinguished:</p>
+<ul class="simple">
+<li>The first level is called <em>Top Of Atmosphere (TOA)</em> reflectivity. It
+takes into account the sensor gain, sensor spectral response and the
+solar illumination.</li>
+<li>The second level is called <em>Top Of Canopy (TOC)</em> reflectivity. In
+addition to sensor gain and solar illumination, it takes into account
+the optical thickness of the atmosphere, the atmospheric pressure,
+the water vapor amount, the ozone amount, as well as the composition
+and amount of aerosol gasses.</li>
+</ul>
+<p>This transformation can be done either with <strong>OTB Applications</strong> or with
+<strong>Monteverdi</strong> . Sensor-related parameters such as gain, date, spectral
+sensitivity and sensor position are seamlessly read from the image
+metadata. Atmospheric parameters can be tuned by the user. Supported
+sensors are:</p>
+<ul class="simple">
+<li>Pleiades</li>
+<li>SPOT5</li>
+<li>QuickBird</li>
+<li>Ikonos</li>
+<li>WorldView-1</li>
+<li>WorldView-2</li>
+<li>Formosat</li>
+</ul>
+<p>The <em>OpticalCalibration</em> application performs optical
+calibration. The mandatory parameters are the input and output images.
+All other parameters are optional. By default the level of calibration
+is set to TOA (Top Of Atmosphere). The output images are expressed in
+thousandth of reflectivity using a 16 bits unsigned integer type.</p>
+<p>A basic TOA calibration task can be performed with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_OpticalCalibration</span> <span class="o">-</span><span class="ow">in</span>  <span class="n">input_image</span> <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span>
+</pre></div>
+</div>
+<p>A basic TOC calibration task can be performed with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_OpticalCalibration</span> <span class="o">-</span><span class="ow">in</span>  <span class="n">input_image</span> <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span> <span class="o">-</span><span class="n">level</span> <span class="n">toc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pan-sharpening">
+<h2>Pan-sharpening<a class="headerlink" href="#pan-sharpening" title="Permalink to this headline">¶</a></h2>
+<p>Because of physical constrains on the sensor design, it is difficult to
+achieve high spatial and spectral resolution at the same time: a better
+spatial resolution means a smaller detector, which in turn means lesser
+optical flow on the detector surface. On the contrary, spectral bands
+are obtained through filters applied on the detector surface, that
+lowers the optical flow, so that it is necessary to increase the
+detector size to achieve an acceptable signal to noise ratio.</p>
+<p>For these reasons, many high resolution satellite payload are composed
+of two sets of detectors, which in turn delivers two different kind of
+images:</p>
+<ul class="simple">
+<li>The multi-spectral (XS) image, composed of 3 to 8 spectral bands
+containing usually blue, green, red and near infra-red bands at a
+given resolution (usually from 2.8 meters to 2 meters).</li>
+<li>The panchromatic (PAN) image, which is a grayscale image acquired by
+a detector covering a wider part of the light spectrum, which allows
+to increase the optical flow and thus to reduce pixel size.
+Therefore, resolution of the panchromatic image is usually around 4
+times lower than the resolution of the multi-spectral image (from 46
+centimeters to 70 centimeters).</li>
+</ul>
+<p>It is very frequent that those two images are delivered side by side by
+data providers. Such a dataset is called a bundle. A very common remote
+sensing processing is to fuse the panchromatic image with the
+multi-spectral one so as to get an image combining the spatial
+resolution of the panchromatic image with the spectral richness of the
+multi-spectral image. This operation is called pan-sharpening.</p>
+<p>This fusion operation requires two different steps:</p>
+<ol class="arabic simple">
+<li>The multi-spectral (XS) image is zoomed and registered to the
+panchromatic image,</li>
+<li>A pixel-by-pixel fusion operator is applied to the co-registered
+pixels of the multi-spectral and panchromatic image to obtain the
+fused pixels.</li>
+</ol>
+<p>Using either <strong>OTB Applications</strong> or modules from <strong>Monteverdi</strong> , it is
+possible to perform both steps in a row, or step-by-step fusion, as
+described in the above sections.</p>
+<p>The <em>BundleToPerfectSensor</em> application performs both steps in
+a row. Seamless sensor modelling is used to perform zooming and
+registration of the multi-spectral image on the panchromatic image. In
+the case of a Pléiades bundle, a different approach is used: an affine
+transform is used to zoom the multi-spectral image and apply a residual
+translation. This translation is computed based on metadata about the
+geometric processing of the bundle. This zooming and registration of the
+multi-spectral image over the panchromatic image can also be performed
+by the <em>Superimpose</em> application.</p>
+<p>After the registration step, a simple pan-sharpening is applied,
+according to the following formula:</p>
+<div class="math">
+<p><img src="../_images/math/c337c052f82b3f1f333db8d9deed404a736cbfa8.png" alt="PXS(i,j) = \frac{PAN(i,j)}{PAN_{smooth}(i,j)} \cdot XS(i,j)"/></p>
+</div><p>Where <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and <img class="math" src="../_images/math/6b21e0b0899a0d2879d3b8019087fa630bab4ea2.png" alt="j"/> are pixels indices, <img class="math" src="../_images/math/ffc26a71a647343f71bbdf4360146bcf2f472c39.png" alt="PAN"/> is the
+panchromatic image, <img class="math" src="../_images/math/6416d8a25eb0ce7f8609446bf1ca1a45394b186b.png" alt="XS"/> is the multi-spectral image and
+<img class="math" src="../_images/math/76435eba802afe37f91eeffd0082c46f491c938b.png" alt="PAN_{smooth}"/> is the panchromatic image smoothed with a kernel to
+fit the multi-spectral image scale.</p>
+<p>Here is a simple example of how to use the <em>BundleToPerfectSensor</em>
+application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BundleToPerfectSensor</span> <span class="o">-</span><span class="n">inp</span> <span class="n">pan_image</span> <span class="o">-</span><span class="n">inxs</span> <span class="n">xs_image</span> <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span>
+</pre></div>
+</div>
+<p>There are also optional parameters that can be useful for this tool:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">-elev</span></code> option specifies the elevation, either with a
+DEM formatted for OTB (<code class="docutils literal notranslate"><span class="pre">-elev.dem</span></code> option, see section&nbsp;<a class="reference internal" href="#section2"><span class="std std-ref">Digital Elevation Model management</span></a>)
+or with an average elevation (<code class="docutils literal notranslate"><span class="pre">-elev.default</span></code> option). Since
+registration and zooming of the multi-spectral image is performed
+using sensor-models, it may happen that the registration is not
+perfect in case of a landscape with a large variation in elevation. In this
+case a DEM will allow for a better registration to be achieved.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">-lmSpacing</span></code> option specifies the step of the
+registration grid between the multi-spectral image and panchromatic
+image. This is expressed in amount of panchromatic pixels. A lower
+value gives a more precise registration but implies more computation
+with the sensor models, and thus increase the computation time.
+Default value is 10 pixels, which gives sufficient precision in most
+of the cases.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">-mode</span></code> option selects the registration mode for the
+multi-spectral image. The <code class="docutils literal notranslate"><span class="pre">default</span></code> mode uses the sensor model of
+each image to create a generic “MS to Pan” transform. The <code class="docutils literal notranslate"><span class="pre">phr</span></code>
+mode uses a simple affine transform (which does not need an elevation
+source nor a registration grid).</li>
+</ul>
+<p>Pan-sharpening is a process that requires a lot of system
+resources. The <code class="docutils literal notranslate"><span class="pre">-ram</span></code> option allows you to limit the amount of memory
+available for the computation, and also avoids overloading your computer.
+Increasing the available amount of RAM may also result in better
+computation time, seems it optimises the use of the system resources.
+Default value is 256 Mb.</p>
+<div class="figure">
+<img alt="../_images/monteverdi_QB_XS_pan-sharpened.png" src="../_images/monteverdi_QB_XS_pan-sharpened.png" />
+</div>
+<p>Figure 5: Pan-sharpened image using Orfeo ToolBox.</p>
+<p>Please also note that since registration and zooming of the
+multi-spectral image with the panchromatic image relies on sensor
+modelling, this tool will work only for images whose sensor models is
+available in <strong>Orfeo ToolBox</strong> (see Section <a class="reference internal" href="#section3"><span class="std std-ref">Ortho-rectification and map projections</span></a> for a detailed
+list). It will also work with ortho-ready products in cartographic
+projection.</p>
+</div>
+<div class="section" id="digital-elevation-model-management">
+<span id="section2"></span><h2>Digital Elevation Model management<a class="headerlink" href="#digital-elevation-model-management" title="Permalink to this headline">¶</a></h2>
+<p>A Digital Elevation Model (DEM) is a georeferenced image (or collection
+of images) where each pixel corresponds to a local elevation. DEMs are
+useful for tasks involving sensor to ground and ground to sensor
+coordinate transformations, for example, ortho-rectification (see Section <a class="reference internal" href="#section3"><span class="std std-ref">Ortho-rectification and map projections</span></a>). These transforms need to find the intersection
+between the line of sight of the sensor and the Earth geoid. If a simple
+spheroid is used as the Earth model, potentially high localisation
+errors can be made in areas where elevation is high or perturbed. Of
+course, DEM accuracy and resolution have a great impact on the precision
+of these transformations.</p>
+<p>The two principal DEMs that are available free of charges, and with worldwide cover, are
+both delivered as 1 degree by 1 degree tiles. They are:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www2.jpl.nasa.gov/srtm/">The Shuttle Radar topographic Mission
+(SRTM)</a>  is a DEM with a resolution of 90 metres,
+obtained by radar interferometry during a campaign of the
+Endeavour space shuttle from NASA in 2000.</li>
+<li>The <a class="reference external" href="http://www.ersdac.or.jp/GDEM/E/2.html">Advanced Spaceborne Thermal Emission and Reflection Radiometer
+(ASTER)</a>  is a DEM with a resolution of
+30 metres obtained by stereoscopic processing of the archive of
+the ASTER instrument.</li>
+</ul>
+<p>The <strong>Orfeo ToolBox</strong> relies on <a class="reference external" href="http://www.ossim.org/">OSSIM</a>
+capabilities for sensor modelling and DEM handling. Tiles of a given DEM
+are supposed to be located within a single directory. General elevation
+support is also supported from GeoTIFF files.</p>
+<p>Whenever an application or <strong>Monteverdi</strong> module requires a DEM, the
+option <strong>elev.dem</strong> sets the DEM directory. This directory must
+contain the DEM tiles, either in DTED or SRTM format or as a GeoTIFF.
+Subdirectories are not supported.</p>
+<p>Depending on the reference of the elevation, you also need to use a
+geoid to accurately manage the elevation. For this, you need to specify a
+path to a file which contains the geoid. <a class="reference external" href="http://en.wikipedia.org/wiki/Geoid">Geoid</a>
+corresponds to the equipotential surface that would coincide with the mean ocean surface of
+the Earth.</p>
+<p>We provide one geoid in the <a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/tree/master/Input/DEM">OTB-Data</a> repository.</p>
+<p>In all applications, the option <strong>elev.geoid</strong> manages the path
+to the geoid. Finally, it is also possible to use an average elevation
+in case no DEM is available by using the <strong>elev.default</strong> option.</p>
+</div>
+<div class="section" id="ortho-rectification-and-map-projections">
+<span id="section3"></span><h2>Ortho-rectification and map projections<a class="headerlink" href="#ortho-rectification-and-map-projections" title="Permalink to this headline">¶</a></h2>
+<p>There are several level of products available on the remote sensing
+imagery market. The most basic level often provide the geometry of
+acquisition (sometimes called the raw geometry). In this case, pixel
+coordinates can not be directly used as geographical positions. For most
+sensors (but not for all), the different lines corresponds to different
+acquisition times and thus different sensor positions, and different
+rows correspond to different cells of the detector.</p>
+<p>The mapping of a raw image so as to be registered to a cartographic grid
+is called ortho-rectification, and consist in inverting the following
+effects (at least):</p>
+<ul class="simple">
+<li>In most cases, lines are orthogonal to the sensor trajectory, which
+is not exactly (and in some case not at all) following a north-south
+axis,</li>
+<li>Depending on the sensor, the line of sight may be different from a
+Nadir (ground position of the sensor), and thus a projective warping
+may appear,</li>
+<li>The variation of height in the landscape may result in severe warping
+of the image.</li>
+</ul>
+<p>Moreover, depending on the area of the world the image has been acquired
+on, different map projections should be used.</p>
+<p>The ortho-rectification process is as follows: once an appropriate map
+projection has been defined, a localisation grid is computed to map
+pixels from the raw image to the ortho-rectified one. Pixels from the
+raw image are then interpolated according to this grid in order to fill
+the ortho-rectified pixels.</p>
+<p>Ortho-rectification can be performed either with <strong>OTB Applications</strong> or
+<strong>Monteverdi</strong> . Sensor parameters and image meta-data are seamlessly
+read from the image files without needing any user interaction, provided
+that all auxiliary files are available. The sensor for which <strong>Orfeo
+ToolBox</strong> supports ortho-rectification of raw products are the
+following:</p>
+<ul class="simple">
+<li>Pleiades</li>
+<li>SPOT5</li>
+<li>Ikonos</li>
+<li>Quickbird</li>
+<li>GeoEye</li>
+<li>WorldView</li>
+</ul>
+<p>In addition, GeoTiff and other file format with geographical information
+are seamlessly read by <strong>Orfeo ToolBox</strong> , and the ortho-rectification
+tools can be used to re-sample these images in another map projection.</p>
+<div class="section" id="beware-of-ortho-ready-products">
+<h3>Beware of “ortho-ready” products<a class="headerlink" href="#beware-of-ortho-ready-products" title="Permalink to this headline">¶</a></h3>
+<p>There are some image products, called “ortho-ready”, that should be
+processed carefully. They are actual products in raw geometry, but their
+metadata also contains projection data:</p>
+<ul class="simple">
+<li>a map projection</li>
+<li>a physical origin</li>
+<li>a physical spacing</li>
+<li>and sometimes an orientation angle</li>
+</ul>
+<p>The purpose of this projection information is to give an approximate map
+projection to a raw product. It allows you to display the raw image in a
+GIS viewer at the (almost) right location, without having to reproject
+it. Obviously, this map projection is not as accurate as the sensor
+parameters of the raw geometry. In addition, the impact of the elevation
+model can’t be observed if the map projection is used. In order to
+perform an ortho-rectification on this type of product, the map
+projection has to be hidden from <strong>Orfeo ToolBox</strong> .</p>
+<p>You can see if a product is an “ortho-ready” product by using <code class="docutils literal notranslate"><span class="pre">gdalinfo</span></code> or
+OTB ReadImageInfo application.
+Check if your product verifies following two conditions:</p>
+<ul class="simple">
+<li>The product is in raw geometry: you should expect the presence of
+RPC coefficients and a non-empty OSSIM keywordlist.</li>
+<li>The product has a map projection: you should see a projection name
+with physical origin and spacing.</li>
+</ul>
+<p>In that case, you can hide the map projection from the <strong>Orfeo ToolBox</strong>
+by using <em>extended</em> filenames. Instead of using the plain input image
+path, you append a specific key at the end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;path_to_image?&amp;skipcarto=true&quot;</span>
+</pre></div>
+</div>
+<p>The double quote can be necessary for a successful parsing. More details
+about the extended filenames can be found in the <a class="reference internal" href="../AdvancedUse.html#extended-filenames"><span class="std std-ref">Extended filenames</span></a>
+section.</p>
+</div>
+<div class="section" id="ortho-rectification-with-otb-applications">
+<h3>Ortho-rectification with <strong>OTB Applications</strong><a class="headerlink" href="#ortho-rectification-with-otb-applications" title="Permalink to this headline">¶</a></h3>
+<p>The <em>OrthoRectification</em> application performs
+ortho-rectification and map re-projection. The simplest way to use it is
+the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_OrthoRectification</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">input_image</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">output_image</span>
+</pre></div>
+</div>
+<p>In this case, the tool will automatically estimates all the necessary
+parameters:</p>
+<ul class="simple">
+<li>The map projection is set to UTM (a worldwide map projection) and the
+UTM zone is automatically estimated,</li>
+<li>The ground sampling distance of the output image is computed to fit
+the image resolution,</li>
+<li>The region of interest (upper-left corner and size of the image) is
+estimated so as to contain the whole input image extent.</li>
+</ul>
+<p>In order to use a Digital Elevation Model to improve
+the locational accuracy, one can pass the directory containing
+the DEM tiles to the application as follows. Further information regarding
+the use of DEMs can be found in Section <a class="reference internal" href="#section2"><span class="std std-ref">Digital Elevation Model management</span></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_OrthoRectification</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">input_image</span>
+                          <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">output_image</span>
+                          <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">dem</span> <span class="n">dem_dir</span>
+</pre></div>
+</div>
+<p>If one wants to use a different map projection, the <em>-map</em> option may be
+used (example with <em>lambert93</em> map projection):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_OrthoRectification</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">input_image</span>
+                          <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">output_image</span>
+                          <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">dem</span> <span class="n">dem_dir</span>
+                          <span class="o">-</span><span class="nb">map</span> <span class="n">lambert93</span>
+</pre></div>
+</div>
+<p>Map projections handled by the application are the following (please
+note that the ellipsoid is always WGS84):</p>
+<ul>
+<li><div class="first line-block">
+<div class="line">UTM: <code class="docutils literal notranslate"><span class="pre">-map</span> <span class="pre">utm</span></code>  | The UTM zone and hemisphere can be set by the options <code class="docutils literal notranslate"><span class="pre">-map.utm.zone</span></code> and <code class="docutils literal notranslate"><span class="pre">-map.utm.northhem</span></code>.</div>
+</div>
+</li>
+<li><p class="first">Lambert 2 etendu: <code class="docutils literal notranslate"><span class="pre">-map</span> <span class="pre">lambert2</span></code></p>
+</li>
+<li><p class="first">Lambert 93: <code class="docutils literal notranslate"><span class="pre">-map</span> <span class="pre">lambert93</span></code></p>
+</li>
+<li><div class="first line-block">
+<div class="line">TransMercator: <code class="docutils literal notranslate"><span class="pre">-map</span> <span class="pre">transmercator</span></code> | The related parameters (false easting, false northing and scale factor) can be set by the options    <code class="docutils literal notranslate"><span class="pre">-map.transmercator.falseeasting</span></code>, <code class="docutils literal notranslate"><span class="pre">-map.transmercator.falsenorthing</span></code> and <code class="docutils literal notranslate"><span class="pre">-map.transmercator.scale</span></code></div>
+</div>
+</li>
+<li><p class="first">WGS: <code class="docutils literal notranslate"><span class="pre">-map</span> <span class="pre">wgs</span></code></p>
+</li>
+<li><div class="first line-block">
+<div class="line">Any map projection system with an EPSG code: <code class="docutils literal notranslate"><span class="pre">-map</span> <span class="pre">epsg</span></code> | The EPSG code is set with the option <code class="docutils literal notranslate"><span class="pre">-map.epsg.code</span></code></div>
+</div>
+</li>
+</ul>
+<p>The group <code class="docutils literal notranslate"><span class="pre">outputs</span></code> contains parameters to set the origin, size and
+spacing of the output image. For instance, the ground spacing can be
+specified as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_OrthoRectification</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">input_image</span>
+                          <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">output_image</span>
+                          <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">dem</span> <span class="n">dem_dir</span>
+                          <span class="o">-</span><span class="nb">map</span> <span class="n">lambert93</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">spacingx</span> <span class="n">spx</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">spacingy</span> <span class="n">spy</span>
+</pre></div>
+</div>
+<p>Please note that since the y axis of the image is bottom oriented, the y
+spacing should be negative to avoid switching north and south direction.</p>
+<p>A user-defined region of interest to ortho-rectify can be specified as
+follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_OrthoRectification</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span> <span class="n">input_image</span>
+                          <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">output_image</span>
+                          <span class="o">-</span><span class="n">elev</span><span class="o">.</span><span class="n">dem</span> <span class="n">dem_dir</span>
+                          <span class="o">-</span><span class="nb">map</span> <span class="n">lambert93</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">spacingx</span> <span class="n">spx</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">spacingy</span> <span class="n">spy</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">ulx</span> <span class="n">ul_x_coord</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">uly</span> <span class="n">ul_y_coord</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">sizex</span> <span class="n">x_size</span>
+                          <span class="o">-</span><span class="n">outputs</span><span class="o">.</span><span class="n">sizey</span> <span class="n">y_size</span>
+</pre></div>
+</div>
+<p>Where the <code class="docutils literal notranslate"><span class="pre">-outputs.ulx</span></code> and <code class="docutils literal notranslate"><span class="pre">-outputs.uly</span></code> options specify
+the coordinates of the upper-left corner of the output image, while the options:
+<code class="docutils literal notranslate"><span class="pre">-outputs.sizex</span></code> and <code class="docutils literal notranslate"><span class="pre">-outputs.sizey</span></code> specify the
+size of the output image.</p>
+<p>A few more interesting options are available:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">-opt.rpc</span></code> option uses an estimated RPC model instead
+of the rigorous SPOT5 model, which speeds-up the processing,</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">-opt.gridspacing</span></code> option defines the spacing of the
+localisation grid used for ortho-rectification. A coarser grid
+results in speeding-up the processing, but with potential loss of
+accuracy. A standard value would be 10 times the ground spacing of
+the output image.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">-interpolator</span></code> option changes the interpolation
+algorithm between nearest neighbor, linear and bicubic. Default is
+nearest neighbor interpolation, but bicubic should be fine in most
+cases.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">-opt.ram</span></code> option specifies the amount of memory
+available for the processing (in Mb), with a default value of 256 Mb. Increasing
+this value to fit the available memory on your computer can
+speed-up the processing.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sarprocessing.html" class="btn btn-neutral float-right" title="SAR processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Recipes.html" class="btn btn-neutral" title="Recipes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

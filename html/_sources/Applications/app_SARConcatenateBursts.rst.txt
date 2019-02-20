@@ -1,0 +1,81 @@
+.. _app-SARConcatenateBursts:
+
+SARConcatenateBursts
+====================
+
+
+Concatenate a list of Bursts to provide a whole SAR Deburst Image.
+
+Description
+-----------
+
+This application performs a burst concatenation and provides a SAR Deburst Image. It reads the input image list (single bursts) and generates a whole SAR image with deburst operations.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input bursts list** :code:`-il image1 image2...` *Mandatory* |br|
+The list of bursts to concatenate.
+
+**Input Sentinel1 IW SLC Image (only metadata used)** :code:`-insar image` *Mandatory* |br|
+Raw Sentinel1 IW SLC image, or any extract of such made by OTB (geom file needed).
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The concatenated and debursted output image.
+
+**Index of the first Burst** :code:`-burstindex int` *Default value: 0* |br|
+Index for the first required Burst
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SARConcatenateBursts -insar s1_iw_slc.tif -il Burst0.png Burst1.png -out otbConcatenateBursts.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SARConcatenateBursts")
+
+	app.SetParameterString("insar", "s1_iw_slc.tif")
+	app.SetParameterStringList("il", ['Burst0.png', 'Burst1.png'])
+	app.SetParameterString("out", "otbConcatenateBursts.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Only Sentinel1 IW SLC products are supported for now. In order to concatenate several bursts, all valid lines of each burst are required as inputs.ie : Careful with ROI extraction inside a Burst.
+
+

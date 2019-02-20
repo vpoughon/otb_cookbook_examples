@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ExtractRoadExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="TouziEdgeDetectorExample.cxx" href="TouziEdgeDetectorExample.html" />
+    <link rel="prev" title="ComplexMomentsImageFunctionExample.cxx" href="ComplexMomentsImageFunctionExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="CloudDetectionExample.html">CloudDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TextureExample.html">TextureExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadByStepsExample.html">ExtractRoadByStepsExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThresholdToPointSetExample.html">ThresholdToPointSetExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentPathExample.html">ComplexMomentPathExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EdgeDensityExample.html">EdgeDensityExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlusserMomentsImageFunctionExample.html">FlusserMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HuMomentsImageFunctionExample.html">HuMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RightAngleDetectionExample.html">RightAngleDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RatioLineDetectorExample.html">RatioLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AsymmetricFusionOfLineDetectorExample.html">AsymmetricFusionOfLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingExample.html">SeamCarvingExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentsImageFunctionExample.html">ComplexMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ExtractRoadExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TouziEdgeDetectorExample.html">TouziEdgeDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LineSegmentDetectorExample.html">LineSegmentDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ParallelLineDetectionExample.html">ParallelLineDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CorrelationLineDetectorExample.html">CorrelationLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PanTexExample.html">PanTexExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingOtherExample.html">SeamCarvingOtherExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SURFExample.html">SURFExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SFSExample.html">SFSExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarrisExample.html">HarrisExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../FeatureExtraction.html">FeatureExtraction</a> &raquo;</li>
+        
+      <li>ExtractRoadExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/FeatureExtraction/ExtractRoadExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="extractroadexample-cxx">
+<span id="example-extractroadexample"></span><h1>ExtractRoadExample.cxx<a class="headerlink" href="#extractroadexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./ExtractRoadExample Input/qb_RoadExtract.tif Output/ExtractRoadOutput.png <span class="m">337</span> <span class="m">557</span> <span class="m">432</span> <span class="m">859</span> <span class="m">1</span>.0 <span class="m">0</span>.00005 <span class="m">1</span>.0 <span class="m">0</span>.39269 <span class="m">1</span>.0 <span class="m">10</span>.0 <span class="m">25</span>.
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ExtractRoadExample.cxx?inline=false">ExtractRoadExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// The easiest way to use the road extraction filter provided by OTB is to use the composite</span>
+<span class="c1">// filter. If a modification in the pipeline is required to adapt to a particular situation,</span>
+<span class="c1">// the step by step example, described in the next section can be adapted.</span>
+<span class="c1">//</span>
+<span class="c1">// This example demonstrates the use of the \doxygen{otb}{RoadExtractionFilter}.</span>
+<span class="c1">// This filter is a composite filter achieving road extraction according to the algorithm</span>
+<span class="c1">// adapted by E. Christophe and J. Inglada \cite{Christophe2007} from an original method</span>
+<span class="c1">// proposed in \cite{Lacroix1998}.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step toward the use of this filter is the inclusion of the proper header files.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbPolyLineParametricPathWithValue.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbRoadExtractionFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbDrawPathListFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMath.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkInvertIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkGrayscaleDilateImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkBinaryBallStructuringElement.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">14</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputFileName outputFileName firstPixelComponent secondPixelComponent &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;thirdPixelComponent fourthPixelComponent alpha amplitudeThrehsold tolerance &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;angularThreshold-maxAngle firstMeanDistanceThreshold secondMeanDistanceThreshold &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;distanceThreshold&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Then we must decide what pixel type to use for the image. We choose to do</span>
+  <span class="c1">// all the computation in floating point precision and rescale the results</span>
+  <span class="c1">// between 0 and 255 in order to export PNG images.</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>        <span class="n">InputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">OutputPixelType</span><span class="p">;</span>
+
+  <span class="c1">//  The images are defined using the pixel type and the dimension. Please note that</span>
+  <span class="c1">//  the \doxygen{otb}{RoadExtractionFilter} needs an \doxygen{otb}{VectorImage} as input</span>
+  <span class="c1">//  to handle multispectral images.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">InputVectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>       <span class="n">InputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>      <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="c1">// We define the type of the polyline that the filter produces. We use the</span>
+  <span class="c1">// \doxygen{otb}{PolyLineParametricPathWithValue}, which allows the filter to produce</span>
+  <span class="c1">// a likehood value along with each polyline. The filter is able to produce</span>
+  <span class="c1">// \doxygen{itk}{PolyLineParametricPath} as well.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PolyLineParametricPathWithValue</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">PathType</span><span class="p">;</span>
+
+  <span class="c1">// Now we can define the \doxygen{otb}{RoadExtractionFilter} that takes a multi-spectral</span>
+  <span class="c1">// image as input and produces a list of polylines.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">RoadExtractionFilter</span><span class="o">&lt;</span><span class="n">InputVectorImageType</span><span class="p">,</span> <span class="n">PathType</span><span class="o">&gt;</span> <span class="n">RoadExtractionFilterType</span><span class="p">;</span>
+
+  <span class="c1">// We also define an \doxygen{otb}{DrawPathListFilter} to draw the output</span>
+  <span class="c1">// polylines on an image, taking their likehood values into account.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">DrawPathListFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">PathType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">DrawPathFilterType</span><span class="p">;</span>
+
+  <span class="c1">// The intensity rescaling of the results will be carried out by the</span>
+  <span class="c1">// \doxygen{itk}{RescaleIntensityImageFilter} which is templated by the</span>
+  <span class="c1">// input and output image types.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+
+  <span class="c1">//  An \doxygen{otb}{ImageFileReader} class is also instantiated in order to read</span>
+  <span class="c1">//  image data from a file. Then, an \doxygen{otb}{ImageFileWriter}</span>
+  <span class="c1">//  is instantiated in order to write the output image to a file.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputVectorImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span>      <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="c1">// The different filters composing our pipeline are created by invoking their</span>
+  <span class="c1">// \code{New()} methods, assigning the results to smart pointers.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>               <span class="n">reader</span>               <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">RoadExtractionFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">roadExtractionFilter</span> <span class="o">=</span> <span class="n">RoadExtractionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">DrawPathFilterType</span><span class="o">::</span><span class="n">Pointer</span>       <span class="n">drawingFilter</span>        <span class="o">=</span> <span class="n">DrawPathFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>             <span class="n">rescaleFilter</span>        <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>               <span class="n">writer</span>               <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="c1">// The \doxygen{otb}{RoadExtractionFilter} needs to have a reference pixel</span>
+  <span class="c1">// corresponding to the spectral content likely to represent a road. This is done</span>
+  <span class="c1">// by passing a pixel to the filter. Here we suppose that the input image</span>
+  <span class="c1">// has four spectral bands.</span>
+
+  <span class="n">InputVectorImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">ReferencePixel</span><span class="p">;</span>
+  <span class="n">ReferencePixel</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="n">ReferencePixel</span><span class="p">.</span><span class="n">SetElement</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]));</span>
+  <span class="n">ReferencePixel</span><span class="p">.</span><span class="n">SetElement</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]));</span>
+  <span class="n">ReferencePixel</span><span class="p">.</span><span class="n">SetElement</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
+  <span class="n">ReferencePixel</span><span class="p">.</span><span class="n">SetElement</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetReferencePixel</span><span class="p">(</span><span class="n">ReferencePixel</span><span class="p">);</span>
+
+  <span class="c1">// We must also set the  alpha parameter of the filter which allows us to tune the width of the roads</span>
+  <span class="c1">// we want to extract. Typical value is $1.0$ and should be working in most situations.</span>
+
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetAlpha</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+
+  <span class="c1">// All other parameter should not influence the results too much in most situation and can</span>
+  <span class="c1">// be kept at the default value.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The amplitude threshold parameter tunes the sensitivity of the vectorization step. A typical</span>
+  <span class="c1">// value is $5 \cdot 10^{-5}$.</span>
+
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetAmplitudeThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]));</span>
+
+  <span class="c1">// The tolerance threshold tunes the sensitivity of the path simplification step.</span>
+  <span class="c1">// Typical value is $1.0$.</span>
+
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetTolerance</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]));</span>
+
+  <span class="c1">// Roads are not likely to have sharp turns. Therefore we set the max angle parameter,</span>
+  <span class="c1">// as well as the link angular threshold. The value is typically $\frac{\pi}{8}$.</span>
+
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetMaxAngle</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]));</span>
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetAngularThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]));</span>
+
+  <span class="c1">// The \doxygen{otb}{RoadExtractionFilter} performs two odd path removing operations at different stage of</span>
+  <span class="c1">// its execution. The first mean distance threshold and the second mean distance threshold set their criterion</span>
+  <span class="c1">// for removal. Path are removed if their mean distance between nodes is to small, since such path coming</span>
+  <span class="c1">// from previous filters are likely to be tortuous. The first removal operation as a typical mean distance</span>
+  <span class="c1">// threshold parameter of $1.0$, and the second of $10.0$.</span>
+
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetFirstMeanDistanceThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">11</span><span class="p">]));</span>
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetSecondMeanDistanceThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">12</span><span class="p">]));</span>
+
+  <span class="c1">// The \doxygen{otb}{RoadExtractionFilter} is able to link path whose ends are near</span>
+  <span class="c1">// according to an euclidean distance criterion. The threshold for this distance</span>
+  <span class="c1">// to link a path is the distance threshold parameter. A typical value is $25$.</span>
+
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetDistanceThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">13</span><span class="p">]));</span>
+
+  <span class="c1">// We will now create a black background image to draw the resulting polyline on.</span>
+  <span class="c1">// To achieve this we need to know the size of our input image. Therefore we trigger the</span>
+  <span class="c1">// \code{GenerateOutputInformation()} of the reader.</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GenerateOutputInformation</span><span class="p">();</span>
+  <span class="n">InputImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">blackBackground</span> <span class="o">=</span> <span class="n">InputImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">blackBackground</span><span class="o">-&gt;</span><span class="n">CopyInformation</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">blackBackground</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">blackBackground</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">blackBackground</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+  <span class="n">blackBackground</span><span class="o">-&gt;</span><span class="n">FillBuffer</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="c1">// We tell the \doxygen{otb}{DrawPathListFilter} to try to use the likehood value</span>
+  <span class="c1">// embedded within the polyline as a value for drawing this polyline if possible.</span>
+
+  <span class="n">drawingFilter</span><span class="o">-&gt;</span><span class="n">UseInternalPathValueOn</span><span class="p">();</span>
+
+  <span class="c1">//  The \code{itk::RescaleIntensityImageFilter} needs to know which</span>
+  <span class="c1">//  is the minimum and maximum values of the output generated</span>
+  <span class="c1">//  image. Those can be chosen in a generic way by using the</span>
+  <span class="c1">//  \code{NumericTraits} functions, since they are templated over</span>
+  <span class="c1">//  the pixel type.</span>
+
+  <span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">());</span>
+  <span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">());</span>
+
+  <span class="c1">// Now it is time for some pipeline wiring.</span>
+
+  <span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">drawingFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">blackBackground</span><span class="p">);</span>
+  <span class="n">drawingFilter</span><span class="o">-&gt;</span><span class="n">SetInputPath</span><span class="p">(</span><span class="n">roadExtractionFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">drawingFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// The update of the pipeline is triggered by the \code{Update()} method</span>
+  <span class="c1">// of the rescale intensity filter.</span>
+
+  <span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// output image enhancement</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">BinaryBallStructuringElement</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                             <span class="n">StructuringElementType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">GrayscaleDilateImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">StructuringElementType</span><span class="o">&gt;</span> <span class="n">DilateFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">InvertIntensityImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span>                         <span class="n">InvertFilterType</span><span class="p">;</span>
+
+  <span class="n">StructuringElementType</span> <span class="n">se</span><span class="p">;</span>
+  <span class="n">se</span><span class="p">.</span><span class="n">SetRadius</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">se</span><span class="p">.</span><span class="n">CreateStructuringElement</span><span class="p">();</span>
+
+  <span class="n">DilateFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">dilater</span> <span class="o">=</span> <span class="n">DilateFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">dilater</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">dilater</span><span class="o">-&gt;</span><span class="n">SetKernel</span><span class="p">(</span><span class="n">se</span><span class="p">);</span>
+
+  <span class="n">InvertFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">invertFilter</span> <span class="o">=</span> <span class="n">InvertFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">invertFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">dilater</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">invertFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:ROADEXTRACTION_FILTER} shows the result of applying</span>
+  <span class="c1">// the road extraction filter to a fusionned Quickbird image.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{qb_ExtractRoad_pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{ExtractRoadOutput.eps}</span>
+  <span class="c1">// \itkcaption[Road extraction filter application]{Result of applying</span>
+  <span class="c1">// the \doxygen{otb}{RoadExtractionFilter} to a fusionned Quickbird</span>
+  <span class="c1">// image. From left to right : original image, extracted road with their</span>
+  <span class="c1">// likehood values (color are inverted for display).}</span>
+  <span class="c1">// \label{fig:ROADEXTRACTION_FILTER}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="TouziEdgeDetectorExample.html" class="btn btn-neutral float-right" title="TouziEdgeDetectorExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ComplexMomentsImageFunctionExample.html" class="btn btn-neutral" title="ComplexMomentsImageFunctionExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

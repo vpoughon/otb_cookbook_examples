@@ -1,0 +1,119 @@
+.. _app-ComputeConfusionMatrix:
+
+ComputeConfusionMatrix
+======================
+
+
+Computes the confusion matrix of a classification
+
+Description
+-----------
+
+This application computes the confusion matrix of a classification map relative to a ground truth dataset. This ground truth can be given as a raster or a vector data. Only reference and produced pixels with values different from NoData are handled in the calculation of the confusion matrix. The confusion matrix is organized the following way: rows = reference labels, columns = produced labels. In the header of the output file, the reference and produced class labels are ordered according to the rows/columns of the confusion matrix.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input classification image.
+
+**Matrix output** :code:`-out filename [dtype]` *Mandatory* |br|
+Filename to store the output matrix (csv format)
+
+**set the output format to contingency table or confusion matrix** :code:`-format [confusionmatrix|contingencytable]` *Default value: confusionmatrix* |br|
+Choice of the output format as a contingency table for unsupervised algorithmsor confusion matrix for supervised ones.
+
+* **Choice of a confusion matrix as output.** |br| 
+
+* **Choice of a contingency table as output.** |br| 
+
+
+
+**Ground truth** :code:`-ref [raster|vector]` *Default value: raster* |br|
+Choice of ground truth format
+
+* **Ground truth as a raster image** |br| 
+
+* **Ground truth as a vector data file** |br| 
+
+
+
+Ground truth as a raster image options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Input reference image** :code:`-ref.raster.in image` *Mandatory* |br|
+Input image containing the ground truth labels
+
+**Value for nodata pixels in ref raster** :code:`-ref.raster.nodata int` *Default value: 0* |br|
+Label to be treated as no data in ref raster.
+
+Ground truth as a vector data file options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Input reference vector data** :code:`-ref.vector.in filename [dtype]` *Mandatory* |br|
+Input vector data of the ground truth
+
+**Field name** :code:`-ref.vector.field string` |br|
+Field name containing the label values
+
+**Value for nodata pixels in ref vector** :code:`-ref.vector.nodata int` *Default value: 0* |br|
+Label to be treated as no data in ref vector. Please note that this value is always used in vector mode, to generate default values. Please set it to a value that does not correspond to a class label.
+
+
+
+------------
+
+**Value for nodata pixels in input image** :code:`-nodatalabel int` *Default value: 0* |br|
+Label to be treated as no data in input image
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ComputeConfusionMatrix -in clLabeledImageQB1.tif -out ConfusionMatrix.csv -ref vector -ref.vector.in VectorData_QB1_bis.shp -ref.vector.field Class -ref.vector.nodata 255
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ComputeConfusionMatrix")
+
+	app.SetParameterString("in", "clLabeledImageQB1.tif")
+	app.SetParameterString("out", "ConfusionMatrix.csv")
+	app.SetParameterString("ref","vector")
+	app.SetParameterString("ref.vector.in", "VectorData_QB1_bis.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

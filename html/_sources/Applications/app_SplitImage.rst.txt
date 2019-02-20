@@ -1,0 +1,74 @@
+.. _app-SplitImage:
+
+SplitImage
+==========
+
+
+Split a N multiband image into N images.
+
+Description
+-----------
+
+This application splits a N-bands image into N mono-band images. The output images filename will be generated from the output parameter. Thus, if the input image has 2 channels, and the user has set as output parameter, outimage.tif, the generated images will be outimage_0.tif and outimage_1.tif.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input multiband image filename.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The output filename will be used to get the prefix an the extension of the output written's image. For example with outimage.tif as output filename, the generated images will had an indice (corresponding at each bands) between the prefix and the extension, such as: outimage_0.tif  and outimage_1.tif (if 2 bands).
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SplitImage -in VegetationIndex.hd -out splitImage.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SplitImage")
+
+	app.SetParameterString("in", "VegetationIndex.hd")
+	app.SetParameterString("out", "splitImage.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-ConcatenateImages`

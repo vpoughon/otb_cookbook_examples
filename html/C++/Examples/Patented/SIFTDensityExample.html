@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SIFTDensityExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SIFTExample.cxx" href="SIFTExample.html" />
+    <link rel="prev" title="SIFTFastExample.cxx" href="SIFTFastExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Patented.html">Patented</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SIFTFastExample.html">SIFTFastExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SIFTDensityExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SIFTExample.html">SIFTExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SIFTDisparityMapEstimation.html">SIFTDisparityMapEstimation.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Patented.html">Patented</a> &raquo;</li>
+        
+      <li>SIFTDensityExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Patented/SIFTDensityExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="siftdensityexample-cxx">
+<span id="example-siftdensityexample"></span><h1>SIFTDensityExample.cxx<a class="headerlink" href="#siftdensityexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./SIFTDensityExample Input/suburb2.jpeg Output/SIFTDensityOutput.tif Output/PrettySIFTDensityOutput.png <span class="m">3</span> <span class="m">3</span> <span class="m">7</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTDensityExample.cxx?inline=false">SIFTDensityExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;itkPointSet.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkVariableLengthVector.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+
+
+
+<span class="c1">// This example illustrates the use of the</span>
+<span class="c1">// \doxygen{otb}{KeyPointDensityImageFilter}.</span>
+<span class="c1">// This filter computes a local density of keypoints (SIFT or SURF,</span>
+<span class="c1">// for instance) on an image and can</span>
+<span class="c1">// be useful to detect man made objects or urban areas, for</span>
+<span class="c1">// instance. The filter has been implemented in a generic way, so that</span>
+<span class="c1">// the way the keypoints are detected can be chosen by the user.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step required to use this filter is to include its header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbKeyPointDensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageToSIFTKeyPointSetFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">infname</span>     <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">outfname</span>    <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">prettyfname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">scales</span>      <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">octaves</span>     <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">radius</span>      <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">float</span>      <span class="n">PixelType</span><span class="p">;</span>
+
+  <span class="c1">// As usual, we start by defining the types for the images, the reader</span>
+  <span class="c1">// and the writer.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>  <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>  <span class="n">WriterType</span><span class="p">;</span>
+  <span class="c1">// We define now the type for the keypoint detection. The keypoints</span>
+  <span class="c1">// will be stored in vector form (they may contain many descriptors)</span>
+  <span class="c1">// into a point set. The filter for detecting the SIFT is templated</span>
+  <span class="c1">// over the input image type and the output pointset type.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">VariableLengthVector</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span>                       <span class="n">RealVectorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">PointSet</span><span class="o">&lt;</span><span class="n">RealVectorType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                   <span class="n">PointSetType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToSIFTKeyPointSetFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">PointSetType</span><span class="o">&gt;</span> <span class="n">DetectorType</span><span class="p">;</span>
+  <span class="c1">// We can now define the filter which will compute the SIFT</span>
+  <span class="c1">// density. It will be templated over the input and output image</span>
+  <span class="c1">// types and the SIFT detector.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">KeyPointDensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">DetectorType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
+  <span class="c1">// We can instantiate the reader and the writer as wella s the</span>
+  <span class="c1">// filter and the detector. The detector needs to be instantiated in</span>
+  <span class="c1">// order to set its parameters.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>   <span class="n">reader</span>   <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>   <span class="n">writer</span>   <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span>   <span class="n">filter</span>   <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">DetectorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">detector</span> <span class="o">=</span> <span class="n">DetectorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="c1">// We set the file names for the input and the output images.</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">infname</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outfname</span><span class="p">);</span>
+  <span class="c1">// We set the parameters for the SIFT detector (the number of</span>
+  <span class="c1">// octaves and the number of scales per octave).</span>
+
+  <span class="n">detector</span><span class="o">-&gt;</span><span class="n">SetOctavesNumber</span><span class="p">(</span><span class="n">octaves</span><span class="p">);</span>
+  <span class="n">detector</span><span class="o">-&gt;</span><span class="n">SetScalesNumber</span><span class="p">(</span><span class="n">scales</span><span class="p">);</span>
+  <span class="c1">// And we pass the detector to the filter and we set the radius for</span>
+  <span class="c1">// the density estimation.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetDetector</span><span class="p">(</span><span class="n">detector</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNeighborhoodRadius</span><span class="p">(</span><span class="n">radius</span><span class="p">);</span>
+  <span class="c1">// We plug the pipeline.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// We trigger the execution by calling th \code{Update()} method on</span>
+  <span class="c1">// the writer, but before that we run the</span>
+  <span class="c1">// \code{GenerateOutputInformation()} on the reader so the filter</span>
+  <span class="c1">// gets the information about the image size (needed for the SIFT</span>
+  <span class="c1">// computation).</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GenerateOutputInformation</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:SIFTDENSITY_FILTER} shows the result of applying</span>
+  <span class="c1">// the key point density filter to an image using the SIFT</span>
+  <span class="c1">// detector. The main difference with respect to figure</span>
+  <span class="c1">// \ref{fig:EDGEDENSITY_FILTER} is that for SIFTS, individual trees</span>
+  <span class="c1">// contribute to the density.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{suburb2.eps}</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{PrettySIFTDensityOutput.eps}</span>
+  <span class="c1">// \itkcaption[SIFT Density Filter]{Result of applying the</span>
+  <span class="c1">// \doxygen{otb}{KeypointDensityImageFilter} to an image. From left</span>
+  <span class="c1">// to right :</span>
+  <span class="c1">// original image, SIF density.}</span>
+  <span class="c1">// \label{fig:SIFTDENSITY_FILTER}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="cm">/************* Image for printing **************/</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">OutputWriterType</span><span class="p">;</span>
+  <span class="n">OutputWriterType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">outwriter</span> <span class="o">=</span> <span class="n">OutputWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">outwriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">prettyfname</span><span class="p">);</span>
+  <span class="n">outwriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">outwriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SIFTExample.html" class="btn btn-neutral float-right" title="SIFTExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SIFTFastExample.html" class="btn btn-neutral" title="SIFTFastExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

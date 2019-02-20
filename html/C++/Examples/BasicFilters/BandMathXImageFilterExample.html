@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BandMathXImageFilterExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DEMToRainbowExample.cxx" href="DEMToRainbowExample.html" />
+    <link rel="prev" title="BandMathFilterExample.cxx" href="BandMathFilterExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="HillShadingExample.html">HillShadingExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FrostImageFilter.html">FrostImageFilter.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LeeImageFilter.html">LeeImageFilter.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PrintableImageFilterExample.html">PrintableImageFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ScalingFilterExample.html">ScalingFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MeanShiftSegmentationFilterExample.html">MeanShiftSegmentationFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BandMathFilterExample.html">BandMathFilterExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">BandMathXImageFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DEMToRainbowExample.html">DEMToRainbowExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IndexedToRGBExample.html">IndexedToRGBExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../BasicFilters.html">BasicFilters</a> &raquo;</li>
+        
+      <li>BandMathXImageFilterExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/BasicFilters/BandMathXImageFilterExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bandmathximagefilterexample-cxx">
+<span id="example-bandmathximagefilterexample"></span><h1>BandMathXImageFilterExample.cxx<a class="headerlink" href="#bandmathximagefilterexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./BandMathXImageFilterExample Input/qb_RoadExtract.tif Output/qb_BandMath-res1.tif Output/qb_BandMath-res2.tif Output/context.txt
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/BandMathXImageFilterExample.cxx?inline=false">BandMathXImageFilterExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  This filter is based on the mathematical parser library muParserX.</span>
+<span class="c1">//  The built in functions and operators list is available at:</span>
+<span class="c1">//  \url{http://articles.beltoforion.de/article.php?a=muparserx}.</span>
+<span class="c1">//</span>
+<span class="c1">//  In order to use this filter, at least one input image is to be</span>
+<span class="c1">// set. An associated variable name can be specified or not by using</span>
+<span class="c1">// the corresponding SetNthInput method. For the jth (j=1..T) input image, if</span>
+<span class="c1">// no associated variable name has been specified, a default variable</span>
+<span class="c1">// name is given by concatenating the prefix &quot;im&quot; with the</span>
+<span class="c1">// corresponding input index plus one (for instance, im1 is related to the first input).</span>
+<span class="c1">// If the jth input image is multidimensional, then the variable imj represents a vector whose components are related to its bands.</span>
+<span class="c1">// In order to access the kth band, the variable observes the following pattern : imjbk.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// We start by including the needed header files.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbBandMathXImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImageFile &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; outputImageFile &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; outputImageFile2&quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; context.txt&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  Then, we set the classical \code{typedef}s needed for reading and</span>
+  <span class="c1">//  writing the images. The \doxygen{otb}{BandMathXImageFilter} class</span>
+  <span class="c1">//  works with \doxygen{otb}{VectorImage}.</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>                          <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>  <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+
+  <span class="c1">//  We can now define the type for the filter:</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">BandMathXImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
+
+  <span class="c1">//  We instantiate the filter, the reader, and the writer:</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">//  The reader and the writer are parametrized with usual settings:</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+
+  <span class="c1">//  The aim of this example is to compute a simple high-pass filter.</span>
+  <span class="c1">//  For that purpose, we are going to perform the difference between the original signal</span>
+  <span class="c1">//  and its averaged version. The definition of the expression that follows is only suitable for a 4-band image.</span>
+  <span class="c1">//  So first, we must check this requirement:</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">itkGenericExceptionMacro</span><span class="p">(</span><span class="o">&lt;&lt;</span> <span class="s">&quot;Input image must have 4 bands.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">);</span>
+
+  <span class="c1">//  Now, we can define the expression. The variable im1 represents a pixel (made of 4 components) of the input image.</span>
+  <span class="c1">//  The variable im1b1N5x5 represents a neighborhood of size 5x5 around this pixel (and so on for each band).</span>
+  <span class="c1">//  The last element we need is the operator &#39;mean&#39;. By setting its inputs with four neigborhoods, we tell this operator to process the four related bands.</span>
+  <span class="c1">//  As output, it will produce a vector of four components; this is consistent with the fact that we wish to perform a difference with im1.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  Thus, the expression is as follows:</span>
+
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetExpression</span><span class="p">(</span><span class="s">&quot;im1-mean(im1b1N5x5,im1b2N5x5,im1b3N5x5,im1b4N5x5)&quot;</span><span class="p">);</span>
+
+  <span class="c1">//  Note that the importance of the averaging is driven by the names of the neighborhood variables.</span>
+  <span class="c1">//  Last thing we have to do, is to set the pipeline:</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNthInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:BandMathXImageFilter} shows the result of our high-pass filter.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{qb_ExtractRoad_pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{qb_BandMath-res1.eps}</span>
+  <span class="c1">// \itkcaption[Band Math X]{From left to right:</span>
+  <span class="c1">// Original image, high-pass filter output.}</span>
+  <span class="c1">// \label{fig:BandMathXImageFilter}</span>
+  <span class="c1">// \end{figure}</span>
+
+
+  <span class="c1">//  Now let&#39;s see a little bit more complex example.</span>
+  <span class="c1">//  The aim now is to give the central pixel a higher weight. Moreover :</span>
+  <span class="c1">//  - we wish to use smaller neighborhoods</span>
+  <span class="c1">//  - we wish to drop the 4th band</span>
+  <span class="c1">//  - we wish to add a given number to each band.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  First, we instantiate new filters to later make a proper pipeline:</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader2</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer2</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter2</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader2</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+
+  <span class="c1">//  We define a new kernel (rows are separated by semi-colons, whereas their elements are separated by commas):</span>
+
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">SetMatrix</span><span class="p">(</span><span class="s">&quot;kernel&quot;</span><span class="p">,</span> <span class="s">&quot;{ 0.1 , 0.1 , 0.1; 0.1 , 0.2 , 0.1; 0.1 , 0.1 , 0.1 }&quot;</span><span class="p">);</span>
+
+  <span class="c1">//  We then define a new constant:</span>
+
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">SetConstant</span><span class="p">(</span><span class="s">&quot;cst&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+
+  <span class="c1">//  We now set the expression (note the use of &#39;dotpr&#39; operator, as well as the &#39;bands&#39; operator which is used as a band selector):</span>
+
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">SetExpression</span><span class="p">(</span><span class="s">&quot;bands(im1,{1,2,3})-dotpr(kernel,im1b1N3x3,im1b2N3x3,im1b3N3x3) + {cst,cst,cst}&quot;</span><span class="p">);</span>
+
+  <span class="c1">//  It is possible to export these definitions to a txt file (they will be reusable later thanks to the method ImportContext):</span>
+
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">ExportContext</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+
+
+  <span class="c1">//  And finally, we set the pipeline:</span>
+
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">SetNthInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">reader2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:BandMathXImageFilter2} shows the result of the second filter.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{qb_ExtractRoad_pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{qb_BandMath-res2.eps}</span>
+  <span class="c1">// \itkcaption[Band Math X]{From left to right:</span>
+  <span class="c1">// Original image, second filter output.}</span>
+  <span class="c1">// \label{fig:BandMathXImageFilter2}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="c1">// Finally, it is strongly recommended to take a look at the cookbook, where additional information and examples can be found</span>
+  <span class="c1">// (http://www.orfeo-toolbox.org/packages/OTBCookBook.pdf).</span>
+
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DEMToRainbowExample.html" class="btn btn-neutral float-right" title="DEMToRainbowExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="BandMathFilterExample.html" class="btn btn-neutral" title="BandMathFilterExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

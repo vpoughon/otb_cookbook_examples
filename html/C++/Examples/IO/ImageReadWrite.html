@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ImageReadWrite.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="MultibandImageReadWrite.cxx" href="MultibandImageReadWrite.html" />
+    <link rel="prev" title="DEMToImageGenerator.cxx" href="DEMToImageGenerator.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../IO.html">IO</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ImageReadCastWrite.html">ImageReadCastWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DEMToImageGenerator.html">DEMToImageGenerator.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MultibandImageReadWrite.html">MultibandImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DEMHandlerExample.html">DEMHandlerExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorDataIOExample.html">VectorDataIOExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetadataExample.html">MetadataExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageReadRegionOfInterestWrite.html">ImageReadRegionOfInterestWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractROI.html">ExtractROI.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexImageReadWrite.html">ComplexImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageSeriesIOExample.html">ImageSeriesIOExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../IO.html">IO</a> &raquo;</li>
+        
+      <li>ImageReadWrite.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/IO/ImageReadWrite.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="imagereadwrite-cxx">
+<span id="example-imagereadwrite"></span><h1>ImageReadWrite.cxx<a class="headerlink" href="#imagereadwrite-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ImageReadWrite.cxx?inline=false">ImageReadWrite.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 1999-2011 Insight Software Consortium</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+<span class="c1">//  The classes responsible for reading and writing images are located at the</span>
+<span class="c1">//  beginning and end of the data processing pipeline. These classes are</span>
+<span class="c1">//  known as data sources (readers) and data sinks (writers).</span>
+<span class="c1">//  Generally speaking they are referred to as filters, although readers have</span>
+<span class="c1">//  no pipeline input and writers have no pipeline output.</span>
+<span class="c1">//</span>
+<span class="c1">//  The reading of images is managed by the class \doxygen{otb}{ImageFileReader}</span>
+<span class="c1">//  while writing is performed by the class \doxygen{otb}{ImageFileWriter}. These</span>
+<span class="c1">//  two classes are independent of any particular file format. The actual low</span>
+<span class="c1">//  level task of reading and writing specific file formats is done behind</span>
+<span class="c1">//  the scenes by a family of classes of type</span>
+<span class="c1">//  \doxygen{itk}{ImageIO}. Actually, the OTB image Readers and</span>
+<span class="c1">//  Writers are very similar to those of ITK, but provide new</span>
+<span class="c1">//  functionnalities which are specific to remote sensing images.</span>
+<span class="c1">//</span>
+<span class="c1">//  The first step for performing reading and writing is to include the</span>
+<span class="c1">//  following headers.</span>
+<span class="c1">//</span>
+<span class="c1">//  \index{otb::ImageFileReader}</span>
+<span class="c1">//  \index{otb::ImageFileReader!header}</span>
+<span class="c1">//</span>
+<span class="c1">//  \index{otb::ImageFileWriter}</span>
+<span class="c1">//  \index{otb::ImageFileWriter!header}</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">// Verify the number of parameters in the command line</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImageFile  outputImageFile &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  Then, as usual, a decision must be made about the type of pixel used to</span>
+  <span class="c1">//  represent the image processed by the pipeline. Note that when reading</span>
+  <span class="c1">//  and writing images, the pixel type of the image \textbf{is not</span>
+  <span class="c1">//  necessarily} the same as the pixel type stored in the file.  Your</span>
+  <span class="c1">//  choice of the pixel type (and hence template parameter) should be</span>
+  <span class="c1">//  driven mainly by two considerations:</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \begin{itemize}</span>
+  <span class="c1">//  \item It should be possible to cast the file pixel type in the file to</span>
+  <span class="c1">//  the pixel type you select. This casting will be performed using the</span>
+  <span class="c1">//  standard C-language rules, so you will have to make sure that the</span>
+  <span class="c1">//  conversion does not result in information being lost.</span>
+  <span class="c1">//  \item The pixel type in memory should be appropriate to the type of</span>
+  <span class="c1">//  processing you intended to apply on the images.</span>
+  <span class="c1">//  \end{itemize}</span>
+  <span class="c1">//</span>
+  <span class="c1">//  A typical selection for remote sensing images is illustrated in</span>
+  <span class="c1">//  the following lines.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span>                   <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                       <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="c1">//  Note that the dimension of the image in memory should match the one of</span>
+  <span class="c1">//  the image in file. There are a couple of special cases in which this</span>
+  <span class="c1">//  condition may be relaxed, but in general it is better to ensure that both</span>
+  <span class="c1">//  dimensions match. This is not a real issue in remote sensing,</span>
+  <span class="c1">//  unless you want to consider multi-band images as volumes (3D) of data.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  We can now instantiate the types of the reader and writer. These two</span>
+  <span class="c1">//  classes are parameterized over the image type.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{otb::ImageFileReader!Instantiation}</span>
+  <span class="c1">//  \index{otb::ImageFileWriter!Instantiation}</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="c1">//  Then, we create one object of each type using the New() method and</span>
+  <span class="c1">//  assigning the result to a \doxygen{itk}{SmartPointer}.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{otb::ImageFileReader!New()}</span>
+  <span class="c1">//  \index{otb::ImageFileWriter!New()}</span>
+  <span class="c1">//  \index{otb::ImageFileReader!SmartPointer}</span>
+  <span class="c1">//  \index{otb::ImageFileWriter!SmartPointer}</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// Here we recover the file names from the command line arguments</span>
+  <span class="c1">//</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">inputFilename</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputFilename</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+  <span class="c1">//  The name of the file to be read or written is passed with the</span>
+  <span class="c1">//  SetFileName() method.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{otb::ImageFileReader!SetFileName()}</span>
+  <span class="c1">//  \index{otb::ImageFileWriter!SetFileName()}</span>
+  <span class="c1">//  \index{SetFileName()!otb::ImageFileReader}</span>
+  <span class="c1">//  \index{SetFileName()!otb::ImageFileWriter}</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFilename</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">);</span>
+
+  <span class="c1">//  We can now connect these readers and writers to filters to create a</span>
+  <span class="c1">//  pipeline. For example, we can create a short pipeline by passing</span>
+  <span class="c1">//  the output of the reader directly to the input of the writer.</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  At first view, this may seem as a quite useless program, but it is</span>
+  <span class="c1">//  actually implementing a powerful file format conversion tool! The</span>
+  <span class="c1">//  execution of the pipeline is triggered by the invocation of the</span>
+  <span class="c1">//  \code{Update()} methods in one of the final objects. In this case, the final</span>
+  <span class="c1">//  data pipeline object is the writer. It is a wise practice of defensive</span>
+  <span class="c1">//  programming to insert any \code{Update()} call inside a \code{try/catch} block</span>
+  <span class="c1">//  in case exceptions are thrown during the execution of the pipeline.</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  Note that exceptions should only be caught by pieces of code that know</span>
+  <span class="c1">//  what to do with them. In a typical application this \code{catch} block</span>
+  <span class="c1">//  should probably reside on the GUI code. The action on the \code{catch}</span>
+  <span class="c1">//  block could inform the user about the failure of the IO operation.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  The IO architecture of the toolkit makes it possible to avoid explicit</span>
+  <span class="c1">//  specification of the file format used to read or write</span>
+  <span class="c1">//  images.\footnote{In this example no file format is specified; this</span>
+  <span class="c1">//  program can be used as a general file conversion utility.}  The object</span>
+  <span class="c1">//  factory mechanism enables the ImageFileReader and ImageFileWriter to</span>
+  <span class="c1">//  determine (at run-time) with which file format it is working</span>
+  <span class="c1">//  with. Typically, file formats are chosen based on the filename</span>
+  <span class="c1">//  extension, but the architecture supports arbitrarily complex processes</span>
+  <span class="c1">//  to determine whether a file can be read or written. Alternatively, the</span>
+  <span class="c1">//  user can specify the data file format by explicit instantiation and</span>
+  <span class="c1">//  assignment the appropriate \doxygen{itk}{ImageIO} subclass.</span>
+  <span class="c1">//</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MultibandImageReadWrite.html" class="btn btn-neutral float-right" title="MultibandImageReadWrite.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DEMToImageGenerator.html" class="btn btn-neutral" title="DEMToImageGenerator.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+.. _app-Pansharpening:
+
+Pansharpening
+=============
+
+
+Perform P+XS pansharpening
+
+Description
+-----------
+
+This application performs P+XS pansharpening. :ref:`app-Pansharpening` is a process of merging high-resolution panchromatic and lower resolution multispectral imagery to create a single high-resolution color image. Algorithms available in the applications are: RCS, bayesian fusion and Local Mean and Variance Matching(LMVM).
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input PAN Image** :code:`-inp image` *Mandatory* |br|
+ Input panchromatic image.
+
+**Input XS Image** :code:`-inxs image` *Mandatory* |br|
+ Input XS image.
+
+**Output image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image.
+
+**Algorithm** :code:`-method [rcs|lmvm|bayes]` *Default value: rcs* |br|
+Selection of the pan-sharpening method.
+
+* **RCS** |br| Simple RCS Pan sharpening operation.
+
+* **LMVM** |br| Local Mean and Variance Matching (LMVM) Pan sharpening.
+
+* **Bayesian** |br| Bayesian fusion.
+
+
+
+LMVM options
+^^^^^^^^^^^^
+
+**X radius** :code:`-method.lmvm.radiusx int` *Default value: 3* |br|
+Set the x radius of the sliding window.
+
+**Y radius** :code:`-method.lmvm.radiusy int` *Default value: 3* |br|
+Set the y radius of the sliding window.
+
+Bayesian options
+^^^^^^^^^^^^^^^^
+
+**Weight** :code:`-method.bayes.lambda float` *Default value: 0.9999* |br|
+Set the weighting value.
+
+**S coefficient** :code:`-method.bayes.s float` *Default value: 1* |br|
+Set the S coefficient.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_Pansharpening -inp QB_Toulouse_Ortho_PAN.tif -inxs QB_Toulouse_Ortho_XS.tif -out Pansharpening.tif uint16
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Pansharpening")
+
+	app.SetParameterString("inp", "QB_Toulouse_Ortho_PAN.tif")
+	app.SetParameterString("inxs", "QB_Toulouse_Ortho_XS.tif")
+	app.SetParameterString("out", "Pansharpening.tif")
+	app.SetParameterOutputImagePixelType("out", 3)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

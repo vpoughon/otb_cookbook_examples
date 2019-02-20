@@ -1,0 +1,107 @@
+.. _app-SFSTextureExtraction:
+
+SFSTextureExtraction
+====================
+
+
+Computes Structural Feature Set textures on every pixel of the input image selected channel
+
+Description
+-----------
+
+Structural Feature Set [1] are based on the histograms of the pixels in multiple directions of the image. The :ref:`app-SFSTextureExtraction` application computes the  6 following features: SFS'Length, SFS'Width, SFS'PSI, SFS'W-Mean, SFS'Ratio and SFS'SD (Standard Deviation). The texture indices are computed from the neighborhood of each pixel. It is possible to change the length of the calculation line (spatial threshold), as well as the maximum difference between a pixel of the line and the pixel at the center of the neighborhood (spectral threshold) [2].
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to compute the features on.
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index
+
+Texture feature parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows one to define SFS texture parameters. The available texture features are SFS'Length, SFS'Width, SFS'PSI, SFS'W-Mean, SFS'Ratio and SFS'SD. They are provided in this exact order in the output image.
+
+**Spectral Threshold** :code:`-parameters.spethre float` *Default value: 50* |br|
+Spectral Threshold
+
+**Spatial Threshold** :code:`-parameters.spathre int` *Default value: 100* |br|
+Spatial Threshold
+
+**Number of Direction** :code:`-parameters.nbdir int` *Default value: 20* |br|
+Number of Direction
+
+**Alpha** :code:`-parameters.alpha float` *Default value: 1* |br|
+Alpha
+
+**Ratio Maximum Consideration Number** :code:`-parameters.maxcons int` *Default value: 5* |br|
+Ratio Maximum Consideration Number
+
+
+
+------------
+
+**Feature Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image containing the SFS texture features.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SFSTextureExtraction -in qb_RoadExtract.tif -channel 1 -parameters.spethre 50.0 -parameters.spathre 100 -out SFSTextures.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SFSTextureExtraction")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterFloat("parameters.spethre", 50.0)
+	app.SetParameterInt("parameters.spathre", 100)
+	app.SetParameterString("out", "SFSTextures.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| [1] HUANG, Xin, ZHANG, Liangpei, et LI, Pingxiang. Classification and extraction of spatial features in urban areas using high-resolution multispectral imagery. IEEE Geoscience and Remote Sensing Letters, 2007, vol. 4, no 2, p. 260-264.
+| [2] otbSFSTexturesImageFilter class

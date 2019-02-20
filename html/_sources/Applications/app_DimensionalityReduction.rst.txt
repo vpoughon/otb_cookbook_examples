@@ -1,0 +1,153 @@
+.. _app-DimensionalityReduction:
+
+DimensionalityReduction
+=======================
+
+
+Perform Dimension reduction of the input image.
+
+Description
+-----------
+
+Performs dimensionality reduction on input image. PCA,NA-PCA,MAF,ICA methods are available. It is also possible to compute the inverse transform to reconstruct the image. It is also possible to optionally export the transformation matrix to a text file.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to apply dimensionality reduction.
+
+**Output Image** :code:`-out image [dtype]` |br|
+output image. Components are ordered by decreasing eigenvalues.
+
+Rescale Output
+^^^^^^^^^^^^^^
+
+
+
+
+
+**Output min value** :code:`-rescale.outmin float` *Default value: 0* |br|
+Minimum value of the output image.
+
+**Output max value** :code:`-rescale.outmax float` *Default value: 255* |br|
+Maximum value of the output image.
+
+
+
+------------
+
+** Inverse Output Image** :code:`-outinv image [dtype]` |br|
+reconstruct output image.
+
+**Algorithm** :code:`-method [pca|napca|maf|ica]` *Default value: pca* |br|
+Selection of the reduction dimension method.
+
+* **PCA** |br| Principal Component Analysis.
+
+* **NA-PCA** |br| Noise Adjusted Principal Component Analysis.
+
+* **MAF** |br| Maximum Autocorrelation Factor.
+
+* **ICA** |br| Independent Component Analysis using a stabilized fixed point FastICA algorithm.
+
+
+
+NA-PCA options
+^^^^^^^^^^^^^^
+
+**Set the x radius of the sliding window** :code:`-method.napca.radiusx int` *Default value: 1* |br|
+
+
+**Set the y radius of the sliding window** :code:`-method.napca.radiusy int` *Default value: 1* |br|
+
+
+ICA options
+^^^^^^^^^^^
+
+**number of iterations** :code:`-method.ica.iter int` *Default value: 20* |br|
+
+
+**Give the increment weight of W in [0, 1]** :code:`-method.ica.mu float` *Default value: 1* |br|
+
+
+**Nonlinearity** :code:`-method.ica.g [tanh|exp|u3]` *Default value: tanh* |br|
+Nonlinearity used in the FastICA algorithm
+
+* **tanh** |br| g(x) = tanh(x)
+
+* **exp** |br| g(x) = -exp(-x^2/2)
+
+* **u^3** |br| g(x) = u^3(x)
+
+
+
+
+
+------------
+
+**Number of Components** :code:`-nbcomp int` *Default value: 0* |br|
+Number of relevant components kept. By default all components are kept.
+
+**Normalize** :code:`-normalize bool` *Default value: false* |br|
+Center and reduce data before Dimensionality reduction.
+
+**Transformation matrix output (text format)** :code:`-outmatrix filename [dtype]` |br|
+Filename to store the transformation matrix (csv format)
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_DimensionalityReduction -in cupriteSubHsi.tif -out FilterOutput.tif -method pca
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("DimensionalityReduction")
+
+	app.SetParameterString("in", "cupriteSubHsi.tif")
+	app.SetParameterString("out", "FilterOutput.tif")
+	app.SetParameterString("method","pca")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+This application does not provide the inverse transform and the transformation matrix export for the MAF.
+
+See also
+--------
+
+| "Kernel maximum autocorrelation factor and minimum noise fraction transformations," IEEE Transactions on Image Processing, vol. 20, no. 3, pp. 612-624, (2011)

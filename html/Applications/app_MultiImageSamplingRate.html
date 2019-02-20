@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MultiImageSamplingRate &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PolygonClassStatistics" href="app_PolygonClassStatistics.html" />
+    <link rel="prev" title="KMeansClassification" href="app_KMeansClassification.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Learning.html">Learning</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ClassificationMapRegularization.html">ClassificationMapRegularization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeConfusionMatrix.html">ComputeConfusionMatrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeImagesStatistics.html">ComputeImagesStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_FusionOfClassifications.html">FusionOfClassifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageClassifier.html">ImageClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageDimensionalityReduction.html">ImageDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_KMeansClassification.html">KMeansClassification</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MultiImageSamplingRate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_PolygonClassStatistics.html">PolygonClassStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_PredictRegression.html">PredictRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SOMClassification.html">SOMClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleAugmentation.html">SampleAugmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleExtraction.html">SampleExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleSelection.html">SampleSelection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainDimensionalityReduction.html">TrainDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainImagesClassifier.html">TrainImagesClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainRegression.html">TrainRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainVectorClassifier.html">TrainVectorClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorClassifier.html">VectorClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDimensionalityReduction.html">VectorDimensionalityReduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Learning.html">Learning</a> &raquo;</li>
+        
+      <li>MultiImageSamplingRate</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_MultiImageSamplingRate.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multiimagesamplingrate">
+<span id="app-multiimagesamplingrate"></span><h1>MultiImageSamplingRate<a class="headerlink" href="#multiimagesamplingrate" title="Permalink to this headline">¶</a></h1>
+<p>Compute sampling rate for an input set of images.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The application computes sampling rates for a set of input images. Before calling this application, each pair of image and training vectors has to be analysed with the application <a class="reference internal" href="app_PolygonClassStatistics.html#app-polygonclassstatistics"><span class="std std-ref">PolygonClassStatistics</span></a>. The statistics file is then used to compute the sampling rates for each class in each image. Several types of sampling  are implemented. Each one is a combination of a mono-image strategy and a multi-image mode. The mono-image strategies are:</p>
+<ul class="simple">
+<li>smallest (default): select the same number of sample in each class so that the smallest one is fully sampled.</li>
+<li>constant: select the same number of samples N in each class (with N below or equal to the size of the smallest class).</li>
+<li>byclass: set the required number for each class manually, with an input CSV file (first column is class name, second one is the required samples number).</li>
+</ul>
+<p>The multi-image modes (mim) are proportional, equal and custom. The custom mode lets the users choose the distribution of samples among the images. The different behaviours are described below. Ti(c) and Ni(c)  refers resp. to the total number and needed number of samples in image i for class c. Let’s call L the total number of images.</p>
+<ul>
+<li><p class="first">strategy = all</p>
+<blockquote>
+<div><ul class="simple">
+<li>Same behaviour for all modes: take all samples</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">strategy = constant: let’s call M the global number of samples required per class. For each image i and each class c:</p>
+<blockquote>
+<div><ul class="simple">
+<li>if mim = proportional, then Ni( c ) = M * Ti( c ) / sum_k( Tk(c) )</li>
+<li>if mim = equal       , then Ni( c ) = M / L</li>
+<li>if mim = custom      , then Ni( c ) = Mi where Mi is the custom requested number of samples for image i</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">strategy = byClass : let’s call M(c) the global number of samples for class c). For each image i and each class c:</p>
+<blockquote>
+<div><ul class="simple">
+<li>if mim = proportional, then Ni( c ) = M(c) * Ti( c ) / sum_k( Tk(c) )</li>
+<li>if mim = equal       , then Ni( c ) = M(c) / L</li>
+<li>if mim = custom      , then Ni( c ) = Mi(c) where Mi(c) is the custom requested number of samples for image i and class c</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">strategy = percent : For each image i and each class c:</p>
+<blockquote>
+<div><ul class="simple">
+<li>if mim = proportional, then Ni( c ) = p * Ti( c ) where p is the global percentage of samples</li>
+<li>if mim = equal       , then Ni( c ) = p * sum_k(Tk(c)]/L where p is the global percentage of samples</li>
+<li>if mim = custom      , then Ni( c ) = p(i) * Ti(c) where p(i) is the percentage of samples for image i. c</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">strategy = total : For each image i and each class c:</p>
+<blockquote>
+<div><ul class="simple">
+<li>if mim = proportional, then Ni( c ) = total * (sum_k(Ti(k))/sum_kl(Tl(k))) * (Ti(c)/sum_k(Ti(k))) where total is the total number of samples specified.</li>
+<li>if mim = equal       , then Ni( c ) = (total / L) * (Ti(c)/sum_k(Ti(k))) where total is the total number of samples specified.</li>
+<li>if mim = custom      , then Ni( c ) = total(i) * (Ti(c)/sum_k(Ti(k))) where total(i) is the total number of samples specified for image i.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">strategy = smallest class</p>
+<blockquote>
+<div><ul class="simple">
+<li>if mim = proportional, then the smallest class size (computed globally) is used for the strategy constant+proportional.</li>
+<li>if mim = equal       , then the smallest class size (computed globally) is used for the strategy constant+equal.</li>
+<li>if mim = custom      , then the smallest class is computed and used for each image separately.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#set-samples-count-for-each-class-options" id="id1">Set samples count for each class options</a></li>
+<li><a class="reference internal" href="#set-the-same-samples-counts-for-all-classes-options" id="id2">Set the same samples counts for all classes options</a></li>
+<li><a class="reference internal" href="#use-a-percentage-of-the-samples-available-for-each-class-options" id="id3">Use a percentage of the samples available for each class options</a></li>
+<li><a class="reference internal" href="#set-the-total-number-of-samples-to-generate-and-use-class-proportions-options" id="id4">Set the total number of samples to generate, and use class proportions. options</a></li>
+</ul>
+</div>
+<p><strong>Input statistics</strong> <code class="code docutils literal notranslate"><span class="pre">-il</span> <span class="pre">filename1</span> <span class="pre">filename2...</span></code> <em>Mandatory</em> <br />
+List of statistics files for each input image.</p>
+<p><strong>Output sampling rates</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Output filename storing sampling rates (CSV format with class name, required samples, total samples, and rate). The given filename will be used with a suffix to indicate the corresponding input index (for instance: rates.csv will give rates_1.csv, rates_2.csv, …).</p>
+<p><strong>Sampling strategy</strong> <code class="code docutils literal notranslate"><span class="pre">-strategy</span> <span class="pre">[byclass|constant|smallest|percent|total|all]</span></code> <em>Default value: smallest</em> <br /></p>
+<ul class="simple">
+<li><strong>Set samples count for each class</strong> <br /> Set samples count for each class</li>
+<li><strong>Set the same samples counts for all classes</strong> <br /> Set the same samples counts for all classes</li>
+<li><strong>Set same number of samples for all classes, with the smallest class fully sampled</strong> <br /> Set same number of samples for all classes, with the smallest class fully sampled</li>
+<li><strong>Use a percentage of the samples available for each class</strong> <br /> Use a percentage of the samples available for each class</li>
+<li><strong>Set the total number of samples to generate, and use class proportions.</strong> <br /> Set the total number of samples to generate, and use class proportions.</li>
+<li><strong>Take all samples</strong> <br /> Take all samples</li>
+</ul>
+<div class="section" id="set-samples-count-for-each-class-options">
+<h3><a class="toc-backref" href="#id1">Set samples count for each class options</a><a class="headerlink" href="#set-samples-count-for-each-class-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Number of samples by class</strong> <code class="code docutils literal notranslate"><span class="pre">-strategy.byclass.in</span> <span class="pre">filename1</span> <span class="pre">filename2...</span></code> <em>Mandatory</em> <br />
+Number of samples by class (CSV format with class name in 1st column and required samples in the 2nd).In the case of the custom multi-image mode, several inputs may be given for each image.</p>
+</div>
+<div class="section" id="set-the-same-samples-counts-for-all-classes-options">
+<h3><a class="toc-backref" href="#id2">Set the same samples counts for all classes options</a><a class="headerlink" href="#set-the-same-samples-counts-for-all-classes-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Number of samples for all classes</strong> <code class="code docutils literal notranslate"><span class="pre">-strategy.constant.nb</span> <span class="pre">string</span></code> <em>Mandatory</em> <br />
+Number of samples for all classes.In the case of the custom multi-image mode, several values can be given for each image.</p>
+</div>
+<div class="section" id="use-a-percentage-of-the-samples-available-for-each-class-options">
+<h3><a class="toc-backref" href="#id3">Use a percentage of the samples available for each class options</a><a class="headerlink" href="#use-a-percentage-of-the-samples-available-for-each-class-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>The percentage(s) to use</strong> <code class="code docutils literal notranslate"><span class="pre">-strategy.percent.p</span> <span class="pre">string</span></code> <em>Mandatory</em> <br />
+The percentage(s) to use In the case of the custom multi-image mode, several values can be given for each image.</p>
+</div>
+<div class="section" id="set-the-total-number-of-samples-to-generate-and-use-class-proportions-options">
+<h3><a class="toc-backref" href="#id4">Set the total number of samples to generate, and use class proportions. options</a><a class="headerlink" href="#set-the-total-number-of-samples-to-generate-and-use-class-proportions-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>The number of samples to generate</strong> <code class="code docutils literal notranslate"><span class="pre">-strategy.total.v</span> <span class="pre">string</span></code> <em>Mandatory</em> <br />
+The number of samples to generateIn the case of the custom multi-image mode, several values can be given for each image.</p>
+<hr class="docutils" />
+<p><strong>Multi-Image Mode</strong> <code class="code docutils literal notranslate"><span class="pre">-mim</span> <span class="pre">[proportional|equal|custom]</span></code> <em>Default value: proportional</em> <br /></p>
+<ul class="simple">
+<li><strong>Proportional</strong> <br /> Split proportionally the required number of samples</li>
+<li><strong>equal</strong> <br /> Split equally the required number of samples</li>
+<li><strong>Custom</strong> <br /> Split the required number of samples following user choice.</li>
+</ul>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_MultiImageSamplingRate -il stats_1.xml stats_2.xml -out rates.csv -strategy smallest -mim proportional
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;MultiImageSamplingRate&quot;</span><span class="p">)</span>
+
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;rates.csv&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;strategy&quot;</span><span class="p">,</span><span class="s2">&quot;smallest&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;mim&quot;</span><span class="p">,</span><span class="s2">&quot;proportional&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_PolygonClassStatistics.html" class="btn btn-neutral float-right" title="PolygonClassStatistics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_KMeansClassification.html" class="btn btn-neutral" title="KMeansClassification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

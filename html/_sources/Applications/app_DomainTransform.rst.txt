@@ -1,0 +1,136 @@
+.. _app-DomainTransform:
+
+DomainTransform
+===============
+
+
+Domain Transform application for wavelet and fourier
+
+Description
+-----------
+
+Domain Transform application for wavelet and fourier.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+This will take an input image to be transformed image. For FFT inverse transform, it expects a complex image as two-band image in which first band represent real part and second band represent imaginary part.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+This parameter holds the output file name to which transformed image will be written. This has a slightly different behaviour depending on transform type. 
+For Wavelet, output is a single band image for both forward and inverse transform. For FFT forward transform, output is two band image where first band represents real part and second band represents imaginary part of a complex image.
+
+**Mode** :code:`-mode [fft|wavelet]` *Default value: wavelet* |br|
+This parameter allows one to select between fft(fourier) and wavelet
+
+* **FFT transform** |br| FFT transform
+
+* **Wavelet** |br| Wavelet transform
+
+
+
+FFT transform options
+^^^^^^^^^^^^^^^^^^^^^
+
+**Shift fft transform** :code:`-mode.fft.shift bool` *Default value: false* |br|
+Shift transform of fft filter
+
+Wavelet options
+^^^^^^^^^^^^^^^
+
+**Select wavelet form** :code:`-mode.wavelet.form [haar|db4|db6|db8|db12|db20|sb24|sb44|sym8]` *Default value: haar* |br|
+
+
+* **HAAR** |br| 
+
+* **DAUBECHIES4** |br| 
+
+* **DAUBECHIES6** |br| 
+
+* **DAUBECHIES8** |br| 
+
+* **DAUBECHIES12** |br| 
+
+* **DAUBECHIES20** |br| 
+
+* **SPLINE_BIORTHOGONAL_2_4** |br| 
+
+* **SPLINE_BIORTHOGONAL_4_4** |br| 
+
+* **SYMLET8** |br| 
+
+
+
+**Number of decomposition levels** :code:`-mode.wavelet.nlevels int` *Default value: 2* |br|
+Number of decomposition levels
+
+
+
+------------
+
+**Direction** :code:`-direction [forward|inverse]` *Default value: forward* |br|
+
+
+* **Forward** |br| 
+
+* **Inverse** |br| 
+
+
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_DomainTransform -in input.tif -mode.wavelet.form haar -out output_wavelet_haar.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("DomainTransform")
+
+	app.SetParameterString("in", "input.tif")
+	app.SetParameterString("mode.wavelet.form","haar")
+	app.SetParameterString("out", "output_wavelet_haar.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+This application is not streamed, check your system resources when processing large images
+
+See also
+--------
+
+| otbWaveletImageFilter, otbWaveletInverseImageFilter, otbWaveletTransform

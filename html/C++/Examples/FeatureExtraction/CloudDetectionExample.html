@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CloudDetectionExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="TextureExample.cxx" href="TextureExample.html" />
+    <link rel="prev" title="FeatureExtraction" href="../FeatureExtraction.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">CloudDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TextureExample.html">TextureExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadByStepsExample.html">ExtractRoadByStepsExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThresholdToPointSetExample.html">ThresholdToPointSetExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentPathExample.html">ComplexMomentPathExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EdgeDensityExample.html">EdgeDensityExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlusserMomentsImageFunctionExample.html">FlusserMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HuMomentsImageFunctionExample.html">HuMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RightAngleDetectionExample.html">RightAngleDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RatioLineDetectorExample.html">RatioLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AsymmetricFusionOfLineDetectorExample.html">AsymmetricFusionOfLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingExample.html">SeamCarvingExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentsImageFunctionExample.html">ComplexMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadExample.html">ExtractRoadExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TouziEdgeDetectorExample.html">TouziEdgeDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LineSegmentDetectorExample.html">LineSegmentDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ParallelLineDetectionExample.html">ParallelLineDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CorrelationLineDetectorExample.html">CorrelationLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PanTexExample.html">PanTexExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingOtherExample.html">SeamCarvingOtherExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SURFExample.html">SURFExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SFSExample.html">SFSExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarrisExample.html">HarrisExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../FeatureExtraction.html">FeatureExtraction</a> &raquo;</li>
+        
+      <li>CloudDetectionExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/FeatureExtraction/CloudDetectionExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="clouddetectionexample-cxx">
+<span id="example-clouddetectionexample"></span><h1>CloudDetectionExample.cxx<a class="headerlink" href="#clouddetectionexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./CloudDetectionExample Input/CloudsOnReunion.tif <span class="se">\</span>
+                        Output/CloudDetectionOutput.tif <span class="se">\</span>
+                        Output/pretty_CloudsOnReunion.png <span class="se">\</span>
+                        Output/pretty_CloudDetectionOutput.png <span class="se">\</span>
+                        <span class="m">553</span> <span class="se">\</span>
+                        <span class="m">467</span> <span class="se">\</span>
+                        <span class="m">734</span> <span class="se">\</span>
+                        <span class="m">581</span> <span class="se">\</span>
+                        <span class="m">0</span>.4 <span class="se">\</span>
+                        <span class="m">0</span>.6 <span class="se">\</span>
+                        <span class="m">1</span>.0
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/CloudDetectionExample.cxx?inline=false">CloudDetectionExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// The cloud detection functor is a processing chain composed by the</span>
+<span class="c1">// computation of a spectral angle (with SpectralAngleFunctor).  The</span>
+<span class="c1">// result is multiplied by a gaussian factor (with</span>
+<span class="c1">// CloudEstimatorFunctor) and finally thresholded to obtain a binary</span>
+<span class="c1">// image (with CloudDetectionFilter).  However, modifications can be</span>
+<span class="c1">// added in the pipeline to adapt to a particular situation.</span>
+<span class="c1">//</span>
+<span class="c1">// This example demonstrates the use of the</span>
+<span class="c1">// \doxygen{otb}{CloudDetectionFilter}.  This filter uses the spectral</span>
+<span class="c1">// angle principle to measure the radiometric gap between a reference</span>
+<span class="c1">// pixel and the other pixels of the image.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step toward the use of this filter is the inclusion of</span>
+<span class="c1">// the proper header files.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbCloudDetectionFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">12</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;inputFileName outputFileName printableInputFileName printableOutputFileName&quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;firstPixelComponent secondPixelComponent thirdPixelComponent fourthPixelComponent &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;variance &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;minThreshold maxThreshold &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Then we must decide what pixel type to use for the images. We choose to do</span>
+  <span class="c1">// all the computations in double precision.</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span> <span class="n">InputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">double</span> <span class="n">OutputPixelType</span><span class="p">;</span>
+
+  <span class="c1">//  The images are defined using the pixel type and the</span>
+  <span class="c1">//  dimension. Please note that the</span>
+  <span class="c1">//  \doxygen{otb}{CloudDetectionFilter} needs an</span>
+  <span class="c1">//  \doxygen{otb}{VectorImage} as input to handle multispectral</span>
+  <span class="c1">//  images.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">VectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">VectorImageType</span><span class="o">::</span><span class="n">PixelType</span>                  <span class="n">VectorPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>      <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="c1">// We define the functor type that the filter will use. We use the</span>
+  <span class="c1">// \doxygen{otb}{CloudDetectionFunctor}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">CloudDetectionFunctor</span><span class="o">&lt;</span><span class="n">VectorPixelType</span><span class="p">,</span> <span class="n">OutputPixelType</span><span class="o">&gt;</span> <span class="n">FunctorType</span><span class="p">;</span>
+
+  <span class="c1">// Now we can define the \doxygen{otb}{CloudDetectionFilter} that</span>
+  <span class="c1">// takes a multi-spectral image as input and produces a binary</span>
+  <span class="c1">// image.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">CloudDetectionFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">CloudDetectionFilterType</span><span class="p">;</span>
+
+  <span class="c1">//  An \doxygen{otb}{ImageFileReader} class is also instantiated in</span>
+  <span class="c1">//  order to read image data from a file. Then, an</span>
+  <span class="c1">//  \doxygen{otb}{ImageFileWriter} is instantiated in order to write</span>
+  <span class="c1">//  the output image to a file.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="c1">// The different filters composing our pipeline are created by invoking their</span>
+  <span class="c1">// \code{New()} methods, assigning the results to smart pointers.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>               <span class="n">reader</span>         <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">CloudDetectionFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">cloudDetection</span> <span class="o">=</span> <span class="n">CloudDetectionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>               <span class="n">writer</span>         <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">cloudDetection</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// The \doxygen{otb}{CloudDetectionFilter} needs to have a reference</span>
+  <span class="c1">// pixel corresponding to the spectral content likely to represent a</span>
+  <span class="c1">// cloud. This is done by passing a pixel to the filter. Here we</span>
+  <span class="c1">// suppose that the input image has four spectral bands.</span>
+
+  <span class="n">VectorPixelType</span> <span class="n">referencePixel</span><span class="p">;</span>
+  <span class="n">referencePixel</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="n">referencePixel</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">);</span>
+  <span class="n">referencePixel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
+  <span class="n">referencePixel</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
+  <span class="n">referencePixel</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+  <span class="n">referencePixel</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]));</span>
+  <span class="n">cloudDetection</span><span class="o">-&gt;</span><span class="n">SetReferencePixel</span><span class="p">(</span><span class="n">referencePixel</span><span class="p">);</span>
+
+  <span class="c1">// We must also set the variance parameter of the filter and the</span>
+  <span class="c1">// parameter of the gaussian functor.  The bigger the value, the</span>
+  <span class="c1">// more tolerant the detector will be.</span>
+
+  <span class="n">cloudDetection</span><span class="o">-&gt;</span><span class="n">SetVariance</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]));</span>
+
+  <span class="c1">// The minimum and maximum thresholds are set to binarise the final result.</span>
+  <span class="c1">// These values have to be between 0 and 1.</span>
+
+  <span class="n">cloudDetection</span><span class="o">-&gt;</span><span class="n">SetMinThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]));</span>
+  <span class="n">cloudDetection</span><span class="o">-&gt;</span><span class="n">SetMaxThreshold</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">11</span><span class="p">]));</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">cloudDetection</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:CLOUDDETECTION_FILTER} shows the result of applying</span>
+  <span class="c1">// the cloud detection filter to a cloudy image.</span>
+  <span class="c1">// \begin{figure} \center</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{pretty_CloudsOnReunion.eps}</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{pretty_CloudDetectionOutput.eps}</span>
+  <span class="c1">// \itkcaption[Cloud Detection Example]{From left to right : original image, cloud mask resulting from processing.}</span>
+  <span class="c1">// \label{fig:CLOUDDETECTION_FILTER}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="c1">// Pretty image creation for printing</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                          <span class="n">OutputPrettyImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                    <span class="n">InputPrettyImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputPrettyImageType</span><span class="o">&gt;</span>                                   <span class="n">WriterPrettyOutputType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">InputPrettyImageType</span><span class="o">&gt;</span>                                    <span class="n">WriterPrettyInputType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputPrettyImageType</span><span class="o">&gt;</span>      <span class="n">RescalerOutputType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">InputPrettyImageType</span><span class="o">&gt;</span> <span class="n">RescalerInputType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelExtractROI</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">InputPixelType</span><span class="o">&gt;</span>                   <span class="n">ChannelExtractorType</span><span class="p">;</span>
+
+  <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">selecter</span>          <span class="o">=</span> <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">RescalerInputType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">inputRescaler</span>     <span class="o">=</span> <span class="n">RescalerInputType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterPrettyInputType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">prettyInputWriter</span> <span class="o">=</span> <span class="n">WriterPrettyInputType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">inputRescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">selecter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">VectorPixelType</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">;</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">inputRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">inputRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">prettyInputWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">prettyInputWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">inputRescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">RescalerOutputType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">outputRescaler</span>     <span class="o">=</span> <span class="n">RescalerOutputType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterPrettyOutputType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">prettyOutputWriter</span> <span class="o">=</span> <span class="n">WriterPrettyOutputType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">cloudDetection</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">prettyOutputWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="n">prettyOutputWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">prettyInputWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="n">prettyOutputWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="TextureExample.html" class="btn btn-neutral float-right" title="TextureExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../FeatureExtraction.html" class="btn btn-neutral" title="FeatureExtraction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

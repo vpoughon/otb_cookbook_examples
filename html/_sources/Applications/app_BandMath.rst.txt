@@ -1,0 +1,94 @@
+.. _app-BandMath:
+
+BandMath
+========
+
+
+Outputs a monoband image which is the result of a mathematical operation on several multi-band images.
+
+Description
+-----------
+
+This application performs a mathematical operation on several multi-band images and outputs the result into a monoband image. The given expression is computed at each pixel position. Evaluation of the mathematical formula is done by the muParser library.
+
+The formula can be written using:
+
+* numerical values ( 2.3, -5, 3.1e4, ...)
+* variables containing pixel values (e.g. ``im2b3`` is the pixel value in 2nd image, 3rd band)
+* binary operators:
+
+  * ``+`` addition, ``-`` subtraction, ``*`` multiplication, ``/`` division
+  * ``^`` raise x to the power of y
+  * ``<`` less than, ``>`` greater than, ``<=`` less or equal, ``>=`` greater or equal
+  * ``==`` equal, ``!=`` not equal
+  * ``||`` logical or, ``&&`` logical and
+  * if-then-else operator: ``(condition ? value_true : value_false)``
+* functions: ``exp()``, ``log()``, ``sin()``, ``cos()``, ``min()``, ``max()``, ...
+
+The full list of features and operators is available on the muParser website [1].
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input image list** :code:`-il image1 image2...` *Mandatory* |br|
+Image list of operands to the mathematical expression.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image which is the result of the mathematical expressions on input image list operands.
+
+**Expression** :code:`-exp string` *Mandatory* |br|
+The muParser mathematical expression to apply on input images.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_BandMath -il verySmallFSATSW_r.tif verySmallFSATSW_nir.tif verySmallFSATSW.tif -out apTvUtBandMathOutput.tif -exp 'cos( im1b1 ) > cos( im2b1 ) ? im3b1 : im3b2'
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("BandMath")
+
+	app.SetParameterStringList("il", ['verySmallFSATSW_r.tif', 'verySmallFSATSW_nir.tif', 'verySmallFSATSW.tif'])
+	app.SetParameterString("out", "apTvUtBandMathOutput.tif")
+	app.SetParameterString("exp", "'cos( im1b1 ) > cos( im2b1 ) ? im3b1 : im3b2'")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| [1] http://beltoforion.de/article.php?a=muparser

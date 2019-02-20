@@ -1,0 +1,990 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LAIAndPROSAILToSensorResponse.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DimensionReduction" href="../DimensionReduction.html" />
+    <link rel="prev" title="ProsailModel.cxx" href="ProsailModel.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Simulation.html">Simulation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="LAIFromNDVIImageTransform.html">LAIFromNDVIImageTransform.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ProsailModel.html">ProsailModel.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">LAIAndPROSAILToSensorResponse.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Simulation.html">Simulation</a> &raquo;</li>
+        
+      <li>LAIAndPROSAILToSensorResponse.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Simulation/LAIAndPROSAILToSensorResponse.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="laiandprosailtosensorresponse-cxx">
+<span id="example-laiandprosailtosensorresponse"></span><h1>LAIAndPROSAILToSensorResponse.cxx<a class="headerlink" href="#laiandprosailtosensorresponse-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./LAIAndPROSAILToSensorResponse Input/LAIverySmallFSATSW.tif <span class="se">\</span>
+                                Input/Simu_label_LAI.png <span class="se">\</span>
+                                Input/Simu_mask_LAI_1.png <span class="se">\</span>
+                                Input/label-params-SO-2006-Level-2.txt <span class="se">\</span>
+                                Input/acqui-params.txt <span class="se">\</span>
+                                Input/rep6S.dat <span class="se">\</span>
+                                Output/siTvLAIAndPROSAILToSensorResponse.tif <span class="se">\</span>
+                                <span class="m">5</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Simulation/LAIAndPROSAILToSensorResponse.cxx?inline=false">LAIAndPROSAILToSensorResponse.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// The following code is an example of Sensor spectral response image generated using image of labeled objects image, objects properties (vegetation classes are</span>
+<span class="c1">// handled using PROSAIL model, non-vegetation classes are characterized using \href{http://speclib.jpl.nasa.gov/}{Aster database} characteristics provided by a</span>
+<span class="c1">// text file), acquisition parameters, sensor characteristics, and LAI (Leaf Area Index) image.</span>
+<span class="c1">//</span>
+<span class="c1">// Sensor RSR is modeled by 6S (Second Simulation of a Satellite Signal in the Solar Spectrum) model \cite{Vermote1997}. Detailed information about 6S can be</span>
+<span class="c1">// found \href{http://6s.ltdri.org/6S_code2_thiner_stuff/6S_Manual_Part_1.pdf}{here}.</span>
+<span class="c1">//</span>
+<span class="c1">// Let&#39;s look at the minimal code required to use this algorithm. First, the</span>
+<span class="c1">// following headers must be included.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorDataFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbStandardWriterWatcher.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkImageRegionConstIterator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkOrImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbLeafParameters.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbReduceSpectralResponse.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageSimulationMethod.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSpatialisationFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbAttributesMapLabelObject.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkTernaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbRAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorDataToLabelMapWithAttributesFilter.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">otb</span>
+<span class="p">{</span>
+
+<span class="c1">// \code{ImageUniqueValuesCalculator} class is defined here. Method \code{GetUniqueValues()} returns an array with all values contained in an image.</span>
+<span class="c1">// This class is implemented and used to test if all labels in labeled image are present in label parameter file.</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TImage</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ITK_EXPORT</span> <span class="nl">ImageUniqueValuesCalculator</span> <span class="p">:</span> <span class="k">public</span> <span class="n">itk</span><span class="o">::</span><span class="n">Object</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">typedef</span> <span class="n">ImageUniqueValuesCalculator</span><span class="o">&lt;</span><span class="n">TImage</span><span class="o">&gt;</span> <span class="n">Self</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Object</span>                         <span class="n">Superclass</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="n">Self</span><span class="o">&gt;</span>             <span class="n">Pointer</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Self</span><span class="o">&gt;</span>       <span class="n">ConstPointer</span><span class="p">;</span>
+
+  <span class="n">itkNewMacro</span><span class="p">(</span><span class="n">Self</span><span class="p">);</span>
+
+  <span class="n">itkTypeMacro</span><span class="p">(</span><span class="n">ImageUniqueValuesCalculator</span><span class="p">,</span> <span class="n">itk</span><span class="o">::</span><span class="n">Object</span><span class="p">);</span>
+
+  <span class="n">itkStaticConstMacro</span><span class="p">(</span><span class="n">ImageDimension</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">,</span> <span class="n">TImage</span><span class="o">::</span><span class="n">ImageDimension</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">TImage</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">PixelType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">TImage</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span> <span class="n">ArrayType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span>      <span class="n">ImagePointer</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">ConstPointer</span> <span class="n">ImageConstPointer</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">SetImage</span><span class="p">(</span><span class="k">const</span> <span class="n">ImageType</span><span class="o">*</span> <span class="n">image</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_Image</span> <span class="o">!=</span> <span class="n">image</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">m_Image</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">Modified</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+
+  <span class="n">ArrayType</span> <span class="nf">GetUniqueValues</span><span class="p">()</span> <span class="k">const</span>
+  <span class="p">{</span>
+    <span class="n">ArrayType</span> <span class="n">uniqueValues</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_Image</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="n">uniqueValues</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionConstIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">it</span><span class="p">(</span><span class="n">m_Image</span><span class="p">,</span> <span class="n">m_Image</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+
+    <span class="n">uniqueValues</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="o">++</span><span class="n">it</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">it</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">uniqueValues</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">uniqueValues</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">())</span> <span class="o">==</span> <span class="n">uniqueValues</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+      <span class="p">{</span>
+        <span class="n">uniqueValues</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+      <span class="p">}</span>
+      <span class="o">++</span><span class="n">it</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">uniqueValues</span><span class="p">;</span>
+  <span class="p">}</span>
+
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">ImageUniqueValuesCalculator</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="n">m_Image</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="o">~</span><span class="n">ImageUniqueValuesCalculator</span><span class="p">()</span> <span class="k">override</span>
+  <span class="p">{</span>
+  <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">PrintSelf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="n">itk</span><span class="o">::</span><span class="n">Indent</span> <span class="n">indent</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span>
+  <span class="p">{</span>
+    <span class="n">Superclass</span><span class="o">::</span><span class="n">PrintSelf</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="n">indent</span><span class="p">);</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="n">indent</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Image: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_Image</span><span class="p">.</span><span class="n">GetPointer</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">ImageUniqueValuesCalculator</span><span class="p">(</span><span class="k">const</span> <span class="n">Self</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Self</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="n">ImageConstPointer</span> <span class="n">m_Image</span><span class="p">;</span>
+
+<span class="p">};</span> <span class="c1">// class ImageUniqueValuesCalculator</span>
+
+
+<span class="k">namespace</span> <span class="n">Functor</span>
+<span class="p">{</span>
+
+<span class="c1">// \code{ProsailSimulatorFunctor} functor is defined here.</span>
+<span class="c1">//</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TLAI</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TLabel</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TMask</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TOutput</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TLabelSpectra</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TLabelParameter</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TAcquistionParameter</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TSatRSR</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ProsailSimulatorFunctor</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="cm">/** Standard class typedefs */</span>
+
+  <span class="c1">// \code{ProsailSimulatorFunctor} functor is defined here.</span>
+  <span class="c1">//</span>
+
+  <span class="k">typedef</span> <span class="n">TLAI</span>                         <span class="n">LAIPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">TLabel</span>                       <span class="n">LabelPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">TMask</span>                        <span class="n">MaskPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">TOutput</span>                      <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">TLabelSpectra</span>                <span class="n">LabelSpectraType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">TLabelParameter</span>              <span class="n">LabelParameterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">TAcquistionParameter</span>         <span class="n">AcquistionParameterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">TSatRSR</span>                      <span class="n">SatRSRType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">SatRSRType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">SatRSRPointerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">otb</span><span class="o">::</span><span class="n">ProspectModel</span>  <span class="n">ProspectType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">otb</span><span class="o">::</span><span class="n">SailModel</span>      <span class="n">SailType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>                                                <span class="n">PrecisionType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">PrecisionType</span><span class="p">,</span> <span class="n">PrecisionType</span><span class="o">&gt;</span>               <span class="n">PairType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PairType</span><span class="o">&gt;</span>                        <span class="n">VectorPairType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SpectralResponse</span><span class="o">&lt;</span><span class="n">PrecisionType</span><span class="p">,</span> <span class="n">PrecisionType</span><span class="o">&gt;</span>   <span class="n">ResponseType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">ResponseType</span><span class="o">::</span><span class="n">Pointer</span>                                 <span class="n">ResponsePointerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ReduceSpectralResponse</span><span class="o">&lt;</span><span class="n">ResponseType</span><span class="p">,</span> <span class="n">SatRSRType</span><span class="o">&gt;</span> <span class="n">ReduceResponseType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">ReduceResponseType</span><span class="o">::</span><span class="n">Pointer</span>                  <span class="n">ReduceResponseTypePointerType</span><span class="p">;</span>
+
+  <span class="c1">// In this example spectra are generated form $400$ to $2400nm$. the number of simulated band is set by \code{SimNbBands} value.</span>
+  <span class="c1">//</span>
+
+  <span class="k">static</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">SimNbBands</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+  <span class="cm">/** Constructor */</span>
+  <span class="n">ProsailSimulatorFunctor</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="n">m_SatRSR</span>       <span class="o">=</span> <span class="n">SatRSRType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">m_InvertedMask</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/** Destructor */</span>
+  <span class="o">~</span><span class="n">ProsailSimulatorFunctor</span><span class="p">(){};</span>
+
+  <span class="kt">void</span> <span class="nf">SetInvertedMask</span><span class="p">(</span><span class="kt">bool</span> <span class="n">ivm</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_InvertedMask</span> <span class="o">=</span> <span class="n">ivm</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/** Implementation of the () operator*/</span>
+  <span class="kr">inline</span> <span class="n">OutputPixelType</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">LAIPixelType</span><span class="o">&amp;</span> <span class="n">lai</span><span class="p">,</span> <span class="k">const</span> <span class="n">LabelPixelType</span><span class="o">&amp;</span> <span class="n">label</span><span class="p">,</span> <span class="k">const</span> <span class="n">MaskPixelType</span><span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span>
+  <span class="p">{</span>
+
+    <span class="c1">// mask value is read to know if the pixel have to be calculated, it is set to 0 otherwise.</span>
+
+    <span class="n">OutputPixelType</span> <span class="n">pix</span><span class="p">;</span>
+    <span class="n">pix</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">m_SatRSR</span><span class="o">-&gt;</span><span class="n">GetNbBands</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="n">mask</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">m_InvertedMask</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">mask</span> <span class="o">&amp;&amp;</span> <span class="n">m_InvertedMask</span><span class="p">))</span>
+    <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m_SatRSR</span><span class="o">-&gt;</span><span class="n">GetNbBands</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">pix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">OutputPixelType</span><span class="o">::</span><span class="n">ValueType</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">pix</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// Object reflectance \code{hxSpectrum} is calculated. If object label correspond to vegetation label then Prosail code is used, aster database is used</span>
+    <span class="c1">// otherwise.</span>
+
+    <span class="n">VectorPairType</span> <span class="n">hxSpectrum</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SimNbBands</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">PairType</span> <span class="n">resp</span><span class="p">;</span>
+      <span class="n">resp</span><span class="p">.</span><span class="n">first</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PrecisionType</span><span class="o">&gt;</span><span class="p">((</span><span class="mf">400.0</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">);</span>
+      <span class="n">hxSpectrum</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// either the spectrum has to be simulated by Prospect+Sail</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_LabelParameters</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">!=</span> <span class="n">m_LabelParameters</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="n">ProspectType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">prospect</span> <span class="o">=</span> <span class="n">ProspectType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+      <span class="n">prospect</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_LabelParameters</span><span class="p">[</span><span class="n">label</span><span class="p">]);</span>
+
+      <span class="n">SailType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">sail</span> <span class="o">=</span> <span class="n">SailType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetLAI</span><span class="p">(</span><span class="n">lai</span><span class="p">);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetAngl</span><span class="p">(</span><span class="n">m_AcquisitionParameters</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Angl&quot;</span><span class="p">)]);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetPSoil</span><span class="p">(</span><span class="n">m_AcquisitionParameters</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;PSoil&quot;</span><span class="p">)]);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetSkyl</span><span class="p">(</span><span class="n">m_AcquisitionParameters</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Skyl&quot;</span><span class="p">)]);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetHSpot</span><span class="p">(</span><span class="n">m_AcquisitionParameters</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;HSpot&quot;</span><span class="p">)]);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetTTS</span><span class="p">(</span><span class="n">m_AcquisitionParameters</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;TTS&quot;</span><span class="p">)]);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetTTO</span><span class="p">(</span><span class="n">m_AcquisitionParameters</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;TTO&quot;</span><span class="p">)]);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetPSI</span><span class="p">(</span><span class="n">m_AcquisitionParameters</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;PSI&quot;</span><span class="p">)]);</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetReflectance</span><span class="p">(</span><span class="n">prospect</span><span class="o">-&gt;</span><span class="n">GetReflectance</span><span class="p">());</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">SetTransmittance</span><span class="p">(</span><span class="n">prospect</span><span class="o">-&gt;</span><span class="n">GetTransmittance</span><span class="p">());</span>
+      <span class="n">sail</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+      <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SimNbBands</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="n">hxSpectrum</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">OutputPixelType</span><span class="o">::</span><span class="n">ValueType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetHemisphericalReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// or the spectra has been set from outside the functor (ex. bare soil, etc.)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">m_LabelSpectra</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">!=</span> <span class="n">m_LabelSpectra</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SimNbBands</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">hxSpectrum</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">OutputPixelType</span><span class="o">::</span><span class="n">ValueType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_LabelSpectra</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="c1">// or the class does not exist</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SimNbBands</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">hxSpectrum</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">OutputPixelType</span><span class="o">::</span><span class="n">ValueType</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// Spectral response \code{aResponse} is set using \code{hxSpectrum}.</span>
+
+    <span class="n">ResponseType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">aResponse</span> <span class="o">=</span> <span class="n">ResponseType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">aResponse</span><span class="o">-&gt;</span><span class="n">SetResponse</span><span class="p">(</span><span class="n">hxSpectrum</span><span class="p">);</span>
+
+    <span class="c1">// Satellite RSR is initialized and set with \code{aResponse}. Reflectance</span>
+    <span class="c1">// mode is used in this case to take into account solar irradiance into</span>
+    <span class="c1">// spectral response reduction.</span>
+
+    <span class="n">ReduceResponseTypePointerType</span> <span class="n">reduceResponse</span> <span class="o">=</span> <span class="n">ReduceResponseType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">reduceResponse</span><span class="o">-&gt;</span><span class="n">SetInputSatRSR</span><span class="p">(</span><span class="n">m_SatRSR</span><span class="p">);</span>
+    <span class="n">reduceResponse</span><span class="o">-&gt;</span><span class="n">SetInputSpectralResponse</span><span class="p">(</span><span class="n">aResponse</span><span class="p">);</span>
+
+    <span class="n">reduceResponse</span><span class="o">-&gt;</span><span class="n">SetReflectanceMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+    <span class="n">reduceResponse</span><span class="o">-&gt;</span><span class="n">CalculateResponse</span><span class="p">();</span>
+    <span class="n">VectorPairType</span> <span class="n">reducedResponse</span> <span class="o">=</span> <span class="n">reduceResponse</span><span class="o">-&gt;</span><span class="n">GetReduceResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">();</span>
+
+
+    <span class="c1">// \code{pix} value is returned for desired Satellite bands</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m_SatRSR</span><span class="o">-&gt;</span><span class="n">GetNbBands</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="n">pix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">OutputPixelType</span><span class="o">::</span><span class="n">ValueType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">reducedResponse</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">pix</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">ProsailSimulatorFunctor</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">m_AcquisitionParameters</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_AcquisitionParameters</span> <span class="o">||</span> <span class="n">m_LabelParameters</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_LabelParameters</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">ProsailSimulatorFunctor</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">m_AcquisitionParameters</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">m_AcquisitionParameters</span> <span class="o">&amp;&amp;</span> <span class="n">m_LabelParameters</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">m_LabelParameters</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/** The spectra associated with labels are supposed to have the same</span>
+<span class="cm">   * sampling as a Prosail simulation, that is, 2000 bands starting at</span>
+<span class="cm">   * 400nm up to 2400 nm*/</span>
+  <span class="kr">inline</span> <span class="kt">void</span> <span class="n">SetLabelSpectra</span><span class="p">(</span><span class="k">const</span> <span class="n">TLabelSpectra</span><span class="o">&amp;</span> <span class="n">lSpectra</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_LabelSpectra</span> <span class="o">=</span> <span class="n">lSpectra</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">void</span> <span class="n">SetLabelParameters</span><span class="p">(</span><span class="k">const</span> <span class="n">TLabelParameter</span><span class="o">&amp;</span> <span class="n">lParameters</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_LabelParameters</span> <span class="o">=</span> <span class="n">lParameters</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">void</span> <span class="n">SetAcquisitionParameters</span><span class="p">(</span><span class="k">const</span> <span class="n">TAcquistionParameter</span><span class="o">&amp;</span> <span class="n">aParameters</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_AcquisitionParameters</span> <span class="o">=</span> <span class="n">aParameters</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">void</span> <span class="n">SetRSR</span><span class="p">(</span><span class="k">const</span> <span class="n">SatRSRPointerType</span> <span class="n">rsr</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_SatRSR</span> <span class="o">=</span> <span class="n">rsr</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="n">SatRSRPointerType</span> <span class="n">GetRSR</span><span class="p">()</span> <span class="k">const</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_SatRSR</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="cm">/** Spectra associated to labels*/</span>
+  <span class="n">LabelSpectraType</span> <span class="n">m_LabelSpectra</span><span class="p">;</span>
+  <span class="cm">/** Prospect+sail parameters to labels*/</span>
+  <span class="n">LabelParameterType</span> <span class="n">m_LabelParameters</span><span class="p">;</span>
+  <span class="cm">/** Prospect+sail acquisition parameters*/</span>
+  <span class="n">AcquistionParameterType</span> <span class="n">m_AcquisitionParameters</span><span class="p">;</span>
+  <span class="cm">/** Satellite Relative spectral response*/</span>
+  <span class="n">SatRSRPointerType</span> <span class="n">m_SatRSR</span><span class="p">;</span>
+
+  <span class="cm">/** Simulate pixels with mask != 0 ==&gt; m_InvertedMask = false; */</span>
+  <span class="kt">bool</span> <span class="n">m_InvertedMask</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace Functor</span>
+
+<span class="c1">// \code{TernaryFunctorImageFilterWithNBands} class is defined here.</span>
+<span class="c1">// This class inherits form \doxygen{itk}{TernaryFunctorImageFilter} with additional nuber of band parameters.</span>
+<span class="c1">// It&#39;s implementation is done to process Label, LAI, and mask image with Simulation functor.</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TInputImage1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TInputImage2</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TInputImage3</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TOutputImage</span><span class="p">,</span> <span class="k">class</span> <span class="nc">TFunctor</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ITK_EXPORT</span> <span class="nl">TernaryFunctorImageFilterWithNBands</span> <span class="p">:</span> <span class="k">public</span> <span class="n">itk</span><span class="o">::</span><span class="n">TernaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">TInputImage1</span><span class="p">,</span> <span class="n">TInputImage2</span><span class="p">,</span> <span class="n">TInputImage3</span><span class="p">,</span> <span class="n">TOutputImage</span><span class="p">,</span> <span class="n">TFunctor</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">typedef</span> <span class="n">TernaryFunctorImageFilterWithNBands</span>                                                              <span class="n">Self</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">TernaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">TInputImage1</span><span class="p">,</span> <span class="n">TInputImage2</span><span class="p">,</span> <span class="n">TInputImage3</span><span class="p">,</span> <span class="n">TOutputImage</span><span class="p">,</span> <span class="n">TFunctor</span><span class="o">&gt;</span> <span class="n">Superclass</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="n">Self</span><span class="o">&gt;</span>                                                                          <span class="n">Pointer</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Self</span><span class="o">&gt;</span>                                                                    <span class="n">ConstPointer</span><span class="p">;</span>
+
+  <span class="cm">/** Method for creation through the object factory. */</span>
+  <span class="n">itkNewMacro</span><span class="p">(</span><span class="n">Self</span><span class="p">);</span>
+
+  <span class="cm">/** Macro defining the type*/</span>
+  <span class="n">itkTypeMacro</span><span class="p">(</span><span class="n">TernaryFunctorImageFilterWithNBands</span><span class="p">,</span> <span class="n">SuperClass</span><span class="p">);</span>
+
+  <span class="cm">/** Accessors for the number of bands*/</span>
+  <span class="n">itkSetMacro</span><span class="p">(</span><span class="n">NumberOfOutputBands</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">);</span>
+  <span class="n">itkGetConstMacro</span><span class="p">(</span><span class="n">NumberOfOutputBands</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">);</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">TernaryFunctorImageFilterWithNBands</span><span class="p">()</span>
+  <span class="p">{</span>
+  <span class="p">}</span>
+  <span class="o">~</span><span class="n">TernaryFunctorImageFilterWithNBands</span><span class="p">()</span> <span class="k">override</span>
+  <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">GenerateOutputInformation</span><span class="p">()</span> <span class="k">override</span>
+  <span class="p">{</span>
+    <span class="n">Superclass</span><span class="o">::</span><span class="n">GenerateOutputInformation</span><span class="p">();</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetNumberOfComponentsPerPixel</span><span class="p">(</span><span class="n">m_NumberOfOutputBands</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">TernaryFunctorImageFilterWithNBands</span><span class="p">(</span><span class="k">const</span> <span class="n">Self</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Self</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">m_NumberOfOutputBands</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="p">}</span> <span class="c1">// namespace otb</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">cmifname</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">11</span><span class="p">)</span> <span class="c1">// cloud mask filename optional parameter</span>
+    <span class="p">{</span>
+      <span class="n">cmifname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Wrong Parameters &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">laiifname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">outfname</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">lifname</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">mifname</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">lpfname</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">apfname</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">rsfname</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nbBands</span>   <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]));</span>
+  <span class="kt">char</span><span class="o">*</span>        <span class="n">rootPath</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">];</span>
+
+  <span class="c1">// Read the label parameter file. It is assumed to have the form</span>
+  <span class="c1">// label 1 Cab Car CBrown Cw Cm N   --&gt; for vegetation classes</span>
+  <span class="c1">// label 0 /path/to/spectra/file    --&gt; for other classes</span>
+
+
+  <span class="c1">// input images typedef are presented below. This example uses \code{double} LAI image, \code{binary} mask and</span>
+  <span class="c1">//  cloud mask, and \code{integer} label image</span>
+  <span class="c1">//</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>         <span class="n">LAIPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">LabelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">MaskPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">float</span>          <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="c1">// Image typedef</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">LAIPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>          <span class="n">LAIImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>             <span class="n">LabelImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">MaskPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>         <span class="n">MaskImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">SimulatedImageType</span><span class="p">;</span>
+
+  <span class="c1">// reader typedef</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">LAIImageType</span><span class="o">&gt;</span>   <span class="n">LAIReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">LabelImageType</span><span class="o">&gt;</span> <span class="n">LabelReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">MaskImageType</span><span class="o">&gt;</span>  <span class="n">MaskReaderType</span><span class="p">;</span>
+
+  <span class="c1">// Leaf parameters typedef is defined.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">LeafParameters</span>                            <span class="n">LeafParametersType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">LeafParametersType</span><span class="o">::</span><span class="n">Pointer</span>                    <span class="n">LeafParametersPointerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="p">,</span> <span class="n">LeafParametersPointerType</span><span class="o">&gt;</span> <span class="n">LabelParameterMapType</span><span class="p">;</span>
+
+  <span class="c1">// Sensor spectral response typedef is defined</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>                           <span class="n">PrecisionType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PrecisionType</span><span class="o">&gt;</span>       <span class="n">SpectraType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="p">,</span> <span class="n">SpectraType</span><span class="o">&gt;</span> <span class="n">SpectraParameterType</span><span class="p">;</span>
+
+  <span class="c1">// Acquisition response typedef is defined</span>
+
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span> <span class="n">AcquistionParsType</span><span class="p">;</span>
+
+  <span class="c1">// Satellite typedef is defined</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SatelliteRSR</span><span class="o">&lt;</span><span class="n">PrecisionType</span><span class="p">,</span> <span class="n">PrecisionType</span><span class="o">&gt;</span> <span class="n">SatRSRType</span><span class="p">;</span>
+
+
+  <span class="c1">// Filter type is the specific \code{TernaryFunctorImageFilterWithNBands} defined below with specific functor.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">ProsailSimulatorFunctor</span><span class="o">&lt;</span><span class="n">LAIPixelType</span><span class="p">,</span> <span class="n">LabelType</span><span class="p">,</span> <span class="n">MaskPixelType</span><span class="p">,</span> <span class="n">SimulatedImageType</span><span class="o">::</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">SpectraParameterType</span><span class="p">,</span>
+                                                <span class="n">LabelParameterMapType</span><span class="p">,</span> <span class="n">AcquistionParsType</span><span class="p">,</span> <span class="n">SatRSRType</span><span class="o">&gt;</span>
+                                                                                                                                     <span class="n">SimuFunctorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">TernaryFunctorImageFilterWithNBands</span><span class="o">&lt;</span><span class="n">LAIImageType</span><span class="p">,</span> <span class="n">LabelImageType</span><span class="p">,</span> <span class="n">MaskImageType</span><span class="p">,</span> <span class="n">SimulatedImageType</span><span class="p">,</span> <span class="n">SimuFunctorType</span><span class="o">&gt;</span> <span class="n">SimulatorType</span><span class="p">;</span>
+
+  <span class="c1">// Read the acquisition parameter file which is like</span>
+  <span class="c1">// Angl val</span>
+  <span class="c1">// PSoil val</span>
+  <span class="c1">// Skyl val</span>
+  <span class="c1">// HSpot val</span>
+  <span class="c1">// TTS val</span>
+  <span class="c1">// TTO val</span>
+  <span class="c1">// PSI val</span>
+
+  <span class="c1">// Acquisition parameters are loaded using text file. A detailed definition of acquisition parameters can</span>
+  <span class="c1">// be found in class \doxygen{otb}{SailModel}.</span>
+
+  <span class="n">AcquistionParsType</span> <span class="n">acquistionPars</span><span class="p">;</span>
+  <span class="n">acquistionPars</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Angl&quot;</span><span class="p">)]</span>  <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="n">acquistionPars</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;PSoil&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="n">acquistionPars</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Skyl&quot;</span><span class="p">)]</span>  <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="n">acquistionPars</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;HSpot&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="n">acquistionPars</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;TTS&quot;</span><span class="p">)]</span>   <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="n">acquistionPars</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;TTO&quot;</span><span class="p">)]</span>   <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="n">acquistionPars</span><span class="p">[</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;PSI&quot;</span><span class="p">)]</span>   <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="n">acquistionParsFile</span><span class="p">;</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">acquistionParsFile</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">apfname</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Could not open file &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">apfname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// unsigned int acPar = 0;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">acquistionParsFile</span><span class="p">.</span><span class="n">good</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">acquistionParsFile</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span>       <span class="n">parName</span><span class="p">;</span>
+    <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">parName</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">parValue</span><span class="p">;</span>
+    <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">parValue</span><span class="p">;</span>
+    <span class="n">acquistionPars</span><span class="p">[</span><span class="n">parName</span><span class="p">]</span> <span class="o">=</span> <span class="n">parValue</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">acquistionParsFile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+
+
+  <span class="c1">// Label parameters are loaded using text file.</span>
+  <span class="c1">// Two type of object characteristic can be found. If label corresponds to vegetation class,</span>
+  <span class="c1">// then leaf parameters are loaded.</span>
+  <span class="c1">// A detailed definition of leaf parameters can be found in class \doxygen{otb}{LeafParameters} class.</span>
+  <span class="c1">// Otherwise object reflectance is generated from $400$ to $2400nm$ using \href{http://speclib.jpl.nasa.gov/}{Aster database}.</span>
+
+  <span class="n">LabelParameterMapType</span> <span class="n">labelParameters</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span>         <span class="n">labelParsFile</span><span class="p">;</span>
+
+  <span class="n">SpectraParameterType</span> <span class="n">spectraParameters</span><span class="p">;</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">labelParsFile</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">lpfname</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Could not open file &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">lpfname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">labelParsFile</span><span class="p">.</span><span class="n">good</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">fileLine</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+    <span class="n">labelParsFile</span><span class="p">.</span><span class="n">getline</span><span class="p">(</span><span class="n">fileLine</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">fileLine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;#&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">(</span><span class="n">fileLine</span><span class="p">);</span>
+      <span class="kt">unsigned</span> <span class="kt">short</span>    <span class="n">label</span><span class="p">;</span>
+      <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">label</span><span class="p">;</span>
+      <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">paramsOrSpectra</span><span class="p">;</span>
+      <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">paramsOrSpectra</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">paramsOrSpectra</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">Cab</span><span class="p">;</span>
+        <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">Cab</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">Car</span><span class="p">;</span>
+        <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">Car</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">CBrown</span><span class="p">;</span>
+        <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">CBrown</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">Cw</span><span class="p">;</span>
+        <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">Cw</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">Cm</span><span class="p">;</span>
+        <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">Cm</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">N</span><span class="p">;</span>
+        <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
+
+        <span class="n">LeafParametersType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">leafParams</span> <span class="o">=</span> <span class="n">LeafParametersType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+        <span class="n">leafParams</span><span class="o">-&gt;</span><span class="n">SetCab</span><span class="p">(</span><span class="n">Cab</span><span class="p">);</span>
+        <span class="n">leafParams</span><span class="o">-&gt;</span><span class="n">SetCar</span><span class="p">(</span><span class="n">Car</span><span class="p">);</span>
+        <span class="n">leafParams</span><span class="o">-&gt;</span><span class="n">SetCBrown</span><span class="p">(</span><span class="n">CBrown</span><span class="p">);</span>
+        <span class="n">leafParams</span><span class="o">-&gt;</span><span class="n">SetCw</span><span class="p">(</span><span class="n">Cw</span><span class="p">);</span>
+        <span class="n">leafParams</span><span class="o">-&gt;</span><span class="n">SetCm</span><span class="p">(</span><span class="n">Cm</span><span class="p">);</span>
+        <span class="n">leafParams</span><span class="o">-&gt;</span><span class="n">SetN</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+        <span class="n">labelParameters</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">leafParams</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">spectraFilename</span> <span class="o">=</span> <span class="n">rootPath</span><span class="p">;</span>
+        <span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">spectraFilename</span><span class="p">;</span>
+        <span class="n">spectraFilename</span> <span class="o">=</span> <span class="n">rootPath</span> <span class="o">+</span> <span class="n">spectraFilename</span><span class="p">;</span>
+        <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SpectralResponse</span><span class="o">&lt;</span><span class="n">PrecisionType</span><span class="p">,</span> <span class="n">PrecisionType</span><span class="o">&gt;</span> <span class="n">ResponseType</span><span class="p">;</span>
+        <span class="n">ResponseType</span><span class="o">::</span><span class="n">Pointer</span>                                       <span class="n">resp</span> <span class="o">=</span> <span class="n">ResponseType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+        <span class="c1">// Coefficient 100 since Aster database is given in % reflectance</span>
+        <span class="n">resp</span><span class="o">-&gt;</span><span class="n">Load</span><span class="p">(</span><span class="n">spectraFilename</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">);</span>
+
+        <span class="n">SpectraType</span> <span class="n">spec</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SimuFunctorType</span><span class="o">::</span><span class="n">SimNbBands</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+          <span class="c1">// Prosail starts at 400 and lambda in Aster DB is in micrometers</span>
+          <span class="n">spec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PrecisionType</span><span class="o">&gt;</span><span class="p">((</span><span class="o">*</span><span class="n">resp</span><span class="p">)((</span><span class="n">i</span> <span class="o">+</span> <span class="mf">400.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">)));</span>
+
+        <span class="n">spectraParameters</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">labelParsFile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+
+
+  <span class="c1">// LAI image is read.</span>
+
+  <span class="n">LAIReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">laiReader</span> <span class="o">=</span> <span class="n">LAIReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">laiReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">laiifname</span><span class="p">);</span>
+  <span class="n">laiReader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="n">LAIImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">laiImage</span> <span class="o">=</span> <span class="n">laiReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+  <span class="c1">// Label image is then read. Label image is processed using \code{ImageUniqueValuesCalculator} in order to check if all the labels are present in the</span>
+  <span class="c1">// labelParameters file.</span>
+
+
+  <span class="n">LabelReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">labelReader</span> <span class="o">=</span> <span class="n">LabelReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">labelReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">lifname</span><span class="p">);</span>
+  <span class="n">labelReader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">LabelImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">labelImage</span> <span class="o">=</span> <span class="n">labelReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageUniqueValuesCalculator</span><span class="o">&lt;</span><span class="n">LabelImageType</span><span class="o">&gt;</span> <span class="n">UniqueCalculatorType</span><span class="p">;</span>
+
+  <span class="n">UniqueCalculatorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">uniqueCalculator</span> <span class="o">=</span> <span class="n">UniqueCalculatorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">uniqueCalculator</span><span class="o">-&gt;</span><span class="n">SetImage</span><span class="p">(</span><span class="n">labelImage</span><span class="p">);</span>
+
+  <span class="n">UniqueCalculatorType</span><span class="o">::</span><span class="n">ArrayType</span> <span class="n">uniqueVals</span> <span class="o">=</span> <span class="n">uniqueCalculator</span><span class="o">-&gt;</span><span class="n">GetUniqueValues</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">uniqueVals</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;No label value found!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Labels are &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">UniqueCalculatorType</span><span class="o">::</span><span class="n">ArrayType</span><span class="o">::</span><span class="n">const_iterator</span> <span class="n">uvIt</span> <span class="o">=</span> <span class="n">uniqueVals</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">uvIt</span> <span class="o">!=</span> <span class="n">uniqueVals</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="o">*</span><span class="n">uvIt</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">uvIt</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="n">uvIt</span> <span class="o">=</span> <span class="n">uniqueVals</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">uvIt</span> <span class="o">!=</span> <span class="n">uniqueVals</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">labelParameters</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">uvIt</span><span class="p">))</span> <span class="o">==</span> <span class="n">labelParameters</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+        <span class="n">spectraParameters</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">uvIt</span><span class="p">))</span> <span class="o">==</span> <span class="n">spectraParameters</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">LabelType</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">uvIt</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;label &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="o">*</span><span class="n">uvIt</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; not found in &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">lpfname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="o">++</span><span class="n">uvIt</span><span class="p">;</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// Mask image is read. If cloud mask is filename is given, a new mask image is generated with masks concatenation.</span>
+
+
+  <span class="n">MaskReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">miReader</span> <span class="o">=</span> <span class="n">MaskReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">miReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">mifname</span><span class="p">);</span>
+  <span class="n">miReader</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+  <span class="n">MaskImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">maskImage</span> <span class="o">=</span> <span class="n">miReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">cmifname</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span>
+  <span class="p">{</span>
+
+    <span class="n">MaskReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">cmiReader</span> <span class="o">=</span> <span class="n">MaskReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">cmiReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">cmifname</span><span class="p">);</span>
+    <span class="n">cmiReader</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+
+    <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">OrImageFilter</span><span class="o">&lt;</span><span class="n">MaskImageType</span><span class="p">,</span> <span class="n">MaskImageType</span><span class="p">,</span> <span class="n">MaskImageType</span><span class="o">&gt;</span> <span class="n">OrType</span><span class="p">;</span>
+    <span class="n">OrType</span><span class="o">::</span><span class="n">Pointer</span>                                                         <span class="n">orfilter</span> <span class="o">=</span> <span class="n">OrType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+    <span class="n">orfilter</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">miReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">orfilter</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">cmiReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+    <span class="n">orfilter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+    <span class="n">maskImage</span> <span class="o">=</span> <span class="n">orfilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// A test is done. All images must have the same size.</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">laiImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">labelImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span>
+      <span class="n">laiImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">labelImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span>
+      <span class="n">laiImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">maskImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span>
+      <span class="n">laiImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">maskImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetSize</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Image of labels, mask and LAI image must have the same size&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// Satellite RSR (Reduced Spectral Response) is defined using filename and band number given by command line arguments.</span>
+
+  <span class="n">SatRSRType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">satRSR</span> <span class="o">=</span> <span class="n">SatRSRType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">satRSR</span><span class="o">-&gt;</span><span class="n">SetNbBands</span><span class="p">(</span><span class="n">nbBands</span><span class="p">);</span>
+  <span class="n">satRSR</span><span class="o">-&gt;</span><span class="n">SetSortBands</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+  <span class="n">satRSR</span><span class="o">-&gt;</span><span class="n">Load</span><span class="p">(</span><span class="n">rsfname</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nbBands</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">satRSR</span><span class="o">-&gt;</span><span class="n">GetRSR</span><span class="p">())[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">GetInterval</span><span class="p">().</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">satRSR</span><span class="o">-&gt;</span><span class="n">GetRSR</span><span class="p">())[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">GetInterval</span><span class="p">().</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// At this step all initialization have been done. The next step is to implement and initialize simulation functor \code{ProsailSimulatorFunctor}.</span>
+
+  <span class="n">SimuFunctorType</span> <span class="n">simuFunctor</span><span class="p">;</span>
+  <span class="n">simuFunctor</span><span class="p">.</span><span class="n">SetLabelParameters</span><span class="p">(</span><span class="n">labelParameters</span><span class="p">);</span>
+  <span class="n">simuFunctor</span><span class="p">.</span><span class="n">SetLabelSpectra</span><span class="p">(</span><span class="n">spectraParameters</span><span class="p">);</span>
+  <span class="n">simuFunctor</span><span class="p">.</span><span class="n">SetAcquisitionParameters</span><span class="p">(</span><span class="n">acquistionPars</span><span class="p">);</span>
+  <span class="n">simuFunctor</span><span class="p">.</span><span class="n">SetRSR</span><span class="p">(</span><span class="n">satRSR</span><span class="p">);</span>
+  <span class="n">simuFunctor</span><span class="p">.</span><span class="n">SetInvertedMask</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+
+  <span class="c1">// Inputs and Functor are plugged to simulator filter.</span>
+  <span class="n">SimulatorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">simulator</span> <span class="o">=</span> <span class="n">SimulatorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">simulator</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">laiImage</span><span class="p">);</span>
+  <span class="n">simulator</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">labelImage</span><span class="p">);</span>
+  <span class="n">simulator</span><span class="o">-&gt;</span><span class="n">SetInput3</span><span class="p">(</span><span class="n">maskImage</span><span class="p">);</span>
+  <span class="n">simulator</span><span class="o">-&gt;</span><span class="n">SetFunctor</span><span class="p">(</span><span class="n">simuFunctor</span><span class="p">);</span>
+  <span class="n">simulator</span><span class="o">-&gt;</span><span class="n">SetNumberOfOutputBands</span><span class="p">(</span><span class="n">nbBands</span><span class="p">);</span>
+
+  <span class="c1">//  The invocation of the \code{Update()} method triggers the</span>
+  <span class="c1">//  execution of the pipeline.</span>
+
+  <span class="n">simulator</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+
+  <span class="c1">// Write output image to disk</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">SimulatedImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>                              <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outfname</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">simulator</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// writer-&gt;SetBufferNumberOfLinesDivisions(nbStreams);</span>
+
+  <span class="n">otb</span><span class="o">::</span><span class="n">StandardWriterWatcher</span> <span class="n">watcher</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="s">&quot;Simulation&quot;</span><span class="p">);</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../DimensionReduction.html" class="btn btn-neutral float-right" title="DimensionReduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ProsailModel.html" class="btn btn-neutral" title="ProsailModel.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

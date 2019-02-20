@@ -1,0 +1,175 @@
+.. _app-TrainDimensionalityReduction:
+
+TrainDimensionalityReduction
+============================
+
+
+Train a dimensionality reduction model
+
+Description
+-----------
+
+Trainer for dimensionality reduction algorithms (autoencoders, PCA, SOM). All input samples are used to compute the model, like other machine learning models.
+The model can be used in the :ref:`app-ImageDimensionalityReduction` and :ref:`app-VectorDimensionalityReduction` applications.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input and output data
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows setting input and output data.
+
+**Input Vector Data** :code:`-io.vd vectorfile` *Mandatory* |br|
+Input geometries used for training (note: all geometries from the layer will be used)
+
+**Output model** :code:`-io.out filename [dtype]` *Mandatory* |br|
+Output file containing the estimated model (.txt format).
+
+**Input XML image statistics file** :code:`-io.stats filename [dtype]` |br|
+XML file containing mean and variance of each feature.
+
+
+
+------------
+
+**Field names to be used for training** :code:`-feat string1 string2...` *Mandatory* |br|
+List of field names in the input vector data used as features for training.
+
+**algorithm to use for the training** :code:`-algorithm [som|autoencoder|pca]` *Default value: som* |br|
+Choice of the dimensionality reduction algorithm to use for the training.
+
+* **OTB SOM** |br| This group of parameters allows setting SOM parameters. 
+
+* **Shark Autoencoder** |br| This group of parameters allows setting Shark autoencoder parameters. 
+
+* **Shark PCA** |br| This group of parameters allows setting Shark PCA parameters. 
+
+
+
+OTB SOM options
+^^^^^^^^^^^^^^^
+
+**Map size** :code:`-algorithm.som.s string1 string2...` *Default value: 10 10* |br|
+Sizes of the SOM map (one per dimension). For instance, [12;15] means a 2D map of size 12x15. Support2D to 5D maps.
+
+**Neighborhood sizes** :code:`-algorithm.som.n string1 string2...` *Default value: 3 3* |br|
+Sizes of the initial neighborhood in the SOM map (one per dimension). The number of sizes should be the same as the map sizes
+
+**NumberIteration** :code:`-algorithm.som.ni int` *Default value: 5* |br|
+Number of iterations for SOM learning
+
+**BetaInit** :code:`-algorithm.som.bi float` *Default value: 1* |br|
+Initial learning coefficient
+
+**BetaFinal** :code:`-algorithm.som.bf float` *Default value: 0.1* |br|
+Final learning coefficient
+
+**InitialValue** :code:`-algorithm.som.iv float` *Default value: 10* |br|
+Maximum initial neuron weight
+
+Shark Autoencoder options
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Maximum number of iterations during training** :code:`-algorithm.autoencoder.nbiter int` *Default value: 100* |br|
+The maximum number of iterations used during training.
+
+**Maximum number of iterations during training** :code:`-algorithm.autoencoder.nbiterfinetuning int` *Default value: 0* |br|
+The maximum number of iterations used during fine tuning of the whole network.
+
+**Epsilon** :code:`-algorithm.autoencoder.epsilon float` *Default value: 0* |br|
+Epsilon
+
+**Weight initialization factor** :code:`-algorithm.autoencoder.initfactor float` *Default value: 1* |br|
+Parameter that control the weight initialization of the autoencoder
+
+**Size** :code:`-algorithm.autoencoder.nbneuron string1 string2...` *Mandatory* |br|
+The number of neurons in each hidden layer.
+
+**Strength of the regularization** :code:`-algorithm.autoencoder.regularization string1 string2...` *Mandatory* |br|
+Strength of the L2 regularization used during training
+
+**Strength of the noise** :code:`-algorithm.autoencoder.noise string1 string2...` *Mandatory* |br|
+Strength of the noise
+
+**Sparsity parameter** :code:`-algorithm.autoencoder.rho string1 string2...` *Mandatory* |br|
+Sparsity parameter
+
+**Sparsity regularization strength** :code:`-algorithm.autoencoder.beta string1 string2...` *Mandatory* |br|
+Sparsity regularization strength
+
+**Learning curve** :code:`-algorithm.autoencoder.learningcurve filename [dtype]` |br|
+Learning error values
+
+Shark PCA options
+^^^^^^^^^^^^^^^^^
+
+**Dimension of the output of the pca transformation** :code:`-algorithm.pca.dim int` *Default value: 10* |br|
+Dimension of the output of the pca transformation.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_TrainDimensionalityReduction -io.vd cuprite_samples.sqlite -io.out model.som -algorithm som -algorithm.som.s 10 10 -algorithm.som.n 3 3 -algorithm.som.ni 5 -algorithm.som.bi 1 -algorithm.som.bf 0.1 -algorithm.som.iv 10 -feat value_0 value_1 value_2 value_3 value_4 value_5 value_6 value_7 value_8 value_9
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("TrainDimensionalityReduction")
+
+	app.SetParameterString("io.vd", "cuprite_samples.sqlite")
+	app.SetParameterString("io.out", "model.som")
+	app.SetParameterString("algorithm","som")
+	app.SetParameterStringList("algorithm.som.s", ['10', '10'])
+	app.SetParameterStringList("algorithm.som.n", ['3', '3'])
+	app.SetParameterInt("algorithm.som.ni", 5)
+	app.SetParameterFloat("algorithm.som.bi", 1)
+	app.SetParameterFloat("algorithm.som.bf", 0.1)
+	app.SetParameterFloat("algorithm.som.iv", 10)
+	app.SetParameterStringList("feat", ['value_0', 'value_1', 'value_2', 'value_3', 'value_4', 'value_5', 'value_6', 'value_7', 'value_8', 'value_9'])
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-ImageDimensionalityReduction`, :ref:`app-VectorDimensionalityReduction`

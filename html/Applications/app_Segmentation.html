@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Segmentation &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SmallRegionsMerging" href="app_SmallRegionsMerging.html" />
+    <link rel="prev" title="OGRLayerClassifier" href="app_OGRLayerClassifier.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Segmentation.html">Segmentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeOGRLayersFeaturesStatistics.html">ComputeOGRLayersFeaturesStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ConnectedComponentSegmentation.html">ConnectedComponentSegmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_HooverCompareSegmentation.html">HooverCompareSegmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LSMSSegmentation.html">LSMSSegmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LSMSSmallRegionsMerging.html">LSMSSmallRegionsMerging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LSMSVectorization.html">LSMSVectorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LargeScaleMeanShift.html">LargeScaleMeanShift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_OGRLayerClassifier.html">OGRLayerClassifier</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Segmentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_SmallRegionsMerging.html">SmallRegionsMerging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Segmentation.html">Segmentation</a> &raquo;</li>
+        
+      <li>Segmentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_Segmentation.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="segmentation">
+<span id="app-segmentation"></span><h1>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h1>
+<p>Performs segmentation of an image, and output either a raster or a vector file. In vector mode, large input datasets are supported.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application allows one to perform various segmentation algorithms on a multispectral image. Available segmentation algorithms are two different versions of Mean-Shift segmentation algorithm (one being multi-threaded), simple pixel based connected components according to a user-defined criterion, and watershed from the gradient of the intensity (norm of spectral bands vector). The application has two different modes that affects the nature of its output.</p>
+<p>In raster mode, the output of the application is a classical image of unique labels identifying the segmented regions. The labeled output can be passed to the <a class="reference internal" href="app_ColorMapping.html#app-colormapping"><span class="std std-ref">ColorMapping</span></a> application to render regions with contrasted colours. Please note that this mode loads the whole input image into memory, and as such can not handle large images.</p>
+<p>To segment large data, one can use the vector mode. In this case, the output of the application is a vector file or database. The input image is split into tiles (whose size can be set using the tilesize parameter), and each tile is loaded, segmented with the chosen algorithm, vectorized, and written into the output file or database. This piece-wise behavior ensure that memory will never get overloaded, and that images of any size can be processed. There are few more options in the vector mode. The simplify option allows simplifying the geometry (i.e. remove nodes in polygons) according to a user-defined tolerance. The stitch option tries to stitch together the polygons corresponding to segmented region that may have been split by the tiling scheme.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#mean-shift-options" id="id1">Mean-Shift options</a></li>
+<li><a class="reference internal" href="#connected-components-options" id="id2">Connected components options</a></li>
+<li><a class="reference internal" href="#watershed-options" id="id3">Watershed options</a></li>
+<li><a class="reference internal" href="#morphological-profiles-based-segmentation-options" id="id4">Morphological profiles based segmentation options</a></li>
+<li><a class="reference internal" href="#tile-based-large-scale-segmentation-with-vector-output-options" id="id5">Tile-based large-scale segmentation with vector output options</a></li>
+<li><a class="reference internal" href="#standard-segmentation-with-labeled-raster-output-options" id="id6">Standard segmentation with labeled raster output options</a></li>
+</ul>
+</div>
+<p><strong>Input Image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The input image to segment</p>
+<p><strong>Segmentation algorithm</strong> <code class="code docutils literal notranslate"><span class="pre">-filter</span> <span class="pre">[meanshift|cc|watershed|mprofiles]</span></code> <em>Default value: meanshift</em> <br />
+Choice of segmentation algorithm (mean-shift by default)</p>
+<ul class="simple">
+<li><strong>Mean-Shift</strong> <br /> OTB implementation of the Mean-Shift algorithm (multi-threaded).</li>
+<li><strong>Connected components</strong> <br /> Simple pixel-based connected-components algorithm with a user-defined connection condition.</li>
+<li><strong>Watershed</strong> <br /> The traditional watershed algorithm. The height function is the gradient magnitude of the amplitude (square root of the sum of squared bands).</li>
+<li><strong>Morphological profiles based segmentation</strong> <br /> Segmentation based on morphological profiles, as described in Martino Pesaresi and Jon Alti Benediktsson, Member, IEEE: A new approach for the morphological segmentation of high resolution satellite imagery. IEEE Transactions on geoscience and remote sensing, vol. 39, NO. 2, February 2001, p. 309-320.</li>
+</ul>
+<div class="section" id="mean-shift-options">
+<h3><a class="toc-backref" href="#id1">Mean-Shift options</a><a class="headerlink" href="#mean-shift-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Spatial radius</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.meanshift.spatialr</span> <span class="pre">int</span></code> <em>Default value: 5</em> <br />
+Spatial radius of the neighborhood.</p>
+<p><strong>Range radius</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.meanshift.ranger</span> <span class="pre">float</span></code> <em>Default value: 15</em> <br />
+Range radius defining the radius (expressed in radiometry unit) in the multispectral space.</p>
+<p><strong>Mode convergence threshold</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.meanshift.thres</span> <span class="pre">float</span></code> <em>Default value: 0.1</em> <br />
+Algorithm iterative scheme will stop if mean-shift vector is below this threshold or if iteration number reached maximum number of iterations.</p>
+<p><strong>Maximum number of iterations</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.meanshift.maxiter</span> <span class="pre">int</span></code> <em>Default value: 100</em> <br />
+Algorithm iterative scheme will stop if convergence hasn’t been reached after the maximum number of iterations.</p>
+<p><strong>Minimum region size</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.meanshift.minsize</span> <span class="pre">int</span></code> <em>Default value: 100</em> <br />
+Minimum size of a region (in pixel unit) in segmentation. Smaller clusters will be merged to the neighboring cluster with the closest radiometry. If set to 0 no pruning is done.</p>
+</div>
+<div class="section" id="connected-components-options">
+<h3><a class="toc-backref" href="#id2">Connected components options</a><a class="headerlink" href="#connected-components-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Condition</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.cc.expr</span> <span class="pre">string</span></code> <em>Mandatory</em> <br />
+User defined connection condition, written as a mathematical expression. Available variables are p(i)b(i), intensity_p(i) and distance (example of expression: distance &lt; 10 )</p>
+</div>
+<div class="section" id="watershed-options">
+<h3><a class="toc-backref" href="#id3">Watershed options</a><a class="headerlink" href="#watershed-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Depth Threshold</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.watershed.threshold</span> <span class="pre">float</span></code> <em>Default value: 0.01</em> <br />
+Depth threshold Units in percentage of the maximum depth in the image.</p>
+<p><strong>Flood Level</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.watershed.level</span> <span class="pre">float</span></code> <em>Default value: 0.1</em> <br />
+flood level for generating the merge tree from the initial segmentation (between 0 and 1)</p>
+</div>
+<div class="section" id="morphological-profiles-based-segmentation-options">
+<h3><a class="toc-backref" href="#id4">Morphological profiles based segmentation options</a><a class="headerlink" href="#morphological-profiles-based-segmentation-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Profile Size</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.mprofiles.size</span> <span class="pre">int</span></code> <em>Default value: 5</em> <br />
+Size of the profiles</p>
+<p><strong>Initial radius</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.mprofiles.start</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Initial radius of the structuring element (in pixels)</p>
+<p><strong>Radius step</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.mprofiles.step</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Radius step along the profile (in pixels)</p>
+<p><strong>Threshold of the final decision rule</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.mprofiles.sigma</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Profiles values under the threshold will be ignored.</p>
+<hr class="docutils" />
+<p><strong>Processing mode</strong> <code class="code docutils literal notranslate"><span class="pre">-mode</span> <span class="pre">[vector|raster]</span></code> <em>Default value: vector</em> <br />
+Choice of processing mode, either raster or large-scale.</p>
+<ul class="simple">
+<li><strong>Tile-based large-scale segmentation with vector output</strong> <br /> In this mode, the application will output a vector file or database, and process the input image piecewise. This allows performing segmentation of very large images.</li>
+<li><strong>Standard segmentation with labeled raster output</strong> <br /> In this mode, the application will output a standard labeled raster. This mode can not handle large data.</li>
+</ul>
+</div>
+<div class="section" id="tile-based-large-scale-segmentation-with-vector-output-options">
+<h3><a class="toc-backref" href="#id5">Tile-based large-scale segmentation with vector output options</a><a class="headerlink" href="#tile-based-large-scale-segmentation-with-vector-output-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Output vector file</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.out</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The output vector file or database (name can be anything understood by OGR)</p>
+<p><strong>Writing mode for the output vector file</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.outmode</span> <span class="pre">[ulco|ovw|ulovw|ulu]</span></code> <em>Default value: ulco</em> <br />
+This allows one to set the writing behaviour for the output vector file. Please note that the actual behaviour depends on the file format.</p>
+<ul class="simple">
+<li><strong>Update output vector file, only allow creating new layers</strong> <br /> The output vector file is opened in update mode if existing. If the output layer already exists, the application stops, leaving it untouched.</li>
+<li><strong>Overwrite output vector file if existing.</strong> <br /> If the output vector file already exists, it is completely destroyed (including all its layers) and recreated from scratch.</li>
+<li><strong>Update output vector file, overwrite existing layer</strong> <br /> The output vector file is opened in update mode if existing. If the output layer already exists, it si completely destroyed and recreated from scratch.</li>
+<li><strong>Update output vector file, update existing layer</strong> <br /> The output vector file is opened in update mode if existing. If the output layer already exists, the new geometries are appended to the layer.</li>
+</ul>
+<p><strong>Mask Image</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.inmask</span> <span class="pre">image</span></code> <br />
+Only pixels whose mask value is strictly positive will be segmented.</p>
+<p><strong>8-neighbor connectivity</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.neighbor</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+Activate 8-Neighborhood connectivity (default is 4).</p>
+<p><strong>Stitch polygons</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.stitch</span> <span class="pre">bool</span></code> <em>Default value: true</em> <br />
+Scan polygons on each side of tiles and stitch polygons which connect by more than one pixel.</p>
+<p><strong>Minimum object size</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.minsize</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Objects whose size is below the minimum object size (area in pixels) will be ignored during vectorization.</p>
+<p><strong>Simplify polygons</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.simplify</span> <span class="pre">float</span></code> <em>Default value: 0.1</em> <br />
+Simplify polygons according to a given tolerance (in pixel). This option allows reducing the size of the output file or database.</p>
+<p><strong>Layer name</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.layername</span> <span class="pre">string</span></code> <em>Default value: layer</em> <br />
+Name of the layer in the vector file or database (default is Layer).</p>
+<p><strong>Geometry index field name</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.fieldname</span> <span class="pre">string</span></code> <em>Default value: DN</em> <br />
+Name of the field holding the geometry index in the output vector file or database.</p>
+<p><strong>Tiles size</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.tilesize</span> <span class="pre">int</span></code> <em>Default value: 1024</em> <br />
+User defined tiles size for tile-based segmentation. Optimal tile size is selected according to available RAM if null.</p>
+<p><strong>Starting geometry index</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.startlabel</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Starting value of the geometry index field</p>
+<p><strong>OGR options for layer creation</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.vector.ogroptions</span> <span class="pre">string1</span> <span class="pre">string2...</span></code> <br />
+A list of layer creation options in the form KEY=VALUE that will be passed directly to OGR without any validity checking. Options may depend on the file format, and can be found in OGR documentation.</p>
+</div>
+<div class="section" id="standard-segmentation-with-labeled-raster-output-options">
+<h3><a class="toc-backref" href="#id6">Standard segmentation with labeled raster output options</a><a class="headerlink" href="#standard-segmentation-with-labeled-raster-output-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Output labeled image</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.raster.out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The output labeled image.</p>
+<hr class="docutils" />
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of use with vector mode and watershed segmentation</span>
+otbcli_Segmentation -in QB_Toulouse_Ortho_PAN.tif -mode vector -mode.vector.out SegmentationVector.sqlite -filter watershed
+
+<span class="c1"># Example of use with raster mode and mean-shift segmentation</span>
+otbcli_Segmentation -in QB_Toulouse_Ortho_PAN.tif -mode raster -mode.raster.out SegmentationRaster.tif uint16 -filter meanshift
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of use with vector mode and watershed segmentation</span>
+<span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;Segmentation&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;QB_Toulouse_Ortho_PAN.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span><span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;mode.vector.out&quot;</span><span class="p">,</span> <span class="s2">&quot;SegmentationVector.sqlite&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;filter&quot;</span><span class="p">,</span><span class="s2">&quot;watershed&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of use with raster mode and mean-shift segmentation</span>
+<span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;Segmentation&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;QB_Toulouse_Ortho_PAN.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span><span class="s2">&quot;raster&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;mode.raster.out&quot;</span><span class="p">,</span> <span class="s2">&quot;SegmentationRaster.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterOutputImagePixelType</span><span class="p">(</span><span class="s2">&quot;mode.raster.out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;filter&quot;</span><span class="p">,</span><span class="s2">&quot;meanshift&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>In raster mode, the application can not handle large input images. Stitching step of vector mode might become slow with very large input images.
+MeanShift filter results depends on the number of threads used.
+Watershed and multiscale geodesic morphology segmentation will be performed on the amplitude  of the input image.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">MeanShift:ref:<cite>app-Segmentation</cite></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_SmallRegionsMerging.html" class="btn btn-neutral float-right" title="SmallRegionsMerging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_OGRLayerClassifier.html" class="btn btn-neutral" title="OGRLayerClassifier" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

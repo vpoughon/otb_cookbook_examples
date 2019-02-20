@@ -1,0 +1,31 @@
+.. _cpp-examples:
+
+Examples
+========
+
+.. toctree::
+	:maxdepth: 3
+
+
+	Examples/Classification.rst
+	Examples/OBIA.rst
+	Examples/Radiometry.rst
+	Examples/BasicFilters.rst
+	Examples/IO.rst
+	Examples/Image.rst
+	Examples/Patented.rst
+	Examples/Fusion.rst
+	Examples/Learning.rst
+	Examples/Installation.rst
+	Examples/Application.rst
+	Examples/DisparityMap.rst
+	Examples/Hyperspectral.rst
+	Examples/FeatureExtraction.rst
+	Examples/Simulation.rst
+	Examples/DimensionReduction.rst
+	Examples/Projections.rst
+	Examples/Tutorials.rst
+	Examples/Markov.rst
+	Examples/Filtering.rst
+	Examples/Iterators.rst
+	Examples/ChangeDetection.rst

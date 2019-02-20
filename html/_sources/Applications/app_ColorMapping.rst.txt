@@ -1,0 +1,196 @@
+.. _app-ColorMapping:
+
+ColorMapping
+============
+
+
+Map a label image to 8-bits RGB using look-up tables.
+
+Description
+-----------
+
+Map a label image to a 8-bits RGB image (both ways) using different methods:
+
+* **Custom**: use a custom look-up table. The look-up table is loaded from a text file where each line describes an entry. The typical use of this method is to colorise a classification map.
+* **Continuous**: Map a range of values in a scalar input image to a colored image using continuous look-up table, in order to enhance image interpretation. Several look-up tables can been chosen with different color ranges.
+* **Optimal**: Compute an optimal look-up table. When processing a segmentation label image (label to color), the color difference between adjacent segmented regions is maximized. When processing an unknown color image (color to label), all the present colors are mapped to a continuous label list.
+* **Support image**: Use a color support image to associate an average color to each region.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image filename
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image filename
+
+**Operation** :code:`-op [labeltocolor|colortolabel]` *Default value: labeltocolor* |br|
+Selection of the operation to execute (default is: label to color).
+
+* **Label to color** |br| 
+
+* **Color to label** |br| 
+
+
+
+Color to label options
+^^^^^^^^^^^^^^^^^^^^^^
+
+**Not Found Label** :code:`-op.colortolabel.notfound int` *Default value: 404* |br|
+Label to use for unknown colors.
+
+
+
+------------
+
+**Color mapping method** :code:`-method [custom|continuous|optimal|image]` *Default value: custom* |br|
+Selection of color mapping methods and their parameters.
+
+* **Color mapping with custom labeled look-up table** |br| Apply a user-defined look-up table to a labeled image. Look-up table is loaded from a text file.
+
+* **Color mapping with continuous look-up table** |br| Apply a continuous look-up table to a range of input values.
+
+* **Compute an optimized look-up table** |br| [label to color] Compute an optimal look-up table such that neighboring labels in a segmentation are mapped to highly contrasted colors. [color to label] Searching all the colors present in the image to compute a continuous label list
+
+* **Color mapping with look-up table calculated on support image** |br| 
+
+
+
+Color mapping with custom labeled look-up table options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Look-up table file** :code:`-method.custom.lut filename [dtype]` *Mandatory* |br|
+An ASCII file containing the look-up table
+with one color per line
+(for instance the line '1 255 0 0' means that all pixels with label 1 will be replaced by RGB color 255 0 0)
+Lines beginning with a # are ignored
+
+Color mapping with continuous look-up table options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Look-up tables** :code:`-method.continuous.lut [red|green|blue|grey|hot|cool|spring|summer|autumn|winter|copper|jet|hsv|overunder|relief]` *Default value: red* |br|
+Available look-up tables.
+
+* **Red** |br| 
+
+* **Green** |br| 
+
+* **Blue** |br| 
+
+* **Grey** |br| 
+
+* **Hot** |br| 
+
+* **Cool** |br| 
+
+* **Spring** |br| 
+
+* **Summer** |br| 
+
+* **Autumn** |br| 
+
+* **Winter** |br| 
+
+* **Copper** |br| 
+
+* **Jet** |br| 
+
+* **HSV** |br| 
+
+* **OverUnder** |br| 
+
+* **Relief** |br| 
+
+
+
+**Mapping range lower value** :code:`-method.continuous.min float` *Default value: 0* |br|
+Set the lower input value of the mapping range.
+
+**Mapping range higher value** :code:`-method.continuous.max float` *Default value: 255* |br|
+Set the higher input value of the mapping range.
+
+Compute an optimized look-up table options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Background label** :code:`-method.optimal.background int` *Default value: 0* |br|
+Value of the background label
+
+Color mapping with look-up table calculated on support image options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Support Image** :code:`-method.image.in image` *Mandatory* |br|
+Support image filename. For each label, the LUT is calculated from the mean pixel value in the support image, over the corresponding labeled areas. First of all, the support image is normalized with extrema rejection
+
+**NoData value** :code:`-method.image.nodatavalue float` *Default value: 0* |br|
+NoData value for each channel of the support image, which will not be handled in the LUT estimation. If NOT checked, ALL the pixel values of the support image will be handled in the LUT estimation.
+
+**lower quantile** :code:`-method.image.low int` *Default value: 2* |br|
+lower quantile for image normalization
+
+**upper quantile** :code:`-method.image.up int` *Default value: 2* |br|
+upper quantile for image normalization
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ColorMapping -in ROI_QB_MUL_1_SVN_CLASS_MULTI.png -method custom -method.custom.lut ROI_QB_MUL_1_SVN_CLASS_MULTI_PNG_ColorTable.txt -out Colorized_ROI_QB_MUL_1_SVN_CLASS_MULTI.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ColorMapping")
+
+	app.SetParameterString("in", "ROI_QB_MUL_1_SVN_CLASS_MULTI.png")
+	app.SetParameterString("method","custom")
+	app.SetParameterString("method.custom.lut", "ROI_QB_MUL_1_SVN_CLASS_MULTI_PNG_ColorTable.txt")
+	app.SetParameterString("out", "Colorized_ROI_QB_MUL_1_SVN_CLASS_MULTI.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The segmentation optimal method does not support streaming, and thus large images. The operation color to label is not implemented for the methods continuous LUT and support image LUT.
+
+ColorMapping using support image is not threaded.
+
+See also
+--------
+
+| ImageSVMClassifier

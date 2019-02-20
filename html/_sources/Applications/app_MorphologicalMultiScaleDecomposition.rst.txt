@@ -1,0 +1,130 @@
+.. _app-MorphologicalMultiScaleDecomposition:
+
+MorphologicalMultiScaleDecomposition
+====================================
+
+
+Perform a geodesic morphology based image analysis on an input image channel
+
+Description
+-----------
+
+This application recursively apply geodesic decomposition. 
+
+This algorithm is derived from the following publication:
+
+Martino Pesaresi and Jon Alti Benediktsson, Member, IEEE: A new approach for the morphological segmentation of high resolution satellite imagery.
+IEEE Transactions on geoscience and remote sensing, vol. 39, NO. 2, February 2001, p. 309-320.
+
+It provides a geodesic decomposition of the input image, with the following scheme. Let :math:`f_0` denote the input image, :math:`\stackrel{\smile}{\mu}_{N}(f)` denote the convex membership function, :math:`\stackrel{\frown}{\mu}_{N}(f)` denote the concave membership function and :math:`\psi_{N}(f)` denote the leveling function, for a given radius :math:`N` as defined in the documentation
+of the GeodesicMorphologyDecompositionImageFilter. Let :math:`[N_{1},\ldots, N_{n}]` denote a range of increasing radius (or scales). The iterative decomposition is defined as follows:
+
+:math:`f_i` = :math:`\psi_{N_i}(f_{i-1})` 
+
+:math:`\stackrel{\frown}{f}_i` = :math:`\stackrel{\frown}{\mu}_{N_i}(f_i)` 
+
+:math:`\stackrel{\smile}{f}_i` = :math:`\stackrel{\smile}{\mu}_{N_i}(f_i)` 
+
+The :math:`\stackrel{\smile}{f}_{i}` and :math:`\stackrel{\frown}{f}_{i}` are membership function for the convex
+(resp. concave) objects whose size is comprised between :math:`N_{i-1}` and :math:`N_i`
+
+Output convex, concave and leveling images with B bands, where n is the number of levels.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to be classified.
+
+**Output Convex Image** :code:`-outconvex image [dtype]` *Mandatory* |br|
+The output convex image with N bands
+
+**Output Concave Image** :code:`-outconcave image [dtype]` *Mandatory* |br|
+The output concave concave with N bands
+
+**Output Image** :code:`-outleveling image [dtype]` *Mandatory* |br|
+The output leveling image with N bands
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index for input image
+
+**Structuring Element Type** :code:`-structype [ball|cross]` *Default value: ball* |br|
+Choice of the structuring element type
+
+* **Ball** |br| 
+
+* **Cross** |br| 
+
+
+
+**Initial radius** :code:`-radius int` *Default value: 5* |br|
+Initial radius of the structuring element (in pixels)
+
+**Radius step** :code:`-step int` *Default value: 1* |br|
+Radius step along the profile (in pixels)
+
+**Number of levels use for multi scale** :code:`-levels int` *Default value: 1* |br|
+Number of levels use for multi scale
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_MorphologicalMultiScaleDecomposition -in ROI_IKO_PAN_LesHalles.tif -structype ball -channel 1 -radius 2 -levels 2 -step 3 -outconvex convex.tif -outconcave concave.tif -outleveling leveling.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("MorphologicalMultiScaleDecomposition")
+
+	app.SetParameterString("in", "ROI_IKO_PAN_LesHalles.tif")
+	app.SetParameterString("structype","ball")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterInt("radius", 2)
+	app.SetParameterInt("levels", 2)
+	app.SetParameterInt("step", 3)
+	app.SetParameterString("outconvex", "convex.tif")
+	app.SetParameterString("outconcave", "concave.tif")
+	app.SetParameterString("outleveling", "leveling.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Generation of the multi scale decomposition is not streamable, pay attention to this fact when setting the number of iterating levels.
+
+See also
+--------
+
+| otbGeodesicMorphologyDecompositionImageFilter class

@@ -1,0 +1,110 @@
+.. _app-ConnectedComponentSegmentation:
+
+ConnectedComponentSegmentation
+==============================
+
+
+Connected component segmentation and object based image filtering of the input image according to user-defined criterions.
+
+Description
+-----------
+
+This application allows one to perform a masking, connected components segmentation and object based image filtering. First and optionally, a mask can be built based on user-defined criterions to select pixels of the image which will be segmented. Then a connected component segmentation is performed with a user defined criterion to decide whether two neighbouring pixels belong to the same segment or not. After this segmentation step, an object based image filtering is applied using another user-defined criterion reasoning on segment properties, like shape or radiometric attributes. Criterions are mathematical expressions analysed by the MuParser library (http://muparser.sourceforge.net/). For instance, expression "((b1>80) and intensity>95)" will merge two neighbouring pixel in a single segment if their intensity is more than 95 and their value in the first image band is more than 80. See parameters documentation for a list of available attributes. The output of the object based image filtering is vectorized and can be written in shapefile or KML format. If the input image is in raw geometry, resulting polygons will be transformed to WGS84 using sensor modelling before writing, to ensure consistency with GIS software. For this purpose, a Digital Elevation Model can be provided to the application. The whole processing is done on a per-tile basis for large images, so this application can handle images of arbitrary size.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The image to segment.
+
+**Output Shape** :code:`-out vectorfile` *Mandatory* |br|
+The segmentation shape.
+
+**Mask expression** :code:`-mask string` |br|
+Mask mathematical expression (only if support image is given)
+
+**Connected Component Expression** :code:`-expr string` *Mandatory* |br|
+Formula used for connected component segmentation
+
+**Minimum Object Size** :code:`-minsize int` *Default value: 2* |br|
+Min object size (area in pixel)
+
+**OBIA Expression** :code:`-obia string` |br|
+OBIA mathematical expression
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ConnectedComponentSegmentation -in ROI_QB_MUL_4.tif -mask "((b1>80)*intensity>95)" -expr "distance<10" -minsize 15 -obia "SHAPE_Elongation>8" -out ConnectedComponentSegmentation.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ConnectedComponentSegmentation")
+
+	app.SetParameterString("in", "ROI_QB_MUL_4.tif")
+	app.SetParameterString("mask", "((b1>80)*intensity>95)")
+	app.SetParameterString("expr", "distance<10")
+	app.SetParameterInt("minsize", 15)
+	app.SetParameterString("obia", "SHAPE_Elongation>8")
+	app.SetParameterString("out", "ConnectedComponentSegmentation.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Due to the tiling scheme in case of large images, some segments can be arbitrarily split across multiple tiles.
+
+

@@ -1,0 +1,134 @@
+.. _app-Smoothing:
+
+Smoothing
+=========
+
+
+Apply a smoothing filter to an image
+
+Description
+-----------
+
+This application applies a smoothing filter to an image. Three methodes can be used: a gaussian filter , a mean filter , or an anisotropic diffusion using the Perona-Malik algorithm.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image to smooth.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output smoothed image.
+
+**Smoothing Type** :code:`-type [mean|gaussian|anidif]` *Default value: anidif* |br|
+Smoothing kernel to apply
+
+* **Mean** |br| 
+
+* **Gaussian** |br| 
+
+* **Anisotropic Diffusion** |br| 
+
+
+
+Mean options
+^^^^^^^^^^^^
+
+**Radius** :code:`-type.mean.radius int` *Default value: 2* |br|
+Kernel's radius (in pixels)
+
+Gaussian options
+^^^^^^^^^^^^^^^^
+
+**Radius** :code:`-type.gaussian.radius float` *Default value: 2* |br|
+Standard deviation of the gaussian kernel used to filter the image
+
+Anisotropic Diffusion options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Time Step** :code:`-type.anidif.timestep float` *Default value: 0.125* |br|
+Time step that will be used to discretize the diffusion equation
+
+**Nb Iterations** :code:`-type.anidif.nbiter int` *Default value: 10* |br|
+Number of iterations needed to get the result
+
+**Conductance** :code:`-type.anidif.conductance float` *Default value: 1* |br|
+Controls the sensitivity of the conductance term in the diffusion equation. The lower it is the stronger the features will be preserved
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    # Image smoothing using a mean filter.
+    otbcli_Smoothing -in Romania_Extract.tif -out smoothedImage_mean.png uchar -type mean
+
+    # Image smoothing using an anisotropic diffusion filter.
+    otbcli_Smoothing -in Romania_Extract.tif -out smoothedImage_ani.png float -type anidif -type.anidif.timestep 0.1 -type.anidif.nbiter 5 -type.anidif.conductance 1.5
+
+
+From Python:
+
+.. code-block:: python
+
+	# Image smoothing using a mean filter.
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Smoothing")
+
+	app.SetParameterString("in", "Romania_Extract.tif")
+	app.SetParameterString("out", "smoothedImage_mean.png")
+	app.SetParameterOutputImagePixelType("out", 1)
+	app.SetParameterString("type","mean")
+
+	app.ExecuteAndWriteOutput()
+
+.. code-block:: python
+
+	# Image smoothing using an anisotropic diffusion filter.
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Smoothing")
+
+	app.SetParameterString("in", "Romania_Extract.tif")
+	app.SetParameterString("out", "smoothedImage_ani.png")
+	app.SetParameterOutputImagePixelType("out", 6)
+	app.SetParameterString("type","anidif")
+	app.SetParameterFloat("type.anidif.timestep", 0.1)
+	app.SetParameterInt("type.anidif.nbiter", 5)
+	app.SetParameterFloat("type.anidif.conductance", 1.5)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

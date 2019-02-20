@@ -1,0 +1,82 @@
+.. _app-LocalStatisticExtraction:
+
+LocalStatisticExtraction
+========================
+
+
+Computes local statistical moments on every pixel in the selected channel of the input image
+
+Description
+-----------
+
+This application computes the 4 local statistical moments on every pixel in the selected channel of the input image, over a specified neighborhood. The output image is multi band with one statistical moment (feature) per band. Thus, the 4 output features are the Mean, the Variance, the Skewness and the Kurtosis. They are provided in this exact order in the output image.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to compute the features on.
+
+**Feature Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image containing the local statistical moments.
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index
+
+**Neighborhood radius** :code:`-radius int` *Default value: 3* |br|
+The computational window radius.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_LocalStatisticExtraction -in qb_RoadExtract.tif -channel 1 -radius 3 -out Statistics.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("LocalStatisticExtraction")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterInt("radius", 3)
+	app.SetParameterString("out", "Statistics.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| otbRadiometricMomentsImageFunction class

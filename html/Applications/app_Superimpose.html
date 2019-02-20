@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Superimpose &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Learning" href="Learning.html" />
+    <link rel="prev" title="RigidTransformResample" href="app_RigidTransformResample.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Geometry.html">Geometry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_BundleToPerfectSensor.html">BundleToPerfectSensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ConvertCartoToGeoPoint.html">ConvertCartoToGeoPoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ConvertSensorToGeoPoint.html">ConvertSensorToGeoPoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_GeneratePlyFile.html">GeneratePlyFile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_GenerateRPCSensorModel.html">GenerateRPCSensorModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_GridBasedImageResampling.html">GridBasedImageResampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageEnvelope.html">ImageEnvelope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ObtainUTMZoneFromGeoPoint.html">ObtainUTMZoneFromGeoPoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_OrthoRectification.html">OrthoRectification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_Pansharpening.html">Pansharpening</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_RefineSensorModel.html">RefineSensorModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_RigidTransformResample.html">RigidTransformResample</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Superimpose</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Geometry.html">Geometry</a> &raquo;</li>
+        
+      <li>Superimpose</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_Superimpose.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="superimpose">
+<span id="app-superimpose"></span><h1>Superimpose<a class="headerlink" href="#superimpose" title="Permalink to this headline">¶</a></h1>
+<p>Using available image metadata, project one image onto another one</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application performs the projection of an image into the geometry of another one.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#elevation-management" id="id1">Elevation management</a></li>
+<li><a class="reference internal" href="#bicubic-interpolation-options" id="id2">Bicubic interpolation options</a></li>
+</ul>
+</div>
+<p><strong>Reference input</strong> <code class="code docutils literal notranslate"><span class="pre">-inr</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The input reference image.</p>
+<p><strong>The image to reproject</strong> <code class="code docutils literal notranslate"><span class="pre">-inm</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The image to reproject into the geometry of the reference input.</p>
+<p><strong>Output image</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Output reprojected image.</p>
+<div class="section" id="elevation-management">
+<h3><a class="toc-backref" href="#id1">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.</p>
+<p><strong>DEM directory</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.dem</span> <span class="pre">directory</span></code> <br />
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.</p>
+<p><strong>Geoid File</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.geoid</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd">https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd</a>).</p>
+<p><strong>Default elevation</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.default</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.</p>
+<hr class="docutils" />
+<p><strong>Spacing of the deformation field</strong> <code class="code docutils literal notranslate"><span class="pre">-lms</span> <span class="pre">float</span></code> <em>Default value: 4</em> <br />
+Generate a coarser deformation field with the given spacing</p>
+<p><strong>Fill Value</strong> <code class="code docutils literal notranslate"><span class="pre">-fv</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+Fill value for area outside the reprojected image</p>
+<p><strong>Mode</strong> <code class="code docutils literal notranslate"><span class="pre">-mode</span> <span class="pre">[default|phr]</span></code> <em>Default value: default</em> <br />
+Superimposition mode</p>
+<ul class="simple">
+<li><strong>Default mode</strong> <br /> Default superimposition mode : uses any projection reference or sensor model found in the images</li>
+<li><strong>Pleiades mode</strong> <br /> Pleiades superimposition mode, designed for the case of a P+XS bundle in SENSOR geometry. It uses a simple transform on the XS image : a scaling and a residual translation.</li>
+</ul>
+<p><strong>Interpolation</strong> <code class="code docutils literal notranslate"><span class="pre">-interpolator</span> <span class="pre">[bco|nn|linear]</span></code> <em>Default value: bco</em> <br />
+This group of parameters allows defining how the input image will be interpolated during resampling.</p>
+<ul class="simple">
+<li><strong>Bicubic interpolation</strong> <br /> Bicubic interpolation leads to very good image quality but is slow.</li>
+<li><strong>Nearest Neighbor interpolation</strong> <br /> Nearest neighbor interpolation leads to poor image quality, but it is very fast.</li>
+<li><strong>Linear interpolation</strong> <br /> Linear interpolation leads to average image quality but is quite fast</li>
+</ul>
+</div>
+<div class="section" id="bicubic-interpolation-options">
+<h3><a class="toc-backref" href="#id2">Bicubic interpolation options</a><a class="headerlink" href="#bicubic-interpolation-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Radius for bicubic interpolation</strong> <code class="code docutils literal notranslate"><span class="pre">-interpolator.bco.radius</span> <span class="pre">int</span></code> <em>Default value: 2</em> <br />
+This parameter allows controlling the size of the bicubic interpolation filter. If the target pixel size is higher than the input pixel size, increasing this parameter will reduce aliasing artifacts.</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_Superimpose -inr QB_Toulouse_Ortho_PAN.tif -inm QB_Toulouse_Ortho_XS.tif -out SuperimposedXS_to_PAN.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;Superimpose&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;inr&quot;</span><span class="p">,</span> <span class="s2">&quot;QB_Toulouse_Ortho_PAN.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;inm&quot;</span><span class="p">,</span> <span class="s2">&quot;QB_Toulouse_Ortho_XS.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;SuperimposedXS_to_PAN.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Learning.html" class="btn btn-neutral float-right" title="Learning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_RigidTransformResample.html" class="btn btn-neutral" title="RigidTransformResample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+.. _app-BundleToPerfectSensor:
+
+BundleToPerfectSensor
+=====================
+
+
+Perform P+XS pansharpening
+
+Description
+-----------
+
+This application performs P+XS pansharpening. The default mode use Pan and XS sensor models to estimate the transformation to superimpose XS over Pan before the fusion ("default mode"). The application provides also a PHR mode for Pleiades images which does not use sensor models as Pan and XS products are already coregistered but only estimate an affine transformation to superimpose XS over the Pan.Note that this option is automatically activated in case Pleiades images are detected as input.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input PAN Image** :code:`-inp image` *Mandatory* |br|
+Input panchromatic image.
+
+**Input XS Image** :code:`-inxs image` *Mandatory* |br|
+Input XS image.
+
+**Output image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image.
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Mode** :code:`-mode [default|phr]` *Default value: default* |br|
+Superimposition mode
+
+* **Default mode** |br| Default superimposition mode : uses any projection reference or sensor model found in the images
+
+* **Pleiades mode** |br| Pleiades superimposition mode, designed for the case of a P+XS bundle in SENSOR geometry. It uses a simple transform on the XS image : a scaling and a residual translation.
+
+
+
+**Algorithm** :code:`-method [rcs|lmvm|bayes]` *Default value: rcs* |br|
+Selection of the pan-sharpening method.
+
+* **RCS** |br| Simple RCS Pan sharpening operation.
+
+* **LMVM** |br| Local Mean and Variance Matching (LMVM) Pan sharpening.
+
+* **Bayesian** |br| Bayesian fusion.
+
+
+
+LMVM options
+^^^^^^^^^^^^
+
+**X radius** :code:`-method.lmvm.radiusx int` *Default value: 3* |br|
+Set the x radius of the sliding window.
+
+**Y radius** :code:`-method.lmvm.radiusy int` *Default value: 3* |br|
+Set the y radius of the sliding window.
+
+Bayesian options
+^^^^^^^^^^^^^^^^
+
+**Weight** :code:`-method.bayes.lambda float` *Default value: 0.9999* |br|
+Set the weighting value.
+
+**S coefficient** :code:`-method.bayes.s float` *Default value: 1* |br|
+Set the S coefficient.
+
+
+
+------------
+
+**Spacing of the deformation field** :code:`-lms float` *Default value: 4* |br|
+Spacing of the deformation field. Default is 10 times the PAN image spacing.
+
+**Interpolation** :code:`-interpolator [bco|nn|linear]` *Default value: bco* |br|
+This group of parameters allows defining how the input image will be interpolated during resampling.
+
+* **Bicubic interpolation** |br| Bicubic interpolation leads to very good image quality but is slow.
+
+* **Nearest Neighbor interpolation** |br| Nearest neighbor interpolation leads to poor image quality, but it is very fast.
+
+* **Linear interpolation** |br| Linear interpolation leads to average image quality but is quite fast
+
+
+
+Bicubic interpolation options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Radius for bicubic interpolation** :code:`-interpolator.bco.radius int` *Default value: 2* |br|
+This parameter allows controlling the size of the bicubic interpolation filter. If the target pixel size is higher than the input pixel size, increasing this parameter will reduce aliasing artifacts.
+
+
+
+------------
+
+**Fill Value** :code:`-fv float` *Default value: 0* |br|
+Fill value for area outside the reprojected image
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_BundleToPerfectSensor -inp QB_Toulouse_Ortho_PAN.tif -inxs QB_Toulouse_Ortho_XS.tif -out BundleToPerfectSensor.png uchar
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("BundleToPerfectSensor")
+
+	app.SetParameterString("inp", "QB_Toulouse_Ortho_PAN.tif")
+	app.SetParameterString("inxs", "QB_Toulouse_Ortho_XS.tif")
+	app.SetParameterString("out", "BundleToPerfectSensor.png")
+	app.SetParameterOutputImagePixelType("out", 1)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

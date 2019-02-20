@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OrthoRectificationExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="PlaceNameToLonLatExample.cxx" href="PlaceNameToLonLatExample.html" />
+    <link rel="prev" title="EstimateRPCSensorModelExample.cxx" href="EstimateRPCSensorModelExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Projections.html">Projections</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="GeometriesProjectionExample.html">GeometriesProjectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EstimateRPCSensorModelExample.html">EstimateRPCSensorModelExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">OrthoRectificationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PlaceNameToLonLatExample.html">PlaceNameToLonLatExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorDataExtractROIExample.html">VectorDataExtractROIExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorDataProjectionExample.html">VectorDataProjectionExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Projections.html">Projections</a> &raquo;</li>
+        
+      <li>OrthoRectificationExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Projections/OrthoRectificationExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="orthorectificationexample-cxx">
+<span id="example-orthorectificationexample"></span><h1>OrthoRectificationExample.cxx<a class="headerlink" href="#orthorectificationexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/OrthoRectificationExample.cxx?inline=false">OrthoRectificationExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// This example demonstrates the use of the</span>
+<span class="c1">// \doxygen{otb}{OrthoRectificationFilter}. This filter is intended to</span>
+<span class="c1">// orthorectify images which are in a distributor format with the</span>
+<span class="c1">// appropriate meta-data describing the sensor model. In this example,</span>
+<span class="c1">// we will choose to use an UTM projection for the output image.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step toward the use of these filters is to include the</span>
+<span class="c1">// proper header files: the one for the ortho-rectification filter and</span>
+<span class="c1">// the one defining the different projections available in OTB.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbOrthoRectificationFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMapProjections.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">11</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;input_filename&gt; &lt;output_filename&gt;  &lt;utm zone&gt; &lt;hemisphere N/S&gt; &lt;x_ground_upper_left_corner&gt; &lt;y_ground_upper_left_corner&gt; &lt;x_Size&gt; &lt;y_Size&gt; &quot;</span>
+                 <span class="s">&quot;&lt;x_groundSamplingDistance&gt; &lt;y_groundSamplingDistance&gt; (should be negative since origin is upper left)&gt;&quot;</span>
+              <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// We will start by defining the types for the images, the image file</span>
+  <span class="c1">// reader and the image file writer. The writer will be a</span>
+  <span class="c1">// \doxygen{otb}{ImageFileWriter} which will allow us to set</span>
+  <span class="c1">// the number of stream divisions we want to apply when writing the</span>
+  <span class="c1">// output image, which can be very large.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                    <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>              <span class="n">VectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="c1">// We can now proceed to declare the type for the ortho-rectification</span>
+  <span class="c1">// filter. The class \doxygen{otb}{OrthoRectificationFilter} is</span>
+  <span class="c1">// templated over the input and the output image types as well as over</span>
+  <span class="c1">// the cartographic projection. We define therefore the</span>
+  <span class="c1">// type of the projection we want, which is an UTM projection for this case.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">UtmInverseProjection</span>                                                             <span class="n">utmMapProjectionType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">OrthoRectificationFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="p">,</span> <span class="n">utmMapProjectionType</span><span class="o">&gt;</span> <span class="n">OrthoRectifFilterType</span><span class="p">;</span>
+
+  <span class="n">OrthoRectifFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">orthoRectifFilter</span> <span class="o">=</span> <span class="n">OrthoRectifFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// Now we need to</span>
+  <span class="c1">// instantiate the map projection, set the {\em zone} and {\em hemisphere}</span>
+  <span class="c1">// parameters and pass this projection to the orthorectification filter.</span>
+
+  <span class="n">utmMapProjectionType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">utmMapProjection</span> <span class="o">=</span> <span class="n">utmMapProjectionType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">utmMapProjection</span><span class="o">-&gt;</span><span class="n">SetZone</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]));</span>
+  <span class="n">utmMapProjection</span><span class="o">-&gt;</span><span class="n">SetHemisphere</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]));</span>
+  <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetMapProjection</span><span class="p">(</span><span class="n">utmMapProjection</span><span class="p">);</span>
+
+  <span class="c1">// We then wire the input image to the orthorectification filter.</span>
+
+  <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// Using the user-provided information, we define the output region</span>
+  <span class="c1">// for the image generated by the orthorectification filter.</span>
+  <span class="c1">// We also define the spacing of the deformation grid where actual</span>
+  <span class="c1">// deformation values are estimated. Choosing a bigger deformation field</span>
+  <span class="c1">// spacing will speed up computation.</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">start</span><span class="p">;</span>
+  <span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetOutputStartIndex</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">size</span><span class="p">;</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+  <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetOutputSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">SpacingType</span> <span class="n">spacing</span><span class="p">;</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span>
+  <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetOutputSpacing</span><span class="p">(</span><span class="n">spacing</span><span class="p">);</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">SpacingType</span> <span class="n">gridSpacing</span><span class="p">;</span>
+  <span class="n">gridSpacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+  <span class="n">gridSpacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span>
+  <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetDisplacementFieldSpacing</span><span class="p">(</span><span class="n">gridSpacing</span><span class="p">);</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">PointType</span> <span class="n">origin</span><span class="p">;</span>
+  <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">strtod</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">strtod</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetOutputOrigin</span><span class="p">(</span><span class="n">origin</span><span class="p">);</span>
+
+  <span class="c1">// We can now set plug the ortho-rectification filter to the writer</span>
+  <span class="c1">// and set the number of tiles we want to split the output image in</span>
+  <span class="c1">// for the writing step.</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetAutomaticTiledStreaming</span><span class="p">();</span>
+
+  <span class="c1">// Finally, we trigger the pipeline execution by calling the</span>
+  <span class="c1">// \code{Update()} method on the writer. Please note that the</span>
+  <span class="c1">// ortho-rectification filter is derived from the</span>
+  <span class="c1">// \doxygen{otb}{StreamingResampleImageFilter} in order to be able to</span>
+  <span class="c1">// compute the input image regions which are needed to build the</span>
+  <span class="c1">// output image. Since the resampler applies a geometric</span>
+  <span class="c1">// transformation (scale, rotation, etc.), this region computation is</span>
+  <span class="c1">// not trivial.</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PlaceNameToLonLatExample.html" class="btn btn-neutral float-right" title="PlaceNameToLonLatExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="EstimateRPCSensorModelExample.html" class="btn btn-neutral" title="EstimateRPCSensorModelExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

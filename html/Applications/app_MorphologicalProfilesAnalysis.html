@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MorphologicalProfilesAnalysis &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RadiometricIndices" href="app_RadiometricIndices.html" />
+    <link rel="prev" title="MorphologicalMultiScaleDecomposition" href="app_MorphologicalMultiScaleDecomposition.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_BinaryMorphologicalOperation.html">BinaryMorphologicalOperation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputePolylineFeatureFromImage.html">ComputePolylineFeatureFromImage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_DSFuzzyModelEstimation.html">DSFuzzyModelEstimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_EdgeExtraction.html">EdgeExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_GrayScaleMorphologicalOperation.html">GrayScaleMorphologicalOperation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_HaralickTextureExtraction.html">HaralickTextureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_HomologousPointsExtraction.html">HomologousPointsExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LineSegmentDetection.html">LineSegmentDetection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LocalStatisticExtraction.html">LocalStatisticExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MorphologicalClassification.html">MorphologicalClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MorphologicalMultiScaleDecomposition.html">MorphologicalMultiScaleDecomposition</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MorphologicalProfilesAnalysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_RadiometricIndices.html">RadiometricIndices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SFSTextureExtraction.html">SFSTextureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDataDSValidation.html">VectorDataDSValidation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Feature_Extraction.html">Feature Extraction</a> &raquo;</li>
+        
+      <li>MorphologicalProfilesAnalysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_MorphologicalProfilesAnalysis.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="morphologicalprofilesanalysis">
+<span id="app-morphologicalprofilesanalysis"></span><h1>MorphologicalProfilesAnalysis<a class="headerlink" href="#morphologicalprofilesanalysis" title="Permalink to this headline">¶</a></h1>
+<p>Performs morphological profiles analysis on an input image channel.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This algorithm is derived from the following publication:</p>
+<p>Martino Pesaresi and Jon Alti Benediktsson, Member, IEEE: A new approach
+for the morphological segmentation of high resolution satellite imagery.
+IEEE Transactions on geoscience and remote sensing, vol. 39, NO. 2,
+February 2001, p. 309-320.</p>
+<p>Depending of the profile selection, the application provides:</p>
+<ul class="simple">
+<li>The multi scale geodesic morphological opening or closing profile of the input image.</li>
+<li>The multi scale derivative of the opening or closing profile.</li>
+<li>The parameter (called characteristic) of the maximum derivative value of the multi scale closing or opening profile for which this maxima occurs.</li>
+<li>The labeled classification of the input image.</li>
+</ul>
+<p>The behavior of the classification is:</p>
+<p>Given <img class="math" src="../_images/math/fdf6501bec5987984965f15d09235c645fe06ccb.png" alt="x_1"/> and <img class="math" src="../_images/math/1f1a225cd22b81817fc48b3a84dcf8f1a9e145d8.png" alt="x_2"/> two membership values,
+<img class="math" src="../_images/math/40ce0cc9c91b6693dfdeec858ce4cc682d3854ac.png" alt="L_1, L_2"/> two labels associated, and <img class="math" src="../_images/math/011e5790a6c33043ceadca81d9657dde6c61d769.png" alt="\sigma"/> a tolerance
+value, the following decision rule is applied:</p>
+<p><img class="math" src="../_images/math/73c0708a66eadcf8cda1a8b3827b18ab872e9d8c.png" alt="L = \begin{cases}  L_{1} &amp; : x_{1}&gt;x_{2} \quad and \quad x_{1}&gt;\sigma \\ L_{2} &amp; : x_{2}&gt;x_{1} \quad and \quad x_{2}&gt;\sigma \\ 0   &amp; : otherwise. \end{cases}"/></p>
+<p>The output image can be:- A <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> multi band image for the opening/closing normal or derivative profiles.
+- A mono band image for the opening/closing characteristics.
+- A labeled image for the classification.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#classification-options" id="id1">classification options</a></li>
+</ul>
+</div>
+<p><strong>Input Image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The input image.</p>
+<p><strong>Output Image</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The output image.</p>
+<p><strong>Selected Channel</strong> <code class="code docutils literal notranslate"><span class="pre">-channel</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+The selected channel index for input image</p>
+<p><strong>Structuring Element Type</strong> <code class="code docutils literal notranslate"><span class="pre">-structype</span> <span class="pre">[ball|cross]</span></code> <em>Default value: ball</em> <br />
+Choice of the structuring element type</p>
+<ul class="simple">
+<li><strong>Ball</strong> <br /></li>
+<li><strong>Cross</strong> <br /></li>
+</ul>
+<p><strong>Profile Size</strong> <code class="code docutils literal notranslate"><span class="pre">-size</span> <span class="pre">int</span></code> <em>Default value: 5</em> <br />
+Size of the profiles</p>
+<p><strong>Initial radius</strong> <code class="code docutils literal notranslate"><span class="pre">-radius</span> <span class="pre">int</span></code> <em>Default value: 5</em> <br />
+Initial radius of the structuring element (in pixels)</p>
+<p><strong>Radius step</strong> <code class="code docutils literal notranslate"><span class="pre">-step</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Radius step along the profile (in pixels)</p>
+<p><strong>Profile</strong> <code class="code docutils literal notranslate"><span class="pre">-profile</span> <span class="pre">[opening|closing|derivativeopening|derivativeclosing|openingcharacteristics|closingcharacteristics|classification]</span></code> <em>Default value: opening</em> <br /></p>
+<ul class="simple">
+<li><strong>opening</strong> <br /></li>
+<li><strong>closing</strong> <br /></li>
+<li><strong>derivativeopening</strong> <br /></li>
+<li><strong>derivativeclosing</strong> <br /></li>
+<li><strong>openingcharacteristics</strong> <br /></li>
+<li><strong>closingcharacteristics</strong> <br /></li>
+<li><strong>classification</strong> <br /></li>
+</ul>
+<div class="section" id="classification-options">
+<h3><a class="toc-backref" href="#id1">classification options</a><a class="headerlink" href="#classification-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Sigma value for leveling tolerance</strong> <code class="code docutils literal notranslate"><span class="pre">-profile.classification.sigma</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Sigma value for leveling tolerance</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_MorphologicalProfilesAnalysis -in ROI_IKO_PAN_LesHalles.tif -channel <span class="m">1</span> -structype ball -profile classification -size <span class="m">5</span> -radius <span class="m">1</span> -step <span class="m">1</span> -profile.classification.sigma <span class="m">1</span> -out output.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;MorphologicalProfilesAnalysis&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;ROI_IKO_PAN_LesHalles.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;structype&quot;</span><span class="p">,</span><span class="s2">&quot;ball&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;profile&quot;</span><span class="p">,</span><span class="s2">&quot;classification&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;profile.classification.sigma&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;output.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>Generation of the morphological profile is not streamable, pay attention to this fact when setting the radius initial size and step of the structuring element.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">otbMorphologicalOpeningProfileFilter, otbMorphologicalClosingProfileFilter, otbProfileToProfileDerivativeFilter, otbProfileDerivativeToMultiScaleCharacteristicsFilter, otbMultiScaleConvexOrConcaveClassificationFilter, classes</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_RadiometricIndices.html" class="btn btn-neutral float-right" title="RadiometricIndices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_MorphologicalMultiScaleDecomposition.html" class="btn btn-neutral" title="MorphologicalMultiScaleDecomposition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

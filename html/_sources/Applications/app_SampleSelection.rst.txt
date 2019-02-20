@@ -1,0 +1,211 @@
+.. _app-SampleSelection:
+
+SampleSelection
+===============
+
+
+Selects samples from a training vector data set.
+
+Description
+-----------
+
+The application selects a set of samples from geometries intended for training (they should have a field giving the associated class). 
+
+First of all, the geometries must be analyzed by the :ref:`app-PolygonClassStatistics` application to compute statistics about the geometries, which are summarized in an xml file. 
+Then, this xml file must be given as input to this application (parameter instats).
+
+The input support image and the input training vectors shall be given in parameters 'in' and 'vec' respectively. Only the sampling grid (origin, size, spacing)will be read in the input image.
+There are several strategies to select samples (parameter strategy) : 
+
+  - smallest (default) : select the same number of sample in each class so that the smallest one is fully sampled.
+  - constant : select the same number of samples N in each class (with N below or equal to the size of the smallest class).
+  - byclass : set the required number for each class manually, with an input CSV file (first column is class name, second one is the required samples number).
+
+  - percent: set a target global percentage of samples to use. Class proportions will be respected. 
+
+  - total: set a target total number of samples to use. Class proportions will be respected. 
+
+There is also a choice on the sampling type to performs : 
+
+  - periodic : select samples uniformly distributed
+  - random : select samples randomly distributed
+
+Once the strategy and type are selected, the application outputs samples positions(parameter out).
+
+The other parameters to look at are : 
+
+  - layer : index specifying from which layer to pick geometries.
+  - field : set the field name containing the class.
+  - mask : an optional raster mask can be used to discard samples.
+  - outrates : allows outputting a CSV file that summarizes the sampling rates for each class.
+
+As with the :ref:`app-PolygonClassStatistics` application, different types  of geometry are supported : polygons, lines, points. 
+The behavior of this application is different for each type of geometry : 
+
+  - polygon: select points whose center is inside the polygon
+  - lines  : select points intersecting the line
+  - points : select closest point to the provided point
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**InputImage** :code:`-in image` *Mandatory* |br|
+Support image that will be classified
+
+**InputMask** :code:`-mask image` |br|
+Validity mask (only pixels corresponding to a mask value greater than 0 will be used for statistics)
+
+**Input vectors** :code:`-vec filename [dtype]` *Mandatory* |br|
+Input geometries to analyse
+
+**Output vectors** :code:`-out filename [dtype]` *Mandatory* |br|
+Output resampled geometries
+
+**Input Statistics** :code:`-instats filename [dtype]` *Mandatory* |br|
+Input file storing statistics (XML format)
+
+**Output rates** :code:`-outrates filename [dtype]` |br|
+Output rates (CSV formatted)
+
+**Sampler type** :code:`-sampler [periodic|random]` *Default value: periodic* |br|
+Type of sampling (periodic, pattern based, random)
+
+* **Periodic sampler** |br| Takes samples regularly spaced
+
+* **Random sampler** |br| The positions to select are randomly shuffled.
+
+
+
+Periodic sampler options
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Jitter amplitude** :code:`-sampler.periodic.jitter int` *Default value: 0* |br|
+Jitter amplitude added during sample selection (0 = no jitter)
+
+
+
+------------
+
+**Sampling strategy** :code:`-strategy [byclass|constant|percent|total|smallest|all]` *Default value: smallest* |br|
+
+
+* **Set samples count for each class** |br| Set samples count for each class
+
+* **Set the same samples counts for all classes** |br| Set the same samples counts for all classes
+
+* **Use a percentage of the samples available for each class** |br| Use a percentage of the samples available for each class
+
+* **Set the total number of samples to generate, and use class proportions.** |br| Set the total number of samples to generate, and use class proportions.
+
+* **Set same number of samples for all classes, with the smallest class fully sampled** |br| Set same number of samples for all classes, with the smallest class fully sampled
+
+* **Take all samples** |br| Take all samples
+
+
+
+Set samples count for each class options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Number of samples by class** :code:`-strategy.byclass.in filename [dtype]` *Mandatory* |br|
+Number of samples by class (CSV format with class name in 1st column and required samples in the 2nd.
+
+Set the same samples counts for all classes options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Number of samples for all classes** :code:`-strategy.constant.nb int` *Mandatory* |br|
+Number of samples for all classes
+
+Use a percentage of the samples available for each class options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**The percentage to use** :code:`-strategy.percent.p float` *Default value: 0.5* |br|
+The percentage to use
+
+Set the total number of samples to generate, and use class proportions. options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**The number of samples to generate** :code:`-strategy.total.v int` *Default value: 1000* |br|
+The number of samples to generate
+
+
+
+------------
+
+**Field Name** :code:`-field string` |br|
+Name of the field carrying the class name in the input vectors.
+
+**Layer Index** :code:`-layer int` *Default value: 0* |br|
+Layer index to read in the input vector file.
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Random seed** :code:`-rand int` |br|
+Set a specific random seed with integer value.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SampleSelection -in support_image.tif -vec variousVectors.sqlite -field label -instats apTvClPolygonClassStatisticsOut.xml -out resampledVectors.sqlite
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SampleSelection")
+
+	app.SetParameterString("in", "support_image.tif")
+	app.SetParameterString("vec", "variousVectors.sqlite")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

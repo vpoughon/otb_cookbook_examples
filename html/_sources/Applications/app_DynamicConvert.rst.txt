@@ -1,0 +1,166 @@
+.. _app-DynamicConvert:
+
+DynamicConvert
+==============
+
+
+Change the pixel type and rescale the image's dynamic
+
+Description
+-----------
+
+This application performs an image pixel type conversion (short, ushort, uchar, int, uint, float and double types are handled). The output image is written in the specified format (ie. that corresponds to the given extension).
+The conversion can include a rescale of the data range, by default it's set between the 2nd to the 98th percentile. The rescale can be linear or log2. 
+The choice of the output channels can be done with the extended filename, but less easy to handle. To do this, a 'channels' parameter allows you to select the desired bands at the output. There are 3 modes, the available choices are: 
+
+* **All**: keep all bands.
+* **Grayscale**: to display mono image as standard color image 
+* **RGB**: select 3 bands in the input image (multi-bands)
+
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input image** :code:`-in image` *Mandatory* |br|
+Input image
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image
+
+**Rescale type** :code:`-type [linear|log2]` *Default value: linear* |br|
+Transfer function for the rescaling
+
+* **Linear** |br| 
+
+* **Log2** |br| 
+
+
+
+Linear options
+^^^^^^^^^^^^^^
+
+**Gamma correction factor** :code:`-type.linear.gamma float` *Default value: 1* |br|
+Gamma correction factor
+
+
+
+------------
+
+**Input mask** :code:`-mask image` |br|
+Optional mask to indicate which pixels are valid for computing the histogram quantiles. Pixels where the mask is zero will not contribute to the histogram. The mask must have the same dimensions as the input image.
+
+Histogram quantile cutting
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Cut the histogram edges before rescaling
+
+**High cut quantile** :code:`-quantile.high float` *Default value: 2* |br|
+Quantiles to cut from histogram high values before computing min/max rescaling (in percent, 2 by default)
+
+**Low cut quantile** :code:`-quantile.low float` *Default value: 2* |br|
+Quantiles to cut from histogram low values before computing min/max rescaling (in percent, 2 by default)
+
+
+
+------------
+
+**Channels selection** :code:`-channels [all|grayscale|rgb]` *Default value: all* |br|
+It's possible to select the channels of the output image. There are 3 modes, the available choices are:
+
+* **Default mode** |br| Select all bands in the input image, (1,...,n).
+
+* **Grayscale mode** |br| Display single channel as standard color image.
+
+* **RGB composition** |br| Select 3 bands in the input image (multi-bands), by default (1,2,3).
+
+
+
+Grayscale mode options
+^^^^^^^^^^^^^^^^^^^^^^
+
+**Grayscale channel** :code:`-channels.grayscale.channel int` *Default value: 1* |br|
+
+
+RGB composition options
+^^^^^^^^^^^^^^^^^^^^^^^
+
+**Red Channel** :code:`-channels.rgb.red int` *Mandatory* |br|
+Red channel index.
+
+**Green Channel** :code:`-channels.rgb.green int` *Mandatory* |br|
+Green channel index.
+
+**Blue Channel** :code:`-channels.rgb.blue int` *Mandatory* |br|
+Blue channel index.
+
+
+
+------------
+
+**Output min value** :code:`-outmin float` *Default value: 0* |br|
+Minimum value of the output image.
+
+**Output max value** :code:`-outmax float` *Default value: 255* |br|
+Maximum value of the output image.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_DynamicConvert -in QB_Toulouse_Ortho_XS.tif -out otbConvertWithScalingOutput.png -type linear -channels rgb -outmin 0 -outmax 255
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("DynamicConvert")
+
+	app.SetParameterString("in", "QB_Toulouse_Ortho_XS.tif")
+	app.SetParameterString("out", "otbConvertWithScalingOutput.png")
+	app.SetParameterString("type","linear")
+	app.SetParameterString("channels","rgb")
+	app.SetParameterFloat("outmin", 0)
+	app.SetParameterFloat("outmax", 255)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The application does not support complex pixel types as output.
+
+See also
+--------
+
+| :ref:`app-Rescale`

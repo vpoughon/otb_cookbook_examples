@@ -1,0 +1,22 @@
+.. _apprefdoc:
+
+Applications
+============
+
+.. toctree::
+	:maxdepth: 2
+
+
+	Applications/Image_Manipulation.rst
+	Applications/Feature_Extraction.rst
+	Applications/Stereo.rst
+	Applications/Geometry.rst
+	Applications/Learning.rst
+	Applications/SAR.rst
+	Applications/Segmentation.rst
+	Applications/Vector_Data_Manipulation.rst
+	Applications/Image_Filtering.rst
+	Applications/Hyperspectral.rst
+	Applications/Change_Detection.rst
+	Applications/Calibration.rst
+	Applications/Deprecated.rst

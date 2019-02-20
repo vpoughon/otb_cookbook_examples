@@ -1,0 +1,91 @@
+.. _app-LSMSVectorization:
+
+LSMSVectorization
+=================
+
+
+This application performs the fourth step of the exact Large-Scale Mean-Shift segmentation workflow [1].
+
+Description
+-----------
+
+Given a segmentation result (label image), that may come from the :ref:`app-LSMSSegmentation` [2] application (out parameter) or have been processed for small regions merging [3] (out parameter), it will convert it to a GIS vector file containing one polygon per segment. Each polygon contains additional fields: mean and variance of each channels from input image (in parameter), segmentation image label, number of pixels in the polygon. For large images one can use the tilesizex and tilesizey parameters for tile-wise processing, with the guarantees of identical results.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image, containing initial spectral signatures corresponding to the segmented image (inseg).
+
+**Segmented image** :code:`-inseg image` *Mandatory* |br|
+Segmented image where each pixel value is the unique integer label of the segment it belongs to.
+
+**Output GIS vector file** :code:`-out filename [dtype]` *Mandatory* |br|
+The output GIS vector file, representing the vectorized version of the segmented image where the features of the polygons are the radiometric means and variances.
+
+**Size of tiles in pixel (X-axis)** :code:`-tilesizex int` *Default value: 500* |br|
+Size of tiles along the X-axis for tile-wise processing.
+
+**Size of tiles in pixel (Y-axis)** :code:`-tilesizey int` *Default value: 500* |br|
+Size of tiles along the Y-axis for tile-wise processing.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_LSMSVectorization -in maur_rgb.png -inseg merged.tif -out vector.shp -tilesizex 256 -tilesizey 256
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("LSMSVectorization")
+
+	app.SetParameterString("in", "maur_rgb.png")
+	app.SetParameterString("inseg", "merged.tif")
+	app.SetParameterString("out", "vector.shp")
+	app.SetParameterInt("tilesizex", 256)
+	app.SetParameterInt("tilesizey", 256)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+This application is part of the Large-Scale Mean-Shift segmentation workflow (LSMS) and may not be suited for any other purpose.
+
+See also
+--------
+
+| [1] Michel, J., Youssefi, D., & Grizonnet, M. (2015). Stable mean-shift algorithm and its application to the segmentation of arbitrarily large remote sensing images. IEEE Transactions on Geoscience and Remote Sensing, 53(2), 952-964.
+| [2] LSM:ref:`app-Segmentation`
+| [3] LSMSmallRegionMerging

@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PrintableImageFilterExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ScalingFilterExample.cxx" href="ScalingFilterExample.html" />
+    <link rel="prev" title="LeeImageFilter.cxx" href="LeeImageFilter.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="HillShadingExample.html">HillShadingExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FrostImageFilter.html">FrostImageFilter.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LeeImageFilter.html">LeeImageFilter.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">PrintableImageFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ScalingFilterExample.html">ScalingFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MeanShiftSegmentationFilterExample.html">MeanShiftSegmentationFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BandMathFilterExample.html">BandMathFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BandMathXImageFilterExample.html">BandMathXImageFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DEMToRainbowExample.html">DEMToRainbowExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IndexedToRGBExample.html">IndexedToRGBExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../BasicFilters.html">BasicFilters</a> &raquo;</li>
+        
+      <li>PrintableImageFilterExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/BasicFilters/PrintableImageFilterExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="printableimagefilterexample-cxx">
+<span id="example-printableimagefilterexample"></span><h1>PrintableImageFilterExample.cxx<a class="headerlink" href="#printableimagefilterexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./PrintableImageFilterExample Input/IMAGERY_SSECH.tif Output/PrintableExampleOutput1.jpg <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/PrintableImageFilterExample.cxx?inline=false">PrintableImageFilterExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  Most of the time, satellite images have more than three spectral bands. As we</span>
+<span class="c1">// are only able to see three colors (red, green and blue), we have to find a way to</span>
+<span class="c1">// represent these images using only three bands. This is called creating a color</span>
+<span class="c1">// composition.</span>
+<span class="c1">//</span>
+<span class="c1">// Of course, any color composition will not be able to render all the information</span>
+<span class="c1">// available in the original image. As a consequence, sometimes, creating more than</span>
+<span class="c1">// one color composition will be necessary.</span>
+<span class="c1">//</span>
+<span class="c1">// If you want to obtain an image with natural colors, you have to match the wavelength</span>
+<span class="c1">// captured by the satellite with those captured by your eye: thus matching the red band</span>
+<span class="c1">// with the red color, etc.</span>
+<span class="c1">//</span>
+<span class="c1">// Some satellites (SPOT 5 is an example) do not acquire all the {\em human} spectral bands:</span>
+<span class="c1">// the blue can be missing and replaced by some other wavelength of interest for a specific application.</span>
+<span class="c1">// In these situations, another mapping has to be created. That&#39;s why, the vegetation often appears in</span>
+<span class="c1">// red in satellite images (see on left of figure~\ref{fig:PRINTABLE_FILTER}).</span>
+<span class="c1">//</span>
+<span class="c1">// The band order in the image products can be also quite tricky. It could be in the wavelength order,</span>
+<span class="c1">// as it is the case for Quickbird (1: Blue, 2: Green, 3: Red, 4: NIR), in this case, you</span>
+<span class="c1">// have to be careful to reverse the order if you want a natural display. It could also be reverse</span>
+<span class="c1">// to facilitate direct viewing, as for SPOT5 (1: NIR, 2: Red, 3: Green, 4: SWIR) but in this situations</span>
+<span class="c1">// you have to be careful when you process the image.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbPrintableImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;inputImageFile&gt; &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;outputImageFile&gt; &lt;RedBand&gt; &lt;GreenBand&gt; &lt;BlueBand&gt;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">inputFilename</span>      <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputFilename</span>     <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="kt">int</span>         <span class="n">redChannelNumber</span>   <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="kt">int</span>         <span class="n">greenChannelNumber</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="kt">int</span>         <span class="n">blueChannelNumber</span>  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>     <span class="n">InputPixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">InputImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFilename</span><span class="p">);</span>
+
+  <span class="c1">//  To easily convert the image to a {\em printable} format, i.e. 3 bands</span>
+  <span class="c1">// \code{unsigned char} value, you can use the \doxygen{otb}{PrintableImageFilter}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PrintableImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">PrintableFilterType</span><span class="p">;</span>
+  <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">Pointer</span>                      <span class="n">printableImageFilter</span> <span class="o">=</span> <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">printableImageFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">printableImageFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="n">redChannelNumber</span><span class="p">);</span>
+  <span class="n">printableImageFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="n">greenChannelNumber</span><span class="p">);</span>
+  <span class="n">printableImageFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="n">blueChannelNumber</span><span class="p">);</span>
+
+  <span class="c1">//  When you create the writer to plug at the output of the \code{printableImageFilter}</span>
+  <span class="c1">// you may want to use the direct type definition as it is a good way to avoid mismatch:</span>
+
+  <span class="k">typedef</span> <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">OutputImageType</span>  <span class="n">OutputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">printableImageFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:PRINTABLE_FILTER} illustrates different color compositions for a SPOT 5 image.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{PrintableExampleOutput1.eps}</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{PrintableExampleOutput2.eps}</span>
+  <span class="c1">// \itkcaption[Scaling images]{On the left, a classic SPOT5</span>
+  <span class="c1">// combination: XS3 in red, XS2 in green and XS1 in blue. On the</span>
+  <span class="c1">// right another composition: XS3 in red, XS4 in green and XS2 in blue.}</span>
+  <span class="c1">// \label{fig:PRINTABLE_FILTER}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ScalingFilterExample.html" class="btn btn-neutral float-right" title="ScalingFilterExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="LeeImageFilter.html" class="btn btn-neutral" title="LeeImageFilter.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

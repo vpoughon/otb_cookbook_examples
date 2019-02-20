@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DEMHandlerExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="VectorDataIOExample.cxx" href="VectorDataIOExample.html" />
+    <link rel="prev" title="MultibandImageReadWrite.cxx" href="MultibandImageReadWrite.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../IO.html">IO</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ImageReadCastWrite.html">ImageReadCastWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DEMToImageGenerator.html">DEMToImageGenerator.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageReadWrite.html">ImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MultibandImageReadWrite.html">MultibandImageReadWrite.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">DEMHandlerExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorDataIOExample.html">VectorDataIOExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetadataExample.html">MetadataExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageReadRegionOfInterestWrite.html">ImageReadRegionOfInterestWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractROI.html">ExtractROI.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexImageReadWrite.html">ComplexImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageSeriesIOExample.html">ImageSeriesIOExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../IO.html">IO</a> &raquo;</li>
+        
+      <li>DEMHandlerExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/IO/DEMHandlerExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="demhandlerexample-cxx">
+<span id="example-demhandlerexample"></span><h1>DEMHandlerExample.cxx<a class="headerlink" href="#demhandlerexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./DEMHandlerExample Input/DEM/srtm_directory Input/DEM/egm96.grd <span class="m">40</span> <span class="m">8</span>.434583 <span class="m">44</span>.647083 <span class="m">383</span>.580313671 <span class="m">0</span>.001
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/DEMHandlerExample.cxx?inline=false">DEMHandlerExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// OTB relies on OSSIM for elevation handling. Since release 3.16, there is a</span>
+<span class="c1">// single configuration class \doxygen{otb}{DEMHandler} to manage elevation (in</span>
+<span class="c1">// image projections or localization functions for example).  This configuration</span>
+<span class="c1">// is managed by the a proper instantiation and parameters setting of this</span>
+<span class="c1">// class.  These instantiations must be done before any call to geometric</span>
+<span class="c1">// filters or functionalities. Ossim internal accesses to elevation are also</span>
+<span class="c1">// configured by this class and this will ensure consistency throughout the</span>
+<span class="c1">// library.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbDEMHandler.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; demdir[path|no] geoid[path|no] defaultHeight longitude latitude targetValue tolerance&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">demdir</span>        <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">geoid</span>         <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="kt">double</span>      <span class="n">defaultHeight</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="kt">double</span>      <span class="n">longitude</span>     <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="kt">double</span>      <span class="n">latitude</span>      <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="kt">double</span>      <span class="n">target</span>        <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="kt">double</span>      <span class="n">tolerance</span>     <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+
+  <span class="c1">// This class is a singleton, the New() method is deprecated and will be removed</span>
+  <span class="c1">// in future release. We need to use the \code{Instance()} method instead.</span>
+
+  <span class="n">otb</span><span class="o">::</span><span class="n">DEMHandler</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">demHandler</span> <span class="o">=</span> <span class="n">otb</span><span class="o">::</span><span class="n">DEMHandler</span><span class="o">::</span><span class="n">Instance</span><span class="p">();</span>
+
+  <span class="kt">bool</span> <span class="n">fail</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+  <span class="c1">// It allows configuring a directory containing DEM tiles (DTED or SRTM</span>
+  <span class="c1">// supported) using the \code{OpenDEMDirectory()} method. The \code{OpenGeoidFile()} method</span>
+  <span class="c1">// allows inputting a geoid file as well. Last, a default height above ellipsoid</span>
+  <span class="c1">// can be set using the \code{SetDefaultHeightAboveEllipsoid()} method.</span>
+
+  <span class="n">demHandler</span><span class="o">-&gt;</span><span class="n">SetDefaultHeightAboveEllipsoid</span><span class="p">(</span><span class="n">defaultHeight</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">demHandler</span><span class="o">-&gt;</span><span class="n">IsValidDEMDirectory</span><span class="p">(</span><span class="n">demdir</span><span class="p">.</span><span class="n">c_str</span><span class="p">()))</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;IsValidDEMDirectory(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">demdir</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;) = false&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">fail</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">demHandler</span><span class="o">-&gt;</span><span class="n">OpenDEMDirectory</span><span class="p">(</span><span class="n">demdir</span><span class="p">);</span>
+  <span class="n">demHandler</span><span class="o">-&gt;</span><span class="n">OpenGeoidFile</span><span class="p">(</span><span class="n">geoid</span><span class="p">);</span>
+
+  <span class="c1">// We can now retrieve height above ellipsoid or height above Mean Sea Level</span>
+  <span class="c1">// (MSL) using the methods \code{GetHeightAboveEllipsoid()} and</span>
+  <span class="c1">// \code{GetHeightAboveMSL()}.  Outputs of these methods depend on the</span>
+  <span class="c1">// configuration of the class \doxygen{otb}{DEMHandler} and the different</span>
+  <span class="c1">// cases are:</span>
+  <span class="c1">//</span>
+  <span class="c1">// For \code{GetHeightAboveEllipsoid()}:</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item DEM and geoid both available: $dem\_value + geoid\_offset$</span>
+  <span class="c1">// \item No DEM but geoid available: geoid\_offset</span>
+  <span class="c1">// \item DEM available, but no geoid: dem\_value</span>
+  <span class="c1">// \item No DEM and no geoid available: default height above ellipsoid</span>
+  <span class="c1">// \end{itemize}</span>
+  <span class="c1">//</span>
+  <span class="c1">// For \code{GetHeightAboveMSL()}:</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item DEM and geoid both available: srtm\_value</span>
+  <span class="c1">// \item No DEM but geoid available: $0$</span>
+  <span class="c1">// \item DEM available, but no geoid: srtm\_value</span>
+  <span class="c1">// \item No DEM and no geoid available: $0$</span>
+  <span class="c1">// \end{itemize}</span>
+
+  <span class="n">otb</span><span class="o">::</span><span class="n">DEMHandler</span><span class="o">::</span><span class="n">PointType</span> <span class="n">point</span><span class="p">;</span>
+  <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">longitude</span><span class="p">;</span>
+  <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">latitude</span><span class="p">;</span>
+
+  <span class="kt">double</span> <span class="n">height</span> <span class="o">=</span> <span class="o">-</span><span class="mi">32768</span><span class="p">;</span>
+
+  <span class="n">height</span> <span class="o">=</span> <span class="n">demHandler</span><span class="o">-&gt;</span><span class="n">GetHeightAboveMSL</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;height above MSL (&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">longitude</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;,&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">latitude</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;) = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">height</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; meters&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="n">height</span> <span class="o">=</span> <span class="n">demHandler</span><span class="o">-&gt;</span><span class="n">GetHeightAboveEllipsoid</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;height above ellipsoid (&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">longitude</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">latitude</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;) = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">height</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; meters&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="c1">//</span>
+  <span class="c1">// Note that OSSIM internal calls for sensor</span>
+  <span class="c1">// modelling use the height above ellipsoid, and follow the same logic as the</span>
+  <span class="c1">// \code{GetHeightAboveEllipsoid()} method.</span>
+  <span class="c1">//</span>
+  <span class="c1">// Software Guide : EndLatex</span>
+
+  <span class="c1">// Check for Nan</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">vnl_math_isnan</span><span class="p">(</span><span class="n">height</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Computed value is NaN&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">fail</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">double</span> <span class="n">error</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">height</span> <span class="o">-</span> <span class="n">target</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Target value is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">target</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; meters, computed value is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">height</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; meters. error (&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">error</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; meters) &gt; tolerance (&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">tolerance</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot; meters)&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">fail</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">fail</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="VectorDataIOExample.html" class="btn btn-neutral float-right" title="VectorDataIOExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="MultibandImageReadWrite.html" class="btn btn-neutral" title="MultibandImageReadWrite.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

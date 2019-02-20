@@ -1,0 +1,84 @@
+.. _app-OGRLayerClassifier:
+
+OGRLayerClassifier
+==================
+
+
+Classify an OGR layer based on a machine learning model and a list of features to consider.
+
+Description
+-----------
+
+This application will apply a trained machine learning model on the selected feature to get a classification of each geometry contained in an OGR layer. The list of feature must match the list used for training. The predicted label is written in the user defined field for each geometry.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Name of the input shapefile** :code:`-inshp vectorfile` *Mandatory* |br|
+Name of the input shapefile
+
+**XML file containing mean and variance of each feature** :code:`-instats filename [dtype]` *Mandatory* |br|
+XML file containing mean and variance of each feature.
+
+**Input model filename** :code:`-insvm filename [dtype]` *Mandatory* |br|
+Input model filename.
+
+**Features** :code:`-feat string1 string2...` |br|
+Features to be calculated
+
+**Field containing the predicted class** :code:`-cfield string` *Default value: predicted* |br|
+Field containing the predicted class
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_OGRLayerClassifier -inshp vectorData.shp -instats meanVar.xml -insvm svmModel.svm -feat perimeter -cfield predicted
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("OGRLayerClassifier")
+
+	app.SetParameterString("inshp", "vectorData.shp")
+	app.SetParameterString("instats", "meanVar.xml")
+	app.SetParameterString("insvm", "svmModel.svm")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Experimental. Only shapefiles are supported for now.
+
+See also
+--------
+
+| :ref:`app-ComputeOGRLayersFeaturesStatistics`

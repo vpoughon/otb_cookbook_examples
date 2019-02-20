@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SIFTDisparityMapEstimation.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Fusion" href="../Fusion.html" />
+    <link rel="prev" title="SIFTExample.cxx" href="SIFTExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Patented.html">Patented</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SIFTFastExample.html">SIFTFastExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SIFTDensityExample.html">SIFTDensityExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SIFTExample.html">SIFTExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SIFTDisparityMapEstimation.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Patented.html">Patented</a> &raquo;</li>
+        
+      <li>SIFTDisparityMapEstimation.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Patented/SIFTDisparityMapEstimation.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="siftdisparitymapestimation-cxx">
+<span id="example-siftdisparitymapestimation"></span><h1>SIFTDisparityMapEstimation.cxx<a class="headerlink" href="#siftdisparitymapestimation-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./SIFTDisparityMapEstimation Input/ROISpot5.png Input/ROISpot5Warped.png Output/SIFTdeformationFieldOutput.png
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTDisparityMapEstimation.cxx?inline=false">SIFTDisparityMapEstimation.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example demonstrates the use of the</span>
+<span class="c1">// \doxygen{otb}{KeyPointSetsMatchingFilter} for disparity map</span>
+<span class="c1">// estimation. The idea here is to match SIFTs extracted from both the</span>
+<span class="c1">// fixed and the moving images. The use of SIFTs is demonstrated in</span>
+<span class="c1">// section \ref{sec:SIFTDetector}. The</span>
+<span class="c1">// \doxygen{itk}{DisplacementFieldSource} will be used</span>
+<span class="c1">// to generate a deformation field by using</span>
+<span class="c1">// interpolation on the deformation values from the point set. More</span>
+<span class="c1">// advanced methods for deformation field interpolation are also</span>
+<span class="c1">// available.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step toward the use of these filters is to include the</span>
+<span class="c1">// appropriate header files.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbKeyPointSetsMatchingFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSiftFastImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkLandmarkDisplacementFieldSource.h&quot;</span><span class="cp"></span>
+
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkPointSet.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiToMonoChannelExtractROI.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;fixedFileName movingFileName fieldOutName&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// Then we must decide what pixel type to use for the image. We choose to do</span>
+  <span class="c1">// all the computations in floating point precision and rescale the results</span>
+  <span class="c1">// between 0 and 255 in order to export PNG images.</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>        <span class="n">RealType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">OutputPixelType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">RealType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>        <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
+  <span class="c1">// The SIFTs obtained for the matching will be stored in vector</span>
+  <span class="c1">// form inside a point set. So we need the following types:</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">VariableLengthVector</span><span class="o">&lt;</span><span class="n">RealType</span><span class="o">&gt;</span>      <span class="n">RealVectorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">PointSet</span><span class="o">&lt;</span><span class="n">RealVectorType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">PointSetType</span><span class="p">;</span>
+  <span class="c1">// The filter for computing the SIFTs has a type defined as follows:</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SiftFastImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">PointSetType</span><span class="o">&gt;</span> <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="p">;</span>
+  <span class="c1">// Although many choices for evaluating the distances during the</span>
+  <span class="c1">// matching procedure exist, we choose here to use a simple</span>
+  <span class="c1">// Euclidean distance. We can then define the type for the matching filter.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Statistics</span><span class="o">::</span><span class="n">EuclideanDistanceMetric</span><span class="o">&lt;</span><span class="n">RealVectorType</span><span class="o">&gt;</span>    <span class="n">DistanceType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">KeyPointSetsMatchingFilter</span><span class="o">&lt;</span><span class="n">PointSetType</span><span class="p">,</span> <span class="n">DistanceType</span><span class="o">&gt;</span> <span class="n">EuclideanDistanceMetricMatchingFilterType</span><span class="p">;</span>
+  <span class="c1">// The following types are needed for dealing with the matched points.</span>
+
+  <span class="k">typedef</span> <span class="n">PointSetType</span><span class="o">::</span><span class="n">PointType</span>                                     <span class="n">PointType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">PointType</span><span class="p">,</span> <span class="n">PointType</span><span class="o">&gt;</span>                             <span class="n">MatchType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MatchType</span><span class="o">&gt;</span>                                      <span class="n">MatchVectorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">EuclideanDistanceMetricMatchingFilterType</span><span class="o">::</span><span class="n">LandmarkListType</span> <span class="n">LandmarkListType</span><span class="p">;</span>
+
+  <span class="c1">// We define the type for the image reader.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+
+  <span class="c1">// Two readers are instantiated : one for the fixed image, and one</span>
+  <span class="c1">// for the moving image.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">fixedReader</span>  <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">movingReader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">fixedReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">movingReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">fixedReader</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+  <span class="n">movingReader</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+  <span class="c1">// We will now instantiate the 2 SIFT filters and the filter used</span>
+  <span class="c1">// for the matching of the points.</span>
+
+  <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="o">::</span><span class="n">Pointer</span>          <span class="n">filter1</span>          <span class="o">=</span> <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="o">::</span><span class="n">Pointer</span>          <span class="n">filter2</span>          <span class="o">=</span> <span class="n">ImageToSIFTKeyPointSetFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">EuclideanDistanceMetricMatchingFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">euclideanMatcher</span> <span class="o">=</span> <span class="n">EuclideanDistanceMetricMatchingFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="c1">// We plug the pipeline and set the parameters.</span>
+
+  <span class="kt">double</span> <span class="n">secondOrderThreshold</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+  <span class="kt">bool</span>   <span class="n">useBackMatching</span>      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">filter1</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fixedReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">filter1</span><span class="o">-&gt;</span><span class="n">SetScalesNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">movingReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">SetScalesNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+  <span class="n">filter1</span><span class="o">-&gt;</span><span class="n">SetNumberOfThreads</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">filter2</span><span class="o">-&gt;</span><span class="n">SetNumberOfThreads</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">euclideanMatcher</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">filter1</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">euclideanMatcher</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">filter2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">euclideanMatcher</span><span class="o">-&gt;</span><span class="n">SetDistanceThreshold</span><span class="p">(</span><span class="n">secondOrderThreshold</span><span class="p">);</span>
+  <span class="n">euclideanMatcher</span><span class="o">-&gt;</span><span class="n">SetUseBackMatching</span><span class="p">(</span><span class="n">useBackMatching</span><span class="p">);</span>
+  <span class="n">euclideanMatcher</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="c1">// The matched points will be stored into a landmark list.</span>
+
+  <span class="n">LandmarkListType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">landmarkList</span><span class="p">;</span>
+  <span class="n">landmarkList</span> <span class="o">=</span> <span class="n">euclideanMatcher</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+  <span class="n">MatchVectorType</span> <span class="n">trueSecondOrder</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">LandmarkListType</span><span class="o">::</span><span class="n">Iterator</span> <span class="n">it</span> <span class="o">=</span> <span class="n">landmarkList</span><span class="o">-&gt;</span><span class="n">Begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">landmarkList</span><span class="o">-&gt;</span><span class="n">End</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">PointType</span> <span class="n">point1</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetPoint1</span><span class="p">();</span>
+    <span class="n">PointType</span> <span class="n">point2</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetPoint2</span><span class="p">();</span>
+
+    <span class="n">trueSecondOrder</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">MatchType</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Displaying the matches</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">PrintableFilterType</span><span class="p">;</span>
+
+  <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">printable1</span> <span class="o">=</span> <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">printable2</span> <span class="o">=</span> <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">printable1</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">fixedReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">printable1</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">printable1</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">printable1</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">movingReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">itk</span><span class="o">::</span><span class="n">RGBPixel</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">RGBImageType</span><span class="p">;</span>
+
+  <span class="n">RGBImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rgbimage1</span> <span class="o">=</span> <span class="n">RGBImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rgbimage1</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">printable1</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">rgbimage1</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">RGBImageType</span><span class="o">&gt;</span>    <span class="n">outIt1</span><span class="p">(</span><span class="n">rgbimage1</span><span class="p">,</span> <span class="n">rgbimage1</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">inIt1</span><span class="p">(</span><span class="n">printable1</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">printable1</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">outIt1</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+  <span class="n">inIt1</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">inIt1</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">outIt1</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">itk</span><span class="o">::</span><span class="n">RGBPixel</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span> <span class="n">pixel</span><span class="p">;</span>
+    <span class="n">pixel</span><span class="p">.</span><span class="n">SetRed</span><span class="p">(</span><span class="n">inIt1</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="n">pixel</span><span class="p">.</span><span class="n">SetGreen</span><span class="p">(</span><span class="n">inIt1</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="n">pixel</span><span class="p">.</span><span class="n">SetBlue</span><span class="p">(</span><span class="n">inIt1</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="n">outIt1</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">pixel</span><span class="p">);</span>
+    <span class="o">++</span><span class="n">inIt1</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">outIt1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">RGBImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rgbimage2</span> <span class="o">=</span> <span class="n">RGBImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rgbimage2</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">printable2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">rgbimage2</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">RGBImageType</span><span class="o">&gt;</span>    <span class="n">outIt2</span><span class="p">(</span><span class="n">rgbimage2</span><span class="p">,</span> <span class="n">rgbimage2</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">inIt2</span><span class="p">(</span><span class="n">printable2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">outIt2</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+  <span class="n">inIt2</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">inIt2</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">outIt2</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">itk</span><span class="o">::</span><span class="n">RGBPixel</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span> <span class="n">pixel</span><span class="p">;</span>
+    <span class="n">pixel</span><span class="p">.</span><span class="n">SetRed</span><span class="p">(</span><span class="n">inIt2</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="n">pixel</span><span class="p">.</span><span class="n">SetGreen</span><span class="p">(</span><span class="n">inIt2</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="n">pixel</span><span class="p">.</span><span class="n">SetBlue</span><span class="p">(</span><span class="n">inIt2</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="n">outIt2</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">pixel</span><span class="p">);</span>
+    <span class="o">++</span><span class="n">inIt2</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">outIt2</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The landmarks are used for building a deformation field. The</span>
+  <span class="c1">// deformation field is an image of vectors created by the</span>
+  <span class="c1">// \doxygen{itk}{DisplacementFieldSource} class.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">RealType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>  <span class="n">VectorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">DisplacementFieldType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">LandmarkDisplacementFieldSource</span><span class="o">&lt;</span><span class="n">DisplacementFieldType</span><span class="o">&gt;</span> <span class="n">DisplacementSourceType</span><span class="p">;</span>
+
+  <span class="n">DisplacementSourceType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">deformer</span> <span class="o">=</span> <span class="n">DisplacementSourceType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="c1">// The deformation field needs information about the extent and</span>
+  <span class="c1">// spacing of the images on which it is defined.</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">ConstPointer</span> <span class="n">fixedImage</span> <span class="o">=</span> <span class="n">fixedReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+  <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">SetOutputSpacing</span><span class="p">(</span><span class="n">fixedImage</span><span class="o">-&gt;</span><span class="n">GetSignedSpacing</span><span class="p">());</span>
+  <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">SetOutputOrigin</span><span class="p">(</span><span class="n">fixedImage</span><span class="o">-&gt;</span><span class="n">GetOrigin</span><span class="p">());</span>
+  <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">SetOutputRegion</span><span class="p">(</span><span class="n">fixedImage</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="c1">// We will need some intermediate variables in order to pass the</span>
+  <span class="c1">// matched SIFTs to the deformation field source.</span>
+  <span class="k">typedef</span> <span class="n">DisplacementSourceType</span><span class="o">::</span><span class="n">LandmarkContainer</span> <span class="n">LandmarkContainerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">DisplacementSourceType</span><span class="o">::</span><span class="n">LandmarkPointType</span> <span class="n">LandmarkPointType</span><span class="p">;</span>
+
+  <span class="n">LandmarkContainerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">sourceLandmarks</span> <span class="o">=</span> <span class="n">LandmarkContainerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">LandmarkContainerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">targetLandmarks</span> <span class="o">=</span> <span class="n">LandmarkContainerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">LandmarkPointType</span> <span class="n">sourcePoint</span><span class="p">;</span>
+  <span class="n">LandmarkPointType</span> <span class="n">targetPoint</span><span class="p">;</span>
+  <span class="c1">// We can now iterate through the list of matched points and store</span>
+  <span class="c1">// them in the intermediate landmark sets.</span>
+
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pointId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">LandmarkListType</span><span class="o">::</span><span class="n">Iterator</span> <span class="n">it</span> <span class="o">=</span> <span class="n">landmarkList</span><span class="o">-&gt;</span><span class="n">Begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">landmarkList</span><span class="o">-&gt;</span><span class="n">End</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">PointType</span> <span class="n">point1</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetPoint1</span><span class="p">();</span>
+    <span class="n">PointType</span> <span class="n">point2</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetPoint2</span><span class="p">();</span>
+
+    <span class="n">sourcePoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">point1</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">sourcePoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">point1</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="n">targetPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">point2</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">targetPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">point2</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="n">sourceLandmarks</span><span class="o">-&gt;</span><span class="n">InsertElement</span><span class="p">(</span><span class="n">pointId</span><span class="p">,</span> <span class="n">sourcePoint</span><span class="p">);</span>
+    <span class="n">targetLandmarks</span><span class="o">-&gt;</span><span class="n">InsertElement</span><span class="p">(</span><span class="n">pointId</span><span class="p">,</span> <span class="n">targetPoint</span><span class="p">);</span>
+
+    <span class="o">++</span><span class="n">pointId</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// We pass the landmarks to the deformer and we run it.</span>
+  <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">SetSourceLandmarks</span><span class="p">(</span><span class="n">sourceLandmarks</span><span class="p">.</span><span class="n">GetPointer</span><span class="p">());</span>
+  <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">SetTargetLandmarks</span><span class="p">(</span><span class="n">targetLandmarks</span><span class="p">.</span><span class="n">GetPointer</span><span class="p">());</span>
+
+  <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">UpdateLargestPossibleRegion</span><span class="p">();</span>
+
+  <span class="n">DisplacementFieldType</span><span class="o">::</span><span class="n">ConstPointer</span> <span class="n">deformationField</span> <span class="o">=</span> <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+  <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">outdf</span> <span class="o">=</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">outdf</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">fixedReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">outdf</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">outIt</span><span class="p">(</span><span class="n">outdf</span><span class="p">,</span> <span class="n">outdf</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">DisplacementFieldType</span><span class="o">&gt;</span> <span class="n">inIt</span><span class="p">(</span><span class="n">deformer</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">deformer</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+  <span class="n">outIt</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+  <span class="n">inIt</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">inIt</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">outIt</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="c1">// std::cout &lt;&lt; inIt.Get() &lt;&lt; std::endl;</span>
+
+    <span class="n">outIt</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">inIt</span><span class="p">.</span><span class="n">Get</span><span class="p">()[</span><span class="mi">1</span><span class="p">]);</span>
+
+    <span class="o">++</span><span class="n">inIt</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">outIt</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescaleType</span><span class="p">;</span>
+
+  <span class="n">RescaleType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescaleType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">outdf</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>                           <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:SIFTDME} shows the result of applying the SIFT</span>
+  <span class="c1">// disparity map estimation. Only the horizontal component of the</span>
+  <span class="c1">// deformation is shown.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.40\textwidth]{ROISpot5.eps}</span>
+  <span class="c1">// \includegraphics[width=0.40\textwidth]{ROISpot5Warped.eps}</span>
+  <span class="c1">// \includegraphics[width=0.40\textwidth]{SIFTdeformationFieldOutput.eps}</span>
+  <span class="c1">// \itkcaption[Displacement field from SIFT disparity map estimation]{From left</span>
+  <span class="c1">// to right and top to bottom: fixed input image, moving image with a deformation,</span>
+  <span class="c1">// estimated deformation field in the horizontal direction.}</span>
+  <span class="c1">// \label{fig:SIFTDME}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Fusion.html" class="btn btn-neutral float-right" title="Fusion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SIFTExample.html" class="btn btn-neutral" title="SIFTExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

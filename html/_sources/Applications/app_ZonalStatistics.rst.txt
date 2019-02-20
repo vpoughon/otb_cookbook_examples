@@ -1,0 +1,145 @@
+.. _app-ZonalStatistics:
+
+ZonalStatistics
+===============
+
+
+This application computes zonal statistics
+
+Description
+-----------
+
+This application computes zonal statistics from label image, or vector data. The application inputs one input multiband image, and another input for zones definition. Zones can be defined with a label image (inzone.labelimage.in) or a vector data layer (inzone.vector.in). The following statistics are computed over each zones: mean, min, max, and standard deviation. Statistics can be exported in a vector layer (if the input zone definition is a label image, it will be vectorized) or in a XML file
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+
+
+**Background value to ignore in statistics computation** :code:`-inbv float` |br|
+
+
+**Type of input for the zone definitions** :code:`-inzone [vector|labelimage]` *Default value: vector* |br|
+
+
+* **Input objects from vector data** |br| 
+
+* **Input objects from label image** |br| 
+
+
+
+Input objects from vector data options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Input vector data** :code:`-inzone.vector.in vectorfile` *Mandatory* |br|
+
+
+**Reproject the input vector** :code:`-inzone.vector.reproject bool` *Default value: false* |br|
+
+
+Input objects from label image options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Input label image** :code:`-inzone.labelimage.in image` *Mandatory* |br|
+
+
+**No-data value for the input label image** :code:`-inzone.labelimage.nodata int` |br|
+
+
+
+
+------------
+
+**Format of the output stats** :code:`-out [vector|xml|raster]` *Default value: vector* |br|
+
+
+* **Output vector data** |br| 
+
+* **Output XML file** |br| 
+
+* **Output raster image** |br| 
+
+
+
+Output vector data options
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Filename for the output vector data** :code:`-out.vector.filename vectorfile` *Mandatory* |br|
+
+
+Output XML file options
+^^^^^^^^^^^^^^^^^^^^^^^
+
+**Filename for the output xml file** :code:`-out.xml.filename string` *Mandatory* |br|
+
+
+Output raster image options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**File name for the raster image** :code:`-out.raster.filename image [dtype]` *Mandatory* |br|
+
+
+**Background value for the output raster** :code:`-out.raster.bv float` |br|
+
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ZonalStatistics -in input.tif -inzone.vector.in myvector.shp -out.vector.filename myvector_with_stats.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ZonalStatistics")
+
+	app.SetParameterString("in", "input.tif")
+	app.SetParameterString("inzone.vector.in", "myvector.shp")
+	app.SetParameterString("out.vector.filename", "myvector_with_stats.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+1) The inzone.vector.in must fit in memory (if "inzone" is "vector"). 2) The vectorized label image must also fit in memory (if "out" is "vector"): if not, consider using "out" to "xml"
+
+See also
+--------
+
+| :ref:`app-ComputeImagesStatistics`

@@ -1,0 +1,88 @@
+.. _app-ImageDimensionalityReduction:
+
+ImageDimensionalityReduction
+============================
+
+
+Performs dimensionality reduction of the input image according to a dimensionality reduction model file.
+
+Description
+-----------
+
+This application reduces the dimension of an input image, based on a machine learning model file produced by the :ref:`app-TrainDimensionalityReduction` application. Pixels of the output image will contain the reduced values fromthe model. The input pixels can be optionally centered and reduced according to the statistics file produced by the :ref:`app-ComputeImagesStatistics` application.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to predict.
+
+**Input Mask** :code:`-mask image` |br|
+The mask allow restricting classification of the input image to the area where mask pixel values are greater than 0.
+
+**Model file** :code:`-model filename [dtype]` *Mandatory* |br|
+A dimensionality reduction model file (produced by TrainRegression application).
+
+**Statistics file** :code:`-imstat filename [dtype]` |br|
+A XML file containing mean and standard deviation to center and reduce samples before prediction (produced by ComputeImagesStatistics application). If this file containsone more bands than the sample size, the last stat of last band will beapplied to expand the output predicted value
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image containing reduced values
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ImageDimensionalityReduction -in QB_1_ortho.tif -imstat EstimateImageStatisticsQB1.xml -model clsvmModelQB1.model -out ReducedImageQB1.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ImageDimensionalityReduction")
+
+	app.SetParameterString("in", "QB_1_ortho.tif")
+	app.SetParameterString("imstat", "EstimateImageStatisticsQB1.xml")
+	app.SetParameterString("model", "clsvmModelQB1.model")
+	app.SetParameterString("out", "ReducedImageQB1.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The input image must contain the feature bands used for the model training. If a statistics file was used during training by the Training application, it is mandatory to use the same statistics file for reduction.
+
+See also
+--------
+
+| :ref:`app-TrainDimensionalityReduction`, :ref:`app-ComputeImagesStatistics`

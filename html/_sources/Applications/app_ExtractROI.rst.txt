@@ -1,0 +1,195 @@
+.. _app-ExtractROI:
+
+ExtractROI
+==========
+
+
+Extract a ROI defined by the user.
+
+Description
+-----------
+
+This application extracts a Region Of Interest with user parameters. There are four mode of extraction. The standard mode allows the user to enter one point (upper left corner of the region to extract) and a size. The extent mode needs two points (upper left corner and lower right) and the radius mode need the center of the region and the radius: it will extract the rectangle containing the circle defined and limited by the image dimension. The fit mode needs a reference image or vector and the dimension of the extracted region will be the same as the extent of the reference. Different units are available such as pixel, image physical space or longitude and latitude.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Image to be processed.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Region of interest from the input image
+
+**Extraction mode** :code:`-mode [standard|fit|extent|radius]` *Default value: standard* |br|
+
+
+* **Standard** |br| In standard mode extraction is done with 2 parameters: the upper left corner and the size of the region, decomposed in X and Y coordinates.
+
+* **Fit** |br| In fit mode, extract is made from a reference: image or vector dataset.
+
+* **Extent** |br| In extent mode, the ROI is defined by two points, the upper left corner and the lower right corner, decomposed in 2 coordinates: X and Y. The unit for those coordinates can be set.
+
+* **Radius** |br| In radius mode, the ROI is defined by a point and a radius. The unit of those two parameters can be chosen independently.
+
+
+
+Fit options
+^^^^^^^^^^^
+
+**Reference image** :code:`-mode.fit.im image` *Mandatory* |br|
+Reference image to define the ROI
+
+**Reference vector** :code:`-mode.fit.vect vectorfile` *Mandatory* |br|
+The extent of the input vector file is computed and then gives a region of interest that will be extracted.
+
+Extent options
+^^^^^^^^^^^^^^
+
+**X coordinate of the Upper left corner** :code:`-mode.extent.ulx float` *Default value: 0* |br|
+X coordinate of upper left corner point.
+
+**Y coordinate of Upper Left corner point** :code:`-mode.extent.uly float` *Default value: 0* |br|
+Y coordinate of upper left corner point.
+
+**X coordinate of Lower Right corner point** :code:`-mode.extent.lrx float` *Default value: 0* |br|
+X coordinate of lower right corner point.
+
+**Y coordinate of Lower Right corner point** :code:`-mode.extent.lry float` *Default value: 0* |br|
+Y coordinate of lower right corner point.
+
+**Unit** :code:`-mode.extent.unit [pxl|phy|lonlat]` *Default value: pxl* |br|
+
+
+* **Pixel** |br| The unit for the parameters coordinates will be the pixel, meaning the index of the two points.
+
+* **Image physical space** |br| The unit for the parameters coordinates will be the physical measure of the image.
+
+* **Longitude and latitude** |br| The unit for the parameters coordinates will be the longitude and the latitude.
+
+
+
+Radius options
+^^^^^^^^^^^^^^
+
+**Radius** :code:`-mode.radius.r float` *Default value: 0* |br|
+This is the radius parameter of the radius mode.
+
+**Radius unit** :code:`-mode.radius.unitr [pxl|phy]` *Default value: pxl* |br|
+
+
+* **Pixel** |br| The unit of the radius will be the pixel.
+
+* **Image physical space** |br| The unit of the radius will be the physical measure of the image.
+
+
+
+**X coordinate of the center** :code:`-mode.radius.cx float` *Default value: 0* |br|
+This is the center coordinate of the radius mode, it will be either an ordinate or a latitude.
+
+**Y coordinate of the center** :code:`-mode.radius.cy float` *Default value: 0* |br|
+
+
+**Center unit** :code:`-mode.radius.unitc [pxl|phy|lonlat]` *Default value: pxl* |br|
+
+
+* **Pixel** |br| The unit for the center coordinates will be the pixel
+
+* **Image physical space** |br| The unit for the center coordinates will be the physical measure of the image.
+
+* **Lon/Lat** |br| The unit for the center coordinates will be the longitude and the latitude.
+
+
+
+
+
+------------
+
+**Start X** :code:`-startx int` *Default value: 0* |br|
+ROI start x position.
+
+**Start Y** :code:`-starty int` *Default value: 0* |br|
+ROI start y position.
+
+**Size X** :code:`-sizex int` *Default value: 0* |br|
+size along x in pixels.
+
+**Size Y** :code:`-sizey int` *Default value: 0* |br|
+size along y in pixels.
+
+**Output Image channels** :code:`-cl string1 string2...` |br|
+Channels to write in the output image.
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ExtractROI -in VegetationIndex.hd -mode extent -mode.extent.ulx 40 -mode.extent.uly 40 -mode.extent.lrx 150 -mode.extent.lry 150 -out ExtractROI.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ExtractROI")
+
+	app.SetParameterString("in", "VegetationIndex.hd")
+	app.SetParameterString("mode","extent")
+	app.SetParameterFloat("mode.extent.ulx", 40)
+	app.SetParameterFloat("mode.extent.uly", 40)
+	app.SetParameterFloat("mode.extent.lrx", 150)
+	app.SetParameterFloat("mode.extent.lry", 150)
+	app.SetParameterString("out", "ExtractROI.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

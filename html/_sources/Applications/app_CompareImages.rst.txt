@@ -1,0 +1,135 @@
+.. _app-CompareImages:
+
+CompareImages
+=============
+
+
+Estimator between 2 images.
+
+Description
+-----------
+
+Compute MSE (Mean Squared Error), MAE (Mean Absolute Error) and PSNR (Peak Signal to Noise Ratio) between two image bands (reference and measurement). The user has to set the used channel and can specify a ROI.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Reference image properties
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+**Reference image** :code:`-ref.in image` *Mandatory* |br|
+Image used as reference in the comparison.
+
+**Reference image channel** :code:`-ref.channel int` *Default value: 1* |br|
+Used channel for the reference image.
+
+Measured image properties
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+**Measured image** :code:`-meas.in image` *Mandatory* |br|
+Image used as measured in the comparison.
+
+**Measured image channel** :code:`-meas.channel int` *Default value: 1* |br|
+Used channel for the measured image.
+
+Region Of Interest (relative to reference image)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+**Start X** :code:`-roi.startx int` *Default value: 0* |br|
+ROI start x position.
+
+**Start Y** :code:`-roi.starty int` *Default value: 0* |br|
+ROI start y position.
+
+**Size X** :code:`-roi.sizex int` *Default value: 0* |br|
+Size along x in pixels.
+
+**Size Y** :code:`-roi.sizey int` *Default value: 0* |br|
+Size along y in pixels.
+
+
+
+------------
+
+**MSE** :code:`-mse float` *Mandatory* |br|
+Mean Squared Error value.
+
+**MAE** :code:`-mae float` *Mandatory* |br|
+Mean Absolute Error value.
+
+**PSNR** :code:`-psnr float` *Mandatory* |br|
+Peak Signal to Noise Ratio value.
+
+**count** :code:`-count float` *Mandatory* |br|
+Nb of pixels which are different.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_CompareImages -ref.in GomaApres.png -ref.channel 1 -meas.in GomaAvant.png -meas.channel 2 -roi.startx 20 -roi.starty 30 -roi.sizex 150 -roi.sizey 200
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("CompareImages")
+
+	app.SetParameterString("ref.in", "GomaApres.png")
+	app.SetParameterInt("ref.channel", 1)
+	app.SetParameterString("meas.in", "GomaAvant.png")
+	app.SetParameterInt("meas.channel", 2)
+	app.SetParameterInt("roi.startx", 20)
+	app.SetParameterInt("roi.starty", 30)
+	app.SetParameterInt("roi.sizex", 150)
+	app.SetParameterInt("roi.sizey", 200)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-BandMath` application, ImageStatistics

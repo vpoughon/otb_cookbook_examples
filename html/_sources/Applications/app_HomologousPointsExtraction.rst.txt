@@ -1,0 +1,163 @@
+.. _app-HomologousPointsExtraction:
+
+HomologousPointsExtraction
+==========================
+
+
+Compute homologous points between images using keypoints
+
+Description
+-----------
+
+This application allows computing homologous points between images using keypoints.  SIFT or SURF keypoints can be used and the band on which keypoints are computed can be set independently for both images. The application offers two modes: the first is the full mode where keypoints are extracted from the full extent of both images (please note that in this mode large image file are not supported). The second mode, called geobins, allows one to set-up spatial binning to get fewer points spread across the entire image. In this mode, the corresponding spatial bin in the second image is estimated using geographical transform or sensor modelling, and is padded according to the user defined precision. Last, in both modes the application can filter matches whose colocalisation in first image exceed this precision. The elevation parameters are to deal more precisely with sensor modelling in case of sensor geometry data. The outvector option allows creating a vector file with segments corresponding to the localisation error between the matches. It can be useful to assess the precision of a registration for instance. The vector file is always reprojected to EPSG:4326 to allow display in a GIS. This is done via reprojection or by applying the image sensor models.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image 1** :code:`-in1 image` *Mandatory* |br|
+ First input image
+
+**Input band 1** :code:`-band1 int` *Default value: 1* |br|
+Index of the band from input image 1 to use for keypoints extraction
+
+**Input Image 2** :code:`-in2 image` *Mandatory* |br|
+ Second input image
+
+**Input band 2** :code:`-band2 int` *Default value: 1* |br|
+Index of the band from input image 1 to use for keypoints extraction
+
+**Output file with tie points** :code:`-out filename [dtype]` *Mandatory* |br|
+File containing the list of tie points
+
+**Output vector file with tie points** :code:`-outvector filename [dtype]` |br|
+File containing segments representing matches 
+
+**Keypoints detection algorithm** :code:`-algorithm [surf|sift]` *Default value: surf* |br|
+Choice of the detection algorithm to use
+
+* **SURF algorithm** |br| 
+
+* **SIFT algorithm** |br| 
+
+
+
+**Distance threshold for matching** :code:`-threshold float` *Default value: 0.6* |br|
+The distance threshold for matching.
+
+**Use back-matching to filter matches** :code:`-backmatching bool` *Default value: false* |br|
+If set to true, matches should be consistent in both ways.
+
+**Keypoints search mode** :code:`-mode [full|geobins]` *Default value: full* |br|
+
+
+* **Extract and match all keypoints (no streaming)** |br| Extract and match all keypoints, loading both images entirely into memory
+
+* **Search keypoints in small spatial bins regularly spread across first image** |br| This method allows retrieving a set of tie points regulary spread across image 1. Corresponding bins in image 2 are retrieved using sensor and geographical information if available. The first bin position takes into account the margin parameter. Bins are cropped to the largest image region shrunk by the margin parameter for both in1 and in2 images.
+
+
+
+Search keypoints in small spatial bins regularly spread across first image options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Size of bin** :code:`-mode.geobins.binsize int` *Default value: 256* |br|
+Radius of the spatial bin in pixels
+
+**Size of bin (y direction)** :code:`-mode.geobins.binsizey int` |br|
+Radius of the spatial bin in pixels (y direction). If not set, the mode.geobins.binsize value is used.
+
+**Steps between bins** :code:`-mode.geobins.binstep int` *Default value: 256* |br|
+Steps between bins in pixels
+
+**Steps between bins (y direction)** :code:`-mode.geobins.binstepy int` |br|
+Steps between bins in pixels (y direction). If not set, the mode.geobins.binstep value is used.
+
+**Margin from image border to start/end bins (in pixels)** :code:`-mode.geobins.margin int` *Default value: 10* |br|
+Margin from image border to start/end bins (in pixels)
+
+
+
+------------
+
+**Estimated precision of the colocalisation function (in pixels)** :code:`-precision float` *Default value: 0* |br|
+Estimated precision of the colocalisation function in pixels
+
+**Filter points according to geographical or sensor based colocalisation** :code:`-mfilter bool` *Default value: false* |br|
+If enabled, this option allows one to filter matches according to colocalisation from sensor or geographical information, using the given tolerancy expressed in pixels
+
+**If enabled, points from second image will be exported in WGS84** :code:`-2wgs84 bool` *Default value: false* |br|
+
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_HomologousPointsExtraction -in1 sensor_stereo_left.tif -in2 sensor_stereo_right.tif -mode full -out homologous.txt
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("HomologousPointsExtraction")
+
+	app.SetParameterString("in1", "sensor_stereo_left.tif")
+	app.SetParameterString("in2", "sensor_stereo_right.tif")
+	app.SetParameterString("mode","full")
+	app.SetParameterString("out", "homologous.txt")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Full mode does not handle large images.
+
+See also
+--------
+
+| :ref:`app-RefineSensorModel`

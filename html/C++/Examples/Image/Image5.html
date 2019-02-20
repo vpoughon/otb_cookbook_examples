@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image5.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Patented" href="../Patented.html" />
+    <link rel="prev" title="VectorImage.cxx" href="VectorImage.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Image.html">Image</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Image3.html">Image3.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image2.html">Image2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image1.html">Image1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image4.html">Image4.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageListExample.html">ImageListExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorImage.html">VectorImage.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Image5.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Image.html">Image</a> &raquo;</li>
+        
+      <li>Image5.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Image/Image5.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="image5-cxx">
+<span id="example-image5"></span><h1>Image5.cxx<a class="headerlink" href="#image5-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Image/Image5.cxx?inline=false">Image5.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 1999-2011 Insight Software Consortium</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+<span class="c1">// This example illustrates how to import data into the \doxygen{otb}{Image}</span>
+<span class="c1">// class. This is particularly useful for interfacing with other software</span>
+<span class="c1">// systems. Many systems use a contiguous block of memory as a buffer</span>
+<span class="c1">// for image pixel data. The current example assumes this is the case and</span>
+<span class="c1">// feeds the buffer into an \doxygen{otb}{ImportImageFilter}, thereby producing an</span>
+<span class="c1">// Image as output.</span>
+
+<span class="c1">//</span>
+<span class="c1">// For fun we create a synthetic image with a centered sphere in</span>
+<span class="c1">// a locally allocated buffer and pass this block of memory to the</span>
+<span class="c1">// ImportImageFilter. This example is set up so that on execution, the</span>
+<span class="c1">// user must provide the name of an output file as a command-line argument.</span>
+<span class="c1">//</span>
+<span class="c1">// \index{otb::ImportImageFilter!Instantiation}</span>
+<span class="c1">// \index{otb::ImportImageFilter!Header}</span>
+<span class="c1">//</span>
+<span class="c1">// First, the header file of the ImportImageFilter class must be</span>
+<span class="c1">// included.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImportImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRGBPixel.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  outputImageFile&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Next, we select the data type to use to represent the image pixels.  We</span>
+  <span class="c1">// assume that the external block of memory uses the same data type to</span>
+  <span class="c1">// represent the pixels.</span>
+  <span class="c1">//</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                    <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                       <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="c1">// The type of the ImportImageFilter is instantiated in the</span>
+  <span class="c1">// following line.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImportImageFilter!Instantiation}</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImportImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ImportFilterType</span><span class="p">;</span>
+
+  <span class="c1">//  A filter object created using the \code{New()} method is then</span>
+  <span class="c1">//  assigned to a \code{SmartPointer}.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImportImageFilter!Pointer}</span>
+  <span class="c1">// \index{otb::ImportImageFilter!New()}</span>
+  <span class="c1">//</span>
+  <span class="n">ImportFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">importFilter</span> <span class="o">=</span> <span class="n">ImportFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// This filter requires the user to specify the size of the image to be</span>
+  <span class="c1">// produced as output.  The \code{SetRegion()} method is used to this end.</span>
+  <span class="c1">// The image size should exactly match the number of pixels available in the</span>
+  <span class="c1">// locally allocated buffer.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::ImportImageFilter!SetRegion()}</span>
+  <span class="c1">// \index{otb::ImportImageFilter!New()}</span>
+  <span class="c1">// \index{otb::ImportImageFilter!New()}</span>
+  <span class="c1">//</span>
+  <span class="n">ImportFilterType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">size</span><span class="p">;</span>
+
+  <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="c1">// size along X</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="c1">// size along Y</span>
+
+  <span class="n">ImportFilterType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">start</span><span class="p">;</span>
+  <span class="n">start</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">ImportFilterType</span><span class="o">::</span><span class="n">RegionType</span> <span class="n">region</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">SetIndex</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+
+  <span class="n">importFilter</span><span class="o">-&gt;</span><span class="n">SetRegion</span><span class="p">(</span><span class="n">region</span><span class="p">);</span>
+
+  <span class="c1">//  The origin of the output image is specified with the \code{SetOrigin()}</span>
+  <span class="c1">//  method.</span>
+
+  <span class="kt">double</span> <span class="n">origin</span><span class="p">[</span><span class="n">Dimension</span><span class="p">];</span>
+  <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">// X coordinate</span>
+  <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">// Y coordinate</span>
+
+  <span class="n">importFilter</span><span class="o">-&gt;</span><span class="n">SetOrigin</span><span class="p">(</span><span class="n">origin</span><span class="p">);</span>
+
+  <span class="c1">//  The spacing of the image is passed with the \code{SetSpacing()} method.</span>
+
+  <span class="kt">double</span> <span class="n">spacing</span><span class="p">[</span><span class="n">Dimension</span><span class="p">];</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="c1">// along X direction</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="c1">// along Y direction</span>
+
+  <span class="n">importFilter</span><span class="o">-&gt;</span><span class="n">SetSpacing</span><span class="p">(</span><span class="n">spacing</span><span class="p">);</span>
+
+  <span class="c1">//  Next we allocate the memory block containing the pixel data to be</span>
+  <span class="c1">//  passed to the ImportImageFilter. Note that we use exactly the</span>
+  <span class="c1">//  same size that was specified with the \code{SetRegion()} method.  In a</span>
+  <span class="c1">//  practical application, you may get this buffer from some other library</span>
+  <span class="c1">//  using a different data structure to represent the images.</span>
+
+  <span class="c1">// MODIFIED</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">numberOfPixels</span> <span class="o">=</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">PixelType</span><span class="o">*</span>         <span class="n">localBuffer</span>    <span class="o">=</span> <span class="k">new</span> <span class="n">PixelType</span><span class="p">[</span><span class="n">numberOfPixels</span><span class="p">];</span>
+
+  <span class="k">const</span> <span class="kt">double</span> <span class="n">radius</span> <span class="o">=</span> <span class="mf">80.0</span><span class="p">;</span>
+
+  <span class="c1">//  Here we fill up the buffer with a binary sphere. We use simple</span>
+  <span class="c1">//  \code{for()} loops here similar to those found in the C or FORTRAN</span>
+  <span class="c1">//  programming languages. Note that otb</span>
+  <span class="c1">//  does not use \code{for()} loops in its internal code to access</span>
+  <span class="c1">//  pixels. All pixel access tasks are instead performed using</span>
+  <span class="c1">//  \doxygen{otb}{ImageIterator}s that support the management of</span>
+  <span class="c1">//  n-dimensional images.</span>
+
+  <span class="k">const</span> <span class="kt">double</span> <span class="n">radius2</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">;</span>
+  <span class="n">PixelType</span><span class="o">*</span>   <span class="n">it</span>      <span class="o">=</span> <span class="n">localBuffer</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">double</span> <span class="n">dy</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">const</span> <span class="kt">double</span> <span class="n">dx</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">;</span>
+      <span class="k">const</span> <span class="kt">double</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span><span class="p">;</span>
+      <span class="o">*</span><span class="n">it</span><span class="o">++</span>           <span class="o">=</span> <span class="p">(</span><span class="n">d2</span> <span class="o">&lt;</span> <span class="n">radius2</span><span class="p">)</span> <span class="o">?</span> <span class="mi">255</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  The buffer is passed to the ImportImageFilter with the</span>
+  <span class="c1">//  \code{SetImportPointer()}. Note that the last argument of this method</span>
+  <span class="c1">//  specifies who will be responsible for deleting the memory block once it</span>
+  <span class="c1">//  is no longer in use. A \code{false} value indicates that the</span>
+  <span class="c1">//  ImportImageFilter will not try to delete the buffer when its</span>
+  <span class="c1">//  destructor is called. A \code{true} value, on the other hand, will allow the</span>
+  <span class="c1">//  filter to delete the memory block upon destruction of the import filter.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  For the ImportImageFilter to appropriately delete the</span>
+  <span class="c1">//  memory block, the memory must be allocated with the C++</span>
+  <span class="c1">//  \code{new()} operator.  Memory allocated with other memory</span>
+  <span class="c1">//  allocation mechanisms, such as C \code{malloc} or \code{calloc}, will not</span>
+  <span class="c1">//  be deleted properly by the ImportImageFilter.  In</span>
+  <span class="c1">//  other words, it is the application programmer&#39;s responsibility</span>
+  <span class="c1">//  to ensure that ImportImageFilter is only given</span>
+  <span class="c1">//  permission to delete the C++ \code{new} operator-allocated memory.</span>
+
+  <span class="k">const</span> <span class="kt">bool</span> <span class="n">importImageFilterWillOwnTheBuffer</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="n">importFilter</span><span class="o">-&gt;</span><span class="n">SetImportPointer</span><span class="p">(</span><span class="n">localBuffer</span><span class="p">,</span> <span class="n">numberOfPixels</span><span class="p">,</span> <span class="n">importImageFilterWillOwnTheBuffer</span><span class="p">);</span>
+
+  <span class="c1">//  Finally, we can connect the output of this filter to a pipeline.</span>
+  <span class="c1">//  For simplicity we just use a writer here, but it could be any other filter.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">importFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()));</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">exp</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">exp</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  Note that we do not call \code{delete} on the buffer since we pass</span>
+  <span class="c1">//  \code{true} as the last argument of \code{SetImportPointer()}. Now the</span>
+  <span class="c1">//  buffer is owned by the ImportImageFilter.</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Patented.html" class="btn btn-neutral float-right" title="Patented" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="VectorImage.html" class="btn btn-neutral" title="VectorImage.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

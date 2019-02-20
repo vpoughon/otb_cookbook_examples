@@ -1,0 +1,121 @@
+.. _app-RadiometricIndices:
+
+RadiometricIndices
+==================
+
+
+Compute radiometric indices.
+
+Description
+-----------
+
+This application computes radiometric indices using the relevant channels of the input image. The output is a multi band image into which each channel is one of the selected indices.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Radiometric indices output image
+
+Channels selection
+^^^^^^^^^^^^^^^^^^
+
+
+
+Channels selection
+
+**Blue Channel** :code:`-channels.blue int` *Default value: 1* |br|
+Blue channel index
+
+**Green Channel** :code:`-channels.green int` *Default value: 1* |br|
+Green channel index
+
+**Red Channel** :code:`-channels.red int` *Default value: 1* |br|
+Red channel index
+
+**NIR Channel** :code:`-channels.nir int` *Default value: 1* |br|
+NIR channel index
+
+**Mir Channel** :code:`-channels.mir int` *Default value: 1* |br|
+Mir channel index
+
+
+
+------------
+
+**Available Radiometric Indices** :code:`-list string1 string2...` *Default value: ndvi* |br|
+List of available radiometric indices with their relevant channels in brackets:
+
+* Vegetation:NDVI - Normalized difference vegetation index (Red, NIR)
+* Vegetation:TNDVI - Transformed normalized difference vegetation index (Red, NIR)
+* Vegetation:RVI - Ratio vegetation index (Red, NIR)
+* Vegetation:SAVI - Soil adjusted vegetation index (Red, NIR)
+* Vegetation:TSAVI - Transformed soil adjusted vegetation index (Red, NIR)
+* Vegetation:MSAVI - Modified soil adjusted vegetation index (Red, NIR)
+* Vegetation:MSAVI2 - Modified soil adjusted vegetation index 2 (Red, NIR)
+* Vegetation:GEMI - Global environment monitoring index (Red, NIR)
+* Vegetation:IPVI - Infrared percentage vegetation index (Red, NIR)
+* Water:NDWI - Normalized difference water index (Gao 1996) (NIR, MIR)
+* Water:NDWI2 - Normalized difference water index (Mc Feeters 1996) (Green, NIR)
+* Water:MNDWI - Modified normalized difference water index (Xu 2006) (Green, MIR)
+* Water:NDPI - Normalized difference pond index (Lacaux et al.) (MIR, Green)
+* Water:NDTI - Normalized difference turbidity index (Lacaux et al.) (Red, Green)
+* Soil:RI - Redness index (Red, Green)
+* Soil:CI - Color index (Red, Green)
+* Soil:BI - Brightness index (Red, Green)
+* Soil:BI2 - Brightness index 2 (NIR, Red, Green)
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_RadiometricIndices -in qb_RoadExtract.tif -list Vegetation:NDVI Vegetation:RVI Vegetation:IPVI -out RadiometricIndicesImage.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("RadiometricIndices")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| otbVegetationIndicesFunctor, otbWaterIndicesFunctor and otbSoilIndicesFunctor classes

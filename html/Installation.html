@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Compiling OTB from source" href="CompilingOTBFromSource.html" />
+    <link rel="prev" title="Welcome to Orfeo ToolBox!" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-bindings">Python bindings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-dependencies">System dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#caveat-on-otb-6-0">Caveat on OTB 6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Python bindings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#faq">FAQ</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-unable-to-import-otbapplication-library-with-python3">Q: Unable to import otbApplication library with Python3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#macos-x">MacOS X</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Python bindings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">FAQ</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-i-am-getting-an-error-message">Q: I am getting an error message…</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#other-packages">Other packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debian">Debian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ubuntu-12-04-and-higher">Ubuntu 12.04 and higher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opensuse-12-x-and-higher">OpenSuse 12.X and higher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Installation.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>We provide different standalone binary packages for OTB-Applications:</p>
+<ul class="simple">
+<li>for Windows platform (Seven or higher)</li>
+<li>for 64 bits Linux distribution</li>
+<li>for MacOS X</li>
+</ul>
+<p>Other binaries can be available as packages (OSGeo packages,
+Debian/Ubuntu packages, OpenSuse packages), however be advised that they
+may not be up-to-date nor delivered with full features. If you want to
+build from source or if we don’t provide packages for your system,
+information is available in the <a class="reference external" href="http://orfeo-toolbox.org/SoftwareGuide/">Software Guide</a>,
+in the section “Building from Source”.</p>
+<p>You can get latest binary packages from our <a class="reference external" href="https://www.orfeo-toolbox.org/download">Download page</a>.</p>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>Windows binary packages are available for Windows 7 or higher. They can
+be downloaded from <a class="reference external" href="https://www.orfeo-toolbox.org/download">otb download page</a> .</p>
+<p>Pick the correct version (32 bit or 64 bit) depending on your system.</p>
+<p>Extract the archive and use one of the launchers, they contain all applications
+and their launchers (both command line and graphical launchers are provided):</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">monteverdi.bat</span></code>: A launcher script for Monteverdi</li>
+<li><code class="docutils literal notranslate"><span class="pre">mapla.bat</span></code>: A launcher script for Mapla</li>
+<li><code class="docutils literal notranslate"><span class="pre">otbenv.bat</span></code>: A script to initialize the environment for OTB
+executables</li>
+<li><code class="docutils literal notranslate"><span class="pre">bin</span></code>: A folder containing application launchers (otbcli.bat,
+otbgui.bat) and the DLLs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">lib</span></code>: A folder containing application DLLs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">include</span></code>: A folder containing all the necessary headers to compile OTB
+based projects.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tool</span></code>: A folder containing useful scripts to test the installation or
+to uninstall OTB libraries and headers while keeping all the dependencies.</li>
+</ul>
+<p>The applications can be launched from the Mapla launcher. If you want to
+use the otbcli and otbgui launchers, you can initialize a command prompt
+with <code class="docutils literal notranslate"><span class="pre">otbenv.bat</span></code>.</p>
+<p>The package can be used to compile other projects using OTB (binaries, libraries
+and headers are included). If you want to build OTB from source using this
+package, you should first uninstall the specific OTB files from the package to
+leave only the dependencies (what we call an XDK). You can do it using the
+supplied script <code class="docutils literal notranslate"><span class="pre">tools/uninstall_otb.bat</span></code>.</p>
+<p>In the package you also have a template project for Visual 2015
+<code class="docutils literal notranslate"><span class="pre">OTB</span> <span class="pre">Project.zip</span></code>. This template can be placed in your user Visual 2015 template
+directory : <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%\Documents\Visual</span> <span class="pre">Studio</span> <span class="pre">2015\Templates\ProjectTemplates</span></code>.
+The script <code class="docutils literal notranslate"><span class="pre">start_devenv.bat</span></code> allows to copy the template in that folder and
+start Visual Studio.</p>
+<div class="section" id="python-bindings">
+<h3>Python bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h3>
+<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
+package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+Please note that using a different Python version may not be compatible with
+OTB wrappings. If no compatible Python 2.x version is found a
+notification is generated during the installation process.  If the installation completes
+without issue, information relating to your Python bindings will be provided.</p>
+<p>You must have Python numpy bindings installed in your system. They can be installed locally
+without admin rights as follows: “pip install –user numpy”. This is to give users the option
+to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
+<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
+If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
+</ul>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>You must have “Visual C++ Redistributable for Visual Studio 2015” installed for using this package.
+It can be downloaded freely from <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">microsoft</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<p>We provide a binary package for GNU/Linux x86_64. This package includes
+all of the OTB applications along with command line and graphical launchers.
+It can be downloaded from <a class="reference external" href="https://www.orfeo-toolbox.org/download">OTB’s download page</a>.</p>
+<p>This package is a self-extractable archive. You may uncompress it with a
+double-click on the file, or from the command line as follows:</p>
+<pre class="literal-block">
+chmod +x OTB-6.7.0-Linux64.run
+./OTB-6.7.0-Linux64.run
+</pre>
+<p>The self-extractable archive only needs common tools found on most Linux
+distributions (“sed”, “grep”, “find”, “cat”, “printf”, “ln”, …). However, be
+aware that it requires tools such as “which” and “file” (they are not always
+present, for instance when building a container).</p>
+<p>Please note that the resulting installation is not meant to be moved,
+you should uncompress the archive in its final location. Once the
+archive is extracted, the directory structure consists of:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">monteverdi.sh</span></code>: A launcher script for Monteverdi</li>
+<li><code class="docutils literal notranslate"><span class="pre">mapla.sh</span></code>: A launcher script for Mapla</li>
+<li><code class="docutils literal notranslate"><span class="pre">otbenv.profile</span></code>: A script to initialize the environment for OTB
+executables</li>
+<li><code class="docutils literal notranslate"><span class="pre">bin</span></code>: A folder containing application launchers (otbcli.sh,
+otbgui.sh), Monteverdi and Mapla.</li>
+<li><code class="docutils literal notranslate"><span class="pre">lib</span></code>: A folder containing all shared libraries and OTB
+applications.</li>
+<li><code class="docutils literal notranslate"><span class="pre">include</span></code>: A folder containing all the necessary headers to compile OTB
+based projects.</li>
+<li><code class="docutils literal notranslate"><span class="pre">share</span></code>: A folder containing common resources and copyright
+mentions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tool</span></code>: A folder containing useful scripts to test the installation or
+to uninstall OTB libraries and headers while keeping all the dependencies.</li>
+</ul>
+<p>The applications can be launched from the Mapla launcher. If you want to
+use the otbcli and otbgui launchers, you can initialize your environment
+with <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">otbenv.profile</span></code>.</p>
+<p>The package can be used to compile other projects using OTB (binaries, libraries
+and headers are included). If you want to build OTB from source using this
+package, you should first uninstall the specific OTB files from the package to
+leave only the dependencies (what we call an XDK). You can do it using the
+supplied script <code class="docutils literal notranslate"><span class="pre">tools/uninstall_otb.sh</span></code>.</p>
+<div class="section" id="system-dependencies">
+<h3>System dependencies<a class="headerlink" href="#system-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>In order to run the command line launchers, this package doesn’t require
+any special library that is not present in most modern Linux
+distributions. The graphical executable (otbgui launchers, Monteverdi
+and Mapla) use the X11 libraries, which are widely used in a lot of
+distributions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">libx11</span><span class="o">-</span><span class="mi">6</span> <span class="n">libxext6</span> <span class="n">libxau6</span> <span class="n">libxxf86vm1</span> <span class="n">libxdmcp6</span> <span class="n">libdrm2</span>
+</pre></div>
+</div>
+<p>Monteverdi also requires the standard graphics libraries <strong>libgl1</strong> and
+<strong>libglu1</strong>. Make sure you have at least one version of them installed
+in your system.</p>
+</div>
+<div class="section" id="caveat-on-otb-6-0">
+<h3>Caveat on OTB 6.0<a class="headerlink" href="#caveat-on-otb-6-0" title="Permalink to this headline">¶</a></h3>
+<p>In OTB 6.0 binaries, there is a small caveat for “expat” as the supplied binaries
+depend on “libexpat.so”, which is not contained in the package. It can be
+supplied by most package managers (apt, yum, …). If not already present, it is
+necessary to install one of the following packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">libexpat</span><span class="o">-</span><span class="n">dev</span>   <span class="n">libexpat1</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Python bindings<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
+package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+Please note that using a different Python version may not be compatible with
+OTB wrappings. If no compatible Python 2.x version is found a
+notification is generated during the installation process.  If the installation completes
+without issue, information relating to your Python bindings will be provided.</p>
+<p>You must have Python NumPy bindings installed in your system. They can be installed locally
+without admin rights as follows: “pip install –user numpy”. This is to give users the option
+to select their own existing Python installation rather than the one distributed by the OTB package.</p>
+<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
+If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
+</ul>
+<p>Notes:</p>
+<ul class="simple">
+<li>You must use monteverdi and mapla through <code class="docutils literal notranslate"><span class="pre">mapla.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">monteverdi.sh</span></code> helper scripts in extracted directory.</li>
+<li>The helper scripts for monteverdi and mapla set required environment variables</li>
+<li>You might be tempted to move “OTB-6.7.0-Linux64” into another location say /usr/local/ after extraction. But avoid this action!</li>
+<li>To have “OTB-6.7.0-Linux64” installed in /usr/local or /opt execute “OTB-6.7.0-Linux64.run” in that directory.</li>
+<li>Multiple installation of OTB can exists in same system without one conflicting the other!</li>
+</ul>
+</div>
+<div class="section" id="faq">
+<h3>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="q-unable-to-import-otbapplication-library-with-python3">
+<h4>Q: Unable to import otbApplication library with Python3<a class="headerlink" href="#q-unable-to-import-otbapplication-library-with-python3" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ImportError</span><span class="p">:</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">5</span><span class="n">m</span><span class="o">.</span><span class="n">so</span><span class="o">.</span><span class="n">rh</span><span class="o">-</span><span class="n">python35</span><span class="o">-</span><span class="mf">1.0</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">shared</span> <span class="nb">object</span> <span class="n">file</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</pre></div>
+</div>
+<p>A: You need to add a symlink to libpython3.5m.so.rh-python35-1.0 to make it works.</p>
+<p>Here is the solution:</p>
+<ul class="simple">
+<li>Find the libpython3.5XX on your system : <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">/usr/lib</span> <span class="pre">-iname</span> <span class="pre">*libpython3.5*</span></code>
+(on Ubuntu 14.04, it is <code class="docutils literal notranslate"><span class="pre">/usr/lib/x86_64-linux-gnu/libpython3.5m.so</span></code>)</li>
+<li>Create a symlink : <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">path/to/lib/python3.5XX</span> <span class="pre">path/to/lib/libpython3.5m.so.rh-python35-1.0</span></code></li>
+<li>Try to import otbApplication again</li>
+</ul>
+<p>See this discussion on <a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/issues/1540#note_67864">OTB issue tracker</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="macos-x">
+<h2>MacOS X<a class="headerlink" href="#macos-x" title="Permalink to this headline">¶</a></h2>
+<p>We provide for MacOS X through a standalone package. This package is a
+self-extractible archive, quite similar to the Linux one. You may
+uncompress it with the command line:</p>
+<pre class="literal-block">
+chmod +x OTB-6.7.0-Darwin64.run
+./OTB-6.7.0-Darwin64.run
+</pre>
+<p>Once the archive is extracted, you can see OTB-6.7.0-Darwin64 directory in
+the same direcrtory along with OTB-6.7.0-Darwin64.run</p>
+<p>Contents of OTB-6.7.0-Darwin64 is briefly listed below:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Monteverdi.app</span></code>: A Mac OSX .app for Monteverdi</li>
+<li><code class="docutils literal notranslate"><span class="pre">Mapla.app</span></code>: A Mac OSX .app for Mapla.</li>
+<li><code class="docutils literal notranslate"><span class="pre">bin</span></code>: A folder containing application launchers (otbcli.sh,
+otbgui.sh), monteverdi and mapla binaries.</li>
+<li><code class="docutils literal notranslate"><span class="pre">lib</span></code>: A folder containing all shared libraries and OTB
+applications.</li>
+<li><code class="docutils literal notranslate"><span class="pre">include</span></code>: A folder containing all the necessary headers to compile OTB
+based projects.</li>
+<li><code class="docutils literal notranslate"><span class="pre">share</span></code>: A folder containing common resources and copyright
+mentions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tool</span></code>: A folder containing useful scripts to test the installation or
+to uninstall OTB libraries and headers while keeping all the dependencies.</li>
+</ul>
+<p>The applications can be launched from the Mapla launcher. If you want to
+use the otbcli and otbgui launchers, you can initialize your environment
+with <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">otbenv.profile</span></code>.</p>
+<p>The package can be used to compile other projects using OTB (binaries, libraries
+and headers are included). If you want to build OTB from source using this
+package, you should first uninstall the specific OTB files from the package to
+leave only the dependencies (what we call an XDK). You can do it using the
+supplied script <code class="docutils literal notranslate"><span class="pre">tools/uninstall_otb.sh</span></code>.</p>
+<div class="section" id="id2">
+<h3>Python bindings<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
+package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+Please note that using a different Python version may not be compatible with
+OTB wrappings. If no compatible Python 2.x version is found a
+notification is generated during the installation process.  If the installation completes
+without issue, information relating to your Python bindings will be provided.</p>
+<p>You must have Python numpy bindings installed in your system. They can be installed locally
+without admin rights as follows: “pip install –user numpy”. This is to give users the option
+to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
+<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
+If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
+</ul>
+<p>Notes:</p>
+<ul class="simple">
+<li>If you want to use the otbcli and otbgui launchers, you must access
+them via a terminal prompt.</li>
+<li>The OSX .app are provided for monteverdi (viewer) and mapla
+(application browser).</li>
+<li>You must use monteverdi and mapla through their .app files only.</li>
+<li>You are allowed to move these .app files and refrain from moving or
+deleting OTB-6.7.0-Darwin64 after extraction. In case you need to have OTB
+installed in some other directory. Extract the .run file there.</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>FAQ<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="q-i-am-getting-an-error-message">
+<h4>Q: I am getting an error message…<a class="headerlink" href="#q-i-am-getting-an-error-message" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcrun</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">active</span> <span class="n">developer</span> <span class="n">path</span>
+<span class="p">(</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="p">),</span> <span class="n">missing</span> <span class="n">xcrun</span> <span class="n">at</span><span class="p">:</span>
+<span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">xcrun</span>
+</pre></div>
+</div>
+<p>A: You can get this error at startup running Monteverdi.app or Mapla.app. The
+solution is to run in a terminal the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcode</span><span class="o">-</span><span class="n">select</span> <span class="o">--</span><span class="n">install</span>
+</pre></div>
+</div>
+<p>And then try to restart Monteverdi or Mapla.</p>
+</div>
+</div>
+</div>
+<div class="section" id="other-packages">
+<h2>Other packages<a class="headerlink" href="#other-packages" title="Permalink to this headline">¶</a></h2>
+<p>Warning! These packages may not be up-to-date with latest OTB
+releases. In addition, some features of the library may not be available
+on every platform. Some of these are not maintained by the OTB-team. If you
+want to get involved in the packaging of OTB for your favourite
+platform, please contact us through the developer’s mailing list:
+<a class="reference external" href="mailto:otb-developers&#37;&#52;&#48;googlegroups&#46;com">otb-developers<span>&#64;</span>googlegroups<span>&#46;</span>com</a>.</p>
+<div class="section" id="debian">
+<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h3>
+<p>There are OTB packages for Debian (unstable) since version 5.2.0. OTB
+Applications packages may be available as Debian packages through APT
+repositories:</p>
+<ul class="simple">
+<li>otb-bin for command line applications</li>
+<li>otb-bin-qt for Qt applications</li>
+<li>python-otb for python applications</li>
+</ul>
+<p>Due to license issues, the OTB package built in Debian doesn’t contain
+6S. As a consequence, the package does not contain the
+OpticalCalibration application.</p>
+</div>
+<div class="section" id="ubuntu-12-04-and-higher">
+<h3>Ubuntu 12.04 and higher<a class="headerlink" href="#ubuntu-12-04-and-higher" title="Permalink to this headline">¶</a></h3>
+<p>For Ubuntu 12.04 and higher, OTB Applications packages may be available
+as Debian packages through APT repositories:</p>
+<ul class="simple">
+<li>otb-bin for command line applications</li>
+<li>otb-bin-qt for Qt applications</li>
+<li>python-otb for python applications</li>
+</ul>
+<p>Since release 3.14.1, OTB Applications packages are available in the
+<a class="reference external" href="https://launchpad.net/~ubuntugis/+archive/ubuntugis-unstable">ubuntugis-unstable</a>
+repository.</p>
+<p>Since release 5.2.0, the Ubuntu packages derive from the Debian
+packages.</p>
+<p>You can add it by using these command-lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">aptitude</span> <span class="n">install</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">add</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">ubuntugis</span><span class="o">/</span><span class="n">ubuntugis</span><span class="o">-</span><span class="n">unstable</span>
+</pre></div>
+</div>
+<p>You will then need to run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">aptitude</span> <span class="n">install</span> <span class="n">otb</span><span class="o">-</span><span class="nb">bin</span> <span class="n">otb</span><span class="o">-</span><span class="nb">bin</span><span class="o">-</span><span class="n">qt</span> <span class="n">python</span><span class="o">-</span><span class="n">otb</span>
+</pre></div>
+</div>
+<p>If you are using <em>Synaptic</em>, you can add the repositories, update and
+install the packages through the graphical user interface.</p>
+<p>For further information about Ubuntu packages go to
+<a class="reference external" href="https://launchpad.net/~ubuntugis/+archive/ubuntugis-unstable">ubuntugis-unstable</a>
+launchpad page and click on Read about installing.</p>
+<p>apt-add-repository will try to retrieve the GPG keys of the
+repositories to certify the origin of the packages. If you are behind a
+http proxy, this step won’t work and apt-add-repository will stall and
+eventually quit. You can temporarily ignore this error and proceed with
+the update step. Following this, aptitude update will issue a warning
+about a signature problem. This warning won’t prevent you from
+installing the packages.</p>
+</div>
+<div class="section" id="opensuse-12-x-and-higher">
+<h3>OpenSuse 12.X and higher<a class="headerlink" href="#opensuse-12-x-and-higher" title="Permalink to this headline">¶</a></h3>
+<p>For OpenSuse 12.X and higher, OTB Applications packages are available
+through <em>zypper</em>.</p>
+<p>First, you need to add the appropriate repositories with the following
+commands (please replace <img class="math" src="_images/math/c4f4658c5b80ae51fbdc58c76e1b9cb96f464244.png" alt="11.4"/> with your version of OpenSuse):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">zypper</span> <span class="n">ar</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">opensuse</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repositories</span><span class="o">/</span><span class="n">games</span><span class="o">/</span><span class="n">openSUSE_11</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span> <span class="n">Games</span>
+<span class="n">sudo</span> <span class="n">zypper</span> <span class="n">ar</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">opensuse</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repositories</span><span class="o">/</span><span class="n">Application</span><span class="p">:</span><span class="o">/</span><span class="n">Geo</span><span class="o">/</span><span class="n">openSUSE_11</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span> <span class="n">GEO</span>
+<span class="n">sudo</span> <span class="n">zypper</span> <span class="n">ar</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">opensuse</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repositories</span><span class="o">/</span><span class="n">home</span><span class="p">:</span><span class="o">/</span><span class="n">tzotsos</span><span class="o">/</span><span class="n">openSUSE_11</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span> <span class="n">tzotsos</span>
+</pre></div>
+</div>
+<p>You should then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">zypper</span> <span class="n">refresh</span>
+<span class="n">sudo</span> <span class="n">zypper</span> <span class="n">install</span> <span class="n">OrfeoToolbox</span>
+<span class="n">sudo</span> <span class="n">zypper</span> <span class="n">install</span> <span class="n">OrfeoToolbox</span><span class="o">-</span><span class="n">python</span>
+</pre></div>
+</div>
+<p>Alternatively you can use the One-Click Installer from the <a class="reference external" href="http://software.opensuse.org/search?q=Orfeo&amp;baseproject=openSUSE%3A11.4&amp;lang=en&amp;include_home=true&amp;exclude_debug=true">openSUSE
+Download
+page</a>
+or add the above repositories and install through Yast Package
+Management.</p>
+<p>There is also support for the recently introduced ’rolling’ openSUSE
+distribution named ’Tumbleweed’. For Tumbleweed you need to add the
+following repositories with these command-lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">zypper</span> <span class="n">ar</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">opensuse</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repositories</span><span class="o">/</span><span class="n">games</span><span class="o">/</span><span class="n">openSUSE_Tumbleweed</span><span class="o">/</span> <span class="n">Games</span>
+<span class="n">sudo</span> <span class="n">zypper</span> <span class="n">ar</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">opensuse</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repositories</span><span class="o">/</span><span class="n">Application</span><span class="p">:</span><span class="o">/</span><span class="n">Geo</span><span class="o">/</span><span class="n">openSUSE_Tumbleweed</span><span class="o">/</span> <span class="n">GEO</span>
+<span class="n">sudo</span> <span class="n">zypper</span> <span class="n">ar</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">opensuse</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repositories</span><span class="o">/</span><span class="n">home</span><span class="p">:</span><span class="o">/</span><span class="n">tzotsos</span><span class="o">/</span><span class="n">openSUSE_Tumbleweed</span><span class="o">/</span> <span class="n">tzotsos</span>
+</pre></div>
+</div>
+<p>and then add the OTB packages as shown above.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CompilingOTBFromSource.html" class="btn btn-neutral float-right" title="Compiling OTB from source" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to Orfeo ToolBox!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

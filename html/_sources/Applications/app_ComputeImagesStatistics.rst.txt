@@ -1,0 +1,80 @@
+.. _app-ComputeImagesStatistics:
+
+ComputeImagesStatistics
+=======================
+
+
+Computes global mean and standard deviation for each band from a set of images and optionally saves the results in an XML file.
+
+Description
+-----------
+
+This application computes a global mean and standard deviation for each band of a set of images and optionally saves the results in an XML file. The output XML is intended to be used as an input for the :ref:`app-TrainImagesClassifier` application to normalize samples before learning. You can also normalize the image with the XML file in the :ref:`app-ImageClassifier` application.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input images** :code:`-il image1 image2...` *Mandatory* |br|
+List of input image filenames.
+
+**Background Value** :code:`-bv float` |br|
+Background value to ignore in computation of statistics.
+
+**Output XML file** :code:`-out filename [dtype]` |br|
+XML filename where the statistics are saved for future reuse.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ComputeImagesStatistics -il QB_1_ortho.tif -out EstimateImageStatisticsQB1.xml
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ComputeImagesStatistics")
+
+	app.SetParameterStringList("il", ['QB_1_ortho.tif'])
+	app.SetParameterString("out", "EstimateImageStatisticsQB1.xml")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Each image of the set must contain the same bands as the others (i.e. same types, in the same order).
+
+See also
+--------
+
+| Documentation of the :ref:`app-TrainImagesClassifier` and :ref:`app-ImageClassifier` application.

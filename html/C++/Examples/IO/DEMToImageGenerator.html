@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DEMToImageGenerator.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ImageReadWrite.cxx" href="ImageReadWrite.html" />
+    <link rel="prev" title="ImageReadCastWrite.cxx" href="ImageReadCastWrite.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../IO.html">IO</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ImageReadCastWrite.html">ImageReadCastWrite.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">DEMToImageGenerator.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageReadWrite.html">ImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MultibandImageReadWrite.html">MultibandImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DEMHandlerExample.html">DEMHandlerExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorDataIOExample.html">VectorDataIOExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MetadataExample.html">MetadataExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageReadRegionOfInterestWrite.html">ImageReadRegionOfInterestWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractROI.html">ExtractROI.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexImageReadWrite.html">ComplexImageReadWrite.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageSeriesIOExample.html">ImageSeriesIOExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../IO.html">IO</a> &raquo;</li>
+        
+      <li>DEMToImageGenerator.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/IO/DEMToImageGenerator.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="demtoimagegenerator-cxx">
+<span id="example-demtoimagegenerator"></span><h1>DEMToImageGenerator.cxx<a class="headerlink" href="#demtoimagegenerator-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./DEMToImageGenerator Output/DEMToImageGenerator.tif Output/pretty_DEMToImageGenerator.png <span class="m">6</span>.5 <span class="m">45</span>.5 <span class="m">500</span> <span class="m">500</span> <span class="m">0</span>.002 -0.002 Input/DEM_srtm
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/DEMToImageGenerator.cxx?inline=false">DEMToImageGenerator.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{otb::DEMToImageGenerator}</span>
+<span class="c1">// \index{otb::DEMHandler}</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">// The following example illustrates the use of the \doxygen{otb}{DEMToImageGenerator} class.</span>
+<span class="c1">// The aim of this class is to generate an image from the srtm data (precising the start extraction</span>
+<span class="c1">// latitude and longitude point). Each pixel is a geographic point and its intensity is</span>
+<span class="c1">// the altitude of the point.</span>
+<span class="c1">// If srtm doesn&#39;t have altitude information for a point, the altitude value is set at -32768 (value of the srtm norm).</span>
+<span class="c1">//</span>
+<span class="c1">// Let&#39;s look at the minimal code required to use this algorithm. First, the following header</span>
+<span class="c1">// defining the \doxygen{otb}{DEMToImageGenerator} class must be included.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbDEMToImageGenerator.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkThresholdImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot; output filename , pretty output filename , Longitude Output Origin point , Latitude Output Origin point , X Output Size, Y Output size , X &quot;</span>
+                 <span class="s">&quot;Spacing , Y Spacing, DEM folder path&quot;</span>
+              <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// The image type is now defined using pixel type and</span>
+  <span class="c1">// dimension. The output image is defined as an \doxygen{otb}{Image}.</span>
+
+  <span class="kt">char</span><span class="o">*</span>                                 <span class="n">folderPath</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span>                                 <span class="n">outputName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                    <span class="n">Dimension</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="c1">// The writer is defined</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="c1">// The DEMToImageGenerator is defined using the image pixel</span>
+  <span class="c1">// type as a template parameter. After that, the object can be instancied.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">DEMToImageGenerator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">DEMToImageGeneratorType</span><span class="p">;</span>
+
+  <span class="n">DEMToImageGeneratorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">object</span> <span class="o">=</span> <span class="n">DEMToImageGeneratorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// Input parameter types are defined to set the value in the \doxygen{otb}{DEMToImageGenerator}.</span>
+
+  <span class="k">typedef</span> <span class="n">DEMToImageGeneratorType</span><span class="o">::</span><span class="n">SizeType</span>    <span class="n">SizeType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">DEMToImageGeneratorType</span><span class="o">::</span><span class="n">SpacingType</span> <span class="n">SpacingType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">DEMToImageGeneratorType</span><span class="o">::</span><span class="n">PointType</span>   <span class="n">PointType</span><span class="p">;</span>
+
+  <span class="c1">// Instantiating writer</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// The path to the DEM folder is given to the \doxygen{otb}{DEMHandler}.</span>
+  <span class="n">otb</span><span class="o">::</span><span class="n">DEMHandler</span><span class="o">::</span><span class="n">Instance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">OpenDEMDirectory</span><span class="p">(</span><span class="n">folderPath</span><span class="p">);</span>
+
+  <span class="c1">// The origin (Longitude/Latitude) of the output image in the DEM is given to the filter.</span>
+  <span class="n">PointType</span> <span class="n">origin</span><span class="p">;</span>
+  <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+
+  <span class="n">object</span><span class="o">-&gt;</span><span class="n">SetOutputOrigin</span><span class="p">(</span><span class="n">origin</span><span class="p">);</span>
+
+  <span class="c1">// The size (in Pixel) of the output image is given to the filter.</span>
+  <span class="n">SizeType</span> <span class="n">size</span><span class="p">;</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+
+  <span class="n">object</span><span class="o">-&gt;</span><span class="n">SetOutputSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+
+  <span class="c1">// The spacing (step between to consecutive pixel) is given to the filter.</span>
+  <span class="c1">// By default, this spacing is set at 0.001.</span>
+  <span class="n">SpacingType</span> <span class="n">spacing</span><span class="p">;</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+
+  <span class="n">object</span><span class="o">-&gt;</span><span class="n">SetOutputSpacing</span><span class="p">(</span><span class="n">spacing</span><span class="p">);</span>
+
+  <span class="c1">// The output image name is given to the writer and</span>
+  <span class="c1">// the filter output is linked to the writer input.</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputName</span><span class="p">);</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  The invocation of the \code{Update()} method on the writer triggers the</span>
+  <span class="c1">//  execution of the pipeline.  It is recommended to place update calls in a</span>
+  <span class="c1">//  \code{try/catch} block in case errors occur and exceptions are thrown.</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception itk::ExceptionObject thrown !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception thrown !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Pretty image creation for the printing</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                               <span class="n">OutputPrettyImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputPrettyImageType</span><span class="o">&gt;</span>                        <span class="n">WriterPrettyType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">OutputPrettyImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ThresholdImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>                               <span class="n">ThresholderType</span><span class="p">;</span>
+
+  <span class="n">ThresholderType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">thresholder</span>  <span class="o">=</span> <span class="n">ThresholderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">rescaler</span>     <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterPrettyType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">prettyWriter</span> <span class="o">=</span> <span class="n">WriterPrettyType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">ThresholdBelow</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">prettyWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="n">prettyWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">prettyWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excep</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+
+  <span class="c1">// Let&#39;s now run this example using as input the SRTM data contained in</span>
+  <span class="c1">// \code{DEM\_srtm} folder. Figure \ref{fig:DEMToImageGenerator}</span>
+  <span class="c1">// shows the obtained DEM. Invalid data values -- hidden areas due</span>
+  <span class="c1">// to SAR shadowing -- are set to zero.</span>
+  <span class="c1">//</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure} \center</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_DEMToImageGenerator.eps}</span>
+  <span class="c1">// \itkcaption[DEM To Image generator Example]{DEMToImageGenerator image.}</span>
+  <span class="c1">// \label{fig:DEMToImageGenerator}</span>
+  <span class="c1">// \end{figure}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ImageReadWrite.html" class="btn btn-neutral float-right" title="ImageReadWrite.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ImageReadCastWrite.html" class="btn btn-neutral" title="ImageReadCastWrite.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

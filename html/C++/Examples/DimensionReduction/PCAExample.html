@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PCAExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ICAExample.cxx" href="ICAExample.html" />
+    <link rel="prev" title="DimensionReduction" href="../DimensionReduction.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">PCAExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ICAExample.html">ICAExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NAPCAExample.html">NAPCAExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MNFExample.html">MNFExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MaximumAutocorrelationFactor.html">MaximumAutocorrelationFactor.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../DimensionReduction.html">DimensionReduction</a> &raquo;</li>
+        
+      <li>PCAExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/DimensionReduction/PCAExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pcaexample-cxx">
+<span id="example-pcaexample"></span><h1>PCAExample.cxx<a class="headerlink" href="#pcaexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./PCAExample Input/wv2_cannes_8bands.tif <span class="se">\</span>
+             Output/PCAOutput.tif <span class="se">\</span>
+             Output/InversePCAOutput.tif <span class="se">\</span>
+             Output/input-pretty.png <span class="se">\</span>
+             Output/output-pretty.png <span class="se">\</span>
+             Output/invoutput-pretty.png <span class="se">\</span>
+             <span class="m">8</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/PCAExample.cxx?inline=false">PCAExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbPrintableImageFilter.h&quot;</span><span class="cp"></span>
+
+
+
+
+<span class="c1">// This example illustrates the use of the</span>
+<span class="c1">// \doxygen{otb}{PCAImageFilter}.</span>
+<span class="c1">// This filter computes a Principal Component Analysis using an</span>
+<span class="c1">// efficient method based on the inner product in order to compute the</span>
+<span class="c1">// covariance matrix.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step required to use this filter is to include its header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbPCAImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">typedef</span> <span class="kt">double</span>     <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span>             <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">inputFileName</span>         <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">outputFilename</span>        <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">outputInverseFilename</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">numberOfPrincipalComponentsRequired</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">inpretty</span>     <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">outpretty</span>    <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>        <span class="n">invoutpretty</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+
+
+  <span class="c1">// We start by defining the types for the images and the reader and</span>
+  <span class="c1">// the writer. We choose to work with a \doxygen{otb}{VectorImage},</span>
+  <span class="c1">// since we will produce a multi-channel image (the principal</span>
+  <span class="c1">// components) from a multi-channel input image.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>        <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>        <span class="n">WriterType</span><span class="p">;</span>
+  <span class="c1">// We instantiate now the image reader and we set the image file name.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFileName</span><span class="p">);</span>
+  <span class="c1">// We define the type for the filter. It is templated over the input</span>
+  <span class="c1">// and the output image types and also the transformation direction. The</span>
+  <span class="c1">// internal structure of this filter is a filter-to-filter like structure.</span>
+  <span class="c1">// We can now the instantiate the filter.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PCAImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">otb</span><span class="o">::</span><span class="n">Transform</span><span class="o">::</span><span class="n">FORWARD</span><span class="o">&gt;</span> <span class="n">PCAFilterType</span><span class="p">;</span>
+  <span class="n">PCAFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                     <span class="n">pcafilter</span> <span class="o">=</span> <span class="n">PCAFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="c1">// The only parameter needed for the PCA is the number of principal</span>
+  <span class="c1">// components required as output. Principal components are linear combination of input components</span>
+  <span class="c1">// (here the input image  bands),</span>
+  <span class="c1">// which are selected using Singular Value Decomposition eigen vectors sorted by eigen value.</span>
+  <span class="c1">// We can choose to get less Principal Components than</span>
+  <span class="c1">// the number of input bands.</span>
+
+  <span class="n">pcafilter</span><span class="o">-&gt;</span><span class="n">SetNumberOfPrincipalComponentsRequired</span><span class="p">(</span><span class="n">numberOfPrincipalComponentsRequired</span><span class="p">);</span>
+  <span class="c1">// We now instantiate the writer and set the file name for the</span>
+  <span class="c1">// output image.</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">);</span>
+  <span class="c1">// We finally plug the pipeline and trigger the PCA computation with</span>
+  <span class="c1">// the method \code{Update()} of the writer.</span>
+
+  <span class="n">pcafilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">pcafilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// \doxygen{otb}{PCAImageFilter} allows also to compute inverse</span>
+  <span class="c1">// transformation from PCA coefficients. In reverse mode, the</span>
+  <span class="c1">// covariance matrix or the transformation matrix</span>
+  <span class="c1">// (which may not be square) has to be given.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PCAImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">otb</span><span class="o">::</span><span class="n">Transform</span><span class="o">::</span><span class="n">INVERSE</span><span class="o">&gt;</span> <span class="n">InvPCAFilterType</span><span class="p">;</span>
+  <span class="n">InvPCAFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                  <span class="n">invFilter</span> <span class="o">=</span> <span class="n">InvPCAFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">pcafilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">SetTransformationMatrix</span><span class="p">(</span><span class="n">pcafilter</span><span class="o">-&gt;</span><span class="n">GetTransformationMatrix</span><span class="p">());</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">invWriter</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">invWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputInverseFilename</span><span class="p">);</span>
+  <span class="n">invWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">invWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:PCA_FILTER} shows the result of applying forward</span>
+  <span class="c1">// and reverse PCA transformation to a 8 bands Worldview2 image.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{input-pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{output-pretty.eps}</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{invoutput-pretty.eps}</span>
+  <span class="c1">// \itkcaption[PCA Filter (forward trasnformation)]{Result of applying the</span>
+  <span class="c1">// \doxygen{otb}{PCAImageFilter} to an image. From left</span>
+  <span class="c1">// to right:</span>
+  <span class="c1">// original image, color composition with first three principal</span>
+  <span class="c1">// components and output of the</span>
+  <span class="c1">// inverse mode (the input RGB image).}</span>
+  <span class="c1">// \label{fig:PCA_FILTER}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="c1">// This is for rendering in software guide</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PrintableImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">PrintFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">OutputImageType</span>                <span class="n">VisuImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">VisuImageType</span><span class="o">&gt;</span>             <span class="n">VisuWriterType</span><span class="p">;</span>
+
+  <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">inputPrintFilter</span>        <span class="o">=</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">outputPrintFilter</span>       <span class="o">=</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">invertOutputPrintFilter</span> <span class="o">=</span> <span class="n">PrintFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">inputVisuWriter</span>         <span class="o">=</span> <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">outputVisuWriter</span>        <span class="o">=</span> <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">invertOutputVisuWriter</span>  <span class="o">=</span> <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">pcafilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">invFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="n">inputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">inputPrintFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">outputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">outputPrintFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">invertOutputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">invertOutputPrintFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">inputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inpretty</span><span class="p">);</span>
+  <span class="n">outputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outpretty</span><span class="p">);</span>
+  <span class="n">invertOutputVisuWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">invoutpretty</span><span class="p">);</span>
+
+  <span class="n">inputVisuWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="n">outputVisuWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="n">invertOutputVisuWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ICAExample.html" class="btn btn-neutral float-right" title="ICAExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../DimensionReduction.html" class="btn btn-neutral" title="DimensionReduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

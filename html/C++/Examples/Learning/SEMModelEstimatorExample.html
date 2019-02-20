@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SEMModelEstimatorExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="TrainMachineLearningModelFromSamplesExample.cxx" href="TrainMachineLearningModelFromSamplesExample.html" />
+    <link rel="prev" title="GenerateTrainingImageExample.cxx" href="GenerateTrainingImageExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Learning.html">Learning</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SOMClassifierExample.html">SOMClassifierExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOMExample.html">SOMExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SVMImageEstimatorClassificationMultiExample.html">SVMImageEstimatorClassificationMultiExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GenerateTrainingImageExample.html">GenerateTrainingImageExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SEMModelEstimatorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TrainMachineLearningModelFromSamplesExample.html">TrainMachineLearningModelFromSamplesExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TrainMachineLearningModelFromImagesExample.html">TrainMachineLearningModelFromImagesExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Learning.html">Learning</a> &raquo;</li>
+        
+      <li>SEMModelEstimatorExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Learning/SEMModelEstimatorExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="semmodelestimatorexample-cxx">
+<span id="example-semmodelestimatorexample"></span><h1>SEMModelEstimatorExample.cxx<a class="headerlink" href="#semmodelestimatorexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./SEMModelEstimatorExample Input/ROI_QB_MUL_4.tif Output/SEMClassif.png <span class="m">4</span> <span class="m">40</span> <span class="m">5</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SEMModelEstimatorExample.cxx?inline=false">SEMModelEstimatorExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> * Copyright (C) 2007-2012 Institut Mines Telecom / Telecom Bretagne</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+
+
+<span class="c1">//</span>
+<span class="c1">// In this example, we present OTB&#39;s implementation of SEM, through the class</span>
+<span class="c1">// \doxygen{otb}{SEMClassifier}. This class performs a stochastic version</span>
+<span class="c1">// of the EM algorithm, but instead of inheriting from</span>
+<span class="c1">// \doxygen{itk}{ExpectationMaximizationMixtureModelEstimator}, we chose to</span>
+<span class="c1">// inherit from \subdoxygen{itk}{Statistics}{ListSample},</span>
+<span class="c1">// in the same way as \doxygen{otb}{SVMClassifier}.</span>
+<span class="c1">//</span>
+<span class="c1">// The program begins with \doxygen{otb}{VectorImage} and outputs</span>
+<span class="c1">// \doxygen{otb}{Image}. Then appropriate header files have to be included:</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkVector.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkVariableLengthVector.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// \doxygen{otb}{SEMClassifier} performs estimation of mixture to fit the</span>
+<span class="c1">// initial histogram. Actually, mixture of Gaussian pdf can be performed.</span>
+<span class="c1">// Those generic pdf are treated in</span>
+<span class="c1">// \subdoxygen{otb}{Statistics}{ModelComponentBase}. The Gaussian model</span>
+<span class="c1">// is taken in charge with the class</span>
+<span class="c1">// \subdoxygen{otb}{Statistics}{GaussianModelComponent}.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbSEMClassifier.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unsupervised Image Segmentation with SEM approach</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; imageIn imgClassif num_of_class &quot;</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;nbIteration size_of_the_neighborhood</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Input/Output images type are define in a classical way.</span>
+    <span class="c1">// In fact, a \doxygen{itk}{VariableLengthVector} is to be</span>
+    <span class="c1">// considered for the templated \code{MeasurementVectorType}, which</span>
+    <span class="c1">// will be used in the \code{ListSample} interface.</span>
+
+    <span class="k">typedef</span> <span class="kt">double</span> <span class="n">PixelType</span><span class="p">;</span>
+
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>  <span class="n">ImageType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>          <span class="n">OutputImageType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+    <span class="kt">char</span><span class="o">*</span>  <span class="n">fileNameIn</span>           <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="kt">char</span><span class="o">*</span>  <span class="n">fileNameImgInit</span>      <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="kt">char</span><span class="o">*</span>  <span class="n">fileNameOut</span>          <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="kt">int</span>    <span class="n">numberOfClasses</span>      <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+    <span class="kt">int</span>    <span class="n">numberOfIteration</span>    <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+    <span class="kt">int</span>    <span class="n">neighborhood</span>         <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+    <span class="kt">double</span> <span class="n">terminationThreshold</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">;</span>
+
+    <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">fileNameIn</span><span class="p">);</span>
+    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+    <span class="c1">// Once the input image is opened, the classifier may be initialised by</span>
+    <span class="c1">// \code{SmartPointer}.</span>
+
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SEMClassifier</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">ClassifType</span><span class="p">;</span>
+    <span class="n">ClassifType</span><span class="o">::</span><span class="n">Pointer</span>                                   <span class="n">classifier</span> <span class="o">=</span> <span class="n">ClassifType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+    <span class="c1">//  Then, it follows, classical initializations of the pipeline.</span>
+
+    <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetNumberOfClasses</span><span class="p">(</span><span class="n">numberOfClasses</span><span class="p">);</span>
+    <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetMaximumIteration</span><span class="p">(</span><span class="n">numberOfIteration</span><span class="p">);</span>
+    <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetNeighborhood</span><span class="p">(</span><span class="n">neighborhood</span><span class="p">);</span>
+    <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetTerminationThreshold</span><span class="p">(</span><span class="n">terminationThreshold</span><span class="p">);</span>
+    <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetSample</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+    <span class="c1">// When an initial segmentation is available, the classifier may use it</span>
+    <span class="c1">// as image (of type \code{OutputImageType}) or as a</span>
+    <span class="c1">// \doxygen{itk}{SampleClassifier} result (of type</span>
+    <span class="c1">// \subdoxygen{itk}{Statistics}{MembershipSample}).</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">fileNameImgInit</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">ImgInitReaderType</span><span class="p">;</span>
+      <span class="n">ImgInitReaderType</span><span class="o">::</span><span class="n">Pointer</span>                    <span class="n">segReader</span> <span class="o">=</span> <span class="n">ImgInitReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+      <span class="n">segReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">fileNameImgInit</span><span class="p">);</span>
+      <span class="n">segReader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+      <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetClassLabels</span><span class="p">(</span><span class="n">segReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="c1">//  By default, \doxygen{otb}{SEMClassifier} performs initialization of</span>
+    <span class="c1">// \code{ModelComponentBase} by as many instantiation of</span>
+    <span class="c1">// \subdoxygen{otb}{Statistics}{GaussianModelComponent} as the number of</span>
+    <span class="c1">// classes to estimate in the mixture. Nevertheless, the user may add specific</span>
+    <span class="c1">// distribution into the mixture estimation. It is permitted by the use of</span>
+    <span class="c1">// \code{AddComponent} for the given class number and the specific distribution.</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Explicit component initialization</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+    <span class="k">typedef</span> <span class="n">ClassifType</span><span class="o">::</span><span class="n">ClassSampleType</span>                             <span class="n">ClassSampleType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Statistics</span><span class="o">::</span><span class="n">GaussianModelComponent</span><span class="o">&lt;</span><span class="n">ClassSampleType</span><span class="o">&gt;</span> <span class="n">GaussianType</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numberOfClasses</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">GaussianType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">model</span> <span class="o">=</span> <span class="n">GaussianType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+      <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">AddComponent</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">model</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//  Once the pipeline is instantiated. The segmentation by itself may be</span>
+    <span class="c1">// launched by using the \code{Update} function.</span>
+
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught in &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//  The segmentation may outputs a result of type</span>
+    <span class="c1">// \subdoxygen{itk}{Statistics}{MembershipSample} as it is the</span>
+    <span class="c1">// case for the \doxygen{otb}{SVMClassifier}. But when using</span>
+    <span class="c1">// \code{GetOutputImage} the output is directly an Image.</span>
+    <span class="c1">//</span>
+    <span class="c1">// Only for visualization purposes, we choose to rescale the image of</span>
+    <span class="c1">// classes before saving it to a file. We will use the</span>
+    <span class="c1">// \doxygen{itk}{RescaleIntensityImageFilter} for this purpose.</span>
+
+    <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+    <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>                                                      <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+    <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">());</span>
+    <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">());</span>
+
+    <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">classifier</span><span class="o">-&gt;</span><span class="n">GetOutputImage</span><span class="p">());</span>
+
+    <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">fileNameOut</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+    <span class="c1">// Figure \ref{fig:RESSEMCLASSIF} shows the result of the SEM segmentation</span>
+    <span class="c1">// with 4 different classes and a contextual neighborhood of 3 pixels.</span>
+    <span class="c1">// \begin{figure}</span>
+    <span class="c1">//  \center</span>
+    <span class="c1">//  \includegraphics[width=0.6\textwidth]{SEMClassif.eps}</span>
+    <span class="c1">//  \itkcaption[SEM Classification results]{SEM Classification results.}</span>
+    <span class="c1">//  \label{fig:RESSEMCLASSIF}</span>
+    <span class="c1">// \end{figure}</span>
+    <span class="c1">//</span>
+    <span class="c1">// As soon as the segmentation is performed by an iterative stochastic</span>
+    <span class="c1">// process, it is worth verifying the output status: does the segmentation</span>
+    <span class="c1">// ends when it has converged or just at the limit of the iteration numbers.</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Program terminated with a &quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">classifier</span><span class="o">-&gt;</span><span class="n">GetTerminationCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">ClassifType</span><span class="o">::</span><span class="n">CONVERGED</span><span class="p">)</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;converged &quot;</span><span class="p">;</span>
+    <span class="k">else</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;not-converged &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;code...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+    <span class="c1">//  The text output gives for each class the parameters of the pdf (e.g. mean</span>
+    <span class="c1">// of each component of the class and there covariance matrix, in the case of a</span>
+    <span class="c1">// Gaussian mixture model).</span>
+
+    <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">Print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception itk::ExceptionObject thrown !</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception thrown !</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="TrainMachineLearningModelFromSamplesExample.html" class="btn btn-neutral float-right" title="TrainMachineLearningModelFromSamplesExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GenerateTrainingImageExample.html" class="btn btn-neutral" title="GenerateTrainingImageExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

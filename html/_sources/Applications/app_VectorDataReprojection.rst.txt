@@ -1,0 +1,158 @@
+.. _app-VectorDataReprojection:
+
+VectorDataReprojection
+======================
+
+
+Reproject a vector data using support image projection reference, or a user specified map projection
+
+Description
+-----------
+
+Reproject vector data using a support image as projection reference or to a user given map projection.  If given an image keywordlist can be added to the reprojected vectordata.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input data
+^^^^^^^^^^
+
+
+
+
+
+**Input vector data** :code:`-in.vd filename [dtype]` *Mandatory* |br|
+The input vector data to reproject
+
+**Use image keywords list** :code:`-in.kwl image` |br|
+Optional input image to fill vector data with image kwl.
+
+Output data
+^^^^^^^^^^^
+
+
+
+
+
+**Output vector data** :code:`-out.vd filename [dtype]` *Mandatory* |br|
+The reprojected vector data
+
+**Output Projection choice** :code:`-out.proj [image|user]` *Default value: image* |br|
+
+
+* **Use image projection ref** |br| Vector data will be reprojected in image projection ref.
+
+* **User defined projection** |br| 
+
+
+
+Use image projection ref options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Image used to get projection map** :code:`-out.proj.image.in image` *Mandatory* |br|
+Projection map will be found using image metadata
+
+User defined projection options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Map Projection** :code:`-out.proj.user.map [utm|lambert2|lambert93|wgs|epsg]` *Default value: utm* |br|
+Defines the map projection to be used.
+
+* **Universal Trans-Mercator (UTM)** |br| A system of transverse mercator projections dividing the surface of Earth between 80S and 84N latitude.
+
+* **Lambert II Etendu** |br| This is a Lambert Conformal Conic projection mainly used in France.
+
+* **Lambert93** |br| This is a Lambert 93 projection mainly used in France.
+
+* **WGS 84** |br| This is a Geographical projection
+
+* **EPSG Code** |br| This code is a generic way of identifying map projections, and allows specifying a large amount of them. See www.spatialreference.org to find which EPSG code is associated to your projection;
+
+
+
+Universal Trans-Mercator (UTM) options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Zone number** :code:`-out.proj.user.map.utm.zone int` *Default value: 31* |br|
+The zone number ranges from 1 to 60 and allows defining the transverse mercator projection (along with the hemisphere)
+
+**Northern Hemisphere** :code:`-out.proj.user.map.utm.northhem bool` *Default value: false* |br|
+The transverse mercator projections are defined by their zone number as well as the hemisphere. Activate this parameter if your image is in the northern hemisphere.
+
+EPSG Code options
+^^^^^^^^^^^^^^^^^
+
+**EPSG Code** :code:`-out.proj.user.map.epsg.code int` *Default value: 4326* |br|
+See www.spatialreference.org to find which EPSG code is associated to your projection
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_VectorDataReprojection -in.vd VectorData_QB1.shp -out.proj image -out.proj.image.in ROI_QB_MUL_1.tif -out.vd reprojected_vd.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("VectorDataReprojection")
+
+	app.SetParameterString("in.vd", "VectorData_QB1.shp")
+	app.SetParameterString("out.proj","image")
+	app.SetParameterString("out.proj.image.in", "ROI_QB_MUL_1.tif")
+	app.SetParameterString("out.vd", "reprojected_vd.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+ 
+
+

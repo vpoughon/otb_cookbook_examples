@@ -1,0 +1,94 @@
+.. _app-ImageEnvelope:
+
+ImageEnvelope
+=============
+
+
+Extracts an image envelope.
+
+Description
+-----------
+
+Build a vector data containing the image envelope polygon. Useful for some projection, you can set the polygon with more points with the sr parameter. This filter supports user-specified output projection. If no projection is defined, the standard WGS84 projection will be used.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image filename.
+
+**Output Vector Data** :code:`-out vectorfile` *Mandatory* |br|
+Vector data file containing the envelope.
+
+**Sampling Rate** :code:`-sr int` *Default value: 0* |br|
+Sampling rate for image edges (in pixel).
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Projection** :code:`-proj string` |br|
+Projection to be used to compute the envelope (default is WGS84)
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ImageEnvelope -in QB_TOULOUSE_MUL_Extract_500_500.tif -out ImageEnvelope.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ImageEnvelope")
+
+	app.SetParameterString("in", "QB_TOULOUSE_MUL_Extract_500_500.tif")
+	app.SetParameterString("out", "ImageEnvelope.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

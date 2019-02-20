@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ApplicationExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DisparityMap" href="../DisparityMap.html" />
+    <link rel="prev" title="Application" href="../Application.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Application.html">Application</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ApplicationExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Application.html">Application</a> &raquo;</li>
+        
+      <li>ApplicationExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Application/ApplicationExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="applicationexample-cxx">
+<span id="example-applicationexample"></span><h1>ApplicationExample.cxx<a class="headerlink" href="#applicationexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./ApplicationExample Input/QB_Suburb.png Output/ApplicationExample.png
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Application/ApplicationExample.cxx?inline=false">ApplicationExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the creation of an application.</span>
+<span class="c1">// A new application is a class, which derives from \subdoxygen{otb}{Wrapper}{Application} class.</span>
+<span class="c1">// We start by including the needed header files.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbWrapperApplication.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbWrapperApplicationFactory.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">otb</span>
+<span class="p">{</span>
+
+<span class="c1">//  Application class is defined in Wrapper namespace.</span>
+
+<span class="k">namespace</span> <span class="n">Wrapper</span>
+<span class="p">{</span>
+
+
+<span class="c1">//  ExampleApplication class is derived from Application class.</span>
+
+<span class="k">class</span> <span class="nc">ApplicationExample</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Application</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Class declaration is followed by \code{ITK} public types for the class, the superclass and</span>
+  <span class="c1">// smart pointers.</span>
+
+  <span class="k">typedef</span> <span class="n">ApplicationExample</span>            <span class="n">Self</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">Application</span>                   <span class="n">Superclass</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="n">Self</span><span class="o">&gt;</span>       <span class="n">Pointer</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Self</span><span class="o">&gt;</span> <span class="n">ConstPointer</span><span class="p">;</span>
+
+  <span class="c1">//  Following macros are necessary to respect ITK object factory mechanisms. Please report</span>
+  <span class="c1">//  to \ref{sec:FilterConventions} for additional information.</span>
+
+  <span class="n">itkNewMacro</span><span class="p">(</span><span class="n">Self</span><span class="p">);</span>
+  <span class="n">itkTypeMacro</span><span class="p">(</span><span class="n">ExampleApplication</span><span class="p">,</span> <span class="n">otb</span><span class="o">::</span><span class="n">Application</span><span class="p">);</span>
+
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="c1">//  \doxygen{otb}{Application} relies on three main private methods: \code{DoInit()}, \code{DoUpdate()}, and \code{DoExecute()}.</span>
+  <span class="c1">//  Section \ref{sec:appArchitecture} gives a description a these methods.</span>
+
+
+  <span class="c1">//  \code{DoInit()} method contains class information and description, parameter set up, and example values.</span>
+
+  <span class="kt">void</span> <span class="n">DoInit</span><span class="p">()</span> <span class="k">override</span>
+  <span class="p">{</span>
+
+    <span class="c1">// Application name and description are set using following methods :</span>
+    <span class="c1">// \begin{description}</span>
+    <span class="c1">// \item[\code{SetName()}] Name of the application.</span>
+    <span class="c1">// \item[\code{SetDescription()}] Set the short description of the class.</span>
+    <span class="c1">// \item[\code{SetDocName()}] Set long name of the application (that can be displayed \dots).</span>
+    <span class="c1">// \item[\code{SetDocLongDescription()}] This methods is used to describe the class.</span>
+    <span class="c1">// \item[\code{SetDocLimitations()}] Set known limitations (threading, invalid pixel type \dots) or bugs.</span>
+    <span class="c1">// \item[\code{SetDocAuthors()}] Set the application Authors. Author List. Format : &quot;John Doe, Winnie the Pooh&quot; \dots</span>
+    <span class="c1">// \item[\code{SetDocSeeAlso()}] If the application is related to one another, it can be mentioned.</span>
+    <span class="c1">// \end{description}</span>
+
+    <span class="n">SetName</span><span class="p">(</span><span class="s">&quot;Example&quot;</span><span class="p">);</span>
+    <span class="n">SetDescription</span><span class="p">(</span>
+        <span class="s">&quot;This application opens an image and save it. &quot;</span>
+        <span class="s">&quot;Pay attention, it includes Latex snippets in order to generate &quot;</span>
+        <span class="s">&quot;software guide documentation&quot;</span><span class="p">);</span>
+
+    <span class="n">SetDocName</span><span class="p">(</span><span class="s">&quot;Example&quot;</span><span class="p">);</span>
+    <span class="n">SetDocLongDescription</span><span class="p">(</span>
+        <span class="s">&quot;The purpose of this application is &quot;</span>
+        <span class="s">&quot;to present parameters types,&quot;</span>
+        <span class="s">&quot; and Application class framework. &quot;</span>
+        <span class="s">&quot;It is used to generate Software guide documentation&quot;</span>
+        <span class="s">&quot; for Application chapter example.&quot;</span><span class="p">);</span>
+    <span class="n">SetDocLimitations</span><span class="p">(</span><span class="s">&quot;None&quot;</span><span class="p">);</span>
+    <span class="n">SetDocAuthors</span><span class="p">(</span><span class="s">&quot;OTB-Team&quot;</span><span class="p">);</span>
+    <span class="n">SetDocSeeAlso</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+
+
+    <span class="c1">// \code{AddDocTag()} method categorize the application using relevant tags.</span>
+    <span class="c1">// The header file \code{otbWrapperTags.h} in OTB sources contains some predefined tags defined in \code{Tags} namespace.</span>
+
+    <span class="n">AddDocTag</span><span class="p">(</span><span class="n">Tags</span><span class="o">::</span><span class="n">Analysis</span><span class="p">);</span>
+    <span class="n">AddDocTag</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Application parameters declaration is done using \code{AddParameter()} method.</span>
+    <span class="c1">// \code{AddParameter()} requires the input parameter type</span>
+    <span class="c1">// (ParameterType\_InputImage, ParameterType\_Int, ParameterType\_Float), its name and description.</span>
+    <span class="c1">// \subdoxygen{otb}{Wrapper}{Application} class contains methods to set parameters characteristics.</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_InputImage</span><span class="p">,</span> <span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;Input Image&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_OutputImage</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;Output Image&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Bool</span><span class="p">,</span> <span class="s">&quot;param1&quot;</span><span class="p">,</span> <span class="s">&quot;Example of boolean parameter&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;param1&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Int</span><span class="p">,</span> <span class="s">&quot;param2&quot;</span><span class="p">,</span> <span class="s">&quot;Example of integer parameter&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;param2&quot;</span><span class="p">);</span>
+    <span class="n">SetDefaultParameterInt</span><span class="p">(</span><span class="s">&quot;param2&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">SetMinimumParameterIntValue</span><span class="p">(</span><span class="s">&quot;param2&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">SetMaximumParameterIntValue</span><span class="p">(</span><span class="s">&quot;param2&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Float</span><span class="p">,</span> <span class="s">&quot;param3&quot;</span><span class="p">,</span> <span class="s">&quot;Example of float parameter&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;param3&quot;</span><span class="p">);</span>
+    <span class="n">SetDefaultParameterFloat</span><span class="p">(</span><span class="s">&quot;param3&quot;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
+    <span class="n">SetMinimumParameterFloatValue</span><span class="p">(</span><span class="s">&quot;param3&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">);</span>
+    <span class="n">SetMaximumParameterFloatValue</span><span class="p">(</span><span class="s">&quot;param3&quot;</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_String</span><span class="p">,</span> <span class="s">&quot;param4&quot;</span><span class="p">,</span> <span class="s">&quot;Example of string parameter&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;param4&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_InputFilename</span><span class="p">,</span> <span class="s">&quot;param5&quot;</span><span class="p">,</span> <span class="s">&quot;Example of filename&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;param5&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Directory</span><span class="p">,</span> <span class="s">&quot;param6&quot;</span><span class="p">,</span> <span class="s">&quot;Example of directory name&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;param6&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Choice</span><span class="p">,</span> <span class="s">&quot;inchoice&quot;</span><span class="p">,</span> <span class="s">&quot;Example of choice parameter&quot;</span><span class="p">);</span>
+    <span class="n">AddChoice</span><span class="p">(</span><span class="s">&quot;inchoice.choice1&quot;</span><span class="p">,</span> <span class="s">&quot;Choice 1&quot;</span><span class="p">);</span>
+    <span class="n">AddChoice</span><span class="p">(</span><span class="s">&quot;inchoice.choice2&quot;</span><span class="p">,</span> <span class="s">&quot;Choice 2&quot;</span><span class="p">);</span>
+    <span class="n">AddChoice</span><span class="p">(</span><span class="s">&quot;inchoice.choice3&quot;</span><span class="p">,</span> <span class="s">&quot;Choice 3&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Float</span><span class="p">,</span> <span class="s">&quot;inchoice.choice1.floatchoice1&quot;</span><span class="p">,</span> <span class="s">&quot;Example of float parameter for choice1&quot;</span><span class="p">);</span>
+    <span class="n">SetDefaultParameterFloat</span><span class="p">(</span><span class="s">&quot;inchoice.choice1.floatchoice1&quot;</span><span class="p">,</span> <span class="mf">0.125</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Float</span><span class="p">,</span> <span class="s">&quot;inchoice.choice3.floatchoice3&quot;</span><span class="p">,</span> <span class="s">&quot;Example of float parameter for choice3&quot;</span><span class="p">);</span>
+    <span class="n">SetDefaultParameterFloat</span><span class="p">(</span><span class="s">&quot;inchoice.choice3.floatchoice3&quot;</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Group</span><span class="p">,</span> <span class="s">&quot;ingroup&quot;</span><span class="p">,</span> <span class="s">&quot;Input group&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;ingroup&quot;</span><span class="p">);</span>
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Int</span><span class="p">,</span> <span class="s">&quot;ingroup.valint&quot;</span><span class="p">,</span> <span class="s">&quot;Example of integer parameter for group&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;ingroup.valint&quot;</span><span class="p">);</span>
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Group</span><span class="p">,</span> <span class="s">&quot;ingroup.images&quot;</span><span class="p">,</span> <span class="s">&quot;Input Images group&quot;</span><span class="p">);</span>
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_InputImage</span><span class="p">,</span> <span class="s">&quot;ingroup.images.inputimage&quot;</span><span class="p">,</span> <span class="s">&quot;Input Image&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;ingroup.images.inputimage&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_Group</span><span class="p">,</span> <span class="s">&quot;outgroup&quot;</span><span class="p">,</span> <span class="s">&quot;Output group&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;outgroup&quot;</span><span class="p">);</span>
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_OutputImage</span><span class="p">,</span> <span class="s">&quot;outgroup.outputimage&quot;</span><span class="p">,</span> <span class="s">&quot;Output Image&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;outgroup.outputimage&quot;</span><span class="p">);</span>
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_InputImageList</span><span class="p">,</span> <span class="s">&quot;il&quot;</span><span class="p">,</span> <span class="s">&quot;Input image list&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;il&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_ListView</span><span class="p">,</span> <span class="s">&quot;cl&quot;</span><span class="p">,</span> <span class="s">&quot;Output image channels&quot;</span><span class="p">);</span>
+    <span class="n">AddChoice</span><span class="p">(</span><span class="s">&quot;cl.choice1&quot;</span><span class="p">,</span> <span class="s">&quot;cl.choice1&quot;</span><span class="p">);</span>
+    <span class="n">AddChoice</span><span class="p">(</span><span class="s">&quot;cl.choice2&quot;</span><span class="p">,</span> <span class="s">&quot;cl.choice2&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;cl&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_RAM</span><span class="p">,</span> <span class="s">&quot;ram&quot;</span><span class="p">,</span> <span class="s">&quot;Available RAM&quot;</span><span class="p">);</span>
+    <span class="n">SetDefaultParameterInt</span><span class="p">(</span><span class="s">&quot;ram&quot;</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;ram&quot;</span><span class="p">);</span>
+
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_ComplexInputImage</span><span class="p">,</span> <span class="s">&quot;cin&quot;</span><span class="p">,</span> <span class="s">&quot;Input complex image&quot;</span><span class="p">);</span>
+    <span class="n">AddParameter</span><span class="p">(</span><span class="n">ParameterType_ComplexOutputImage</span><span class="p">,</span> <span class="s">&quot;cout&quot;</span><span class="p">,</span> <span class="s">&quot;Output complex image&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;cin&quot;</span><span class="p">);</span>
+    <span class="n">MandatoryOff</span><span class="p">(</span><span class="s">&quot;cout&quot;</span><span class="p">);</span>
+
+    <span class="c1">// An example of command-line is automatically generated. Method \code{SetDocExampleParameterValue()} is</span>
+    <span class="c1">// used to set parameters. Dataset should be located in  \code{OTB-Data/Examples} directory.</span>
+
+    <span class="n">SetDocExampleParameterValue</span><span class="p">(</span><span class="s">&quot;boolean&quot;</span><span class="p">,</span> <span class="s">&quot;true&quot;</span><span class="p">);</span>
+    <span class="n">SetDocExampleParameterValue</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;QB_Suburb.png&quot;</span><span class="p">);</span>
+    <span class="n">SetDocExampleParameterValue</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;Application_Example.png&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// \code{DoUpdateParameters()} is called as soon as a parameter value change. Section \ref{sec:appDoUpdateParameters}</span>
+  <span class="c1">// gives a complete description of this method.</span>
+  <span class="c1">//  Software Guide :BeginCodeSnippet</span>
+  <span class="kt">void</span> <span class="n">DoUpdateParameters</span><span class="p">()</span> <span class="k">override</span>
+  <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="c1">// \code{DoExecute()} contains the application core. Section \ref{sec:appDoExecute}</span>
+  <span class="c1">// gives a complete description of this method.</span>
+  <span class="c1">//  Software Guide :BeginCodeSnippet</span>
+  <span class="kt">void</span> <span class="n">DoExecute</span><span class="p">()</span> <span class="k">override</span>
+  <span class="p">{</span>
+    <span class="n">FloatVectorImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">inImage</span> <span class="o">=</span> <span class="n">GetParameterImage</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">paramInt</span> <span class="o">=</span> <span class="n">GetParameterInt</span><span class="p">(</span><span class="s">&quot;param2&quot;</span><span class="p">);</span>
+    <span class="n">otbAppLogDEBUG</span><span class="p">(</span><span class="o">&lt;&lt;</span> <span class="n">paramInt</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">paramFloat</span> <span class="o">=</span> <span class="n">GetParameterFloat</span><span class="p">(</span><span class="s">&quot;param3&quot;</span><span class="p">);</span>
+    <span class="n">otbAppLogINFO</span><span class="p">(</span><span class="o">&lt;&lt;</span> <span class="n">paramFloat</span><span class="p">);</span>
+
+    <span class="n">SetParameterOutputImage</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="n">inImage</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">//  Software Guide :EndCodeSnippet</span>
+<span class="p">};</span>
+<span class="p">}</span> <span class="c1">// namespace Wrapper</span>
+<span class="p">}</span> <span class="c1">// namespace otb</span>
+
+<span class="c1">// Finally \code{OTB\_APPLICATION\_EXPORT} is called:</span>
+<span class="c1">//  Software Guide :BeginCodeSnippet</span>
+<span class="n">OTB_APPLICATION_EXPORT</span><span class="p">(</span><span class="n">otb</span><span class="o">::</span><span class="n">Wrapper</span><span class="o">::</span><span class="n">ApplicationExample</span><span class="p">)</span>
+<span class="c1">//  Software Guide :EndCodeSnippet</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../DisparityMap.html" class="btn btn-neutral float-right" title="DisparityMap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Application.html" class="btn btn-neutral" title="Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

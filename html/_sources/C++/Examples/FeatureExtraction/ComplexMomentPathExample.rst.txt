@@ -1,0 +1,110 @@
+.. _example-ComplexMomentPathExample:
+
+ComplexMomentPathExample.cxx
+============================
+
+
+
+
+
+Example usage:
+
+.. code-block:: bash
+
+    ./ComplexMomentPathExample 1 1
+
+
+Example source code (`ComplexMomentPathExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ComplexMomentPathExample.cxx?inline=false>`_):
+
+.. code-block:: cpp
+
+    #include "itkMacro.h"
+    #include "otbImage.h"
+    
+    #include "otbImageFileReader.h"
+    
+    
+    
+    
+    // The complex moments can be computed on images, but sometimes we are
+    // interested in computing them on shapes extracted from images by
+    // segmentation algorithms. These shapes can be represented by
+    // \doxygen{itk}{Path}s. This example illustrates the use of the
+    // \doxygen{otb}{ComplexMomentPathFunction} for the computation of
+    // complex geometric moments on ITK paths.
+    //
+    // The first step required to use this filter is to include its header file.
+    
+    #include "otbComplexMomentPathFunction.h"
+    #include "itkPolyLineParametricPath.h"
+    
+    int main(int argc, char* argv[])
+    {
+      if (argc != 3)
+      {
+        std::cerr << "Usage: " << argv[0];
+        std::cerr << " p q" << std::endl;
+        return EXIT_FAILURE;
+      }
+    
+      unsigned int P((unsigned char)::atoi(argv[1]));
+      unsigned int Q((unsigned char)::atoi(argv[2]));
+    
+      //  The \doxygen{otb}{ComplexMomentPathFunction} is templated over the
+      //  input path type and the output complex type value, so we start by
+      //  defining:
+    
+      const unsigned int Dimension = 2;
+    
+      typedef itk::PolyLineParametricPath<Dimension> PathType;
+    
+      typedef std::complex<double>                                  ComplexType;
+      typedef otb::ComplexMomentPathFunction<PathType, ComplexType> CMType;
+    
+      CMType::Pointer cmFunction = CMType::New();
+    
+      PathType::Pointer path = PathType::New();
+    
+      path->Initialize();
+    
+      typedef PathType::ContinuousIndexType ContinuousIndexType;
+    
+      ContinuousIndexType cindex;
+    
+      // Draw a square:
+    
+      path->Initialize();
+    
+      cindex[0] = 30;
+      cindex[1] = 30;
+      path->AddVertex(cindex);
+      cindex[0] = 30;
+      cindex[1] = 130;
+      path->AddVertex(cindex);
+      cindex[0] = 130;
+      cindex[1] = 130;
+      path->AddVertex(cindex);
+      cindex[0] = 130;
+      cindex[1] = 30;
+      path->AddVertex(cindex);
+    
+      // Next, we set the parameters of the plug the input path into the complex moment function
+      // and we set its parameters.
+    
+      cmFunction->SetInputPath(path);
+      cmFunction->SetQ(Q);
+      cmFunction->SetP(P);
+    
+      // Since the paths are defined in physical coordinates, we do not
+      // need to set the center for the moment computation as we did
+      // with the \doxygen{otb}{ComplexMomentImageFunction}. The same
+      // applies for the size of the neighborhood around the
+      // center pixel for the moment computation. The moment computation
+      // is triggered by calling the \code{Evaluate} method.
+    
+      ComplexType Result = cmFunction->Evaluate();
+    
+      std::cout << "The moment of order (" << P << "," << Q << ") is equal to " << Result << std::endl;
+    
+      return EXIT_SUCCESS;
+    }

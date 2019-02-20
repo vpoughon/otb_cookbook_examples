@@ -1,0 +1,107 @@
+.. _app-SampleExtraction:
+
+SampleExtraction
+================
+
+
+Extracts samples values from an image.
+
+Description
+-----------
+
+The application extracts samples values from animage using positions contained in a vector data file. 
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**InputImage** :code:`-in image` *Mandatory* |br|
+Support image
+
+**Input sampling positions** :code:`-vec filename [dtype]` *Mandatory* |br|
+Vector data file containing samplingpositions. (OGR format)
+
+**Output samples** :code:`-out filename [dtype]` |br|
+Output vector data file storing samplevalues (OGR format). If not given, the input vector data file is updated
+
+**Output field names** :code:`-outfield [prefix|list]` *Default value: prefix* |br|
+Choice between naming method for output fields
+
+* **Use a prefix and an incremental counter** |br| Use a prefix and an incremental counter
+
+* **Use the given name list** |br| Use the given name list
+
+
+
+Use a prefix and an incremental counter options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Output field prefix** :code:`-outfield.prefix.name string` *Default value: value_* |br|
+Prefix used to form the field names thatwill contain the extracted values.
+
+Use the given name list options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Output field names** :code:`-outfield.list.names string1 string2...` *Mandatory* |br|
+Full list of output field names.
+
+
+
+------------
+
+**Field Name** :code:`-field string` |br|
+Name of the field carrying the class name in the input vectors.
+
+**Layer Index** :code:`-layer int` *Default value: 0* |br|
+Layer index to read in the input vector file.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SampleExtraction -in support_image.tif -vec sample_positions.sqlite -outfield prefix -outfield.prefix.name band_ -field label -out sample_values.sqlite
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SampleExtraction")
+
+	app.SetParameterString("in", "support_image.tif")
+	app.SetParameterString("vec", "sample_positions.sqlite")
+	app.SetParameterString("outfield","prefix")
+	app.SetParameterString("outfield.prefix.name", "band_")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

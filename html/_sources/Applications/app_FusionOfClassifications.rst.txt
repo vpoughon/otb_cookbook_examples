@@ -1,0 +1,119 @@
+.. _app-FusionOfClassifications:
+
+FusionOfClassifications
+=======================
+
+
+Fuses several classifications maps of the same image on the basis of class labels.
+
+Description
+-----------
+
+This application allows you to fuse several classification maps and produces a single more robust classification map. Fusion is done either by mean of Majority Voting, or with the Dempster Shafer combination method on class labels.
+
+  - MAJORITY VOTING: for each pixel, the class with the highest number of votes is selected.
+  - DEMPSTER SHAFER: for each pixel, the class label for which the Belief Function is maximal is selected. This Belief Function is calculated by mean of the Dempster Shafer combination of Masses of Belief, and indicates the belief that each input classification map presents for each label value. Moreover, the Masses of Belief are based on the input confusion matrices of each classification map, either by using the PRECISION or RECALL rates, or the OVERALL ACCURACY, or the KAPPA coefficient. Thus, each input classification map needs to be associated with its corresponding input confusion matrix file for the Dempster Shafer fusion.
+  - Input pixels with the NODATA label are not handled in the fusion of classification maps. Moreover, pixels for which all the input classifiers are set to NODATA keep this value in the output fused image.
+  - In case of number of votes equality, the UNDECIDED label is attributed to the pixel.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input classifications** :code:`-il image1 image2...` *Mandatory* |br|
+List of input classification maps to fuse. Labels in each classification image must represent the same class.
+
+**The output classification image** :code:`-out image [dtype]` *Mandatory* |br|
+The output classification image resulting from the fusion of the input classification images.
+
+**Fusion method** :code:`-method [majorityvoting|dempstershafer]` *Default value: majorityvoting* |br|
+Selection of the fusion method and its parameters.
+
+* **Majority Voting** |br| Fusion of classification maps by majority voting for each output pixel.
+
+* **Dempster Shafer combination** |br| Fusion of classification maps by the Dempster Shafer combination method for each output pixel.
+
+
+
+Dempster Shafer combination options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Confusion Matrices** :code:`-method.dempstershafer.cmfl filename1 filename2...` *Mandatory* |br|
+A list of confusion matrix files (.csv format) to define the masses of belief and the class labels. Each file should be formatted the following way: the first line, beginning with a '#' symbol, should be a list of the class labels present in the corresponding input classification image, organized in the same order as the confusion matrix rows/columns.
+
+**Mass of belief measurement** :code:`-method.dempstershafer.mob [precision|recall|accuracy|kappa]` *Default value: precision* |br|
+Type of confusion matrix measurement used to compute the masses of belief of each classifier.
+
+* **Precision** |br| Masses of belief = Precision rates of each classifier (one rate per class label).
+
+* **Recall** |br| Masses of belief = Recall rates of each classifier (one rate per class label).
+
+* **Overall Accuracy** |br| Mass of belief = Overall Accuracy of each classifier (one unique value for all the class labels).
+
+* **Kappa** |br| Mass of belief = Kappa coefficient of each classifier (one unique value for all the class labels).
+
+
+
+
+
+------------
+
+**Label for the NoData class** :code:`-nodatalabel int` *Default value: 0* |br|
+Label for the NoData class. Such input pixels keep their NoData label in the output image and are not handled in the fusion process. By default, 'nodatalabel = 0'.
+
+**Label for the Undecided class** :code:`-undecidedlabel int` *Default value: 0* |br|
+Label for the Undecided class. Pixels with more than 1 fused class are marked as Undecided. Please note that the Undecided value must be different from existing labels in the input classifications. By default, 'undecidedlabel = 0'.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_FusionOfClassifications -il classification1.tif classification2.tif classification3.tif -method dempstershafer -method.dempstershafer.cmfl classification1.csv classification2.csv classification3.csv -method.dempstershafer.mob precision -nodatalabel 0 -undecidedlabel 10 -out classification_fused.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("FusionOfClassifications")
+
+	app.SetParameterStringList("il", ['classification1.tif', 'classification2.tif', 'classification3.tif'])
+	app.SetParameterString("method","dempstershafer")
+
+	app.SetParameterString("method.dempstershafer.mob","precision")
+	app.SetParameterInt("nodatalabel", 0)
+	app.SetParameterInt("undecidedlabel", 10)
+	app.SetParameterString("out", "classification_fused.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-ImageClassifier` application

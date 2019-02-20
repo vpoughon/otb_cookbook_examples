@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Feature extraction &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stereoscopic reconstruction from VHR optical images pair" href="stereo.html" />
+    <link rel="prev" title="Classification" href="pbclassif.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Feature extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#local-statistics-extraction">Local statistics extraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edge-extraction">Edge extraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#radiometric-indices-extraction">Radiometric indices extraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#morphological-features-extraction">Morphological features extraction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#binary-morphological-operations">Binary morphological operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gray-scale-morphological-operations">Gray scale morphological operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#textural-features-extraction">Textural features extraction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#haralick-texture-features">Haralick texture features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sfs-texture-extraction">SFS texture extraction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>Feature extraction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/featextract.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="feature-extraction">
+<h1>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h1>
+<p>As described in the OTB Software Guide, the term <em>Feature Extraction</em>
+refers to techniques aiming at extracting added value information from
+images. These extracted items named <em>features</em> can be local statistical
+moments, edges, radiometric indices, morphological and textural
+properties. For example, such features can be used as input data for
+other image processing methods like <em>Segmentation</em> and
+<a class="reference external" href="https://www.orfeo-toolbox.org/CookBook/recipes/pbclassif.html#feature-classification">Classification</a> .</p>
+<div class="section" id="local-statistics-extraction">
+<h2>Local statistics extraction<a class="headerlink" href="#local-statistics-extraction" title="Permalink to this headline">¶</a></h2>
+<p>This application computes the 4 local statistical moments on every pixel
+in the selected channel of the input image, over a specified
+neighborhood. The output image is multi band with one statistical moment
+(feature) per band. Thus, the 4 output features are the Mean, the
+Variance, the Skewness and the Kurtosis. They are provided in this exact
+order in the output image.</p>
+<p>The <em>LocalStatisticExtraction</em> application has the following input
+parameters:</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-in</span></code> the input image to compute the features on</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channel</span></code> the selected channel index in the input image to be</dt>
+<dd>processed (default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-radius</span></code> the computational window radius (default value is 3</dt>
+<dd>pixels)</dd>
+</dl>
+<p>-<code class="docutils literal notranslate"><span class="pre">-out</span></code> the output image containing the local statistical moments</p>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_LocalStatisticExtraction</span>  <span class="o">-</span><span class="ow">in</span>        <span class="n">InputImage</span>
+                                 <span class="o">-</span><span class="n">channel</span>   <span class="mi">1</span>
+                                 <span class="o">-</span><span class="n">radius</span>    <span class="mi">3</span>
+                                 <span class="o">-</span><span class="n">out</span>       <span class="n">OutputImage</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="edge-extraction">
+<h2>Edge extraction<a class="headerlink" href="#edge-extraction" title="Permalink to this headline">¶</a></h2>
+<p>This application Computes edge features on every pixel in the selected
+channel of the input image.</p>
+<p>The <em>EdgeExtraction</em> application has the following input parameters:</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-in</span></code> the input image to compute the features on</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channel</span></code> the selected channel index in the input image to be</dt>
+<dd>processed (default value is 1)</dd>
+</dl>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-filter</span></code> the choice of edge detection method (gradient/sobel/touzi) (default value is gradient)</li>
+</ul>
+<blockquote>
+<div><p>-<code class="docutils literal notranslate"><span class="pre">(-filter.touzi.xradius)</span></code> the X Radius of the Touzi processing neighborhood (only if filter==touzi) (default value is 1 pixel) __</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">(-filter.touzi.yradius)</span></code> the Y Radius of the Touzi processing neighborhood (only if filter==touzi) (default value is 1 pixel)</li>
+</ul>
+</div></blockquote>
+<p>-<code class="docutils literal notranslate"><span class="pre">-out</span></code> the output mono band image containing the edge features</p>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_EdgeExtraction</span>  <span class="o">-</span><span class="ow">in</span>        <span class="n">InputImage</span>
+                       <span class="o">-</span><span class="n">channel</span>   <span class="mi">1</span>
+                       <span class="o">-</span><span class="nb">filter</span>    <span class="n">sobel</span>
+                       <span class="o">-</span><span class="n">out</span>       <span class="n">OutputImage</span>
+</pre></div>
+</div>
+<p>or like this if filter==touzi:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_EdgeExtraction</span>  <span class="o">-</span><span class="ow">in</span>                    <span class="n">InputImage</span>
+                       <span class="o">-</span><span class="n">channel</span>               <span class="mi">1</span>
+                       <span class="o">-</span><span class="nb">filter</span>                <span class="n">touzi</span>
+                       <span class="o">-</span><span class="nb">filter</span><span class="o">.</span><span class="n">touzi</span><span class="o">.</span><span class="n">xradius</span>  <span class="mi">2</span>
+                       <span class="o">-</span><span class="nb">filter</span><span class="o">.</span><span class="n">touzi</span><span class="o">.</span><span class="n">yradius</span>  <span class="mi">2</span>
+                       <span class="o">-</span><span class="n">out</span>                   <span class="n">OutputImage</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="radiometric-indices-extraction">
+<h2>Radiometric indices extraction<a class="headerlink" href="#radiometric-indices-extraction" title="Permalink to this headline">¶</a></h2>
+<p>This application computes radiometric indices using the channels of the
+input image. The output is a multi band image into which each channel is
+one of the selected indices.</p>
+<p>The <em>RadiometricIndices</em> application has the following input parameters:</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-in</span></code> the input image to compute the features on</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-out</span></code> the output image containing the radiometric indices</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channels.blue</span></code> the Blue channel index in the input image (default</dt>
+<dd>value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channels.green</span></code> the Green channel index in the input image</dt>
+<dd>(default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channels.red</span></code> the Red channel index in the input image (default</dt>
+<dd>value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channels.nir</span></code> the Near Infrared channel index in the input image</dt>
+<dd>(default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channels.mir</span></code> the Mid-Infrared channel index in the input image</dt>
+<dd>(default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-list</span></code> the list of available radiometric indices (default value is</dt>
+<dd>Vegetation:NDVI)</dd>
+</dl>
+<p>The available radiometric indices to be listed into -list with their
+relevant channels in brackets are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Vegetation</span><span class="p">:</span><span class="n">NDVI</span> <span class="o">-</span> <span class="n">Normalized</span> <span class="n">difference</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">TNDVI</span> <span class="o">-</span> <span class="n">Transformed</span> <span class="n">normalized</span> <span class="n">difference</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">RVI</span> <span class="o">-</span> <span class="n">Ratio</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">SAVI</span> <span class="o">-</span> <span class="n">Soil</span> <span class="n">adjusted</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">TSAVI</span> <span class="o">-</span> <span class="n">Transformed</span> <span class="n">soil</span> <span class="n">adjusted</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">MSAVI</span> <span class="o">-</span> <span class="n">Modified</span> <span class="n">soil</span> <span class="n">adjusted</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">MSAVI2</span> <span class="o">-</span> <span class="n">Modified</span> <span class="n">soil</span> <span class="n">adjusted</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="mi">2</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">GEMI</span> <span class="o">-</span> <span class="n">Global</span> <span class="n">environment</span> <span class="n">monitoring</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Vegetation</span><span class="p">:</span><span class="n">IPVI</span> <span class="o">-</span> <span class="n">Infrared</span> <span class="n">percentage</span> <span class="n">vegetation</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+
+<span class="n">Water</span><span class="p">:</span><span class="n">NDWI</span> <span class="o">-</span> <span class="n">Normalized</span> <span class="n">difference</span> <span class="n">water</span> <span class="n">index</span> <span class="p">(</span><span class="n">Gao</span> <span class="mi">1996</span><span class="p">)</span> <span class="p">(</span><span class="n">NIR</span><span class="p">,</span> <span class="n">MIR</span><span class="p">)</span>
+<span class="n">Water</span><span class="p">:</span><span class="n">NDWI2</span> <span class="o">-</span> <span class="n">Normalized</span> <span class="n">difference</span> <span class="n">water</span> <span class="n">index</span> <span class="p">(</span><span class="n">Mc</span> <span class="n">Feeters</span> <span class="mi">1996</span><span class="p">)</span> <span class="p">(</span><span class="n">Green</span><span class="p">,</span> <span class="n">NIR</span><span class="p">)</span>
+<span class="n">Water</span><span class="p">:</span><span class="n">MNDWI</span> <span class="o">-</span> <span class="n">Modified</span> <span class="n">normalized</span> <span class="n">difference</span> <span class="n">water</span> <span class="n">index</span> <span class="p">(</span><span class="n">Xu</span> <span class="mi">2006</span><span class="p">)</span> <span class="p">(</span><span class="n">Green</span><span class="p">,</span> <span class="n">MIR</span><span class="p">)</span>
+<span class="n">Water</span><span class="p">:</span><span class="n">NDPI</span> <span class="o">-</span> <span class="n">Normalized</span> <span class="n">difference</span> <span class="n">pond</span> <span class="n">index</span> <span class="p">(</span><span class="n">Lacaux</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">)</span> <span class="p">(</span><span class="n">MIR</span><span class="p">,</span> <span class="n">Green</span><span class="p">)</span>
+<span class="n">Water</span><span class="p">:</span><span class="n">NDTI</span> <span class="o">-</span> <span class="n">Normalized</span> <span class="n">difference</span> <span class="n">turbidity</span> <span class="n">index</span> <span class="p">(</span><span class="n">Lacaux</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">)</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">Green</span><span class="p">)</span>
+
+<span class="n">Soil</span><span class="p">:</span><span class="n">RI</span> <span class="o">-</span> <span class="n">Redness</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">Green</span><span class="p">)</span>
+<span class="n">Soil</span><span class="p">:</span><span class="n">CI</span> <span class="o">-</span> <span class="n">Color</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">Green</span><span class="p">)</span>
+<span class="n">Soil</span><span class="p">:</span><span class="n">BI</span> <span class="o">-</span> <span class="n">Brightness</span> <span class="n">index</span> <span class="p">(</span><span class="n">Red</span><span class="p">,</span> <span class="n">Green</span><span class="p">)</span>
+<span class="n">Soil</span><span class="p">:</span><span class="n">BI2</span> <span class="o">-</span> <span class="n">Brightness</span> <span class="n">index</span> <span class="mi">2</span> <span class="p">(</span><span class="n">NIR</span><span class="p">,</span> <span class="n">Red</span><span class="p">,</span> <span class="n">Green</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The application can be used as follows, which would produce an output image
+containing 3 bands, respectively with the Vegetation:NDVI, Vegetation:RVI and
+Vegetation:IPVI radiometric indices in this exact order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_RadiometricIndices</span> <span class="o">-</span><span class="ow">in</span>             <span class="n">InputImage</span>
+                          <span class="o">-</span><span class="n">out</span>            <span class="n">OutputImage</span>
+                          <span class="o">-</span><span class="n">channels</span><span class="o">.</span><span class="n">red</span>   <span class="mi">3</span>
+                          <span class="o">-</span><span class="n">channels</span><span class="o">.</span><span class="n">green</span> <span class="mi">2</span>
+                          <span class="o">-</span><span class="n">channels</span><span class="o">.</span><span class="n">nir</span>   <span class="mi">4</span>
+                          <span class="o">-</span><span class="nb">list</span>           <span class="n">Vegetation</span><span class="p">:</span><span class="n">NDVI</span> <span class="n">Vegetation</span><span class="p">:</span><span class="n">RVI</span>
+                                          <span class="n">Vegetation</span><span class="p">:</span><span class="n">IPVI</span>
+</pre></div>
+</div>
+<p>or as follows, which would produce a single band output image with the
+Water:NDWI2 radiometric index:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_RadiometricIndices</span> <span class="o">-</span><span class="ow">in</span>             <span class="n">InputImage</span>
+                          <span class="o">-</span><span class="n">out</span>            <span class="n">OutputImage</span>
+                          <span class="o">-</span><span class="n">channels</span><span class="o">.</span><span class="n">red</span>   <span class="mi">3</span>
+                          <span class="o">-</span><span class="n">channels</span><span class="o">.</span><span class="n">green</span> <span class="mi">2</span>
+                          <span class="o">-</span><span class="n">channels</span><span class="o">.</span><span class="n">nir</span>   <span class="mi">4</span>
+                          <span class="o">-</span><span class="nb">list</span>           <span class="n">Water</span><span class="p">:</span><span class="n">NDWI2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="morphological-features-extraction">
+<h2>Morphological features extraction<a class="headerlink" href="#morphological-features-extraction" title="Permalink to this headline">¶</a></h2>
+<p>Morphological features can be highlighted by using image filters based
+on mathematical morphology either on binary or gray scale images.</p>
+<div class="section" id="binary-morphological-operations">
+<h3>Binary morphological operations<a class="headerlink" href="#binary-morphological-operations" title="Permalink to this headline">¶</a></h3>
+<p>This application performs binary morphological operations (dilation,
+erosion, opening and closing) on a mono band image with a specific
+structuring element (a ball or a cross) having one radius along X and
+another one along Y. NB: the cross shaped structuring element has a
+fixed radius equal to 1 pixel in both X and Y directions.</p>
+<p>The <em>BinaryMorphologicalOperation</em> application has the following input
+parameters:</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-in</span></code> the input image to be filtered</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channel</span></code> the selected channel index in the input image to be</dt>
+<dd>processed (default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-structype</span></code> the choice of the structuring element type</dt>
+<dd>(ball/cross) (default value is ball)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">(-structype.ball.xradius)</span></code> the ball structuring element X Radius</dt>
+<dd>(only if structype==ball) (default value is 5 pixels)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">(-structype.ball.yradius)</span></code> the ball structuring element Y Radius</dt>
+<dd>(only if structype==ball) (default value is 5 pixels)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-filter</span></code> the choice of the morphological operation</dt>
+<dd>(dilate/erode/opening/closing) (default value is dilate)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">(-filter.dilate.foreval)</span></code> the foreground value for the dilation</dt>
+<dd>(idem for filter.erode/opening/closing) (default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">(-filter.dilate.backval)</span></code> the background value for the dilation</dt>
+<dd>(idem for filter.erode/opening/closing) (default value is 0)</dd>
+</dl>
+<p>-<code class="docutils literal notranslate"><span class="pre">-out</span></code> the output filtered image</p>
+<p>The application can be used as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BinaryMorphologicalOperation</span>  <span class="o">-</span><span class="ow">in</span>                     <span class="n">InputImage</span>
+                                     <span class="o">-</span><span class="n">channel</span>                <span class="mi">1</span>
+                                     <span class="o">-</span><span class="n">structype</span>              <span class="n">ball</span>
+                                     <span class="o">-</span><span class="n">structype</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">xradius</span> <span class="mi">10</span>
+                                     <span class="o">-</span><span class="n">structype</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">yradius</span> <span class="mi">5</span>
+                                     <span class="o">-</span><span class="nb">filter</span>                 <span class="n">opening</span>
+                                     <span class="o">-</span><span class="nb">filter</span><span class="o">.</span><span class="n">opening</span><span class="o">.</span><span class="n">foreval</span> <span class="mf">1.0</span>
+                                     <span class="o">-</span><span class="nb">filter</span><span class="o">.</span><span class="n">opening</span><span class="o">.</span><span class="n">backval</span> <span class="mf">0.0</span>
+                                     <span class="o">-</span><span class="n">out</span>                    <span class="n">OutputImage</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gray-scale-morphological-operations">
+<h3>Gray scale morphological operations<a class="headerlink" href="#gray-scale-morphological-operations" title="Permalink to this headline">¶</a></h3>
+<p>This application performs morphological operations (dilation, erosion,
+opening and closing) on a gray scale mono band image with a specific
+structuring element (a ball or a cross) having one radius along X and
+another one along Y. NB: the cross shaped structuring element has a
+fixed radius equal to 1 pixel in both X and Y directions.</p>
+<p>The <em>GrayScaleMorphologicalOperation</em> application has the following
+input parameters:</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-in</span></code> the input image to be filtered</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channel</span></code> the selected channel index in the input image to be</dt>
+<dd>processed (default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-structype</span></code> the choice of the structuring element type</dt>
+<dd>(ball/cross) (default value is ball)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">(-structype.ball.xradius)</span></code> the ball structuring element X Radius</dt>
+<dd>(only if structype==ball) (default value is 5 pixels)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">(-structype.ball.yradius)</span></code> the ball structuring element Y Radius</dt>
+<dd>(only if structype==ball) (default value is 5 pixels)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-filter</span></code> the choice of the morphological operation</dt>
+<dd>(dilate/erode/opening/closing) (default value is dilate)</dd>
+</dl>
+<p>-<code class="docutils literal notranslate"><span class="pre">-out</span></code> the output filtered image</p>
+<p>The application can be used as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_GrayScaleMorphologicalOperation</span>  <span class="o">-</span><span class="ow">in</span>                     <span class="n">InputImage</span>
+                                        <span class="o">-</span><span class="n">channel</span>                <span class="mi">1</span>
+                                        <span class="o">-</span><span class="n">structype</span>              <span class="n">ball</span>
+                                        <span class="o">-</span><span class="n">structype</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">xradius</span> <span class="mi">10</span>
+                                        <span class="o">-</span><span class="n">structype</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">yradius</span> <span class="mi">5</span>
+                                        <span class="o">-</span><span class="nb">filter</span>                 <span class="n">opening</span>
+                                        <span class="o">-</span><span class="n">out</span>                    <span class="n">OutputImage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="textural-features-extraction">
+<h2>Textural features extraction<a class="headerlink" href="#textural-features-extraction" title="Permalink to this headline">¶</a></h2>
+<p>Texture features can be extracted with the help of image filters based
+on texture analysis methods like Haralick and structural feature set
+(SFS).</p>
+<div class="section" id="haralick-texture-features">
+<h3>Haralick texture features<a class="headerlink" href="#haralick-texture-features" title="Permalink to this headline">¶</a></h3>
+<p>This application computes Haralick, advanced and higher order texture
+features on every pixel in the selected channel of the input image. The
+output image is multi band with a feature per band.</p>
+<p>The <em>HaralickTextureExtraction</em> application has the following input
+parameters:</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-in</span></code> the input image to compute the features on</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channel</span></code> the selected channel index in the input image to be</dt>
+<dd>processed (default value is 1)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-texture</span></code> the texture set selection [simple/advanced/higher]</dt>
+<dd>(default value is simple)</dd>
+</dl>
+<p>-<code class="docutils literal notranslate"><span class="pre">-parameters.min</span></code> the input image minimum (default value is 0)</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-parameters.max</span></code> the input image maximum (default value is 255)</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-parameters.xrad</span></code> the X Radius of the processing neighborhood</dt>
+<dd>(default value is 2 pixels)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-parameters.yrad</span></code> the Y Radius of the processing neighborhood</dt>
+<dd>(default value is 2 pixels)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-parameters.xoff</span></code> the <img class="math" src="../_images/math/4d26a3c646f81ab56cceb818c7801dd1f3cfaaf3.png" alt="\Delta"/>X Offset for the</dt>
+<dd>co-occurrence computation (default value is 1 pixel)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-parameters.yoff</span></code> the <img class="math" src="../_images/math/4d26a3c646f81ab56cceb818c7801dd1f3cfaaf3.png" alt="\Delta"/>Y Offset for the</dt>
+<dd>co-occurrence computation (default value is 1 pixel)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-parameters.nbbin</span></code> the number of bin per axis for histogram</dt>
+<dd>generation (default value is 8)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-out</span></code> the output multi band image containing the selected texture</dt>
+<dd>features (one feature per band)</dd>
+</dl>
+<p>The available values for -texture with their relevant features are:</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-texture=simple:</span></code> In this case, 8 local Haralick textures features</dt>
+<dd><p class="first">will be processed. The 8 output image channels are: Energy, Entropy,
+Correlation, Inverse Difference Moment, Inertia, Cluster Shade,
+Cluster Prominence and Haralick Correlation. They are provided in
+this exact order in the output image. Thus, this application computes
+the following Haralick textures over a neighborhood with user defined
+radius. To improve the speed of computation, a variant of Grey Level
+Co-occurrence Matrix(GLCM) called Grey Level Co-occurrence Indexed
+List (GLCIL) is used. Given below is the mathematical explanation on
+the computation of each textures. Here <img class="math" src="../_images/math/1b255058bc7786bb1ea95973a3ddd9d49a458d93.png" alt="g(i, j)"/> is the
+frequency of element in the GLCIL whose index is i, j. GLCIL stores a
+pair of frequency of two pixels taken from the given offset and the
+cell index (i, j) of the pixel in the neighborhood window. :(where
+each element in GLCIL is a pair of pixel index and it’s frequency,
+<img class="math" src="../_images/math/1b255058bc7786bb1ea95973a3ddd9d49a458d93.png" alt="g(i, j)"/> is the frequency value of the pair having index is
+i, j).</p>
+<p>“Energy” <img class="math" src="../_images/math/2d20256b8c4d72c44bc65bf63d5d3cffbc383117.png" alt="= f_1 = \sum_{i, j}g(i, j)^2"/></p>
+<p>“Entropy” <img class="math" src="../_images/math/96d57a604aa5060f9761a8b8db94e7c4d3a16c48.png" alt="= f_2 = -\sum_{i, j}g(i, j) \log_2 g(i, j)"/>, or 0
+if <img class="math" src="../_images/math/73c39414163a81988ed7c02024bf23369812402a.png" alt="g(i, j) = 0"/></p>
+<p>“Correlation”
+<img class="math" src="../_images/math/957cf12eaa1713deabfcd0c8ecbbc7df8047596a.png" alt="= f_3 = \sum_{i, j}\frac{(i - \mu)(j - \mu)g(i, j)}{\sigma^2}"/></p>
+<p>“Inverse Difference Moment”
+<img class="math" src="../_images/math/7c03d39b33c56831a953491be2eb7ee06664bc8a.png" alt="= f_4 = \sum_{i, j}\frac{1}{1 + (i - j)^2}g(i, j)"/></p>
+<p>“Inertia” <img class="math" src="../_images/math/be4ba7649a538fe28a13789a831fac01f374152e.png" alt="= f_5 = \sum_{i, j}(i - j)^2g(i, j)"/> (sometimes
+called “contrast”)</p>
+<p>“Cluster Shade”
+<img class="math" src="../_images/math/4bc63b82fdab4448aa49ce4ec292091a27ed98c9.png" alt="= f_6 = \sum_{i, j}((i - \mu) + (j - \mu))^3 g(i, j)"/></p>
+<p>“Cluster Prominence”
+<img class="math" src="../_images/math/14b97ad65505fe9930ebdd301ce6f24de5fa2fc3.png" alt="= f_7 = \sum_{i, j}((i - \mu) + (j - \mu))^4 g(i, j)"/></p>
+<p class="last">“Haralick’s Correlation”
+<img class="math" src="../_images/math/03df62bd97b3579bb6697be6069db442d62f1209.png" alt="= f_8 = \frac{\sum_{i, j}(i, j) g(i, j) -\mu_t^2}{\sigma_t^2}"/>
+where <img class="math" src="../_images/math/16ea1751f7a8e8c02082ec8a535ce24aa03b8543.png" alt="\mu_t"/> and <img class="math" src="../_images/math/d012dc0d9f0b87f9975d6fdbd6a58e92aeed1935.png" alt="\sigma_t"/> are the mean and standard
+deviation of the row (or column, due to symmetry) sums. Above,
+<img class="math" src="../_images/math/d09cd77c736582861c81358bbaf65de162df69b5.png" alt="\mu ="/> (weighted pixel average)
+<img class="math" src="../_images/math/c2ad3bbd4f25608721c85edf4c99b70c4ed87f11.png" alt="= \sum_{i, j}i \cdot g(i, j) = \sum_{i, j}j \cdot g(i, j)"/>
+(due to matrix symmetry), and <img class="math" src="../_images/math/fa308e4b870e530335b1c6b14dbfca7cdad72636.png" alt="\sigma ="/> (weighted pixel
+variance)
+<img class="math" src="../_images/math/46b3e0580d6b3cb60b40baf157aec1a85ce032be.png" alt="= \sum_{i, j}(i - \mu)^2 \cdot g(i, j) = \sum_{i, j}(j - \mu)^2 \cdot g(i, j)"/>
+(due to matrix symmetry).</p>
+</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-texture=advanced:</span></code> In this case, 10 advanced texture features</dt>
+<dd><p class="first">will be processed. The 10 output image channels are: Mean, Variance,
+Dissimilarity, Sum Average, Sum Variance, Sum Entropy, Difference of
+Entropies, Difference of Variances, IC1 and IC2. They are provided in
+this exact order in the output image. The textures are computed over
+a sliding window with user defined radius.</p>
+<p>To improve the speed of computation, a variant of Grey Level
+Co-occurrence Matrix(GLCM) called Grey Level Co-occurrence Indexed
+List (GLCIL) is used. Given below is the mathematical explanation on
+the computation of each textures. Here <img class="math" src="../_images/math/1b255058bc7786bb1ea95973a3ddd9d49a458d93.png" alt="g(i, j)"/> is the
+frequency of element in the GLCIL whose index is i, j. GLCIL stores a
+pair of frequency of two pixels taken from the given offset and the
+cell index (i, j) of the pixel in the neighborhood window. :(where
+each element in GLCIL is a pair of pixel index and it’s frequency,
+<img class="math" src="../_images/math/1b255058bc7786bb1ea95973a3ddd9d49a458d93.png" alt="g(i, j)"/> is the frequency value of the pair having index is
+i, j).</p>
+<p>“Mean” <img class="math" src="../_images/math/03900756b65e0b96adbc56c7787f87ad2ab060fa.png" alt="= \sum_{i, j}i g(i, j)"/></p>
+<p>“Sum of squares: Variance”
+<img class="math" src="../_images/math/b4125448fb0d264b21477e5809f519f34855885f.png" alt="= f_4 = \sum_{i, j}(i - \mu)^2 g(i, j)"/></p>
+<p>“Dissimilarity” <img class="math" src="../_images/math/991d444b6822b7e55c1c7d89da18ec2ec56efd57.png" alt="= f_5 = \sum_{i, j}(i - j) g(i, j)^2"/></p>
+<p>“Sum average” <img class="math" src="../_images/math/de49846ca37f6d6cdc9a47e811fd918cea542482.png" alt="= f_6 = -\sum_{i}i g_{x+y}(i)"/></p>
+<p>“Sum Variance” <img class="math" src="../_images/math/32e842009bda29dedd3192993f6a9a50e62adcf3.png" alt="= f_7 = \sum_{i}(i - f_8)^2 g_{x+y}(i)"/></p>
+<p>“Sum Entropy” <img class="math" src="../_images/math/c3646d2af7a3ff865cbedb695ad4519961475698.png" alt="= f_8 = -\sum_{i}g_{x+y}(i) log (g_{x+y}(i))"/></p>
+<p>“Difference variance” <img class="math" src="../_images/math/1ba3160d26f8b33f2112950a8e4e744c0cdea809.png" alt="= f_10 = variance of g_{x-y}(i)"/></p>
+<p>“Difference entropy”
+<img class="math" src="../_images/math/306653930fdc91ec330fd5d456911c2c3fab7b7c.png" alt="= f_11 = -\sum_{i}g_{x-y}(i) log (g_{x-y}(i))"/></p>
+<p>“Information Measures of Correlation IC1”
+<img class="math" src="../_images/math/9c117f9d5eb0634cd15c8a5800534441501972a2.png" alt="= f_12 = \frac{f_9 - HXY1}{H}"/></p>
+<p>“Information Measures of Correlation IC2”
+<img class="math" src="../_images/math/61a4f77fe936fb5a07d9b8fd17c83c8299d4a71d.png" alt="= f_13 = \sqrt{1 - \exp{-2}|HXY2 - f_9|}"/></p>
+<p>Above, <img class="math" src="../_images/math/d09cd77c736582861c81358bbaf65de162df69b5.png" alt="\mu ="/> (weighted pixel average)
+<img class="math" src="../_images/math/36ee3327c7f535434dc980694cd96bcdfa724e44.png" alt="= \sum_{i, j}i \cdot g(i, j) =  \sum_{i, j}j \cdot g(i, j)"/>
+(due to matrix summetry), and</p>
+<p><img class="math" src="../_images/math/81a11f5da0a4ff9b421cc85faadc861d5f097f0a.png" alt="g_{x+y}(k) =  \sum_{i}\sum_{j}g(i)"/> where <img class="math" src="../_images/math/69b9a742e5210d094858fba7b2b5e3b027c01bb0.png" alt="i+j=k"/>
+and <img class="math" src="../_images/math/56c457d3ba718275a14658fa1e9b0c9e77b32eeb.png" alt="k = 2, 3, .., 2N_{g}"/> and</p>
+<p class="last"><img class="math" src="../_images/math/7851181a00c424873208e3734e7fc6ff2290678d.png" alt="g_{x-y}(k) =  \sum_{i}\sum_{j}g(i)"/> where <img class="math" src="../_images/math/8da4286713ce36b64e3846aacd11fe0c23680b16.png" alt="i-j=k"/>
+and <img class="math" src="../_images/math/6198bfee0abd8cf010eae165813419afd5051fbd.png" alt="k = 0, 1, .., N_{g}-1"/></p>
+</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-texture=higher:</span></code> In this case, 11 local higher order statistics</dt>
+<dd><p class="first">texture coefficients based on the grey level run-length matrix will
+be processed. The 11 output image channels are: Short Run Emphasis,
+Long Run Emphasis, Grey-Level Nonuniformity, Run Length
+Nonuniformity, Run Percentage, Low Grey-Level Run Emphasis, High
+Grey-Level Run Emphasis, Short Run Low Grey-Level Emphasis, Short Run
+High Grey-Level Emphasis, Long Run Low Grey-Level Emphasis and Long
+Run High Grey-Level Emphasis. They are provided in this exact order
+in the output image. Thus, this application computes the following
+Haralick textures over a sliding window with user defined radius:
+(where <img class="math" src="../_images/math/2b7dc0836f038c47fa90aa5a3a478f694356d02f.png" alt="p(i, j)"/> is the element in cell i, j of a normalized
+Run Length Matrix, <img class="math" src="../_images/math/1694b1a275f552c5f98c8d4081cc7b295fe665db.png" alt="n_r"/> is the total number of runs and
+<img class="math" src="../_images/math/e74454dd1595af5ee3fefd760ec2b5d3d121e289.png" alt="n_p"/> is the total number of pixels):</p>
+<p>“Short Run Emphasis”
+<img class="math" src="../_images/math/f33b01bf6900b812825b01aaf260c4c49bd7a745.png" alt="= SRE = \frac{1}{n_r} \sum_{i, j}\frac{p(i, j)}{j^2}"/></p>
+<p>“Long Run Emphasis”
+<img class="math" src="../_images/math/bf3aa9e0d7c1b31d4079973b4821cbad41d7bf37.png" alt="= LRE = \frac{1}{n_r} \sum_{i, j}p(i, j) * j^2"/></p>
+<p>“Grey-Level Nonuniformity”
+<img class="math" src="../_images/math/f883af3f3f0e18d85eebc3a841043ea5b479cc55.png" alt="= GLN = \frac{1}{n_r} \sum_{i} \left( \sum_{j}{p(i, j)} \right)^2"/></p>
+<p>“Run Length Nonuniformity”
+<img class="math" src="../_images/math/aa978e027d934207fbf8637aa00f69922003ab17.png" alt="= RLN = \frac{1}{n_r} \sum_{j} \left( \sum_{i}{p(i, j)} \right)^2"/></p>
+<p>“Run Percentage” <img class="math" src="../_images/math/8a35d2872427d040a6fa3f2302997e29bc4f3c8d.png" alt="= RP = \frac{n_r}{n_p}"/></p>
+<p>“Low Grey-Level Run Emphasis”
+<img class="math" src="../_images/math/5318b1fd9d924e0da04e20695712d3a71d03f662.png" alt="= LGRE = \frac{1}{n_r} \sum_{i, j}\frac{p(i, j)}{i^2}"/></p>
+<p>“High Grey-Level Run Emphasis”
+<img class="math" src="../_images/math/98543170a0771c8bd5369716fde576c4771b7af6.png" alt="= HGRE = \frac{1}{n_r} \sum_{i, j}p(i, j) * i^2"/></p>
+<p>“Short Run Low Grey-Level Emphasis”
+<img class="math" src="../_images/math/2242f5073737fb42707165dabd50ed24e69312c1.png" alt="= SRLGE = \frac{1}{n_r} \sum_{i, j}\frac{p(i, j)}{i^2 j^2}"/></p>
+<p>“Short Run High Grey-Level Emphasis”
+<img class="math" src="../_images/math/600cc181e91be93e9601b09486d7bf2d4ab069d5.png" alt="= SRHGE = \frac{1}{n_r} \sum_{i, j}\frac{p(i, j) * i^2}{j^2}"/></p>
+<p>“Long Run Low Grey-Level Emphasis”
+<img class="math" src="../_images/math/ff410cc57f0b7ffd08349a719c0900e7a1c10e3b.png" alt="= LRLGE = \frac{1}{n_r} \sum_{i, j}\frac{p(i, j) * j^2}{i^2}"/></p>
+<p class="last">“Long Run High Grey-Level Emphasis”
+<img class="math" src="../_images/math/838fbe8d4a73c9e8e3ece5e578c9b8d30af0aaa6.png" alt="= LRHGE = \frac{1}{n_r} \sum_{i, j} p(i, j) i^2 j^2"/></p>
+</dd>
+</dl>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_HaralickTextureExtraction</span>  <span class="o">-</span><span class="ow">in</span>             <span class="n">InputImage</span>
+                                  <span class="o">-</span><span class="n">channel</span>        <span class="mi">1</span>
+                                  <span class="o">-</span><span class="n">texture</span>        <span class="n">simple</span>
+                                  <span class="o">-</span><span class="n">parameters</span><span class="o">.</span><span class="n">min</span> <span class="mi">0</span>
+                                  <span class="o">-</span><span class="n">parameters</span><span class="o">.</span><span class="n">max</span> <span class="mi">255</span>
+                                  <span class="o">-</span><span class="n">out</span>            <span class="n">OutputImage</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sfs-texture-extraction">
+<h3>SFS texture extraction<a class="headerlink" href="#sfs-texture-extraction" title="Permalink to this headline">¶</a></h3>
+<p>This application computes Structural Feature Set textures on every pixel
+in the selected channel of the input image. The output image is multi
+band with a feature per band. The 6 output texture features are
+SFS’Length, SFS’Width, SFS’PSI, SFS’W-Mean, SFS’Ratio and SFS’SD. They
+are provided in this exact order in the output image.</p>
+<p>It is based on line direction estimation and described in the following
+publication. Please refer to Xin Huang, Liangpei Zhang and Pingxiang Li
+publication, Classification and Extraction of Spatial Features in Urban
+Areas Using High-Resolution Multispectral Imagery. IEEE Geoscience and
+Remote Sensing Letters, vol. 4, n. 2, 2007, pp 260-264.</p>
+<p>The texture is computed for each pixel using its neighborhood. User can
+set the spatial threshold that is the max line length, the spectral
+threshold that is the max difference authorized between a pixel of the
+line and the center pixel of the current neighborhood. The adjustement
+constant alpha and the ratio Maximum Consideration Number, which
+describes the shape contour around the central pixel, are used to
+compute the <img class="math" src="../_images/math/73c19c8f20b8e54e829f53e08c24d2ffadf6bf5f.png" alt="w - mean"/> value.</p>
+<p>The <em>SFSTextureExtraction</em> application has the following input
+parameters:</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-in</span></code> the input image to compute the features on</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-channel</span></code> the selected channel index in the input image to be</dt>
+<dd>processed (default value is 1)</dd>
+</dl>
+<p>-<code class="docutils literal notranslate"><span class="pre">-parameters.spethre</span></code> the spectral threshold (default value is 50)</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-parameters.spathre</span></code> the spatial threshold (default value is 100</dt>
+<dd>pixels)</dd>
+</dl>
+<p>-<code class="docutils literal notranslate"><span class="pre">-parameters.nbdir</span></code> the number of directions (default value is 20)</p>
+<p>-<code class="docutils literal notranslate"><span class="pre">-parameters.alpha</span></code> the alpha value (default value is 1)</p>
+<dl class="docutils">
+<dt>-<code class="docutils literal notranslate"><span class="pre">-parameters.maxcons</span></code> the ratio Maximum Consideration Number</dt>
+<dd>(default value is 5)</dd>
+<dt>-<code class="docutils literal notranslate"><span class="pre">-out</span></code> the output multi band image containing the selected texture</dt>
+<dd>features (one feature per band)</dd>
+</dl>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SFSTextureExtraction</span> <span class="o">-</span><span class="ow">in</span>             <span class="n">InputImage</span>
+                            <span class="o">-</span><span class="n">channel</span>        <span class="mi">1</span>
+                            <span class="o">-</span><span class="n">out</span>            <span class="n">OutputImage</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="stereo.html" class="btn btn-neutral float-right" title="Stereoscopic reconstruction from VHR optical images pair" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pbclassif.html" class="btn btn-neutral" title="Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

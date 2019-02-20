@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Despeckle &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DimensionalityReduction" href="app_DimensionalityReduction.html" />
+    <link rel="prev" title="ContrastEnhancement" href="app_ContrastEnhancement.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ContrastEnhancement.html">ContrastEnhancement</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Despeckle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_DimensionalityReduction.html">DimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_DomainTransform.html">DomainTransform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MeanShiftSmoothing.html">MeanShiftSmoothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_Smoothing.html">Smoothing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Image_Filtering.html">Image Filtering</a> &raquo;</li>
+        
+      <li>Despeckle</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_Despeckle.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="despeckle">
+<span id="app-despeckle"></span><h1>Despeckle<a class="headerlink" href="#despeckle" title="Permalink to this headline">¶</a></h1>
+<p>Perform speckle noise reduction on SAR image.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>SAR images are affected by speckle noise that inherently exists in and which degrades the image quality. It is caused by the coherent nature of back-scattered waves from multiple distributed targets. It is locally strong and it increases the mean Grey level of a local area.</p>
+<p>Reducing the speckle noise enhances radiometric resolution but tend to decrease the spatial resolution.Several different methods are used to eliminate speckle noise, based upon different mathematical models of the phenomenon. The application includes four methods: Lee [1], Frost [2], GammaMAP [3] and Kuan [4].</p>
+<p>We sum up below the basic principle of this four methods:</p>
+<ul class="simple">
+<li>Lee: Estimate the signal by mean square error minimization (MMSE) on a sliding window.</li>
+<li>Frost: Also derived from the MMSE criteria with a weighted sum of the values within the window. The weighting factors decrease with distance from the pixel of interest.</li>
+<li>GammaMAP: Derived under the assumption of the image follows a Gamma distribution.</li>
+<li>Kuan: Also derived from the MMSE criteria under the assumption of non stationary mean and variance. It is quite similar to Lee filter in form.</li>
+</ul>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#lee-options" id="id1">Lee options</a></li>
+<li><a class="reference internal" href="#frost-options" id="id2">Frost options</a></li>
+<li><a class="reference internal" href="#gammamap-options" id="id3">GammaMap options</a></li>
+<li><a class="reference internal" href="#kuan-options" id="id4">Kuan options</a></li>
+</ul>
+</div>
+<p><strong>Input Image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+Input image.</p>
+<p><strong>Output Image</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Output image.</p>
+<p><strong>Speckle filtering method</strong> <code class="code docutils literal notranslate"><span class="pre">-filter</span> <span class="pre">[lee|frost|gammamap|kuan]</span></code> <em>Default value: lee</em> <br /></p>
+<ul class="simple">
+<li><strong>Lee</strong> <br /> Lee filter</li>
+<li><strong>Frost</strong> <br /> Frost filter</li>
+<li><strong>GammaMap</strong> <br /> GammaMap filter</li>
+<li><strong>Kuan</strong> <br /> Kuan filter</li>
+</ul>
+<div class="section" id="lee-options">
+<h3><a class="toc-backref" href="#id1">Lee options</a><a class="headerlink" href="#lee-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Radius</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.lee.rad</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Radius in pixel</p>
+<p><strong>Number of looks</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.lee.nblooks</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Number of looks in the input image.</p>
+</div>
+<div class="section" id="frost-options">
+<h3><a class="toc-backref" href="#id2">Frost options</a><a class="headerlink" href="#frost-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Radius</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.frost.rad</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Radius in pixel.</p>
+<p><strong>Deramp factor</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.frost.deramp</span> <span class="pre">float</span></code> <em>Default value: 0.1</em> <br />
+factor use to control the
+exponential function used to weight effect of the distance between the
+central pixel and its neighborhood. Increasing the deramp parameter will
+lead to take more into account pixels farther from the center and
+therefore increase the smoothing effects.</p>
+</div>
+<div class="section" id="gammamap-options">
+<h3><a class="toc-backref" href="#id3">GammaMap options</a><a class="headerlink" href="#gammamap-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Radius</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.gammamap.rad</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Radius in pixel.</p>
+<p><strong>Number of looks</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.gammamap.nblooks</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Number of looks in the input image.</p>
+</div>
+<div class="section" id="kuan-options">
+<h3><a class="toc-backref" href="#id4">Kuan options</a><a class="headerlink" href="#kuan-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Radius</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.kuan.rad</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+Radius in pixel.</p>
+<p><strong>Number of looks</strong> <code class="code docutils literal notranslate"><span class="pre">-filter.kuan.nblooks</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Number of looks in the input image.</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_Despeckle -in sar.tif -filter lee -filter.lee.rad <span class="m">5</span> -out despeckle.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;Despeckle&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;sar.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;filter&quot;</span><span class="p">,</span><span class="s2">&quot;lee&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;filter.lee.rad&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;despeckle.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>The application does not handle complex image as input.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">[1] J. Lee. Digital image enhancement and noise filtering byuse of local statistics. IEEE Transactions on Pattern Analysis and MachineIntelligence, 2:165–168, 1980.</div>
+<div class="line">[2] V. S. Frost, et al., A Model for Radar Images and ItsApplication to Adaptive Digital Filtering of MultiplicativeNoise, IEEE Trans. Pattern Anal., Machine Intell., vol. 4,no. 2, pp. 157-166, Mar. 1982.</div>
+<div class="line">[3] A. Lopes, E. Nezry, R. Touzi and H. Laur, Maximum APosteriori Speckle Filtering And First Order Texture ModelsIn Sar Images, 10thAnnual International Symposium onGeoscience and Remote Sensing, 1990,pp. 2409-2412.  doi:10.1109/IGARSS.1990.689026</div>
+<div class="line">[4] Kuan, D.  T., Sawchuk, A.  A., Strand, T.  C, and Chavel,P., 1987.  Adaptive restoration of image with speckle.  IEEETrans on Acoustic Speech and Signal Processing, 35,pp. 373-383.</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_DimensionalityReduction.html" class="btn btn-neutral float-right" title="DimensionalityReduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_ContrastEnhancement.html" class="btn btn-neutral" title="ContrastEnhancement" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

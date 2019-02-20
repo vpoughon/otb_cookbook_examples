@@ -1,0 +1,105 @@
+.. _app-ConvertSensorToGeoPoint:
+
+ConvertSensorToGeoPoint
+=======================
+
+
+Sensor to geographic coordinates conversion.
+
+Description
+-----------
+
+This Application converts a sensor point of an input image to a geographic point using the Forward Sensor Model of the input image.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Sensor image** :code:`-in image` *Mandatory* |br|
+Input sensor image.
+
+Point Coordinates
+^^^^^^^^^^^^^^^^^
+
+
+
+
+
+**X value of desired point** :code:`-input.idx float` *Default value: 0* |br|
+X coordinate of the point to transform.
+
+**Y value of desired point** :code:`-input.idy float` *Default value: 0* |br|
+Y coordinate of the point to transform.
+
+Geographic Coordinates
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+**Output Point Longitude** :code:`-output.idx float` *Mandatory* |br|
+Output point longitude coordinate.
+
+**Output Point Latitude** :code:`-output.idy float` *Mandatory* |br|
+Output point latitude coordinate.
+
+**Main town near the coordinates computed** :code:`-output.town string` *Mandatory* |br|
+Nearest main town of the computed geographic point.
+
+**Country of the image** :code:`-output.country string` *Mandatory* |br|
+Country of the input image
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ConvertSensorToGeoPoint -in QB_TOULOUSE_MUL_Extract_500_500.tif -input.idx 200 -input.idy 200
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ConvertSensorToGeoPoint")
+
+	app.SetParameterString("in", "QB_TOULOUSE_MUL_Extract_500_500.tif")
+	app.SetParameterFloat("input.idx", 200)
+	app.SetParameterFloat("input.idy", 200)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-ConvertCartoToGeoPoint` application, otb:ref:`app-ObtainUTMZoneFromGeoPoint`

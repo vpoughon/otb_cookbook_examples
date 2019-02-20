@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LAIFromNDVIImageTransform.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ProsailModel.cxx" href="ProsailModel.html" />
+    <link rel="prev" title="Simulation" href="../Simulation.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Simulation.html">Simulation</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">LAIFromNDVIImageTransform.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ProsailModel.html">ProsailModel.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LAIAndPROSAILToSensorResponse.html">LAIAndPROSAILToSensorResponse.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Simulation.html">Simulation</a> &raquo;</li>
+        
+      <li>LAIFromNDVIImageTransform.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Simulation/LAIFromNDVIImageTransform.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="laifromndviimagetransform-cxx">
+<span id="example-laifromndviimagetransform"></span><h1>LAIFromNDVIImageTransform.cxx<a class="headerlink" href="#laifromndviimagetransform-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./LAIFromNDVIImageTransform Input/verySmallFSATSW.tif <span class="se">\</span>
+                            Output/siTvLAIFromNDVIImageTransformExampleTest_verySmallFSATSW.tif <span class="se">\</span>
+                            Output/verySmallFSATSW_visu.png <span class="se">\</span>
+                            Output/siTvLAIFromNDVIImageTransformExampleTest_verySmallFSATSW_visu.png <span class="se">\</span>
+                            <span class="m">1</span> <span class="se">\</span>
+                            <span class="m">4</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Simulation/LAIFromNDVIImageTransform.cxx?inline=false">LAIFromNDVIImageTransform.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// This example presents a way to generate LAI (Leaf Area Index) image using formula dedicated to Formosat2.</span>
+<span class="c1">// LAI Image is used as an input in Image Simulation process.</span>
+<span class="c1">//</span>
+<span class="c1">// Let&#39;s look at the minimal code required to use this algorithm. First, the</span>
+<span class="c1">// following headers must be included.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelRAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Wrong Parameters &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                            <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>   <span class="n">InputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>         <span class="n">OutputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>  <span class="n">ImageVisuType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span>  <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageVisuType</span><span class="o">&gt;</span>   <span class="n">VisuWriterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span>  <span class="n">InWriterType</span><span class="p">;</span>
+  <span class="c1">// Filter type is a generic \doxygen{otb}{MultiChannelRAndNIRIndexImageFilter} using Formosat2 specific LAI</span>
+  <span class="c1">//  \doxygen{otb}{LAIFromNDVIFormosat2Functor}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">LAIFromNDVIFormosat2Functor</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">::</span><span class="n">InternalPixelType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="o">::</span><span class="n">InternalPixelType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">::</span><span class="n">PixelType</span><span class="o">&gt;</span>
+                                                                                                 <span class="n">FunctorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelRAndNIRIndexImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">MultiChannelRAndNIRIndexImageFilterType</span><span class="p">;</span>
+
+  <span class="c1">// Instantiating object</span>
+
+  <span class="c1">//  Next the filter is created by invoking the \code{New()}~method and</span>
+  <span class="c1">//  assigning the result to a \doxygen{itk}{SmartPointer}.</span>
+
+  <span class="n">MultiChannelRAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">MultiChannelRAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">reader</span>     <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">writer</span>     <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">InWriterType</span><span class="o">::</span><span class="n">Pointer</span>   <span class="n">inWriter</span>   <span class="o">=</span> <span class="n">InWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">visuWriter</span> <span class="o">=</span> <span class="n">VisuWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="kt">char</span><span class="o">*</span> <span class="n">InputName</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">OutputName1</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">OutputName2</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">OutputName3</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">InputName</span><span class="p">);</span>
+
+
+  <span class="c1">// filter input is set with input image</span>
+  <span class="c1">//</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// then red and nir channels index are set using \code{SetRedIndex()} and  \code{SetNIRIndex()}</span>
+  <span class="c1">//</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">redChannel</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nirChannel</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="n">redChannel</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="n">nirChannel</span><span class="p">);</span>
+
+  <span class="c1">//  The invocation of the \code{Update()} method triggers the</span>
+  <span class="c1">//  execution of the pipeline.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">OutputName1</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// rescale data</span>
+
+  <span class="n">inWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">OutputName2</span><span class="p">);</span>
+  <span class="c1">// typedef itk::RescaleIntensityImageFilter&lt;InputImageType,</span>
+  <span class="c1">//     OutputImageType&gt; RescalerType;</span>
+
+  <span class="c1">// RescalerType::Pointer     rescaler     = RescalerType::New();</span>
+  <span class="c1">// rescaler-&gt;SetInput(reader-&gt;GetOutput());</span>
+  <span class="c1">// rescaler-&gt;SetOutputMinimum(0);</span>
+  <span class="c1">// rescaler-&gt;SetOutputMaximum(255);</span>
+
+  <span class="n">inWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">inWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+
+  <span class="n">visuWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">OutputName3</span><span class="p">);</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">ImageVisuType</span><span class="o">&gt;</span> <span class="n">RescalerTypeOut</span><span class="p">;</span>
+
+  <span class="n">RescalerTypeOut</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescalerTypeOut</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">visuWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">visuWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{verySmallFSATSW_visu.eps}</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{siTvLAIFromNDVIImageTransformExampleTest_verySmallFSATSW_visu.eps}</span>
+  <span class="c1">// \itkcaption[LAIFromNDVIImageTransform Filter]{LAI generation \emph{(right)} from NDVI applied on Formosat 2 Image \emph{(left)} .}</span>
+  <span class="c1">// \label{fig:LAIFromNDVIImageTransform}</span>
+  <span class="c1">// \end{figure}</span>
+  <span class="c1">//</span>
+  <span class="c1">//  Figure \ref{fig:LAIFromNDVIImageTransform} illustrates the LAI generation using Formosat 2 data.</span>
+  <span class="c1">//</span>
+
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ProsailModel.html" class="btn btn-neutral float-right" title="ProsailModel.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Simulation.html" class="btn btn-neutral" title="Simulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

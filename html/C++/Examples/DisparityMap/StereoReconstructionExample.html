@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>StereoReconstructionExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="NCCRegistrationFilterExample.cxx" href="NCCRegistrationFilterExample.html" />
+    <link rel="prev" title="DisparityMap" href="../DisparityMap.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">StereoReconstructionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NCCRegistrationFilterExample.html">NCCRegistrationFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FineRegistrationImageFilterExample.html">FineRegistrationImageFilterExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../DisparityMap.html">DisparityMap</a> &raquo;</li>
+        
+      <li>StereoReconstructionExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/DisparityMap/StereoReconstructionExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stereoreconstructionexample-cxx">
+<span id="example-stereoreconstructionexample"></span><h1>StereoReconstructionExample.cxx<a class="headerlink" href="#stereoreconstructionexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./StereoReconstructionExample Input/sensor_stereo_left.tif Input/sensor_stereo_right.tif Output/elevationOutput.tif Output/elevationOutputPrintable.png <span class="m">140</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/StereoReconstructionExample.cxx?inline=false">StereoReconstructionExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example demonstrates the use of the stereo reconstruction chain</span>
+<span class="c1">// from an image pair. The images are assumed to come from the same sensor</span>
+<span class="c1">// but with different positions. The approach presented here has the</span>
+<span class="c1">// following steps:</span>
+<span class="c1">// \begin{itemize}</span>
+<span class="c1">// \item Epipolar resampling of the image pair</span>
+<span class="c1">// \item Dense disparity map estimation</span>
+<span class="c1">// \item Projection of the disparities on an existing Digital Elevation Model (DEM)</span>
+<span class="c1">// \end{itemize}</span>
+<span class="c1">// It is important to note that this method requires the sensor models with</span>
+<span class="c1">// a pose estimate for each image.</span>
+
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbStereorectificationDisplacementFieldSource.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbStreamingWarpImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbBandMathImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSubPixelDisparityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbDisparityMapMedianFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbDisparityMapToDEMFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbBCOInterpolateImageFunction.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkVectorCastImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageList.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageListToVectorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbDEMHandler.h&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; sensorImage1 sensorImage2 outputDEM outputDEMPNG&quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;averageElevation  &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>       <span class="n">FloatImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">FloatVectorImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="o">&gt;</span> <span class="n">ImageReaderType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                  <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">OutputWriterType</span><span class="p">;</span>
+  <span class="c1">// This example demonstrates the use of the following filters :</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item \doxygen{otb}{StereorectificationDisplacementFieldSource}</span>
+  <span class="c1">// \item \doxygen{otb}{StreamingWarpImageFilter}</span>
+  <span class="c1">// \item \doxygen{otb}{PixelWiseBlockMatchingImageFilter}</span>
+  <span class="c1">// \item \doxygen{otb}{otbSubPixelDisparityImageFilter}</span>
+  <span class="c1">// \item \doxygen{otb}{otbDisparityMapMedianFilter}</span>
+  <span class="c1">// \item \doxygen{otb}{DisparityMapToDEMFilter}</span>
+  <span class="c1">// \end{itemize}</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">StereorectificationDisplacementFieldSource</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatVectorImageType</span><span class="o">&gt;</span> <span class="n">DisplacementFieldSourceType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>       <span class="n">DisplacementType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">DisplacementType</span><span class="o">&gt;</span> <span class="n">DisplacementFieldType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">VectorCastImageFilter</span><span class="o">&lt;</span><span class="n">FloatVectorImageType</span><span class="p">,</span> <span class="n">DisplacementFieldType</span><span class="o">&gt;</span> <span class="n">DisplacementFieldCastFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">StreamingWarpImageFilter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">DisplacementFieldType</span><span class="o">&gt;</span> <span class="n">WarpFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">BCOInterpolateImageFunction</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="o">&gt;</span> <span class="n">BCOInterpolationType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">NCCBlockMatching</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="o">&gt;</span> <span class="n">NCCBlockMatchingFunctorType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PixelWiseBlockMatchingImageFilter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">NCCBlockMatchingFunctorType</span><span class="o">&gt;</span>
+      <span class="n">NCCBlockMatchingFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">BandMathImageFilter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="o">&gt;</span> <span class="n">BandMathFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SubPixelDisparityImageFilter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">NCCBlockMatchingFunctorType</span><span class="o">&gt;</span>
+      <span class="n">NCCSubPixelDisparityFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">DisparityMapMedianFilter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="o">&gt;</span> <span class="n">MedianFilterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">DisparityMapToDEMFilter</span><span class="o">&lt;</span><span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="p">,</span> <span class="n">FloatVectorImageType</span><span class="p">,</span> <span class="n">FloatImageType</span><span class="o">&gt;</span> <span class="n">DisparityToElevationFilterType</span><span class="p">;</span>
+
+  <span class="kt">double</span> <span class="n">avgElevation</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="n">otb</span><span class="o">::</span><span class="n">DEMHandler</span><span class="o">::</span><span class="n">Instance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetDefaultHeightAboveEllipsoid</span><span class="p">(</span><span class="n">avgElevation</span><span class="p">);</span>
+
+  <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">leftReader</span>  <span class="o">=</span> <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rightReader</span> <span class="o">=</span> <span class="n">ImageReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">leftReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">rightReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="c1">// The image pair is supposed to be in sensor geometry. From two images covering</span>
+  <span class="c1">// nearly the same area, one can estimate a common epipolar geometry. In this geometry,</span>
+  <span class="c1">// an altitude variation corresponds to an horizontal shift between the two images.</span>
+  <span class="c1">// The filter \doxygen{otb}{StereorectificationDisplacementFieldSource} computes the</span>
+  <span class="c1">// deformation grids for each image.</span>
+  <span class="c1">//</span>
+  <span class="c1">// These grids are sampled in epipolar geometry. They have two bands, containing</span>
+  <span class="c1">// the position offset (in physical space units) between the current epipolar</span>
+  <span class="c1">// point and the corresponding sensor point in horizontal and vertical</span>
+  <span class="c1">// direction. They can be computed at a lower resolution than sensor</span>
+  <span class="c1">// resolution. The application \code{StereoRectificationGridGenerator} also</span>
+  <span class="c1">// provides a simple tool to generate the epipolar grids for your image pair.</span>
+
+  <span class="n">DisplacementFieldSourceType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_DisplacementFieldSource</span> <span class="o">=</span> <span class="n">DisplacementFieldSourceType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">SetLeftImage</span><span class="p">(</span><span class="n">leftReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">SetRightImage</span><span class="p">(</span><span class="n">rightReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">SetGridStep</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">SetScale</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+  <span class="c1">// m_DisplacementFieldSource-&gt;SetAverageElevation(avgElevation);</span>
+
+  <span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Then, the sensor images can be resampled in epipolar geometry, using the</span>
+  <span class="c1">// \doxygen{otb}{StreamingWarpImageFilter}. The application</span>
+  <span class="c1">// \code{GridBasedImageResampling} also gives an easy access to this filter. The user</span>
+  <span class="c1">// can choose the epipolar region to resample, as well as the resampling step</span>
+  <span class="c1">// and the interpolator.</span>
+  <span class="c1">//</span>
+  <span class="c1">// Note that the epipolar image size can be retrieved from the stereo rectification grid</span>
+  <span class="c1">// filter.</span>
+
+  <span class="n">FloatImageType</span><span class="o">::</span><span class="n">SpacingType</span> <span class="n">epipolarSpacing</span><span class="p">;</span>
+  <span class="n">epipolarSpacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+  <span class="n">epipolarSpacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+
+  <span class="n">FloatImageType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">epipolarSize</span><span class="p">;</span>
+  <span class="n">epipolarSize</span> <span class="o">=</span> <span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">GetRectifiedImageSize</span><span class="p">();</span>
+
+  <span class="n">FloatImageType</span><span class="o">::</span><span class="n">PointType</span> <span class="n">epipolarOrigin</span><span class="p">;</span>
+  <span class="n">epipolarOrigin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="n">epipolarOrigin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+  <span class="n">FloatImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">defaultValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="c1">// The deformation grids are casted into deformation fields, then the left</span>
+  <span class="c1">// and right sensor images are resampled.</span>
+
+  <span class="n">DisplacementFieldCastFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_LeftDisplacementFieldCaster</span> <span class="o">=</span> <span class="n">DisplacementFieldCastFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_LeftDisplacementFieldCaster</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">GetLeftDisplacementFieldOutput</span><span class="p">());</span>
+  <span class="n">m_LeftDisplacementFieldCaster</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+
+  <span class="n">BCOInterpolationType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">leftInterpolator</span> <span class="o">=</span> <span class="n">BCOInterpolationType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">leftInterpolator</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="n">WarpFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_LeftWarpImageFilter</span> <span class="o">=</span> <span class="n">WarpFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">leftReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetDisplacementField</span><span class="p">(</span><span class="n">m_LeftDisplacementFieldCaster</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetInterpolator</span><span class="p">(</span><span class="n">leftInterpolator</span><span class="p">);</span>
+  <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetOutputSize</span><span class="p">(</span><span class="n">epipolarSize</span><span class="p">);</span>
+  <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetOutputSpacing</span><span class="p">(</span><span class="n">epipolarSpacing</span><span class="p">);</span>
+  <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetOutputOrigin</span><span class="p">(</span><span class="n">epipolarOrigin</span><span class="p">);</span>
+  <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetEdgePaddingValue</span><span class="p">(</span><span class="n">defaultValue</span><span class="p">);</span>
+
+  <span class="n">DisplacementFieldCastFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_RightDisplacementFieldCaster</span> <span class="o">=</span> <span class="n">DisplacementFieldCastFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_RightDisplacementFieldCaster</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">GetRightDisplacementFieldOutput</span><span class="p">());</span>
+  <span class="n">m_RightDisplacementFieldCaster</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+
+  <span class="n">BCOInterpolationType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rightInterpolator</span> <span class="o">=</span> <span class="n">BCOInterpolationType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rightInterpolator</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="n">WarpFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_RightWarpImageFilter</span> <span class="o">=</span> <span class="n">WarpFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rightReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetDisplacementField</span><span class="p">(</span><span class="n">m_RightDisplacementFieldCaster</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetInterpolator</span><span class="p">(</span><span class="n">rightInterpolator</span><span class="p">);</span>
+  <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetOutputSize</span><span class="p">(</span><span class="n">epipolarSize</span><span class="p">);</span>
+  <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetOutputSpacing</span><span class="p">(</span><span class="n">epipolarSpacing</span><span class="p">);</span>
+  <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetOutputOrigin</span><span class="p">(</span><span class="n">epipolarOrigin</span><span class="p">);</span>
+  <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">SetEdgePaddingValue</span><span class="p">(</span><span class="n">defaultValue</span><span class="p">);</span>
+
+  <span class="c1">// Since the resampling produces black regions around the image, it is useless</span>
+  <span class="c1">// to estimate disparities on these \textit{no-data} regions. We use a \doxygen{otb}{BandMathImageFilter}</span>
+  <span class="c1">// to produce a mask on left and right epipolar images.</span>
+
+  <span class="n">BandMathFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_LBandMathFilter</span> <span class="o">=</span> <span class="n">BandMathFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_LBandMathFilter</span><span class="o">-&gt;</span><span class="n">SetNthInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="s">&quot;inleft&quot;</span><span class="p">);</span>
+<span class="cp">#ifdef OTB_MUPARSER_HAS_CXX_LOGICAL_OPERATORS</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">leftExpr</span> <span class="o">=</span> <span class="s">&quot;inleft != 0 ? 255 : 0&quot;</span><span class="p">;</span>
+<span class="cp">#else</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">leftExpr</span>  <span class="o">=</span> <span class="s">&quot;if(inleft != 0,255,0)&quot;</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+  <span class="n">m_LBandMathFilter</span><span class="o">-&gt;</span><span class="n">SetExpression</span><span class="p">(</span><span class="n">leftExpr</span><span class="p">);</span>
+
+  <span class="n">BandMathFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_RBandMathFilter</span> <span class="o">=</span> <span class="n">BandMathFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_RBandMathFilter</span><span class="o">-&gt;</span><span class="n">SetNthInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="s">&quot;inright&quot;</span><span class="p">);</span>
+
+<span class="cp">#ifdef OTB_MUPARSER_HAS_CXX_LOGICAL_OPERATORS</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">rightExpr</span> <span class="o">=</span> <span class="s">&quot;inright != 0 ? 255 : 0&quot;</span><span class="p">;</span>
+<span class="cp">#else</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">rightExpr</span> <span class="o">=</span> <span class="s">&quot;if(inright != 0,255,0)&quot;</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+  <span class="n">m_RBandMathFilter</span><span class="o">-&gt;</span><span class="n">SetExpression</span><span class="p">(</span><span class="n">rightExpr</span><span class="p">);</span>
+
+  <span class="c1">// Once the two sensor images have been resampled in epipolar geometry, the</span>
+  <span class="c1">// disparity map can be computed. The approach presented here is a 2D matching</span>
+  <span class="c1">// based on a pixel-wise metric optimization. This approach doesn&#39;t give the best</span>
+  <span class="c1">// results compared to global optimization methods, but it is suitable for</span>
+  <span class="c1">// streaming and threading on large images.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The major filter used for this step is \doxygen{otb}{PixelWiseBlockMatchingImageFilter}.</span>
+  <span class="c1">// The metric is computed on a window centered around the tested epipolar position.</span>
+  <span class="c1">// It performs a pixel-to-pixel matching between the two epipolar images. The output disparities</span>
+  <span class="c1">// are given as index offset from left to right position. The following features are available</span>
+  <span class="c1">// in this filter:</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item Available metrics : SSD, NCC and $L^{p}$ pseudo norm (computed on a square window)</span>
+  <span class="c1">// \item Rectangular disparity exploration area.</span>
+  <span class="c1">// \item Input masks for left and right images (optional).</span>
+  <span class="c1">// \item Output metric values (optional).</span>
+  <span class="c1">// \item Possibility to use input disparity estimate (as a uniform value or a full map) and an</span>
+  <span class="c1">// exploration radius around these values to reduce the size of the exploration area (optional).</span>
+  <span class="c1">// \end{itemize}</span>
+
+  <span class="n">NCCBlockMatchingFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_NCCBlockMatcher</span> <span class="o">=</span> <span class="n">NCCBlockMatchingFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetLeftInput</span><span class="p">(</span><span class="n">m_LeftWarpImageFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetRightInput</span><span class="p">(</span><span class="n">m_RightWarpImageFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetMinimumHorizontalDisparity</span><span class="p">(</span><span class="o">-</span><span class="mi">24</span><span class="p">);</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetMaximumHorizontalDisparity</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetMinimumVerticalDisparity</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetMaximumVerticalDisparity</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">MinimizeOff</span><span class="p">();</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetLeftMaskInput</span><span class="p">(</span><span class="n">m_LBandMathFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_NCCBlockMatcher</span><span class="o">-&gt;</span><span class="n">SetRightMaskInput</span><span class="p">(</span><span class="n">m_RBandMathFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// Some other filters have been added to enhance these \textit{pixel-to-pixel} disparities. The filter</span>
+  <span class="c1">// \doxygen{otb}{SubPixelDisparityImageFilter} can estimate the disparities with sub-pixel</span>
+  <span class="c1">// precision. Several interpolation methods can be used : parabolic fit, triangular fit, and</span>
+  <span class="c1">// dichotomy search.</span>
+
+  <span class="n">NCCSubPixelDisparityFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_NCCSubPixFilter</span> <span class="o">=</span> <span class="n">NCCSubPixelDisparityFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_NCCSubPixFilter</span><span class="o">-&gt;</span><span class="n">SetInputsFromBlockMatchingFilter</span><span class="p">(</span><span class="n">m_NCCBlockMatcher</span><span class="p">);</span>
+  <span class="n">m_NCCSubPixFilter</span><span class="o">-&gt;</span><span class="n">SetRefineMethod</span><span class="p">(</span><span class="n">NCCSubPixelDisparityFilterType</span><span class="o">::</span><span class="n">DICHOTOMY</span><span class="p">);</span>
+
+  <span class="c1">// The filter \doxygen{otb}{DisparityMapMedianFilter} can be used to remove outliers. It has two</span>
+  <span class="c1">// parameters:</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item The radius of the local neighborhood to compute the median</span>
+  <span class="c1">// \item An incoherence threshold to reject disparities whose distance from the local median</span>
+  <span class="c1">// is superior to the threshold.</span>
+  <span class="c1">// \end{itemize}</span>
+
+  <span class="n">MedianFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_HMedianFilter</span> <span class="o">=</span> <span class="n">MedianFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_HMedianFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_NCCSubPixFilter</span><span class="o">-&gt;</span><span class="n">GetHorizontalDisparityOutput</span><span class="p">());</span>
+  <span class="n">m_HMedianFilter</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">m_HMedianFilter</span><span class="o">-&gt;</span><span class="n">SetIncoherenceThreshold</span><span class="p">(</span><span class="mf">2.0</span><span class="p">);</span>
+  <span class="n">m_HMedianFilter</span><span class="o">-&gt;</span><span class="n">SetMaskInput</span><span class="p">(</span><span class="n">m_LBandMathFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">MedianFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_VMedianFilter</span> <span class="o">=</span> <span class="n">MedianFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_VMedianFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_NCCSubPixFilter</span><span class="o">-&gt;</span><span class="n">GetVerticalDisparityOutput</span><span class="p">());</span>
+  <span class="n">m_VMedianFilter</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">m_VMedianFilter</span><span class="o">-&gt;</span><span class="n">SetIncoherenceThreshold</span><span class="p">(</span><span class="mf">2.0</span><span class="p">);</span>
+  <span class="n">m_VMedianFilter</span><span class="o">-&gt;</span><span class="n">SetMaskInput</span><span class="p">(</span><span class="n">m_LBandMathFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// The application \code{PixelWiseBlockMatching} contains all these filters and</span>
+  <span class="c1">// provides a single interface to compute your disparity maps.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The disparity map obtained with the previous step usually gives a good idea of</span>
+  <span class="c1">// the altitude profile. However, it is more useful to study altitude with a DEM (Digital</span>
+  <span class="c1">// Elevation Model) representation.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The filter \doxygen{otb}{DisparityMapToDEMFilter} performs this last step. The behavior</span>
+  <span class="c1">// of this filter is to :</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item Compute the DEM extent from the left sensor image envelope (spacing is set by the user)</span>
+  <span class="c1">// \item Compute the left and right rays corresponding to each valid disparity</span>
+  <span class="c1">// \item Compute the intersection with the \textit{mid-point} method</span>
+  <span class="c1">// \item If the 3D point falls inside a DEM cell and has a greater elevation than the</span>
+  <span class="c1">// current height, the cell height is updated</span>
+  <span class="c1">// \end{itemize}</span>
+  <span class="c1">// The rule of keeping the highest elevation makes sense for buildings seen from the side</span>
+  <span class="c1">// because the roof edges elevation has to be kept. However this rule is not suited for</span>
+  <span class="c1">// noisy disparities.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The application \code{DisparityMapToElevationMap} also gives an example of use.</span>
+
+  <span class="n">DisparityToElevationFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_DispToElev</span> <span class="o">=</span> <span class="n">DisparityToElevationFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetHorizontalDisparityMapInput</span><span class="p">(</span><span class="n">m_HMedianFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetVerticalDisparityMapInput</span><span class="p">(</span><span class="n">m_VMedianFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetLeftInput</span><span class="p">(</span><span class="n">leftReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetRightInput</span><span class="p">(</span><span class="n">rightReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetLeftEpipolarGridInput</span><span class="p">(</span><span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">GetLeftDisplacementFieldOutput</span><span class="p">());</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetRightEpipolarGridInput</span><span class="p">(</span><span class="n">m_DisplacementFieldSource</span><span class="o">-&gt;</span><span class="n">GetRightDisplacementFieldOutput</span><span class="p">());</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetElevationMin</span><span class="p">(</span><span class="n">avgElevation</span> <span class="o">-</span> <span class="mf">10.0</span><span class="p">);</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetElevationMax</span><span class="p">(</span><span class="n">avgElevation</span> <span class="o">+</span> <span class="mf">80.0</span><span class="p">);</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetDEMGridStep</span><span class="p">(</span><span class="mf">2.5</span><span class="p">);</span>
+  <span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">SetDisparityMaskInput</span><span class="p">(</span><span class="n">m_LBandMathFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// m_DispToElev-&gt;SetAverageElevation(avgElevation);</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_DEMWriter</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_DEMWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_DEMWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">m_DEMWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">fieldRescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_DispToElev</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">OutputWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">fieldWriter</span> <span class="o">=</span> <span class="n">OutputWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">fieldWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">fieldWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="n">fieldWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:STEREORECONSTRUCTIONOUTPUT} shows the result of applying</span>
+  <span class="c1">// terrain reconstruction based using pixel-wise block matching, sub-pixel</span>
+  <span class="c1">// interpolation and DEM estimation using a pair of Pleiades images over the</span>
+  <span class="c1">// \textit{Stadium} in Toulouse, France.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.4\textwidth]{elevationOutputPrintable.eps}</span>
+  <span class="c1">// \itkcaption[From stereo pair to elevation]{DEM image estimated from the disparity.}</span>
+  <span class="c1">// \label{fig:STEREORECONSTRUCTIONOUTPUT}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="NCCRegistrationFilterExample.html" class="btn btn-neutral float-right" title="NCCRegistrationFilterExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../DisparityMap.html" class="btn btn-neutral" title="DisparityMap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FineRegistrationImageFilterExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Hyperspectral" href="../Hyperspectral.html" />
+    <link rel="prev" title="NCCRegistrationFilterExample.cxx" href="NCCRegistrationFilterExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="StereoReconstructionExample.html">StereoReconstructionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NCCRegistrationFilterExample.html">NCCRegistrationFilterExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">FineRegistrationImageFilterExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../DisparityMap.html">DisparityMap</a> &raquo;</li>
+        
+      <li>FineRegistrationImageFilterExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/DisparityMap/FineRegistrationImageFilterExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fineregistrationimagefilterexample-cxx">
+<span id="example-fineregistrationimagefilterexample"></span><h1>FineRegistrationImageFilterExample.cxx<a class="headerlink" href="#fineregistrationimagefilterexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./FineRegistrationImageFilterExample Input/StereoFixed.png <span class="se">\</span>
+                                     Input/StereoMoving.png <span class="se">\</span>
+                                     Output/fcDisplacementFieldOutput-horizontal.png <span class="se">\</span>
+                                     Output/fcDisplacementFieldOutput-vertical.png <span class="se">\</span>
+                                     Output/fcCorrelFieldOutput.png <span class="se">\</span>
+                                     Output/fcDResampledOutput2.png <span class="se">\</span>
+                                     <span class="m">1</span>.0 <span class="se">\</span>
+                                     <span class="m">5</span> <span class="se">\</span>
+                                     <span class="m">3</span> <span class="se">\</span>
+                                     <span class="m">0</span>.1
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/FineRegistrationImageFilterExample.cxx?inline=false">FineRegistrationImageFilterExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example demonstrates the use of the \doxygen{otb}{FineRegistrationImageFilter}. This filter performs deformation estimation</span>
+<span class="c1">// using the classical extrema of image-to-image metric look-up in a search window.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step toward the use of these filters is to include the proper header files.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRecursiveGaussianImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkWarpImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkMeanReciprocalSquareDifferenceImageToImageMetric.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbFineRegistrationImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageOfVectorsToMonoChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkCastImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">11</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; fixedFileName movingFileName fieldOutNameHorizontal fieldOutNameVertical fieldMetric warped &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;smoothingSigma metricRadius explorationRadius subpixelPrecision&quot;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">ImageDimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>                              <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">ImageDimension</span><span class="o">&gt;</span> <span class="n">DisplacementPixelType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                               <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">ImageDimension</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="c1">// Several type of \doxygen{otb}{Image} are required to represent the input image, the metric field,</span>
+  <span class="c1">// and the deformation field.</span>
+
+  <span class="c1">// Allocate Images</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">ImageDimension</span><span class="o">&gt;</span>             <span class="n">InputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">ImageDimension</span><span class="o">&gt;</span>             <span class="n">MetricImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">DisplacementPixelType</span><span class="p">,</span> <span class="n">ImageDimension</span><span class="o">&gt;</span> <span class="n">DisplacementFieldType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">InputReaderType</span><span class="p">;</span>
+  <span class="n">InputReaderType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">fReader</span> <span class="o">=</span> <span class="n">InputReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">fReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="n">InputReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">mReader</span> <span class="o">=</span> <span class="n">InputReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">mReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="c1">// To make the metric estimation more robust, the first</span>
+  <span class="c1">// required step is to blur the input images. This is done using the</span>
+  <span class="c1">// \doxygen{itk}{RecursiveGaussianImageFilter}:</span>
+
+  <span class="c1">// Blur input images</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RecursiveGaussianImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">InputBlurType</span><span class="p">;</span>
+
+  <span class="n">InputBlurType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">fBlur</span> <span class="o">=</span> <span class="n">InputBlurType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">fBlur</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">fReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">fBlur</span><span class="o">-&gt;</span><span class="n">SetSigma</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+
+  <span class="n">InputBlurType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">mBlur</span> <span class="o">=</span> <span class="n">InputBlurType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">mBlur</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">mReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">mBlur</span><span class="o">-&gt;</span><span class="n">SetSigma</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+
+  <span class="c1">// Now, we declare and instantiate the \doxygen{otb}{FineRegistrationImageFilter} which is going to perform the registration:</span>
+
+  <span class="c1">// Create the filter</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">FineRegistrationImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">MetricImageType</span><span class="p">,</span> <span class="n">DisplacementFieldType</span><span class="o">&gt;</span> <span class="n">RegistrationFilterType</span><span class="p">;</span>
+
+  <span class="n">RegistrationFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">registrator</span> <span class="o">=</span> <span class="n">RegistrationFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">SetMovingInput</span><span class="p">(</span><span class="n">mBlur</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">SetFixedInput</span><span class="p">(</span><span class="n">fBlur</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// Some parameters need to be specified to the filter:</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item The area where the search is performed. This area is defined by its radius:</span>
+
+  <span class="k">typedef</span> <span class="n">RegistrationFilterType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">RadiusType</span><span class="p">;</span>
+
+  <span class="n">RadiusType</span> <span class="n">searchRadius</span><span class="p">;</span>
+
+  <span class="n">searchRadius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+  <span class="n">searchRadius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+
+  <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">SetSearchRadius</span><span class="p">(</span><span class="n">searchRadius</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exploration radius &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">GetSearchRadius</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// \item The window used to compute the local metric. This window is also defined by its radius:</span>
+
+  <span class="n">RadiusType</span> <span class="n">metricRadius</span><span class="p">;</span>
+  <span class="n">metricRadius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+  <span class="n">metricRadius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+
+  <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="n">metricRadius</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Metric radius &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">GetRadius</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// We need to set the sub-pixel accuracy we want to obtain:</span>
+  <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">SetConvergenceAccuracy</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]));</span>
+
+  <span class="c1">// The default matching metric used by the \doxygen{otb}{FineRegistrationImageFilter} is standard correlation.</span>
+  <span class="c1">// However, we may also use any other image-to-image metric provided by ITK. For instance, here is how we</span>
+  <span class="c1">// would use the \doxygen{itk}{MutualInformationImageToImageMetric} (do not forget to include the proper header).</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&gt;</span> <span class="mi">11</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">MeanReciprocalSquareDifferenceImageToImageMetric</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">MRSDMetricType</span><span class="p">;</span>
+    <span class="n">MRSDMetricType</span><span class="o">::</span><span class="n">Pointer</span>                                                                       <span class="n">mrsdMetric</span> <span class="o">=</span> <span class="n">MRSDMetricType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">SetMetric</span><span class="p">(</span><span class="n">mrsdMetric</span><span class="p">);</span>
+
+    <span class="c1">// The \doxygen{itk}{MutualInformationImageToImageMetric} produces low value for poor matches, therefore, the filter has</span>
+    <span class="c1">// to maximize the metric :</span>
+
+    <span class="n">registrator</span><span class="o">-&gt;</span><span class="n">MinimizeOff</span><span class="p">();</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// \end{itemize}</span>
+  <span class="c1">// The execution of the \doxygen{otb}{FineRegistrationImageFilter} will be triggered by</span>
+  <span class="c1">// the \code{Update()} call on the writer at the end of the</span>
+  <span class="c1">// pipeline. Make sure to use a</span>
+  <span class="c1">// \doxygen{otb}{ImageFileWriter} if you want to benefit</span>
+  <span class="c1">// from the streaming features.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageOfVectorsToMonoChannelExtractROI</span><span class="o">&lt;</span><span class="n">DisplacementFieldType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">ChannelExtractionFilterType</span><span class="p">;</span>
+  <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                      <span class="n">channelExtractor</span> <span class="o">=</span> <span class="n">ChannelExtractionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">channelExtractor</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">registrator</span><span class="o">-&gt;</span><span class="n">GetOutputDisplacementField</span><span class="p">());</span>
+  <span class="n">channelExtractor</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>                                                     <span class="n">fieldRescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">channelExtractor</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">DFWriterType</span><span class="p">;</span>
+
+  <span class="n">DFWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">dfWriter</span> <span class="o">=</span> <span class="n">DFWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">dfWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">dfWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">fieldRescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">dfWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">channelExtractor</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">dfWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="n">dfWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">WarpImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="p">,</span> <span class="n">DisplacementFieldType</span><span class="o">&gt;</span> <span class="n">WarperType</span><span class="p">;</span>
+  <span class="n">WarperType</span><span class="o">::</span><span class="n">Pointer</span>                                                                 <span class="n">warper</span> <span class="o">=</span> <span class="n">WarperType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">InputImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">padValue</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">;</span>
+
+  <span class="n">warper</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">mReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">warper</span><span class="o">-&gt;</span><span class="n">SetDisplacementField</span><span class="p">(</span><span class="n">registrator</span><span class="o">-&gt;</span><span class="n">GetOutputDisplacementField</span><span class="p">());</span>
+  <span class="n">warper</span><span class="o">-&gt;</span><span class="n">SetEdgePaddingValue</span><span class="p">(</span><span class="n">padValue</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">MetricImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">MetricRescalerType</span><span class="p">;</span>
+
+  <span class="n">MetricRescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">metricRescaler</span> <span class="o">=</span> <span class="n">MetricRescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">metricRescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">registrator</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">metricRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">metricRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer1</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer1</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">metricRescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer1</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="n">writer1</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">CastImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">CastFilterType</span><span class="p">;</span>
+  <span class="n">CastFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                       <span class="n">caster</span> <span class="o">=</span> <span class="n">CastFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">caster</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">warper</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer2</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">caster</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:FineCorrelationImageFilterOUTPUT} shows the result of</span>
+  <span class="c1">// applying the \doxygen{otb}{FineRegistrationImageFilter}.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{StereoFixed.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{StereoMoving.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{fcCorrelFieldOutput.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{fcMRSDCorrelFieldOutput.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{fcDResampledOutput2.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{fcMRSDDResampledOutput2.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{fcDisplacementFieldOutput-horizontal.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{fcMRSDDisplacementFieldOutput-horizontal.eps}</span>
+  <span class="c1">// \itkcaption[Displacement field and resampling from fine registration]{From left</span>
+  <span class="c1">// to right and top to bottom: fixed input image, moving image with a low stereo angle,</span>
+  <span class="c1">// local correlation field, local mean reciprocal square difference field,</span>
+  <span class="c1">// resampled image based on correlation, resampled image based on mean reciprocal square difference,</span>
+  <span class="c1">//  estimated epipolar deformation using on correlation,</span>
+  <span class="c1">// estimated epipolar deformation using mean reciprocal square difference.</span>
+  <span class="c1">// }</span>
+  <span class="c1">// \label{fig:FineCorrelationImageFilterOUTPUT}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Hyperspectral.html" class="btn btn-neutral float-right" title="Hyperspectral" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="NCCRegistrationFilterExample.html" class="btn btn-neutral" title="NCCRegistrationFilterExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

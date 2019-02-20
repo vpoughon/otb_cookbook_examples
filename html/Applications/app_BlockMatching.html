@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BlockMatching &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DisparityMapToElevationMap" href="app_DisparityMapToElevationMap.html" />
+    <link rel="prev" title="Stereo" href="Stereo.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Stereo.html">Stereo</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">BlockMatching</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_DisparityMapToElevationMap.html">DisparityMapToElevationMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_StereoRectificationGridGenerator.html">StereoRectificationGridGenerator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Stereo.html">Stereo</a> &raquo;</li>
+        
+      <li>BlockMatching</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_BlockMatching.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="blockmatching">
+<span id="app-blockmatching"></span><h1>BlockMatching<a class="headerlink" href="#blockmatching" title="Permalink to this headline">¶</a></h1>
+<p>Performs block-matching to estimate pixel-wise disparities between two images.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application allows one to performs block-matching to estimate pixel-wise disparities for a pair of images in epipolar geometry.</p>
+<p>This application is part of the stereovision pipeline. It can be used after having computed epipolar grids (with <a class="reference internal" href="app_StereoRectificationGridGenerator.html#app-stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a>) and resampled each input image into epipolar geometry (with <a class="reference internal" href="app_GridBasedImageResampling.html#app-gridbasedimageresampling"><span class="std std-ref">GridBasedImageResampling</span></a>).</p>
+<p>The application searches locally for the displacement between a reference image and a secondary image. The correspondence is evaluated for each pixel, based on a pair of local neighborhood windows. The displacement evaluated can be 1D (along lines) or 2D. Parameters allow setting the minimum and maximum disparities to search (both for horizontal and vertical directions). A winner-take-all approach is used to select the best match. There are different metrics implemented to evaluate the match between two local windows:</p>
+<ul class="simple">
+<li>SSD: Sum of Squared Distances</li>
+<li>NCC: Normalized Cross-Correlation</li>
+<li>Lp: Lp pseudo norm</li>
+</ul>
+<p>Once the best integer disparity is found, an optional step of sub-pixel disparity estimation can be performed, with various algorithms (triangular interpolation, parabollic interpolation, dichotimic search). As post-processing, there is an optional step of median filtering on the disparities. One can chose input masks (related to the left and right input image) of pixels for which the disparity should be investigated. Additionally, two criteria can be optionally used to disable disparity investigation for some pixel: a no-data value, and a threshold on the local variance. This allows one to speed-up computation by avoiding to investigate disparities that will not be reliable anyway. For efficiency reasons, if the image of optimal metric values is desired, it will be concatenated to the output image (which will then have three bands: horizontal disparity, vertical disparity and metric value). One can split these images afterward.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#input-and-output-data" id="id1">Input and output data</a></li>
+<li><a class="reference internal" href="#image-masking-parameters" id="id2">Image masking parameters</a></li>
+<li><a class="reference internal" href="#block-matching-parameters" id="id3">Block matching parameters</a></li>
+<li><a class="reference internal" href="#lp-pseudo-norm-options" id="id4">Lp pseudo-norm options</a></li>
+<li><a class="reference internal" href="#median-filtering-of-disparity-map" id="id5">Median filtering of disparity map</a></li>
+<li><a class="reference internal" href="#uniform-initial-disparity-options" id="id6">Uniform initial disparity options</a></li>
+<li><a class="reference internal" href="#initial-disparity-maps-options" id="id7">Initial disparity maps options</a></li>
+</ul>
+</div>
+<div class="section" id="input-and-output-data">
+<h3><a class="toc-backref" href="#id1">Input and output data</a><a class="headerlink" href="#input-and-output-data" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows setting the input and output images.</p>
+<p><strong>Left input image</strong> <code class="code docutils literal notranslate"><span class="pre">-io.inleft</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The left input image (reference).
+It should have the same size and same physical space as the right input. This image can be generated by GridBasedImageResampling</p>
+<p><strong>Right input image</strong> <code class="code docutils literal notranslate"><span class="pre">-io.inright</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The right input (secondary).
+It should have the same size and same physical space as the left input. This image can be generated by GridBasedImageResampling</p>
+<p><strong>The output disparity map</strong> <code class="code docutils literal notranslate"><span class="pre">-io.out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+An image containing the estimated disparities as well as the metric values if the option is used. If no metric is output and no sub-pixel interpolation is done, pixel type canbe a signed integer. In the other cases, floating point pixel is advised.</p>
+<p><strong>The output mask corresponding to all criterions</strong> <code class="code docutils literal notranslate"><span class="pre">-io.outmask</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <br />
+An output mask image corresponding to all citerions (see masking parameters). Only required if variance threshold or nodata criterions are set. Output pixel type is unsigned 8bit by default.</p>
+<p><strong>Flag to output optimal metric values as well</strong> <code class="code docutils literal notranslate"><span class="pre">-io.outmetric</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+If enabled, the output image will have a third component with metric optimal values</p>
+</div>
+<div class="section" id="image-masking-parameters">
+<h3><a class="toc-backref" href="#id2">Image masking parameters</a><a class="headerlink" href="#image-masking-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows determining the masking parameters to prevent disparities estimation for some pixels of the left image</p>
+<p><strong>Mask to discard left pixels</strong> <code class="code docutils literal notranslate"><span class="pre">-mask.inleft</span> <span class="pre">image</span></code> <br />
+This parameter allows providing a custom mask for the left image. Block matching will be only perform on pixels inside the mask (non-zero values).</p>
+<p><strong>Mask to discard right pixels</strong> <code class="code docutils literal notranslate"><span class="pre">-mask.inright</span> <span class="pre">image</span></code> <br />
+This parameter allows providing a custom mask for the right image. Block matching will be perform only on pixels inside the mask (non-zero values).</p>
+<p><strong>Discard pixels with no-data value</strong> <code class="code docutils literal notranslate"><span class="pre">-mask.nodata</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+This parameter allows discarding pixels whose value is equal to the user-defined no-data value.</p>
+<p><strong>Discard pixels with low local variance</strong> <code class="code docutils literal notranslate"><span class="pre">-mask.variancet</span> <span class="pre">float</span></code> <em>Default value: 100</em> <br />
+This parameter allows discarding pixels whose local variance is too small (the size of the neighborhood is given by the radius parameter)</p>
+</div>
+<div class="section" id="block-matching-parameters">
+<h3><a class="toc-backref" href="#id3">Block matching parameters</a><a class="headerlink" href="#block-matching-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allow tuning the block-matching behaviour</p>
+<p><strong>Block-matching metric</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.metric</span> <span class="pre">[ssd|ncc|lp]</span></code> <em>Default value: ssd</em> <br />
+Metric to evaluate matching between two local windows.</p>
+<ul class="simple">
+<li><strong>Sum of Squared Distances</strong> <br /> Sum of squared distances between pixels value in the metric window</li>
+<li><strong>Normalized Cross-Correlation</strong> <br /> Normalized Cross-Correlation between the left and right windows</li>
+<li><strong>Lp pseudo-norm</strong> <br /> Lp pseudo-norm between the left and right windows.</li>
+</ul>
+</div>
+<div class="section" id="lp-pseudo-norm-options">
+<h3><a class="toc-backref" href="#id4">Lp pseudo-norm options</a><a class="headerlink" href="#lp-pseudo-norm-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>p value</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.metric.lp.p</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Value of the p parameter in Lp pseudo-norm (must be positive).</p>
+<hr class="docutils" />
+<p><strong>Radius of blocks</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.radius</span> <span class="pre">int</span></code> <em>Default value: 3</em> <br />
+The radius (in pixels) of blocks in Block-Matching</p>
+<p><strong>Minimum horizontal disparity</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.minhd</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+Minimum horizontal disparity to explore (can be negative)</p>
+<p><strong>Maximum horizontal disparity</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.maxhd</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+Maximum horizontal disparity to explore (can be negative)</p>
+<p><strong>Minimum vertical disparity</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.minvd</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+Minimum vertical disparity to explore (can be negative)</p>
+<p><strong>Maximum vertical disparity</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.maxvd</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+Maximum vertical disparity to explore (can be negative)</p>
+<p><strong>Sub-pixel interpolation</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.subpixel</span> <span class="pre">[none|parabolic|triangular|dichotomy]</span></code> <em>Default value: none</em> <br />
+Estimate disparities with sub-pixel precision</p>
+<ul class="simple">
+<li><strong>None</strong> <br /> No sub-pixel search</li>
+<li><strong>Parabolic fit</strong> <br /> The metric values closest to the best match are used in order to fit a parabola to the local extremum of the metric surface. The peak position of this parabola is output.</li>
+<li><strong>Triangular fit</strong> <br /> The metric values closest to the best match are used in order to fit a triangular peak to the local extremum of the metric surface. The peak position of this triangle is output.</li>
+<li><strong>Dichotomy search</strong> <br /> An iterative dichotomic search is performed to find the best sub-pixel position. The window in the right image is resampled at sub-pixel positions to estimate the match.</li>
+</ul>
+<p><strong>Computation step</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.step</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Location step between computed disparities. Disparities will be computed every ‘step’ pixels in the left image (step for both rows and columns). For instance, a value of 1 corresponds to the classic dense disparity map.</p>
+<p><strong>X start index</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.startx</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+X start index of the subsampled grid (wrt the input image grid). See parameter bm.step</p>
+<p><strong>Y start index</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.starty</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Y start index of the subsampled grid (wrt the input image grid). See parameter bm.step</p>
+</div>
+<div class="section" id="median-filtering-of-disparity-map">
+<h3><a class="toc-backref" href="#id5">Median filtering of disparity map</a><a class="headerlink" href="#median-filtering-of-disparity-map" title="Permalink to this headline">¶</a></h3>
+<p>Use a median filter to get a smooth disparity map</p>
+<p><strong>Radius</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.medianfilter.radius</span> <span class="pre">int</span></code> <br />
+Radius (in pixels) for median filter</p>
+<p><strong>Incoherence threshold</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.medianfilter.incoherence</span> <span class="pre">float</span></code> <br />
+Incoherence threshold between original and filtered disparity</p>
+<hr class="docutils" />
+<p><strong>Initial disparities</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp</span> <span class="pre">[none|uniform|maps]</span></code> <em>Default value: none</em> <br /></p>
+<ul class="simple">
+<li><strong>None</strong> <br /> No initial disparity used</li>
+<li><strong>Uniform initial disparity</strong> <br /> Use an uniform initial disparity estimate</li>
+<li><strong>Initial disparity maps</strong> <br /> Use initial disparity maps to define the exploration area. This area in the right image is centered on the current position shifted by the initial disparity estimate, and has a given exploration radius in horizontal and vertical directions.</li>
+</ul>
+</div>
+<div class="section" id="uniform-initial-disparity-options">
+<h3><a class="toc-backref" href="#id6">Uniform initial disparity options</a><a class="headerlink" href="#uniform-initial-disparity-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Horizontal initial disparity</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.uniform.hdisp</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Value of the uniform horizontal disparity initial estimate (in pixels)</p>
+<p><strong>Vertical initial disparity</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.uniform.vdisp</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Value of the uniform vertical disparity initial estimate (in pixels)</p>
+<p><strong>Horizontal exploration radius</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.uniform.hrad</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Horizontal exploration radius around the initial disparity estimate (in pixels)</p>
+<p><strong>Vertical exploration radius</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.uniform.vrad</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Vertical exploration radius around the initial disparity estimate (in pixels)</p>
+</div>
+<div class="section" id="initial-disparity-maps-options">
+<h3><a class="toc-backref" href="#id7">Initial disparity maps options</a><a class="headerlink" href="#initial-disparity-maps-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Horizontal initial disparity map</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.maps.hmap</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+Map of the initial horizontal disparities</p>
+<p><strong>Vertical initial disparity map</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.maps.vmap</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+Map of the initial vertical disparities</p>
+<p><strong>Horizontal exploration radius</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.maps.hrad</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Horizontal exploration radius around the initial disparity estimate (in pixels)</p>
+<p><strong>Vertical exploration radius</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.initdisp.maps.vrad</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Vertical exploration radius around the initial disparity estimate (in pixels)</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_BlockMatching -io.inleft StereoFixed.png -io.inright StereoMoving.png -bm.minhd -10 -bm.maxhd <span class="m">10</span> -mask.variancet <span class="m">10</span> -io.out MyDisparity.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;BlockMatching&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.inleft&quot;</span><span class="p">,</span> <span class="s2">&quot;StereoFixed.png&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.inright&quot;</span><span class="p">,</span> <span class="s2">&quot;StereoMoving.png&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;bm.minhd&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;bm.maxhd&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;mask.variancet&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.out&quot;</span><span class="p">,</span> <span class="s2">&quot;MyDisparity.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">[1] <a class="reference internal" href="app_StereoRectificationGridGenerator.html#app-stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a></div>
+<div class="line">[2] <a class="reference internal" href="app_GridBasedImageResampling.html#app-gridbasedimageresampling"><span class="std std-ref">GridBasedImageResampling</span></a></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_DisparityMapToElevationMap.html" class="btn btn-neutral float-right" title="DisparityMapToElevationMap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Stereo.html" class="btn btn-neutral" title="Stereo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

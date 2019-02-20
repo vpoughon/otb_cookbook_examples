@@ -1,0 +1,107 @@
+.. _app-VectorClassifier:
+
+VectorClassifier
+================
+
+
+Performs a classification of the input vector data according to a model file.
+
+Description
+-----------
+
+This application performs a vector data classification based on a model file produced by the :ref:`app-TrainVectorClassifier` application.Features of the vector data output will contain the class labels decided by the classifier (maximal class label = 65535). 
+There are two modes: 
+1) Update mode: add of the 'cfield' field containing the predicted class in the input file. 
+2) Write mode: copies the existing fields of the input file in the output file  and add the 'cfield' field containing the predicted class. 
+If you have declared the output file, the write mode applies. Otherwise, the input file update mode will be applied.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Name of the input vector data** :code:`-in vectorfile` *Mandatory* |br|
+The input vector data file to classify.
+
+**Statistics file** :code:`-instat filename [dtype]` |br|
+A XML file containing mean and standard deviation to centerand reduce samples before classification, produced by ComputeImagesStatistics application.
+
+**Model file** :code:`-model filename [dtype]` *Mandatory* |br|
+Model file produced by TrainVectorClassifier application.
+
+**Field class** :code:`-cfield string` *Default value: predicted* |br|
+Field containing the predicted class.Only geometries with this field available will be taken into account.
+The field is added either in the input file (if 'out' off) or in the output file.
+Caution, the 'cfield' must not exist in the input file if you are updating the file.
+
+**Field names to be calculated** :code:`-feat string1 string2...` |br|
+List of field names in the input vector data used as features for training. Put the same field names as the TrainVectorClassifier application.
+
+**Confidence map** :code:`-confmap bool` *Default value: false* |br|
+Confidence map of the produced classification. The confidence index depends on the model: 
+
+* LibSVM: difference between the two highest probabilities (needs a model with probability estimates, so that classes probabilities can be computed for each sample)
+* Boost: sum of votes
+* DecisionTree: (not supported)
+* KNearestNeighbors: number of neighbors with the same label
+* NeuralNetwork: difference between the two highest responses
+* NormalBayes: (not supported)
+* RandomForest: Confidence (proportion of votes for the majority class). Margin (normalized difference of the votes of the 2 majority classes) is not available for now.
+* SVM: distance to margin (only works for 2-class models)
+
+
+**Output vector data file containing class labels** :code:`-out filename [dtype]` |br|
+Output vector data file storing sample values (OGR format).If not given, the input vector data file is updated.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_VectorClassifier -in vectorData.shp -instat meanVar.xml -model svmModel.svm -out vectorDataLabeledVector.shp -feat perimeter  area  width -cfield predicted
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("VectorClassifier")
+
+	app.SetParameterString("in", "vectorData.shp")
+	app.SetParameterString("instat", "meanVar.xml")
+	app.SetParameterString("model", "svmModel.svm")
+	app.SetParameterString("out", "vectorDataLabeledVector.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Shapefiles are supported. But the SQLite format is only supported in update mode.
+
+See also
+--------
+
+| :ref:`app-TrainVectorClassifier`

@@ -1,0 +1,200 @@
+.. _app-ReadImageInfo:
+
+ReadImageInfo
+=============
+
+
+Get information about the image
+
+Description
+-----------
+
+Display information about the input image like: image size, origin, spacing, metadata, projections...
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image to analyse
+
+**Display the OSSIM keywordlist** :code:`-keywordlist bool` *Default value: false* |br|
+Output the OSSIM keyword list. It contains metadata information (sensor model, geometry ). Information is stored in keyword list (pairs of key/value)
+
+**Write the OSSIM keywordlist to a geom file** :code:`-outkwl filename [dtype]` |br|
+This option allows extracting the OSSIM keywordlist of the image into a geom file.
+
+**Start index X** :code:`-indexx int` *Mandatory* |br|
+X start index
+
+**Start index Y** :code:`-indexy int` *Mandatory* |br|
+Y start index
+
+**Size X** :code:`-sizex int` *Mandatory* |br|
+X size (in pixels)
+
+**Size Y** :code:`-sizey int` *Mandatory* |br|
+Y size (in pixels)
+
+**Pixel Size X** :code:`-spacingx float` *Mandatory* |br|
+Pixel size along X (in physical units)
+
+**Pixel Size Y** :code:`-spacingy float` *Mandatory* |br|
+Pixel size along Y (in physical units)
+
+**Image Origin X** :code:`-originx float` *Mandatory* |br|
+Origin along X
+
+**Image Origin Y** :code:`-originy float` *Mandatory* |br|
+Origin along Y
+
+**Estimated ground spacing X** :code:`-estimatedgroundspacingx float` *Mandatory* |br|
+Estimated ground spacing along X (in meters).
+
+**Estimated ground spacing Y** :code:`-estimatedgroundspacingy float` *Mandatory* |br|
+Estimated ground spacing along Y (in meters).
+
+**Number Of Bands** :code:`-numberbands int` *Mandatory* |br|
+Number of bands
+
+**Data type** :code:`-datatype string` *Mandatory* |br|
+Data type
+
+**Sensor id** :code:`-sensor string` *Mandatory* |br|
+Sensor identifier
+
+**Image id** :code:`-id string` *Mandatory* |br|
+Image identifier
+
+**Acquisition time** :code:`-time string` *Mandatory* |br|
+Acquisition time.
+
+**Upper left latitude** :code:`-ullat float` *Default value: 0* |br|
+Latitude of the upper left corner.
+
+**Upper left longitude** :code:`-ullon float` *Default value: 0* |br|
+Longitude of the upper left corner.
+
+**Upper right latitude** :code:`-urlat float` *Default value: 0* |br|
+Latitude of the upper right corner.
+
+**Upper right longitude** :code:`-urlon float` *Default value: 0* |br|
+Longitude of the upper right corner.
+
+**Lower right latitude** :code:`-lrlat float` *Default value: 0* |br|
+Latitude of the lower right corner.
+
+**Lower right longitude** :code:`-lrlon float` *Default value: 0* |br|
+Longitude of the lower right corner.
+
+**Lower left latitude** :code:`-lllat float` *Default value: 0* |br|
+Latitude of the lower left corner.
+
+**Lower left longitude** :code:`-lllon float` *Default value: 0* |br|
+Longitude of the lower left corner.
+
+**Nearest town** :code:`-town string` *Mandatory* |br|
+Main town near center of image
+
+**Country** :code:`-country string` *Mandatory* |br|
+Country of the image
+
+Default RGB Display
+^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters provide information about the default rgb composition.
+
+**Red Band** :code:`-rgb.r int` *Default value: 1* |br|
+Red band Number
+
+**Green Band** :code:`-rgb.g int` *Default value: 2* |br|
+Green band Number
+
+**Blue Band** :code:`-rgb.b int` *Default value: 3* |br|
+Blue band Number
+
+
+
+------------
+
+**Projection** :code:`-projectionref string` *Mandatory* |br|
+Projection Coordinate System
+
+**Keywordlist** :code:`-keyword string` *Mandatory* |br|
+Image keyword list
+
+Ground Control Points information
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters provide information about all GCPs.
+
+**GCPs Number** :code:`-gcp.count int` *Default value: 0* |br|
+Number of GCPs
+
+**GCP Projection** :code:`-gcp.proj string` *Mandatory* |br|
+Projection Coordinate System for GCPs
+
+**GCPs Id** :code:`-gcp.ids string1 string2...` *Mandatory* |br|
+GCPs identifier
+
+**GCPs Info** :code:`-gcp.info string1 string2...` *Mandatory* |br|
+GCPs Information
+
+**GCPs Image Coordinates** :code:`-gcp.imcoord string1 string2...` *Mandatory* |br|
+GCPs Image coordinates
+
+**GCPs Geographic Coordinates** :code:`-gcp.geocoord string1 string2...` *Mandatory* |br|
+GCPs Geographic Coordinates
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ReadImageInfo -in QB_Toulouse_Ortho_XS.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ReadImageInfo")
+
+	app.SetParameterString("in", "QB_Toulouse_Ortho_XS.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

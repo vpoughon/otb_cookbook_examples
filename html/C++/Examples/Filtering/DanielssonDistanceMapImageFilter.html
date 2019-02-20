@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DanielssonDistanceMapImageFilter.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="CompositeFilterExample.cxx" href="CompositeFilterExample.html" />
+    <link rel="prev" title="Filtering" href="../Filtering.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Filtering.html">Filtering</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">DanielssonDistanceMapImageFilter.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CompositeFilterExample.html">CompositeFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SecondDerivativeRecursiveGaussianImageFilter.html">SecondDerivativeRecursiveGaussianImageFilter.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Filtering.html">Filtering</a> &raquo;</li>
+        
+      <li>DanielssonDistanceMapImageFilter.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Filtering/DanielssonDistanceMapImageFilter.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="danielssondistancemapimagefilter-cxx">
+<span id="example-danielssondistancemapimagefilter"></span><h1>DanielssonDistanceMapImageFilter.cxx<a class="headerlink" href="#danielssondistancemapimagefilter-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./DanielssonDistanceMapImageFilter Input/FivePoints.png Output/DanielssonDistanceMapImageFilterOutput1.png Output/DanielssonDistanceMapImageFilterOutput2.png
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/DanielssonDistanceMapImageFilter.cxx?inline=false">DanielssonDistanceMapImageFilter.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the use of the</span>
+<span class="c1">// \doxygen{itk}{DanielssonDistanceMapImageFilter}.  This filter generates a</span>
+<span class="c1">// distance map from the input image using the algorithm developed by</span>
+<span class="c1">// Danielsson \cite{Danielsson1980}. As secondary outputs, a Voronoi</span>
+<span class="c1">// partition of the input elements is produced, as well as a vector image</span>
+<span class="c1">// with the components of the distance vector to the closest point. The input</span>
+<span class="c1">// to the map is assumed to be a set of points on the input image. Each</span>
+<span class="c1">// point/pixel is considered to be a separate entity even if they share the</span>
+<span class="c1">// same gray level value.</span>
+<span class="c1">//</span>
+<span class="c1">// \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!Instantiation}</span>
+<span class="c1">// \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!Header}</span>
+<span class="c1">//</span>
+<span class="c1">// The first step required to use this filter is to include its header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkConnectedComponentImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkDanielssonDistanceMapImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImageFile outputDistanceMapImageFile &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; outputVoronoiMapImageFilter &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  Then we must decide what pixel types to use for the input and output</span>
+  <span class="c1">//  images. Since the output will contain distances measured in pixels, the</span>
+  <span class="c1">//  pixel type should be able to represent at least the width of the image,</span>
+  <span class="c1">//  or said in $N-D$ terms, the maximum extension along all the dimensions.</span>
+  <span class="c1">//  The input and output image types are now defined using their respective</span>
+  <span class="c1">//  pixel type and dimension.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                  <span class="n">InputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span>                 <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>  <span class="n">InputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="c1">//  The filter type can be instantiated using the input and output image</span>
+  <span class="c1">//  types defined above. A filter object is created with the \code{New()}</span>
+  <span class="c1">//  method.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!instantiation}</span>
+  <span class="c1">//  \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!New()}</span>
+  <span class="c1">//  \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!Pointer}</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ConnectedComponentImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">ConnectedType</span><span class="p">;</span>
+  <span class="n">ConnectedType</span><span class="o">::</span><span class="n">Pointer</span>                                                     <span class="n">connectedComponents</span> <span class="o">=</span> <span class="n">ConnectedType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">DanielssonDistanceMapImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
+  <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                             <span class="n">filter</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>                                                      <span class="n">scaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">//</span>
+  <span class="c1">// Reader and Writer types are instantiated.</span>
+  <span class="c1">//</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span>  <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="c1">//  The input to the filter is taken from a reader and its output is passed</span>
+  <span class="c1">//  to a \doxygen{itk}{RescaleIntensityImageFilter} and then to a writer.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!SetInput()}</span>
+  <span class="c1">//  \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!GetOutput()}</span>
+
+  <span class="n">connectedComponents</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">connectedComponents</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">scaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">scaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">scaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">65535L</span><span class="p">);</span>
+  <span class="n">scaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0L</span><span class="p">);</span>
+
+  <span class="c1">//  The type of input image has to be specified. In this case, a binary</span>
+  <span class="c1">//  image is selected.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{itk::Danielsson\-Distance\-MapImage\-Filter!InputIsBinaryOn()}</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">InputIsBinaryOff</span><span class="p">();</span>
+
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{FivePoints.eps}</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{DanielssonDistanceMapImageFilterOutput1.eps}</span>
+  <span class="c1">// \includegraphics[width=0.32\textwidth]{DanielssonDistanceMapImageFilterOutput2.eps}</span>
+  <span class="c1">// \itkcaption[DanielssonDistanceMapImageFilter</span>
+  <span class="c1">// output]{DanielssonDistanceMapImageFilter output. Set of pixels, distance</span>
+  <span class="c1">// map and Voronoi partition.}</span>
+  <span class="c1">// \label{fig:DanielssonDistanceMapImageFilterInputOutput}</span>
+  <span class="c1">// \end{figure}</span>
+  <span class="c1">//</span>
+  <span class="c1">//  Figure \ref{fig:DanielssonDistanceMapImageFilterInputOutput} illustrates</span>
+  <span class="c1">//  the effect of this filter on a binary image with a set of points. The</span>
+  <span class="c1">//  input image is shown at left, the distance map at the center and the</span>
+  <span class="c1">//  Voronoi partition at right. This filter computes distance maps in</span>
+  <span class="c1">//  N-dimensions and is therefore capable of producing $N-D$ Voronoi</span>
+  <span class="c1">//  partitions.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{Voronoi partitions}</span>
+  <span class="c1">//  \index{Voronoi partitions!itk::Danielsson\-Distance\-Map\-Image\-Filter}</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">voronoiMapFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+  <span class="c1">//  The Voronoi map is obtained with the \code{GetVoronoiMap()} method. In</span>
+  <span class="c1">//  the lines below we connect this output to the intensity rescaler and</span>
+  <span class="c1">//  save the result in a file.</span>
+  <span class="c1">//</span>
+  <span class="c1">//  \index{itk::Danielsson\-Distance\-Map\-Image\-Filter!GetVoronoiMap()}</span>
+
+  <span class="n">scaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetVoronoiMap</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">voronoiMapFileName</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">//  Execution of the writer is triggered by the invocation of the</span>
+  <span class="c1">//  \code{Update()} method. Since this method can potentially throw</span>
+  <span class="c1">//  exceptions it must be placed in a \code{try/catch} block.</span>
+
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CompositeFilterExample.html" class="btn btn-neutral float-right" title="CompositeFilterExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Filtering.html" class="btn btn-neutral" title="Filtering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+.. _app-VectorDataDSValidation:
+
+VectorDataDSValidation
+======================
+
+
+Vector data validation based on the fusion of features using Dempster-Shafer evidence theory framework.
+
+Description
+-----------
+
+This application validates or unvalidate the studied samples using the Dempster-Shafer theory.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Vector Data** :code:`-in vectorfile` *Mandatory* |br|
+Input vector data to validate
+
+**Descriptors model filename** :code:`-descmod filename [dtype]` *Mandatory* |br|
+Fuzzy descriptors model (xml file)
+
+**Belief Support** :code:`-belsup string1 string2...` *Mandatory* |br|
+Dempster Shafer study hypothesis to compute belief
+
+**Plausibility Support** :code:`-plasup string1 string2...` *Mandatory* |br|
+Dempster Shafer study hypothesis to compute plausibility
+
+**Output Vector Data** :code:`-out vectorfile` *Mandatory* |br|
+Output VectorData containing only the validated samples
+
+**Criterion** :code:`-cri string` *Default value: ((Belief + Plausibility)/2.)* |br|
+Dempster Shafer criterion (by default (belief+plausibility)/2)
+
+**Criterion threshold** :code:`-thd float` *Default value: 0.5* |br|
+Criterion threshold (default 0.5)
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_VectorDataDSValidation -in cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_gt.shp -belsup cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_gt.shp -descmod DSFuzzyModel.xml -out VectorDataDSValidation.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("VectorDataDSValidation")
+
+	app.SetParameterString("in", "cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_gt.shp")
+	app.SetParameterStringList("belsup", ['cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_gt.shp'])
+	app.SetParameterString("descmod", "DSFuzzyModel.xml")
+	app.SetParameterString("out", "VectorDataDSValidation.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+None.
+
+See also
+--------
+
+| http://en.wikipedia.org/wiki/Dempster-Shafer_theory

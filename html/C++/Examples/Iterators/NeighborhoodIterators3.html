@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NeighborhoodIterators3.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ImageLinearIteratorWithIndex.cxx" href="ImageLinearIteratorWithIndex.html" />
+    <link rel="prev" title="ImageRegionIteratorWithIndex.cxx" href="ImageRegionIteratorWithIndex.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Iterators.html">Iterators</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators1.html">ShapedNeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRegionIterator.html">ImageRegionIterator.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators4.html">NeighborhoodIterators4.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageLinearIteratorWithIndex2.html">ImageLinearIteratorWithIndex2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators2.html">ShapedNeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators1.html">NeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRandomConstIteratorWithIndex.html">ImageRandomConstIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators5.html">NeighborhoodIterators5.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRegionIteratorWithIndex.html">ImageRegionIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">NeighborhoodIterators3.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageLinearIteratorWithIndex.html">ImageLinearIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators2.html">NeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageSliceIteratorWithIndex.html">ImageSliceIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IteratorsExamples.html">IteratorsExamples.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators6.html">NeighborhoodIterators6.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Iterators.html">Iterators</a> &raquo;</li>
+        
+      <li>NeighborhoodIterators3.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Iterators/NeighborhoodIterators3.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="neighborhooditerators3-cxx">
+<span id="example-neighborhooditerators3"></span><h1>NeighborhoodIterators3.cxx<a class="headerlink" href="#neighborhooditerators3-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators3.cxx?inline=false">NeighborhoodIterators3.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkConstNeighborhoodIterator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkImageRegionIterator.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// This example illustrates a technique for improving the efficiency of</span>
+<span class="c1">// neighborhood calculations by eliminating unnecessary bounds checking. As</span>
+<span class="c1">// described in Section~\ref{sec:NeighborhoodIterators}, the neighborhood</span>
+<span class="c1">// iterator automatically enables or disables bounds checking based on the</span>
+<span class="c1">// iteration region in which it is initialized. By splitting our image into</span>
+<span class="c1">// boundary and non-boundary regions, and then processing each region using a</span>
+<span class="c1">// different neighborhood iterator, the algorithm will only perform</span>
+<span class="c1">// bounds-checking on those pixels for which it is actually required.  This</span>
+<span class="c1">// trick can provide a significant speedup for simple algorithms such as our</span>
+<span class="c1">// Sobel edge detection, where iteration speed is a critical.</span>
+<span class="c1">//</span>
+<span class="c1">// Splitting the image into the necessary regions is an easy task when you use</span>
+<span class="c1">// the \doxygen{itk}{ImageBoundaryFacesCalculator}.  The face</span>
+<span class="c1">// calculator is so named because it returns a list of the ``faces&#39;&#39; of the ND</span>
+<span class="c1">// dataset.  Faces are those regions whose pixels all lie within a distance $d$</span>
+<span class="c1">// from the boundary, where $d$ is the radius of the neighborhood stencil used</span>
+<span class="c1">// for the numerical calculations. In other words, faces are those regions</span>
+<span class="c1">// where a neighborhood iterator of radius $d$ will always overlap the boundary</span>
+<span class="c1">// of the image. The face calculator also returns the single \emph{inner}</span>
+<span class="c1">// region, in which out-of-bounds values are never required and bounds checking</span>
+<span class="c1">// is not necessary.</span>
+<span class="c1">//</span>
+<span class="c1">// The face calculator object is defined in \code{itkNeighborhoodAlgorithm.h}.</span>
+<span class="c1">// We include this file in addition to those from the previous two examples.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkSobelOperator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkNeighborhoodInnerProduct.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkNeighborhoodAlgorithm.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing parameters. &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImageFile outputImageFile direction&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">typedef</span> <span class="kt">float</span>                           <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>        <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ConstNeighborhoodIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">NeighborhoodIteratorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>       <span class="n">IteratorType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">output</span> <span class="o">=</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">SobelOperator</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">sobelOperator</span><span class="p">;</span>
+  <span class="n">sobelOperator</span><span class="p">.</span><span class="n">SetDirection</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]));</span>
+  <span class="n">sobelOperator</span><span class="p">.</span><span class="n">CreateDirectional</span><span class="p">();</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">NeighborhoodInnerProduct</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">innerProduct</span><span class="p">;</span>
+
+  <span class="c1">// First we load the input image and create the output image and inner product</span>
+  <span class="c1">// function as in the previous examples.  The image iterators will be created</span>
+  <span class="c1">// in a later step.  Next we create a face calculator object.  An empty list is</span>
+  <span class="c1">// created to hold the regions that will later on be returned by the face</span>
+  <span class="c1">// calculator.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">NeighborhoodAlgorithm</span> <span class="o">::</span><span class="n">ImageBoundaryFacesCalculator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">FaceCalculatorType</span><span class="p">;</span>
+
+  <span class="n">FaceCalculatorType</span>               <span class="n">faceCalculator</span><span class="p">;</span>
+  <span class="n">FaceCalculatorType</span><span class="o">::</span><span class="n">FaceListType</span> <span class="n">faceList</span><span class="p">;</span>
+
+  <span class="c1">// The face calculator function is invoked by passing it an image pointer, an</span>
+  <span class="c1">// image region, and a neighborhood radius.  The image pointer is the same</span>
+  <span class="c1">// image used to initialize the neighborhood iterator, and the image region is</span>
+  <span class="c1">// the region that the algorithm is going to process.  The radius is the radius</span>
+  <span class="c1">// of the iterator.</span>
+  <span class="c1">//</span>
+  <span class="c1">// Notice that in this case the image region is given as the region of the</span>
+  <span class="c1">// \emph{output} image and the image pointer is given as that of the</span>
+  <span class="c1">// \emph{input} image.  This is important if the input and output images differ</span>
+  <span class="c1">// in size, i.e. the input image is larger than the output image.  ITK</span>
+  <span class="c1">// and OTB image</span>
+  <span class="c1">// filters, for example, operate on data from the input image but only generate</span>
+  <span class="c1">// results in the \code{RequestedRegion} of the output image, which may be</span>
+  <span class="c1">// smaller than the full extent of the input.</span>
+
+  <span class="n">faceList</span> <span class="o">=</span> <span class="n">faceCalculator</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">(),</span> <span class="n">sobelOperator</span><span class="p">.</span><span class="n">GetRadius</span><span class="p">());</span>
+
+  <span class="c1">// The face calculator has returned a list of $2N+1$ regions. The first element</span>
+  <span class="c1">// in the list is always the inner region, which may or may not be important</span>
+  <span class="c1">// depending on the application.  For our purposes it does not matter because</span>
+  <span class="c1">// all regions are processed the same way.  We use an iterator to traverse the</span>
+  <span class="c1">// list of faces.</span>
+
+  <span class="n">FaceCalculatorType</span><span class="o">::</span><span class="n">FaceListType</span><span class="o">::</span><span class="n">iterator</span> <span class="n">fit</span><span class="p">;</span>
+
+  <span class="c1">// We now rewrite the main loop of the previous example so that each region in the</span>
+  <span class="c1">// list is processed by a separate iterator.  The iterators \code{it} and</span>
+  <span class="c1">// \code{out} are reinitialized over each region in turn.  Bounds checking is</span>
+  <span class="c1">// automatically enabled for those regions that require it, and disabled for</span>
+  <span class="c1">// the region that does not.</span>
+
+  <span class="n">IteratorType</span>             <span class="n">out</span><span class="p">;</span>
+  <span class="n">NeighborhoodIteratorType</span> <span class="n">it</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">fit</span> <span class="o">=</span> <span class="n">faceList</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">fit</span> <span class="o">!=</span> <span class="n">faceList</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">fit</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">it</span>  <span class="o">=</span> <span class="n">NeighborhoodIteratorType</span><span class="p">(</span><span class="n">sobelOperator</span><span class="p">.</span><span class="n">GetRadius</span><span class="p">(),</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="o">*</span><span class="n">fit</span><span class="p">);</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">IteratorType</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="o">*</span><span class="n">fit</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">(),</span> <span class="n">out</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span> <span class="o">!</span><span class="n">it</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">,</span> <span class="o">++</span><span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">innerProduct</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">sobelOperator</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The output is written as before.  Results for this example are the same as</span>
+  <span class="c1">// the previous example.  You may not notice the speedup except on larger</span>
+  <span class="c1">// images.  When moving to 3D and higher dimensions, the effects are greater</span>
+  <span class="c1">// because the volume to surface area ratio is usually larger.  In other</span>
+  <span class="c1">// words, as the number of interior pixels increases relative to the number of</span>
+  <span class="c1">// face pixels, there is a corresponding increase in efficiency from disabling</span>
+  <span class="c1">// bounds checking on interior pixels.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                        <span class="n">WritePixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">WritePixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>        <span class="n">WriteImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">WriteImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">WriteImageType</span><span class="o">&gt;</span> <span class="n">RescaleFilterType</span><span class="p">;</span>
+
+  <span class="n">RescaleFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescaleFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ImageLinearIteratorWithIndex.html" class="btn btn-neutral float-right" title="ImageLinearIteratorWithIndex.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ImageRegionIteratorWithIndex.html" class="btn btn-neutral" title="ImageRegionIteratorWithIndex.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

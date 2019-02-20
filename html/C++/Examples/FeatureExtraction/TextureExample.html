@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TextureExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ExtractRoadByStepsExample.cxx" href="ExtractRoadByStepsExample.html" />
+    <link rel="prev" title="CloudDetectionExample.cxx" href="CloudDetectionExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="CloudDetectionExample.html">CloudDetectionExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">TextureExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadByStepsExample.html">ExtractRoadByStepsExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThresholdToPointSetExample.html">ThresholdToPointSetExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentPathExample.html">ComplexMomentPathExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EdgeDensityExample.html">EdgeDensityExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlusserMomentsImageFunctionExample.html">FlusserMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HuMomentsImageFunctionExample.html">HuMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RightAngleDetectionExample.html">RightAngleDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RatioLineDetectorExample.html">RatioLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AsymmetricFusionOfLineDetectorExample.html">AsymmetricFusionOfLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingExample.html">SeamCarvingExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentsImageFunctionExample.html">ComplexMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadExample.html">ExtractRoadExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TouziEdgeDetectorExample.html">TouziEdgeDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LineSegmentDetectorExample.html">LineSegmentDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ParallelLineDetectionExample.html">ParallelLineDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CorrelationLineDetectorExample.html">CorrelationLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PanTexExample.html">PanTexExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingOtherExample.html">SeamCarvingOtherExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SURFExample.html">SURFExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SFSExample.html">SFSExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarrisExample.html">HarrisExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../FeatureExtraction.html">FeatureExtraction</a> &raquo;</li>
+        
+      <li>TextureExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/FeatureExtraction/TextureExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="textureexample-cxx">
+<span id="example-textureexample"></span><h1>TextureExample.cxx<a class="headerlink" href="#textureexample-cxx" title="Permalink to this headline">¶</a></h1>
+<div class="figure" id="id2">
+<img alt="../../../_images/pretty_TextureOutput.png" src="../../../_images/pretty_TextureOutput.png" />
+<p class="caption"><span class="caption-text">Result of applying the ScalarImageToTexturesFilter to an image (contrast).</span></p>
+</div>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./TextureExample Input/ADS40RoiSmall.png Output/TextureOutput.tif Output/pretty_TextureOutput.png <span class="m">2</span> <span class="m">1</span> <span class="m">1</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/TextureExample.cxx?inline=false">TextureExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// Pretty RGB output</span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageToVectorImageCastFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbScalarImageToTexturesFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">// Parse command line parameters</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;inputImage&gt; &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;outputImage&gt; &lt;outputRescaled&gt; &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;radius&gt; &lt;xOffset&gt; &lt;yOffset&gt; &quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">infname</span>        <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outfname</span>       <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outprettyfname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">radius</span>  <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]));</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">xOffset</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">yOffset</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>                           <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">int</span>                                <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="c1">// After defining the types for the pixels and the images used in the</span>
+  <span class="c1">// example, we define the types for the textures filter. It is</span>
+  <span class="c1">// templated by the input and output image types.</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ScalarImageToTexturesFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">TexturesFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>                        <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>                        <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">infname</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outfname</span><span class="p">);</span>
+
+  <span class="c1">// We can now instantiate the filters.</span>
+  <span class="n">TexturesFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">texturesFilter</span> <span class="o">=</span> <span class="n">TexturesFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// The texture filters takes at least 2 parameters: the radius of the</span>
+  <span class="c1">// neighborhood on which the texture will be computed and the offset</span>
+  <span class="c1">// used. Texture features are bivariate statistics, that is, they are</span>
+  <span class="c1">// computed using pair of pixels. Each texture feature is defined for</span>
+  <span class="c1">// an offset defining the pixel pair.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The radius parameter can be passed to the filter as a scalar</span>
+  <span class="c1">// parameter if the neighborhood is square, or as \code{SizeType} in</span>
+  <span class="c1">// any case.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The offset is always an array of N values, where N is the number of</span>
+  <span class="c1">// dimensions of the image.</span>
+
+  <span class="k">typedef</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">SizeType</span><span class="p">;</span>
+  <span class="n">SizeType</span>                    <span class="n">sradius</span><span class="p">;</span>
+  <span class="n">sradius</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="n">radius</span><span class="p">);</span>
+
+  <span class="n">texturesFilter</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">(</span><span class="n">sradius</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">OffsetType</span><span class="p">;</span>
+  <span class="n">OffsetType</span>                    <span class="n">offset</span><span class="p">;</span>
+  <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">xOffset</span><span class="p">;</span>
+  <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">yOffset</span><span class="p">;</span>
+
+  <span class="n">texturesFilter</span><span class="o">-&gt;</span><span class="n">SetOffset</span><span class="p">(</span><span class="n">offset</span><span class="p">);</span>
+
+  <span class="c1">// The textures filter will automatically derive the optimal</span>
+  <span class="c1">// bin size for co-occurences histogram, but they need to know</span>
+  <span class="c1">// the input image minimum and maximum. These values can be set</span>
+  <span class="c1">// like this :</span>
+
+  <span class="n">texturesFilter</span><span class="o">-&gt;</span><span class="n">SetInputImageMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">texturesFilter</span><span class="o">-&gt;</span><span class="n">SetInputImageMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="c1">// To tune co-occurence histogram resolution, you can use</span>
+  <span class="c1">// the SetNumberOfBinsPerAxis() method.</span>
+
+  <span class="c1">// We can now plug the pipeline.</span>
+  <span class="n">texturesFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">texturesFilter</span><span class="o">-&gt;</span><span class="n">GetInertiaOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Pretty image creation for printing</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                 <span class="n">VectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>          <span class="n">PrettyVectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">PrettyVectorImageType</span><span class="o">&gt;</span> <span class="n">WriterPrettyOutputType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToVectorImageCastFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span>                  <span class="n">VectorCastFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">PrettyVectorImageType</span><span class="o">&gt;</span> <span class="n">RescalerOutputType</span><span class="p">;</span>
+
+  <span class="n">RescalerOutputType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">outputRescaler</span>     <span class="o">=</span> <span class="n">RescalerOutputType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterPrettyOutputType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">prettyOutputWriter</span> <span class="o">=</span> <span class="n">WriterPrettyOutputType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VectorCastFilterType</span><span class="o">::</span><span class="n">Pointer</span>   <span class="n">vectorCastFilter</span>   <span class="o">=</span> <span class="n">VectorCastFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vectorCastFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">texturesFilter</span><span class="o">-&gt;</span><span class="n">GetInertiaOutput</span><span class="p">());</span>
+  <span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vectorCastFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">PrettyVectorImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">min</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">min</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">max</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">min</span><span class="p">);</span>
+  <span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">max</span><span class="p">);</span>
+
+  <span class="n">prettyOutputWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outprettyfname</span><span class="p">);</span>
+  <span class="n">prettyOutputWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">outputRescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">prettyOutputWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ExtractRoadByStepsExample.html" class="btn btn-neutral float-right" title="ExtractRoadByStepsExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CloudDetectionExample.html" class="btn btn-neutral" title="CloudDetectionExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

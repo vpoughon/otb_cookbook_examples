@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python bindings &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+        
+      <li>Python bindings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Installation_Macos.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>We provide for MacOS X through a standalone package. This package is a
+self-extractible archive, quite similar to the Linux one. You may
+uncompress it with the command line:</p>
+<pre class="literal-block">
+chmod +x OTB-6.7.0-Darwin64.run
+./OTB-6.7.0-Darwin64.run
+</pre>
+<p>Once the archive is extracted, you can see OTB-6.7.0-Darwin64 directory in
+the same direcrtory along with OTB-6.7.0-Darwin64.run</p>
+<p>Contents of OTB-6.7.0-Darwin64 is briefly listed below:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Monteverdi.app</span></code>: A Mac OSX .app for Monteverdi</li>
+<li><code class="docutils literal notranslate"><span class="pre">Mapla.app</span></code>: A Mac OSX .app for Mapla.</li>
+<li><code class="docutils literal notranslate"><span class="pre">bin</span></code>: A folder containing application launchers (otbcli.sh,
+otbgui.sh), monteverdi and mapla binaries.</li>
+<li><code class="docutils literal notranslate"><span class="pre">lib</span></code>: A folder containing all shared libraries and OTB
+applications.</li>
+<li><code class="docutils literal notranslate"><span class="pre">include</span></code>: A folder containing all the necessary headers to compile OTB
+based projects.</li>
+<li><code class="docutils literal notranslate"><span class="pre">share</span></code>: A folder containing common resources and copyright
+mentions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tool</span></code>: A folder containing useful scripts to test the installation or
+to uninstall OTB libraries and headers while keeping all the dependencies.</li>
+</ul>
+<p>The applications can be launched from the Mapla launcher. If you want to
+use the otbcli and otbgui launchers, you can initialize your environment
+with <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">otbenv.profile</span></code>.</p>
+<p>The package can be used to compile other projects using OTB (binaries, libraries
+and headers are included). If you want to build OTB from source using this
+package, you should first uninstall the specific OTB files from the package to
+leave only the dependencies (what we call an XDK). You can do it using the
+supplied script <code class="docutils literal notranslate"><span class="pre">tools/uninstall_otb.sh</span></code>.</p>
+<div class="section" id="python-bindings">
+<h1>Python bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h1>
+<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
+package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+Please note that using a different Python version may not be compatible with
+OTB wrappings. If no compatible Python 2.x version is found a
+notification is generated during the installation process.  If the installation completes
+without issue, information relating to your Python bindings will be provided.</p>
+<p>You must have Python numpy bindings installed in your system. They can be installed locally
+without admin rights as follows: “pip install –user numpy”. This is to give users the option
+to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
+<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
+If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
+</ul>
+<p>Notes:</p>
+<ul class="simple">
+<li>If you want to use the otbcli and otbgui launchers, you must access
+them via a terminal prompt.</li>
+<li>The OSX .app are provided for monteverdi (viewer) and mapla
+(application browser).</li>
+<li>You must use monteverdi and mapla through their .app files only.</li>
+<li>You are allowed to move these .app files and refrain from moving or
+deleting OTB-6.7.0-Darwin64 after extraction. In case you need to have OTB
+installed in some other directory. Extract the .run file there.</li>
+</ul>
+</div>
+<div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="q-i-am-getting-an-error-message">
+<h2>Q: I am getting an error message…<a class="headerlink" href="#q-i-am-getting-an-error-message" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcrun</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">active</span> <span class="n">developer</span> <span class="n">path</span>
+<span class="p">(</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="p">),</span> <span class="n">missing</span> <span class="n">xcrun</span> <span class="n">at</span><span class="p">:</span>
+<span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">xcrun</span>
+</pre></div>
+</div>
+<p>A: You can get this error at startup running Monteverdi.app or Mapla.app. The
+solution is to run in a terminal the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcode</span><span class="o">-</span><span class="n">select</span> <span class="o">--</span><span class="n">install</span>
+</pre></div>
+</div>
+<p>And then try to restart Monteverdi or Mapla.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

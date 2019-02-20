@@ -1,0 +1,12 @@
+DimensionReduction
+==================
+
+.. toctree::
+	:maxdepth: 3
+
+
+	DimensionReduction/PCAExample.rst
+	DimensionReduction/ICAExample.rst
+	DimensionReduction/NAPCAExample.rst
+	DimensionReduction/MNFExample.rst
+	DimensionReduction/MaximumAutocorrelationFactor.rst

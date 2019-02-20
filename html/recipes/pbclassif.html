@@ -1,0 +1,1167 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Classification &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Feature extraction" href="featextract.html" />
+    <link rel="prev" title="Enhance local contrast" href="contrast_enhancement.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#feature-classification-and-training">Feature classification and training</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#train-a-classifier-with-features">Train a classifier with features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#feature-classification">Feature classification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#validating-classification">Validating classification</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pixel-based-classification">Pixel based classification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#samples-statistics-estimation">Samples statistics estimation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-selection">Sample selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samples-extraction">Samples extraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#working-with-several-images">Working with several images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#images-statistics-estimation">Images statistics estimation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#training-the-model">Training the model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-classification-model">Using the classification model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#validating-the-classification-model">Validating the classification model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fancy-classification-results">Fancy classification results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#unsupervised-learning">Unsupervised learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fusion-of-classification-maps">Fusion of classification maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#majority-voting-for-the-fusion-of-classifications">Majority voting for the fusion of classifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dempster-shafer-framework-for-the-fusion-of-classifications">Dempster Shafer framework for the fusion of classifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recommendations-to-properly-use-the-fusion-of-classification-maps">Recommendations to properly use the fusion of classification maps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#majority-voting-based-classification-map-regularization">Majority voting based classification map regularization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#majority-voting-for-the-classification-map-regularization">Majority voting for the classification map regularization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#handling-ambiguity-and-not-classified-pixels-in-the-majority-voting-based-regularization">Handling ambiguity and not classified pixels in the majority voting based regularization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recommendations-to-properly-use-the-majority-voting-based-regularization">Recommendations to properly use the majority voting based regularization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#regression">Regression</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#statistics-estimation">Statistics estimation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#training">Training</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prediction">Prediction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>Classification</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/pbclassif.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="classification">
+<h1>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="feature-classification-and-training">
+<h2>Feature classification and training<a class="headerlink" href="#feature-classification-and-training" title="Permalink to this headline">¶</a></h2>
+<p>The Orfeo ToolBox provided applications to train a supervised
+or unsupervised classifier from different set of <em>features</em>
+and to use the generated classifier for vector data classification.
+Those <em>features</em> can be information extracted from images
+(see <a class="reference external" href="https://www.orfeo-toolbox.org/CookBook/recipes/featextract.html#feature-extraction">feature extraction</a> section)
+or it can be different types of <em>features</em> such as the perimeter, width,
+or area of a surface present in a vector data file in an ogr compatible
+format.</p>
+<div class="section" id="train-a-classifier-with-features">
+<h3>Train a classifier with features<a class="headerlink" href="#train-a-classifier-with-features" title="Permalink to this headline">¶</a></h3>
+<p>The <em>TrainVectorClassifier</em> application provide a way to train a classifier
+with an input set of labeled geometries and a list of <em>features</em> to consider
+for classification.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_TrainVectorClassifier</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">vd</span> <span class="n">samples</span><span class="o">.</span><span class="n">sqlite</span>
+                             <span class="o">-</span><span class="n">cfield</span> <span class="n">CODE</span>
+                             <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">model</span><span class="o">.</span><span class="n">rf</span>
+                             <span class="o">-</span><span class="n">classifier</span> <span class="n">rf</span>
+                             <span class="o">-</span><span class="n">feat</span> <span class="n">perimeter</span> <span class="n">area</span> <span class="n">width</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-classifier</span></code> parameter allows to choose which machine learning
+model algorithm to train. You have the possibility to do the unsupervised
+classification,for it, you must to choose the Shark kmeans classifier.
+Please refer to the <code class="docutils literal notranslate"><span class="pre">TrainVectorClassifier</span></code> application reference documentation.</p>
+<p>In case of multiple sample files, you can add them to the <code class="docutils literal notranslate"><span class="pre">-io.vd</span></code>
+parameter.</p>
+<p>The feature to be used for training must be explicitly listed using
+the <code class="docutils literal notranslate"><span class="pre">-feat</span></code> parameter. Order of the list matters.</p>
+<p>If you want to use a statistic file for features normalization, you
+can pass it using the <code class="docutils literal notranslate"><span class="pre">-io.stats</span></code> parameter. Make sure that the
+order of feature statistics in the statistics file matches the order
+of feature passed to the <code class="docutils literal notranslate"><span class="pre">-feat</span></code> option.</p>
+<p>The field in vector data allowing to specify the label of each sample
+can be set using the <code class="docutils literal notranslate"><span class="pre">-cfield</span></code> option.</p>
+<p>By default, the application will estimate the trained classifier
+performances on the same set of samples that has been used for
+training. The <code class="docutils literal notranslate"><span class="pre">-io.vd</span></code> parameter allows for the specification of different
+sample files for this purpose, for a more fair estimation of the
+performances. Note that this scheme to estimate the performance can also
+be carried out afterwards (see <a class="reference internal" href="#validating-the-classification-model">Validating the classification model</a>
+section).</p>
+</div>
+<div class="section" id="feature-classification">
+<h3>Feature classification<a class="headerlink" href="#feature-classification" title="Permalink to this headline">¶</a></h3>
+<p>Once the classifier has been trained, one can apply the model to
+classify a set of features on a new vector data file using the
+<em>VectorClassifier</em> application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_VectorClassifier</span> <span class="o">-</span><span class="ow">in</span>      <span class="n">vectorData</span><span class="o">.</span><span class="n">shp</span>
+                        <span class="o">-</span><span class="n">model</span>   <span class="n">model</span><span class="o">.</span><span class="n">rf</span>
+                        <span class="o">-</span><span class="n">feat</span>    <span class="n">perimeter</span> <span class="n">area</span> <span class="n">width</span>
+                        <span class="o">-</span><span class="n">cfield</span>  <span class="n">predicted</span>
+                        <span class="o">-</span><span class="n">out</span>     <span class="n">classifiedData</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+<p>This application outputs a vector data file storing sample values
+and classification labels. The output vector file is optional. If no output is
+given to the application, the input vector data classification label field is
+updated. If a statistics file was used to normalize the features during
+training, it shall also be used here, during classification.</p>
+<p>Note that with this application, the machine learning model may come from a
+training on image or vector data, it doesn’t matter. The only requirement is
+that the chosen features to use should be the same as the one used during
+training.</p>
+</div>
+<div class="section" id="validating-classification">
+<h3>Validating classification<a class="headerlink" href="#validating-classification" title="Permalink to this headline">¶</a></h3>
+<p>The performance of the model generated by the <em>TrainVectorClassifier</em>
+or <em>TrainImagesClassifier</em> applications is directly estimated by the
+application itself, which displays the precision, recall and F-score
+of each class, and can generate the global confusion matrix for
+supervised algorithms. For unsupervised algorithms a contingency table
+is generated. These results are output as an *.CSV file.</p>
+</div>
+</div>
+<div class="section" id="pixel-based-classification">
+<h2>Pixel based classification<a class="headerlink" href="#pixel-based-classification" title="Permalink to this headline">¶</a></h2>
+<p>Orfeo ToolBox ships with a set of application to perform supervised or
+unsupervised pixel-based image classification. This framework allows
+to learn from multiple images, and using several machine learning method
+such as SVM, Bayes, KNN, Random Forests, Artificial Neural Network, and
+others…(see application help of <code class="docutils literal notranslate"><span class="pre">TrainImagesClassifier</span></code> and
+<code class="docutils literal notranslate"><span class="pre">TrainVectorClassifier</span></code> for further details about all the available
+classifiers). Here is an overview of the complete workflow:</p>
+<ol class="arabic simple">
+<li>Compute samples statistics for each image</li>
+<li>Compute sampling rates for each image (only if more than one input image)</li>
+<li>Select samples positions for each image</li>
+<li>Extract samples measurements for each image</li>
+<li>Compute images statistics</li>
+<li>Train machine learning model from samples</li>
+</ol>
+<div class="section" id="samples-statistics-estimation">
+<h3>Samples statistics estimation<a class="headerlink" href="#samples-statistics-estimation" title="Permalink to this headline">¶</a></h3>
+<p>The first step of the framework is to know how many samples are
+available for each class in your image. The <code class="docutils literal notranslate"><span class="pre">PolygonClassStatistics</span></code>
+will do this job for you. This application processes a set of training
+geometries and an image and outputs statistics about available samples
+(i.e. pixel covered by the image and out of a no-data mask if
+provided), in the form of a XML file:</p>
+<ul class="simple">
+<li>number of samples per class</li>
+<li>number of samples per geometry</li>
+</ul>
+<p>Supported geometries are polygons, lines and points. Depending on the
+geometry type, this application behaves differently:</p>
+<ul class="simple">
+<li>polygon: select pixels whose center falls inside the polygon</li>
+<li>lines: select pixels intersecting the line</li>
+<li>points: select closest pixel to the provided point</li>
+</ul>
+<p>The application will require the input image, but it is only used to
+define the footprint in which samples will be selected. The user can
+also provide a raster mask, that will be used to discard pixel
+positions, using parameter <code class="docutils literal notranslate"><span class="pre">-mask</span></code>.</p>
+<p>A simple use of the application <code class="docutils literal notranslate"><span class="pre">PolygonClassStatistics</span></code> could be as
+follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_PolygonClassStatistics</span>  <span class="o">-</span><span class="ow">in</span>     <span class="n">LANDSAT_MultiTempIm_clip_GapF_20140309</span><span class="o">.</span><span class="n">tif</span>
+                               <span class="o">-</span><span class="n">vec</span>    <span class="n">training</span><span class="o">.</span><span class="n">shp</span>
+                               <span class="o">-</span><span class="n">field</span>  <span class="n">CODE</span>
+                               <span class="o">-</span><span class="n">out</span>    <span class="n">classes</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-field</span></code> parameter is the name of the field that corresponds to class
+labels in the input geometries.</p>
+<p>The output XML file will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;GeneralStatistics&gt;
+ &lt;Statistic name=&quot;samplesPerClass&quot;&gt;
+     &lt;StatisticMap key=&quot;11&quot; value=&quot;56774&quot; /&gt;
+     &lt;StatisticMap key=&quot;12&quot; value=&quot;59347&quot; /&gt;
+     &lt;StatisticMap key=&quot;211&quot; value=&quot;25317&quot; /&gt;
+     &lt;StatisticMap key=&quot;221&quot; value=&quot;2087&quot; /&gt;
+     &lt;StatisticMap key=&quot;222&quot; value=&quot;2080&quot; /&gt;
+     &lt;StatisticMap key=&quot;31&quot; value=&quot;8149&quot; /&gt;
+     &lt;StatisticMap key=&quot;32&quot; value=&quot;1029&quot; /&gt;
+     &lt;StatisticMap key=&quot;34&quot; value=&quot;3770&quot; /&gt;
+     &lt;StatisticMap key=&quot;36&quot; value=&quot;941&quot; /&gt;
+     &lt;StatisticMap key=&quot;41&quot; value=&quot;2630&quot; /&gt;
+     &lt;StatisticMap key=&quot;51&quot; value=&quot;11221&quot; /&gt;
+ &lt;/Statistic&gt;
+ &lt;Statistic name=&quot;samplesPerVector&quot;&gt;
+     &lt;StatisticMap key=&quot;0&quot; value=&quot;3&quot; /&gt;
+     &lt;StatisticMap key=&quot;1&quot; value=&quot;2&quot; /&gt;
+     &lt;StatisticMap key=&quot;10&quot; value=&quot;86&quot; /&gt;
+     &lt;StatisticMap key=&quot;100&quot; value=&quot;21&quot; /&gt;
+     &lt;StatisticMap key=&quot;1000&quot; value=&quot;3&quot; /&gt;
+     &lt;StatisticMap key=&quot;1001&quot; value=&quot;27&quot; /&gt;
+     &lt;StatisticMap key=&quot;1002&quot; value=&quot;7&quot; /&gt;
+     ...
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-selection">
+<h3>Sample selection<a class="headerlink" href="#sample-selection" title="Permalink to this headline">¶</a></h3>
+<p>Now, we know exactly how many samples are available in the image for
+each class and each geometry in the training set. From these
+statistics, we can now compute the sampling rates to apply for each
+class, and perform the sample selection. This will be done by the
+<code class="docutils literal notranslate"><span class="pre">SampleSelection</span></code> application.</p>
+<p>There are several strategies to compute those sampling rates:</p>
+<ul class="simple">
+<li><strong>Constant strategy:</strong> All classes will be sampled with the same number
+of samples, which is user-defined.</li>
+<li><strong>Smallest class strategy:</strong> The class with the least number of samples
+will be fully sampled. All other classes will be sampled with the
+same number of samples.</li>
+<li><strong>Percent strategy:</strong> Each class will be sampled with a user-defined
+percentage (same value for all classes) of samples available in this
+class.</li>
+<li><strong>Total strategy:</strong> A global number of samples to select is
+divided proportionally among each class (class proportions are
+enforced).</li>
+<li><strong>Take all strategy:</strong> Take all the available samples.</li>
+<li><strong>By class strategy:</strong> Set a target number of samples for each
+class. The number of samples for each class is read from a CSV file.</li>
+</ul>
+<p>To actually select the sample positions, there are two available
+sampling techniques:</p>
+<ul class="simple">
+<li><strong>Random:</strong> Randomly select samples while respecting the sampling
+rate.</li>
+<li><strong>Periodic:</strong> Sample periodically using the sampling rate.</li>
+</ul>
+<p>The application will make sure that samples spans the whole training
+set extent by adjusting the sampling rate. Depending on the strategy
+to determine the sampling rate, some geometries of the training set
+may not be sampled.</p>
+<p>The application will accept as input the input image and training
+geometries, as well class statistics XML file computed during the previous
+step. It will output a vector file containing point geometries which
+indicate the location of the samples.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SampleSelection</span> <span class="o">-</span><span class="ow">in</span> <span class="n">LANDSAT_MultiTempIm_clip_GapF_20140309</span><span class="o">.</span><span class="n">tif</span>
+                       <span class="o">-</span><span class="n">vec</span> <span class="n">training</span><span class="o">.</span><span class="n">shp</span>
+                       <span class="o">-</span><span class="n">instats</span> <span class="n">classes</span><span class="o">.</span><span class="n">xml</span>
+                       <span class="o">-</span><span class="n">field</span> <span class="n">CODE</span>
+                       <span class="o">-</span><span class="n">strategy</span> <span class="n">smallest</span>
+                       <span class="o">-</span><span class="n">outrates</span> <span class="n">rates</span><span class="o">.</span><span class="n">csv</span>
+                       <span class="o">-</span><span class="n">out</span> <span class="n">samples</span><span class="o">.</span><span class="n">sqlite</span>
+</pre></div>
+</div>
+<p>The csv file written by the optional <code class="docutils literal notranslate"><span class="pre">-outrates</span></code> parameter sums-up what
+has been done during sample selection:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#className requiredSamples totalSamples rate</span>
+<span class="mi">11</span>  <span class="mi">941</span>    <span class="mi">56774</span>   <span class="mf">0.0165745</span>
+<span class="mi">12</span>  <span class="mi">941</span>    <span class="mi">59347</span>   <span class="mf">0.0158559</span>
+<span class="mi">211</span> <span class="mi">941</span>  <span class="mi">25317</span>     <span class="mf">0.0371687</span>
+<span class="mi">221</span> <span class="mi">941</span>  <span class="mi">2087</span>      <span class="mf">0.450886</span>
+<span class="mi">222</span> <span class="mi">941</span>  <span class="mi">2080</span>      <span class="mf">0.452404</span>
+<span class="mi">31</span>  <span class="mi">941</span>    <span class="mi">8149</span>    <span class="mf">0.115474</span>
+<span class="mi">32</span>  <span class="mi">941</span>    <span class="mi">1029</span>    <span class="mf">0.91448</span>
+<span class="mi">34</span>  <span class="mi">941</span>    <span class="mi">3770</span>    <span class="mf">0.249602</span>
+<span class="mi">36</span>  <span class="mi">941</span>    <span class="mi">941</span>     <span class="mi">1</span>
+<span class="mi">41</span>  <span class="mi">941</span>    <span class="mi">2630</span>    <span class="mf">0.357795</span>
+<span class="mi">51</span>  <span class="mi">941</span>    <span class="mi">11221</span>   <span class="mf">0.0838606</span>
+</pre></div>
+</div>
+<div class="figure" id="id3">
+<img alt="../_images/sample-selection.png" src="../_images/sample-selection.png" />
+<p class="caption"><span class="caption-text">This image shows the polygons of the training with a color
+corresponding to their class. The red dot shows the samples that
+have been selected.</span></p>
+</div>
+</div>
+<div class="section" id="samples-extraction">
+<h3>Samples extraction<a class="headerlink" href="#samples-extraction" title="Permalink to this headline">¶</a></h3>
+<p>Now that the locations of the samples are selected, we will attach
+measurements to them. This is the purpose of the <code class="docutils literal notranslate"><span class="pre">SampleExtraction</span></code>
+application. It will walk through the list of samples and extract the
+underlying pixel values. If no <code class="docutils literal notranslate"><span class="pre">-out</span></code> parameter is given, the
+<code class="docutils literal notranslate"><span class="pre">SampleExtraction</span></code> application can work in update mode, thus allowing
+to extract features from multiple images of the same location.</p>
+<p>Features will be stored in fields attached to each sample. Field name
+can be generated from a prefix a sequence of numbers (i.e. if
+prefix is <code class="docutils literal notranslate"><span class="pre">feature_</span></code> then features will be named <code class="docutils literal notranslate"><span class="pre">feature_0</span></code>,
+<code class="docutils literal notranslate"><span class="pre">feature_1</span></code>, …). This can be achieved with the <code class="docutils literal notranslate"><span class="pre">-outfield</span> <span class="pre">prefix</span></code>
+option. Alternatively, one can set explicit names for all features
+using the <code class="docutils literal notranslate"><span class="pre">-outfield</span> <span class="pre">list</span></code> option.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SampleExtraction</span> <span class="o">-</span><span class="ow">in</span> <span class="n">LANDSAT_MultiTempIm_clip_GapF_20140309</span><span class="o">.</span><span class="n">tif</span>
+                        <span class="o">-</span><span class="n">vec</span> <span class="n">samples</span><span class="o">.</span><span class="n">sqlite</span>
+                        <span class="o">-</span><span class="n">outfield</span> <span class="n">prefix</span>
+                        <span class="o">-</span><span class="n">outfield</span><span class="o">.</span><span class="n">prefix</span><span class="o">.</span><span class="n">name</span> <span class="n">band_</span>
+                        <span class="o">-</span><span class="n">field</span> <span class="n">CODE</span>
+</pre></div>
+</div>
+<div class="figure" id="id4">
+<img alt="../_images/samples-extraction.png" src="../_images/samples-extraction.png" />
+<p class="caption"><span class="caption-text">Attributes table of the updated samples file.</span></p>
+</div>
+</div>
+<div class="section" id="working-with-several-images">
+<h3>Working with several images<a class="headerlink" href="#working-with-several-images" title="Permalink to this headline">¶</a></h3>
+<p>If the training set spans several images, the <code class="docutils literal notranslate"><span class="pre">MultiImageSamplingRate</span></code>
+application allows to compute the appropriate sampling rates per image
+and per class, in order to get samples that span the entire extents of the images.</p>
+<p>It is first required to run the <code class="docutils literal notranslate"><span class="pre">PolygonClassStatistics</span></code> application
+on each image of the set separately. The <code class="docutils literal notranslate"><span class="pre">MultiImageSamplingRate</span></code>
+application will then read all the produced statistics XML files and
+derive the sampling rates according the sampling strategy. For more
+information, please refer to the <a class="reference internal" href="#samples-statistics-estimation">Samples statistics estimation</a> section.</p>
+<p>There are 3 modes for the sampling rates estimation from multiple
+images:</p>
+<ul class="simple">
+<li><strong>Proportional mode:</strong> For each class, the requested number of
+samples is divided proportionally among the images.</li>
+<li><strong>Equal mode:</strong> For each class, the requested number of samples is
+divided equally among the images.</li>
+<li><strong>Custom mode:</strong> The user indicates the target number of samples for
+each image.</li>
+</ul>
+<p>The different behaviors for each mode and strategy are described as follows.</p>
+<p><img class="math" src="../_images/math/787340bdcd589335ac453411b80cbf53fb126a7a.png" alt="T_i( c )"/> and <img class="math" src="../_images/math/0fcb5c63fd32c714a9a0c26bab78b0269727f4ae.png" alt="N_i( c )"/> refers resp. to the total number and needed number
+of samples in image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> for class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>. Let’s call <img class="math" src="../_images/math/ae2b750f71e1fc0daaa3de9a85d42794d7cd1326.png" alt="L"/> the total number of
+image.</p>
+<ul class="simple">
+<li><strong>Strategy = all</strong><ul>
+<li>Same behavior for all modes proportional, equal, custom: take all samples</li>
+</ul>
+</li>
+<li><strong>Strategy = constant</strong> (let’s call <img class="math" src="../_images/math/450a8e2c2320d77181e0d4fc68c947e9a5de8ecb.png" alt="M"/> the global number of samples per
+class required)<ul>
+<li><em>Mode = proportional:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/e0e0ce8418e93c665e150d790468d14f1c4783e5.png" alt="N_i( c ) = \frac{M * T_i(c)}{sum_k(T_k(c))}"/></li>
+<li><em>Mode = equal:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/ba444684961f2d5ae436f9f2d935a05a4d6537ca.png" alt="N_i( c ) = \frac{M}{L}"/></li>
+<li><em>Mode = custom:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/3d5359342ad219c43b48634c672ea8518e681582.png" alt="N_i( c ) = M_i"/> where <img class="math" src="../_images/math/5f551a2b0b8493e07209d890bd660b0e1f7bbbd6.png" alt="M_i"/> is the custom requested number of samples
+for image i</li>
+</ul>
+</li>
+<li><strong>Strategy = byClass</strong> (let’s call <img class="math" src="../_images/math/c826166d14020de0b707b7b9611eac566be724db.png" alt="M(c)"/> the global number of samples for
+class c)<ul>
+<li><em>Mode = proportional:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/66fd084365f0bc27803b9925bba64cace92e3837.png" alt="N_i( c ) = M(c) * \frac{T_i( c )}{sum_k( T_k(c))}"/></li>
+<li><em>Mode = equal:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/d505e5e17116aee01624a387002887d4f6a9f90e.png" alt="N_i( c ) = \frac{M(c)}{L}"/></li>
+<li><em>Mode = custom:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/31ad54487e49f8334badbb0aee395fac3cdc6ce9.png" alt="Ni( c ) = M_i(c)"/> where <img class="math" src="../_images/math/89caa1f7c517b2c6b69d603849b5781e55cbf2c2.png" alt="M_i(c)"/> is the custom requested number of
+samples for each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/></li>
+</ul>
+</li>
+<li><strong>Strategy = percent</strong><ul>
+<li><em>Mode = proportional:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/f67348a01f2c6794cf9f91394a808ce71676ac57.png" alt="N_i( c ) = p * T_i(c)"/> where <img class="math" src="../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/> is the user-defined percentage</li>
+<li><em>Mode = equal:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/afd3a7912cb73a9dee078f2d4b915a8cb5f1b08b.png" alt="N_i( c ) = p * \frac{sum_k(Tk(c))}{L}"/> where <img class="math" src="../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/> is the user-defined percentage</li>
+<li><em>Mode = custom:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/59abf22c50defd98f68d344282117bbfc60da864.png" alt="Ni( c ) = p(i) * T_i(c)"/> where <img class="math" src="../_images/math/3c4ae28becd11ee346ebb989eaa431c70d549d48.png" alt="p(i)"/> is the user-defined percentage for image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/></li>
+</ul>
+</li>
+<li><strong>Strategy = total</strong><ul>
+<li><em>Mode = proportional:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/30de9f32af3684bf0452db45bd169a7e2e13057b.png" alt="N_i( c ) = total * (\frac{sum_k(Ti(k))}{sum_kl(Tl(k))}) * (\frac{Ti(c)}{sum_k(Ti(k))})"/> where <img class="math" src="../_images/math/4749e3a6699a6b7276f88b261d3c74b0a6bf07a4.png" alt="total"/> is the total number of samples specified</li>
+<li><em>Mode = equal:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/ff8dfef25c44a305c5359f233230f8d921dd2f89.png" alt="N_i( c ) = (total / L) * (\frac{Ti(c)}{sum_k(Ti(k))})"/> where <img class="math" src="../_images/math/4749e3a6699a6b7276f88b261d3c74b0a6bf07a4.png" alt="total"/> is the total number of samples specified</li>
+<li><em>Mode = custom:</em> For each image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> and each class <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>,
+<img class="math" src="../_images/math/bd6616deefb882bd29e9aad803a93edec38aadfa.png" alt="Ni( c ) = total(i) * (\frac{Ti(c)}{sum_k(Ti(k))})"/> where <img class="math" src="../_images/math/2073e8a1fb48e7cdebb95df4bbffb942f9d3d255.png" alt="total(i)"/> is the total number of samples specified for image <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/></li>
+</ul>
+</li>
+<li><strong>Strategy = smallest class</strong><ul>
+<li><em>Mode = proportional:</em> the smallest class is computed globally, then this smallest size is used for the strategy constant+proportional</li>
+<li><em>Mode = equal:</em> the smallest class is computed globally, then this smallest size is used for the strategy constant+equal</li>
+<li><em>Mode = custom:</em> the smallest class is computed and used for each image separately</li>
+</ul>
+</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">MultiImageSamplingRate</span></code> application can be used as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_MultiImageSamplingRate</span> <span class="o">-</span><span class="n">il</span> <span class="n">stats1</span><span class="o">.</span><span class="n">xml</span> <span class="n">stats2</span><span class="o">.</span><span class="n">xml</span> <span class="n">stats3</span><span class="o">.</span><span class="n">xml</span>
+                              <span class="o">-</span><span class="n">out</span> <span class="n">rates</span><span class="o">.</span><span class="n">csv</span>
+                              <span class="o">-</span><span class="n">strategy</span> <span class="n">smallest</span>
+                              <span class="o">-</span><span class="n">mim</span> <span class="n">proportional</span>
+</pre></div>
+</div>
+<p>The output filename from <code class="docutils literal notranslate"><span class="pre">-out</span></code> parameter will be used to generate as
+many filenames as necessary (e.g. one per input filename), called
+<code class="docutils literal notranslate"><span class="pre">rates_1.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">rates_2.csv</span></code> …</p>
+<p>Once rates are computed for each image, sample selection can be
+performed on each corresponding image using the by class strategy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_SampleSelection</span> <span class="o">-</span><span class="ow">in</span> <span class="n">img1</span><span class="o">.</span><span class="n">tif</span>
+                       <span class="o">-</span><span class="n">vec</span> <span class="n">training</span><span class="o">.</span><span class="n">shp</span>
+                       <span class="o">-</span><span class="n">instats</span> <span class="n">stats1</span><span class="o">.</span><span class="n">xml</span>
+                       <span class="o">-</span><span class="n">field</span> <span class="n">CODE</span>
+                       <span class="o">-</span><span class="n">strategy</span> <span class="n">byclass</span>
+                       <span class="o">-</span><span class="n">strategy</span><span class="o">.</span><span class="n">byclass</span><span class="o">.</span><span class="ow">in</span> <span class="n">rates_1</span><span class="o">.</span><span class="n">csv</span>
+                       <span class="o">-</span><span class="n">out</span> <span class="n">samples1</span><span class="o">.</span><span class="n">sqlite</span>
+</pre></div>
+</div>
+<p>Samples extraction can then be performed on each image b y following
+the <a class="reference internal" href="#samples-extraction">Samples extraction</a> step. The learning application can process
+several samples files.</p>
+</div>
+<div class="section" id="images-statistics-estimation">
+<h3>Images statistics estimation<a class="headerlink" href="#images-statistics-estimation" title="Permalink to this headline">¶</a></h3>
+<p>Some machine learning algorithms converge faster if the range of
+features is <img class="math" src="../_images/math/49a47d5b84588d4baba9dd7f7e2c5f4251aa643a.png" alt="[-1,1]"/> or <img class="math" src="../_images/math/62f34fae2b08036cedb90a3ebf47f74a61dcb1be.png" alt="[0,1]"/>. Other will be sensitive
+to relative ranges between feature, e.g. a feature with a larger range
+might have more weight in the final decision. This is for instance the
+case for machine learning algorithm using euclidean distance at some
+point to compare features. In those cases, it is advised to normalize
+all features to the range <img class="math" src="../_images/math/49a47d5b84588d4baba9dd7f7e2c5f4251aa643a.png" alt="[-1,1]"/> before performing the
+learning. For this purpose, the <code class="docutils literal notranslate"><span class="pre">ComputeImageStatistics</span></code> application
+allows to compute and output to an XML file the mean and standard
+deviation based on pooled variance of each band for one or several
+images.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ComputeImagesStatistics</span> <span class="o">-</span><span class="n">il</span>  <span class="n">im1</span><span class="o">.</span><span class="n">tif</span> <span class="n">im2</span><span class="o">.</span><span class="n">tif</span> <span class="n">im3</span><span class="o">.</span><span class="n">tif</span>
+                               <span class="o">-</span><span class="n">out</span> <span class="n">images_statistics</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>The output statistics file can then be fed to the training and
+classification applications.</p>
+</div>
+<div class="section" id="training-the-model">
+<h3>Training the model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h3>
+<p>Now that the training samples are ready, we can perform the learning
+using the <code class="docutils literal notranslate"><span class="pre">TrainVectorClassifier</span></code> application.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_TrainVectorClassifier</span> <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">vd</span> <span class="n">samples</span><span class="o">.</span><span class="n">sqlite</span>
+                             <span class="o">-</span><span class="n">cfield</span> <span class="n">CODE</span>
+                             <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span> <span class="n">model</span><span class="o">.</span><span class="n">rf</span>
+                             <span class="o">-</span><span class="n">classifier</span> <span class="n">rf</span>
+                             <span class="o">-</span><span class="n">feat</span> <span class="n">band_0</span> <span class="n">band_1</span> <span class="n">band_2</span> <span class="n">band_3</span> <span class="n">band_4</span> <span class="n">band_5</span> <span class="n">band_6</span>
+</pre></div>
+</div>
+<p>In case of multiple samples files, you can add them to the <code class="docutils literal notranslate"><span class="pre">-io.vd</span></code>
+parameter (see  <a class="reference internal" href="#working-with-several-images">Working with several images</a> section).</p>
+<p>For more information about the training process for features
+please refer to the <a class="reference internal" href="#train-a-classifier-with-features">Train a classifier with features</a> section.</p>
+</div>
+<div class="section" id="using-the-classification-model">
+<h3>Using the classification model<a class="headerlink" href="#using-the-classification-model" title="Permalink to this headline">¶</a></h3>
+<p>Once the classifier has been trained, one can apply the model to
+classify pixel inside defined classes on a new image using the
+<em>ImageClassifier</em> application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ImageClassifier</span> <span class="o">-</span><span class="ow">in</span>     <span class="n">image</span><span class="o">.</span><span class="n">tif</span>
+                       <span class="o">-</span><span class="n">model</span>  <span class="n">model</span><span class="o">.</span><span class="n">rf</span>
+                       <span class="o">-</span><span class="n">out</span>    <span class="n">labeled_image</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>You can set an input mask to limit the classification to the mask area
+with value &gt;0.</p>
+<p>-imstat images_statistics.xml</p>
+</div>
+<div class="section" id="validating-the-classification-model">
+<h3>Validating the classification model<a class="headerlink" href="#validating-the-classification-model" title="Permalink to this headline">¶</a></h3>
+<p>The Orfeo ToolBox training applications provides information about the performance
+of the generated model (see <a class="reference internal" href="#validating-classification">Validating classification</a> ).</p>
+<p>With the <em>ConputeConfusionMatrix</em> application, it is also possible to
+estimate the performance of a model from a classification map generated
+with the <em>ImageClassifier</em> application. This labeled image is compared
+to positive reference samples (either represented as a raster labeled
+image or as a vector data containing the reference classes). It will
+compute the confusion matrix and precision, recall and F-score of each
+class too, based on the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen-current/classotb_1_1ConfusionMatrixCalculator.html">ConfusionMatrixCalculator</a>
+class.</p>
+<p>If you have made an unsupervised classification, it must be specified
+to the <code class="docutils literal notranslate"><span class="pre">ConputeConfusionMatrix</span></code> application. In this case, a contingency table
+have to be create rather than a confusion matrix. For further details,
+see <code class="docutils literal notranslate"><span class="pre">format</span></code> parameter in the application help of <em>ConputeConfusionMatrix</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ComputeConfusionMatrix</span> <span class="o">-</span><span class="ow">in</span>                <span class="n">labeled_image</span><span class="o">.</span><span class="n">tif</span>
+                              <span class="o">-</span><span class="n">ref</span>               <span class="n">vector</span>
+                              <span class="o">-</span><span class="n">ref</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="ow">in</span>     <span class="n">vectordata</span><span class="o">.</span><span class="n">shp</span>
+                              <span class="o">-</span><span class="n">ref</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">field</span>  <span class="n">Class</span> <span class="p">(</span><span class="n">name_of_label_field</span><span class="p">)</span>
+                              <span class="o">-</span><span class="n">out</span>               <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fancy-classification-results">
+<span id="id1"></span><h3>Fancy classification results<a class="headerlink" href="#fancy-classification-results" title="Permalink to this headline">¶</a></h3>
+<p>Color mapping can be used to apply color transformations on the final
+gray level label image. It allows to get an RGB classification map by
+re-mapping the image values to be suitable for display purposes. One can
+use the <em>ColorMapping</em> application. This tool will replace each label
+with an 8-bits RGB color specified in a mapping file. The mapping file
+should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lines beginning with a # are ignored</span>
+<span class="mi">1</span> <span class="mi">255</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>In the previous example, 1 is the label and 255 0 0 is a RGB color (this
+one will be rendered as red). To use the mapping tool, enter the
+following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ColorMapping</span> <span class="o">-</span><span class="ow">in</span>                <span class="n">labeled_image</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">method</span>            <span class="n">custom</span>
+                    <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">custom</span><span class="o">.</span><span class="n">lut</span> <span class="n">lut_mapping_file</span><span class="o">.</span><span class="n">txt</span>
+                    <span class="o">-</span><span class="n">out</span>               <span class="n">RGB_color_image</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>Other look-up tables (LUT) are available: standard continuous LUT,
+optimal LUT, and LUT computed over a support image.</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>We consider 4 classes: water, roads, vegetation and buildings with red
+roofs. Data is available in the OTB-Data
+<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/tree/master/Input/Classification">repository</a> .</p>
+<table border="1" class="docutils" id="figure2">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image_21" src="../_images/classification_chain_inputimage.jpg" /></td>
+<td><img alt="image_22" src="../_images/classification_chain_fancyclassif_fusion.jpg" /></td>
+<td><img alt="image_23" src="../_images/classification_chain_fancyclassif.jpg" /></td>
+</tr>
+</tbody>
+</table>
+<p>Figure 2: From left to right: Original image, result image with fusion (with monteverdi viewer) of original image and fancy classification and input image with fancy color classification from labeled image.</p>
+</div>
+</div>
+<div class="section" id="unsupervised-learning">
+<h2>Unsupervised learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">¶</a></h2>
+<p>Using the same machine learning framework, it is also possible to perform
+unsupervised classification. In this case, the main difference is that
+the training samples don’t need a real class label. However, in order to use
+the same <em>TrainImagesClassifier</em> application, you still need to
+provide a vector data file with a label field. This vector file will be
+used to extract samples for the training. Each label value is can be considered
+as a source area for samples, the same logic as in supervised learning is
+applied for the computation of extracted samples per area. Hence, for
+unsupervised classification, the samples are selected based on classes that are
+not actually used during the training. For the moment, only the KMeans
+algorithm is proposed in this framework.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_TrainImageClassifier</span>
+  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">il</span>                <span class="n">image</span><span class="o">.</span><span class="n">tif</span>
+  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">vd</span>                <span class="n">training_areas</span><span class="o">.</span><span class="n">shp</span>
+  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span>               <span class="n">model</span><span class="o">.</span><span class="n">txt</span>
+  <span class="o">-</span><span class="n">sample</span><span class="o">.</span><span class="n">vfn</span>           <span class="n">Class</span>
+  <span class="o">-</span><span class="n">classifier</span>           <span class="n">sharkkm</span>
+  <span class="o">-</span><span class="n">classifier</span><span class="o">.</span><span class="n">sharkkm</span><span class="o">.</span><span class="n">k</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>If your training samples are in a vector data file, you can use the application
+<em>TrainVectorClassifier</em>. In this case, you don’t need a fake label field. You
+just need to specify which fields shall be used to do the training.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_TrainVectorClassifier</span>
+  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">vd</span>                <span class="n">training_samples</span><span class="o">.</span><span class="n">shp</span>
+  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span>               <span class="n">model</span><span class="o">.</span><span class="n">txt</span>
+  <span class="o">-</span><span class="n">feat</span>                 <span class="n">perimeter</span> <span class="n">area</span> <span class="n">width</span> <span class="n">red</span> <span class="n">nir</span>
+  <span class="o">-</span><span class="n">classifier</span>           <span class="n">sharkkm</span>
+  <span class="o">-</span><span class="n">classifier</span><span class="o">.</span><span class="n">sharkkm</span><span class="o">.</span><span class="n">k</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>Once you have the model file, the actual classification step is the same as
+the supervised case. The model will predict labels on your input data.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ImageClassifier</span>
+  <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+  <span class="o">-</span><span class="n">model</span> <span class="n">model</span><span class="o">.</span><span class="n">txt</span>
+  <span class="o">-</span><span class="n">out</span> <span class="n">kmeans_labels</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fusion-of-classification-maps">
+<h2>Fusion of classification maps<a class="headerlink" href="#fusion-of-classification-maps" title="Permalink to this headline">¶</a></h2>
+<p>After having processed several classifications of the same input image
+but from different models or methods (SVM, KNN, Random Forest,…), it
+is possible to make a fusion of these classification maps with the
+<em>FusionOfClassifications</em> application which uses either majority voting
+or the Dempster-Shafer framework to handle this fusion. The Fusion of
+Classifications generates a single more robust and precise
+classification map which combines the information extracted from the
+input list of labeled images.</p>
+<p>The <em>FusionOfClassifications</em> application has the following input parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-il</span></code> list of input labeled classification images to fuse</li>
+<li><code class="docutils literal notranslate"><span class="pre">-out</span></code> the output labeled image resulting from the fusion of the
+input classification images</li>
+<li><code class="docutils literal notranslate"><span class="pre">-method</span></code> the fusion method (either by majority voting or by
+Dempster Shafer)</li>
+<li><code class="docutils literal notranslate"><span class="pre">-nodatalabel</span></code> label for the no data class (default value = 0)</li>
+<li><code class="docutils literal notranslate"><span class="pre">-undecidedlabel</span></code> label for the undecided class (default value = 0)</li>
+</ul>
+<p>The input pixels with the no-data class label are simply ignored by the
+fusion process. Moreover, the output pixels for which the fusion process
+does not result in a unique class label, are set to the undecided value.</p>
+<div class="section" id="majority-voting-for-the-fusion-of-classifications">
+<h3>Majority voting for the fusion of classifications<a class="headerlink" href="#majority-voting-for-the-fusion-of-classifications" title="Permalink to this headline">¶</a></h3>
+<p>In the Majority Voting method implemented in the
+<em>FusionOfClassifications</em> application, the value of each output pixel is
+equal to the more frequent class label of the same pixel in the input
+classification maps. However, it may happen that the more frequent class
+labels are not unique in individual pixels. In that case, the undecided
+label is attributed to the output pixels.</p>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_FusionOfClassifications</span>  <span class="o">-</span><span class="n">il</span>             <span class="n">cmap1</span><span class="o">.</span><span class="n">tif</span> <span class="n">cmap2</span><span class="o">.</span><span class="n">tif</span> <span class="n">cmap3</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">method</span>         <span class="n">majorityvoting</span>
+                                <span class="o">-</span><span class="n">nodatalabel</span>    <span class="mi">0</span>
+                                <span class="o">-</span><span class="n">undecidedlabel</span> <span class="mi">10</span>
+                                <span class="o">-</span><span class="n">out</span>            <span class="n">MVFusedClassificationMap</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>Let us consider 6 independent classification maps of the same input
+image (Cf. left image in <a class="reference internal" href="#figure2">Figure2</a>) generated from 6 different SVM models.
+The <a class="reference internal" href="#figure3">Figure3</a> represents them after a color mapping by the same LUT.
+Thus, 4 classes (water: blue, roads: gray,vegetation: green,
+buildings with red roofs: red) are observable on each of them.</p>
+<table border="1" class="docutils" id="figure3">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image_31" src="../_images/QB_1_ortho_C1_CM.png" /></td>
+<td><img alt="image_32" src="../_images/QB_1_ortho_C2_CM.png" /></td>
+<td><img alt="image_33" src="../_images/QB_1_ortho_C3_CM.png" /></td>
+</tr>
+<tr class="row-even"><td><img alt="image_34" src="../_images/QB_1_ortho_C4_CM.png" /></td>
+<td><img alt="image_35" src="../_images/QB_1_ortho_C5_CM.png" /></td>
+<td><img alt="image_36" src="../_images/QB_1_ortho_C6_CM.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>Figure 3: Six fancy colored classified images to be fused, generated from 6 different SVM models.</p>
+<p>As an example of the <em>FusionOfClassifications</em> application by <em>majority
+voting</em>, the fusion of the six input classification maps represented in
+<a class="reference internal" href="#figure3">Figure3</a> leads to the classification map illustrated on the right in <a class="reference internal" href="#figure4">Figure4</a>.
+Thus, it appears that this fusion highlights the more relevant classes among the six different
+input classifications. The white parts of the fused image correspond to
+the undecided class labels, i.e. to pixels for which there is not a
+unique majority voting.</p>
+<table border="1" class="docutils" id="figure4">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image_41" src="../_images/classification_chain_inputimage.jpg" /></td>
+<td><img alt="image_42" src="../_images/QB_1_ortho_MV_C123456_CM.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>Figure 4: From left to right: Original image, and fancy colored classified image obtained by a majority voting fusion of the 6 classification maps represented in Fig. 4.13 (water: blue, roads: gray, vegetation: green, buildings with red roofs: red, undecided: white)</p>
+</div>
+<div class="section" id="dempster-shafer-framework-for-the-fusion-of-classifications">
+<h3>Dempster Shafer framework for the fusion of classifications<a class="headerlink" href="#dempster-shafer-framework-for-the-fusion-of-classifications" title="Permalink to this headline">¶</a></h3>
+<p>The <em>FusionOfClassifications</em> application, handles another method to
+compute the fusion: the Dempster Shafer framework. In the
+<a class="reference external" href="http://en.wikipedia.org/wiki/Dempster-Shafer_theory">Dempster-Shafer
+theory</a> , the
+performance of each classifier resulting in the classification maps to
+fuse are evaluated with the help of the so-called <em>belief function</em> of
+each class label, which measures the degree of belief that the
+corresponding label is correctly assigned to a pixel. For each
+classifier, and for each class label, these belief functions are
+estimated from another parameter called the <em>mass of belief</em> of each
+class label, which measures the confidence that the user can have in
+each classifier according to the resulting labels.</p>
+<p>In the Dempster Shafer framework for the fusion of classification maps,
+the fused class label for each pixel is the one with the maximal belief
+function. In case of multiple class labels maximizing the belief
+functions, the output fused pixels are set to the undecided value.</p>
+<p>In order to estimate the confidence level in each classification map,
+each of them should be confronted with a ground truth. For this purpose,
+the masses of belief of the class labels resulting from a classifier are
+estimated from its confusion matrix, which is itself exported as a
+*.CSV file with the help of the <em>ComputeConfusionMatrix</em> application.
+Thus, using the Dempster-Shafer method to fuse classification maps needs
+an additional input list of such *.CSV files corresponding to their
+respective confusion matrices.</p>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_FusionOfClassifications</span>  <span class="o">-</span><span class="n">il</span>             <span class="n">cmap1</span><span class="o">.</span><span class="n">tif</span> <span class="n">cmap2</span><span class="o">.</span><span class="n">tif</span> <span class="n">cmap3</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">method</span>         <span class="n">dempstershafer</span>
+                                <span class="o">-</span><span class="n">method</span><span class="o">.</span><span class="n">dempstershafer</span><span class="o">.</span><span class="n">cmfl</span>
+                                                <span class="n">cmat1</span><span class="o">.</span><span class="n">csv</span> <span class="n">cmat2</span><span class="o">.</span><span class="n">csv</span> <span class="n">cmat3</span><span class="o">.</span><span class="n">csv</span>
+                                <span class="o">-</span><span class="n">nodatalabel</span>    <span class="mi">0</span>
+                                <span class="o">-</span><span class="n">undecidedlabel</span> <span class="mi">10</span>
+                                <span class="o">-</span><span class="n">out</span>            <span class="n">DSFusedClassificationMap</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>As an example of the <em>FusionOfClassifications</em> application by <em>Dempster
+Shafer</em>, the fusion of the six input classification maps represented in <a class="reference internal" href="#figure3">Figure3</a>
+leads to the classification map illustrated on the right in <a class="reference internal" href="#figure5">Figure5</a>.
+Thus, it appears that this fusion gives access to a more precise and robust classification map
+based on the confidence level in each classifier.</p>
+<table border="1" class="docutils" id="figure5">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image_51" src="../_images/classification_chain_inputimage.jpg" /></td>
+<td><img alt="image_52" src="../_images/QB_1_ortho_DS_V_P_C123456_CM.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>Figure 5: From left to right: Original image, and fancy colored classified image obtained by a Dempster-Shafer fusion of the 6 classification maps represented in <a class="reference internal" href="#figure3">Figure3</a> (water: blue, roads: gray, vegetation: green, buildings with red roofs: red, undecided: white).</p>
+</div>
+<div class="section" id="recommendations-to-properly-use-the-fusion-of-classification-maps">
+<h3>Recommendations to properly use the fusion of classification maps<a class="headerlink" href="#recommendations-to-properly-use-the-fusion-of-classification-maps" title="Permalink to this headline">¶</a></h3>
+<p>In order to properly use the <em>FusionOfClassifications</em> application, some
+points should be considered. First, the <code class="docutils literal notranslate"><span class="pre">list_of_input_images</span></code> and
+<code class="docutils literal notranslate"><span class="pre">OutputFusedClassificationImage</span></code> are single band labeled images, which
+means that the value of each pixel corresponds to the class label it
+belongs to, and labels in each classification map must represent the
+same class. Secondly, the undecided label value must be different from
+existing labels in the input images in order to avoid any ambiguity in
+the interpretation of the <code class="docutils literal notranslate"><span class="pre">OutputFusedClassificationImage</span></code>.</p>
+</div>
+</div>
+<div class="section" id="majority-voting-based-classification-map-regularization">
+<h2>Majority voting based classification map regularization<a class="headerlink" href="#majority-voting-based-classification-map-regularization" title="Permalink to this headline">¶</a></h2>
+<p>Resulting classification maps can be regularized in order to smooth
+irregular classes. Such a regularization process improves classification
+results by making more homogeneous areas which are easier to handle.</p>
+<div class="section" id="majority-voting-for-the-classification-map-regularization">
+<h3>Majority voting for the classification map regularization<a class="headerlink" href="#majority-voting-for-the-classification-map-regularization" title="Permalink to this headline">¶</a></h3>
+<p>The <em>ClassificationMapRegularization</em> application performs a
+regularization of a labeled input image based on the Majority Voting
+method in a specified ball shaped neighborhood. For each center pixel,
+Majority Voting takes the more representative value of all the pixels
+identified by the structuring element and then sets the output center
+pixel to this majority label value. The ball shaped neighborhood is
+identified by its radius expressed in pixels.</p>
+</div>
+<div class="section" id="handling-ambiguity-and-not-classified-pixels-in-the-majority-voting-based-regularization">
+<h3>Handling ambiguity and not classified pixels in the majority voting based regularization<a class="headerlink" href="#handling-ambiguity-and-not-classified-pixels-in-the-majority-voting-based-regularization" title="Permalink to this headline">¶</a></h3>
+<p>Since, the Majority Voting regularization may lead to not unique
+majority labels in the neighborhood, it is important to define which
+behaviour the filter must have in this case. For this purpose, a Boolean
+parameter (called ip.suvbool) is used in the
+<em>ClassificationMapRegularization</em> application to choose whether pixels
+with more than one majority class are set to Undecided (true), or to
+their Original labels (false = default value).</p>
+<p>Moreover, it may happen that pixels in the input image do not belong to
+any of the considered class. Such pixels are assumed to belong to the
+NoData class, the label of which is specified as an input parameter for
+the regularization. Therefore, those NoData input pixels are invariant
+and keep their NoData label in the output regularized image.</p>
+<p>The <em>ClassificationMapRegularization</em> application has the following
+input parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-io.in</span></code> labeled input image resulting from a previous
+classification process</li>
+<li><code class="docutils literal notranslate"><span class="pre">-io.out</span></code> output labeled image corresponding to the regularization
+of the input image</li>
+<li><code class="docutils literal notranslate"><span class="pre">-ip.radius</span></code> integer corresponding to the radius of the ball shaped
+structuring element (default value = 1 pixel)</li>
+<li><code class="docutils literal notranslate"><span class="pre">-ip.suvbool</span></code> boolean parameter used to choose whether pixels with
+more than one majority class are set to Undecided (true), or to their
+Original labels (false = default value). Please note that the
+Undecided value must be different from existing labels in the input
+image</li>
+<li><code class="docutils literal notranslate"><span class="pre">-ip.nodatalabel</span></code> label for the NoData class. Such input pixels
+keep their NoData label in the output image (default value = 0)</li>
+<li><code class="docutils literal notranslate"><span class="pre">-ip.undecidedlabel</span></code> label for the Undecided class (default value =
+0).</li>
+</ul>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ClassificationMapRegularization</span>  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="ow">in</span>              <span class="n">labeled_image</span><span class="o">.</span><span class="n">tif</span>
+                                        <span class="o">-</span><span class="n">ip</span><span class="o">.</span><span class="n">radius</span>          <span class="mi">3</span>
+                                        <span class="o">-</span><span class="n">ip</span><span class="o">.</span><span class="n">suvbool</span>         <span class="n">true</span>
+                                        <span class="o">-</span><span class="n">ip</span><span class="o">.</span><span class="n">nodatalabel</span>     <span class="mi">10</span>
+                                        <span class="o">-</span><span class="n">ip</span><span class="o">.</span><span class="n">undecidedlabel</span>  <span class="mi">7</span>
+                                        <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span>             <span class="n">regularized</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="recommendations-to-properly-use-the-majority-voting-based-regularization">
+<h3>Recommendations to properly use the majority voting based regularization<a class="headerlink" href="#recommendations-to-properly-use-the-majority-voting-based-regularization" title="Permalink to this headline">¶</a></h3>
+<p>In order to properly use the <em>ClassificationMapRegularization</em>
+application, some points should be considered. First, both
+<code class="docutils literal notranslate"><span class="pre">InputLabeledImage</span></code> and <code class="docutils literal notranslate"><span class="pre">OutputLabeledImage</span></code> are single band labeled
+images, which means that the value of each pixel corresponds to the
+class label it belongs to. The <code class="docutils literal notranslate"><span class="pre">InputLabeledImage</span></code> is commonly an
+image generated with a classification algorithm such as the SVM
+classification. Remark: both <code class="docutils literal notranslate"><span class="pre">InputLabeledImage</span></code> and
+<code class="docutils literal notranslate"><span class="pre">OutputLabeledImage</span></code> are not necessarily of the same type.
+Secondly, if ip.suvbool == true, the Undecided label value must be
+different from existing labels in the input labeled image in order to
+avoid any ambiguity in the interpretation of the regularized
+<code class="docutils literal notranslate"><span class="pre">OutputLabeledImage</span></code>. Finally, the structuring element radius must
+have a minimum value equal to 1 pixel, which is its default value. Both
+NoData and Undecided labels have a default value equal to 0.</p>
+</div>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Resulting from the application presented in section <a class="reference internal" href="#fancy-classification-results"><span class="std std-ref">Fancy classification results</span></a>
+and illustrated in <a class="reference internal" href="#figure2">Figure2</a>, the <a class="reference internal" href="#figure6">Figure6</a> shows a regularization
+of a classification map composed of 4 classes: water, roads, vegetation
+and buildings with red roofs. The radius of the ball shaped structuring
+element is equal to 3 pixels, which corresponds to a ball included in a
+7 x 7 pixels square. Pixels with more than one majority class keep their
+original labels.</p>
+</div>
+</div>
+<div class="section" id="regression">
+<h2>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h2>
+<p>The machine learning models in OpenCV and LibSVM also support a
+regression mode: they can be used to predict a numeric value (i.e. not
+a class index) from an input predictor. The workflow is the same as
+classification. First, the regression model is trained, then it can be
+used to predict output values. The applications to do that are and .</p>
+<table border="1" class="docutils" id="figure6">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image_61" src="../_images/classification_chain_inputimage.jpg" /></td>
+<td><img alt="image_62" src="../_images/classification_chain_fancyclassif_CMR_input.png" /></td>
+<td><img alt="image_63" src="../_images/classification_chain_fancyclassif_CMR_3.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>Figure 6: From left to right: Original image, fancy colored classified image and regularized classification map with radius equal to 3 pixels.</p>
+<p>The input data set for training must have the following structure:</p>
+<ul class="simple">
+<li><em>n</em> components for the input predictors</li>
+<li>one component for the corresponding output value</li>
+</ul>
+<p>The application supports 2 input formats:</p>
+<ul class="simple">
+<li>An image list: each image should have components matching the
+structure detailed earlier (<em>n</em> feature components + 1 output value)</li>
+<li>A CSV file: the first <em>n</em> columns are the feature components and the
+last one is the output value</li>
+</ul>
+<p>If you have separate images for predictors and output values, you can
+use the application.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ConcatenateImages</span>  <span class="o">-</span><span class="n">il</span> <span class="n">features</span><span class="o">.</span><span class="n">tif</span>  <span class="n">output_value</span><span class="o">.</span><span class="n">tif</span>
+                          <span class="o">-</span><span class="n">out</span> <span class="n">training_set</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<div class="section" id="statistics-estimation">
+<h3>Statistics estimation<a class="headerlink" href="#statistics-estimation" title="Permalink to this headline">¶</a></h3>
+<p>As in classification, a statistics estimation step can be performed
+before training. It allows to normalize the dynamic of the input
+predictors to a standard one: zero mean, unit standard deviation. The
+main difference with the classification case is that with regression,
+the dynamic of output values can also be reduced.</p>
+<p>The statistics file format is identical to the output file from
+application, for instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;FeatureStatistics&gt;
+    &lt;Statistic name=&quot;mean&quot;&gt;
+        &lt;StatisticVector value=&quot;198.796&quot; /&gt;
+        &lt;StatisticVector value=&quot;283.117&quot; /&gt;
+        &lt;StatisticVector value=&quot;169.878&quot; /&gt;
+        &lt;StatisticVector value=&quot;376.514&quot; /&gt;
+    &lt;/Statistic&gt;
+    &lt;Statistic name=&quot;stddev&quot;&gt;
+        &lt;StatisticVector value=&quot;22.6234&quot; /&gt;
+        &lt;StatisticVector value=&quot;41.4086&quot; /&gt;
+        &lt;StatisticVector value=&quot;40.6766&quot; /&gt;
+        &lt;StatisticVector value=&quot;110.956&quot; /&gt;
+    &lt;/Statistic&gt;
+&lt;/FeatureStatistics&gt;
+</pre></div>
+</div>
+<p>In the application, normalization of input predictors and output values
+is optional. There are 3 options:</p>
+<ul class="simple">
+<li>No statistic file: normalization disabled</li>
+<li>Statistic file with <em>n</em> components: normalization enabled for input
+predictors only</li>
+<li>Statistic file with <em>n+1</em> components: normalization enabled for
+input predictors and output values</li>
+</ul>
+<p>If you use an image list as training set, you can run application. It
+will produce a statistics file suitable for input and output
+normalization (third option).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ComputeImagesStatistics</span>  <span class="o">-</span><span class="n">il</span>   <span class="n">training_set</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">out</span>  <span class="n">stats</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="training">
+<h3>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h3>
+<p>Initially, the machine learning models in OTB only used classification.
+But since they come from external libraries (OpenCV and LibSVM), the
+regression mode was already implemented in these external libraries. So
+the integration of these models in OTB has been improved in order to
+allow the usage of regression mode. As a consequence , the machine
+learning models have nearly the same set of parameters for
+classification and regression mode.</p>
+<ul class="simple">
+<li>Decision Trees</li>
+<li>Gradient Boosted Trees</li>
+<li>Neural Network</li>
+<li>Random Forests</li>
+<li>K-Nearest Neighbors</li>
+</ul>
+<p>The behavior of application is very similar to . From the input data
+set, a portion of the samples is used for training, whereas the other
+part is used for validation. The user may also set the model to train
+and its parameters. Once the training is done, the model is stored in an
+output file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_TrainRegression</span>  <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">il</span>                <span class="n">training_set</span><span class="o">.</span><span class="n">tif</span>
+                        <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">imstat</span>            <span class="n">stats</span><span class="o">.</span><span class="n">xml</span>
+                        <span class="o">-</span><span class="n">io</span><span class="o">.</span><span class="n">out</span>               <span class="n">model</span><span class="o">.</span><span class="n">txt</span>
+                        <span class="o">-</span><span class="n">sample</span><span class="o">.</span><span class="n">vtr</span>           <span class="mf">0.5</span>
+                        <span class="o">-</span><span class="n">classifier</span>           <span class="n">knn</span>
+                        <span class="o">-</span><span class="n">classifier</span><span class="o">.</span><span class="n">knn</span><span class="o">.</span><span class="n">k</span>     <span class="mi">5</span>
+                        <span class="o">-</span><span class="n">classifier</span><span class="o">.</span><span class="n">knn</span><span class="o">.</span><span class="n">rule</span>  <span class="n">median</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="prediction">
+<h3>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h3>
+<p>Once the model is trained, it can be used in application to perform the
+prediction on an entire image containing input predictors (i.e. an image
+with only <em>n</em> feature components). If the model was trained with
+normalization, the same statistic file must be used for prediction. The
+behavior of with respect to statistic file is identical to:</p>
+<ul class="simple">
+<li>no statistic file: normalization off</li>
+<li><em>n</em> components: input only</li>
+<li><em>n+1</em> components: input and output</li>
+</ul>
+<p>The model to use is read from file (the one produced during training).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_PredictRegression</span>  <span class="o">-</span><span class="ow">in</span>     <span class="n">features_bis</span><span class="o">.</span><span class="n">tif</span>
+                          <span class="o">-</span><span class="n">model</span>  <span class="n">model</span><span class="o">.</span><span class="n">txt</span>
+                          <span class="o">-</span><span class="n">imstat</span> <span class="n">stats</span><span class="o">.</span><span class="n">xml</span>
+                          <span class="o">-</span><span class="n">out</span>    <span class="n">prediction</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="featextract.html" class="btn btn-neutral float-right" title="Feature extraction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contrast_enhancement.html" class="btn btn-neutral" title="Enhance local contrast" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>StereoFramework &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="StereoRectificationGridGenerator" href="app_StereoRectificationGridGenerator.html" />
+    <link rel="prev" title="FineRegistration" href="app_FineRegistration.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Stereo.html">Stereo</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_DisparityMapToElevationMap.html">DisparityMapToElevationMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">StereoFramework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_StereoRectificationGridGenerator.html">StereoRectificationGridGenerator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Stereo.html">Stereo</a> &raquo;</li>
+        
+      <li>StereoFramework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_StereoFramework.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stereoframework">
+<span id="app-stereoframework"></span><h1>StereoFramework<a class="headerlink" href="#stereoframework" title="Permalink to this headline">¶</a></h1>
+<p>Compute the ground elevation based on one or multiple stereo pair(s)</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Compute the ground elevation with a stereo block matching algorithm between one or multiple stereo pair in sensor geometry. The output is projected in desired geographic or cartographic map projection (WGS84 by default).</p>
+<p>This application is chaining different processing steps. Some of them are also performed by other applications in the stereo-reconstruction framework:</p>
+<ul class="simple">
+<li><a class="reference internal" href="app_StereoRectificationGridGenerator.html#app-stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a>: for the generation of deformation grids</li>
+<li><a class="reference internal" href="app_GridBasedImageResampling.html#app-gridbasedimageresampling"><span class="std std-ref">GridBasedImageResampling</span></a>: resampling into epipolar geometry</li>
+<li><a class="reference internal" href="app_BlockMatching.html#app-blockmatching"><span class="std std-ref">BlockMatching</span></a>: estimation of dense disparity maps</li>
+</ul>
+<p>The pipeline executes the following steps on each stereo pair:</p>
+<ul class="simple">
+<li>compute the epipolar displacement grids from the stereo pair (direct and inverse)</li>
+<li>resample the stereo pair into epipolar geometry using BCO interpolation</li>
+<li>create masks for each epipolar image: remove black borders and resample input masks</li>
+<li>compute horizontal disparities with a block matching algorithm</li>
+<li>refine disparities to sub-pixel precision with a dichotomy algorithm</li>
+<li>apply an optional median filter</li>
+<li>filter disparities based on the correlation score and exploration bounds</li>
+<li>translate disparities in sensor geometry</li>
+<li>convert disparity to 3D Map.</li>
+</ul>
+<p>Then all 3D maps are fused to produce DSM. The fusion method in each DEM cell can be chosen between maximum, minimum and average.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#input-parameters" id="id1">Input parameters</a></li>
+<li><a class="reference internal" href="#elevation-management" id="id2">Elevation management</a></li>
+<li><a class="reference internal" href="#output-parameters" id="id3">Output parameters</a></li>
+<li><a class="reference internal" href="#user-defined-options" id="id4">User Defined options</a></li>
+<li><a class="reference internal" href="#universal-trans-mercator-utm-options" id="id5">Universal Trans-Mercator (UTM) options</a></li>
+<li><a class="reference internal" href="#epsg-code-options" id="id6">EPSG Code options</a></li>
+<li><a class="reference internal" href="#stereorectification-grid-parameters" id="id7">Stereorectification Grid parameters</a></li>
+<li><a class="reference internal" href="#block-matching-parameters" id="id8">Block matching parameters</a></li>
+<li><a class="reference internal" href="#lp-pseudo-norm-options" id="id9">Lp pseudo-norm options</a></li>
+<li><a class="reference internal" href="#postprocessing-parameters" id="id10">Postprocessing parameters</a></li>
+<li><a class="reference internal" href="#masks" id="id11">Masks</a></li>
+</ul>
+</div>
+<div class="section" id="input-parameters">
+<h3><a class="toc-backref" href="#id1">Input parameters</a><a class="headerlink" href="#input-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows one to set input data.</p>
+<p><strong>Input images list</strong> <code class="code docutils literal notranslate"><span class="pre">-input.il</span> <span class="pre">image1</span> <span class="pre">image2...</span></code> <em>Mandatory</em> <br />
+List of images corresponding to multiple views on a single scene, in sensor geometry.</p>
+<p><strong>Couples list</strong> <code class="code docutils literal notranslate"><span class="pre">-input.co</span> <span class="pre">string</span></code> <br />
+List of index of couples im image list. Couples must be separated by a comma (index start at 0). For example: 0 1,1 2 will process a first couple composed of the first and the second image in image list, then the second and the third image
+. Note that images are handled by pairs. If left empty, couples are created from input index i.e. a first couple will be composed of the first and second image, a second couple with third and fourth image etc. (in this case image list must be even).</p>
+<p><strong>Input Image channel</strong> <code class="code docutils literal notranslate"><span class="pre">-input.channel</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Channel used for block matching (the same for all images)</p>
+</div>
+<div class="section" id="elevation-management">
+<h3><a class="toc-backref" href="#id2">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.</p>
+<p><strong>DEM directory</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.dem</span> <span class="pre">directory</span></code> <br />
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.</p>
+<p><strong>Geoid File</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.geoid</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd">https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd</a>).</p>
+<p><strong>Default elevation</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.default</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.</p>
+</div>
+<div class="section" id="output-parameters">
+<h3><a class="toc-backref" href="#id3">Output parameters</a><a class="headerlink" href="#output-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows one to choose the DSM resolution, nodata value, and projection parameters.</p>
+<p><strong>Output resolution</strong> <code class="code docutils literal notranslate"><span class="pre">-output.res</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Spatial sampling distance of the output elevation: the cell size (in m)</p>
+<p><strong>NoData value</strong> <code class="code docutils literal notranslate"><span class="pre">-output.nodata</span> <span class="pre">float</span></code> <em>Default value: -32768</em> <br />
+DSM empty cells are filled with this value (optional -32768 by default)</p>
+<p><strong>Method to fuse measures in each DSM cell</strong> <code class="code docutils literal notranslate"><span class="pre">-output.fusionmethod</span> <span class="pre">[max|min|mean|acc]</span></code> <em>Default value: max</em> <br />
+This parameter allows one to choose the method used to fuse elevation measurements in each output DSM cell</p>
+<ul class="simple">
+<li><strong>Maximum</strong> <br /> The cell is filled with the maximum measured elevation values</li>
+<li><strong>Minimum</strong> <br /> The cell is filled with the minimum measured elevation values</li>
+<li><strong>Mean</strong> <br /> The cell is filled with the mean of measured elevation values</li>
+<li><strong>Accumulator</strong> <br /> Accumulator mode. The cell is filled with the the number of values (for debugging purposes).</li>
+</ul>
+<p><strong>Output DSM</strong> <code class="code docutils literal notranslate"><span class="pre">-output.out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Output elevation image</p>
+<p><strong>Parameters estimation modes</strong> <code class="code docutils literal notranslate"><span class="pre">-output.mode</span> <span class="pre">[fit|user]</span></code> <em>Default value: fit</em> <br /></p>
+<ul class="simple">
+<li><strong>Fit to sensor image</strong> <br /> Fit the size, origin and spacing to an existing ortho image (uses the value of outputs.ortho)</li>
+<li><strong>User Defined</strong> <br /> This mode allows you to fully modify default values.</li>
+</ul>
+</div>
+<div class="section" id="user-defined-options">
+<h3><a class="toc-backref" href="#id4">User Defined options</a><a class="headerlink" href="#user-defined-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Upper Left X</strong> <code class="code docutils literal notranslate"><span class="pre">-output.mode.user.ulx</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Cartographic X coordinate of upper-left corner (meters for cartographic projections, degrees for geographic ones)</p>
+<p><strong>Upper Left Y</strong> <code class="code docutils literal notranslate"><span class="pre">-output.mode.user.uly</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Cartographic Y coordinate of the upper-left corner (meters for cartographic projections, degrees for geographic ones)</p>
+<p><strong>Size X</strong> <code class="code docutils literal notranslate"><span class="pre">-output.mode.user.sizex</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+Size of projected image along X (in pixels)</p>
+<p><strong>Size Y</strong> <code class="code docutils literal notranslate"><span class="pre">-output.mode.user.sizey</span> <span class="pre">int</span></code> <em>Mandatory</em> <br />
+Size of projected image along Y (in pixels)</p>
+<p><strong>Pixel Size X</strong> <code class="code docutils literal notranslate"><span class="pre">-output.mode.user.spacingx</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Size of each pixel along X axis (meters for cartographic projections, degrees for geographic ones)</p>
+<p><strong>Pixel Size Y</strong> <code class="code docutils literal notranslate"><span class="pre">-output.mode.user.spacingy</span> <span class="pre">float</span></code> <em>Mandatory</em> <br />
+Size of each pixel along Y axis (meters for cartographic projections, degrees for geographic ones)</p>
+<hr class="docutils" />
+<p><strong>Map Projection</strong> <code class="code docutils literal notranslate"><span class="pre">-map</span> <span class="pre">[utm|lambert2|lambert93|wgs|epsg]</span></code> <em>Default value: wgs</em> <br />
+Defines the map projection to be used.</p>
+<ul class="simple">
+<li><strong>Universal Trans-Mercator (UTM)</strong> <br /> A system of transverse mercator projections dividing the surface of Earth between 80S and 84N latitude.</li>
+<li><strong>Lambert II Etendu</strong> <br /> This is a Lambert Conformal Conic projection mainly used in France.</li>
+<li><strong>Lambert93</strong> <br /> This is a Lambert 93 projection mainly used in France.</li>
+<li><strong>WGS 84</strong> <br /> This is a Geographical projection</li>
+<li><strong>EPSG Code</strong> <br /> This code is a generic way of identifying map projections, and allows specifying a large amount of them. See www.spatialreference.org to find which EPSG code is associated to your projection;</li>
+</ul>
+</div>
+<div class="section" id="universal-trans-mercator-utm-options">
+<h3><a class="toc-backref" href="#id5">Universal Trans-Mercator (UTM) options</a><a class="headerlink" href="#universal-trans-mercator-utm-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Zone number</strong> <code class="code docutils literal notranslate"><span class="pre">-map.utm.zone</span> <span class="pre">int</span></code> <em>Default value: 31</em> <br />
+The zone number ranges from 1 to 60 and allows defining the transverse mercator projection (along with the hemisphere)</p>
+<p><strong>Northern Hemisphere</strong> <code class="code docutils literal notranslate"><span class="pre">-map.utm.northhem</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+The transverse mercator projections are defined by their zone number as well as the hemisphere. Activate this parameter if your image is in the northern hemisphere.</p>
+</div>
+<div class="section" id="epsg-code-options">
+<h3><a class="toc-backref" href="#id6">EPSG Code options</a><a class="headerlink" href="#epsg-code-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>EPSG Code</strong> <code class="code docutils literal notranslate"><span class="pre">-map.epsg.code</span> <span class="pre">int</span></code> <em>Default value: 4326</em> <br />
+See www.spatialreference.org to find which EPSG code is associated to your projection</p>
+</div>
+<div class="section" id="stereorectification-grid-parameters">
+<h3><a class="toc-backref" href="#id7">Stereorectification Grid parameters</a><a class="headerlink" href="#stereorectification-grid-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows one to choose direct and inverse grid subsampling. These parameters are very useful to tune time and memory consumption.</p>
+<p><strong>Step of the displacement grid (in pixels)</strong> <code class="code docutils literal notranslate"><span class="pre">-stereorect.fwdgridstep</span> <span class="pre">int</span></code> <em>Default value: 16</em> <br />
+Stereo-rectification displacement grid only varies slowly. Therefore, it is recommended to use a coarser grid (higher step value) in case of large images</p>
+<p><strong>Sub-sampling rate for epipolar grid inversion</strong> <code class="code docutils literal notranslate"><span class="pre">-stereorect.invgridssrate</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+Grid inversion is an heavy process that implies spline regression on control points. To avoid eating to much memory, this parameter allows one to first sub-sample the field to invert.</p>
+</div>
+<div class="section" id="block-matching-parameters">
+<h3><a class="toc-backref" href="#id8">Block matching parameters</a><a class="headerlink" href="#block-matching-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allow tuning the block-matching behavior</p>
+<p><strong>Block-matching metric</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.metric</span> <span class="pre">[ssdmean|ssd|ncc|lp]</span></code> <em>Default value: ssdmean</em> <br />
+Metric used to compute matching score</p>
+<ul class="simple">
+<li><strong>Sum of Squared Distances divided by mean of block</strong> <br /> derived version of Sum of Squared Distances between pixels value in the metric window (SSD divided by mean over window)</li>
+<li><strong>Sum of Squared Distances</strong> <br /> Sum of squared distances between pixels value in the metric window</li>
+<li><strong>Normalized Cross-Correlation</strong> <br /> Normalized Cross-Correlation between the left and right windows</li>
+<li><strong>Lp pseudo-norm</strong> <br /> Lp pseudo-norm between the left and right windows</li>
+</ul>
+</div>
+<div class="section" id="lp-pseudo-norm-options">
+<h3><a class="toc-backref" href="#id9">Lp pseudo-norm options</a><a class="headerlink" href="#lp-pseudo-norm-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>p value</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.metric.lp.p</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Value of the p parameter in Lp pseudo-norm (must be positive)</p>
+<hr class="docutils" />
+<p><strong>Correlation window radius (in pixels)</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.radius</span> <span class="pre">int</span></code> <em>Default value: 2</em> <br />
+The radius of blocks in Block-Matching (in pixels)</p>
+<p><strong>Minimum altitude offset (in meters)</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.minhoffset</span> <span class="pre">float</span></code> <em>Default value: -20</em> <br />
+Minimum altitude below the selected elevation source (in meters)</p>
+<p><strong>Maximum altitude offset (in meters)</strong> <code class="code docutils literal notranslate"><span class="pre">-bm.maxhoffset</span> <span class="pre">float</span></code> <em>Default value: 20</em> <br />
+Maximum altitude above the selected elevation source (in meters)</p>
+</div>
+<div class="section" id="postprocessing-parameters">
+<h3><a class="toc-backref" href="#id10">Postprocessing parameters</a><a class="headerlink" href="#postprocessing-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allow use optional filters.</p>
+<p><strong>Use bijection consistency in block matching strategy</strong> <code class="code docutils literal notranslate"><span class="pre">-postproc.bij</span> <span class="pre">bool</span></code> <em>Default value: true</em> <br />
+Use bijection consistency. Right to Left correlation is computed to validate Left to Right disparities. If bijection is not found, the disparity is rejected.</p>
+<p><strong>Use median disparities filtering</strong> <code class="code docutils literal notranslate"><span class="pre">-postproc.med</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+Disparity map can be filtered using median post filtering (disabled by default).</p>
+<p><strong>Correlation metric threshold</strong> <code class="code docutils literal notranslate"><span class="pre">-postproc.metrict</span> <span class="pre">float</span></code> <em>Default value: 0.6</em> <br />
+Use block matching metric output to discard pixels with low correlation value (disabled by default, float value)</p>
+</div>
+<div class="section" id="masks">
+<h3><a class="toc-backref" href="#id11">Masks</a><a class="headerlink" href="#masks" title="Permalink to this headline">¶</a></h3>
+<p><strong>Input left mask</strong> <code class="code docutils literal notranslate"><span class="pre">-mask.left</span> <span class="pre">image</span></code> <br />
+Mask for left input image. Pixel with a null mask value are discarded.</p>
+<p><strong>Input right mask</strong> <code class="code docutils literal notranslate"><span class="pre">-mask.right</span> <span class="pre">image</span></code> <br />
+Mask for right input image. Pixel with a null mask value are discarded.</p>
+<p><strong>Discard pixels with low local variance</strong> <code class="code docutils literal notranslate"><span class="pre">-mask.variancet</span> <span class="pre">float</span></code> <em>Default value: 50</em> <br />
+This parameter allows one to discard pixels whose local variance is too small (the size of the neighborhood is given by the correlation window radius)</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_StereoFramework -input.il sensor_stereo_left.tif sensor_stereo_right.tif -elev.default <span class="m">200</span> -stereorect.fwdgridstep <span class="m">8</span> -stereorect.invgridssrate <span class="m">4</span> -postproc.med <span class="m">1</span> -output.res <span class="m">2</span>.5 -output.out dem.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;StereoFramework&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterStringList</span><span class="p">(</span><span class="s2">&quot;input.il&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;sensor_stereo_left.tif&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_stereo_right.tif&#39;</span><span class="p">])</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;elev.default&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;stereorect.fwdgridstep&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;stereorect.invgridssrate&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;postproc.med&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;output.res&quot;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;output.out&quot;</span><span class="p">,</span> <span class="s2">&quot;dem.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="app_StereoRectificationGridGenerator.html#app-stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a></div>
+<div class="line"><a class="reference internal" href="app_GridBasedImageResampling.html#app-gridbasedimageresampling"><span class="std std-ref">GridBasedImageResampling</span></a></div>
+<div class="line"><a class="reference internal" href="app_BlockMatching.html#app-blockmatching"><span class="std std-ref">BlockMatching</span></a></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_StereoRectificationGridGenerator.html" class="btn btn-neutral float-right" title="StereoRectificationGridGenerator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_FineRegistration.html" class="btn btn-neutral" title="FineRegistration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

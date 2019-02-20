@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OpticalCalibration &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SARCalibration" href="app_SARCalibration.html" />
+    <link rel="prev" title="Calibration" href="Calibration.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Calibration.html">Calibration</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">OpticalCalibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_SARCalibration.html">SARCalibration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Calibration.html">Calibration</a> &raquo;</li>
+        
+      <li>OpticalCalibration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_OpticalCalibration.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opticalcalibration">
+<span id="app-opticalcalibration"></span><h1>OpticalCalibration<a class="headerlink" href="#opticalcalibration" title="Permalink to this headline">¶</a></h1>
+<p>Perform optical calibration TOA/TOC (Top Of Atmosphere/Top Of Canopy). Supported sensors: QuickBird, Ikonos, WorldView2, Formosat, Spot5, Pleiades, Spot6, Spot7. For other sensors the application also allows providing calibration parameters manually.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The application allows converting pixel values from DN (for Digital Numbers) to reflectance. Calibrated values are called surface reflectivity and its values lie in the range [0, 1].
+The first level is called Top Of Atmosphere (TOA) reflectivity. It takes into account the sensor gain, sensor spectral response and the solar illuminations.
+The second level is called Top Of Canopy (TOC) reflectivity. In addition to sensor gain and solar illuminations, it takes into account the optical thickness of the atmosphere, the atmospheric pressure, the water vapor amount, the ozone amount, as well as the composition and amount of aerosol gasses.
+It is also possible to indicate an AERONET file which contains atmospheric parameters (version 1 and version 2 of Aeronet file are supported. Note that computing TOC reflectivity will internally compute first TOA and then TOC reflectance.</p>
+<hr class="docutils" />
+<p>If the sensor is not supported by the metadata interface factory of OTB, users still have the possibility to give the needed parameters to the application.
+For TOA conversion, these parameters are:
+- day and month of acquisition, or flux normalization coefficient, or solar distance (in AU);
+- sun elevation angle;
+- gains and biases, one pair of values for each band (passed by a file);
+- solar illuminations, one value for each band (passed by a file).</p>
+<p>For the conversion from DN (for Digital Numbers) to spectral radiance (or ‘TOA radiance’) L, the following formula is used:</p>
+<ol class="arabic simple">
+<li>L(b) = DN(b)/gain(b)+bias(b)    (in W/m2/steradians/micrometers)        with b being a band ID.</li>
+</ol>
+<p>These values are provided by the user thanks to a simple txt file with two lines, one for the gains and one for the biases.
+Each value must be separated with colons (:), with eventual spaces. Blank lines are not allowed. If a line begins with the ‘#’ symbol, then it is considered as comments.
+Note that sometimes, the values provided by certain metadata files assume the formula L(b) = gain(b)*DC(b)+bias(b).
+In this case, be sure to provide the inverse gain values so that the application can correctly interpret them.</p>
+<p>In order to convert TOA radiance to TOA reflectance, the following formula is used:</p>
+<ol class="arabic simple" start="2">
+<li>R(b) = (pi*L(b)*d*d) / (ESUN(b)*cos(θ)) (no dimension)  where:</li>
+</ol>
+<ul class="simple">
+<li>L(b) is the spectral radiance for band b</li>
+<li>pi is the famous mathematical constant (3.14159…)</li>
+<li>d is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month</li>
+<li>ESUN(b) is the mean TOA solar irradiance (or solar illumination) in W/m2/micrometers</li>
+<li>θ is the solar zenith angle in degrees.</li>
+</ul>
+<p>Note that the application asks for the solar elevation angle, and will perform the conversion to the zenith angle itself (zenith_angle = 90 - elevation_angle , units: degrees).
+Note also that ESUN(b) not only depends on the band b, but also on the spectral sensitivity of the sensor in this particular band. In other words, the influence of spectral sensitivities is included within the ESUN different values.
+These values are provided by the user thanks to a txt file following the same convention as before.
+Instead of providing the date of acquisition, the user can also provide a flux normalization coefficient or a solar distance (in AU) ‘fn’. The formula used instead will be the following :</p>
+<ol class="arabic simple" start="3">
+<li>R(b) = (pi*L(b)) / (ESUN(b)*fn*fn*cos(θ))</li>
+</ol>
+<p>Whatever the formula used (2 or 3), the user should pay attention to the interpretation of the parameters he will provide to the application, by taking into account the original formula that the metadata files assumes.</p>
+<p>Below, we give two examples of txt files containing information about gains/biases and solar illuminations :</p>
+<ul class="simple">
+<li>gainbias.txt :</li>
+</ul>
+<p># Gain values for each band. Each value must be separated with colons (:), with eventual spaces. Blank lines not allowed.
+10.4416 : 9.529 : 8.5175 : 14.0063
+# Bias values for each band.
+0.0 : 0.0 : 0.0 : 0.0</p>
+<ul class="simple">
+<li>solarillumination.txt :</li>
+</ul>
+<p># Solar illumination values in watt/m2/micron (‘micron’ means actually ‘for each band’).
+# Each value must be separated with colons (:), with eventual spaces. Blank lines not allowed.
+1540.494123 : 1826.087443 : 1982.671954 : 1094.747446</p>
+<p>Finally, the ‘Logs’ tab provides useful messages that can help the user in knowing the process different status.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#acquisition-parameters" id="id1">Acquisition parameters</a></li>
+<li><a class="reference internal" href="#sun-angles" id="id2">Sun angles</a></li>
+<li><a class="reference internal" href="#viewing-angles" id="id3">Viewing angles</a></li>
+<li><a class="reference internal" href="#atmospheric-parameters-for-toc" id="id4">Atmospheric parameters (for TOC)</a></li>
+</ul>
+</div>
+<p><strong>Input</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+Input image filename</p>
+<p><strong>Output</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+Output calibrated image filename</p>
+<p><strong>Calibration Level</strong> <code class="code docutils literal notranslate"><span class="pre">-level</span> <span class="pre">[toa|toatoim|toc]</span></code> <em>Default value: toa</em> <br /></p>
+<ul class="simple">
+<li><strong>Image to Top Of Atmosphere reflectance</strong> <br /></li>
+<li><strong>TOA reflectance to Image</strong> <br /></li>
+<li><strong>Image to Top Of Canopy reflectance (atmospheric corrections)</strong> <br /></li>
+</ul>
+<p><strong>Convert to milli reflectance</strong> <code class="code docutils literal notranslate"><span class="pre">-milli</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+Flag to use milli-reflectance instead of reflectance.
+This allows saving the image with integer pixel type (in the range [0, 1000]  instead of floating point in the range [0, 1]. In order to do that, use this option and set the output pixel type (-out filename double for example)</p>
+<p><strong>Clamp of reflectivity values between [0, 1]</strong> <code class="code docutils literal notranslate"><span class="pre">-clamp</span> <span class="pre">bool</span></code> <em>Default value: true</em> <br />
+Clamping in the range [0, 1]. It can be useful to preserve area with specular reflectance.</p>
+<div class="section" id="acquisition-parameters">
+<h3><a class="toc-backref" href="#id1">Acquisition parameters</a><a class="headerlink" href="#acquisition-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group allows setting the parameters related to the acquisition conditions.</p>
+<p><strong>Minute</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.minute</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Minute (0-59)</p>
+<p><strong>Hour</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.hour</span> <span class="pre">int</span></code> <em>Default value: 12</em> <br />
+Hour (0-23)</p>
+<p><strong>Day</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.day</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Day (1-31)</p>
+<p><strong>Month</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.month</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Month (1-12)</p>
+<p><strong>Year</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.year</span> <span class="pre">int</span></code> <em>Default value: 2000</em> <br />
+Year</p>
+<p><strong>Flux Normalization</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.fluxnormcoeff</span> <span class="pre">float</span></code> <br />
+Flux Normalization Coefficient</p>
+<p><strong>Solar distance</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.solardistance</span> <span class="pre">float</span></code> <br />
+Solar distance (in AU)</p>
+</div>
+<div class="section" id="sun-angles">
+<h3><a class="toc-backref" href="#id2">Sun angles</a><a class="headerlink" href="#sun-angles" title="Permalink to this headline">¶</a></h3>
+<p>This group contains the sun angles</p>
+<p><strong>Sun elevation angle (deg)</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.sun.elev</span> <span class="pre">float</span></code> <em>Default value: 90</em> <br />
+Sun elevation angle (in degrees)</p>
+<p><strong>Sun azimuth angle (deg)</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.sun.azim</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+Sun azimuth angle (in degrees)</p>
+</div>
+<div class="section" id="viewing-angles">
+<h3><a class="toc-backref" href="#id3">Viewing angles</a><a class="headerlink" href="#viewing-angles" title="Permalink to this headline">¶</a></h3>
+<p>This group contains the sensor viewing angles</p>
+<p><strong>Viewing elevation angle (deg)</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.view.elev</span> <span class="pre">float</span></code> <em>Default value: 90</em> <br />
+Viewing elevation angle (in degrees)</p>
+<p><strong>Viewing azimuth angle (deg)</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.view.azim</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+Viewing azimuth angle (in degrees)</p>
+<hr class="docutils" />
+<p><strong>Gains or biases</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.gainbias</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Gains or biases</p>
+<p><strong>Solar illuminations</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.solarilluminations</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Solar illuminations (one value per band)</p>
+</div>
+<div class="section" id="atmospheric-parameters-for-toc">
+<h3><a class="toc-backref" href="#id4">Atmospheric parameters (for TOC)</a><a class="headerlink" href="#atmospheric-parameters-for-toc" title="Permalink to this headline">¶</a></h3>
+<p>This group allows setting the atmospheric parameters.</p>
+<p><strong>Aerosol Model</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.aerosol</span> <span class="pre">[noaersol|continental|maritime|urban|desertic]</span></code> <em>Default value: noaersol</em> <br /></p>
+<ul class="simple">
+<li><strong>No Aerosol Model</strong> <br /></li>
+<li><strong>Continental</strong> <br /></li>
+<li><strong>Maritime</strong> <br /></li>
+<li><strong>Urban</strong> <br /></li>
+<li><strong>Desertic</strong> <br /></li>
+</ul>
+<p><strong>Ozone Amount</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.oz</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+Ozone Amount</p>
+<p><strong>Water Vapor Amount</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.wa</span> <span class="pre">float</span></code> <em>Default value: 2.5</em> <br />
+Water Vapor Amount (in saturation fraction of water)</p>
+<p><strong>Atmospheric Pressure</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.pressure</span> <span class="pre">float</span></code> <em>Default value: 1030</em> <br />
+Atmospheric Pressure (in hPa)</p>
+<p><strong>Aerosol Optical Thickness</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.opt</span> <span class="pre">float</span></code> <em>Default value: 0.2</em> <br />
+Aerosol Optical Thickness</p>
+<p><strong>Aeronet File</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.aeronet</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Aeronet file containing atmospheric parameters</p>
+<p><strong>Relative Spectral Response File</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.rsr</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Sensor relative spectral response file
+By default the application gets this information in the metadata</p>
+<p><strong>Window radius (adjacency effects)</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.radius</span> <span class="pre">int</span></code> <em>Default value: 2</em> <br />
+Window radius for adjacency effects correctionsSetting this parameters will enable the correction ofadjacency effects</p>
+<p><strong>Pixel size (in km)</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.pixsize</span> <span class="pre">float</span></code> <em>Default value: 1</em> <br />
+Pixel size (in km )used tocompute adjacency effects, it doesn’t have tomatch the image spacing</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_OpticalCalibration -in QB_1_ortho.tif -level toa -out OpticalCalibration.tif
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;OpticalCalibration&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;QB_1_ortho.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;level&quot;</span><span class="p">,</span><span class="s2">&quot;toa&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;OpticalCalibration.tif&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">The OTB CookBook</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_SARCalibration.html" class="btn btn-neutral float-right" title="SARCalibration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Calibration.html" class="btn btn-neutral" title="Calibration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

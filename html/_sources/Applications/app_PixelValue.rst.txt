@@ -1,0 +1,99 @@
+.. _app-PixelValue:
+
+PixelValue
+==========
+
+
+Get the value of a pixel.
+
+Description
+-----------
+
+This application gives the value of a selected pixel. There are three ways to designate a pixel, with its index, its physical coordinate (in the physical space attached to the image), and with geographical coordinate system. Coordinates will be interpreted differently depending on which mode is chosen.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image
+
+**X coordinate** :code:`-coordx float` *Mandatory* |br|
+This will be the X coordinate interpreted depending on the chosen mode
+
+**Y coordinate** :code:`-coordy float` *Mandatory* |br|
+This will be the Y coordinate interpreted depending on the chosen mode
+
+**Coordinate system used to designate the pixel** :code:`-mode [index|physical|epsg]` *Default value: index* |br|
+Different modes can be selected, default mode is Index.
+
+* **Index** |br| This mode uses the given coordinates as index to locate the pixel.
+
+* **Image physical space** |br| This mode interprets the given coordinates in the image physical space.
+
+* **EPSG coordinates** |br| This mode interprets the given coordinates in the specified geographical coordinate system by the EPSG code.
+
+
+
+EPSG coordinates options
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**EPSG code** :code:`-mode.epsg.code int` |br|
+This code is used to define a geographical coordinate system. If no system is specified, WGS84 (EPSG: 4326) is used by default.
+
+
+
+------------
+
+**Channels** :code:`-cl string1 string2...` |br|
+Displayed channels
+
+**Pixel Value** :code:`-value string` *Mandatory* |br|
+Pixel radiometric value
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_PixelValue -in QB_Toulouse_Ortho_XS.tif -coordx 50 -coordy 100 -cl Channel1
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("PixelValue")
+
+	app.SetParameterString("in", "QB_Toulouse_Ortho_XS.tif")
+	app.SetParameterFloat("coordx", 50)
+	app.SetParameterFloat("coordy", 100)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

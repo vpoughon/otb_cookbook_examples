@@ -1,0 +1,127 @@
+.. _app-LargeScaleMeanShift:
+
+LargeScaleMeanShift
+===================
+
+
+Large-scale segmentation using MeanShift
+
+Description
+-----------
+
+This application chains together the 4 steps of the MeanShit framework, that is the :ref:`app-MeanShiftSmoothing`, the :ref:`app-LSMSSegmentation`, the :ref:`app-LSMSSmallRegionsMerging` and the :ref:`app-LSMSVectorization`.
+
+This application can be a preliminary step for an object-based analysis.
+
+It generates a vector data file containing the regions extracted with the MeanShift algorithm. The spatial and range radius parameters allow adapting the sensitivity of the algorithm depending on the image dynamic and resolution. There is a step to remove small regions whose size (in pixels) is less than the given 'minsize' parameter. These regions are merged to a similar neighbor region. In the output vectors, there are additional fields to describe each region. In particular the mean and standard deviation (for each band) is computed for each region using the input image as support. If an optional 'imfield' image is given, it will be used as support image instead.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image can be any single or multiband image. Beware of pontential imbalance between bands ranges as it may alter euclidean distance.
+
+**Spatial radius** :code:`-spatialr int` *Default value: 5* |br|
+Radius of the spatial neighborhood for averaging. Higher values will result in more smoothing and higher processing time.
+
+**Range radius** :code:`-ranger float` *Default value: 15* |br|
+Threshold on spectral signature euclidean distance (expressed in radiometry unit) to consider neighborhood pixel for averaging. Higher values will be less edge-preserving (more similar to simple average in neighborhood), whereas lower values will result in less noise smoothing. Note that this parameter has no effect on processing time.
+
+**Minimum Segment Size** :code:`-minsize int` *Default value: 50* |br|
+Minimum Segment Size. If, after the  segmentation, a segment is of size strictly lower than this criterion, the segment is merged with the segment that has the closest sepctral signature.
+
+**Size of tiles in pixel (X-axis)** :code:`-tilesizex int` *Default value: 500* |br|
+Size of tiles along the X-axis for tile-wise processing.
+
+**Size of tiles in pixel (Y-axis)** :code:`-tilesizey int` *Default value: 500* |br|
+Size of tiles along the Y-axis for tile-wise processing.
+
+**Output mode** :code:`-mode [vector|raster]` *Default value: vector* |br|
+Type of segmented output
+
+* **Segmentation as vector output** |br| In this mode, the application will produce a vector file or database and compute field values for each region
+
+* **Standard segmentation with labeled raster output** |br| In this mode, the application will produce a standard labeled raster.
+
+
+
+Segmentation as vector output options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Support image for field computation** :code:`-mode.vector.imfield image` |br|
+This is an optional support image that can be used to compute field values in each region. Otherwise, the input image is used as support.
+
+**Output GIS vector file** :code:`-mode.vector.out filename [dtype]` *Mandatory* |br|
+The output GIS vector file, representing the vectorized version of the segmented image where the features of the polygons are the radiometric means and variances.
+
+Standard segmentation with labeled raster output options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**The output raster image** :code:`-mode.raster.out image [dtype]` *Mandatory* |br|
+It corresponds to the output of the small region merging step.
+
+
+
+------------
+
+**Temporary files cleaning** :code:`-cleanup bool` *Default value: true* |br|
+If activated, the application will try to clean all temporary files it created
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_LargeScaleMeanShift -in QB_1_ortho.tif -spatialr 4 -ranger 80 -minsize 16 -mode.vector.out regions.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("LargeScaleMeanShift")
+
+	app.SetParameterString("in", "QB_1_ortho.tif")
+	app.SetParameterInt("spatialr", 4)
+	app.SetParameterFloat("ranger", 80)
+	app.SetParameterInt("minsize", 16)
+	app.SetParameterString("mode.vector.out", "regions.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-MeanShiftSmoothing`
+| :ref:`app-LSMSSegmentation`
+| :ref:`app-LSMSSmallRegionsMerging`
+| :ref:`app-LSMSVectorization`

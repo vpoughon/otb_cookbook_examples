@@ -1,0 +1,106 @@
+.. _app-MorphologicalClassification:
+
+MorphologicalClassification
+===========================
+
+
+Performs morphological convex, concave and flat classification on an input image channel
+
+Description
+-----------
+
+This algorithm is based on the following publication:
+Martino Pesaresi and Jon Alti Benediktsson, Member, IEEE: A new approach for the morphological segmentation of high resolution satellite imagery.
+IEEE Transactions on geoscience and remote sensing, vol. 39, NO. 2, February 2001, p. 309-320.
+
+This application perform the following decision rule to classify a pixel between the three classes Convex, Concave and Flat. Let :math:`f` denote the input image and :math:`\psi_{N}(f)` the geodesic leveling of :math:`f` with a structuring element of size :math:`N`. One can derive the following decision rule to classify :math:`f` into Convex (label :math:`\stackrel{\smile}{k}`), Concave (label :math:`\stackrel{\frown}{k}`) and Flat (label :math:`\bar{k}`):  
+:math:`f(n) = \begin{cases} \stackrel{\smile}{k} & : f-\psi_{N}(f)>\sigma \\ \stackrel{\frown}{k} & : \psi_{N}(f)-f>\sigma \\ \bar{k} & : \mid f - \psi_{N}(f) \mid \leq \sigma \end{cases}`
+
+The output is a labeled image (0: Flat, 1: Convex, 2: Concave)
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to be classified.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The output classified image with 3 different values (0: Flat, 1: Convex, 2: Concave)
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index for input image
+
+**Structuring Element Type** :code:`-structype [ball|cross]` *Default value: ball* |br|
+Choice of the structuring element type
+
+* **Ball** |br| 
+
+* **Cross** |br| 
+
+
+
+**Radius** :code:`-radius int` *Default value: 5* |br|
+Radius of the structuring element (in pixels), default value is 5.
+
+**Sigma value for leveling tolerance** :code:`-sigma float` *Default value: 0.5* |br|
+Sigma value for leveling tolerance, default value is 0.5.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_MorphologicalClassification -in ROI_IKO_PAN_LesHalles.tif -channel 1 -structype ball -radius 5 -sigma 0.5 -out output.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("MorphologicalClassification")
+
+	app.SetParameterString("in", "ROI_IKO_PAN_LesHalles.tif")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterString("structype","ball")
+	app.SetParameterInt("radius", 5)
+	app.SetParameterFloat("sigma", 0.5)
+	app.SetParameterString("out", "output.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Generation of the morphological classification is not streamable, pay attention to this fact when setting the radius size of the structuring element.
+
+See also
+--------
+
+| otbConvexOrConcaveClassificationFilter class

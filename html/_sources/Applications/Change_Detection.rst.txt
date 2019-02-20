@@ -1,0 +1,8 @@
+Change Detection
+================
+
+.. toctree::
+	:maxdepth: 1
+
+
+	app_MultivariateAlterationDetector

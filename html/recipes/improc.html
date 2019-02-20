@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image processing and information extraction &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BandMathImageFilterX (based on muParserX)" href="bandmathx.html" />
+    <link rel="prev" title="Residual registration" href="residual_registration.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Image processing and information extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simple-calculus-with-channels">Simple calculus with channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#images-with-no-data-values">Images with no-data values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#segmentation">Segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#large-scale-mean-shift-lsms-segmentation">Large-Scale Mean-Shift (LSMS) segmentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-mean-shift-smoothing">Step 1: Mean-Shift Smoothing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-segmentation">Step 2: Segmentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-optional-merging-small-regions">Step 3 (optional): Merging small regions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-vectorization">Step 4: Vectorization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#all-in-one">All-in-one</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dempster-shafer-based-classifier-fusion">Dempster Shafer based Classifier Fusion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fuzzy-model-requisite">Fuzzy Model (requisite)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#first-step-compute-descriptors">First Step: Compute Descriptors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-step-feature-validation">Second Step: Feature Validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>Image processing and information extraction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/improc.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="image-processing-and-information-extraction">
+<h1>Image processing and information extraction<a class="headerlink" href="#image-processing-and-information-extraction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="simple-calculus-with-channels">
+<h2>Simple calculus with channels<a class="headerlink" href="#simple-calculus-with-channels" title="Permalink to this headline">¶</a></h2>
+<p>The <em>BandMath</em> application provides a simple and efficient way to
+perform band operations. The command line application and the
+corresponding Monteverdi module (shown in the section [Band:sub:<cite>m</cite>ath
+module]) are based on the same standards. It computes a band wise
+operation according to a user defined mathematical expression. The
+following code computes the absolute difference between first bands of
+two images.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">input_image_1</span> <span class="n">input_image_2</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;abs(im1b1 - im2b1)&quot;</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span>
+</pre></div>
+</div>
+<p>The naming convention “im[x]b[y]” designates the yth band of the xth
+input image.</p>
+<p>The <em>BandMath</em> application embeds built-in operators and functions
+listed in <a class="reference external" href="http://muparser.sourceforge.net/mup_features.html#idDef2">muparser documentation</a> thus
+allowing a vast choice of possible operations.</p>
+</div>
+<div class="section" id="images-with-no-data-values">
+<h2>Images with no-data values<a class="headerlink" href="#images-with-no-data-values" title="Permalink to this headline">¶</a></h2>
+<p>Image files can contain a no-data value in their metadata. It represents
+a special pixel value that should be treated as “no data available for
+this pixel”. For instance, SRTM tiles use a particular no-data value of
+-32768 (usually found on sea areas).</p>
+<p>On multiband images, the no-data values are handled independently for
+each band. The case of an image with no-data values defined only for a
+subset of its bands is supported.</p>
+<p>This metadata is now handled by OTB image readers and writer (using the
+GDAL driver). The no-data value can be read from an image files and
+stored in the image metadata dictionary. It can also be exported by
+image writers. The OTB filters that produce a no-data value are able to
+export this value so that the output file will store it.</p>
+<p>An application has been created to manage the no-data value. The
+application has the following features:</p>
+<ul class="simple">
+<li>Build a mask corresponding to the no-data pixels in the input image:
+it gives you a binary image of the no-data pixels in your input
+image.</li>
+<li>Change the no-data value of the input image: it will change all
+pixels that carry the old no-data value to the new one and update the
+metadata</li>
+<li>Apply an external mask to the input image as no-data: all the pixels
+that corresponds have a null mask value are flagged as no-data in the
+output image.</li>
+</ul>
+<p>For instance, the following command converts the no-data value of the
+input image to the default value for DEM (which is -32768):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ManageNoData</span> <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">mode</span> <span class="n">changevalue</span>
+                    <span class="o">-</span><span class="n">mode</span><span class="o">.</span><span class="n">changevalue</span><span class="o">.</span><span class="n">newv</span> <span class="o">-</span><span class="mi">32768</span>
+</pre></div>
+</div>
+<p>The third mode “apply” can be useful if you apply a formula to the
+entire image. This will likely change the values of pixels flagged as
+no-data, but the no-data value in the image metadata does not change. If
+you want to fix all no-data pixels to their original value, you can
+extract the mask of the original image and apply it on the output image.
+For instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ManageNoData</span> <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">out</span> <span class="n">mask</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">mode</span> <span class="n">buildmask</span>
+
+<span class="n">otbcli_BandMath</span> <span class="o">-</span><span class="n">il</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">out</span> <span class="n">filtered_image</span><span class="o">.</span><span class="n">tif</span>
+                <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;2*im1b1-4&quot;</span>
+
+<span class="n">otbcli_ManageNoData</span> <span class="o">-</span><span class="ow">in</span> <span class="n">filtered_image</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span><span class="o">.</span><span class="n">tif</span>
+                    <span class="o">-</span><span class="n">mode</span> <span class="n">apply</span>
+                    <span class="o">-</span><span class="n">mode</span><span class="o">.</span><span class="n">apply</span><span class="o">.</span><span class="n">mask</span> <span class="n">mask</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>You can also use this “apply” mode with an additional parameter
+“mode.apply.ndval”. This parameter sets the output nodata value
+of the input mask.</p>
+</div>
+<div class="section" id="segmentation">
+<h2>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h2>
+<p>Segmenting objects across a very high resolution scene and with a
+controlled quality is a difficult task for which no method has reached a
+sufficient level of performance to be considered as operational.</p>
+<p>Even if we leave aside the question of segmentation quality and consider
+that we have a method performing reasonably well on our data and objects
+of interest, the task of scaling up segmentation to real very high
+resolution data is itself challenging. First, we can not load the whole
+data into memory, and there is a need for on the flow processing which
+does not cope well with traditional segmentation algorithms. Second, the
+result of the segmentation process itself is difficult to represent and
+manipulate efficiently.</p>
+<p>The experience of segmenting large remote sensing images is packed into
+a single <em>Segmentation</em> in <strong>OTB Applications</strong> .</p>
+<p>You can find more information about this application
+<a class="reference external" href="http://blog.orfeo-toolbox.org/preview/coming-next-large-scale-segmentation">here</a>.</p>
+</div>
+<div class="section" id="large-scale-mean-shift-lsms-segmentation">
+<h2>Large-Scale Mean-Shift (LSMS) segmentation<a class="headerlink" href="#large-scale-mean-shift-lsms-segmentation" title="Permalink to this headline">¶</a></h2>
+<p>LSMS is a segmentation workflow which allows to perform tile-wise
+segmentation of very large image with theoretical guarantees of getting
+identical results to those without tiling.</p>
+<p>It has been developed by David Youssefi and Julien Michel during David
+internship at CNES.</p>
+<p>For more a complete description of the LSMS method, please refer to the
+following publication, <em>J. Michel, D. Youssefi and M. Grizonnet, “Stable
+Mean-Shift Algorithm and Its Application to the Segmentation of
+Arbitrarily Large Remote Sensing Images,” in IEEE Transactions on
+Geoscience and Remote Sensing, vol. 53, no. 2, pp. 952-964, Feb. 2015.</em>
+The workflow consists in chaining 3 or 4 dedicated applications and
+produces a GIS vector file with artifact-free polygons corresponding to
+the segmented image, as well as mean and variance of the radiometry of
+each band for each polygon.</p>
+<div class="section" id="step-1-mean-shift-smoothing">
+<h3>Step 1: Mean-Shift Smoothing<a class="headerlink" href="#step-1-mean-shift-smoothing" title="Permalink to this headline">¶</a></h3>
+<p>The first step of the workflow is to perform Mean-Shift smoothing with
+the <em>MeanShiftSmoothing</em> application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_MeanShiftSmoothing</span> <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                          <span class="o">-</span><span class="n">fout</span> <span class="n">filtered_range</span><span class="o">.</span><span class="n">tif</span>
+                          <span class="o">-</span><span class="n">foutpos</span> <span class="n">filtered_spatial</span><span class="o">.</span><span class="n">tif</span>
+                          <span class="o">-</span><span class="n">ranger</span> <span class="mi">30</span>
+                          <span class="o">-</span><span class="n">spatialr</span> <span class="mi">5</span>
+                          <span class="o">-</span><span class="n">maxiter</span> <span class="mi">10</span>
+                          <span class="o">-</span><span class="n">modesearch</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Note that the <em>modesearch</em> option should be disabled, and that the
+<em>foutpos</em> parameter is optional: it can be activated if you want to
+perform the segmentation based on both spatial and range modes.</p>
+<p>This application will smooth large images by streaming them, and
+deactivating the <em>modesearch</em> will guarantee that the results will not
+depend on the streaming scheme. Please also note that the <em>maxiter</em> is
+used to set the margin to ensure these identical results, and as such
+increasing the <em>maxiter</em> may have an additional impact on processing
+time.</p>
+</div>
+<div class="section" id="step-2-segmentation">
+<h3>Step 2: Segmentation<a class="headerlink" href="#step-2-segmentation" title="Permalink to this headline">¶</a></h3>
+<p>The next step is to produce an initial segmentation based on the
+smoothed images produced by the <em>MeanShiftSmoothing</em> application. To do
+so, the <em>LSMSSegmentation</em> will process them by tiles whose dimensions
+are defined by the <em>tilesizex</em> and <em>tilesizey</em> parameters, and by
+writing intermediate images to disk, thus keeping the memory consumption
+very low throughout the process. The segmentation will group together
+neighboring pixels whose range distance is below the <em>ranger</em> parameter and
+(optionally) spatial distance is below the <em>spatialr</em> parameter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_LSMSSegmentation</span> <span class="o">-</span><span class="ow">in</span> <span class="n">filtered_range</span><span class="o">.</span><span class="n">tif</span>
+                        <span class="o">-</span><span class="n">inpos</span> <span class="n">filtered_spatial</span><span class="o">.</span><span class="n">tif</span>
+                        <span class="o">-</span><span class="n">out</span>  <span class="n">segmentation</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint32</span>
+                        <span class="o">-</span><span class="n">ranger</span> <span class="mi">30</span>
+                        <span class="o">-</span><span class="n">spatialr</span> <span class="mi">5</span>
+                        <span class="o">-</span><span class="n">minsize</span> <span class="mi">0</span>
+                        <span class="o">-</span><span class="n">tilesizex</span> <span class="mi">256</span>
+                        <span class="o">-</span><span class="n">tilesizey</span> <span class="mi">256</span>
+</pre></div>
+</div>
+<p>Note that the final segmentation image may contains a very large number
+of segments, and the <em>uint32</em> image type should therefore be used to
+ensure that there will be enough labels to index those segments. The
+<em>minsize</em> parameter will filter segments whose size in pixels is below
+its value, and their labels will be set to 0 (nodata).</p>
+<p>Please note that the output segmented image may look patchy, as if there
+were tiling artifacts: this is because segments are numbered
+sequentially with respect to the order in which tiles are processed. You
+will see after the result of the vectorization step that there are no
+artifacts in the results.</p>
+<p>The <em>LSMSSegmentation</em> application will write as many intermediate files
+as tiles needed during processing. As such, it may require twice as free
+disk space as the final size of the final image. The <em>cleanup</em> option
+(active by default) will clear the intermediate files during the
+processing as soon as they are not needed anymore. By default, files
+will be written to the current directory. The <em>tmpdir</em> option allows to
+specify a different directory for these intermediate files.</p>
+</div>
+<div class="section" id="step-3-optional-merging-small-regions">
+<h3>Step 3 (optional): Merging small regions<a class="headerlink" href="#step-3-optional-merging-small-regions" title="Permalink to this headline">¶</a></h3>
+<p>The <em>LSMSSegmentation</em> application allows to filter out small segments.
+In the output segmented image, those segments will be removed and
+replaced by the background label (0). Another solution to deal with the
+small regions is to merge them with the closest big enough adjacent
+region in terms of radiometry. This is handled by the
+<em>LSMSSmallRegionsMerging</em> application, which will output a segmented
+image where small regions have been merged. Again, the <em>uint32</em> image
+type is advised for this output image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_LSMSSmallRegionsMerging</span> <span class="o">-</span><span class="ow">in</span> <span class="n">filtered_range</span><span class="o">.</span><span class="n">tif</span>
+                               <span class="o">-</span><span class="n">inseg</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">tif</span>
+                               <span class="o">-</span><span class="n">out</span> <span class="n">segmentation_merged</span><span class="o">.</span><span class="n">tif</span> <span class="n">uint32</span>
+                               <span class="o">-</span><span class="n">minsize</span> <span class="mi">10</span>
+                               <span class="o">-</span><span class="n">tilesizex</span> <span class="mi">256</span>
+                               <span class="o">-</span><span class="n">tilesizey</span> <span class="mi">256</span>
+</pre></div>
+</div>
+<p>The <em>minsize</em> parameter allows to specify the threshold on the size of
+the regions to be merged. Like the <em>LSMSSegmentation</em> application, this
+application will process the input images tile-wise to keep resources
+usage low, with the guarantee of identical results. You can set the tile
+size using the <em>tilesizex</em> and <em>tilesizey</em> parameters. However unlike
+the <em>LSMSSegmentation</em> application, it does not require to write any
+temporary file to disk.</p>
+</div>
+<div class="section" id="step-4-vectorization">
+<h3>Step 4: Vectorization<a class="headerlink" href="#step-4-vectorization" title="Permalink to this headline">¶</a></h3>
+<p>The last step of the LSMS workflow consists in the vectorization of the
+segmented image into a GIS vector file. This vector file will contain
+one polygon per segment, and each of these polygons will hold additional
+attributes denoting the label of the original segment, the size of the
+segment in pixels, and the mean and variance of each band over the
+segment. The projection of the output GIS vector file will be the same
+as the projection from the input image (if input image has no
+projection, so does the output GIS file).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_LSMSVectorization</span> <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                         <span class="o">-</span><span class="n">inseg</span> <span class="n">segmentation_merged</span><span class="o">.</span><span class="n">tif</span>
+                         <span class="o">-</span><span class="n">out</span> <span class="n">segmentation_merged</span><span class="o">.</span><span class="n">shp</span>
+                         <span class="o">-</span><span class="n">tilesizex</span> <span class="mi">256</span>
+                         <span class="o">-</span><span class="n">tilesizey</span> <span class="mi">256</span>
+</pre></div>
+</div>
+<p>This application will process the input images tile-wise to keep
+resources usage low, with the guarantee of identical results. You can
+set the tile size using the <em>tilesizex</em> and <em>tilesizey</em> parameters.
+However unlike the <em>LSMSSegmentation</em> application, it does not require
+to write any temporary file to disk.</p>
+</div>
+<div class="section" id="all-in-one">
+<h3>All-in-one<a class="headerlink" href="#all-in-one" title="Permalink to this headline">¶</a></h3>
+<p>The <em>LargeScaleMeanShift</em> application is a composite application that chains
+all the previous steps:</p>
+<ul class="simple">
+<li>Mean-Shift Smoothing</li>
+<li>Segmentation</li>
+<li>Small region merging</li>
+<li>Vectorization</li>
+</ul>
+<p>Most of the settings from the previous applications are also exposed in this
+composite application. The range and spatial radius used for the segmentation
+step are half the values used for Mean-Shift smoothing, which are obtained from
+LargeScaleMeanShift parameters. There are two output modes: vector (default)
+and raster. When the raster output is chosen, last step (vectorization) is
+skipped.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_LargeScaleMeanShift</span> <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                           <span class="o">-</span><span class="n">spatialr</span> <span class="mi">5</span>
+                           <span class="o">-</span><span class="n">ranger</span> <span class="mi">30</span>
+                           <span class="o">-</span><span class="n">minsize</span> <span class="mi">10</span>
+                           <span class="o">-</span><span class="n">mode</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">out</span> <span class="n">segmentation_merged</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+<p>There is a cleanup option that can be disabled in order to check intermediate
+outputs of this composite application.</p>
+</div>
+</div>
+<div class="section" id="dempster-shafer-based-classifier-fusion">
+<h2>Dempster Shafer based Classifier Fusion<a class="headerlink" href="#dempster-shafer-based-classifier-fusion" title="Permalink to this headline">¶</a></h2>
+<p>This framework is dedicated to perform cartographic validation starting
+from the result of a detection (for example a road extraction), enhance
+the results viability by using a classifier fusion algorithm. Using a
+set of descriptors, the processing chain validates or invalidates the
+input geometrical features.</p>
+<div class="section" id="fuzzy-model-requisite">
+<h3>Fuzzy Model (requisite)<a class="headerlink" href="#fuzzy-model-requisite" title="Permalink to this headline">¶</a></h3>
+<p>The <em>DSFuzzyModelEstimation</em> application performs the fuzzy model
+estimation (once by use case: descriptor set / Belief support /
+Plausibility support). It has the following input parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-psin</span></code> a vector data of positive samples enriched according to the
+“Compute Descriptors” part</li>
+<li><code class="docutils literal notranslate"><span class="pre">-nsin</span></code> a vector data of negative samples enriched according to the
+“Compute Descriptors” part</li>
+<li><code class="docutils literal notranslate"><span class="pre">-belsup</span></code> a support for the Belief computation</li>
+<li><code class="docutils literal notranslate"><span class="pre">-plasup</span></code> a support for the Plausibility computation</li>
+<li><code class="docutils literal notranslate"><span class="pre">-desclist</span></code> an initialization model (xml file) or a descriptor name
+list (listing the descriptors to be included in the model)</li>
+</ul>
+<p>The application can be used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_DSFuzzyModelEstimation</span> <span class="o">-</span><span class="n">psin</span>     <span class="n">PosSamples</span><span class="o">.</span><span class="n">shp</span>
+                              <span class="o">-</span><span class="n">nsin</span>     <span class="n">NegSamples</span><span class="o">.</span><span class="n">shp</span>
+                              <span class="o">-</span><span class="n">belsup</span>   <span class="s2">&quot;ROADSA&quot;</span>
+                              <span class="o">-</span><span class="n">plasup</span>   <span class="s2">&quot;NONDVI&quot;</span> <span class="s2">&quot;ROADSA&quot;</span> <span class="s2">&quot;NOBUIL&quot;</span>
+                              <span class="o">-</span><span class="n">desclist</span> <span class="s2">&quot;NONDVI&quot;</span> <span class="s2">&quot;ROADSA&quot;</span> <span class="s2">&quot;NOBUIL&quot;</span>
+                              <span class="o">-</span><span class="n">out</span>      <span class="n">FuzzyModel</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>The output file <code class="docutils literal notranslate"><span class="pre">FuzzyModel.xml</span></code> contains the optimal model to perform
+information fusion.</p>
+</div>
+<div class="section" id="first-step-compute-descriptors">
+<h3>First Step: Compute Descriptors<a class="headerlink" href="#first-step-compute-descriptors" title="Permalink to this headline">¶</a></h3>
+<p>The first step in the classifier fusion based validation is to compute,
+for each studied polyline, the chosen descriptors. In this context, the
+<em>ComputePolylineFeatureFromImage</em> application can be used for a large
+range of descriptors. It has the following inputs:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-in</span></code> an image (of the studied scene) corresponding to the chosen
+descriptor (NDVI, building Mask…)</li>
+<li><code class="docutils literal notranslate"><span class="pre">-vd</span></code> a vector data containing polyline of interest</li>
+<li><code class="docutils literal notranslate"><span class="pre">-expr</span></code> a formula (“b1 &gt;0.4”, “b1 == 0”) where b1 is the standard
+name of input image first band</li>
+<li><code class="docutils literal notranslate"><span class="pre">-field</span></code> a field name corresponding to the descriptor codename
+(NONDVI, ROADSA…)</li>
+</ul>
+<p>The output is a vector data containing polylines with a new field
+containing the descriptor value. In order to add the “NONDVI” descriptor
+to an input vector data (“inVD.shp”) corresponding to the percentage of
+pixels along a polyline that verifies the formula “NDVI &gt;0.4”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ComputePolylineFeatureFromImage</span> <span class="o">-</span><span class="ow">in</span>   <span class="n">NDVI</span><span class="o">.</span><span class="n">TIF</span>
+                                       <span class="o">-</span><span class="n">vd</span>  <span class="n">inVD</span><span class="o">.</span><span class="n">shp</span>
+                                       <span class="o">-</span><span class="n">expr</span>  <span class="s2">&quot;b1 &gt; 0.4&quot;</span>
+                                       <span class="o">-</span><span class="n">field</span> <span class="s2">&quot;NONDVI&quot;</span>
+                                       <span class="o">-</span><span class="n">out</span>   <span class="n">VD_NONDVI</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">NDVI.TIF</span></code> is the NDVI mono band image of the studied scene. This step
+must be repeated for each chosen descriptor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ComputePolylineFeatureFromImage</span> <span class="o">-</span><span class="ow">in</span>   <span class="n">roadSpectralAngle</span><span class="o">.</span><span class="n">TIF</span>
+                                       <span class="o">-</span><span class="n">vd</span>  <span class="n">VD_NONDVI</span><span class="o">.</span><span class="n">shp</span>
+                                       <span class="o">-</span><span class="n">expr</span>  <span class="s2">&quot;b1 &gt; 0.24&quot;</span>
+                                       <span class="o">-</span><span class="n">field</span> <span class="s2">&quot;ROADSA&quot;</span>
+                                       <span class="o">-</span><span class="n">out</span>   <span class="n">VD_NONDVI_ROADSA</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ComputePolylineFeatureFromImage</span> <span class="o">-</span><span class="ow">in</span>   <span class="n">Buildings</span><span class="o">.</span><span class="n">TIF</span>
+                                       <span class="o">-</span><span class="n">vd</span>  <span class="n">VD_NONDVI_ROADSA</span><span class="o">.</span><span class="n">shp</span>
+                                       <span class="o">-</span><span class="n">expr</span>  <span class="s2">&quot;b1 == 0&quot;</span>
+                                       <span class="o">-</span><span class="n">field</span> <span class="s2">&quot;NOBUILDING&quot;</span>
+                                       <span class="o">-</span><span class="n">out</span>   <span class="n">VD_NONDVI_ROADSA_NOBUIL</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+<p>Both <code class="docutils literal notranslate"><span class="pre">NDVI.TIF</span></code> and <code class="docutils literal notranslate"><span class="pre">roadSpectralAngle.TIF</span></code> can be produced using
+<strong>Monteverdi</strong> feature extraction capabilities, and <code class="docutils literal notranslate"><span class="pre">Buildings.TIF</span></code>
+can be generated using <strong>Monteverdi</strong> rasterization module. From now on,
+<code class="docutils literal notranslate"><span class="pre">VD_NONDVI_ROADSA_NOBUIL.shp</span></code> contains three descriptor fields. It
+will be used in the following part.</p>
+</div>
+<div class="section" id="second-step-feature-validation">
+<h3>Second Step: Feature Validation<a class="headerlink" href="#second-step-feature-validation" title="Permalink to this headline">¶</a></h3>
+<p>The final application (<em>VectorDataDSValidation</em> ) will validate or
+invalidate the studied samples using <a class="reference external" href="http://en.wikipedia.org/wiki/Dempster%E2%80%93Shafer_theory">the Dempster-Shafer
+theory</a>
+. Its inputs are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-in</span></code> an enriched vector data “VD_NONDVI_ROADSA_NOBUIL.shp”</li>
+<li><code class="docutils literal notranslate"><span class="pre">-belsup</span></code> a support for the Belief computation</li>
+<li><code class="docutils literal notranslate"><span class="pre">-plasup</span></code> a support for the Plausibility computation</li>
+<li><code class="docutils literal notranslate"><span class="pre">-descmod</span></code> a fuzzy model FuzzyModel.xml</li>
+</ul>
+<p>The output is a vector data containing only the validated samples.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_VectorDataDSValidation</span> <span class="o">-</span><span class="ow">in</span>      <span class="n">extractedRoads_enriched</span><span class="o">.</span><span class="n">shp</span>
+                              <span class="o">-</span><span class="n">descmod</span> <span class="n">FuzzyModel</span><span class="o">.</span><span class="n">xml</span>
+                              <span class="o">-</span><span class="n">out</span>     <span class="n">validatedSamples</span><span class="o">.</span><span class="n">shp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bandmathx.html" class="btn btn-neutral float-right" title="BandMathImageFilterX (based on muParserX)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="residual_registration.html" class="btn btn-neutral" title="Residual registration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

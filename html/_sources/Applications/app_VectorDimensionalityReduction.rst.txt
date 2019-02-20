@@ -1,0 +1,119 @@
+.. _app-VectorDimensionalityReduction:
+
+VectorDimensionalityReduction
+=============================
+
+
+Performs dimensionality reduction of the input vector data according to a model file.
+
+Description
+-----------
+
+This application performs a vector data dimensionality reduction based on a model file produced by the :ref:`app-TrainDimensionalityReduction` application.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Name of the input vector data** :code:`-in vectorfile` *Mandatory* |br|
+The input vector data to reduce.
+
+**Statistics file** :code:`-instat filename [dtype]` |br|
+A XML file containing mean and standard deviation to center and reduce samples before dimensionality reduction (produced by ComputeImagesStatistics application).
+
+**Model file** :code:`-model filename [dtype]` *Mandatory* |br|
+A model file (produced by the TrainDimensionalityReduction application,
+
+**Output vector data file containing the reduced vector** :code:`-out filename [dtype]` |br|
+Output vector data file storing sample values (OGR format). If not given, the input vector data file is used. In overwrite mode, the original features will be lost.
+
+**Input features to use for reduction** :code:`-feat string1 string2...` |br|
+List of field names in the input vector data used as features for reduction.
+
+**Output feature** :code:`-featout [prefix|list]` *Default value: prefix* |br|
+Naming of output features
+
+* **Prefix** |br| Use a name prefix
+
+* **List** |br| Use a list with all names
+
+
+
+Prefix options
+^^^^^^^^^^^^^^
+
+**Feature name prefix** :code:`-featout.prefix.name string` *Default value: reduced_* |br|
+Name prefix for output features. This prefix is followed by the numeric index of each output feature.
+
+List options
+^^^^^^^^^^^^
+
+**Feature name list** :code:`-featout.list.names string1 string2...` *Mandatory* |br|
+List of field names for the output features which result from the reduction.
+
+
+
+------------
+
+**Principal component dimension** :code:`-pcadim int` |br|
+This optional parameter can be set to reduce the number of eignevectors used in the PCA model file. This parameter can't be used for other models
+
+**Writing mode** :code:`-mode [overwrite|update]` *Default value: overwrite* |br|
+This parameter determines if the output file is overwritten or updated [overwrite/update]. If an output file name is given, the original file is copied before creating the new features.
+
+* **Overwrite** |br| Overwrite mode
+
+* **Update** |br| Update mode
+
+
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_VectorDimensionalityReduction -in vectorData.shp -instat meanVar.xml -model model.txt -out vectorDataOut.shp -feat perimeter area width
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("VectorDimensionalityReduction")
+
+	app.SetParameterString("in", "vectorData.shp")
+	app.SetParameterString("instat", "meanVar.xml")
+	app.SetParameterString("model", "model.txt")
+	app.SetParameterString("out", "vectorDataOut.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-TrainDimensionalityReduction`

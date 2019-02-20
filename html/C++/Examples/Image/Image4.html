@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image4.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ImageListExample.cxx" href="ImageListExample.html" />
+    <link rel="prev" title="Image1.cxx" href="Image1.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Image.html">Image</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Image3.html">Image3.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image2.html">Image2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image1.html">Image1.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Image4.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageListExample.html">ImageListExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="VectorImage.html">VectorImage.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Image5.html">Image5.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Image.html">Image</a> &raquo;</li>
+        
+      <li>Image4.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Image/Image4.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="image4-cxx">
+<span id="example-image4"></span><h1>Image4.cxx<a class="headerlink" href="#image4-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Image/Image4.cxx?inline=false">Image4.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 1999-2011 Insight Software Consortium</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+<span class="c1">// Even though OTB can be used to perform</span>
+<span class="c1">// general image processing tasks, the primary purpose of the toolkit is the</span>
+<span class="c1">// processing of remote sensing image data.  In that respect, additional</span>
+<span class="c1">// information about the images is considered mandatory. In particular the</span>
+<span class="c1">// information associated with the physical spacing between pixels and the</span>
+<span class="c1">// position of the image in space with respect to some world coordinate</span>
+<span class="c1">// system are extremely important.</span>
+<span class="c1">//</span>
+<span class="c1">// Image origin and spacing are fundamental to many</span>
+<span class="c1">// applications. Registration, for example, is performed in physical</span>
+<span class="c1">// coordinates. Improperly defined spacing and origins will result in</span>
+<span class="c1">// inconsistent results in such processes. Remote sensing images with no spatial</span>
+<span class="c1">// information should not be used for image analysis,</span>
+<span class="c1">// feature extraction, GIS input, etc. In</span>
+<span class="c1">// other words, remote sensing images lacking spatial information are not only</span>
+<span class="c1">// useless but also hazardous.</span>
+<span class="c1">//</span>
+<span class="c1">// \begin{figure} \center</span>
+<span class="c1">// \includegraphics[width=\textwidth]{ImageOriginAndSpacing.eps}</span>
+<span class="c1">// \itkcaption[OTB Image Geometrical Concepts]{Geometrical concepts associated</span>
+<span class="c1">// with the OTB image.}</span>
+<span class="c1">// \label{fig:ImageOriginAndSpacing}</span>
+<span class="c1">// \end{figure}</span>
+<span class="c1">//</span>
+<span class="c1">// Figure \ref{fig:ImageOriginAndSpacing} illustrates the main geometrical</span>
+<span class="c1">// concepts associated with the \doxygen{otb}{Image}. In this figure,</span>
+<span class="c1">// circles are</span>
+<span class="c1">// used to represent the center of pixels. The value of the pixel is assumed</span>
+<span class="c1">// to exist as a Dirac Delta Function located at the pixel center. Pixel</span>
+<span class="c1">// spacing is measured between the pixel centers and can be different along</span>
+<span class="c1">// each dimension. The image origin is associated with the coordinates of the</span>
+<span class="c1">// first pixel in the image. A \emph{pixel} is considered to be the</span>
+<span class="c1">// rectangular region surrounding the pixel center holding the data</span>
+<span class="c1">// value. This can be viewed as the Voronoi region of the image grid, as</span>
+<span class="c1">// illustrated in the right side of the figure.  Linear interpolation of</span>
+<span class="c1">// image values is performed inside the Delaunay region whose corners</span>
+<span class="c1">// are pixel centers.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkPoint.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">short</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">image</span> <span class="o">=</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">start</span><span class="p">;</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">SizeType</span>  <span class="n">size</span><span class="p">;</span>
+
+  <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="c1">// size along X</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="c1">// size along Y</span>
+
+  <span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// first index on X</span>
+  <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// first index on Y</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">RegionType</span> <span class="n">region</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">SetIndex</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+
+  <span class="n">image</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">region</span><span class="p">);</span>
+  <span class="n">image</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+
+  <span class="n">image</span><span class="o">-&gt;</span><span class="n">FillBuffer</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="c1">// Image spacing is represented in a \code{FixedArray}</span>
+  <span class="c1">// whose size matches the dimension of the image. In order to manually set</span>
+  <span class="c1">// the spacing of the image, an array of the corresponding type must be</span>
+  <span class="c1">// created.  The elements of the array should then be initialized with the</span>
+  <span class="c1">// spacing between the centers of adjacent pixels. The following code</span>
+  <span class="c1">// illustrates the methods available in the Image class for dealing with</span>
+  <span class="c1">// spacing and origin.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::Image!Spacing}</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">SpacingType</span> <span class="n">spacing</span><span class="p">;</span>
+
+  <span class="c1">// Note: measurement units (e.g., meters, feet, etc.) are defined by the application.</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.70</span><span class="p">;</span> <span class="c1">// spacing along X</span>
+  <span class="n">spacing</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.70</span><span class="p">;</span> <span class="c1">// spacing along Y</span>
+
+  <span class="c1">// The array can be assigned to the image using</span>
+  <span class="c1">// the \code{SetSignedSpacing()} method.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::Image!SetSignedSpacing()}</span>
+
+  <span class="n">image</span><span class="o">-&gt;</span><span class="n">SetSignedSpacing</span><span class="p">(</span><span class="n">spacing</span><span class="p">);</span>
+
+  <span class="c1">// The spacing information can be retrieved from an image by using the</span>
+  <span class="c1">// \code{GetSignedSpacing()} method. This method returns a reference to a</span>
+  <span class="c1">// \code{FixedArray}. The returned object can then be used to read the</span>
+  <span class="c1">// contents of the array. Note the use of the \code{const} keyword to indicate</span>
+  <span class="c1">// that the array will not be modified.</span>
+
+  <span class="k">const</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">SpacingType</span><span class="o">&amp;</span> <span class="n">sp</span> <span class="o">=</span> <span class="n">image</span><span class="o">-&gt;</span><span class="n">GetSignedSpacing</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Spacing = &quot;</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// The image origin is managed in a similar way to the spacing.  A</span>
+  <span class="c1">// \code{Point} of the appropriate dimension must first be</span>
+  <span class="c1">// allocated.  The coordinates of the origin can then be assigned to</span>
+  <span class="c1">// every component.  These coordinates correspond to the position of</span>
+  <span class="c1">// the first pixel of the image with respect to an arbitrary</span>
+  <span class="c1">// reference system in physical space. It is the user&#39;s</span>
+  <span class="c1">// responsibility to make sure that multiple images used in the same</span>
+  <span class="c1">// application are using a consistent reference system. This is</span>
+  <span class="c1">// extremely important in image registration applications.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The following code illustrates the creation and assignment of a variable</span>
+  <span class="c1">// suitable for initializing the image origin.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::Image!origin}</span>
+  <span class="c1">// \index{otb::Image!SetOrigin()}</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">PointType</span> <span class="n">origin</span><span class="p">;</span>
+
+  <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">// coordinates of the</span>
+  <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">// first pixel in 2-D</span>
+
+  <span class="n">image</span><span class="o">-&gt;</span><span class="n">SetOrigin</span><span class="p">(</span><span class="n">origin</span><span class="p">);</span>
+
+  <span class="c1">//  The origin can also be retrieved from an image by using the</span>
+  <span class="c1">//  \code{GetOrigin()} method. This will return a reference to a</span>
+  <span class="c1">//  \code{Point}. The reference can be used to read the contents of</span>
+  <span class="c1">//  the array. Note again the use of the \code{const} keyword to indicate</span>
+  <span class="c1">//  that the array contents will not be modified.</span>
+
+  <span class="k">const</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">PointType</span><span class="o">&amp;</span> <span class="n">orgn</span> <span class="o">=</span> <span class="n">image</span><span class="o">-&gt;</span><span class="n">GetOrigin</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Origin = &quot;</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">orgn</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">orgn</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// Once the spacing and origin of the image have been initialized, the image</span>
+  <span class="c1">// will correctly map pixel indices to and from physical space</span>
+  <span class="c1">// coordinates. The following code illustrates how a point in physical</span>
+  <span class="c1">// space can be mapped into an image index for the purpose of reading the</span>
+  <span class="c1">// content of the closest pixel.</span>
+  <span class="c1">//</span>
+  <span class="c1">// First, a \doxygen{itk}{Point} type must be declared. The point type is</span>
+  <span class="c1">// templated over the type used to represent coordinates and over the</span>
+  <span class="c1">// dimension of the space. In this particular case, the dimension of the</span>
+  <span class="c1">// point must match the dimension of the image.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Point</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">ImageDimension</span><span class="o">&gt;</span> <span class="n">PointType</span><span class="p">;</span>
+
+  <span class="c1">// The Point class, like an \doxygen{itk}{Index}, is a relatively small and</span>
+  <span class="c1">// simple object.  For this reason, it is not reference-counted like the</span>
+  <span class="c1">// large data objects in OTB.  Consequently, it is also not manipulated</span>
+  <span class="c1">// with \doxygen{itk}{SmartPointer}s.  Point objects are simply declared as</span>
+  <span class="c1">// instances of any other C++ class.  Once the point is declared, its</span>
+  <span class="c1">// components can be accessed using traditional array notation. In</span>
+  <span class="c1">// particular, the \code{[]} operator is available. For efficiency reasons,</span>
+  <span class="c1">// no bounds checking is performed on the index used to access a particular</span>
+  <span class="c1">// point component. It is the user&#39;s responsibility to make sure that the</span>
+  <span class="c1">// index is in the range $\{0, Dimension-1\}$.</span>
+
+  <span class="n">PointType</span> <span class="n">point</span><span class="p">;</span>
+
+  <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.45</span><span class="p">;</span> <span class="c1">// x coordinate</span>
+  <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">7.21</span><span class="p">;</span> <span class="c1">// y coordinate</span>
+
+  <span class="c1">// The image will map the point to an index using the values of the</span>
+  <span class="c1">// current spacing and origin. An index object must be provided to</span>
+  <span class="c1">// receive the results of the mapping. The index object can be</span>
+  <span class="c1">// instantiated by using the \code{IndexType} defined in the Image</span>
+  <span class="c1">// type.</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">pixelIndex</span><span class="p">;</span>
+
+  <span class="c1">// The \code{TransformPhysicalPointToIndex()} method of the image class</span>
+  <span class="c1">// will compute the pixel index closest to the point provided. The method</span>
+  <span class="c1">// checks for this index to be contained inside the current buffered pixel</span>
+  <span class="c1">// data. The method returns a boolean indicating whether the resulting</span>
+  <span class="c1">// index falls inside the buffered region or not. The output index should</span>
+  <span class="c1">// not be used when the returned value of the method is \code{false}.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The following lines illustrate the point to index mapping and the</span>
+  <span class="c1">// subsequent use of the pixel index for accessing pixel data from the</span>
+  <span class="c1">// image.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{otb::Image!TransformPhysicalPointToIndex()}</span>
+
+  <span class="kt">bool</span> <span class="n">isInside</span> <span class="o">=</span> <span class="n">image</span><span class="o">-&gt;</span><span class="n">TransformPhysicalPointToIndex</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">pixelIndex</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">isInside</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">ImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">pixelValue</span> <span class="o">=</span> <span class="n">image</span><span class="o">-&gt;</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">pixelIndex</span><span class="p">);</span>
+
+    <span class="n">pixelValue</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
+
+    <span class="n">image</span><span class="o">-&gt;</span><span class="n">SetPixel</span><span class="p">(</span><span class="n">pixelIndex</span><span class="p">,</span> <span class="n">pixelValue</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Remember that \code{GetPixel()} and \code{SetPixel()} are very</span>
+  <span class="c1">// inefficient methods for accessing pixel data. Image iterators should be</span>
+  <span class="c1">// used when massive access to pixel data is required.</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ImageListExample.html" class="btn btn-neutral float-right" title="ImageListExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Image1.html" class="btn btn-neutral" title="Image1.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

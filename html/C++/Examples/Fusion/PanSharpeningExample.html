@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PanSharpeningExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="BayesianFusionImageFilter.cxx" href="BayesianFusionImageFilter.html" />
+    <link rel="prev" title="Fusion" href="../Fusion.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Fusion.html">Fusion</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">PanSharpeningExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BayesianFusionImageFilter.html">BayesianFusionImageFilter.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Fusion.html">Fusion</a> &raquo;</li>
+        
+      <li>PanSharpeningExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Fusion/PanSharpeningExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pansharpeningexample-cxx">
+<span id="example-pansharpeningexample"></span><h1>PanSharpeningExample.cxx<a class="headerlink" href="#pansharpeningexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./example Input/QB_Toulouse_Ortho_PAN.tif <span class="se">\</span>
+          Input/QB_Toulouse_Ortho_XS.tif <span class="se">\</span>
+          Output/QB_Toulouse_Ortho_PXS.tif <span class="se">\</span>
+          Output/pretty_QB_Toulouse_Ortho_PXS.png <span class="se">\</span>
+          Output/pretty_QB_Toulouse_Ortho_PAN.png <span class="se">\</span>
+          Output/pretty_QB_Toulouse_Ortho_XS.png
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Fusion/PanSharpeningExample.cxx?inline=false">PanSharpeningExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 1999-2011 Insight Software Consortium</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+
+<span class="c1">// Here we are illustrating the use of the</span>
+<span class="c1">// \doxygen{otb}{SimpleRcsPanSharpeningFusionImageFilter} for PAN-sharpening.</span>
+<span class="c1">// This example takes a PAN and the corresponding XS images as input. These</span>
+<span class="c1">// images are supposed to be registered.</span>
+<span class="c1">//</span>
+<span class="c1">// The fusion operation is defined as</span>
+<span class="c1">//</span>
+<span class="c1">// \begin{equation}</span>
+<span class="c1">// \frac{XS}{\mathrm{Filtered}(PAN)} PAN</span>
+<span class="c1">// \end{equation}</span>
+
+<span class="c1">// Figure~\ref{fig:PANSHARP_FILTER} shows the result of applying</span>
+<span class="c1">// this PAN sharpening filter to a Quickbird image.</span>
+<span class="c1">// \begin{figure}</span>
+<span class="c1">// \center</span>
+<span class="c1">// \includegraphics[width=0.44\textwidth]{pretty_QB_Toulouse_Ortho_PAN.eps}</span>
+<span class="c1">// \includegraphics[width=0.44\textwidth]{pretty_QB_Toulouse_Ortho_XS.eps}</span>
+<span class="c1">// \includegraphics[width=0.44\textwidth]{pretty_QB_Toulouse_Ortho_PXS.eps}</span>
+<span class="c1">// \itkcaption[Pan sharpening]{Result of applying</span>
+<span class="c1">// the \doxygen{otb}{SimpleRcsPanSharpeningFusionImageFilter} to</span>
+<span class="c1">// orthorectified Quickbird</span>
+<span class="c1">// image. From left to right : original PAN image, original XS image and the</span>
+<span class="c1">// result of the PAN sharpening}</span>
+<span class="c1">// \label{fig:PANSHARP_FILTER}</span>
+<span class="c1">// \end{figure}</span>
+
+<span class="c1">// We start by including the required header and declaring the main function:</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSimpleRcsPanSharpeningFusionImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbPrintableImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageToVectorImageCastFilter.h&quot;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing Parameters &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputPanchromatiqueImage inputMultiSpectralImage outputImage outputImagePrinted panchroPrinted msPrinted&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// We declare the different image type used here as well as the image reader.</span>
+  <span class="c1">// Note that, the reader for the PAN image is templated by an</span>
+  <span class="c1">// \doxygen{otb}{Image} while the XS reader uses an</span>
+  <span class="c1">// \doxygen{otb}{VectorImage}.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                   <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>             <span class="n">VectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>         <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span>   <span class="n">ReaderVectorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">VectorIntImageType</span><span class="p">;</span>
+
+  <span class="n">ReaderVectorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">readerXS</span>  <span class="o">=</span> <span class="n">ReaderVectorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>       <span class="n">readerPAN</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// We pass the filenames to the readers</span>
+
+  <span class="n">readerPAN</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">readerXS</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="c1">// We declare the fusion filter an set its inputs using the readers:</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SimpleRcsPanSharpeningFusionImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="p">,</span> <span class="n">VectorIntImageType</span><span class="o">&gt;</span> <span class="n">FusionFilterType</span><span class="p">;</span>
+  <span class="n">FusionFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                            <span class="n">fusion</span> <span class="o">=</span> <span class="n">FusionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">fusion</span><span class="o">-&gt;</span><span class="n">SetPanInput</span><span class="p">(</span><span class="n">readerPAN</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">fusion</span><span class="o">-&gt;</span><span class="n">SetXsInput</span><span class="p">(</span><span class="n">readerXS</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// And finally, we declare the writer and call its \code{Update()} method to</span>
+  <span class="c1">// trigger the full pipeline execution.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">VectorIntImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>                              <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">fusion</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PrintableImageFilter</span><span class="o">&lt;</span><span class="n">VectorIntImageType</span><span class="o">&gt;</span> <span class="n">PrintableImageType</span><span class="p">;</span>
+  <span class="n">PrintableImageType</span><span class="o">::</span><span class="n">Pointer</span>                           <span class="n">printable</span> <span class="o">=</span> <span class="n">PrintableImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>        <span class="n">VectorCharImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">VectorCharImageType</span><span class="o">&gt;</span> <span class="n">PNGWriterType</span><span class="p">;</span>
+  <span class="n">PNGWriterType</span><span class="o">::</span><span class="n">Pointer</span>                            <span class="n">pngwriter</span> <span class="o">=</span> <span class="n">PNGWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">printable</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">fusion</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">printable</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">printable</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">printable</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">pngwriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="n">pngwriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">printable</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">pngwriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PrintableImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">PrintableImageType2</span><span class="p">;</span>
+  <span class="n">PrintableImageType2</span><span class="o">::</span><span class="n">Pointer</span>                       <span class="n">printable2</span> <span class="o">=</span> <span class="n">PrintableImageType2</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">readerXS</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">printable2</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">pngwriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="n">pngwriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">printable2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">pngwriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToVectorImageCastFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">VectorCastFilterType</span><span class="p">;</span>
+
+  <span class="n">VectorCastFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectorCastFilter</span> <span class="o">=</span> <span class="n">VectorCastFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">PNGWriterType</span><span class="o">::</span><span class="n">Pointer</span>        <span class="n">pngwriterPan</span>     <span class="o">=</span> <span class="n">PNGWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">vectorCastFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">readerPAN</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">PrintableImageType2</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">printable3</span> <span class="o">=</span> <span class="n">PrintableImageType2</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">printable3</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vectorCastFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">printable3</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">printable3</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">printable3</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">pngwriterPan</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+
+  <span class="n">pngwriterPan</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">printable3</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">pngwriterPan</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="BayesianFusionImageFilter.html" class="btn btn-neutral float-right" title="BayesianFusionImageFilter.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Fusion.html" class="btn btn-neutral" title="Fusion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MarkovClassification3Example.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="MarkovRestorationExample.cxx" href="MarkovRestorationExample.html" />
+    <link rel="prev" title="Markov" href="../Markov.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Markov.html">Markov</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">MarkovClassification3Example.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MarkovRestorationExample.html">MarkovRestorationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MarkovClassification1Example.html">MarkovClassification1Example.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MarkovRegularizationExample.html">MarkovRegularizationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MarkovClassification2Example.html">MarkovClassification2Example.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Markov.html">Markov</a> &raquo;</li>
+        
+      <li>MarkovClassification3Example.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Markov/MarkovClassification3Example.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="markovclassification3example-cxx">
+<span id="example-markovclassification3example"></span><h1>MarkovClassification3Example.cxx<a class="headerlink" href="#markovclassification3example-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovClassification3Example.cxx?inline=false">MarkovClassification3Example.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Example usage:</span>
+<span class="cm">./MarkovClassification3Example Input/QB_Suburb.png Output/MarkovRandomField3_gray_value.png Output/MarkovRandomField3_color_value.png 1.0 20 1.0 1</span>
+<span class="cm">*/</span>
+
+
+<span class="c1">//  This example illustrates the details of the MarkovRandomFieldFilter by using the Fisher distribution</span>
+<span class="c1">//  to model the likelihood energy.</span>
+<span class="c1">//  This filter is an application of the Markov Random Fields for classification.</span>
+<span class="c1">//</span>
+<span class="c1">//  This example applies the MarkovRandomFieldFilter to</span>
+<span class="c1">//  classify an image into four classes defined by their Fisher distribution parameters L, M and mu.</span>
+<span class="c1">//  The optimization is done using a Metropolis algorithm with a random sampler. The</span>
+<span class="c1">//  regularization energy is defined by a Potts model and the fidelity or likelihood energy is modelled by a</span>
+<span class="c1">//  Fisher distribution.</span>
+<span class="c1">//  The parameter of the Fisher distribution was determined for each class in a supervised step.</span>
+<span class="c1">//  ( See the File OtbParameterEstimatioOfFisherDistribution )</span>
+<span class="c1">//  This example is a contribution from Jan Wegner.</span>
+
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMarkovRandomFieldFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkScalarToRGBPixelFunctor.h&quot;</span><span class="cp"></span>
+
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbMRFEnergyPotts.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMRFEnergyFisherClassification.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMRFOptimizerMetropolis.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMRFSamplerRandom.h&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing Parameters &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argc</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImage output_gray_label output_color_label lambda iterations &quot;</span>
+                 <span class="s">&quot;optimizerTemperature useRandomValue &quot;</span>
+              <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">//  Then we must decide what pixel type to use for the image. We</span>
+  <span class="c1">//  choose to make all computations with double precision.</span>
+  <span class="c1">//  The labeled image is of type unsigned char which allows up to 256 different</span>
+  <span class="c1">//  classes.</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">double</span>        <span class="n">InternalPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">LabelledPixelType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">InternalPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">InputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">LabelledPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">LabelledImageType</span><span class="p">;</span>
+
+  <span class="c1">//  We define a reader for the image to be classified, an initialization for the</span>
+  <span class="c1">//  classification (which could be random) and a writer for the final</span>
+  <span class="c1">//  classification.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span>    <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">LabelledImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">inputFilename</span>               <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputFilename</span>              <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputRescaledImageFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFilename</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputFilename</span><span class="p">);</span>
+
+  <span class="c1">//  Finally, we define the different classes necessary for the Markov classification.</span>
+  <span class="c1">//  A MarkovRandomFieldFilter is instantiated, this is the</span>
+  <span class="c1">// main class which connect the other to do the Markov classification.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MarkovRandomFieldFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">LabelledImageType</span><span class="o">&gt;</span> <span class="n">MarkovRandomFieldFilterType</span><span class="p">;</span>
+
+  <span class="c1">//  An MRFSamplerRandomMAP, which derives from the</span>
+  <span class="c1">//  MRFSampler, is instantiated. The sampler is in charge of</span>
+  <span class="c1">// proposing a modification for a given site. The</span>
+  <span class="c1">// MRFSamplerRandomMAP, randomly pick one possible value</span>
+  <span class="c1">// according to the MAP probability.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MRFSamplerRandom</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">LabelledImageType</span><span class="o">&gt;</span> <span class="n">SamplerType</span><span class="p">;</span>
+
+  <span class="c1">//  An MRFOptimizerMetropolis, which derives from the</span>
+  <span class="c1">// MRFOptimizer, is instantiated. The optimizer is in charge</span>
+  <span class="c1">// of accepting or rejecting the value proposed by the sampler. The</span>
+  <span class="c1">// MRFSamplerRandomMAP, accept the proposal according to the</span>
+  <span class="c1">// variation of energy it causes and a temperature parameter.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MRFOptimizerMetropolis</span> <span class="n">OptimizerType</span><span class="p">;</span>
+
+  <span class="c1">// Two energy, deriving from the MRFEnergy class need to be instantiated. One energy</span>
+  <span class="c1">// is required for the regularization, taking into account the relationship between neighboring pixels</span>
+  <span class="c1">// in the classified image. Here it is done with the MRFEnergyPotts, which implements</span>
+  <span class="c1">// a Potts model.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The second energy is used for the fidelity to the original data. Here it is done with a</span>
+  <span class="c1">// MRFEnergyFisherClassification class, which defines a Fisher distribution to model the data.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MRFEnergyPotts</span><span class="o">&lt;</span><span class="n">LabelledImageType</span><span class="p">,</span> <span class="n">LabelledImageType</span><span class="o">&gt;</span>             <span class="n">EnergyRegularizationType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MRFEnergyFisherClassification</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">LabelledImageType</span><span class="o">&gt;</span> <span class="n">EnergyFidelityType</span><span class="p">;</span>
+
+  <span class="c1">// The different filters composing our pipeline are created by invoking their</span>
+  <span class="c1">// New() methods, assigning the results to smart pointers.</span>
+
+  <span class="n">MarkovRandomFieldFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">markovFilter</span>         <span class="o">=</span> <span class="n">MarkovRandomFieldFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">EnergyRegularizationType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">energyRegularization</span> <span class="o">=</span> <span class="n">EnergyRegularizationType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">EnergyFidelityType</span><span class="o">::</span><span class="n">Pointer</span>          <span class="n">energyFidelity</span>       <span class="o">=</span> <span class="n">EnergyFidelityType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">OptimizerType</span><span class="o">::</span><span class="n">Pointer</span>               <span class="n">optimizer</span>            <span class="o">=</span> <span class="n">OptimizerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">SamplerType</span><span class="o">::</span><span class="n">Pointer</span>                 <span class="n">sampler</span>              <span class="o">=</span> <span class="n">SamplerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// Parameter for the MRFEnergyFisherClassification class are created. The shape parameters M, L</span>
+  <span class="c1">// and the weighting parameter mu are computed in a supervised step</span>
+
+
+  <span class="k">if</span> <span class="p">((</span><span class="kt">bool</span><span class="p">)(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]))</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Overpass random calculation(for test only):</span>
+    <span class="n">sampler</span><span class="o">-&gt;</span><span class="n">InitializeSeed</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">optimizer</span><span class="o">-&gt;</span><span class="n">InitializeSeed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">InitializeSeed</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nClass</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="n">energyFidelity</span><span class="o">-&gt;</span><span class="n">SetNumberOfParameters</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">nClass</span><span class="p">);</span>
+  <span class="n">EnergyFidelityType</span><span class="o">::</span><span class="n">ParametersType</span> <span class="n">parameters</span><span class="p">;</span>
+  <span class="n">parameters</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">energyFidelity</span><span class="o">-&gt;</span><span class="n">GetNumberOfParameters</span><span class="p">());</span>
+  <span class="c1">// Class 0</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">12.353042</span><span class="p">;</span> <span class="c1">// Class 0 mu</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.156422</span><span class="p">;</span>  <span class="c1">// Class 0 L</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.920403</span><span class="p">;</span>  <span class="c1">// Class 0 M</span>
+  <span class="c1">// Class 1</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">72.068291</span><span class="p">;</span> <span class="c1">// Class 1 mu</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mf">11.000000</span><span class="p">;</span> <span class="c1">// Class 1 L</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">50.950001</span><span class="p">;</span> <span class="c1">// Class 1 M</span>
+  <span class="c1">// Class 2</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mf">146.665985</span><span class="p">;</span> <span class="c1">// Class 2 mu</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mf">11.000000</span><span class="p">;</span>  <span class="c1">// Class 2 L</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="mf">50.900002</span><span class="p">;</span>  <span class="c1">// Class 2 M</span>
+  <span class="c1">// Class 3</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">200.010132</span><span class="p">;</span> <span class="c1">// Class 3 mu</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mf">11.000000</span><span class="p">;</span>  <span class="c1">// Class 3 L</span>
+  <span class="n">parameters</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="mf">50.950001</span><span class="p">;</span>  <span class="c1">// Class 3 M</span>
+
+  <span class="n">energyFidelity</span><span class="o">-&gt;</span><span class="n">SetParameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">);</span>
+
+  <span class="c1">// Parameters are given to the different classes and the sampler, optimizer and</span>
+  <span class="c1">// energies are connected with the Markov filter.</span>
+
+  <span class="n">OptimizerType</span><span class="o">::</span><span class="n">ParametersType</span> <span class="n">param</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">param</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
+  <span class="n">optimizer</span><span class="o">-&gt;</span><span class="n">SetParameters</span><span class="p">(</span><span class="n">param</span><span class="p">);</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetNumberOfClasses</span><span class="p">(</span><span class="n">nClass</span><span class="p">);</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetMaximumNumberOfIterations</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetErrorTolerance</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetLambda</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]));</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetNeighborhoodRadius</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetEnergyRegularization</span><span class="p">(</span><span class="n">energyRegularization</span><span class="p">);</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetEnergyFidelity</span><span class="p">(</span><span class="n">energyFidelity</span><span class="p">);</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="p">);</span>
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetSampler</span><span class="p">(</span><span class="n">sampler</span><span class="p">);</span>
+
+  <span class="c1">// The pipeline is connected. An itkRescaleIntensityImageFilter</span>
+  <span class="c1">// rescales the classified image before saving it.</span>
+
+  <span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">LabelledImageType</span><span class="p">,</span> <span class="n">LabelledImageType</span><span class="o">&gt;</span> <span class="n">RescaleType</span><span class="p">;</span>
+  <span class="n">RescaleType</span><span class="o">::</span><span class="n">Pointer</span>                                                           <span class="n">rescaleFilter</span> <span class="o">=</span> <span class="n">RescaleType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">markovFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// convert output image to color</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RGBPixel</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span>                         <span class="n">RGBPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">RGBPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                          <span class="n">RGBImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">ScalarToRGBPixelFunctor</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">ColorMapFunctorType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">UnaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">LabelledImageType</span><span class="p">,</span> <span class="n">RGBImageType</span><span class="p">,</span> <span class="n">ColorMapFunctorType</span><span class="o">&gt;</span> <span class="n">ColorMapFilterType</span><span class="p">;</span>
+  <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                <span class="n">colormapper</span> <span class="o">=</span> <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">colormapper</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaleFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// We can now create an image file writer and save the image.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">RGBImageType</span><span class="o">&gt;</span> <span class="n">WriterRescaledType</span><span class="p">;</span>
+
+  <span class="n">WriterRescaledType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writerRescaled</span> <span class="o">=</span> <span class="n">WriterRescaledType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writerRescaled</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputRescaledImageFileName</span><span class="p">);</span>
+  <span class="n">writerRescaled</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">colormapper</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writerRescaled</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure~\ref{fig:MRF_CLASSIFICATION3} shows the output of the Markov Random</span>
+  <span class="c1">// Field classification into four classes using the</span>
+  <span class="c1">// Fisher-distribution as likelihood term.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{QB_Suburb.eps}</span>
+  <span class="c1">// \includegraphics[width=0.44\textwidth]{MarkovRandomField3_color_value.eps}</span>
+  <span class="c1">// \itkcaption[MRF restoration]{Result of applying</span>
+  <span class="c1">// the \doxygen{otb}{MarkovRandomFieldFilter} to an extract from a PAN Quickbird</span>
+  <span class="c1">// image for classification into four classes using the Fisher-distribution as</span>
+  <span class="c1">// likehood term. From left to right : original image,</span>
+  <span class="c1">// classification.}</span>
+  <span class="c1">// \label{fig:MRF_CLASSIFICATION3}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MarkovRestorationExample.html" class="btn btn-neutral float-right" title="MarkovRestorationExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Markov.html" class="btn btn-neutral" title="Markov" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

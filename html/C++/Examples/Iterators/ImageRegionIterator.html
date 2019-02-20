@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ImageRegionIterator.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="NeighborhoodIterators4.cxx" href="NeighborhoodIterators4.html" />
+    <link rel="prev" title="ShapedNeighborhoodIterators1.cxx" href="ShapedNeighborhoodIterators1.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Iterators.html">Iterators</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators1.html">ShapedNeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ImageRegionIterator.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators4.html">NeighborhoodIterators4.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageLinearIteratorWithIndex2.html">ImageLinearIteratorWithIndex2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators2.html">ShapedNeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators1.html">NeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRandomConstIteratorWithIndex.html">ImageRandomConstIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators5.html">NeighborhoodIterators5.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRegionIteratorWithIndex.html">ImageRegionIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators3.html">NeighborhoodIterators3.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageLinearIteratorWithIndex.html">ImageLinearIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators2.html">NeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageSliceIteratorWithIndex.html">ImageSliceIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IteratorsExamples.html">IteratorsExamples.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators6.html">NeighborhoodIterators6.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Iterators.html">Iterators</a> &raquo;</li>
+        
+      <li>ImageRegionIterator.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Iterators/ImageRegionIterator.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="imageregioniterator-cxx">
+<span id="example-imageregioniterator"></span><h1>ImageRegionIterator.cxx<a class="headerlink" href="#imageregioniterator-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./ImageRegionIterator Input/QB_Suburb.png Output/ImageRegionIteratorOutput.png <span class="m">10</span> <span class="m">10</span> <span class="m">110</span> <span class="m">140</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageRegionIterator.cxx?inline=false">ImageRegionIterator.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{Iterators!speed}</span>
+<span class="c1">// The \doxygen{itk}{ImageRegionIterator} is optimized for</span>
+<span class="c1">// iteration speed and is the first choice for iterative, pixel-wise operations</span>
+<span class="c1">// when location in the image is not</span>
+<span class="c1">// important. ImageRegionIterator is the least specialized of the ITK</span>
+<span class="c1">// image iterator classes.  It implements all of the methods described in the</span>
+<span class="c1">// preceding section.</span>
+<span class="c1">//</span>
+<span class="c1">// The following example illustrates the use of</span>
+<span class="c1">// \doxygen{itk}{ImageRegionConstIterator} and ImageRegionIterator.</span>
+<span class="c1">// Most of the code constructs introduced apply to other ITK iterators as</span>
+<span class="c1">// well. This simple application crops a subregion from an image by copying</span>
+<span class="c1">// its pixel values into to a second, smaller image.</span>
+<span class="c1">//</span>
+<span class="c1">// \index{Iterators!and image regions}</span>
+<span class="c1">// \index{itk::ImageRegionIterator!example of using|(}</span>
+<span class="c1">// We begin by including the appropriate header files.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkImageRegionIterator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">// Verify the number of parameters on the command line.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing parameters. &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImageFile outputImageFile startX startY sizeX sizeY&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Next we define a pixel type and corresponding image type. ITK iterator</span>
+  <span class="c1">// classes expect the image type as their template parameter.</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                    <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionConstIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ConstIteratorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>      <span class="n">IteratorType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="c1">// Information about the subregion to copy is read from the command line. The</span>
+  <span class="c1">// subregion is defined by an \doxygen{itk}{ImageRegion} object, with a starting</span>
+  <span class="c1">// grid index and a size (Section~\ref{sec:ImageSection}).</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">RegionType</span> <span class="n">inputRegion</span><span class="p">;</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">RegionType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">inputStart</span><span class="p">;</span>
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">RegionType</span><span class="o">::</span><span class="n">SizeType</span>  <span class="n">size</span><span class="p">;</span>
+
+  <span class="n">inputStart</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">inputStart</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+
+  <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+
+  <span class="n">inputRegion</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">inputRegion</span><span class="p">.</span><span class="n">SetIndex</span><span class="p">(</span><span class="n">inputStart</span><span class="p">);</span>
+
+  <span class="c1">// The destination region in the output image is defined using the input region</span>
+  <span class="c1">// size, but a different start index.  The starting index for the destination</span>
+  <span class="c1">// region is the corner of the newly generated image.</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">RegionType</span> <span class="n">outputRegion</span><span class="p">;</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">RegionType</span><span class="o">::</span><span class="n">IndexType</span> <span class="n">outputStart</span><span class="p">;</span>
+
+  <span class="n">outputStart</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">outputStart</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">outputRegion</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">outputRegion</span><span class="p">.</span><span class="n">SetIndex</span><span class="p">(</span><span class="n">outputStart</span><span class="p">);</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Check that the region is contained within the input image.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">().</span><span class="n">IsInside</span><span class="p">(</span><span class="n">inputRegion</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;The region &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">inputRegion</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;is not contained within the input image region &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// After reading the input image and checking that the desired subregion is,</span>
+  <span class="c1">// in fact, contained in the input, we allocate an output image.  It is</span>
+  <span class="c1">// fundamental to set valid values to some of the basic image information</span>
+  <span class="c1">// during the copying process.</span>
+  <span class="c1">// In particular, the starting index of the output region</span>
+  <span class="c1">// is now filled up with zero values and the coordinates of the physical</span>
+  <span class="c1">// origin are computed as a shift from the origin of the input image. This is</span>
+  <span class="c1">// quite important since it will allow us to later</span>
+  <span class="c1">// register the extracted region against the original image.</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">outputImage</span> <span class="o">=</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">outputRegion</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">SpacingType</span><span class="o">&amp;</span> <span class="n">spacing</span>     <span class="o">=</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetSignedSpacing</span><span class="p">();</span>
+  <span class="k">const</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">PointType</span><span class="o">&amp;</span>   <span class="n">inputOrigin</span> <span class="o">=</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetOrigin</span><span class="p">();</span>
+  <span class="kt">double</span>                        <span class="n">outputOrigin</span><span class="p">[</span><span class="n">Dimension</span><span class="p">];</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Dimension</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">outputOrigin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputOrigin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">spacing</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">inputStart</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetSignedSpacing</span><span class="p">(</span><span class="n">spacing</span><span class="p">);</span>
+  <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">SetOrigin</span><span class="p">(</span><span class="n">outputOrigin</span><span class="p">);</span>
+  <span class="n">outputImage</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+
+  <span class="c1">// \index{Iterators!construction of} \index{Iterators!and image regions}</span>
+  <span class="c1">// The necessary images and region definitions are now in place.  All that is</span>
+  <span class="c1">// left to do is to create the iterators and perform the copy.  Note that image</span>
+  <span class="c1">// iterators are not accessed via smart pointers so they are light-weight</span>
+  <span class="c1">// objects that are instantiated on the stack.  Also notice how the input and</span>
+  <span class="c1">// output iterators are defined over the \emph{same corresponding region}.  Though the</span>
+  <span class="c1">// images are different sizes, they both contain the same target subregion.</span>
+
+  <span class="n">ConstIteratorType</span> <span class="n">inputIt</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">inputRegion</span><span class="p">);</span>
+  <span class="n">IteratorType</span>      <span class="n">outputIt</span><span class="p">(</span><span class="n">outputImage</span><span class="p">,</span> <span class="n">outputRegion</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">inputIt</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">(),</span> <span class="n">outputIt</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span> <span class="o">!</span><span class="n">inputIt</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">();</span> <span class="o">++</span><span class="n">inputIt</span><span class="p">,</span> <span class="o">++</span><span class="n">outputIt</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">outputIt</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">inputIt</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="c1">// \index{Iterators!image dimensionality}</span>
+  <span class="c1">//  The \code{for} loop above is a common</span>
+  <span class="c1">// construct in ITK/OTB.  The beauty of these four lines of code is that they are</span>
+  <span class="c1">// equally valid for one, two, three, or even ten dimensional data, and no</span>
+  <span class="c1">// knowledge of the size of the image is necessary.  Consider the ugly</span>
+  <span class="c1">// alternative of ten nested \code{for} loops for traversing an image.</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">outputImage</span><span class="p">);</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Let&#39;s run this example on the image \code{QB\_Suburb.png} found</span>
+  <span class="c1">// in \code{Examples/Data}.  The command line arguments specify the</span>
+  <span class="c1">// input and output file names, then the $x$, $y$ origin and the $x$, $y$ size</span>
+  <span class="c1">// of the cropped subregion.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \small</span>
+  <span class="c1">// \begin{verbatim}</span>
+  <span class="c1">// ImageRegionIterator QB_Suburb.png ImageRegionIteratorOutput.png 20 70 210 140</span>
+  <span class="c1">// \end{verbatim}</span>
+  <span class="c1">// \normalsize</span>
+  <span class="c1">//</span>
+  <span class="c1">// The output is the cropped subregion shown in</span>
+  <span class="c1">// Figure~\ref{fig:ImageRegionIteratorOutput}.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \centering</span>
+  <span class="c1">// \includegraphics[width=0.4\textwidth]{QB_Suburb.eps}</span>
+  <span class="c1">// \includegraphics[width=0.3\textwidth]{ImageRegionIteratorOutput.eps}</span>
+  <span class="c1">// \itkcaption[Copying an image subregion using ImageRegionIterator]{Cropping a</span>
+  <span class="c1">// region from an image.  The original image is shown at left.  The image on</span>
+  <span class="c1">// the right is the result of applying the ImageRegionIterator example code.}</span>
+  <span class="c1">// \protect\label{fig:ImageRegionIteratorOutput}</span>
+  <span class="c1">// \end{figure}</span>
+  <span class="c1">//</span>
+  <span class="c1">// \index{itk::ImageRegionIterator!example of using|)}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="NeighborhoodIterators4.html" class="btn btn-neutral float-right" title="NeighborhoodIterators4.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ShapedNeighborhoodIterators1.html" class="btn btn-neutral" title="ShapedNeighborhoodIterators1.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

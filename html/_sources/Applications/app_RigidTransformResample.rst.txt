@@ -1,0 +1,157 @@
+.. _app-RigidTransformResample:
+
+RigidTransformResample
+======================
+
+
+Resample an image with a rigid transform
+
+Description
+-----------
+
+This application performs a parametric transform on the input image. Scaling, translation and rotation with scaling factor are handled. Parameters of the transform is expressed in physical units, thus particular attention must be paid on pixel size (value, and sign). Moreover transform is expressed from input space to output space (on the contrary ITK Transforms are expressed form output space to input space). 
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input image** :code:`-in image` *Mandatory* |br|
+The input image to translate.
+
+**Output image** :code:`-out image [dtype]` *Mandatory* |br|
+The transformed output image.
+
+Transform parameters
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows setting the transformation to apply.
+
+**Type of transformation** :code:`-transform.type [id|translation|rotation]` *Default value: id* |br|
+Type of transformation. Available transformations are spatial scaling, translation and rotation with scaling factor
+
+* **id** |br| Spatial scaling
+
+* **translation** |br| translation
+
+* **rotation** |br| rotation
+
+
+
+id options
+^^^^^^^^^^
+
+**X scaling** :code:`-transform.type.id.scalex float` *Default value: 1* |br|
+Scaling factor between the output X spacing and the input X spacing
+
+**Y scaling** :code:`-transform.type.id.scaley float` *Default value: 1* |br|
+Scaling factor between the output Y spacing and the input Y spacing
+
+translation options
+^^^^^^^^^^^^^^^^^^^
+
+**The X translation (in physical units)** :code:`-transform.type.translation.tx float` *Default value: 0* |br|
+The translation value along X axis (in physical units).
+
+**The Y translation (in physical units)** :code:`-transform.type.translation.ty float` *Default value: 0* |br|
+The translation value along Y axis (in physical units)
+
+**X scaling** :code:`-transform.type.translation.scalex float` *Default value: 1* |br|
+Scaling factor between the output X spacing and the input X spacing
+
+**Y scaling** :code:`-transform.type.translation.scaley float` *Default value: 1* |br|
+Scaling factor between the output Y spacing and the input Y spacing
+
+rotation options
+^^^^^^^^^^^^^^^^
+
+**Rotation angle** :code:`-transform.type.rotation.angle float` *Default value: 0* |br|
+The rotation angle in degree (values between -180 and 180)
+
+**X scaling** :code:`-transform.type.rotation.scalex float` *Default value: 1* |br|
+Scale factor between the X spacing of the rotated output image and the X spacing of the unrotated image
+
+**Y scaling** :code:`-transform.type.rotation.scaley float` *Default value: 1* |br|
+Scale factor between the Y spacing of the rotated output image and the Y spacing of the unrotated image
+
+
+
+------------
+
+**Interpolation** :code:`-interpolator [nn|linear|bco]` *Default value: bco* |br|
+This group of parameters allows one to define how the input image will be interpolated during resampling.
+
+* **Nearest Neighbor interpolation** |br| Nearest neighbor interpolation leads to poor image quality, but it is very fast.
+
+* **Linear interpolation** |br| Linear interpolation leads to average image quality but is quite fast
+
+* **Bicubic interpolation** |br| 
+
+
+
+Bicubic interpolation options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Radius for bicubic interpolation** :code:`-interpolator.bco.radius int` *Default value: 2* |br|
+This parameter allows controlling the size of the bicubic interpolation filter. If the target pixel size is higher than the input pixel size, increasing this parameter will reduce aliasing artifacts.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+This allows setting the maximum amount of RAM available for processing. As the writing task is time consuming, it is better to write large pieces of data, which can be achieved by increasing this parameter (pay attention to your system capabilities)
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_RigidTransformResample -in qb_toulouse_sub.tif -out rigitTransformImage.tif -transform.type rotation -transform.type.rotation.angle 20 -transform.type.rotation.scalex 2. -transform.type.rotation.scaley 2.
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("RigidTransformResample")
+
+	app.SetParameterString("in", "qb_toulouse_sub.tif")
+	app.SetParameterString("out", "rigitTransformImage.tif")
+	app.SetParameterString("transform.type","rotation")
+	app.SetParameterFloat("transform.type.rotation.angle", 20)
+	app.SetParameterFloat("transform.type.rotation.scalex", 2.)
+	app.SetParameterFloat("transform.type.rotation.scaley", 2.)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| Translation

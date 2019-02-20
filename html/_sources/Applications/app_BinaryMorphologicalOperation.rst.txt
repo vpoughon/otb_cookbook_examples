@@ -1,0 +1,148 @@
+.. _app-BinaryMorphologicalOperation:
+
+BinaryMorphologicalOperation
+============================
+
+
+Performs morphological operations on an input image channel
+
+Description
+-----------
+
+This application performs binary morphological operations on a mono band image or a channel of the input.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to be filtered.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index
+
+**Type of structuring element** :code:`-structype [box|ball|cross]` *Default value: box* |br|
+Choice of the structuring element type
+
+* **Box** |br| 
+
+* **Ball** |br| 
+
+* **Cross** |br| 
+
+
+
+**Structuring element X radius** :code:`-xradius int` *Default value: 5* |br|
+The structuring element radius along the X axis.
+
+**Structuring element Y radius** :code:`-yradius int` *Default value: 5* |br|
+The structuring element radius along the Y axis.
+
+**Morphological Operation** :code:`-filter [dilate|erode|opening|closing]` *Default value: dilate* |br|
+Choice of the morphological operation
+
+* **Dilate** |br| 
+
+* **Erode** |br| 
+
+* **Opening** |br| 
+
+* **Closing** |br| 
+
+
+
+Dilate options
+^^^^^^^^^^^^^^
+
+**Foreground value** :code:`-filter.dilate.foreval float` *Default value: 1* |br|
+Set the foreground value, default is 1.0.
+
+**Background value** :code:`-filter.dilate.backval float` *Default value: 0* |br|
+Set the background value, default is 0.0.
+
+Erode options
+^^^^^^^^^^^^^
+
+**Foreground value** :code:`-filter.erode.foreval float` *Default value: 1* |br|
+Set the foreground value, default is 1.0.
+
+**Background value** :code:`-filter.erode.backval float` *Default value: 0* |br|
+Set the background value, default is 0.0.
+
+Opening options
+^^^^^^^^^^^^^^^
+
+**Foreground value** :code:`-filter.opening.foreval float` *Default value: 1* |br|
+Set the foreground value, default is 1.0.
+
+**Background value** :code:`-filter.opening.backval float` *Default value: 0* |br|
+Set the background value, default is 0.0.
+
+Closing options
+^^^^^^^^^^^^^^^
+
+**Foreground value** :code:`-filter.closing.foreval float` *Default value: 1* |br|
+Set the foreground value, default is 1.0.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_BinaryMorphologicalOperation -in qb_RoadExtract.tif -out opened.tif -channel 1 -xradius 5 -yradius 5 -filter erode
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("BinaryMorphologicalOperation")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterString("out", "opened.tif")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterInt("xradius", 5)
+	app.SetParameterInt("yradius", 5)
+	app.SetParameterString("filter","erode")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| itkBinaryDilateImageFilter, itkBinaryErodeImageFilter, itkBinaryMorphologicalOpeningImageFilter and itkBinaryMorphologicalClosingImageFilter classes.

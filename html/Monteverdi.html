@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Monteverdi &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced Use" href="AdvancedUse.html" />
+    <link rel="prev" title="QGIS interface" href="QGIS-interface.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Monteverdi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-menu">Main menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#top-toolbar">Top toolbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#image-displaying">Image displaying</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#right-side-dock">Right side dock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#layer-stack">Layer stack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#optical-calibration">Optical calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bandmath">BandMath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#segmentation">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#polarimetry">Polarimetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pansharpening">Pansharpening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+        
+      <li>Monteverdi</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Monteverdi.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="monteverdi">
+<h1>Monteverdi<a class="headerlink" href="#monteverdi" title="Permalink to this headline">¶</a></h1>
+<p>Monteverdi is a satellite image viewer. Its main features are:</p>
+<ul class="simple">
+<li><strong>Performance</strong>: Navigate instantly in full size satellite images thanks to its
+hardware accelerated rendering engine. Compose tiles or compare multiple images in a stack with
+rapid cycling and shader effects.</li>
+<li><strong>Sensor geometry support</strong>: View raw images directly in sensor geometry! Resampling is
+handled by the GPU through texture mapping. OTB automagically handles
+coordinates mapping between actors and viewport geometries.</li>
+<li><strong>Powerful</strong>: Access to all processing application from OTB. Orthorectification,
+optical calibration, classification, SAR processing, and much more!</li>
+</ul>
+<img alt="_images/gui.png" src="_images/gui.png" />
+<p>This is Monteverdi’s main window where the different functionalities are:</p>
+<ol class="arabic simple">
+<li>Main menu</li>
+<li>Top toolbar</li>
+<li>Image View</li>
+<li>Widgets</li>
+<li>Layer stack</li>
+</ol>
+<div class="section" id="main-menu">
+<h2>Main menu<a class="headerlink" href="#main-menu" title="Permalink to this headline">¶</a></h2>
+<p>The main menu is made up of four items. The main one is the File item,
+from which you can: open a image, load the otb applications, and
+finally quit. The Edit item lets the user change his/her preferences.
+The view item is intended to let the user display or hide different
+parts of the main window. Finally, the Help item lets the user know the
+’About’ information of the software, and also can display an useful
+keymap.</p>
+</div>
+<div class="section" id="top-toolbar">
+<h2>Top toolbar<a class="headerlink" href="#top-toolbar" title="Permalink to this headline">¶</a></h2>
+<p>The top toolbar is made up of ten icons; from left to right:</p>
+<ol class="arabic simple">
+<li>open one or more image(s)</li>
+<li>zoom in</li>
+<li>zoom out</li>
+<li>zoom to full extent</li>
+<li>zoom to layer extent</li>
+<li>zoom to full resolution</li>
+<li>gives/changes the current projection, used as reference of the view</li>
+<li>selects the effect to be applied to the selected layer:
+chessboard, local constrast, local translucency, normal, spectral
+angle, swipe (horizontal and vertical)</li>
+<li>a parameter used for the following effects: chessboard, local
+contrast, local translucency, spectral angle</li>
+<li>a parameter used for the following effects: local constrast,
+spectral angle</li>
+</ol>
+</div>
+<div class="section" id="image-displaying">
+<h2>Image displaying<a class="headerlink" href="#image-displaying" title="Permalink to this headline">¶</a></h2>
+<p>This part of the main window is intended to display the images loaded by
+the user. There are many nice keyboard shortcuts or mouse tricks that
+let the user have a better experience in navigating throughout the
+loaded images. These shortcuts and tricks are provided within the Help item
+of the main menu under Keymap. Here is a short list of the most
+commonly used ones:</p>
+<p>The standard ones:</p>
+<ul class="simple">
+<li>CTRL+O = Open file(s)</li>
+<li>CTRL+Q = Quit application</li>
+</ul>
+<p>In the image displaying part:</p>
+<ul class="simple">
+<li>Mouse drag = Scroll view</li>
+<li>CTRL+Mouse drag = Quick scroll view (rending is done after releasing
+CTRL key)</li>
+<li>Mouse wheel = Zoom</li>
+<li><ul class="first">
+<li>or - = Zoom</li>
+</ul>
+</li>
+</ul>
+<p>In the layer stack part:</p>
+<ul class="simple">
+<li>SHIFT+Page Up = Move layer to top of stack</li>
+<li>SHIFT+Page Down = Move layer to bottom of stack</li>
+<li>Delete = Delete selected layer</li>
+<li>SHIFT+Delete = Delete all layers</li>
+</ul>
+</div>
+<div class="section" id="right-side-dock">
+<h2>Right side dock<a class="headerlink" href="#right-side-dock" title="Permalink to this headline">¶</a></h2>
+<p>The dock on the right side is divided into four tabs:</p>
+<ul class="simple">
+<li>Quicklook: provides an overview of the full extent of the image,
+and allows one to easily select the area to be displayed.</li>
+<li>Histogram: gives the user information about the value distribution
+of the selected channels. By clicking the mouse’s left button, user
+can sample their values.</li>
+<li>Color Setup: lets the user map the image channels to the RGB
+channels. Also lets him/her set the alpha parameter (translucency).</li>
+<li>Color dynamics: lets the user change the displaying dynamics of a
+selected image. For each RGB channel (each mapped to an image
+channel), the user can decide how the pixel range of a selected image
+will be shortcut before being rescaled to 0-255: either by setting
+the extremal values, or by setting the extremal quantiles.</li>
+</ul>
+<p>Each tab is represented by the figures below (&nbsp;[fig:quickhisto]
+&nbsp;[fig:colorsetdyn]).</p>
+<div class="figure">
+<img alt="_images/quickhisto.png" src="_images/quickhisto.png" />
+</div>
+<div class="figure">
+<img alt="_images/colsetdyn.png" src="_images/colsetdyn.png" />
+</div>
+</div>
+<div class="section" id="layer-stack">
+<h2>Layer stack<a class="headerlink" href="#layer-stack" title="Permalink to this headline">¶</a></h2>
+<p>The layer stack is made up of one list of layers located beneath six
+icons. The list of layers gives the user some information about the
+loaded images: projection, resolution (if available), name, and effect
+applied to the images (see top toolbar subsection). If the user moves
+the mouse over the displayed images, they will get more information:</p>
+<ul class="simple">
+<li>(i,j): pixel index</li>
+<li>(Red Green Blue): original image pixel values from channel mapped to
+the RGB ones.</li>
+<li>(X,Y): pixel position</li>
+</ul>
+<p>Concerning the six icons, from left to right:</p>
+<ul class="simple">
+<li>1st: moves the selected layer to the top of the stack</li>
+<li>2nd: moves the selected layer up within the stack</li>
+<li>3rd: moves the selected layer down within the stack</li>
+<li>4th: moves the selected layer to the bottom of the stack</li>
+<li>5th: use selected layer as projection reference</li>
+<li>6th: applies all display settings (color-setup, color-dynamics,
+shader and so forth) of selected layer to all other layers</li>
+</ul>
+<p>The layer stack is represented in the figure below (&nbsp;[fig:layerstack]):</p>
+<div class="figure">
+<img alt="_images/layerstack.png" src="_images/layerstack.png" />
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>With , it is also possible to interactively load otb-applications and
+use them to process images. For that purpose, the user just has to load
+otb-applications by clicking on the Main menu, File/Load
+OTB-Applications (or by simply using the shortcut CTRL+A). The figure
+below (&nbsp;[fig:applications]) represents the otb-applications loading
+window. The applications are arranged in thematic functionalities; the
+user can also quickly find the wanted application by typing its name in
+the dedicated field at the top of the loading window.</p>
+<div class="figure">
+<img alt="_images/applications.png" src="_images/applications.png" />
+</div>
+</div>
+</div>
+<div class="section" id="optical-calibration">
+<h2>Optical calibration<a class="headerlink" href="#optical-calibration" title="Permalink to this headline">¶</a></h2>
+<p>In order to perform an optical calibration, launch the Optical
+calibration application (shortcut CTRL+A). We are going to use this
+application to perform a TOA (Top Of Atmosphere) conversion, which
+consists in converting the DN pixel values into spectral radiance (in
+W/m2/steradians/micrometers). Once the application is launched, the user
+must fill the required fields in (in, out, gainbias.txt -gain and bias
+values in a txt file-, solarillumination.txt -solar illumination values
+in watt/m2/micron for each band in a txt file-, and so on… refer to
+the documentation of the application).</p>
+<ul class="simple">
+<li>Note: if OTB (on which is based ) is able to parse the metadata of
+the image to be calibrated, then some of the fields will be
+automatically filled in.</li>
+</ul>
+<p>In the figure below (&nbsp;[fig:OC]), by taking a look at the layer stack,
+one can notice that the values of the calibrated image are now expressed
+in spectral radiance.</p>
+<div class="figure">
+<img alt="_images/OC.png" src="_images/OC.png" />
+</div>
+</div>
+<div class="section" id="bandmath">
+<h2>BandMath<a class="headerlink" href="#bandmath" title="Permalink to this headline">¶</a></h2>
+<p>BandMath application is intended to apply mathematical operations on
+pixels (launch it with shortcut CTRL+A). In this example, we are going
+to use this application to change the dynamics of an image, and check
+the result by looking at the histogram tab on the right-hand side of the GUI. The
+formula used is the following: <img class="math" src="_images/math/f447c71cd672a70e495dbcc63aa1b7bc21ad88c6.png" alt="\text{im1b1} \times 1000"/>. In the
+figures below (&nbsp;[fig:BM]), one can notice that the mode of the
+distribution is located at position <img class="math" src="_images/math/39c0021a5ebe18deadb37fc0bc420993dad51140.png" alt="356.0935"/>, whereas in the
+transformed image, the mode is located at position <img class="math" src="_images/math/c96e4c4747a12f3055592c31885b3bdb0ec0b2db.png" alt="354737.1454"/>,
+that’s to say approximately 1000 times further away (the cursors aren’t
+placed exactly at the same position in the screenshots).</p>
+<div class="figure">
+<img alt="_images/BM.png" src="_images/BM.png" />
+</div>
+</div>
+<div class="section" id="segmentation">
+<h2>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h2>
+<p>From within Monteverdi, the Segmentation application can be launched using the
+shortcut CTRL+A. We let the user take a look at the application’s documentation;
+let’s simply say that as we wish we could display the segmentation with
+, we must tell the application to output the segmentation in raster
+format. Thus, the value of the mode option must be set to raster. The
+following figure (&nbsp;[fig:seg12]) shows the original image and the labels
+image.</p>
+<div class="figure">
+<img alt="_images/seg1-2.png" src="_images/seg1-2.png" />
+</div>
+<p>Gray colors aren’t very convenient for visualizing a segmentation.
+That’s why we are going to use another application, the ColorMapping one
+(launch it with the shortcut CTRL+A as usual). There are many ways to
+use this application (see the documentation for more details). We wish
+we could colour the segmentation so that color difference between
+adjacent regions is maximized. For this purpose, we can use the method
+optimal (set the value of this option to optimal). The figure below
+(&nbsp;[fig:seg3]) shows the result of such colorization.</p>
+<div class="figure">
+<img alt="_images/seg3.png" src="_images/seg3.png" />
+</div>
+<p>Now it should be nice to superimpose this colorization with the original
+image to assess the quality of the segmentation. provides the user a
+very simple way to do it. Once the two images are loaded in and that the
+original image is placed on the top of the stack, the user just has to
+select the translucency layer effect and set the size of the exploration
+circle to convenience. The figure below (&nbsp;[fig:seg4]) shows the result
+of such colorization. We encourage the reader to test the other layer
+effects.</p>
+<div class="figure">
+<img alt="_images/seg4.png" src="_images/seg4.png" />
+</div>
+</div>
+<div class="section" id="polarimetry">
+<h2>Polarimetry<a class="headerlink" href="#polarimetry" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we are going to use three applications:</p>
+<ul class="simple">
+<li>the first one is SARDecompositions. This application is used to
+compute the HaA decomposition. It takes as inputs three complex
+channels from bands HH HV and VV.</li>
+<li>the second one is SplitImage. Indeed, the previous application had
+produced an output image made up of three channels, H a and A, and we
+wish to focus on the H parameter (entropy). So we let this
+application split this image into three one-band-images.</li>
+<li>the last one is ColorMapping. The entropy image has values ranging
+from 0 to 1, and they can be easily displayed by . But since we have
+a nice visualizing tool in hand, we wish we could go a little bit
+further. Here comes the application ColorMapping. It is going to be
+used with the following parameter settings:<ul>
+<li>method = continuous. This parameters tells the application to use
+a gradient of colors to represent the entropy image.</li>
+<li>method.continuous.lut = hot. We specify here the kind of gradient
+to be used: low values in black, high ones in white, and
+intermediate ones in red/orange/yellow…</li>
+<li>method.continuous.min = 0 and method.continuous.max = 1. Here, the
+gradient of colors must be adjusted to the dynamic of the entropy
+image (note: it is theoretically known that in HaA decomposition,
+H ranges from 0 to 1. Generally speaking, the histogram of can
+also be used for this purpose).</li>
+</ul>
+</li>
+</ul>
+<p>In the figure below (&nbsp;[fig:pol1]), we show the obtained result, with the
+local contrast layer effect.</p>
+<div class="figure">
+<img alt="_images/pol1.png" src="_images/pol1.png" />
+</div>
+</div>
+<div class="section" id="pansharpening">
+<h2>Pansharpening<a class="headerlink" href="#pansharpening" title="Permalink to this headline">¶</a></h2>
+<p>Finally, let’s try a last example with the Pansharpening application
+(launch it with shortcut CTRL+A). The fields are quite easy to fill in:
+this application needs a panchromatic image, a XS image, and an output
+image. These images are represented in the figures below (&nbsp;[fig:ps12]
+and &nbsp;[fig:ps3]):</p>
+<div class="figure">
+<img alt="_images/ps1-2.png" src="_images/ps1-2.png" />
+</div>
+<div class="figure">
+<img alt="_images/ps3.png" src="_images/ps3.png" />
+</div>
+<p>Now, in order to inspect the result properly, these three images are
+loaded in . The pansharpened image is placed to the top of the stack
+layer, and different layer effects are applied to it:</p>
+<ul class="simple">
+<li>in figure &nbsp;[fig:ps4]: chessboard effect, to compare the result with
+the XS image.</li>
+<li>in figure &nbsp;[fig:ps5]: translucency effect, to compare the result
+with the panchromatic image.</li>
+</ul>
+<div class="figure">
+<img alt="_images/ps4.png" src="_images/ps4.png" />
+</div>
+<div class="figure">
+<img alt="_images/ps5.png" src="_images/ps5.png" />
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>The images used in this documentation can be found in the OTB-Data
+repository (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data.git">https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data.git</a>):</p>
+<ul class="simple">
+<li>in OTB-Data/Input:<ul>
+<li>QB_TOULOUSE_MUL_Extract_500_500.tif and
+QB_Toulouse_Ortho_XS_ROI_170x230.tif (GUI presentation)</li>
+<li>RSAT_imagery_HH.tif RSAT_imagery_HV.tif RSAT_imagery_VV.tif
+(polarimetry example)</li>
+<li>QB_Toulouse_Ortho_PAN.tif QB_Toulouse_Ortho_XS.tif
+(pansharpening example)</li>
+</ul>
+</li>
+<li>in OTB-Data/Input/mv2-test: QB_1_ortho.tif</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="AdvancedUse.html" class="btn btn-neutral float-right" title="Advanced Use" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="QGIS-interface.html" class="btn btn-neutral" title="QGIS interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+.. _app-DSFuzzyModelEstimation:
+
+DSFuzzyModelEstimation
+======================
+
+
+Estimate feature fuzzy model parameters using 2 vector data (ground truth samples and wrong samples).
+
+Description
+-----------
+
+Estimate feature fuzzy model parameters using 2 vector data (ground truth samples and wrong samples).
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Positive Vector Data** :code:`-psin vectorfile` *Mandatory* |br|
+Ground truth vector data for positive samples
+
+**Input Negative Vector Data** :code:`-nsin vectorfile` *Mandatory* |br|
+Ground truth vector data for negative samples
+
+**Belief Support** :code:`-belsup string1 string2...` *Mandatory* |br|
+Dempster Shafer study hypothesis to compute belief
+
+**Plausibility Support** :code:`-plasup string1 string2...` *Mandatory* |br|
+Dempster Shafer study hypothesis to compute plausibility
+
+**Output filename** :code:`-out filename [dtype]` *Mandatory* |br|
+Output model file name (xml file) contains the optimal model to perform information fusion.
+
+**Criterion** :code:`-cri string` *Default value: ((Belief + Plausibility)/2.)* |br|
+Dempster Shafer criterion (by default (belief+plausibility)/2)
+
+**Weighting** :code:`-wgt float` *Default value: 0.5* |br|
+Coefficient between 0 and 1 to promote undetection or false detections (default 0.5)
+
+**initialization model** :code:`-initmod filename [dtype]` |br|
+Initialization model (xml file) to be used. If the xml initialization model is set, the descriptor list is not used (specified using the option -desclist)
+
+**Descriptor list** :code:`-desclist string1 string2...` |br|
+List of the descriptors to be used in the model (must be specified to perform an automatic initialization)
+
+**Maximum number of iterations** :code:`-maxnbit int` *Default value: 200* |br|
+Maximum number of optimizer iteration (default 200)
+
+**Optimizer Observer** :code:`-optobs bool` *Default value: false* |br|
+Activate the optimizer observer
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_DSFuzzyModelEstimation -psin cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_gt.shp -nsin cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_wr.shp -belsup "ROADSA" -plasup "NONDVI" "ROADSA" "NOBUIL" -initmod Dempster-Shafer/DSFuzzyModel_Init.xml -maxnbit 4 -optobs true -out DSFuzzyModelEstimation.xml
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("DSFuzzyModelEstimation")
+
+	app.SetParameterString("psin", "cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_gt.shp")
+	app.SetParameterString("nsin", "cdbTvComputePolylineFeatureFromImage_LI_NOBUIL_wr.shp")
+	app.SetParameterStringList("belsup", ['"ROADSA"'])
+	app.SetParameterStringList("plasup", ['"NONDVI"', '"ROADSA"', '"NOBUIL"'])
+	app.SetParameterString("initmod", "Dempster-Shafer/DSFuzzyModel_Init.xml")
+	app.SetParameterInt("maxnbit", 4)
+	app.SetParameterString("optobs","true")
+	app.SetParameterString("out", "DSFuzzyModelEstimation.xml")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+None.
+
+

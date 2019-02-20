@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SVMImageEstimatorClassificationMultiExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GenerateTrainingImageExample.cxx" href="GenerateTrainingImageExample.html" />
+    <link rel="prev" title="SOMExample.cxx" href="SOMExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Learning.html">Learning</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SOMClassifierExample.html">SOMClassifierExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOMExample.html">SOMExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SVMImageEstimatorClassificationMultiExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GenerateTrainingImageExample.html">GenerateTrainingImageExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SEMModelEstimatorExample.html">SEMModelEstimatorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TrainMachineLearningModelFromSamplesExample.html">TrainMachineLearningModelFromSamplesExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TrainMachineLearningModelFromImagesExample.html">TrainMachineLearningModelFromImagesExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Learning.html">Learning</a> &raquo;</li>
+        
+      <li>SVMImageEstimatorClassificationMultiExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Learning/SVMImageEstimatorClassificationMultiExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="svmimageestimatorclassificationmultiexample-cxx">
+<span id="example-svmimageestimatorclassificationmultiexample"></span><h1>SVMImageEstimatorClassificationMultiExample.cxx<a class="headerlink" href="#svmimageestimatorclassificationmultiexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./SVMImageEstimatorClassificationMultiExample Input/ROI_QB_MUL_1.png <span class="se">\</span>
+                                              Input/ROI_mask_multi.png <span class="se">\</span>
+                                              Output/ROI_QB_MUL_1_SVN_CLASS_MULTI.png <span class="se">\</span>
+                                              Output/ROI_QB_MUL_1_SVN_CLASS_MULTI_Rescaled.jpg <span class="se">\</span>
+                                              Output/ROI_mask_multi.png
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SVMImageEstimatorClassificationMultiExample.cxx?inline=false">SVMImageEstimatorClassificationMultiExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the OTB&#39;s multi-class SVM</span>
+<span class="c1">// capabilities. The theory behind this kind of classification is out</span>
+<span class="c1">// of the scope of this guide. In OTB, the multi-class SVM</span>
+<span class="c1">// classification is used in the same way as the two-class</span>
+<span class="c1">// one. Figure~\ref{fig:SVMROISMULTI} shows the image to be classified</span>
+<span class="c1">// and the associated ground truth, which is composed of 4 classes.</span>
+<span class="c1">// \begin{figure}</span>
+<span class="c1">// \center</span>
+<span class="c1">// \includegraphics[width=0.45\textwidth]{ROI_QB_MUL_1.eps}</span>
+<span class="c1">// \includegraphics[width=0.45\textwidth]{ROI_mask_multi.eps}</span>
+<span class="c1">// \itkcaption[SVM Image Model Estimation]{Images used for the</span>
+<span class="c1">// estimation of the SVM model. Left: RGB image. Right: image of labels.}</span>
+<span class="c1">// \label{fig:SVMROISMULTI}</span>
+<span class="c1">// \end{figure}</span>
+
+<span class="c1">// The following header files are needed for the program:</span>
+
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbLibSVMMachineLearningModel.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkImageToListSampleFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageClassificationFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkScalarToRGBPixelFunctor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkBinaryThresholdImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">inputImageFileName</span>          <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">trainingImageFileName</span>       <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputImageFileName</span>         <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputRescaledImageFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="c1">//  const char* outputModelFileName = argv[4];</span>
+
+  <span class="c1">//  We define the types for the input and training images. Even if the</span>
+  <span class="c1">//  input image will be an RGB image, we can read it as a 3 component</span>
+  <span class="c1">//  vector image. This simplifies the interfacing with OTB&#39;s SVM</span>
+  <span class="c1">//  framework.</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">InputPixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>     <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">InputImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">TrainingImageType</span><span class="p">;</span>
+
+  <span class="c1">//  The \doxygen{otb}{LibSVMMachineLearningModel} class is templated over</span>
+  <span class="c1">//  the input (features) and the training (labels) values.</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">LibSVMMachineLearningModel</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">InputPixelType</span><span class="o">&gt;</span> <span class="n">ModelType</span><span class="p">;</span>
+
+
+  <span class="c1">//  As usual, we define the readers for the images.</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span>    <span class="n">InputReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">TrainingImageType</span><span class="o">&gt;</span> <span class="n">TrainingReaderType</span><span class="p">;</span>
+
+  <span class="n">InputReaderType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">inputReader</span>    <span class="o">=</span> <span class="n">InputReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">TrainingReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">trainingReader</span> <span class="o">=</span> <span class="n">TrainingReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+
+  <span class="c1">//  We read the images. It is worth to note that, in order to ensure</span>
+  <span class="c1">//  the pipeline coherence, the output of the objects which precede the</span>
+  <span class="c1">//  model estimator in the pipeline, must be up to date, so we call</span>
+  <span class="c1">//  the corresponding \code{Update} methods.</span>
+  <span class="n">inputReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputImageFileName</span><span class="p">);</span>
+  <span class="n">trainingReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">trainingImageFileName</span><span class="p">);</span>
+
+  <span class="c1">//~ inputReader-&gt;Update();</span>
+  <span class="c1">//~ trainingReader-&gt;Update();</span>
+
+
+  <span class="c1">//  The input data is contained in images. Only label values greater than 0</span>
+  <span class="c1">//  shall be used, so we create two iterators to fill the input and target</span>
+  <span class="c1">//  ListSamples.</span>
+
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">BinaryThresholdImageFilter</span><span class="o">&lt;</span><span class="n">TrainingImageType</span><span class="p">,</span> <span class="n">TrainingImageType</span><span class="o">&gt;</span> <span class="n">ThresholdFilterType</span><span class="p">;</span>
+  <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                  <span class="n">thresholder</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">trainingReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetLowerThreshold</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetInsideValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Statistics</span><span class="o">::</span><span class="n">ImageToListSampleFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">TrainingImageType</span><span class="o">&gt;</span>    <span class="n">ImageToListSample</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Statistics</span><span class="o">::</span><span class="n">ImageToListSampleFilter</span><span class="o">&lt;</span><span class="n">TrainingImageType</span><span class="p">,</span> <span class="n">TrainingImageType</span><span class="o">&gt;</span> <span class="n">ImageToTargetListSample</span><span class="p">;</span>
+
+  <span class="n">ImageToListSample</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">imToList</span> <span class="o">=</span> <span class="n">ImageToListSample</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">imToList</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">inputReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">imToList</span><span class="o">-&gt;</span><span class="n">SetMaskImage</span><span class="p">(</span><span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">imToList</span><span class="o">-&gt;</span><span class="n">SetMaskValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">imToList</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">ImageToTargetListSample</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">imToTargetList</span> <span class="o">=</span> <span class="n">ImageToTargetListSample</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">imToTargetList</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">trainingReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">imToTargetList</span><span class="o">-&gt;</span><span class="n">SetMaskImage</span><span class="p">(</span><span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">imToTargetList</span><span class="o">-&gt;</span><span class="n">SetMaskValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">imToTargetList</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+
+  <span class="c1">//  We can now instantiate the model and set its parameters.</span>
+  <span class="n">ModelType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">svmModel</span> <span class="o">=</span> <span class="n">ModelType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">svmModel</span><span class="o">-&gt;</span><span class="n">SetInputListSample</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="n">ModelType</span><span class="o">::</span><span class="n">InputListSampleType</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">imToList</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()));</span>
+  <span class="n">svmModel</span><span class="o">-&gt;</span><span class="n">SetTargetListSample</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="n">ModelType</span><span class="o">::</span><span class="n">TargetListSampleType</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">imToTargetList</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()));</span>
+
+
+  <span class="c1">//  The model training procedure is triggered by calling the</span>
+  <span class="c1">//  model&#39;s \code{Train} method.</span>
+  <span class="n">svmModel</span><span class="o">-&gt;</span><span class="n">Train</span><span class="p">();</span>
+
+
+  <span class="c1">// We have now all the elements to create a classifier. The classifier</span>
+  <span class="c1">// is templated over the sample type (the type of the data to be</span>
+  <span class="c1">// classified) and the label type (the type of the output of the classifier).</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageClassificationFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">TrainingImageType</span><span class="o">&gt;</span> <span class="n">ClassifierType</span><span class="p">;</span>
+
+  <span class="n">ClassifierType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">classifier</span> <span class="o">=</span> <span class="n">ClassifierType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">// We set the classifier parameters : number of classes, SVM model,</span>
+  <span class="c1">// the sample data. And we trigger the classification process by</span>
+  <span class="c1">// calling the \code{Update} method.</span>
+
+  <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetModel</span><span class="p">(</span><span class="n">svmModel</span><span class="p">);</span>
+  <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">inputReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// After the classification step, we usually want to get the</span>
+  <span class="c1">// results. The classifier gives an output under the form of a sample</span>
+  <span class="c1">// list. This list supports the classical STL iterators. Therefore, we</span>
+  <span class="c1">// will create an output image and fill it up with the results of the</span>
+  <span class="c1">// classification. The pixel type of the output image is the same as</span>
+  <span class="c1">// the one used for the labels.</span>
+
+
+  <span class="c1">// We allocate the memory for the output image using the information</span>
+  <span class="c1">// from the input image.</span>
+
+
+  <span class="c1">// We can now declare the iterators on the list that we get at the</span>
+  <span class="c1">// output of the classifier as well as the iterator to fill the output image.</span>
+
+
+  <span class="c1">// We will iterate through the list, get the labels and assign pixel</span>
+  <span class="c1">// values to the output image.</span>
+
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">TrainingImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputImageFileName</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">classifier</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Only for visualization purposes, we choose a color mapping to the image of</span>
+  <span class="c1">// classes before saving it to a file. The</span>
+  <span class="c1">// \subdoxygen{itk}{Functor}{ScalarToRGBPixelFunctor} class is a special</span>
+  <span class="c1">// function object designed to hash a scalar value into an</span>
+  <span class="c1">// \doxygen{itk}{RGBPixel}. Plugging this functor into the</span>
+  <span class="c1">// \doxygen{itk}{UnaryFunctorImageFilter} creates an image filter for that</span>
+  <span class="c1">// converts scalar images to RGB images.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RGBPixel</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span>                                                       <span class="n">RGBPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">RGBPixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                                                        <span class="n">RGBImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">ScalarToRGBPixelFunctor</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">&gt;</span>                               <span class="n">ColorMapFunctorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">UnaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">TrainingImageType</span><span class="p">,</span> <span class="n">RGBImageType</span><span class="p">,</span> <span class="n">ColorMapFunctorType</span><span class="o">&gt;</span> <span class="n">ColorMapFilterType</span><span class="p">;</span>
+  <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                                <span class="n">colormapper</span> <span class="o">=</span> <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">colormapper</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">classifier</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// We can now create an image file writer and save the image.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">RGBImageType</span><span class="o">&gt;</span> <span class="n">WriterRescaledType</span><span class="p">;</span>
+
+  <span class="n">WriterRescaledType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writerRescaled</span> <span class="o">=</span> <span class="n">WriterRescaledType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writerRescaled</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputRescaledImageFileName</span><span class="p">);</span>
+  <span class="n">writerRescaled</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">colormapper</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writerRescaled</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure \ref{fig:SVMCLASSMULTI} shows the result of the SVM classification.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{ROI_QB_MUL_1.eps}</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{ROI_QB_MUL_1_SVN_CLASS_MULTI_Rescaled.eps}</span>
+  <span class="c1">// \itkcaption[SVM Image Classification]{Result of the SVM</span>
+  <span class="c1">// classification . Left: RGB image. Right: image of classes.}</span>
+  <span class="c1">// \label{fig:SVMCLASSMULTI}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="GenerateTrainingImageExample.html" class="btn btn-neutral float-right" title="GenerateTrainingImageExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SOMExample.html" class="btn btn-neutral" title="SOMExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

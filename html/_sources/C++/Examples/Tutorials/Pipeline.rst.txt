@@ -1,0 +1,71 @@
+.. _example-Pipeline:
+
+Pipeline.cxx
+============
+
+
+
+
+
+Example usage:
+
+.. code-block:: bash
+
+    ./Pipeline Input/QB_Suburb.png Output/TutorialsPipelineOutput.png
+
+
+Example source code (`Pipeline.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/Pipeline.cxx?inline=false>`_):
+
+.. code-block:: cpp
+
+    //  Start by including some necessary headers and with the
+    //  usual \code{main} declaration:
+    
+    #include "otbImage.h"
+    #include "otbImageFileReader.h"
+    #include "otbImageFileWriter.h"
+    
+    int main(int argc, char* argv[])
+    {
+      if (argc != 3)
+      {
+        std::cerr << "Usage: " << argv[0] << " <input_filename> <output_filename>" << std::endl;
+      }
+    
+      //  Declare the image as an \doxygen{otb}{Image}, the pixel type
+      // is declared as an unsigned char (one byte) and the image is specified as
+      // having two dimensions.
+    
+      typedef otb::Image<unsigned char, 2> ImageType;
+    
+      //  To read the image, we need an \doxygen{otb}{ImageFileReader}
+      // which is templated with the image type.
+    
+      typedef otb::ImageFileReader<ImageType> ReaderType;
+      ReaderType::Pointer                     reader = ReaderType::New();
+    
+      // Then, we need an \doxygen{otb}{ImageFileWriter}
+      // also templated with the image type.
+    
+      typedef otb::ImageFileWriter<ImageType> WriterType;
+      WriterType::Pointer                     writer = WriterType::New();
+    
+      // The filenames are passed as arguments to the program. We keep it
+      // simple for now and we don't check their validity.
+    
+      reader->SetFileName(argv[1]);
+      writer->SetFileName(argv[2]);
+    
+      // Now that we have all the elements, we connect the pipeline,
+      // pluging the output of the reader to the input of the writer.
+    
+      writer->SetInput(reader->GetOutput());
+    
+      // And finally, we trigger the pipeline execution calling the Update()
+      // method on the last element of the pipeline. The last element will make
+      // sure to update all previous elements in the pipeline.
+    
+      writer->Update();
+    
+      return EXIT_SUCCESS;
+    }

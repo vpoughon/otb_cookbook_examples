@@ -1,0 +1,107 @@
+.. _app-EndmemberNumberEstimation:
+
+EndmemberNumberEstimation
+=========================
+
+
+Estimate the number of endmembers in a hyperspectral image
+
+Description
+-----------
+
+Estimate the number of endmembers in a hyperspectral image. First, compute statistics on the image and then apply an endmember number estimation algorithm using these statistics. Two algorithms are available:
+
+1. Virtual Dimensionality (VD) [1][2]
+2. Eigenvalue Likelihood Maximization (ELM) [3][4]
+
+The application then returns the estimated number of endmembers.
+
+[1] C.-I. Chang and Q. Du, Estimation of number of spectrally distinct signal sources in hyperspectral imagery, IEEE Transactions on Geoscience and Remote Sensing, vol. 43, no. 3, mar 2004.
+
+[2] J. Wang and C.-I. Chang, Applications of independent component analysis in endmember extraction and abundance quantification for hyperspectral imagery, IEEE Transactions on Geoscience and Remote Sensing, vol. 44, no. 9, pp. 2601-1616, sep 2006.
+
+[3] Unsupervised Endmember Extraction of Martian Hyperspectral Images, B.Luo, J. Chanussot, S. Dout'e and X. Ceamanos, IEEE Whispers 2009, Grenoble France, 2009
+
+[4] Unsupervised classification of hyperspectral images by using linear unmixing algorithm Luo, B. and Chanussot, J., IEEE Int. Conf. On ImageProcessing(ICIP) 2009, Cairo, Egypte, 2009
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image Filename** :code:`-in image` *Mandatory* |br|
+The hyperspectral data cube input
+
+**Number of endmembers** :code:`-number int` *Mandatory* |br|
+The output estimated number of endmembers
+
+**Unmixing algorithm** :code:`-algo [elm|vd]` *Default value: elm* |br|
+The algorithm to use for the estimation
+
+* **Eigenvalue Likelihood Maximization** |br| 
+
+* **Virtual Dimensionality** |br| 
+
+
+
+Virtual Dimensionality options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**False alarm rate** :code:`-algo.vd.far float` *Default value: 0.001* |br|
+False alarm rate for the virtual dimensionality algorithm
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_EndmemberNumberEstimation -in cupriteSubHsi.tif -algo vd -algo.vd.far 1.0E-3
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("EndmemberNumberEstimation")
+
+	app.SetParameterString("in", "cupriteSubHsi.tif")
+	app.SetParameterString("algo","vd")
+	app.SetParameterFloat("algo.vd.far", 1.0E-3)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-VertexComponentAnalysis`, :ref:`app-HyperspectralUnmixing`

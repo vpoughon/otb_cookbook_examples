@@ -1,0 +1,82 @@
+.. _app-LocalRxDetection:
+
+LocalRxDetection
+================
+
+
+Performs local Rx score computation on an hyperspectral image.
+
+Description
+-----------
+
+Performs local Rx score computation on an input hyperspectral image. For each hyperspectral pixel, the Rx score is computed using statistics computed on a dual neighborhood. The dual neighborhood is composed of all pixel that are in between two radiuses around the center pixel. This score can then be used to detect anomalies in the image, this can be done for example by thresholding the result of this application with the :ref:`app-BandMath` application.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input hyperspectral data cube
+
+**Output Image** :code:`-out image [dtype]` |br|
+Output Rx score image
+
+**Internal radius** :code:`-ir int` *Default value: 1* |br|
+Internal radius in pixel
+
+**External radius** :code:`-er int` *Default value: 5* |br|
+External radius in pixel
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_LocalRxDetection -in cupriteSubHsi.tif -out LocalRxScore.tif -ir 1 -er 5
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("LocalRxDetection")
+
+	app.SetParameterString("in", "cupriteSubHsi.tif")
+	app.SetParameterString("out", "LocalRxScore.tif")
+	app.SetParameterInt("ir", 1)
+	app.SetParameterInt("er", 5)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-BandMath`

@@ -1,0 +1,109 @@
+.. _app-OSMDownloader:
+
+OSMDownloader
+=============
+
+
+Download vector data from OSM and store it to file
+
+Description
+-----------
+
+The application connects to Open Street Map server, downloads the data corresponding to the spatial extent of the support image, and filters the geometries based on OSM tags to produce a vector data file.
+
+This application can be used to download reference data to perform the training of a machine learning model (see for instance [1]).
+
+By default, the entire layer is downloaded. The application has a special mode to provide the list of available classes in the layers. The downloaded features are filtered by giving an OSM tag 'key'. In addition, the user can also choose what 'value' this key should have. More information about the OSM project at [2].
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Output vector data** :code:`-out vectorfile` *Mandatory* |br|
+Vector data file to store downloaded features
+
+**Support image** :code:`-support image` *Mandatory* |br|
+Image used to derive the spatial extent to be requested from OSM server (the bounding box of the extent is used). Be aware that a request with a large extent may be rejected by the server.
+
+**OSM tag key** :code:`-key string` |br|
+OSM tag key to extract (highway, building...). It defines a category to select features.
+
+**OSM tag value** :code:`-value string` |br|
+OSM tag value to extract (motorway, footway...). It defines the type of feature to select inside a category.
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Displays available key/value classes** :code:`-printclasses bool` *Default value: false* |br|
+Print the key/value classes available for the selected support image. If enabled, the OSM tag Key (-key) and the output (-out) become optional
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_OSMDownloader -support qb_RoadExtract.tif -key highway -out apTvUtOSMDownloader.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("OSMDownloader")
+
+	app.SetParameterString("support", "qb_RoadExtract.tif")
+	app.SetParameterString("key", "highway")
+	app.SetParameterString("out", "apTvUtOSMDownloader.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+This application requires an Internet access.
+
+See also
+--------
+
+| [1] :ref:`app-TrainImagesClassifier` 
+| [2] http://www.openstreetmap.fr/

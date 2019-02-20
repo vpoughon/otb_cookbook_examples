@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ClassificationMapRegularization &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ComputeConfusionMatrix" href="app_ComputeConfusionMatrix.html" />
+    <link rel="prev" title="Learning" href="Learning.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Learning.html">Learning</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ClassificationMapRegularization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeConfusionMatrix.html">ComputeConfusionMatrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeImagesStatistics.html">ComputeImagesStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_FusionOfClassifications.html">FusionOfClassifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageClassifier.html">ImageClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ImageDimensionalityReduction.html">ImageDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_KMeansClassification.html">KMeansClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MultiImageSamplingRate.html">MultiImageSamplingRate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_PolygonClassStatistics.html">PolygonClassStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_PredictRegression.html">PredictRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SOMClassification.html">SOMClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleAugmentation.html">SampleAugmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleExtraction.html">SampleExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SampleSelection.html">SampleSelection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainDimensionalityReduction.html">TrainDimensionalityReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainImagesClassifier.html">TrainImagesClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainRegression.html">TrainRegression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_TrainVectorClassifier.html">TrainVectorClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorClassifier.html">VectorClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDimensionalityReduction.html">VectorDimensionalityReduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Learning.html">Learning</a> &raquo;</li>
+        
+      <li>ClassificationMapRegularization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_ClassificationMapRegularization.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="classificationmapregularization">
+<span id="app-classificationmapregularization"></span><h1>ClassificationMapRegularization<a class="headerlink" href="#classificationmapregularization" title="Permalink to this headline">¶</a></h1>
+<p>Filters the input labeled image using Majority Voting in a ball shaped neighbordhood</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application filters the input labeled image (with a maximal class label = 65535) using Majority Voting in a ball shaped neighbordhood.Majority Voting takes the more representative value of all the pixels identified by the ball shaped structuring element and then sets the center pixel to this majority label value.</p>
+<ul class="simple">
+<li>NoData is the label of the NOT classified pixels in the input image. These input pixels keep their NoData label in the output image.</li>
+<li>Pixels with more than 1 majority class are marked as Undecided if the parameter ‘ip.suvbool == true’, or keep their Original labels otherwise.</li>
+</ul>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#input-and-output-images" id="id1">Input and output images</a></li>
+<li><a class="reference internal" href="#regularization-parameters" id="id2">Regularization parameters</a></li>
+</ul>
+</div>
+<div class="section" id="input-and-output-images">
+<h3><a class="toc-backref" href="#id1">Input and output images</a><a class="headerlink" href="#input-and-output-images" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows setting input and output images for classification map regularization by Majority Voting.</p>
+<p><strong>Input classification image</strong> <code class="code docutils literal notranslate"><span class="pre">-io.in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The input labeled image to regularize.</p>
+<p><strong>Output regularized image</strong> <code class="code docutils literal notranslate"><span class="pre">-io.out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+The output regularized labeled image.</p>
+</div>
+<div class="section" id="regularization-parameters">
+<h3><a class="toc-backref" href="#id2">Regularization parameters</a><a class="headerlink" href="#regularization-parameters" title="Permalink to this headline">¶</a></h3>
+<p>This group allows setting parameters for classification map regularization by Majority Voting.</p>
+<p><strong>Structuring element radius (in pixels)</strong> <code class="code docutils literal notranslate"><span class="pre">-ip.radius</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+The radius of the ball shaped structuring element (in pixels).</p>
+<p><strong>Set tie pixels to undecided</strong> <code class="code docutils literal notranslate"><span class="pre">-ip.suvbool</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+If true, set pixels with more than one majority class to an undecided value. If false, keep their original labels.</p>
+<p><strong>Label for the NoData class</strong> <code class="code docutils literal notranslate"><span class="pre">-ip.nodatalabel</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Label for the NoData class. Such input pixels keep their NoData label in the output image.</p>
+<p><strong>Label for the Undecided class</strong> <code class="code docutils literal notranslate"><span class="pre">-ip.undecidedlabel</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Label for the Undecided class.</p>
+<p><strong>Process isolated pixels only</strong> <code class="code docutils literal notranslate"><span class="pre">-ip.onlyisolatedpixels</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+Only pixels whose label is unique in the neighbordhood will be processed.</p>
+<p><strong>Threshold for isolated pixels</strong> <code class="code docutils literal notranslate"><span class="pre">-ip.isolatedthreshold</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Maximum number of neighbours with the same label as the center pixel to consider that it is an isolated pixel.</p>
+<hr class="docutils" />
+<p><strong>Available RAM (MB)</strong> <code class="code docutils literal notranslate"><span class="pre">-ram</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Available memory for processing (in MB).</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_ClassificationMapRegularization -io.in clLabeledImageQB123_1.tif -io.out clLabeledImageQB123_1_CMR_r2_nodl_10_undl_7.tif -ip.radius <span class="m">2</span> -ip.suvbool <span class="nb">true</span> -ip.onlyisolatedpixels <span class="nb">true</span> -ip.nodatalabel <span class="m">10</span> -ip.undecidedlabel <span class="m">7</span>
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;ClassificationMapRegularization&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.in&quot;</span><span class="p">,</span> <span class="s2">&quot;clLabeledImageQB123_1.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;io.out&quot;</span><span class="p">,</span> <span class="s2">&quot;clLabeledImageQB123_1_CMR_r2_nodl_10_undl_7.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;ip.radius&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;ip.suvbool&quot;</span><span class="p">,</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;ip.onlyisolatedpixels&quot;</span><span class="p">,</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;ip.nodatalabel&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;ip.undecidedlabel&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>The input image must be a single band labeled image (with a maximal class label = 65535). The structuring element radius must have a minimum value equal to 1 pixel. Please note that the Undecided value must be different from existing labels in the input labeled image.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_ComputeConfusionMatrix.html" class="btn btn-neutral float-right" title="ComputeConfusionMatrix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Learning.html" class="btn btn-neutral" title="Learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

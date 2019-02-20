@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SOMExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SVMImageEstimatorClassificationMultiExample.cxx" href="SVMImageEstimatorClassificationMultiExample.html" />
+    <link rel="prev" title="SOMClassifierExample.cxx" href="SOMClassifierExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Learning.html">Learning</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SOMClassifierExample.html">SOMClassifierExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SOMExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SVMImageEstimatorClassificationMultiExample.html">SVMImageEstimatorClassificationMultiExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GenerateTrainingImageExample.html">GenerateTrainingImageExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SEMModelEstimatorExample.html">SEMModelEstimatorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TrainMachineLearningModelFromSamplesExample.html">TrainMachineLearningModelFromSamplesExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TrainMachineLearningModelFromImagesExample.html">TrainMachineLearningModelFromImagesExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Learning.html">Learning</a> &raquo;</li>
+        
+      <li>SOMExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Learning/SOMExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="somexample-cxx">
+<span id="example-somexample"></span><h1>SOMExample.cxx<a class="headerlink" href="#somexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./SOMExample Input/ROI_QB_MUL_1.png Output/ROI_QB_MUL_SOM.png Output/ROI_QB_MUL_SOMACT.png <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">20</span> <span class="m">1</span>.0 <span class="m">0</span>.1 <span class="m">128</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SOMExample.cxx?inline=false">SOMExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> * Copyright (C) 2007-2012 Institut Mines Telecom / Telecom Bretagne</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+
+
+
+<span class="c1">// This example illustrates the use of the</span>
+<span class="c1">// \doxygen{otb}{SOM} class for building Kohonen&#39;s Self Organizing</span>
+<span class="c1">// Maps.</span>
+<span class="c1">//</span>
+<span class="c1">// We will use the SOM in order to build a color table from an input</span>
+<span class="c1">// image. Our input image is coded with $3\times 8$ bits and we would</span>
+<span class="c1">// like to code it with only 16 levels. We will use the SOM in order</span>
+<span class="c1">// to learn which are the 16 most representative RGB values of the</span>
+<span class="c1">// input image and we will assume that this is the optimal color table</span>
+<span class="c1">// for the image.</span>
+<span class="c1">//</span>
+<span class="c1">// The first thing to do is include the header file for the</span>
+<span class="c1">// class. We will also need the header files for the map itself and</span>
+<span class="c1">// the activation map builder whose utility will be explained at the</span>
+<span class="c1">// end of the example.</span>
+<span class="c1">//</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbSOMMap.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSOM.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSOMActivationBuilder.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkVectorExpandImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkVectorNearestNeighborInterpolateImageFunction.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkExpandImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkNearestNeighborInterpolateImageFunction.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbPerBandVectorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbPrintableImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// Since the \doxygen{otb}{SOM} class uses a distance, we will need to</span>
+<span class="c1">// include the header file for the one we want to use</span>
+<span class="c1">//</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkListSample.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>  <span class="n">inputFileName</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>  <span class="n">outputFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span>  <span class="n">actMapFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">sizeX</span>          <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">sizeY</span>          <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">neighInitX</span>     <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">neighInitY</span>     <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nbIterations</span>   <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+  <span class="kt">double</span>       <span class="n">betaInit</span>       <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
+  <span class="kt">double</span>       <span class="n">betaEnd</span>        <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span>
+  <span class="kt">double</span>       <span class="n">initValue</span>      <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">11</span><span class="p">]);</span>
+
+  <span class="c1">// The Self Organizing Map itself is actually an N-dimensional image</span>
+  <span class="c1">// where each pixel contains a neuron. In our case, we decide to build</span>
+  <span class="c1">// a 2-dimensional SOM, where the neurons store RGB values with</span>
+  <span class="c1">// floating point precision.</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                             <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">double</span>                                 <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">PixelType</span>                   <span class="n">VectorType</span><span class="p">;</span>
+  <span class="c1">// The distance that we want to apply between the RGB values is the</span>
+  <span class="c1">// Euclidean one. Of course we could choose to use other type of</span>
+  <span class="c1">// distance, as for instance, a distance defined in any other color space.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Statistics</span><span class="o">::</span><span class="n">EuclideanDistanceMetric</span><span class="o">&lt;</span><span class="n">VectorType</span><span class="o">&gt;</span> <span class="n">DistanceType</span><span class="p">;</span>
+  <span class="c1">//</span>
+  <span class="c1">// We can now define the type for the map. The \doxygen{otb}{SOMMap}</span>
+  <span class="c1">// class is templated over the neuron type -- \code{PixelType} here</span>
+  <span class="c1">// --, the distance type and the number of dimensions. Note that the</span>
+  <span class="c1">// number of dimensions of the map could be different from the one of</span>
+  <span class="c1">// the images to be processed.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SOMMap</span><span class="o">&lt;</span><span class="n">VectorType</span><span class="p">,</span> <span class="n">DistanceType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">MapType</span><span class="p">;</span>
+  <span class="c1">//</span>
+  <span class="c1">// We are going to perform the learning directly on the pixels of the</span>
+  <span class="c1">// input image. Therefore, the image type is defined using the same</span>
+  <span class="c1">// pixel type as we used for the map. We also define the type for the</span>
+  <span class="c1">// imge file reader.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="c1">//</span>
+  <span class="c1">// Since the \doxygen{otb}{SOM} class works on lists of samples, it</span>
+  <span class="c1">// will need to access the input image through an adaptor. Its type is</span>
+  <span class="c1">// defined as follows:</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Statistics</span><span class="o">::</span><span class="n">ListSample</span><span class="o">&lt;</span><span class="n">VectorType</span><span class="o">&gt;</span> <span class="n">SampleListType</span><span class="p">;</span>
+  <span class="c1">//</span>
+  <span class="c1">// We can now define the type for the SOM, which is templated over the</span>
+  <span class="c1">// input sample list and the type of the map to be produced and the two</span>
+  <span class="c1">// functors that hold the training behavior.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">CzihoSOMLearningBehaviorFunctor</span>                                                   <span class="n">LearningBehaviorFunctorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">CzihoSOMNeighborhoodBehaviorFunctor</span>                                               <span class="n">NeighborhoodBehaviorFunctorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SOM</span><span class="o">&lt;</span><span class="n">SampleListType</span><span class="p">,</span> <span class="n">MapType</span><span class="p">,</span> <span class="n">LearningBehaviorFunctorType</span><span class="p">,</span> <span class="n">NeighborhoodBehaviorFunctorType</span><span class="o">&gt;</span> <span class="n">SOMType</span><span class="p">;</span>
+  <span class="c1">//</span>
+  <span class="c1">// As an alternative to standard \code{SOMType}, one can decide to use</span>
+  <span class="c1">// an \doxygen{otb}{PeriodicSOM}, which behaves like \doxygen{otb}{SOM} but</span>
+  <span class="c1">// is to be considered to as a torus instead of a simple map. Hence, the</span>
+  <span class="c1">// neighborhood behavior of the winning neuron does not depend on its location</span>
+  <span class="c1">// on the map...</span>
+  <span class="c1">// \doxygen{otb}{PeriodicSOM} is defined in otbPeriodicSOM.h.</span>
+  <span class="c1">//</span>
+  <span class="c1">// We can now start building the pipeline. The first step is to</span>
+  <span class="c1">// instantiate the reader and pass its output to the adaptor.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFileName</span><span class="p">);</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">SampleListType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">sampleList</span> <span class="o">=</span> <span class="n">SampleListType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">sampleList</span><span class="o">-&gt;</span><span class="n">SetMeasurementVectorSize</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetVectorLength</span><span class="p">());</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">imgIter</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetBufferedRegion</span><span class="p">());</span>
+  <span class="n">imgIter</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">imgIterEnd</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetBufferedRegion</span><span class="p">());</span>
+  <span class="n">imgIterEnd</span><span class="p">.</span><span class="n">GoToEnd</span><span class="p">();</span>
+
+  <span class="k">do</span>
+  <span class="p">{</span>
+    <span class="n">sampleList</span><span class="o">-&gt;</span><span class="n">PushBack</span><span class="p">(</span><span class="n">imgIter</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="o">++</span><span class="n">imgIter</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">imgIter</span> <span class="o">!=</span> <span class="n">imgIterEnd</span><span class="p">);</span>
+  <span class="c1">//</span>
+  <span class="c1">// We can now instantiate the SOM algorithm and set the sample list as input.</span>
+
+  <span class="n">SOMType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">som</span> <span class="o">=</span> <span class="n">SOMType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetListSample</span><span class="p">(</span><span class="n">sampleList</span><span class="p">);</span>
+  <span class="c1">//</span>
+  <span class="c1">// We use a \code{SOMType::SizeType} array in order to set the sizes</span>
+  <span class="c1">// of the map.</span>
+
+  <span class="n">SOMType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">size</span><span class="p">;</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sizeX</span><span class="p">;</span>
+  <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sizeY</span><span class="p">;</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetMapSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="c1">//</span>
+  <span class="c1">// The initial size of the neighborhood of each neuron is set in the</span>
+  <span class="c1">// same way.</span>
+
+  <span class="n">SOMType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">radius</span><span class="p">;</span>
+  <span class="n">radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">neighInitX</span><span class="p">;</span>
+  <span class="n">radius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">neighInitY</span><span class="p">;</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetNeighborhoodSizeInit</span><span class="p">(</span><span class="n">radius</span><span class="p">);</span>
+  <span class="c1">//</span>
+  <span class="c1">// The other parameters are the number of iterations, the initial and</span>
+  <span class="c1">// the final values for the learning rate -- $\beta$ -- and the</span>
+  <span class="c1">// maximum initial value for the neurons (the map will be randomly</span>
+  <span class="c1">// initialized).</span>
+
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetNumberOfIterations</span><span class="p">(</span><span class="n">nbIterations</span><span class="p">);</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetBetaInit</span><span class="p">(</span><span class="n">betaInit</span><span class="p">);</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetBetaEnd</span><span class="p">(</span><span class="n">betaEnd</span><span class="p">);</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetMaxWeight</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">initValue</span><span class="p">));</span>
+  <span class="c1">//</span>
+  <span class="c1">//  Now comes the initialization of the functors.</span>
+
+  <span class="n">LearningBehaviorFunctorType</span> <span class="n">learningFunctor</span><span class="p">;</span>
+  <span class="n">learningFunctor</span><span class="p">.</span><span class="n">SetIterationThreshold</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">nbIterations</span><span class="p">);</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetBetaFunctor</span><span class="p">(</span><span class="n">learningFunctor</span><span class="p">);</span>
+
+  <span class="n">NeighborhoodBehaviorFunctorType</span> <span class="n">neighborFunctor</span><span class="p">;</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">SetNeighborhoodSizeFunctor</span><span class="p">(</span><span class="n">neighborFunctor</span><span class="p">);</span>
+  <span class="n">som</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="c1">//</span>
+  <span class="c1">// Finally, we set up the las part of the pipeline where the plug the</span>
+  <span class="c1">// output of the SOM into the writer. The learning procedure is</span>
+  <span class="c1">// triggered by calling the \code{Update()} method on the writer.</span>
+  <span class="c1">// Since the map is itself an image, we can write it to disk with an</span>
+  <span class="c1">// \doxygen{otb}{ImageFileWriter}.</span>
+
+  <span class="c1">// Just for visualization purposes, we zoom the image, and pass it to the printable image filter</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                                              <span class="n">SingleImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ExpandImageFilter</span><span class="o">&lt;</span><span class="n">SingleImageType</span><span class="p">,</span> <span class="n">SingleImageType</span><span class="o">&gt;</span>              <span class="n">ExpandType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PerBandVectorImageFilter</span><span class="o">&lt;</span><span class="n">MapType</span><span class="p">,</span> <span class="n">MapType</span><span class="p">,</span> <span class="n">ExpandType</span><span class="o">&gt;</span>           <span class="n">VectorExpandType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">NearestNeighborInterpolateImageFunction</span><span class="o">&lt;</span><span class="n">SingleImageType</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span> <span class="n">InterpolatorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PrintableImageFilter</span><span class="o">&lt;</span><span class="n">MapType</span><span class="o">&gt;</span>                                    <span class="n">PrintableFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">OutputImageType</span><span class="o">&gt;</span>            <span class="n">PrintableWriterType</span><span class="p">;</span>
+
+  <span class="n">InterpolatorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">interpolator</span> <span class="o">=</span> <span class="n">InterpolatorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VectorExpandType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">expand</span>       <span class="o">=</span> <span class="n">VectorExpandType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ExpandType</span><span class="o">::</span><span class="n">Pointer</span>       <span class="n">scalarExpand</span> <span class="o">=</span> <span class="n">ExpandType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">scalarExpand</span><span class="o">-&gt;</span><span class="n">SetExpandFactors</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
+  <span class="n">scalarExpand</span><span class="o">-&gt;</span><span class="n">SetInterpolator</span><span class="p">(</span><span class="n">interpolator</span><span class="p">);</span>
+  <span class="c1">// scalarExpand-&gt;SetEdgePaddingValue(255);</span>
+
+  <span class="n">expand</span><span class="o">-&gt;</span><span class="n">SetFilter</span><span class="p">(</span><span class="n">scalarExpand</span><span class="p">);</span>
+
+  <span class="n">expand</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">som</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">expand</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+
+  <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">printFilter</span> <span class="o">=</span> <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">printFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">expand</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">printFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">printFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">printFilter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+  <span class="n">PrintableWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">printWriter</span> <span class="o">=</span> <span class="n">PrintableWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">printWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">printFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">printWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">);</span>
+
+  <span class="n">printWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// Figure \ref{fig:SOMMAP} shows the result of the SOM learning. Since</span>
+  <span class="c1">// we have performed a learning on RGB pixel values, the produced SOM</span>
+  <span class="c1">// can be interpreted as an optimal color table for the input</span>
+  <span class="c1">// image. It can be observed that the obtained colors are</span>
+  <span class="c1">// topologically organised, so similar colors are also close in the</span>
+  <span class="c1">// map. This topological organisation can be exploited to further</span>
+  <span class="c1">// reduce the number of coding levels of the pixels without</span>
+  <span class="c1">// performing a new learning: we can subsample the map to get a new</span>
+  <span class="c1">// color table. Also, a bilinear interpolation between the neurons can</span>
+  <span class="c1">// be used to increase the number of coding levels.</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{ROI_QB_MUL_1.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{ROI_QB_MUL_SOM.eps}</span>
+  <span class="c1">// \includegraphics[width=0.2\textwidth]{ROI_QB_MUL_SOMACT.eps}</span>
+  <span class="c1">// \itkcaption[SOM Image Classification]{Result of the SOM</span>
+  <span class="c1">// learning. Left: RGB image. Center: SOM. Right: Activation map}</span>
+  <span class="c1">// \label{fig:SOMMAP}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="c1">// We can now compute the activation map for the input image. The</span>
+  <span class="c1">// activation map tells us how many times a given neuron is activated</span>
+  <span class="c1">// for the set of examples given to the map. The activation map is</span>
+  <span class="c1">// stored as a scalar image and an integer pixel type is usually enough.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">OutputPixelType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span>  <span class="n">ActivationWriterType</span><span class="p">;</span>
+  <span class="c1">// In a similar way to the \doxygen{otb}{SOM} class the</span>
+  <span class="c1">// \doxygen{otb}{SOMActivationBuilder} is templated over the sample</span>
+  <span class="c1">// list given as input, the SOM map type and the activation map to be</span>
+  <span class="c1">// built as output.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SOMActivationBuilder</span><span class="o">&lt;</span><span class="n">SampleListType</span><span class="p">,</span> <span class="n">MapType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">SOMActivationBuilderType</span><span class="p">;</span>
+  <span class="c1">// We instantiate the activation map builder and set as input the SOM</span>
+  <span class="c1">// map build before and the image (using the adaptor).</span>
+
+  <span class="n">SOMActivationBuilderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">somAct</span> <span class="o">=</span> <span class="n">SOMActivationBuilderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">somAct</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">som</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">somAct</span><span class="o">-&gt;</span><span class="n">SetListSample</span><span class="p">(</span><span class="n">sampleList</span><span class="p">);</span>
+  <span class="n">somAct</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="c1">// The final step is to write the activation map to a file.</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">actMapFileName</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">ActivationWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">actWriter</span> <span class="o">=</span> <span class="n">ActivationWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">actWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">actMapFileName</span><span class="p">);</span>
+
+    <span class="c1">// The righthand side of figure \ref{fig:SOMMAP} shows the activation</span>
+    <span class="c1">// map obtained.</span>
+
+    <span class="c1">// Just for visualization purposes, we zoom the image.</span>
+    <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ExpandImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span>              <span class="n">ExpandType2</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">NearestNeighborInterpolateImageFunction</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span> <span class="n">InterpolatorType2</span><span class="p">;</span>
+
+    <span class="n">InterpolatorType2</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">interpolator2</span> <span class="o">=</span> <span class="n">InterpolatorType2</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">ExpandType2</span><span class="o">::</span><span class="n">Pointer</span>       <span class="n">expand2</span>       <span class="o">=</span> <span class="n">ExpandType2</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">expand2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">somAct</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">expand2</span><span class="o">-&gt;</span><span class="n">SetExpandFactors</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+    <span class="n">expand2</span><span class="o">-&gt;</span><span class="n">SetInterpolator</span><span class="p">(</span><span class="n">interpolator2</span><span class="p">);</span>
+    <span class="c1">// expand2-&gt;SetEdgePaddingValue(255);</span>
+    <span class="n">expand2</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+
+    <span class="n">actWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">expand2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">actWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;The activation map file name is null&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SVMImageEstimatorClassificationMultiExample.html" class="btn btn-neutral float-right" title="SVMImageEstimatorClassificationMultiExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SOMClassifierExample.html" class="btn btn-neutral" title="SOMClassifierExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

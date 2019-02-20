@@ -1,0 +1,100 @@
+.. _app-HyperspectralUnmixing:
+
+HyperspectralUnmixing
+=====================
+
+
+Estimate abundance maps from an hyperspectral image and a set of endmembers.
+
+Description
+-----------
+
+The application applies a linear unmixing algorithm to an hyperspectral data cube. This method supposes that the mixture between aterials in the scene is macroscopic and simulates a linear mixing model of spectra.
+
+The Linear Mixing Model (LMM) acknowledges that reflectance spectrum associated with each pixel is a linear combination of pure materials in the recovery area, commonly known as endmembers. Endmembers can be estimated using the :ref:`app-VertexComponentAnalysis` application.
+
+The application allows estimating the abundance maps with several algorithms:
+
+* Unconstrained Least Square (ucls)
+* Image Space Reconstruction Algorithm (isra)
+* Non-negative constrained
+* Least Square (ncls)
+* Minimum Dispersion Constrained Non Negative Matrix Factorization (MDMDNMF).
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image Filename** :code:`-in image` *Mandatory* |br|
+The hyperspectral data cube input
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The output abundance map. The abundance fraction are stored in a multispectral image where band N corresponds to the fraction of endmembers N in each pixel.
+
+**Input endmembers** :code:`-ie image` *Mandatory* |br|
+The endmembers (estimated pure pixels) to use for unmixing. Must be stored as a multispectral image, where each pixel is interpreted as an endmember.
+
+**Unmixing algorithm** :code:`-ua [ucls|ncls|isra|mdmdnmf]` *Default value: ucls* |br|
+The algorithm to use for unmixing
+
+* **UCLS** |br| Unconstrained Least Square
+
+* **NCLS** |br| Non-negative constrained Least Square
+
+* **ISRA** |br| Image Space Reconstruction Algorithm
+
+* **MDMDNMF** |br| Minimum Dispersion Constrained Non Negative Matrix Factorization
+
+
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_HyperspectralUnmixing -in cupriteSubHsi.tif -ie cupriteEndmembers.tif -out HyperspectralUnmixing.tif double -ua ucls
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("HyperspectralUnmixing")
+
+	app.SetParameterString("in", "cupriteSubHsi.tif")
+	app.SetParameterString("ie", "cupriteEndmembers.tif")
+	app.SetParameterString("out", "HyperspectralUnmixing.tif")
+	app.SetParameterOutputImagePixelType("out", 7)
+	app.SetParameterString("ua","ucls")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-VertexComponentAnalysis`

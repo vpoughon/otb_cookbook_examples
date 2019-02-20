@@ -1,0 +1,87 @@
+.. _app-SARBurstExtraction:
+
+SARBurstExtraction
+==================
+
+
+This application performs a burst extraction by keeping only lines and samples of a required burst.
+
+Description
+-----------
+
+Sentinel1 IW SLC products are composed of several burst overlapping in azimuth time for each subswath, separated by black lines [1]. The burst extraction consist in extracting a single burst, by selecting only lines and samples of the wanted burst.
+
+Note that the output sensor model is updated accordingly. This burst extraction is the perfect preprocessing step for S1 IW SLC product with OTB without suffering from artifacts caused by bursts separation
+.Two modes are available for the output image : with all pixels andwith only valid pixels 
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Sentinel1 IW SLC Image** :code:`-in image` *Mandatory* |br|
+Raw Sentinel1 IW SLC image, or any extract of such made by OTB (geom file needed)
+
+**Index of Burst** :code:`-burstindex int` *Default value: -1* |br|
+Index for the required Burst (By default -1). If this parameter remains at -1, all bursts will be extracted
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The output filename will be used to get the prefix and the extension of thise output written's image. For example with outimage.tif asoutput filename, the generated images will had an indice (corresponding at each burst) between the prefix and the extension, such as: outimage_Burst0.tif and outimage_Burst1.tif (if 2 bursts).
+
+**Select the modes for output image** :code:`-allpixels bool` *Default value: false* |br|
+If true, all pixels of the current burst are selected.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SARBurstExtraction -in s1_iw_slc.tif -out s1_iw_slc_burst0.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SARBurstExtraction")
+
+	app.SetParameterString("in", "s1_iw_slc.tif")
+	app.SetParameterString("out", "s1_iw_slc_burst0.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Only Sentinel1 IW SLC products are supported for now. Processing of other Sentinel1 modes or TerrasarX images will result in no changes in the image and metadata. Images from other sensors will lead to an error. Burst extraction needs as inputs a image composed of several Bursts. A burst has to  contain all its lines in order to have a correct extraction.  ie : Careful with ROI.
+
+See also
+--------
+
+| [1] Sentinel1 User Handbook, p. 52: https://sentinel.esa.int/documents/247904/685163/Sentinel-1_User_Handbook
+| 

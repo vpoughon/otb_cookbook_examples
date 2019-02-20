@@ -1,0 +1,77 @@
+.. _app-ConcatenateImages:
+
+ConcatenateImages
+=================
+
+
+Concatenate a list of images of the same size into a single multi-channel image.
+
+Description
+-----------
+
+Concatenate a list of images of the same size into a single multi-channel image. It reads the input image list (single or multi-channel) and generates a single multi-channel image. The channel order is the same as the list.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input images list** :code:`-il image1 image2...` *Mandatory* |br|
+The list of images to concatenate, must have the same size.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The concatenated output image.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ConcatenateImages -il GomaAvant.png GomaApres.png -out otbConcatenateImages.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ConcatenateImages")
+
+	app.SetParameterStringList("il", ['GomaAvant.png', 'GomaApres.png'])
+	app.SetParameterString("out", "otbConcatenateImages.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+All input images must have the same size.
+
+See also
+--------
+
+| :ref:`app-Rescale` application, :ref:`app-DynamicConvert`, :ref:`app-SplitImage`

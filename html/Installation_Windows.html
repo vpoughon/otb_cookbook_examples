@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python bindings &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+        
+      <li>Python bindings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Installation_Windows.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>Windows binary packages are available for Windows 7 or higher. They can
+be downloaded from <a class="reference external" href="https://www.orfeo-toolbox.org/download">otb download page</a> .</p>
+<p>Pick the correct version (32 bit or 64 bit) depending on your system.</p>
+<p>Extract the archive and use one of the launchers, they contain all applications
+and their launchers (both command line and graphical launchers are provided):</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">monteverdi.bat</span></code>: A launcher script for Monteverdi</li>
+<li><code class="docutils literal notranslate"><span class="pre">mapla.bat</span></code>: A launcher script for Mapla</li>
+<li><code class="docutils literal notranslate"><span class="pre">otbenv.bat</span></code>: A script to initialize the environment for OTB
+executables</li>
+<li><code class="docutils literal notranslate"><span class="pre">bin</span></code>: A folder containing application launchers (otbcli.bat,
+otbgui.bat) and the DLLs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">lib</span></code>: A folder containing application DLLs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">include</span></code>: A folder containing all the necessary headers to compile OTB
+based projects.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tool</span></code>: A folder containing useful scripts to test the installation or
+to uninstall OTB libraries and headers while keeping all the dependencies.</li>
+</ul>
+<p>The applications can be launched from the Mapla launcher. If you want to
+use the otbcli and otbgui launchers, you can initialize a command prompt
+with <code class="docutils literal notranslate"><span class="pre">otbenv.bat</span></code>.</p>
+<p>The package can be used to compile other projects using OTB (binaries, libraries
+and headers are included). If you want to build OTB from source using this
+package, you should first uninstall the specific OTB files from the package to
+leave only the dependencies (what we call an XDK). You can do it using the
+supplied script <code class="docutils literal notranslate"><span class="pre">tools/uninstall_otb.bat</span></code>.</p>
+<p>In the package you also have a template project for Visual 2015
+<code class="docutils literal notranslate"><span class="pre">OTB</span> <span class="pre">Project.zip</span></code>. This template can be placed in your user Visual 2015 template
+directory : <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%\Documents\Visual</span> <span class="pre">Studio</span> <span class="pre">2015\Templates\ProjectTemplates</span></code>.
+The script <code class="docutils literal notranslate"><span class="pre">start_devenv.bat</span></code> allows to copy the template in that folder and
+start Visual Studio.</p>
+<div class="section" id="python-bindings">
+<h1>Python bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h1>
+<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
+package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+Please note that using a different Python version may not be compatible with
+OTB wrappings. If no compatible Python 2.x version is found a
+notification is generated during the installation process.  If the installation completes
+without issue, information relating to your Python bindings will be provided.</p>
+<p>You must have Python numpy bindings installed in your system. They can be installed locally
+without admin rights as follows: “pip install –user numpy”. This is to give users the option
+to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
+<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
+If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
+</ul>
+</div>
+<div class="section" id="notes">
+<h1>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>You must have “Visual C++ Redistributable for Visual Studio 2015” installed for using this package.
+It can be downloaded freely from <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">microsoft</a></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+Classification
+==============
+
+.. toctree::
+	:maxdepth: 3
+
+
+	Classification/ClassificationMapRegularizationExample.rst
+	Classification/SupervisedImageClassificationExample.rst
+	Classification/DempsterShaferFusionOfClassificationMapsExample.rst
+	Classification/SOMImageClassificationExample.rst

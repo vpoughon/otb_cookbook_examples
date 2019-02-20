@@ -1,0 +1,112 @@
+.. _app-PolygonClassStatistics:
+
+PolygonClassStatistics
+======================
+
+
+Computes statistics on a training polygon set.
+
+Description
+-----------
+
+Process a set of geometries intended for training (they should have a field giving the associated class). The geometries are analyzed against a support image to compute statistics:
+
+* Number of samples per class
+* Number of samples per geometry
+
+An optional raster mask can be used to discard samples. Different types of geometry are supported: polygons, lines, points. The behaviour is different for each type of geometry:
+
+* Polygon: select pixels whose center is inside the polygon
+* Lines: select pixels intersecting the line
+* Points: select closest pixel to the point
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input image** :code:`-in image` *Mandatory* |br|
+Support image that will be classified
+
+**Input validity mask** :code:`-mask image` |br|
+Validity mask (only pixels corresponding to a mask value greater than 0 will be used for statistics)
+
+**Input vectors** :code:`-vec filename [dtype]` *Mandatory* |br|
+Input geometries to analyze
+
+**Output XML statistics file** :code:`-out filename [dtype]` *Mandatory* |br|
+Output file to store statistics (XML format)
+
+**Field Name** :code:`-field string` |br|
+Name of the field carrying the class name in the input vectors.
+
+**Layer Index** :code:`-layer int` *Default value: 0* |br|
+Layer index to read in the input vector file.
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_PolygonClassStatistics -in support_image.tif -vec variousVectors.sqlite -field CLASS -out polygonStat.xml
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("PolygonClassStatistics")
+
+	app.SetParameterString("in", "support_image.tif")
+	app.SetParameterString("vec", "variousVectors.sqlite")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

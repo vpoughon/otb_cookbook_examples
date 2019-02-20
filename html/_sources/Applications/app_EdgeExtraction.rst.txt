@@ -1,0 +1,102 @@
+.. _app-EdgeExtraction:
+
+EdgeExtraction
+==============
+
+
+This application computes edge features on every pixel of the input image selected channel
+
+Description
+-----------
+
+This application computes edge features on a selected channel of the input.It uses different filter such as gradient, Sobel and Touzi
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image on which the features are computed.
+
+**Feature Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image containing the edge features.
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index
+
+**Edge feature** :code:`-filter [gradient|sobel|touzi]` *Default value: gradient* |br|
+Choice of edge feature
+
+* **Gradient** |br| This filter computes the gradient magnitude of the image at each pixel.
+
+* **Sobel** |br| This filter uses the Sobel operator to calculate the image gradient and then finds the magnitude of this gradient vector.
+
+* **Touzi** |br| This filter is more suited for radar images. It has a spatial parameter to avoid speckle noise perturbations. The larger the radius is, less sensible to the speckle noise the filter is, but micro edge will be missed.
+
+
+
+Touzi options
+^^^^^^^^^^^^^
+
+**X radius of the neighborhood** :code:`-filter.touzi.xradius int` *Default value: 1* |br|
+
+
+**Y radius of the neighborhood** :code:`-filter.touzi.yradius int` *Default value: 1* |br|
+
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_EdgeExtraction -in qb_RoadExtract.tif -channel 1 -out Edges.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("EdgeExtraction")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterString("out", "Edges.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| otb class

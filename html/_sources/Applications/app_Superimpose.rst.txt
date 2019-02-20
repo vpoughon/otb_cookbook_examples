@@ -1,0 +1,131 @@
+.. _app-Superimpose:
+
+Superimpose
+===========
+
+
+Using available image metadata, project one image onto another one
+
+Description
+-----------
+
+This application performs the projection of an image into the geometry of another one.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Reference input** :code:`-inr image` *Mandatory* |br|
+The input reference image.
+
+**The image to reproject** :code:`-inm image` *Mandatory* |br|
+The image to reproject into the geometry of the reference input.
+
+**Output image** :code:`-out image [dtype]` *Mandatory* |br|
+Output reprojected image.
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Spacing of the deformation field** :code:`-lms float` *Default value: 4* |br|
+Generate a coarser deformation field with the given spacing
+
+**Fill Value** :code:`-fv float` *Default value: 0* |br|
+Fill value for area outside the reprojected image
+
+**Mode** :code:`-mode [default|phr]` *Default value: default* |br|
+Superimposition mode
+
+* **Default mode** |br| Default superimposition mode : uses any projection reference or sensor model found in the images
+
+* **Pleiades mode** |br| Pleiades superimposition mode, designed for the case of a P+XS bundle in SENSOR geometry. It uses a simple transform on the XS image : a scaling and a residual translation.
+
+
+
+**Interpolation** :code:`-interpolator [bco|nn|linear]` *Default value: bco* |br|
+This group of parameters allows defining how the input image will be interpolated during resampling.
+
+* **Bicubic interpolation** |br| Bicubic interpolation leads to very good image quality but is slow.
+
+* **Nearest Neighbor interpolation** |br| Nearest neighbor interpolation leads to poor image quality, but it is very fast.
+
+* **Linear interpolation** |br| Linear interpolation leads to average image quality but is quite fast
+
+
+
+Bicubic interpolation options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Radius for bicubic interpolation** :code:`-interpolator.bco.radius int` *Default value: 2* |br|
+This parameter allows controlling the size of the bicubic interpolation filter. If the target pixel size is higher than the input pixel size, increasing this parameter will reduce aliasing artifacts.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_Superimpose -inr QB_Toulouse_Ortho_PAN.tif -inm QB_Toulouse_Ortho_XS.tif -out SuperimposedXS_to_PAN.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Superimpose")
+
+	app.SetParameterString("inr", "QB_Toulouse_Ortho_PAN.tif")
+	app.SetParameterString("inm", "QB_Toulouse_Ortho_XS.tif")
+	app.SetParameterString("out", "SuperimposedXS_to_PAN.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CompositeFilterExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SecondDerivativeRecursiveGaussianImageFilter.cxx" href="SecondDerivativeRecursiveGaussianImageFilter.html" />
+    <link rel="prev" title="DanielssonDistanceMapImageFilter.cxx" href="DanielssonDistanceMapImageFilter.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Filtering.html">Filtering</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="DanielssonDistanceMapImageFilter.html">DanielssonDistanceMapImageFilter.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">CompositeFilterExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SecondDerivativeRecursiveGaussianImageFilter.html">SecondDerivativeRecursiveGaussianImageFilter.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Filtering.html">Filtering</a> &raquo;</li>
+        
+      <li>CompositeFilterExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Filtering/CompositeFilterExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compositefilterexample-cxx">
+<span id="example-compositefilterexample"></span><h1>CompositeFilterExample.cxx<a class="headerlink" href="#compositefilterexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/CompositeFilterExample.cxx?inline=false">CompositeFilterExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  The composite filter we will build combines three filters: a gradient</span>
+<span class="c1">//  magnitude operator, which will calculate the first-order derivative of</span>
+<span class="c1">//  the image; a thresholding step to select edges over a given strength;</span>
+<span class="c1">//  and finally a rescaling filter, to ensure the resulting image data is</span>
+<span class="c1">//  visible by scaling the intensity to the full spectrum of the output</span>
+<span class="c1">//  image type.</span>
+<span class="c1">//</span>
+<span class="c1">//  Since this filter takes an image and produces another image (of</span>
+<span class="c1">//  identical type), we will specialize the ImageToImageFilter:</span>
+
+
+<span class="c1">//  Next we include headers for the component filters:</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkGradientMagnitudeImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkThresholdImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkNumericTraits.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+
+<span class="c1">//  Now we can declare the filter itself.  It is within the OTB namespace,</span>
+<span class="c1">//  and we decide to make it use the same image type for both input and</span>
+<span class="c1">//  output, thus the template declaration needs only one parameter.</span>
+<span class="c1">//  Deriving from \code{ImageToImageFilter} provides default behavior for</span>
+<span class="c1">//  several important aspects, notably allocating the output image (and</span>
+<span class="c1">//  making it the same dimensions as the input).</span>
+
+<span class="k">namespace</span> <span class="n">otb</span>
+<span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TImageType</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ITK_EXPORT</span> <span class="nl">CompositeExampleImageFilter</span> <span class="p">:</span> <span class="k">public</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageToImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="p">,</span> <span class="n">TImageType</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">//  Next we have the standard declarations, used for object creation with</span>
+  <span class="c1">//  the object factory:</span>
+
+  <span class="k">typedef</span> <span class="n">CompositeExampleImageFilter</span>                     <span class="n">Self</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageToImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="p">,</span> <span class="n">TImageType</span><span class="o">&gt;</span> <span class="n">Superclass</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="n">Self</span><span class="o">&gt;</span>                         <span class="n">Pointer</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">SmartPointer</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Self</span><span class="o">&gt;</span>                   <span class="n">ConstPointer</span><span class="p">;</span>
+
+  <span class="cm">/** Method for creation through object factory */</span>
+  <span class="n">itkNewMacro</span><span class="p">(</span><span class="n">Self</span><span class="p">);</span>
+
+  <span class="cm">/** Run-time type information */</span>
+  <span class="n">itkTypeMacro</span><span class="p">(</span><span class="n">CompositeExampleImageFilter</span><span class="p">,</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageToImageFilter</span><span class="p">);</span>
+
+  <span class="cm">/** Display */</span>
+  <span class="kt">void</span> <span class="nf">PrintSelf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="n">itk</span><span class="o">::</span><span class="n">Indent</span> <span class="n">indent</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="c1">//  Here we declare an alias (to save typing) for the image&#39;s pixel type,</span>
+  <span class="c1">//  which determines the type of the threshold value.  We then use the</span>
+  <span class="c1">//  convenience macros to define the Get and Set methods for this parameter.</span>
+
+  <span class="k">typedef</span> <span class="k">typename</span> <span class="n">TImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">PixelType</span><span class="p">;</span>
+
+  <span class="n">itkGetMacro</span><span class="p">(</span><span class="n">Threshold</span><span class="p">,</span> <span class="n">PixelType</span><span class="p">);</span>
+  <span class="n">itkSetMacro</span><span class="p">(</span><span class="n">Threshold</span><span class="p">,</span> <span class="n">PixelType</span><span class="p">);</span>
+
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">CompositeExampleImageFilter</span><span class="p">();</span>
+
+  <span class="c1">//  Now we can declare the component filter types, templated over the</span>
+  <span class="c1">//  enclosing image type:</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ThresholdImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="o">&gt;</span>                     <span class="n">ThresholdType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">GradientMagnitudeImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="p">,</span> <span class="n">TImageType</span><span class="o">&gt;</span> <span class="n">GradientType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="p">,</span> <span class="n">TImageType</span><span class="o">&gt;</span>  <span class="n">RescalerType</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">GenerateData</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">CompositeExampleImageFilter</span><span class="p">(</span><span class="n">Self</span><span class="o">&amp;</span><span class="p">);</span> <span class="c1">// intentionally not implemented</span>
+  <span class="kt">void</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Self</span><span class="o">&amp;</span><span class="p">);</span>        <span class="c1">// intentionally not implemented</span>
+
+  <span class="c1">//  The component filters are declared as data members, all using the smart</span>
+  <span class="c1">//  pointer types.</span>
+
+  <span class="k">typename</span> <span class="n">GradientType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">m_GradientFilter</span><span class="p">;</span>
+  <span class="k">typename</span> <span class="n">ThresholdType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">m_ThresholdFilter</span><span class="p">;</span>
+  <span class="k">typename</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>  <span class="n">m_RescaleFilter</span><span class="p">;</span>
+
+  <span class="n">PixelType</span> <span class="n">m_Threshold</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="cm">/* namespace otb */</span>
+
+<span class="c1">//  The constructor sets up the pipeline, which involves creating the</span>
+<span class="c1">//  stages, connecting them together, and setting default parameters.</span>
+
+<span class="k">namespace</span> <span class="n">otb</span>
+<span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TImageType</span><span class="o">&gt;</span>
+<span class="n">CompositeExampleImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="o">&gt;::</span><span class="n">CompositeExampleImageFilter</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">m_GradientFilter</span>  <span class="o">=</span> <span class="n">GradientType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_ThresholdFilter</span> <span class="o">=</span> <span class="n">ThresholdType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">m_RescaleFilter</span>   <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">m_ThresholdFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_GradientFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_RescaleFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">m_ThresholdFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">m_Threshold</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="n">m_RescaleFilter</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;::</span><span class="n">NonpositiveMin</span><span class="p">());</span>
+  <span class="n">m_RescaleFilter</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">//  The \code{GenerateData()} is where the composite magic happens.  First,</span>
+<span class="c1">//  we connect the first component filter to the inputs of the composite</span>
+<span class="c1">//  filter (the actual input, supplied by the upstream stage).  Then we</span>
+<span class="c1">//  graft the output of the last stage onto the output of the composite,</span>
+<span class="c1">//  which ensures the filter regions are updated.  We force the composite</span>
+<span class="c1">//  pipeline to be processed by calling \code{Update()} on the final stage,</span>
+<span class="c1">//  then graft the output back onto the output of the enclosing filter, so</span>
+<span class="c1">//  it has the result available to the downstream filter.</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TImageType</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">CompositeExampleImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="o">&gt;::</span><span class="n">GenerateData</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">m_GradientFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">GetInput</span><span class="p">());</span>
+
+  <span class="n">m_ThresholdFilter</span><span class="o">-&gt;</span><span class="n">ThresholdBelow</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_Threshold</span><span class="p">);</span>
+
+  <span class="n">m_RescaleFilter</span><span class="o">-&gt;</span><span class="n">GraftOutput</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">m_RescaleFilter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="k">this</span><span class="o">-&gt;</span><span class="n">GraftOutput</span><span class="p">(</span><span class="n">m_RescaleFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">//  Finally we define the \code{PrintSelf} method, which (by convention)</span>
+<span class="c1">//  prints the filter parameters.  Note how it invokes the superclass to</span>
+<span class="c1">//  print itself first, and also how the indentation prefixes each line.</span>
+<span class="c1">//</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TImageType</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">CompositeExampleImageFilter</span><span class="o">&lt;</span><span class="n">TImageType</span><span class="o">&gt;::</span><span class="n">PrintSelf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="n">itk</span><span class="o">::</span><span class="n">Indent</span> <span class="n">indent</span><span class="p">)</span> <span class="k">const</span>
+<span class="p">{</span>
+  <span class="n">Superclass</span><span class="o">::</span><span class="n">PrintSelf</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="n">indent</span><span class="p">);</span>
+
+  <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="n">indent</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Threshold:&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">m_Threshold</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="cm">/* end namespace otb */</span>
+
+
+<span class="c1">//  It is important to note that in the above example, none of the internal</span>
+<span class="c1">//  details of the pipeline were exposed to users of the class.  The interface</span>
+<span class="c1">//  consisted of the Threshold parameter (which happened to change the value in</span>
+<span class="c1">//  the component filter) and the regular ImageToImageFilter interface.  This</span>
+<span class="c1">//  example pipeline is illustrated in</span>
+<span class="c1">//  Figure~\ref{fig:CompositeExamplePipeline}.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  inputImageFile  outputImageFile&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">short</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>            <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">CompositeExampleImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetThreshold</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SecondDerivativeRecursiveGaussianImageFilter.html" class="btn btn-neutral float-right" title="SecondDerivativeRecursiveGaussianImageFilter.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DanielssonDistanceMapImageFilter.html" class="btn btn-neutral" title="DanielssonDistanceMapImageFilter.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

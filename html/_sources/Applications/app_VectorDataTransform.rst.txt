@@ -1,0 +1,110 @@
+.. _app-VectorDataTransform:
+
+VectorDataTransform
+===================
+
+
+Apply a transform to each vertex of the input VectorData
+
+Description
+-----------
+
+This application iterates over each vertex in the input vector data file and performs a transformation on this vertex.
+
+It is the equivalent of [1] that transforms images. For instance, if you extract the envelope of an image with [2], and you transform this image with [1], you may want to use this application to operate the same transform on the envelope.
+
+The applied transformation is a 2D similarity. It manages translation, rotation, scaling, and can be centered or not. Note that the support image is used to define the reference coordinate system in which the transform is applied. For instance the input vector data can have WGS84 coordinates, the support image is in UTM, so a translation of 1 pixel along X corresponds to the X pixel size of the input image along the X axis of the UTM coordinates frame. This image can also be in sensor geometry.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Vector data** :code:`-vd vectorfile` *Mandatory* |br|
+Input vector data file to transform
+
+**Output Vector data** :code:`-out vectorfile` *Mandatory* |br|
+Output vector data with 
+
+**Support image** :code:`-in image` *Mandatory* |br|
+Image defining the reference coordinate system in which the transform is applied. Both projected and sensor images are supported.
+
+Transform parameters
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+Group of parameters to define the transform
+
+**X Translation** :code:`-transform.tx float` *Default value: 0* |br|
+Translation in the X direction (in pixels)
+
+**Y Translation** :code:`-transform.ty float` *Default value: 0* |br|
+Translation in the Y direction (in pixels)
+
+**Rotation Angle** :code:`-transform.ro float` *Default value: 0* |br|
+Angle of the rotation (in degrees)
+
+**Center X** :code:`-transform.centerx float` *Default value: 0* |br|
+X coordinate of the rotation and scaling center (in physical units)
+
+**Center Y** :code:`-transform.centery float` *Default value: 0* |br|
+Y coordinate of the rotation and scaling center (in physical units)
+
+**Scale** :code:`-transform.scale float` *Default value: 1* |br|
+The scale coefficient to apply
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_VectorDataTransform -vd qb_RoadExtract_easyClassification.shp -in qb_RoadExtract.tif -out VectorDataTransform.shp -transform.ro 5
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("VectorDataTransform")
+
+	app.SetParameterString("vd", "qb_RoadExtract_easyClassification.shp")
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterString("out", "VectorDataTransform.shp")
+	app.SetParameterFloat("transform.ro", 5)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| [1] :ref:`app-RigidTransformResample`
+| [2] :ref:`app-ImageEnvelope`

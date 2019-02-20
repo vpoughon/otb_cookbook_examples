@@ -1,0 +1,133 @@
+.. _app-RefineSensorModel:
+
+RefineSensorModel
+=================
+
+
+Perform least-square fit of a sensor model to a set of tie points
+
+Description
+-----------
+
+This application reads a geom file containing a sensor model and a text file containing a list of ground control point, and performs a least-square fit of the sensor model adjustable parameters to these tie points. It produces an updated geom file as output, as well as an optional ground control points based statistics file and a vector file containing residues. The output geom file can then be used to ortho-rectify the data more accurately. Plaease note that for a proper use of the application, elevation must be correctly set (including DEM and geoid file). The map parameters allows one to choose a map projection in which the accuracy will be estimated in meters.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input geom file** :code:`-ingeom filename [dtype]` *Mandatory* |br|
+Geom file containing the sensor model to refine
+
+**Output geom file** :code:`-outgeom filename [dtype]` *Mandatory* |br|
+Geom file containing the refined sensor model
+
+**Input file containing tie points** :code:`-inpoints filename [dtype]` *Mandatory* |br|
+Input file containing tie points. Points are stored in following format: row col lon lat. Line beginning with # are ignored.
+
+**Output file containing output precision statistics** :code:`-outstat filename [dtype]` |br|
+Output file containing the following info: ref_lon ref_lat elevation predicted_lon predicted_lat x_error_ref(meters) y_error_ref(meters) global_error_ref(meters) x_error(meters) y_error(meters) overall_error(meters)
+
+**Output vector file with residues** :code:`-outvector filename [dtype]` |br|
+File containing segments representing residues
+
+**Map Projection** :code:`-map [utm|lambert2|lambert93|wgs|epsg]` *Default value: utm* |br|
+Defines the map projection to be used.
+
+* **Universal Trans-Mercator (UTM)** |br| A system of transverse mercator projections dividing the surface of Earth between 80S and 84N latitude.
+
+* **Lambert II Etendu** |br| This is a Lambert Conformal Conic projection mainly used in France.
+
+* **Lambert93** |br| This is a Lambert 93 projection mainly used in France.
+
+* **WGS 84** |br| This is a Geographical projection
+
+* **EPSG Code** |br| This code is a generic way of identifying map projections, and allows specifying a large amount of them. See www.spatialreference.org to find which EPSG code is associated to your projection;
+
+
+
+Universal Trans-Mercator (UTM) options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Zone number** :code:`-map.utm.zone int` *Default value: 31* |br|
+The zone number ranges from 1 to 60 and allows defining the transverse mercator projection (along with the hemisphere)
+
+**Northern Hemisphere** :code:`-map.utm.northhem bool` *Default value: false* |br|
+The transverse mercator projections are defined by their zone number as well as the hemisphere. Activate this parameter if your image is in the northern hemisphere.
+
+EPSG Code options
+^^^^^^^^^^^^^^^^^
+
+**EPSG Code** :code:`-map.epsg.code int` *Default value: 4326* |br|
+See www.spatialreference.org to find which EPSG code is associated to your projection
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_RefineSensorModel -ingeom input.geom -outgeom output.geom -inpoints points.txt -map epsg -map.epsg.code 32631
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("RefineSensorModel")
+
+	app.SetParameterString("ingeom", "input.geom")
+	app.SetParameterString("outgeom", "output.geom")
+	app.SetParameterString("inpoints", "points.txt")
+	app.SetParameterString("map","epsg")
+	app.SetParameterInt("map.epsg.code", 32631)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| :ref:`app-OrthoRectification`,:ref:`app-HomologousPointsExtraction`

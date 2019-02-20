@@ -1,0 +1,181 @@
+.. _app-StereoRectificationGridGenerator:
+
+StereoRectificationGridGenerator
+================================
+
+
+Generates two deformation fields to resample in epipolar geometry, a pair of stereo images up to the sensor model precision
+
+Description
+-----------
+
+This application generates a pair of deformation grid to stereo-rectify a pair of stereo images according to sensor modelling and a mean elevation hypothesis.
+
+This application is the first part of the stereo reconstruction framework. The output deformation grids can be passed to the :ref:`app-GridBasedImageResampling` application for actual resampling into epipolar geometry.
+
+There are several ways to set the elevation source:
+
+* An arbitrary constant elevation
+* A DEM directory
+* Compute an average elevation from a DEM
+
+If needed, the application can compute inverse resampling grids (from epipolar to original sensor geometry). Don't forget to check the other outputs from the application. For instance, the application gives the X and Y size of the rectified images, along with an estimated baseline ratio.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input and output data
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows setting the input and output images.
+
+**Left input image** :code:`-io.inleft image` *Mandatory* |br|
+The left image from the stereo pair, in sensor geometry.
+
+**Right input image** :code:`-io.inright image` *Mandatory* |br|
+The right image from the stereo pair, in sensor geometry.
+
+**Left output deformation grid** :code:`-io.outleft image [dtype]` *Mandatory* |br|
+The deformation grid to resample the left image from sensor geometry to epipolar geometry.
+
+**Right output deformation grid** :code:`-io.outright image [dtype]` *Mandatory* |br|
+The deformation grid to resample the right image from sensor geometry to epipolar geometry.
+
+Epipolar  geometry and grid parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Parameters of the epipolar geometry and output grids
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-epi.elevation.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-epi.elevation.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-epi.elevation.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+Average elevation computed from DEM
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Average elevation computed from the provided DEM
+
+**Sub-sampling step** :code:`-epi.elevation.avgdem.step int` *Default value: 1* |br|
+Step of sub-sampling for average elevation estimation
+
+**Average elevation value** :code:`-epi.elevation.avgdem.value float` *Mandatory* |br|
+Average elevation value estimated from DEM
+
+**Minimum disparity from DEM** :code:`-epi.elevation.avgdem.mindisp float` *Mandatory* |br|
+Disparity corresponding to estimated minimum elevation over the left image
+
+**Maximum disparity from DEM** :code:`-epi.elevation.avgdem.maxdisp float` *Mandatory* |br|
+Disparity corresponding to estimated maximum elevation over the left image
+
+
+
+------------
+
+**Scale of epipolar images** :code:`-epi.scale float` *Default value: 1* |br|
+The scale parameter allows generating zoomed-in (scale < 1) or zoomed-out (scale > 1) epipolar images.
+
+**Step of the deformation grid (in number of pixels)** :code:`-epi.step int` *Default value: 1* |br|
+Stereo-rectification deformation grid only varies slowly. Therefore, it is recommended to use a coarser grid (higher step value) in case of large images
+
+**Rectified image size X** :code:`-epi.rectsizex int` *Mandatory* |br|
+The application computes the optimal rectified image size so that the whole left input image fits into the rectified area. However, due to the scale and step parameter, this size may not match the size of the deformation field output. In this case, one can use these output values.
+
+**Rectified image size Y** :code:`-epi.rectsizey int` *Mandatory* |br|
+The application computes the optimal rectified image size so that the whole left input image fits into the rectified area. However, due to the scale and step parameter, this size may not match the size of the deformation field output. In this case, one can use these output values.
+
+**Mean baseline ratio** :code:`-epi.baseline float` *Mandatory* |br|
+This parameter is the mean value, in pixels.meters^-1, of the baseline to sensor altitude ratio. It can be used to convert disparities to physical elevation, since a disparity of one pixel will correspond to an elevation offset of the invert of this value with respect to the mean elevation.
+
+Write inverse fields
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameter allows generating the inverse fields as well
+
+**Left inverse deformation grid** :code:`-inverse.outleft image [dtype]` |br|
+The deformation grid to resample the left image from the epipolar geometry back into its original sensor geometry.
+
+**Right inverse deformation grid** :code:`-inverse.outright image [dtype]` |br|
+The output deformation grid to resample the right image from the epipolar geometry back into its original sensor geometry.
+
+**Sub-sampling rate for inversion** :code:`-inverse.ssrate int` *Default value: 16* |br|
+Grid inversion is an heavy process that implies spline regression on control points. To avoid eating to much memory, this parameter allows one to first sub-sample the field to invert.
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_StereoRectificationGridGenerator -io.inleft wv2_xs_left.tif -io.inright wv2_xs_left.tif -io.outleft wv2_xs_left_epi_field.tif -io.outright wv2_xs_right_epi_field.tif -epi.elevation.default 400
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("StereoRectificationGridGenerator")
+
+	app.SetParameterString("io.inleft", "wv2_xs_left.tif")
+	app.SetParameterString("io.inright", "wv2_xs_left.tif")
+	app.SetParameterString("io.outleft", "wv2_xs_left_epi_field.tif")
+	app.SetParameterString("io.outright", "wv2_xs_right_epi_field.tif")
+	app.SetParameterFloat("epi.elevation.default", 400)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Generation of the deformation grid is not streamable, pay attention to this fact when setting the grid step.
+
+See also
+--------
+
+| otb:ref:`app-GridBasedImageResampling`

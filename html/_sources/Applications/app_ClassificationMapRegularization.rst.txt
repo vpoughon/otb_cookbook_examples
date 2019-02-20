@@ -1,0 +1,119 @@
+.. _app-ClassificationMapRegularization:
+
+ClassificationMapRegularization
+===============================
+
+
+Filters the input labeled image using Majority Voting in a ball shaped neighbordhood
+
+Description
+-----------
+
+This application filters the input labeled image (with a maximal class label = 65535) using Majority Voting in a ball shaped neighbordhood.Majority Voting takes the more representative value of all the pixels identified by the ball shaped structuring element and then sets the center pixel to this majority label value.
+
+* NoData is the label of the NOT classified pixels in the input image. These input pixels keep their NoData label in the output image.
+
+* Pixels with more than 1 majority class are marked as Undecided if the parameter 'ip.suvbool == true', or keep their Original labels otherwise.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input and output images
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows setting input and output images for classification map regularization by Majority Voting.
+
+**Input classification image** :code:`-io.in image` *Mandatory* |br|
+The input labeled image to regularize.
+
+**Output regularized image** :code:`-io.out image [dtype]` *Mandatory* |br|
+The output regularized labeled image.
+
+Regularization parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group allows setting parameters for classification map regularization by Majority Voting.
+
+**Structuring element radius (in pixels)** :code:`-ip.radius int` *Default value: 1* |br|
+The radius of the ball shaped structuring element (in pixels).
+
+**Set tie pixels to undecided** :code:`-ip.suvbool bool` *Default value: false* |br|
+If true, set pixels with more than one majority class to an undecided value. If false, keep their original labels.
+
+**Label for the NoData class** :code:`-ip.nodatalabel int` *Default value: 0* |br|
+Label for the NoData class. Such input pixels keep their NoData label in the output image.
+
+**Label for the Undecided class** :code:`-ip.undecidedlabel int` *Default value: 0* |br|
+Label for the Undecided class.
+
+**Process isolated pixels only** :code:`-ip.onlyisolatedpixels bool` *Default value: false* |br|
+Only pixels whose label is unique in the neighbordhood will be processed.
+
+**Threshold for isolated pixels** :code:`-ip.isolatedthreshold int` *Default value: 1* |br|
+Maximum number of neighbours with the same label as the center pixel to consider that it is an isolated pixel.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ClassificationMapRegularization -io.in clLabeledImageQB123_1.tif -io.out clLabeledImageQB123_1_CMR_r2_nodl_10_undl_7.tif -ip.radius 2 -ip.suvbool true -ip.onlyisolatedpixels true -ip.nodatalabel 10 -ip.undecidedlabel 7
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ClassificationMapRegularization")
+
+	app.SetParameterString("io.in", "clLabeledImageQB123_1.tif")
+	app.SetParameterString("io.out", "clLabeledImageQB123_1_CMR_r2_nodl_10_undl_7.tif")
+	app.SetParameterInt("ip.radius", 2)
+	app.SetParameterString("ip.suvbool","true")
+	app.SetParameterString("ip.onlyisolatedpixels","true")
+	app.SetParameterInt("ip.nodatalabel", 10)
+	app.SetParameterInt("ip.undecidedlabel", 7)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The input image must be a single band labeled image (with a maximal class label = 65535). The structuring element radius must have a minimum value equal to 1 pixel. Please note that the Undecided value must be different from existing labels in the input labeled image.
+
+

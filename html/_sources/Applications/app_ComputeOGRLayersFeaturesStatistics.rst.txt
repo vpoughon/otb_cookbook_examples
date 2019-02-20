@@ -1,0 +1,77 @@
+.. _app-ComputeOGRLayersFeaturesStatistics:
+
+ComputeOGRLayersFeaturesStatistics
+==================================
+
+
+Compute statistics of the features in a set of OGR Layers
+
+Description
+-----------
+
+Compute statistics (mean and standard deviation) of the features in a set of OGR Layers, and write them in an XML file. This XML file can then be used by the training application.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Vector Data** :code:`-inshp vectorfile` *Mandatory* |br|
+Name of the input shapefile
+
+**Output XML file** :code:`-outstats filename [dtype]` *Mandatory* |br|
+XML file containing mean and variance of each feature.
+
+**Feature** :code:`-feat string1 string2...` |br|
+List of features to consider for statistics.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ComputeOGRLayersFeaturesStatistics -inshp vectorData.shp -outstats results.xml -feat perimeter
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ComputeOGRLayersFeaturesStatistics")
+
+	app.SetParameterString("inshp", "vectorData.shp")
+	app.SetParameterString("outstats", "results.xml")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Experimental. For now only shapefiles are supported.
+
+See also
+--------
+
+| :ref:`app-OGRLayerClassifier`,:ref:`app-TrainVectorClassifier`

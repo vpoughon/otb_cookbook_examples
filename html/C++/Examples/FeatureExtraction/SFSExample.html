@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SFSExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="HarrisExample.cxx" href="HarrisExample.html" />
+    <link rel="prev" title="SURFExample.cxx" href="SURFExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="CloudDetectionExample.html">CloudDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TextureExample.html">TextureExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadByStepsExample.html">ExtractRoadByStepsExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThresholdToPointSetExample.html">ThresholdToPointSetExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentPathExample.html">ComplexMomentPathExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EdgeDensityExample.html">EdgeDensityExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FlusserMomentsImageFunctionExample.html">FlusserMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HuMomentsImageFunctionExample.html">HuMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RightAngleDetectionExample.html">RightAngleDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RatioLineDetectorExample.html">RatioLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AsymmetricFusionOfLineDetectorExample.html">AsymmetricFusionOfLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingExample.html">SeamCarvingExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ComplexMomentsImageFunctionExample.html">ComplexMomentsImageFunctionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExtractRoadExample.html">ExtractRoadExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TouziEdgeDetectorExample.html">TouziEdgeDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="LineSegmentDetectorExample.html">LineSegmentDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ParallelLineDetectionExample.html">ParallelLineDetectionExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CorrelationLineDetectorExample.html">CorrelationLineDetectorExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PanTexExample.html">PanTexExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SeamCarvingOtherExample.html">SeamCarvingOtherExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SURFExample.html">SURFExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SFSExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HarrisExample.html">HarrisExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../FeatureExtraction.html">FeatureExtraction</a> &raquo;</li>
+        
+      <li>SFSExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/FeatureExtraction/SFSExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sfsexample-cxx">
+<span id="example-sfsexample"></span><h1>SFSExample.cxx<a class="headerlink" href="#sfsexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./SFSExample Input/suburb2.jpeg <span class="se">\</span>
+             Output/SFSLengthOutput.tif <span class="se">\</span>
+             Output/SFSWidthOutput.tif <span class="se">\</span>
+             Output/SFSMeanOutput.tif <span class="se">\</span>
+             Output/SFSRatioOutput.tif <span class="se">\</span>
+             Output/SFSSDOutput.tif <span class="se">\</span>
+             Output/SFSPsiOutput.tif <span class="se">\</span>
+             Output/SFSLengthPrettyOutput.tif <span class="se">\</span>
+             Output/SFSWidthPrettyOutput.tif <span class="se">\</span>
+             Output/SFSMeanPrettyOutput.tif <span class="se">\</span>
+             Output/SFSRatioPrettyOutput.tif <span class="se">\</span>
+             Output/SFSSDPrettyOutput.tif <span class="se">\</span>
+             Output/SFSPsiPrettyOutput.tif <span class="se">\</span>
+             <span class="m">20</span> <span class="se">\</span>
+             <span class="m">50</span> <span class="se">\</span>
+             <span class="m">8</span> <span class="se">\</span>
+             <span class="m">4</span> <span class="se">\</span>
+             <span class="m">0</span>.6
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/SFSExample.cxx?inline=false">SFSExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+
+
+
+<span class="c1">// This example illustrates the use of the</span>
+<span class="c1">// \doxygen{otb}{SFSTexturesImageFilter}.</span>
+<span class="c1">// This filter computes the Structural Feature Set as described in</span>
+<span class="c1">// \cite{SFS}. These features are textural parameters which give</span>
+<span class="c1">// information about the structure of lines passing through each pixel</span>
+<span class="c1">// of the image.</span>
+<span class="c1">//</span>
+<span class="c1">// The first step required to use this filter is to include its header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbSFSTexturesImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">typedef</span> <span class="kt">double</span>     <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">inName</span>            <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">outNameLength</span>     <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">outNameWidth</span>      <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">outNameWMean</span>      <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">outNameRatio</span>      <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">outNameSD</span>         <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">outNamePsi</span>        <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">lengthprettyfname</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">widthprettyfname</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">wmeanprettyfname</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">ratioprettyfname</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">11</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">sdprettyfname</span>     <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>  <span class="n">psiprettyfname</span>    <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">13</span><span class="p">];</span>
+  <span class="n">PixelType</span>    <span class="n">spectThresh</span>       <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">14</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">spatialThresh</span>     <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">15</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">dirNb</span>             <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">16</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">maxConsideration</span>  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">17</span><span class="p">]);</span>
+  <span class="kt">double</span>       <span class="n">alpha</span>             <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">18</span><span class="p">]);</span>
+
+  <span class="c1">// As with every OTB program, we start by defining the types for the</span>
+  <span class="c1">// images, the readers and the writers.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>  <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>  <span class="n">WriterType</span><span class="p">;</span>
+  <span class="c1">// The we can instantiate the type for the SFS filter, which is</span>
+  <span class="c1">// templated over the input and output pixel types.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">SFSTexturesImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">SFSFilterType</span><span class="p">;</span>
+  <span class="c1">// After that, we can instantiate the filter. We will also instantiate</span>
+  <span class="c1">// the reader and one writer for each output image, since the SFS</span>
+  <span class="c1">// filter generates 6 different features.</span>
+
+  <span class="n">SFSFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span>       <span class="o">=</span> <span class="n">SFSFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">reader</span>       <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">writerLength</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">writerWidth</span>  <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">writerWMean</span>  <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">writerRatio</span>  <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">writerSD</span>     <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>    <span class="n">writerPsi</span>    <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inName</span><span class="p">);</span>
+
+  <span class="c1">// The SFS filter has several parameters which have to be</span>
+  <span class="c1">// selected. They are:</span>
+  <span class="c1">// \begin{enumerate}</span>
+  <span class="c1">// \item a spectral threshold to decide if 2 neighboring pixels are</span>
+  <span class="c1">// connected;</span>
+  <span class="c1">//\item a spatial threshold defining the maximum length for an</span>
+  <span class="c1">// extracted line;</span>
+  <span class="c1">//\item the number of directions which will be analyzed (the first</span>
+  <span class="c1">// one is to the right and they are equally distributed between 0 and</span>
+  <span class="c1">// $2\pi$);</span>
+  <span class="c1">// \item the $\alpha$ parameter fort the $\omega-mean$ feature;</span>
+  <span class="c1">// \item the RatioMax parameter fort the $\omega-mean$ feature.</span>
+  <span class="c1">// \end{enumerate}</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetSpectralThreshold</span><span class="p">(</span><span class="n">spectThresh</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetSpatialThreshold</span><span class="p">(</span><span class="n">spatialThresh</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNumberOfDirections</span><span class="p">(</span><span class="n">dirNb</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRatioMaxConsiderationNumber</span><span class="p">(</span><span class="n">maxConsideration</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetAlpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">);</span>
+  <span class="c1">// In order to disable the computation of a feature, the</span>
+  <span class="c1">// \code{SetFeatureStatus} parameter can be used. The $true$ value</span>
+  <span class="c1">// enables the feature (default behavior) and the $false$ value</span>
+  <span class="c1">// disables the computation. Therefore, the following line is useless,</span>
+  <span class="c1">// but is given here as an example.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetFeatureStatus</span><span class="p">(</span><span class="n">SFSFilterType</span><span class="o">::</span><span class="n">PSI</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+  <span class="c1">// Now, we plug the pipeline using all the writers.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writerLength</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outNameLength</span><span class="p">);</span>
+  <span class="n">writerLength</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetLengthOutput</span><span class="p">());</span>
+  <span class="n">writerLength</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">writerWidth</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outNameWidth</span><span class="p">);</span>
+  <span class="n">writerWidth</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetWidthOutput</span><span class="p">());</span>
+  <span class="n">writerWidth</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">writerWMean</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outNameWMean</span><span class="p">);</span>
+  <span class="n">writerWMean</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetWMeanOutput</span><span class="p">());</span>
+  <span class="n">writerWMean</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">writerRatio</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outNameRatio</span><span class="p">);</span>
+  <span class="n">writerRatio</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetRatioOutput</span><span class="p">());</span>
+  <span class="n">writerRatio</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">writerSD</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outNameSD</span><span class="p">);</span>
+  <span class="n">writerSD</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetSDOutput</span><span class="p">());</span>
+  <span class="n">writerSD</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">writerPsi</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outNamePsi</span><span class="p">);</span>
+  <span class="n">writerPsi</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetPSIOutput</span><span class="p">());</span>
+  <span class="n">writerPsi</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="c1">// Figure~\ref{fig:SFS_FILTER} shows the result of applying</span>
+  <span class="c1">// the SFS computation to an image</span>
+  <span class="c1">// \begin{figure}</span>
+  <span class="c1">// \center</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{suburb2.eps}</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{SFSLengthPrettyOutput.eps}</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{SFSWidthPrettyOutput.eps}</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{SFSMeanPrettyOutput.eps}</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{SFSRatioPrettyOutput.eps}</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{SFSSDPrettyOutput.eps}</span>
+  <span class="c1">// \includegraphics[width=0.25\textwidth]{SFSPsiPrettyOutput.eps}</span>
+  <span class="c1">// \itkcaption[Right Angle Detection Filter]{Result of applying the</span>
+  <span class="c1">// \doxygen{otb}{SFSTexturesImageFilter} to an image. From left to</span>
+  <span class="c1">// right and top to bottom: original image, length, width,</span>
+  <span class="c1">// $\omega$-mean, ratio, SD and Psi structural features.</span>
+  <span class="c1">// original image, .}</span>
+  <span class="c1">// \label{fig:SFS_FILTER}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="cm">/************** pretty images for printing *********/</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>                                 <span class="n">OutputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span>                        <span class="n">OutputWriterType</span><span class="p">;</span>
+
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">OutputWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">outWriter</span> <span class="o">=</span> <span class="n">OutputWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetLengthOutput</span><span class="p">());</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">lengthprettyfname</span><span class="p">);</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetWidthOutput</span><span class="p">());</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">widthprettyfname</span><span class="p">);</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetWMeanOutput</span><span class="p">());</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">wmeanprettyfname</span><span class="p">);</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetRatioOutput</span><span class="p">());</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">ratioprettyfname</span><span class="p">);</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetSDOutput</span><span class="p">());</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">sdprettyfname</span><span class="p">);</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetPSIOutput</span><span class="p">());</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">psiprettyfname</span><span class="p">);</span>
+  <span class="n">outWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="HarrisExample.html" class="btn btn-neutral float-right" title="HarrisExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SURFExample.html" class="btn btn-neutral" title="SURFExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

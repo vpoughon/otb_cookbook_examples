@@ -1,0 +1,11 @@
+Hyperspectral
+=============
+
+.. toctree::
+	:maxdepth: 1
+
+
+	app_EndmemberNumberEstimation
+	app_HyperspectralUnmixing
+	app_LocalRxDetection
+	app_VertexComponentAnalysis

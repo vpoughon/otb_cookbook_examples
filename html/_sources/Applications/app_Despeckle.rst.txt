@@ -1,0 +1,148 @@
+.. _app-Despeckle:
+
+Despeckle
+=========
+
+
+Perform speckle noise reduction on SAR image.
+
+Description
+-----------
+
+SAR images are affected by speckle noise that inherently exists in and which degrades the image quality. It is caused by the coherent nature of back-scattered waves from multiple distributed targets. It is locally strong and it increases the mean Grey level of a local area. 
+
+Reducing the speckle noise enhances radiometric resolution but tend to decrease the spatial resolution.Several different methods are used to eliminate speckle noise, based upon different mathematical models of the phenomenon. The application includes four methods: Lee [1], Frost [2], GammaMAP [3] and Kuan [4]. 
+
+We sum up below the basic principle of this four methods:
+
+* Lee: Estimate the signal by mean square error minimization (MMSE) on a sliding window.
+* Frost: Also derived from the MMSE criteria with a weighted sum of the values within the window. The weighting factors decrease with distance from the pixel of interest.
+* GammaMAP: Derived under the assumption of the image follows a Gamma distribution.
+* Kuan: Also derived from the MMSE criteria under the assumption of non stationary mean and variance. It is quite similar to Lee filter in form.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image.
+
+**Speckle filtering method** :code:`-filter [lee|frost|gammamap|kuan]` *Default value: lee* |br|
+
+
+* **Lee** |br| Lee filter
+
+* **Frost** |br| Frost filter
+
+* **GammaMap** |br| GammaMap filter
+
+* **Kuan** |br| Kuan filter
+
+
+
+Lee options
+^^^^^^^^^^^
+
+**Radius** :code:`-filter.lee.rad int` *Default value: 1* |br|
+Radius in pixel
+
+**Number of looks** :code:`-filter.lee.nblooks float` *Default value: 1* |br|
+Number of looks in the input image.
+
+Frost options
+^^^^^^^^^^^^^
+
+**Radius** :code:`-filter.frost.rad int` *Default value: 1* |br|
+Radius in pixel.
+
+**Deramp factor** :code:`-filter.frost.deramp float` *Default value: 0.1* |br|
+factor use to control the
+exponential function used to weight effect of the distance between the
+central pixel and its neighborhood. Increasing the deramp parameter will
+lead to take more into account pixels farther from the center and
+therefore increase the smoothing effects.
+
+GammaMap options
+^^^^^^^^^^^^^^^^
+
+**Radius** :code:`-filter.gammamap.rad int` *Default value: 1* |br|
+Radius in pixel.
+
+**Number of looks** :code:`-filter.gammamap.nblooks float` *Default value: 1* |br|
+Number of looks in the input image.
+
+Kuan options
+^^^^^^^^^^^^
+
+**Radius** :code:`-filter.kuan.rad int` *Mandatory* |br|
+Radius in pixel.
+
+**Number of looks** :code:`-filter.kuan.nblooks float` *Mandatory* |br|
+Number of looks in the input image.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_Despeckle -in sar.tif -filter lee -filter.lee.rad 5 -out despeckle.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Despeckle")
+
+	app.SetParameterString("in", "sar.tif")
+	app.SetParameterString("filter","lee")
+	app.SetParameterInt("filter.lee.rad", 5)
+	app.SetParameterString("out", "despeckle.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The application does not handle complex image as input.
+
+See also
+--------
+
+| [1] J. Lee. Digital image enhancement and noise filtering byuse of local statistics. IEEE Transactions on Pattern Analysis and MachineIntelligence, 2:165–168, 1980.
+| [2] V. S. Frost, et al., A Model for Radar Images and ItsApplication to Adaptive Digital Filtering of MultiplicativeNoise, IEEE Trans. Pattern Anal., Machine Intell., vol. 4,no. 2, pp. 157-166, Mar. 1982.
+| [3] A. Lopes, E. Nezry, R. Touzi and H. Laur, Maximum APosteriori Speckle Filtering And First Order Texture ModelsIn Sar Images, 10thAnnual International Symposium onGeoscience and Remote Sensing, 1990,pp. 2409-2412.  doi:10.1109/IGARSS.1990.689026
+| [4] Kuan, D.  T., Sawchuk, A.  A., Strand, T.  C, and Chavel,P., 1987.  Adaptive restoration of image with speckle.  IEEETrans on Acoustic Speech and Signal Processing, 35,pp. 373-383.

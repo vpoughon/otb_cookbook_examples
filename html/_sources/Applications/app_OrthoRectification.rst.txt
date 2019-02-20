@@ -1,0 +1,228 @@
+.. _app-OrthoRectification:
+
+OrthoRectification
+==================
+
+
+This application allows ortho-rectifying optical and radar images from supported sensors.
+
+Description
+-----------
+
+This application uses inverse sensor modelling combined with a choice of interpolation functions to resample a sensor geometry image into a ground geometry regular grid. The ground geometry regular grid is defined with respect to a map projection (see map parameter). The application offers several modes to estimate the output grid parameters (origin and ground sampling distance), including automatic estimation of image size, ground sampling distance, or both, from image metadata, user-defined ROI corners, or another ortho-image.A digital Elevation Model along with a geoid file can be specified to account for terrain deformations.In case of SPOT5 images, the sensor model can be approximated by an RPC model in order to speed-up computation.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input and output data
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows setting the input and output images.
+
+**Input Image** :code:`-io.in image` *Mandatory* |br|
+The input image to ortho-rectify
+
+**Output Image** :code:`-io.out image [dtype]` *Mandatory* |br|
+The ortho-rectified output image
+
+
+
+------------
+
+**Map Projection** :code:`-map [utm|lambert2|lambert93|wgs|epsg]` *Default value: utm* |br|
+Defines the map projection to be used.
+
+* **Universal Trans-Mercator (UTM)** |br| A system of transverse mercator projections dividing the surface of Earth between 80S and 84N latitude.
+
+* **Lambert II Etendu** |br| This is a Lambert Conformal Conic projection mainly used in France.
+
+* **Lambert93** |br| This is a Lambert 93 projection mainly used in France.
+
+* **WGS 84** |br| This is a Geographical projection
+
+* **EPSG Code** |br| This code is a generic way of identifying map projections, and allows specifying a large amount of them. See www.spatialreference.org to find which EPSG code is associated to your projection;
+
+
+
+Universal Trans-Mercator (UTM) options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Zone number** :code:`-map.utm.zone int` *Default value: 31* |br|
+The zone number ranges from 1 to 60 and allows defining the transverse mercator projection (along with the hemisphere)
+
+**Northern Hemisphere** :code:`-map.utm.northhem bool` *Default value: false* |br|
+The transverse mercator projections are defined by their zone number as well as the hemisphere. Activate this parameter if your image is in the northern hemisphere.
+
+EPSG Code options
+^^^^^^^^^^^^^^^^^
+
+**EPSG Code** :code:`-map.epsg.code int` *Default value: 4326* |br|
+See www.spatialreference.org to find which EPSG code is associated to your projection
+
+Output Image Grid
+^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows one to define the grid on which the input image will be resampled.
+
+**Parameters estimation modes** :code:`-outputs.mode [auto|autosize|autospacing|outputroi|orthofit]` *Default value: auto* |br|
+
+
+* **User Defined** |br| This mode allows you to fully modify default values.
+
+* **Automatic Size from Spacing** |br| This mode allows you to automatically compute the optimal image size from given spacing (pixel size) values
+
+* **Automatic Spacing from Size** |br| This mode allows you to automatically compute the optimal image spacing (pixel size) from the given size
+
+* **Automatic Size from Spacing and output corners** |br| This mode allows you to automatically compute the optimal image size from spacing (pixel size) and output corners
+
+* **Fit to ortho** |br| Fit the size, origin and spacing to an existing ortho image (uses the value of outputs.ortho)
+
+
+
+**Upper Left X** :code:`-outputs.ulx float` *Mandatory* |br|
+Cartographic X coordinate of upper-left corner (meters for cartographic projections, degrees for geographic ones)
+
+**Upper Left Y** :code:`-outputs.uly float` *Mandatory* |br|
+Cartographic Y coordinate of the upper-left corner (meters for cartographic projections, degrees for geographic ones)
+
+**Size X** :code:`-outputs.sizex int` *Mandatory* |br|
+Size of projected image along X (in pixels)
+
+**Size Y** :code:`-outputs.sizey int` *Mandatory* |br|
+Size of projected image along Y (in pixels)
+
+**Pixel Size X** :code:`-outputs.spacingx float` *Mandatory* |br|
+Size of each pixel along X axis (meters for cartographic projections, degrees for geographic ones)
+
+**Pixel Size Y** :code:`-outputs.spacingy float` *Mandatory* |br|
+Size of each pixel along Y axis (meters for cartographic projections, degrees for geographic ones)
+
+**Lower right X** :code:`-outputs.lrx float` |br|
+Cartographic X coordinate of the lower-right corner (meters for cartographic projections, degrees for geographic ones)
+
+**Lower right Y** :code:`-outputs.lry float` |br|
+Cartographic Y coordinate of the lower-right corner (meters for cartographic projections, degrees for geographic ones)
+
+**Model ortho-image** :code:`-outputs.ortho image` |br|
+A model ortho-image that can be used to compute size, origin and spacing of the output
+
+**Force isotropic spacing by default** :code:`-outputs.isotropic bool` *Default value: true* |br|
+Default spacing (pixel size) values are estimated from the sensor modeling of the image. It can therefore result in a non-isotropic spacing. This option allows you to force default values to be isotropic (in this case, the minimum of spacing in both direction is applied. Values overridden by user are not affected by this option.
+
+**Default pixel value** :code:`-outputs.default float` *Default value: 0* |br|
+Default value to write when outside of input image.
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Interpolation** :code:`-interpolator [bco|nn|linear]` *Default value: bco* |br|
+This group of parameters allows one to define how the input image will be interpolated during resampling.
+
+* **Bicubic interpolation** |br| 
+
+* **Nearest Neighbor interpolation** |br| Nearest neighbor interpolation leads to poor image quality, but it is very fast.
+
+* **Linear interpolation** |br| Linear interpolation leads to average image quality but is quite fast
+
+
+
+Bicubic interpolation options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Radius for bicubic interpolation** :code:`-interpolator.bco.radius int` *Default value: 2* |br|
+This parameter allows one to control the size of the bicubic interpolation filter. If the target pixel size is higher than the input pixel size, increasing this parameter will reduce aliasing artifacts.
+
+Speed optimization parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows optimization of processing time.
+
+**RPC modeling (points per axis)** :code:`-opt.rpc int` *Default value: 10* |br|
+Enabling RPC modeling allows one to speed-up SPOT5 ortho-rectification. Value is the number of control points per axis for RPC estimation
+
+**Available RAM (MB)** :code:`-opt.ram int` *Default value: 256* |br|
+This allows setting the maximum amount of RAM available for processing. As the writing task is time consuming, it is better to write large pieces of data, which can be achieved by increasing this parameter (pay attention to your system capabilities)
+
+**Resampling grid spacing** :code:`-opt.gridspacing float` *Default value: 4* |br|
+Resampling is done according to a coordinate mapping deformation grid, whose pixel size is set by this parameter, and expressed in the coordinate system of the output image The closer to the output spacing this parameter is, the more precise will be the ortho-rectified image,but increasing this parameter will reduce processing time.
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_OrthoRectification -io.in QB_TOULOUSE_MUL_Extract_500_500.tif -io.out QB_Toulouse_ortho.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("OrthoRectification")
+
+	app.SetParameterString("io.in", "QB_TOULOUSE_MUL_Extract_500_500.tif")
+	app.SetParameterString("io.out", "QB_Toulouse_ortho.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Supported sensors (both optical and radar) are: GeoEye, Ikonos, Pleiades, Quickbird, RadarSat, Sentinel-1, SPOT5 (TIF format), SPOT6/7, TerraSAR-X, Worldview 1/2/3, and any TIF image with embedded RPC tags.
+ Also note that the opt.gridspacing default value may not be suitable for all sensors. In particular, if this value is lower than the target ground sampling distance, the processing time may increase a lot. A warning is issued in this case. Typical values should be half the DEM ground sampling distance.
+
+See also
+--------
+
+| Ortho-rectification chapter from the OTB Software Guide

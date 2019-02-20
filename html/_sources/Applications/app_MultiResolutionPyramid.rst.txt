@@ -1,0 +1,87 @@
+.. _app-MultiResolutionPyramid:
+
+MultiResolutionPyramid
+======================
+
+
+Build a multi-resolution pyramid of the image.
+
+Description
+-----------
+
+This application builds a multi-resolution pyramid of the input image. User can specified the number of levels of the pyramid and the subsampling factor. To speed up the process, you can use the fast scheme option
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+will be used to get the prefix and the extension of the images to write
+
+**Number Of Levels** :code:`-level int` *Default value: 1* |br|
+Number of levels in the pyramid (default is 1).
+
+**Subsampling factor** :code:`-sfactor int` *Default value: 2* |br|
+Subsampling factor between each level of the pyramid (default is 2).
+
+**Variance factor** :code:`-vfactor float` *Default value: 0.6* |br|
+Variance factor use in smoothing. It is multiplied by the subsampling factor of each level in the  pyramid (default is 0.6).
+
+**Use Fast Scheme** :code:`-fast bool` *Default value: false* |br|
+If used, this option allows one to speed-up computation by iteratively subsampling previous level of pyramid instead of processing the full input.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_MultiResolutionPyramid -in QB_Toulouse_Ortho_XS.tif -out multiResolutionImage.tif -level 1 -sfactor 2 -vfactor 0.6 -fast false
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("MultiResolutionPyramid")
+
+	app.SetParameterString("in", "QB_Toulouse_Ortho_XS.tif")
+	app.SetParameterString("out", "multiResolutionImage.tif")
+	app.SetParameterInt("level", 1)
+	app.SetParameterInt("sfactor", 2)
+	app.SetParameterFloat("vfactor", 0.6)
+	app.SetParameterString("fast","false")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

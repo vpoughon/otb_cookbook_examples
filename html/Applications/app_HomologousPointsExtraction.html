@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HomologousPointsExtraction &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LineSegmentDetection" href="app_LineSegmentDetection.html" />
+    <link rel="prev" title="HaralickTextureExtraction" href="app_HaralickTextureExtraction.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_BinaryMorphologicalOperation.html">BinaryMorphologicalOperation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ComputePolylineFeatureFromImage.html">ComputePolylineFeatureFromImage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_DSFuzzyModelEstimation.html">DSFuzzyModelEstimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_EdgeExtraction.html">EdgeExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_GrayScaleMorphologicalOperation.html">GrayScaleMorphologicalOperation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_HaralickTextureExtraction.html">HaralickTextureExtraction</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">HomologousPointsExtraction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_LineSegmentDetection.html">LineSegmentDetection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LocalStatisticExtraction.html">LocalStatisticExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MorphologicalClassification.html">MorphologicalClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MorphologicalMultiScaleDecomposition.html">MorphologicalMultiScaleDecomposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_MorphologicalProfilesAnalysis.html">MorphologicalProfilesAnalysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_RadiometricIndices.html">RadiometricIndices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SFSTextureExtraction.html">SFSTextureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_VectorDataDSValidation.html">VectorDataDSValidation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Segmentation.html">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Feature_Extraction.html">Feature Extraction</a> &raquo;</li>
+        
+      <li>HomologousPointsExtraction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_HomologousPointsExtraction.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="homologouspointsextraction">
+<span id="app-homologouspointsextraction"></span><h1>HomologousPointsExtraction<a class="headerlink" href="#homologouspointsextraction" title="Permalink to this headline">¶</a></h1>
+<p>Compute homologous points between images using keypoints</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application allows computing homologous points between images using keypoints.  SIFT or SURF keypoints can be used and the band on which keypoints are computed can be set independently for both images. The application offers two modes: the first is the full mode where keypoints are extracted from the full extent of both images (please note that in this mode large image file are not supported). The second mode, called geobins, allows one to set-up spatial binning to get fewer points spread across the entire image. In this mode, the corresponding spatial bin in the second image is estimated using geographical transform or sensor modelling, and is padded according to the user defined precision. Last, in both modes the application can filter matches whose colocalisation in first image exceed this precision. The elevation parameters are to deal more precisely with sensor modelling in case of sensor geometry data. The outvector option allows creating a vector file with segments corresponding to the localisation error between the matches. It can be useful to assess the precision of a registration for instance. The vector file is always reprojected to EPSG:4326 to allow display in a GIS. This is done via reprojection or by applying the image sensor models.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#search-keypoints-in-small-spatial-bins-regularly-spread-across-first-image-options" id="id1">Search keypoints in small spatial bins regularly spread across first image options</a></li>
+<li><a class="reference internal" href="#elevation-management" id="id2">Elevation management</a></li>
+</ul>
+</div>
+<dl class="docutils">
+<dt><strong>Input Image 1</strong> <code class="code docutils literal notranslate"><span class="pre">-in1</span> <span class="pre">image</span></code> <em>Mandatory</em> <br /></dt>
+<dd>First input image</dd>
+</dl>
+<p><strong>Input band 1</strong> <code class="code docutils literal notranslate"><span class="pre">-band1</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Index of the band from input image 1 to use for keypoints extraction</p>
+<dl class="docutils">
+<dt><strong>Input Image 2</strong> <code class="code docutils literal notranslate"><span class="pre">-in2</span> <span class="pre">image</span></code> <em>Mandatory</em> <br /></dt>
+<dd>Second input image</dd>
+</dl>
+<p><strong>Input band 2</strong> <code class="code docutils literal notranslate"><span class="pre">-band2</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
+Index of the band from input image 1 to use for keypoints extraction</p>
+<p><strong>Output file with tie points</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+File containing the list of tie points</p>
+<p><strong>Output vector file with tie points</strong> <code class="code docutils literal notranslate"><span class="pre">-outvector</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+File containing segments representing matches</p>
+<p><strong>Keypoints detection algorithm</strong> <code class="code docutils literal notranslate"><span class="pre">-algorithm</span> <span class="pre">[surf|sift]</span></code> <em>Default value: surf</em> <br />
+Choice of the detection algorithm to use</p>
+<ul class="simple">
+<li><strong>SURF algorithm</strong> <br /></li>
+<li><strong>SIFT algorithm</strong> <br /></li>
+</ul>
+<p><strong>Distance threshold for matching</strong> <code class="code docutils literal notranslate"><span class="pre">-threshold</span> <span class="pre">float</span></code> <em>Default value: 0.6</em> <br />
+The distance threshold for matching.</p>
+<p><strong>Use back-matching to filter matches</strong> <code class="code docutils literal notranslate"><span class="pre">-backmatching</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+If set to true, matches should be consistent in both ways.</p>
+<p><strong>Keypoints search mode</strong> <code class="code docutils literal notranslate"><span class="pre">-mode</span> <span class="pre">[full|geobins]</span></code> <em>Default value: full</em> <br /></p>
+<ul class="simple">
+<li><strong>Extract and match all keypoints (no streaming)</strong> <br /> Extract and match all keypoints, loading both images entirely into memory</li>
+<li><strong>Search keypoints in small spatial bins regularly spread across first image</strong> <br /> This method allows retrieving a set of tie points regulary spread across image 1. Corresponding bins in image 2 are retrieved using sensor and geographical information if available. The first bin position takes into account the margin parameter. Bins are cropped to the largest image region shrunk by the margin parameter for both in1 and in2 images.</li>
+</ul>
+<div class="section" id="search-keypoints-in-small-spatial-bins-regularly-spread-across-first-image-options">
+<h3><a class="toc-backref" href="#id1">Search keypoints in small spatial bins regularly spread across first image options</a><a class="headerlink" href="#search-keypoints-in-small-spatial-bins-regularly-spread-across-first-image-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>Size of bin</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.geobins.binsize</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Radius of the spatial bin in pixels</p>
+<p><strong>Size of bin (y direction)</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.geobins.binsizey</span> <span class="pre">int</span></code> <br />
+Radius of the spatial bin in pixels (y direction). If not set, the mode.geobins.binsize value is used.</p>
+<p><strong>Steps between bins</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.geobins.binstep</span> <span class="pre">int</span></code> <em>Default value: 256</em> <br />
+Steps between bins in pixels</p>
+<p><strong>Steps between bins (y direction)</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.geobins.binstepy</span> <span class="pre">int</span></code> <br />
+Steps between bins in pixels (y direction). If not set, the mode.geobins.binstep value is used.</p>
+<p><strong>Margin from image border to start/end bins (in pixels)</strong> <code class="code docutils literal notranslate"><span class="pre">-mode.geobins.margin</span> <span class="pre">int</span></code> <em>Default value: 10</em> <br />
+Margin from image border to start/end bins (in pixels)</p>
+<hr class="docutils" />
+<p><strong>Estimated precision of the colocalisation function (in pixels)</strong> <code class="code docutils literal notranslate"><span class="pre">-precision</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+Estimated precision of the colocalisation function in pixels</p>
+<p><strong>Filter points according to geographical or sensor based colocalisation</strong> <code class="code docutils literal notranslate"><span class="pre">-mfilter</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br />
+If enabled, this option allows one to filter matches according to colocalisation from sensor or geographical information, using the given tolerancy expressed in pixels</p>
+<p><strong>If enabled, points from second image will be exported in WGS84</strong> <code class="code docutils literal notranslate"><span class="pre">-2wgs84</span> <span class="pre">bool</span></code> <em>Default value: false</em> <br /></p>
+</div>
+<div class="section" id="elevation-management">
+<h3><a class="toc-backref" href="#id2">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
+<p>This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.</p>
+<p><strong>DEM directory</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.dem</span> <span class="pre">directory</span></code> <br />
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.</p>
+<p><strong>Geoid File</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.geoid</span> <span class="pre">filename</span> <span class="pre">[dtype]</span></code> <br />
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd">https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd</a>).</p>
+<p><strong>Default elevation</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.default</span> <span class="pre">float</span></code> <em>Default value: 0</em> <br />
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.</p>
+<hr class="docutils" />
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_HomologousPointsExtraction -in1 sensor_stereo_left.tif -in2 sensor_stereo_right.tif -mode full -out homologous.txt
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;HomologousPointsExtraction&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in1&quot;</span><span class="p">,</span> <span class="s2">&quot;sensor_stereo_left.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in2&quot;</span><span class="p">,</span> <span class="s2">&quot;sensor_stereo_right.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span><span class="s2">&quot;full&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;homologous.txt&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>Full mode does not handle large images.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="app_RefineSensorModel.html#app-refinesensormodel"><span class="std std-ref">RefineSensorModel</span></a></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_LineSegmentDetection.html" class="btn btn-neutral float-right" title="LineSegmentDetection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_HaralickTextureExtraction.html" class="btn btn-neutral" title="HaralickTextureExtraction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

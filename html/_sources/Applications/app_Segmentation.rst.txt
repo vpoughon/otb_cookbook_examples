@@ -1,0 +1,232 @@
+.. _app-Segmentation:
+
+Segmentation
+============
+
+
+Performs segmentation of an image, and output either a raster or a vector file. In vector mode, large input datasets are supported.
+
+Description
+-----------
+
+This application allows one to perform various segmentation algorithms on a multispectral image. Available segmentation algorithms are two different versions of Mean-Shift segmentation algorithm (one being multi-threaded), simple pixel based connected components according to a user-defined criterion, and watershed from the gradient of the intensity (norm of spectral bands vector). The application has two different modes that affects the nature of its output.
+
+In raster mode, the output of the application is a classical image of unique labels identifying the segmented regions. The labeled output can be passed to the :ref:`app-ColorMapping` application to render regions with contrasted colours. Please note that this mode loads the whole input image into memory, and as such can not handle large images.
+
+To segment large data, one can use the vector mode. In this case, the output of the application is a vector file or database. The input image is split into tiles (whose size can be set using the tilesize parameter), and each tile is loaded, segmented with the chosen algorithm, vectorized, and written into the output file or database. This piece-wise behavior ensure that memory will never get overloaded, and that images of any size can be processed. There are few more options in the vector mode. The simplify option allows simplifying the geometry (i.e. remove nodes in polygons) according to a user-defined tolerance. The stitch option tries to stitch together the polygons corresponding to segmented region that may have been split by the tiling scheme. 
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to segment
+
+**Segmentation algorithm** :code:`-filter [meanshift|cc|watershed|mprofiles]` *Default value: meanshift* |br|
+Choice of segmentation algorithm (mean-shift by default)
+
+* **Mean-Shift** |br| OTB implementation of the Mean-Shift algorithm (multi-threaded).
+
+* **Connected components** |br| Simple pixel-based connected-components algorithm with a user-defined connection condition.
+
+* **Watershed** |br| The traditional watershed algorithm. The height function is the gradient magnitude of the amplitude (square root of the sum of squared bands).
+
+* **Morphological profiles based segmentation** |br| Segmentation based on morphological profiles, as described in Martino Pesaresi and Jon Alti Benediktsson, Member, IEEE: A new approach for the morphological segmentation of high resolution satellite imagery. IEEE Transactions on geoscience and remote sensing, vol. 39, NO. 2, February 2001, p. 309-320.
+
+
+
+Mean-Shift options
+^^^^^^^^^^^^^^^^^^
+
+**Spatial radius** :code:`-filter.meanshift.spatialr int` *Default value: 5* |br|
+Spatial radius of the neighborhood.
+
+**Range radius** :code:`-filter.meanshift.ranger float` *Default value: 15* |br|
+Range radius defining the radius (expressed in radiometry unit) in the multispectral space.
+
+**Mode convergence threshold** :code:`-filter.meanshift.thres float` *Default value: 0.1* |br|
+Algorithm iterative scheme will stop if mean-shift vector is below this threshold or if iteration number reached maximum number of iterations.
+
+**Maximum number of iterations** :code:`-filter.meanshift.maxiter int` *Default value: 100* |br|
+Algorithm iterative scheme will stop if convergence hasn't been reached after the maximum number of iterations.
+
+**Minimum region size** :code:`-filter.meanshift.minsize int` *Default value: 100* |br|
+Minimum size of a region (in pixel unit) in segmentation. Smaller clusters will be merged to the neighboring cluster with the closest radiometry. If set to 0 no pruning is done.
+
+Connected components options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Condition** :code:`-filter.cc.expr string` *Mandatory* |br|
+User defined connection condition, written as a mathematical expression. Available variables are p(i)b(i), intensity_p(i) and distance (example of expression: distance < 10 )
+
+Watershed options
+^^^^^^^^^^^^^^^^^
+
+**Depth Threshold** :code:`-filter.watershed.threshold float` *Default value: 0.01* |br|
+Depth threshold Units in percentage of the maximum depth in the image.
+
+**Flood Level** :code:`-filter.watershed.level float` *Default value: 0.1* |br|
+flood level for generating the merge tree from the initial segmentation (between 0 and 1)
+
+Morphological profiles based segmentation options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Profile Size** :code:`-filter.mprofiles.size int` *Default value: 5* |br|
+Size of the profiles
+
+**Initial radius** :code:`-filter.mprofiles.start int` *Default value: 1* |br|
+Initial radius of the structuring element (in pixels)
+
+**Radius step** :code:`-filter.mprofiles.step int` *Default value: 1* |br|
+Radius step along the profile (in pixels)
+
+**Threshold of the final decision rule** :code:`-filter.mprofiles.sigma float` *Default value: 1* |br|
+Profiles values under the threshold will be ignored.
+
+
+
+------------
+
+**Processing mode** :code:`-mode [vector|raster]` *Default value: vector* |br|
+Choice of processing mode, either raster or large-scale.
+
+* **Tile-based large-scale segmentation with vector output** |br| In this mode, the application will output a vector file or database, and process the input image piecewise. This allows performing segmentation of very large images.
+
+* **Standard segmentation with labeled raster output** |br| In this mode, the application will output a standard labeled raster. This mode can not handle large data.
+
+
+
+Tile-based large-scale segmentation with vector output options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Output vector file** :code:`-mode.vector.out filename [dtype]` *Mandatory* |br|
+The output vector file or database (name can be anything understood by OGR)
+
+**Writing mode for the output vector file** :code:`-mode.vector.outmode [ulco|ovw|ulovw|ulu]` *Default value: ulco* |br|
+This allows one to set the writing behaviour for the output vector file. Please note that the actual behaviour depends on the file format.
+
+* **Update output vector file, only allow creating new layers** |br| The output vector file is opened in update mode if existing. If the output layer already exists, the application stops, leaving it untouched.
+
+* **Overwrite output vector file if existing.** |br| If the output vector file already exists, it is completely destroyed (including all its layers) and recreated from scratch.
+
+* **Update output vector file, overwrite existing layer** |br| The output vector file is opened in update mode if existing. If the output layer already exists, it si completely destroyed and recreated from scratch.
+
+* **Update output vector file, update existing layer** |br| The output vector file is opened in update mode if existing. If the output layer already exists, the new geometries are appended to the layer.
+
+
+
+**Mask Image** :code:`-mode.vector.inmask image` |br|
+Only pixels whose mask value is strictly positive will be segmented.
+
+**8-neighbor connectivity** :code:`-mode.vector.neighbor bool` *Default value: false* |br|
+Activate 8-Neighborhood connectivity (default is 4).
+
+**Stitch polygons** :code:`-mode.vector.stitch bool` *Default value: true* |br|
+Scan polygons on each side of tiles and stitch polygons which connect by more than one pixel.
+
+**Minimum object size** :code:`-mode.vector.minsize int` *Default value: 1* |br|
+Objects whose size is below the minimum object size (area in pixels) will be ignored during vectorization.
+
+**Simplify polygons** :code:`-mode.vector.simplify float` *Default value: 0.1* |br|
+Simplify polygons according to a given tolerance (in pixel). This option allows reducing the size of the output file or database.
+
+**Layer name** :code:`-mode.vector.layername string` *Default value: layer* |br|
+Name of the layer in the vector file or database (default is Layer).
+
+**Geometry index field name** :code:`-mode.vector.fieldname string` *Default value: DN* |br|
+Name of the field holding the geometry index in the output vector file or database.
+
+**Tiles size** :code:`-mode.vector.tilesize int` *Default value: 1024* |br|
+User defined tiles size for tile-based segmentation. Optimal tile size is selected according to available RAM if null.
+
+**Starting geometry index** :code:`-mode.vector.startlabel int` *Default value: 1* |br|
+Starting value of the geometry index field
+
+**OGR options for layer creation** :code:`-mode.vector.ogroptions string1 string2...` |br|
+A list of layer creation options in the form KEY=VALUE that will be passed directly to OGR without any validity checking. Options may depend on the file format, and can be found in OGR documentation.
+
+Standard segmentation with labeled raster output options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Output labeled image** :code:`-mode.raster.out image [dtype]` *Mandatory* |br|
+The output labeled image.
+
+
+
+------------
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    # Example of use with vector mode and watershed segmentation
+    otbcli_Segmentation -in QB_Toulouse_Ortho_PAN.tif -mode vector -mode.vector.out SegmentationVector.sqlite -filter watershed
+
+    # Example of use with raster mode and mean-shift segmentation
+    otbcli_Segmentation -in QB_Toulouse_Ortho_PAN.tif -mode raster -mode.raster.out SegmentationRaster.tif uint16 -filter meanshift
+
+
+From Python:
+
+.. code-block:: python
+
+	# Example of use with vector mode and watershed segmentation
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Segmentation")
+
+	app.SetParameterString("in", "QB_Toulouse_Ortho_PAN.tif")
+	app.SetParameterString("mode","vector")
+	app.SetParameterString("mode.vector.out", "SegmentationVector.sqlite")
+	app.SetParameterString("filter","watershed")
+
+	app.ExecuteAndWriteOutput()
+
+.. code-block:: python
+
+	# Example of use with raster mode and mean-shift segmentation
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Segmentation")
+
+	app.SetParameterString("in", "QB_Toulouse_Ortho_PAN.tif")
+	app.SetParameterString("mode","raster")
+	app.SetParameterString("mode.raster.out", "SegmentationRaster.tif")
+	app.SetParameterOutputImagePixelType("mode.raster.out", 3)
+	app.SetParameterString("filter","meanshift")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+In raster mode, the application can not handle large input images. Stitching step of vector mode might become slow with very large input images. 
+MeanShift filter results depends on the number of threads used. 
+Watershed and multiscale geodesic morphology segmentation will be performed on the amplitude  of the input image.
+
+See also
+--------
+
+| MeanShift:ref:`app-Segmentation`

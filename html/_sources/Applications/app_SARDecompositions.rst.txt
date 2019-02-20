@@ -1,0 +1,125 @@
+.. _app-SARDecompositions:
+
+SARDecompositions
+=================
+
+
+From one-band complex images (each one related to an element of the Sinclair matrix), returns the selected decomposition.
+
+Description
+-----------
+
+From one-band complex images (HH, HV, VH, VV), returns the selected decomposition.
+ 
+All the decompositions implemented are intended for the mono-static case (transmitter and receiver are co-located).
+There are two kinds of decomposition: coherent ones and incoherent ones.
+In the coherent case, only the Pauli decomposition is available.
+In the incoherent case, there the decompositions available: Huynen, Barnes, and H-alpha-A.
+User must provide three one-band complex images HH, HV or VH, and VV (mono-static case <=> HV = VH).
+Incoherent decompositions consist in averaging 3x3 complex coherency/covariance matrices; the user must provide the size of the averaging window, thanks to the parameter inco.kernelsize.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-inhh image` *Mandatory* |br|
+Input image (HH)
+
+**Input Image** :code:`-inhv image` |br|
+Input image (HV)
+
+**Input Image** :code:`-invh image` |br|
+Input image (VH)
+
+**Input Image** :code:`-invv image` *Mandatory* |br|
+Input image (VV)
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image
+
+**Decompositions** :code:`-decomp [haa|barnes|huynen|pauli]` *Default value: haa* |br|
+
+
+* **H-alpha-A incoherent decomposition** |br| H-alpha-A incoherent decomposition
+
+* **Barnes incoherent decomposition** |br| Barnes incoherent decomposition
+
+* **Huynen incoherent decomposition** |br| Huynen incoherent decomposition
+
+* **Pauli coherent decomposition** |br| Pauli coherent decomposition
+
+
+
+Incoherent decompositions
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group allows setting parameters related to the incoherent decompositions.
+
+**Kernel size for spatial incoherent averaging** :code:`-inco.kernelsize int` *Default value: 3* |br|
+Minute (0-59)
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SARDecompositions -inhh HH.tif -invh VH.tif -invv VV.tif -decomp haa -out HaA.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SARDecompositions")
+
+	app.SetParameterString("inhh", "HH.tif")
+	app.SetParameterString("invh", "VH.tif")
+	app.SetParameterString("invv", "VV.tif")
+	app.SetParameterString("decomp","haa")
+	app.SetParameterString("out", "HaA.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Some decompositions output real images, while this application outputs complex images for general purpose.
+Users should pay attention to extract the real part of the results provided by this application.
+
+
+See also
+--------
+
+| :ref:`app-SARPolarMatrixConvert`, :ref:`app-SARPolarSynth`

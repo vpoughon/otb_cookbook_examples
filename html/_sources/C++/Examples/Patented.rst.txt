@@ -1,0 +1,11 @@
+Patented
+========
+
+.. toctree::
+	:maxdepth: 3
+
+
+	Patented/SIFTFastExample.rst
+	Patented/SIFTDensityExample.rst
+	Patented/SIFTExample.rst
+	Patented/SIFTDisparityMapEstimation.rst

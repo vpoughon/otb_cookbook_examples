@@ -1,0 +1,98 @@
+.. _app-MultivariateAlterationDetector:
+
+MultivariateAlterationDetector
+==============================
+
+
+Change detection by Multivariate Alteration Detector (MAD) algorithm
+
+Description
+-----------
+
+This application performs change detection between two multispectral images using the Multivariate Alteration Detector (MAD) [1] algorithm.
+
+The MAD algorithm produces a set of N change maps (where N is the maximum number of bands in first and second input images), with the following properties:
+
+* Change maps are differences of a pair of linear combinations of  bands from image 1 and bands from image 2 chosen to maximize the  correlation, 
+* Each change map is orthogonal to the others.
+
+This is a statistical method which can handle different modalities and even different bands and number of bands between images. 
+ 
+The application will output all change maps into a single multiband image. If numbers of bands in image 1 and 2 are equal, then change maps are sorted by increasing correlation. If number of bands is different, the change maps are sorted by decreasing correlation. 
+ 
+The application will also print the following information:
+- Mean1 and Mean2 which are the mean values of bands for both input images,
+- V1 and V2 which are the two linear transform that are applied to input image 1 and input image 2 to build the change map,
+- Rho, the vector of correlation associated to each change map.
+ 
+The OTB filter used in this application has been implemented from the Matlab code kindly made available by the authors here [2]. Both cases (same and different number of bands) have been validated by comparing the output image to the output produced by the Matlab  code, and the reference images for testing have been generated from  the Matlab code using Octave.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image 1** :code:`-in1 image` *Mandatory* |br|
+Multiband image of the scene before perturbations
+
+**Input Image 2** :code:`-in2 image` *Mandatory* |br|
+Mutliband image of the scene after perturbations.
+
+**Change Map** :code:`-out image [dtype]` *Mandatory* |br|
+Multiband image containing change maps. Each map will be in the range [-1,1], so a floating point output type is advised.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_MultivariateAlterationDetector -in1 Spot5-Gloucester-before.tif -in2 Spot5-Gloucester-after.tif -out detectedChangeImage.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("MultivariateAlterationDetector")
+
+	app.SetParameterString("in1", "Spot5-Gloucester-before.tif")
+	app.SetParameterString("in2", "Spot5-Gloucester-after.tif")
+	app.SetParameterString("out", "detectedChangeImage.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Input images 1 and 2 should share exactly the same origin, spacing, size, and projection if any.
+
+See also
+--------
+
+| [1] Nielsen, A. A., & Conradsen, K. (1997). Multivariate alterationdetection (MAD) in multispectral, bi-temporal image data: A newapproach to change detection studies.
+| [2] http://www2.imm.dtu.dk/~aa/software.html

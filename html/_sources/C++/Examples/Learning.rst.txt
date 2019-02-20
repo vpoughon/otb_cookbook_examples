@@ -1,0 +1,14 @@
+Learning
+========
+
+.. toctree::
+	:maxdepth: 3
+
+
+	Learning/SOMClassifierExample.rst
+	Learning/SOMExample.rst
+	Learning/SVMImageEstimatorClassificationMultiExample.rst
+	Learning/GenerateTrainingImageExample.rst
+	Learning/SEMModelEstimatorExample.rst
+	Learning/TrainMachineLearningModelFromSamplesExample.rst
+	Learning/TrainMachineLearningModelFromImagesExample.rst

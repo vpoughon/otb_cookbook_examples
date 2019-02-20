@@ -1,0 +1,79 @@
+.. _app-VectorDataSetField:
+
+VectorDataSetField
+==================
+
+
+Set a field in vector data.
+
+Description
+-----------
+
+Set a specified field to a specified value on all features of a vector data.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input** :code:`-in vectorfile` *Mandatory* |br|
+Input Vector Data
+
+**Output** :code:`-out vectorfile` *Mandatory* |br|
+Output Vector Data
+
+**Field** :code:`-fn string` *Mandatory* |br|
+Field name
+
+**Value** :code:`-fv string` *Mandatory* |br|
+Field value
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_VectorDataSetField -in qb_RoadExtract_classification.shp -out VectorDataSetField.shp -fn Info -fv Sample polygon
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("VectorDataSetField")
+
+	app.SetParameterString("in", "qb_RoadExtract_classification.shp")
+	app.SetParameterString("out", "VectorDataSetField.shp")
+	app.SetParameterString("fn", "Info")
+	app.SetParameterString("fv", "Sample polygon")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Doesn't work with KML files yet
+
+

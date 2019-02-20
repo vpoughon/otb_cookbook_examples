@@ -1,0 +1,76 @@
+.. _app-TileFusion:
+
+TileFusion
+==========
+
+
+Fusion of an image made of several tile files.
+
+Description
+-----------
+
+Automatically mosaic a set of non overlapping tile files into a single image. Images must have a matching number of bands and they must be listed in lexicographic order.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Tile Images** :code:`-il image1 image2...` *Mandatory* |br|
+Input images to concatenate (in lexicographic order, for instance: (0,0) (1,0) (0,1) (1,1)).
+
+**Number of tile columns** :code:`-cols int` *Mandatory* |br|
+Number of columns in the tile array
+
+**Number of tile rows** :code:`-rows int` *Mandatory* |br|
+Number of rows in the tile array
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output entire image
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_TileFusion -il Scene_R1C1.tif Scene_R1C2.tif Scene_R2C1.tif Scene_R2C2.tif -cols 2 -rows 2 -out EntireImage.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("TileFusion")
+
+	app.SetParameterStringList("il", ['Scene_R1C1.tif', 'Scene_R1C2.tif', 'Scene_R2C1.tif', 'Scene_R2C2.tif'])
+	app.SetParameterInt("cols", 2)
+	app.SetParameterInt("rows", 2)
+	app.SetParameterString("out", "EntireImage.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

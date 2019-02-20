@@ -1,0 +1,86 @@
+.. _app-ComputeModulusAndPhase:
+
+ComputeModulusAndPhase
+======================
+
+
+This application computes the modulus and the phase of a complex SAR image or an image with 2 components (real and imaginary parts).
+
+Description
+-----------
+
+This application computes the modulus and the phase of a complex SAR image. The input should be a single band image with complex pixels or a 2 bands image (real and imaginary components in separate bands).
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image (complex single band or 2 bands (real/imaginary parts))
+
+**Modulus** :code:`-modulus image [dtype]` *Mandatory* |br|
+Modulus of the input image computes with the
+following formula: :math:`\sqrt{real*real + imag*imag}` where real and imag 
+are respectively the real and the imaginary part of the input complex image.
+
+
+**Phase** :code:`-phase image [dtype]` *Mandatory* |br|
+Phase of the input image computes with the following formula:
+:math:`\tan^{-1}(\frac{imag}{real})` where real and imag are respectively the real and
+the imaginary part of the input complex image.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ComputeModulusAndPhase -in monobandComplexFloat.tif -modulus modulus.tif -phase phase.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ComputeModulusAndPhase")
+
+	app.SetParameterString("in", "monobandComplexFloat.tif")
+	app.SetParameterString("modulus", "modulus.tif")
+	app.SetParameterString("phase", "phase.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The application takes as input single band image with complex pixels or a 2 bands image (real and imaginary part in separate bands).
+
+See also
+--------
+
+| :ref:`app-Despeckle`, :ref:`app-SARPolarMatrixConvert`, :ref:`app-SARPolarSynth`

@@ -1,0 +1,97 @@
+.. _app-Quicklook:
+
+Quicklook
+=========
+
+
+Generates a subsampled version of an image extract
+
+Description
+-----------
+
+Generates a subsampled version of an extract of an image defined by ROIStart and ROISize.
+This extract is subsampled using the ratio OR the output image Size.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The image to read
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The subsampled image
+
+**Channel List** :code:`-cl string1 string2...` |br|
+Selected channels
+
+**ROI Origin X** :code:`-rox int` *Default value: 0* |br|
+first point of ROI in x-direction
+
+**ROI Origin Y** :code:`-roy int` *Default value: 0* |br|
+first point of ROI in y-direction
+
+**ROI Size X** :code:`-rsx int` *Default value: 0* |br|
+size of ROI in x-direction
+
+**ROI Size Y** :code:`-rsy int` *Default value: 0* |br|
+size of ROI in y-direction
+
+**Sampling ratio** :code:`-sr int` *Default value: 2* |br|
+Sampling Ratio, default is 2
+
+**Size X** :code:`-sx int` |br|
+quicklook size in x-direction (used if no sampling ratio is given)
+
+**Size Y** :code:`-sy int` |br|
+quicklook size in y-direction (used if no sampling ratio is given)
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_Quicklook -in qb_RoadExtract.tif -out quicklookImage.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Quicklook")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterString("out", "quicklookImage.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+This application does not provide yet the optimal way to decode coarser level of resolution from JPEG2000 images (like in Monteverdi).
+Trying to subsampled huge JPEG200 image with the application will lead to poor performances for now.
+
+

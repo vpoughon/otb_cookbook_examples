@@ -1,0 +1,198 @@
+.. _app-ContrastEnhancement:
+
+ContrastEnhancement
+===================
+
+
+This application is the implementation of the histogram equalization algorithm. It can be used to enhance contrast in an image or to reduce the dynamic of the image without losing too much contrast. It offers several options as a no data value, a contrast limitation factor, a local version of the algorithm and also a mode to equalize the luminance of the image.
+
+Description
+-----------
+
+This application is the implementation of the histogram equalization algorithm. The idea of the algorithm is to use the whole available dynamic. In order to do so it computes a histogram over the image and then use the whole dynamic: meaning flattening the histogram. That gives us gain for each bin that transform the original histogram into the flat one. This gain is then apply on the original image.
+
+The application proposes several options to allow a finer result:
+
+* There is an option to limit contrast. We choose to limit the contrast by modifying the original histogram. To do so we clip the histogram at a given height and redistribute equally among the bins the clipped population. Then we add a local version of the algorithm.
+* It is possible to apply the algorithm on tiles of the image, instead of on the whole image. That gives us gain depending on the value of the pixel and its position in the image. In order to smoothen the result we interpolate the gain between tiles.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+Input image.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image.
+
+**Number of bins** :code:`-bins int` *Default value: 256* |br|
+Number of bins in the histogram
+
+**Contrast Limitation** :code:`-hfact float` |br|
+This parameter will set the maximum height accepted in a bin on the input image histogram. The maximum height will be computed as hfact*eqHeight where eqHeight is the height of the theoretical flat histogram. The higher hfact, the higher the contrast.
+When using 'luminance mode', it is recommended to limit this factor to a small value (ex: 4)
+
+**Nodata Value** :code:`-nodata float` |br|
+If there is a value in the image that has no visualization meaning, it can be ignored by the algorithm.
+
+**Spatial parameters for the histogram computation** :code:`-spatial [local|global]` *Default value: local* |br|
+
+
+* **Local** |br| The histograms will be computed on each thumbnail. Each of the histogram will be equalized and the corresponding gain will be interpolated.
+
+* **Global** |br| The histogram will be computed on the whole image. The equalization will be computed on this histogram.
+
+
+
+Local options
+^^^^^^^^^^^^^
+
+**Thumbnail height** :code:`-spatial.local.h int` *Default value: 256* |br|
+Height of the thumbnail over which the histogram will be computed. The value is in pixels.
+
+**Thumbnail width** :code:`-spatial.local.w int` *Default value: 256* |br|
+Width of the thumbnail over which the histogram will be computed. The value is in pixels.
+
+
+
+------------
+
+**Minimum and maximum settings** :code:`-minmax [auto|manual]` *Default value: auto* |br|
+Minimum and maximum value that will bound the histogram and thus the dynamic of the resulting image. Values over those boundaries will be clipped.
+
+* **Automatic** |br| Minimum and maximum value will be computed on the image (nodata value won't be taken into account) . Each band will have a minimum and a maximum.
+
+* **Manual settings for min/max values** |br| Minimum and maximum value will be set by the user
+
+
+
+Automatic options
+^^^^^^^^^^^^^^^^^
+
+**Global** :code:`-minmax.auto.global bool` *Default value: false* |br|
+Min/max computation will result in the same minimum and maximum for all the bands.
+
+Manual settings for min/max values options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Minimum value** :code:`-minmax.manual.min float` |br|
+
+
+**Maximum value** :code:`-minmax.manual.max float` |br|
+
+
+
+
+------------
+
+**What to equalized** :code:`-mode [each|lum]` *Default value: each* |br|
+
+
+* **Channels** |br| Each channel is equalized independently
+
+* **Luminance** |br| The relative luminance is computed according to the coefficients.Then the histogram is equalized and the gain is applied to each of the channels. The channel gain will depend on the weight (coef) of the channel in the luminance. |br| Note that default values come from color space theories on how human eyes perceive colors)
+
+
+
+Luminance options
+^^^^^^^^^^^^^^^^^
+
+Red channel
+^^^^^^^^^^^
+
+
+
+
+
+**Red channel** :code:`-mode.lum.red.ch int` *Default value: 0* |br|
+
+
+**Value for luminance computation for the red channel** :code:`-mode.lum.red.coef float` *Default value: 0.21* |br|
+
+
+Green channel
+^^^^^^^^^^^^^
+
+
+
+
+
+**Green channel** :code:`-mode.lum.green.ch int` *Default value: 1* |br|
+
+
+**Value for luminance computation of the green channel** :code:`-mode.lum.green.coef float` *Default value: 0.71* |br|
+
+
+Blue channel
+^^^^^^^^^^^^
+
+
+
+
+
+**Blue channel** :code:`-mode.lum.blue.ch int` *Default value: 2* |br|
+
+
+**Value for luminance computation of the blue channel** :code:`-mode.lum.blue.coef float` *Default value: 0.08* |br|
+
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    # Local contrast enhancement by luminance
+    otbcli_ContrastEnhancement -in colours.tif -out equalizedcolors.tif float -bins 256 -spatial.local.w 500 -spatial.local.h 500 -mode lum
+
+
+From Python:
+
+.. code-block:: python
+
+	# Local contrast enhancement by luminance
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ContrastEnhancement")
+
+	app.SetParameterString("in", "colours.tif")
+	app.SetParameterString("out", "equalizedcolors.tif")
+	app.SetParameterOutputImagePixelType("out", 6)
+	app.SetParameterInt("bins", 256)
+	app.SetParameterInt("spatial.local.w", 500)
+	app.SetParameterInt("spatial.local.h", 500)
+	app.SetParameterString("mode","lum")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

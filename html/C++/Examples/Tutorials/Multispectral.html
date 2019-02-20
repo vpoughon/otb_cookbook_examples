@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multispectral.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="OrthoFusion.cxx" href="OrthoFusion.html" />
+    <link rel="prev" title="FilteringPipeline.cxx" href="FilteringPipeline.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="HelloWorldOTB.html">HelloWorldOTB.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FilteringPipeline.html">FilteringPipeline.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Multispectral.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OrthoFusion.html">OrthoFusion.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Pipeline.html">Pipeline.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ScalingPipeline.html">ScalingPipeline.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Multispectral.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Tutorials/Multispectral.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multispectral-cxx">
+<span id="example-multispectral"></span><h1>Multispectral.cxx<a class="headerlink" href="#multispectral-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./Multispectral Input/qb_RoadExtract.tif Output/qb_blue.tif Output/qb_shiftscale.tif
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/Multispectral.cxx?inline=false">Multispectral.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  First, we are going to use \doxygen{otb}{VectorImage} instead of the now</span>
+<span class="c1">// traditional \doxygen{otb}{Image}. So we include the required header:</span>
+
+
+<span class="c1">// We also include some other header which will be useful later. Note that we</span>
+<span class="c1">// are still using the \doxygen{otb}{Image} in this example for some of the</span>
+<span class="c1">// output.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiToMonoChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkShiftScaleImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbPerBandVectorImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;input_filename&gt; &lt;output_extract&gt; &lt;output_shifted_scaled&gt;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// We want to read a multispectral image so we declare the image type and the</span>
+  <span class="c1">// reader. As we have done in the previous example we get the filename from</span>
+  <span class="c1">// the command line.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span>             <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">VectorImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>                           <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="c1">//  Sometime, you need to process only one spectral band of the image. To get</span>
+  <span class="c1">// only one of the spectral band we use the</span>
+  <span class="c1">// \doxygen{otb}{MultiToMonoChannelExtractROI}. The declaration is as usual:</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiToMonoChannelExtractROI</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">PixelType</span><span class="o">&gt;</span> <span class="n">ExtractChannelType</span><span class="p">;</span>
+  <span class="n">ExtractChannelType</span><span class="o">::</span><span class="n">Pointer</span>                                     <span class="n">extractChannel</span> <span class="o">=</span> <span class="n">ExtractChannelType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="c1">//  We need to pass the parameters to the filter for the extraction. This</span>
+  <span class="c1">// filter also allow extracting only a spatial subset of the image. However,</span>
+  <span class="c1">// we will extract the whole channel in this case.</span>
+  <span class="c1">//</span>
+  <span class="c1">// To do that, we need to pass the desired region using the</span>
+  <span class="c1">// \code{SetExtractionRegion()} (method such as \code{SetStartX},</span>
+  <span class="c1">// \code{SetSizeX} are also available). We get the region from the reader with</span>
+  <span class="c1">// the \code{GetLargestPossibleRegion()} method. Before doing that we need to</span>
+  <span class="c1">// read the metadata from the file: this is done by calling the</span>
+  <span class="c1">// \code{UpdateOutputInformation()} on the reader&#39;s output. The difference with the</span>
+  <span class="c1">// \code{Update()} is that the pixel array is not allocated (yet !) and reduce</span>
+  <span class="c1">// the memory usage.</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">UpdateOutputInformation</span><span class="p">();</span>
+  <span class="n">extractChannel</span><span class="o">-&gt;</span><span class="n">SetExtractionRegion</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">());</span>
+
+  <span class="c1">//  We chose the channel number to extract (starting from 1) and we plug the</span>
+  <span class="c1">// pipeline.</span>
+
+  <span class="n">extractChannel</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">extractChannel</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  To output this image, we need a writer. As the output of the</span>
+  <span class="c1">// \doxygen{otb}{MultiToMonoChannelExtractROI} is a \doxygen{otb}{Image}, we</span>
+  <span class="c1">// need to template the writer with this type.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>        <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">extractChannel</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="c1">// After this, we have a one band image that we can process with most OTB</span>
+  <span class="c1">// filters.</span>
+  <span class="c1">//</span>
+  <span class="c1">// In some situation, you may want to apply the same process to all bands of</span>
+  <span class="c1">// the image. You don&#39;t have to extract each band and process them separately.</span>
+  <span class="c1">// There is several situations:</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{itemize}</span>
+  <span class="c1">// \item the filter (or the combination of filters) you want to use are doing</span>
+  <span class="c1">// operations that are well defined for \doxygen{itk}{VariableLengthVector}</span>
+  <span class="c1">// (which is the pixel type), then you don&#39;t have to do anything special.</span>
+  <span class="c1">// \item if this is not working, you can look for the equivalent filter</span>
+  <span class="c1">// specially designed for vector images.</span>
+  <span class="c1">// \item some of the filter you need to use applies operations undefined for</span>
+  <span class="c1">// \doxygen{itk}{VariableLengthVector}, then you can use the</span>
+  <span class="c1">// \doxygen{otb}{PerBandVectorImageFilter} specially designed for this</span>
+  <span class="c1">// purpose.</span>
+  <span class="c1">// \end{itemize}</span>
+  <span class="c1">//</span>
+  <span class="c1">// Let&#39;s see how this filter is working. We chose to apply the</span>
+  <span class="c1">// \doxygen{itk}{ShiftScaleImageFilter} to each of the spectral band. We start</span>
+  <span class="c1">// by declaring the filter on a normal \doxygen{otb}{Image}. Note that we</span>
+  <span class="c1">// don&#39;t need to specify any input for this filter.</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ShiftScaleImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ShiftScaleType</span><span class="p">;</span>
+  <span class="n">ShiftScaleType</span><span class="o">::</span><span class="n">Pointer</span>                                  <span class="n">shiftScale</span> <span class="o">=</span> <span class="n">ShiftScaleType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">shiftScale</span><span class="o">-&gt;</span><span class="n">SetScale</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+  <span class="n">shiftScale</span><span class="o">-&gt;</span><span class="n">SetShift</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+  <span class="c1">// We declare the \doxygen{otb}{PerBandVectorImageFilter} which has three</span>
+  <span class="c1">// template: the input image type, the output image type and the filter type</span>
+  <span class="c1">// to apply to each band.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The filter is selected using the \code{SetFilter()} method and the input</span>
+  <span class="c1">// by the usual \code{SetInput()} method.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PerBandVectorImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="p">,</span> <span class="n">ShiftScaleType</span><span class="o">&gt;</span> <span class="n">VectorFilterType</span><span class="p">;</span>
+  <span class="n">VectorFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                               <span class="n">vectorFilter</span> <span class="o">=</span> <span class="n">VectorFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">vectorFilter</span><span class="o">-&gt;</span><span class="n">SetFilter</span><span class="p">(</span><span class="n">shiftScale</span><span class="p">);</span>
+
+  <span class="n">vectorFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">// Now, we just have to save the image using a writer templated over an</span>
+  <span class="c1">// \doxygen{otb}{VectorImage}:</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">VectorWriterType</span><span class="p">;</span>
+  <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">Pointer</span>                     <span class="n">writerVector</span> <span class="o">=</span> <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">writerVector</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">writerVector</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vectorFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writerVector</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="OrthoFusion.html" class="btn btn-neutral float-right" title="OrthoFusion.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FilteringPipeline.html" class="btn btn-neutral" title="FilteringPipeline.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

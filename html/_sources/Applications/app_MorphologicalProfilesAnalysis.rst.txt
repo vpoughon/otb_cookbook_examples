@@ -1,0 +1,158 @@
+.. _app-MorphologicalProfilesAnalysis:
+
+MorphologicalProfilesAnalysis
+=============================
+
+
+Performs morphological profiles analysis on an input image channel.
+
+Description
+-----------
+
+This algorithm is derived from the following publication:
+
+Martino Pesaresi and Jon Alti Benediktsson, Member, IEEE: A new approach
+for the morphological segmentation of high resolution satellite imagery.
+IEEE Transactions on geoscience and remote sensing, vol. 39, NO. 2,
+February 2001, p. 309-320.
+
+Depending of the profile selection, the application provides:
+
+* The multi scale geodesic morphological opening or closing profile of the input image.
+* The multi scale derivative of the opening or closing profile.
+* The parameter (called characteristic) of the maximum derivative value of the multi scale closing or opening profile for which this maxima occurs.
+* The labeled classification of the input image.
+
+The behavior of the classification is:
+
+Given :math:`x_1` and :math:`x_2` two membership values,
+:math:`L_1, L_2` two labels associated, and :math:`\sigma` a tolerance
+value, the following decision rule is applied:
+
+:math:`L = \begin{cases}  L_{1} & : x_{1}>x_{2} \quad and \quad x_{1}>\sigma \\ L_{2} & : x_{2}>x_{1} \quad and \quad x_{2}>\sigma \\ 0   & : otherwise. \end{cases}` 
+
+The output image can be:- A :math:`N` multi band image for the opening/closing normal or derivative profiles.
+- A mono band image for the opening/closing characteristics.
+- A labeled image for the classification.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image.
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+The output image.
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index for input image
+
+**Structuring Element Type** :code:`-structype [ball|cross]` *Default value: ball* |br|
+Choice of the structuring element type
+
+* **Ball** |br| 
+
+* **Cross** |br| 
+
+
+
+**Profile Size** :code:`-size int` *Default value: 5* |br|
+Size of the profiles
+
+**Initial radius** :code:`-radius int` *Default value: 5* |br|
+Initial radius of the structuring element (in pixels)
+
+**Radius step** :code:`-step int` *Default value: 1* |br|
+Radius step along the profile (in pixels)
+
+**Profile** :code:`-profile [opening|closing|derivativeopening|derivativeclosing|openingcharacteristics|closingcharacteristics|classification]` *Default value: opening* |br|
+
+
+* **opening** |br| 
+
+* **closing** |br| 
+
+* **derivativeopening** |br| 
+
+* **derivativeclosing** |br| 
+
+* **openingcharacteristics** |br| 
+
+* **closingcharacteristics** |br| 
+
+* **classification** |br| 
+
+
+
+classification options
+^^^^^^^^^^^^^^^^^^^^^^
+
+**Sigma value for leveling tolerance** :code:`-profile.classification.sigma float` *Default value: 1* |br|
+Sigma value for leveling tolerance
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_MorphologicalProfilesAnalysis -in ROI_IKO_PAN_LesHalles.tif -channel 1 -structype ball -profile classification -size 5 -radius 1 -step 1 -profile.classification.sigma 1 -out output.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("MorphologicalProfilesAnalysis")
+
+	app.SetParameterString("in", "ROI_IKO_PAN_LesHalles.tif")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterString("structype","ball")
+	app.SetParameterString("profile","classification")
+	app.SetParameterInt("size", 5)
+	app.SetParameterInt("radius", 1)
+	app.SetParameterInt("step", 1)
+	app.SetParameterFloat("profile.classification.sigma", 1)
+	app.SetParameterString("out", "output.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Generation of the morphological profile is not streamable, pay attention to this fact when setting the radius initial size and step of the structuring element.
+
+See also
+--------
+
+| otbMorphologicalOpeningProfileFilter, otbMorphologicalClosingProfileFilter, otbProfileToProfileDerivativeFilter, otbProfileDerivativeToMultiScaleCharacteristicsFilter, otbMultiScaleConvexOrConcaveClassificationFilter, classes

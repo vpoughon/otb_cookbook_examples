@@ -1,0 +1,73 @@
+.. _app-ConcatenateVectorData:
+
+ConcatenateVectorData
+=====================
+
+
+Concatenate vector data files
+
+Description
+-----------
+
+This application concatenates a list of vector data files to produce a unique vector data output file.
+
+This application will gather all the geometries from the input files and write them into an output vector data file. Any format supported by OGR can be used. Ideally, all inputs should have the same set of fields and the same spatial reference system.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input vector files** :code:`-vd vectorfile1 vectorfile2...` *Mandatory* |br|
+Vector data files to be concatenated.
+
+**Concatenated output** :code:`-out vectorfile` *Mandatory* |br|
+Output conctenated vector data file.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ConcatenateVectorData -vd ToulousePoints-examples.shp ToulouseRoad-examples.shp -out ConcatenatedVectorData.shp
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ConcatenateVectorData")
+
+	app.SetParameterStringList("vd", ['ToulousePoints-examples.shp', 'ToulouseRoad-examples.shp'])
+	app.SetParameterString("out", "ConcatenatedVectorData.shp")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The vector data must be contain the same type of geometries (point / lines / polygons). The fields present in the output file are the ones from the first input.
+
+

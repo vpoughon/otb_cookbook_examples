@@ -1,0 +1,111 @@
+.. _app-GrayScaleMorphologicalOperation:
+
+GrayScaleMorphologicalOperation
+===============================
+
+
+Performs morphological operations on a grayscale input image
+
+Description
+-----------
+
+This application performs grayscale morphological operations on a mono band image
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Image** :code:`-in image` *Mandatory* |br|
+The input image to be filtered.
+
+**Feature Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Output image containing the filtered output image.
+
+**Selected Channel** :code:`-channel int` *Default value: 1* |br|
+The selected channel index
+
+**Structuring Element Type** :code:`-structype [box|ball|cross]` *Default value: box* |br|
+Choice of the structuring element type
+
+* **Box** |br| 
+
+* **Ball** |br| 
+
+* **Cross** |br| 
+
+
+
+**Structuring element X radius** :code:`-xradius int` *Default value: 5* |br|
+The structuring element radius along the X axis.
+
+**Structuring element Y radius** :code:`-yradius int` *Default value: 5* |br|
+The structuring element radius along the Y axis.
+
+**Morphological Operation** :code:`-filter [dilate|erode|opening|closing]` *Default value: dilate* |br|
+Choice of the morphological operation
+
+* **Dilate** |br| 
+
+* **Erode** |br| 
+
+* **Opening** |br| 
+
+* **Closing** |br| 
+
+
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_GrayScaleMorphologicalOperation -in qb_RoadExtract.tif -out opened.tif -channel 1 -xradius 5 -yradius 5 -filter erode
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("GrayScaleMorphologicalOperation")
+
+	app.SetParameterString("in", "qb_RoadExtract.tif")
+	app.SetParameterString("out", "opened.tif")
+	app.SetParameterInt("channel", 1)
+	app.SetParameterInt("xradius", 5)
+	app.SetParameterInt("yradius", 5)
+	app.SetParameterString("filter","erode")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| itkGrayscaleDilateImageFilter, itkGrayscaleErodeImageFilter, itkGrayscaleMorphologicalOpeningImageFilter and itkGrayscaleMorphologicalClosingImageFilter classes

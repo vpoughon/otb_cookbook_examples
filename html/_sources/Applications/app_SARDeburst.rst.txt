@@ -1,0 +1,84 @@
+.. _app-SARDeburst:
+
+SARDeburst
+==========
+
+
+This application performs deburst of Sentinel1 IW SLC images by removing redundant lines.
+
+Description
+-----------
+
+Sentinel1 IW SLC products are composed of several burst overlapping in azimuth time for each subswath, separated by black lines [1]. The deburst operation consist in generating a continuous image in terms of azimuth time, by removing black separation lines as well as redundant lines between bursts.
+
+Note that the output sensor model is updated accordingly. This deburst operation is the perfect preprocessing step to orthorectify S1 IW SLC product with OTB [2] without suffering from artifacts caused by bursts separation.
+Two modes are available for the output image : with all samples andwith only valid samples 
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input Sentinel1 IW SLC Image** :code:`-in image` *Mandatory* |br|
+Raw Sentinel1 IW SLC image, or any extract of such made by OTB (geom file needed)
+
+**Output Image** :code:`-out image [dtype]` *Mandatory* |br|
+Deburst image, with updated geom file that can be further used by Orthorectification application. If the input image is a raw Sentinel1 product, uint16 output type should be used (encoding of S1 product). Otherwise, output type should match type of input image.
+
+**Select the modes for output image** :code:`-onlyvalidsamples bool` *Default value: false* |br|
+If true, the selected mode is with only valid samples.
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_SARDeburst -in s1_iw_slc.tif -out s1_iw_slc_deburst.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("SARDeburst")
+
+	app.SetParameterString("in", "s1_iw_slc.tif")
+	app.SetParameterString("out", "s1_iw_slc_deburst.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+Only Sentinel1 IW SLC products are supported for now. Processing of other Sentinel1 modes or TerrasarX images will result in no changes in the image and metadata. Images from other sensors will lead to an error.
+
+See also
+--------
+
+| [1] Sentinel1 User Handbook, p. 52: https://sentinel.esa.int/documents/247904/685163/Sentinel-1_User_Handbook
+| [2] :ref:`app-OrthoRectification` application

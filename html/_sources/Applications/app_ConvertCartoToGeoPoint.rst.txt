@@ -1,0 +1,122 @@
+.. _app-ConvertCartoToGeoPoint:
+
+ConvertCartoToGeoPoint
+======================
+
+
+Convert cartographic coordinates to geographic ones.
+
+Description
+-----------
+
+This application computes the geographic coordinates from cartographic ones. User has to give the X and Y coordinate and the cartographic projection (see mapproj parameter for details).
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input cartographic coordinates
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+**X cartographic coordinates** :code:`-carto.x float` *Mandatory* |br|
+X cartographic coordinates in the projection defined by mapproj parameter
+
+**Y cartographic coordinates** :code:`-carto.y float` *Mandatory* |br|
+Y cartographic coordinates in the projection defined by mapproj parameter
+
+
+
+------------
+
+**Map Projection** :code:`-mapproj [utm|lambert2|lambert93|wgs|epsg]` *Default value: utm* |br|
+Defines the map projection to be used.
+
+* **Universal Trans-Mercator (UTM)** |br| A system of transverse mercator projections dividing the surface of Earth between 80S and 84N latitude.
+
+* **Lambert II Etendu** |br| This is a Lambert Conformal Conic projection mainly used in France.
+
+* **Lambert93** |br| This is a Lambert 93 projection mainly used in France.
+
+* **WGS 84** |br| This is a Geographical projection
+
+* **EPSG Code** |br| This code is a generic way of identifying map projections, and allows specifying a large amount of them. See www.spatialreference.org to find which EPSG code is associated to your projection;
+
+
+
+Universal Trans-Mercator (UTM) options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Zone number** :code:`-mapproj.utm.zone int` *Default value: 31* |br|
+The zone number ranges from 1 to 60 and allows defining the transverse mercator projection (along with the hemisphere)
+
+**Northern Hemisphere** :code:`-mapproj.utm.northhem bool` *Default value: false* |br|
+The transverse mercator projections are defined by their zone number as well as the hemisphere. Activate this parameter if your image is in the northern hemisphere.
+
+EPSG Code options
+^^^^^^^^^^^^^^^^^
+
+**EPSG Code** :code:`-mapproj.epsg.code int` *Default value: 4326* |br|
+See www.spatialreference.org to find which EPSG code is associated to your projection
+
+
+
+------------
+
+**Output long** :code:`-long float` *Mandatory* |br|
+Point longitude coordinates in decimal degrees.
+
+**Output lat** :code:`-lat float` *Mandatory* |br|
+Point latitude coordinates in decimal degrees.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_ConvertCartoToGeoPoint -carto.x 367074.625 -carto.y 4835740 -mapproj utm -mapproj.utm.northhem true -mapproj.utm.zone 31
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ConvertCartoToGeoPoint")
+
+	app.SetParameterFloat("carto.x", 367074.625)
+	app.SetParameterFloat("carto.y", 4835740)
+	app.SetParameterString("mapproj","utm")
+	app.SetParameterString("mapproj.utm.northhem","true")
+	app.SetParameterInt("mapproj.utm.zone", 31)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

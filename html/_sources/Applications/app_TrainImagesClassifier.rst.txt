@@ -1,0 +1,396 @@
+.. _app-TrainImagesClassifier:
+
+TrainImagesClassifier
+=====================
+
+
+Train a classifier from multiple pairs of images and training vector data.
+
+Description
+-----------
+
+Train a classifier from multiple pairs of images and training vector data. Samples are composed of pixel values in each band optionally centered and reduced using an XML statistics file produced by the :ref:`app-ComputeImagesStatistics` application.
+
+The training vector data must contain polygons with a positive integer field representing the class label. The name of this field can be set using the *Class label field* parameter.
+
+Training and validation sample lists are built such that each class is equally represented in both lists. One parameter allows controlling the ratio between the number of samples in training and validation sets. Two parameters allow managing the size of the training and validation sets per class and per image.
+
+In the validation process, the confusion matrix is organized the following way:
+
+* Rows: reference labels,
+* Columns: produced labels.
+
+In the header of the optional confusion matrix output file, the validation (reference) and predicted (produced) class labels are ordered according to the rows/columns of the confusion matrix.
+
+This application is based on LibSVM, OpenCV Machine Learning, and Shark ML. The output of this application is a text model file, whose format corresponds to the ML model type chosen. There is no image nor vector data output.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input and output data
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows setting input and output data.
+
+**Input Image List** :code:`-io.il image1 image2...` *Mandatory* |br|
+A list of input images.
+
+**Input Vector Data List** :code:`-io.vd vectorfile1 vectorfile2...` *Mandatory* |br|
+A list of vector data to select the training samples.
+
+**Validation Vector Data List** :code:`-io.valid vectorfile1 vectorfile2...` |br|
+A list of vector data to select the validation samples.
+
+**Input XML image statistics file** :code:`-io.imstat filename [dtype]` |br|
+XML file containing mean and variance of each feature.
+
+**Output model** :code:`-io.out filename [dtype]` *Mandatory* |br|
+Output file containing the model estimated (.txt format).
+
+**Output confusion matrix or contingency table** :code:`-io.confmatout filename [dtype]` |br|
+Output file containing the confusion matrix or contingency table (.csv format).The contingency table is output when we unsupervised algorithms is used otherwise the confusion matrix is output.
+
+
+
+------------
+
+**Temporary files cleaning** :code:`-cleanup bool` *Default value: true* |br|
+If activated, the application will try to clean all temporary files it created
+
+Training and validation samples parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows you to set training and validation sample lists parameters.
+
+**Maximum training sample size per class** :code:`-sample.mt int` *Default value: 1000* |br|
+Maximum size per class (in pixels) of the training sample list (default = 1000) (no limit = -1). If equal to -1, then the maximal size of the available training sample list per class will be equal to the surface area of the smallest class multiplied by the training sample ratio.
+
+**Maximum validation sample size per class** :code:`-sample.mv int` *Default value: 1000* |br|
+Maximum size per class (in pixels) of the validation sample list (default = 1000) (no limit = -1). If equal to -1, then the maximal size of the available validation sample list per class will be equal to the surface area of the smallest class multiplied by the validation sample ratio.
+
+**Bound sample number by minimum** :code:`-sample.bm int` *Default value: 1* |br|
+Bound the number of samples for each class by the number of available samples by the smaller class. Proportions between training and validation are respected. Default is true (=1).
+
+**Training and validation sample ratio** :code:`-sample.vtr float` *Default value: 0.5* |br|
+Ratio between training and validation samples (0.0 = all training, 1.0 = all validation) (default = 0.5).
+
+**Field containing the class integer label for supervision** :code:`-sample.vfn string` |br|
+Field containing the class id for supervision. The values in this field shall be cast into integers.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Classifier to use for the training** :code:`-classifier [libsvm|boost|dt|ann|bayes|rf|knn|sharkrf|sharkkm]` *Default value: libsvm* |br|
+Choice of the classifier to use for the training.
+
+* **LibSVM classifier** |br| This group of parameters allows setting SVM classifier parameters.
+
+* **Boost classifier** |br| http://docs.opencv.org/modules/ml/doc/boosting.html
+
+* **Decision Tree classifier** |br| http://docs.opencv.org/modules/ml/doc/decision_trees.html
+
+* **Artificial Neural Network classifier** |br| http://docs.opencv.org/modules/ml/doc/neural_networks.html
+
+* **Normal Bayes classifier** |br| http://docs.opencv.org/modules/ml/doc/normal_bayes_classifier.html
+
+* **Random forests classifier** |br| http://docs.opencv.org/modules/ml/doc/random_trees.html
+
+* **KNN classifier** |br| http://docs.opencv.org/modules/ml/doc/k_nearest_neighbors.html
+
+* **Shark Random forests classifier** |br| http://image.diku.dk/shark/doxygen_pages/html/classshark_1_1_r_f_trainer.html. |br|  It is noteworthy that training is parallel.
+
+* **Shark kmeans classifier** |br| http://image.diku.dk/shark/sphinx_pages/build/html/rest_sources/tutorials/algorithms/kmeans.html 
+
+
+
+LibSVM classifier options
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**SVM Kernel Type** :code:`-classifier.libsvm.k [linear|rbf|poly|sigmoid]` *Default value: linear* |br|
+SVM Kernel Type.
+
+* **Linear** |br| Linear Kernel, no mapping is done, this is the fastest option.
+
+* **Gaussian radial basis function** |br| This kernel is a good choice in most of the case. It is an exponential function of the euclidian distance between the vectors.
+
+* **Polynomial** |br| Polynomial Kernel, the mapping is a polynomial function.
+
+* **Sigmoid** |br| The kernel is a hyperbolic tangente function of the vectors.
+
+
+
+**SVM Model Type** :code:`-classifier.libsvm.m [csvc|nusvc|oneclass]` *Default value: csvc* |br|
+Type of SVM formulation.
+
+* **C support vector classification** |br| This formulation allows imperfect separation of classes. The penalty is set through the cost parameter C.
+
+* **Nu support vector classification** |br| This formulation allows imperfect separation of classes. The penalty is set through the cost parameter Nu. As compared to C, Nu is harder to optimize, and may not be as fast.
+
+* **Distribution estimation (One Class SVM)** |br| All the training data are from the same class, SVM builds a boundary that separates the class from the rest of the feature space.
+
+
+
+**Cost parameter C** :code:`-classifier.libsvm.c float` *Default value: 1* |br|
+SVM models have a cost parameter C (1 by default) to control the trade-off between training errors and forcing rigid margins.
+
+**Cost parameter Nu** :code:`-classifier.libsvm.nu float` *Default value: 0.5* |br|
+Cost parameter Nu, in the range 0..1, the larger the value, the smoother the decision.
+
+**Parameters optimization** :code:`-classifier.libsvm.opt bool` *Default value: false* |br|
+SVM parameters optimization flag.
+
+**Probability estimation** :code:`-classifier.libsvm.prob bool` *Default value: false* |br|
+Probability estimation flag.
+
+Boost classifier options
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Boost Type** :code:`-classifier.boost.t [discrete|real|logit|gentle]` *Default value: real* |br|
+Type of Boosting algorithm.
+
+* **Discrete AdaBoost** |br| This procedure trains the classifiers on weighted versions of the training sample, giving higher weight to cases that are currently misclassified. This is done for a sequence of weighter samples, and then the final classifier is defined as a linear combination of the classifier from each stage.
+
+* **Real AdaBoost (technique using confidence-rated predictions and working well with categorical data)** |br| Adaptation of the Discrete Adaboost algorithm with Real value
+
+* **LogitBoost (technique producing good regression fits)** |br| This procedure is an adaptive Newton algorithm for fitting an additive logistic regression model. Beware it can produce numeric instability.
+
+* **Gentle AdaBoost (technique setting less weight on outlier data points and, for that reason, being often good with regression data)** |br| A modified version of the Real Adaboost algorithm, using Newton stepping rather than exact optimization at each step.
+
+
+
+**Weak count** :code:`-classifier.boost.w int` *Default value: 100* |br|
+The number of weak classifiers.
+
+**Weight Trim Rate** :code:`-classifier.boost.r float` *Default value: 0.95* |br|
+A threshold between 0 and 1 used to save computational time. Samples with summary weight <= (1 - weight_trim_rate) do not participate in the next iteration of training. Set this parameter to 0 to turn off this functionality.
+
+**Maximum depth of the tree** :code:`-classifier.boost.m int` *Default value: 1* |br|
+Maximum depth of the tree.
+
+Decision Tree classifier options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Maximum depth of the tree** :code:`-classifier.dt.max int` *Default value: 10* |br|
+The training algorithm attempts to split each node while its depth is smaller than the maximum possible depth of the tree. The actual depth may be smaller if the other termination criteria are met, and/or if the tree is pruned.
+
+**Minimum number of samples in each node** :code:`-classifier.dt.min int` *Default value: 10* |br|
+If the number of samples in a node is smaller than this parameter, then this node will not be split.
+
+**Termination criteria for regression tree** :code:`-classifier.dt.ra float` *Default value: 0.01* |br|
+If all absolute differences between an estimated value in a node and the values of the train samples in this node are smaller than this regression accuracy parameter, then the node will not be split further.
+
+**Cluster possible values of a categorical variable into K <= cat clusters to find a suboptimal split** :code:`-classifier.dt.cat int` *Default value: 10* |br|
+Cluster possible values of a categorical variable into K <= cat clusters to find a suboptimal split.
+
+**K-fold cross-validations** :code:`-classifier.dt.f int` *Default value: 0* |br|
+If cv_folds > 1, then it prunes a tree with K-fold cross-validation where K is equal to cv_folds.
+
+**Set Use1seRule flag to false** :code:`-classifier.dt.r bool` *Default value: false* |br|
+If true, then a pruning will be harsher. This will make a tree more compact and more resistant to the training data noise but a bit less accurate.
+
+**Set TruncatePrunedTree flag to false** :code:`-classifier.dt.t bool` *Default value: false* |br|
+If true, then pruned branches are physically removed from the tree.
+
+Artificial Neural Network classifier options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Train Method Type** :code:`-classifier.ann.t [back|reg]` *Default value: reg* |br|
+Type of training method for the multilayer perceptron (MLP) neural network.
+
+* **Back-propagation algorithm** |br| Method to compute the gradient of the loss function and adjust weights in the network to optimize the result.
+
+* **Resilient Back-propagation algorithm** |br| Almost the same as the Back-prop algorithm except that it does not take into account the magnitude of the partial derivative (coordinate of the gradient) but only its sign.
+
+
+
+**Number of neurons in each intermediate layer** :code:`-classifier.ann.sizes string1 string2...` *Mandatory* |br|
+The number of neurons in each intermediate layer (excluding input and output layers).
+
+**Neuron activation function type** :code:`-classifier.ann.f [ident|sig|gau]` *Default value: sig* |br|
+This function determine whether the output of the node is positive or not depending on the output of the transfert function.
+
+* **Identity function** |br| 
+
+* **Symmetrical Sigmoid function** |br| 
+
+* **Gaussian function (Not completely supported)** |br| 
+
+
+
+**Alpha parameter of the activation function** :code:`-classifier.ann.a float` *Default value: 1* |br|
+Alpha parameter of the activation function (used only with sigmoid and gaussian functions).
+
+**Beta parameter of the activation function** :code:`-classifier.ann.b float` *Default value: 1* |br|
+Beta parameter of the activation function (used only with sigmoid and gaussian functions).
+
+**Strength of the weight gradient term in the BACKPROP method** :code:`-classifier.ann.bpdw float` *Default value: 0.1* |br|
+Strength of the weight gradient term in the BACKPROP method. The recommended value is about 0.1.
+
+**Strength of the momentum term (the difference between weights on the 2 previous iterations)** :code:`-classifier.ann.bpms float` *Default value: 0.1* |br|
+Strength of the momentum term (the difference between weights on the 2 previous iterations). This parameter provides some inertia to smooth the random fluctuations of the weights. It can vary from 0 (the feature is disabled) to 1 and beyond. The value 0.1 or so is good enough.
+
+**Initial value Delta_0 of update-values Delta_{ij} in RPROP method** :code:`-classifier.ann.rdw float` *Default value: 0.1* |br|
+Initial value Delta_0 of update-values Delta_{ij} in RPROP method (default = 0.1).
+
+**Update-values lower limit Delta_{min} in RPROP method** :code:`-classifier.ann.rdwm float` *Default value: 1e-07* |br|
+Update-values lower limit Delta_{min} in RPROP method. It must be positive (default = 1e-7).
+
+**Termination criteria** :code:`-classifier.ann.term [iter|eps|all]` *Default value: all* |br|
+Termination criteria.
+
+* **Maximum number of iterations** |br| Set the number of iterations allowed to the network for its training. Training will stop regardless of the result when this number is reached
+
+* **Epsilon** |br| Training will focus on result and will stop once the precision isat most epsilon
+
+* **Max. iterations + Epsilon** |br| Both termination criteria are used. Training stop at the first reached
+
+
+
+**Epsilon value used in the Termination criteria** :code:`-classifier.ann.eps float` *Default value: 0.01* |br|
+Epsilon value used in the Termination criteria.
+
+**Maximum number of iterations used in the Termination criteria** :code:`-classifier.ann.iter int` *Default value: 1000* |br|
+Maximum number of iterations used in the Termination criteria.
+
+Random forests classifier options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Maximum depth of the tree** :code:`-classifier.rf.max int` *Default value: 5* |br|
+The depth of the tree. A low value will likely underfit and conversely a high value will likely overfit. The optimal value can be obtained using cross validation or other suitable methods.
+
+**Minimum number of samples in each node** :code:`-classifier.rf.min int` *Default value: 10* |br|
+If the number of samples in a node is smaller than this parameter, then the node will not be split. A reasonable value is a small percentage of the total data e.g. 1 percent.
+
+**Termination Criteria for regression tree** :code:`-classifier.rf.ra float` *Default value: 0* |br|
+If all absolute differences between an estimated value in a node and the values of the train samples in this node are smaller than this regression accuracy parameter, then the node will not be split.
+
+**Cluster possible values of a categorical variable into K <= cat clusters to find a suboptimal split** :code:`-classifier.rf.cat int` *Default value: 10* |br|
+Cluster possible values of a categorical variable into K <= cat clusters to find a suboptimal split.
+
+**Size of the randomly selected subset of features at each tree node** :code:`-classifier.rf.var int` *Default value: 0* |br|
+The size of the subset of features, randomly selected at each tree node, that are used to find the best split(s). If you set it to 0, then the size will be set to the square root of the total number of features.
+
+**Maximum number of trees in the forest** :code:`-classifier.rf.nbtrees int` *Default value: 100* |br|
+The maximum number of trees in the forest. Typically, the more trees you have, the better the accuracy. However, the improvement in accuracy generally diminishes and reaches an asymptote for a certain number of trees. Also to keep in mind, increasing the number of trees increases the prediction time linearly.
+
+**Sufficient accuracy (OOB error)** :code:`-classifier.rf.acc float` *Default value: 0.01* |br|
+Sufficient accuracy (OOB error).
+
+KNN classifier options
+^^^^^^^^^^^^^^^^^^^^^^
+
+**Number of Neighbors** :code:`-classifier.knn.k int` *Default value: 32* |br|
+The number of neighbors to use.
+
+Shark Random forests classifier options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Maximum number of trees in the forest** :code:`-classifier.sharkrf.nbtrees int` *Default value: 100* |br|
+The maximum number of trees in the forest. Typically, the more trees you have, the better the accuracy. However, the improvement in accuracy generally diminishes and reaches an asymptote for a certain number of trees. Also to keep in mind, increasing the number of trees increases the prediction time linearly.
+
+**Min size of the node for a split** :code:`-classifier.sharkrf.nodesize int` *Default value: 25* |br|
+If the number of samples in a node is smaller than this parameter, then the node will not be split. A reasonable value is a small percentage of the total data e.g. 1 percent.
+
+**Number of features tested at each node** :code:`-classifier.sharkrf.mtry int` *Default value: 0* |br|
+The number of features (variables) which will be tested at each node in order to compute the split. If set to zero, the square root of the number of features is used.
+
+**Out of bound ratio** :code:`-classifier.sharkrf.oobr float` *Default value: 0.66* |br|
+Set the fraction of the original training dataset to use as the out of bag sample.A good default value is 0.66. 
+
+Shark kmeans classifier options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Maximum number of iterations for the kmeans algorithm** :code:`-classifier.sharkkm.maxiter int` *Default value: 10* |br|
+The maximum number of iterations for the kmeans algorithm. 0=unlimited
+
+**Number of classes for the kmeans algorithm** :code:`-classifier.sharkkm.k int` *Default value: 2* |br|
+The number of classes used for the kmeans algorithm. Default set to 2 class
+
+
+
+------------
+
+**Random seed** :code:`-rand int` |br|
+Set a specific random seed with integer value.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_TrainImagesClassifier -io.il QB_1_ortho.tif -io.vd VectorData_QB1.shp -io.imstat EstimateImageStatisticsQB1.xml -sample.mv 100 -sample.mt 100 -sample.vtr 0.5 -sample.vfn Class -classifier libsvm -classifier.libsvm.k linear -classifier.libsvm.c 1 -classifier.libsvm.opt false -io.out svmModelQB1.txt -io.confmatout svmConfusionMatrixQB1.csv
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("TrainImagesClassifier")
+
+	app.SetParameterStringList("io.il", ['QB_1_ortho.tif'])
+	app.SetParameterStringList("io.vd", ['VectorData_QB1.shp'])
+	app.SetParameterString("io.imstat", "EstimateImageStatisticsQB1.xml")
+	app.SetParameterInt("sample.mv", 100)
+	app.SetParameterInt("sample.mt", 100)
+	app.SetParameterFloat("sample.vtr", 0.5)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| OpenCV documentation for machine learning http://docs.opencv.org/modules/ml/doc/ml.html 

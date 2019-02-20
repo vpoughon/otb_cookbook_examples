@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ClassificationMapRegularizationExample.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SupervisedImageClassificationExample.cxx" href="SupervisedImageClassificationExample.html" />
+    <link rel="prev" title="Classification" href="../Classification.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../Classification.html">Classification</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ClassificationMapRegularizationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SupervisedImageClassificationExample.html">SupervisedImageClassificationExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DempsterShaferFusionOfClassificationMapsExample.html">DempsterShaferFusionOfClassificationMapsExample.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOMImageClassificationExample.html">SOMImageClassificationExample.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Classification.html">Classification</a> &raquo;</li>
+        
+      <li>ClassificationMapRegularizationExample.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Classification/ClassificationMapRegularizationExample.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="classificationmapregularizationexample-cxx">
+<span id="example-classificationmapregularizationexample"></span><h1>ClassificationMapRegularizationExample.cxx<a class="headerlink" href="#classificationmapregularizationexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/ClassificationMapRegularizationExample.cxx?inline=false">ClassificationMapRegularizationExample.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// After having generated a classification map, it is possible to</span>
+<span class="c1">// regularize such a labeled image in order to obtain more homogeneous</span>
+<span class="c1">// areas, which facilitates its interpretation. For this</span>
+<span class="c1">// purpose, the \doxygen{otb}{NeighborhoodMajorityVotingImageFilter} was</span>
+<span class="c1">// implemented. Like a morphological filter, this filter uses majority</span>
+<span class="c1">// voting in a ball shaped neighborhood in order to set each pixel of the</span>
+<span class="c1">// classification map to the most representative label value in its</span>
+<span class="c1">// neighborhood.</span>
+<span class="c1">//</span>
+<span class="c1">// In this example we will illustrate its use. We start by including the</span>
+<span class="c1">// appropriate header file.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbNeighborhoodMajorityVotingImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;otbImageFileReader.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">itkNotUsed</span><span class="p">(</span><span class="n">argc</span><span class="p">),</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">// Since the input image is a classification map, we will assume a</span>
+  <span class="c1">// single band input image for which each pixel value is a label coded</span>
+  <span class="c1">// on 8 bits as an integer between 0 and 255.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">IOLabelPixelType</span><span class="p">;</span> <span class="c1">// 8 bits</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// Thus, both input and output images are single band labeled images,</span>
+  <span class="c1">// which are composed of the same type of pixels in this example</span>
+  <span class="c1">// (unsigned char).</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">IOLabelPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">IOLabelImageType</span><span class="p">;</span>
+
+
+  <span class="c1">// We can now define the type for the neighborhood majority voting filter,</span>
+  <span class="c1">// which is templated over its input and output images types as well as its</span>
+  <span class="c1">// structuring element type. Choosing only the input image type in the template</span>
+  <span class="c1">// of this filter induces that, both input and output images types are the same</span>
+  <span class="c1">// and that the structuring element is a ball</span>
+  <span class="c1">// (\doxygen{itk}{BinaryBallStructuringElement}).</span>
+
+  <span class="c1">// Neighborhood majority voting filter type</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">NeighborhoodMajorityVotingImageFilter</span><span class="o">&lt;</span><span class="n">IOLabelImageType</span><span class="o">&gt;</span> <span class="n">NeighborhoodMajorityVotingFilterType</span><span class="p">;</span>
+
+
+  <span class="c1">// Since the \doxygen{otb}{NeighborhoodMajorityVotingImageFilter} is a</span>
+  <span class="c1">// neighborhood based image filter, it is necessary to set the structuring</span>
+  <span class="c1">// element which will be used for the majority voting process. By default, the</span>
+  <span class="c1">// structuring element is a ball</span>
+  <span class="c1">// (\doxygen{itk}{BinaryBallStructuringElement}) with a radius defined by two sizes</span>
+  <span class="c1">// (respectively along X and Y). Thus, it is possible to handle anisotropic</span>
+  <span class="c1">// structuring elements such as ovals.</span>
+
+  <span class="c1">// Binary ball Structuring Element type</span>
+  <span class="k">typedef</span> <span class="n">NeighborhoodMajorityVotingFilterType</span><span class="o">::</span><span class="n">KernelType</span> <span class="n">StructuringType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">StructuringType</span><span class="o">::</span><span class="n">RadiusType</span>                      <span class="n">RadiusType</span><span class="p">;</span>
+
+
+  <span class="c1">// Finally, we define the reader and the writer.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">IOLabelImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">IOLabelImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">inputFileName</span>  <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+
+  <span class="c1">// We instantiate the \doxygen{otb}{NeighborhoodMajorityVotingImageFilter} and the</span>
+  <span class="c1">// reader objects.</span>
+
+  <span class="c1">// Neighborhood majority voting filter</span>
+  <span class="n">NeighborhoodMajorityVotingFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">NeighMajVotingFilter</span><span class="p">;</span>
+  <span class="n">NeighMajVotingFilter</span> <span class="o">=</span> <span class="n">NeighborhoodMajorityVotingFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFileName</span><span class="p">);</span>
+
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span>      <span class="n">KeepOriginalLabelBoolStr</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span>     <span class="n">radiusX</span>                  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span>     <span class="n">radiusY</span>                  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="n">IOLabelPixelType</span> <span class="n">noDataValue</span>              <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="n">IOLabelPixelType</span> <span class="n">undecidedValue</span>           <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+
+
+  <span class="c1">// The ball shaped structuring element seBall is instantiated and its</span>
+  <span class="c1">// two radii along X and Y are initialized.</span>
+
+  <span class="n">StructuringType</span> <span class="n">seBall</span><span class="p">;</span>
+  <span class="n">RadiusType</span>      <span class="n">rad</span><span class="p">;</span>
+
+  <span class="n">rad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">radiusX</span><span class="p">;</span>
+  <span class="n">rad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">radiusY</span><span class="p">;</span>
+
+  <span class="n">seBall</span><span class="p">.</span><span class="n">SetRadius</span><span class="p">(</span><span class="n">rad</span><span class="p">);</span>
+  <span class="n">seBall</span><span class="p">.</span><span class="n">CreateStructuringElement</span><span class="p">();</span>
+
+
+  <span class="c1">// Then, this ball shaped neighborhood is used as the kernel structuring element</span>
+  <span class="c1">// for the \doxygen{otb}{NeighborhoodMajorityVotingImageFilter}.</span>
+
+  <span class="n">NeighMajVotingFilter</span><span class="o">-&gt;</span><span class="n">SetKernel</span><span class="p">(</span><span class="n">seBall</span><span class="p">);</span>
+
+  <span class="c1">// Not classified input pixels are assumed to have the noDataValue label</span>
+  <span class="c1">// and will keep this label in the output image.</span>
+
+  <span class="n">NeighMajVotingFilter</span><span class="o">-&gt;</span><span class="n">SetLabelForNoDataPixels</span><span class="p">(</span><span class="n">noDataValue</span><span class="p">);</span>
+
+
+  <span class="c1">// Furthermore, since the majority voting regularization may lead to different</span>
+  <span class="c1">// majority labels in the neighborhood, in this case, it would be important to define</span>
+  <span class="c1">// the filter&#39;s behaviour. For this purpose, a Boolean parameter is used</span>
+  <span class="c1">// in the filter to choose whether pixels with more than one majority class are set</span>
+  <span class="c1">// to undecidedValue (true), or to their Original labels (false = default value)</span>
+  <span class="c1">// in the output image.</span>
+
+
+  <span class="n">NeighMajVotingFilter</span><span class="o">-&gt;</span><span class="n">SetLabelForUndecidedPixels</span><span class="p">(</span><span class="n">undecidedValue</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">KeepOriginalLabelBoolStr</span><span class="p">.</span><span class="n">compare</span><span class="p">(</span><span class="s">&quot;true&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">NeighMajVotingFilter</span><span class="o">-&gt;</span><span class="n">SetKeepOriginalLabelBool</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="n">NeighMajVotingFilter</span><span class="o">-&gt;</span><span class="n">SetKeepOriginalLabelBool</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// We plug the pipeline and</span>
+  <span class="c1">// trigger its execution by updating the output of the writer.</span>
+
+
+  <span class="n">NeighMajVotingFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">NeighMajVotingFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SupervisedImageClassificationExample.html" class="btn btn-neutral float-right" title="SupervisedImageClassificationExample.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Classification.html" class="btn btn-neutral" title="Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

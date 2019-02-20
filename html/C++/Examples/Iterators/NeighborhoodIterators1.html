@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NeighborhoodIterators1.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ImageRandomConstIteratorWithIndex.cxx" href="ImageRandomConstIteratorWithIndex.html" />
+    <link rel="prev" title="ShapedNeighborhoodIterators2.cxx" href="ShapedNeighborhoodIterators2.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Iterators.html">Iterators</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators1.html">ShapedNeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRegionIterator.html">ImageRegionIterator.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators4.html">NeighborhoodIterators4.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageLinearIteratorWithIndex2.html">ImageLinearIteratorWithIndex2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShapedNeighborhoodIterators2.html">ShapedNeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">NeighborhoodIterators1.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRandomConstIteratorWithIndex.html">ImageRandomConstIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators5.html">NeighborhoodIterators5.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageRegionIteratorWithIndex.html">ImageRegionIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators3.html">NeighborhoodIterators3.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageLinearIteratorWithIndex.html">ImageLinearIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators2.html">NeighborhoodIterators2.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImageSliceIteratorWithIndex.html">ImageSliceIteratorWithIndex.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IteratorsExamples.html">IteratorsExamples.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NeighborhoodIterators6.html">NeighborhoodIterators6.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Iterators.html">Iterators</a> &raquo;</li>
+        
+      <li>NeighborhoodIterators1.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Iterators/NeighborhoodIterators1.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="neighborhooditerators1-cxx">
+<span id="example-neighborhooditerators1"></span><h1>NeighborhoodIterators1.cxx<a class="headerlink" href="#neighborhooditerators1-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators1.cxx?inline=false">NeighborhoodIterators1.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Example usage:</span>
+<span class="cm">./NeighborhoodIterators1 Input/ROI_QB_PAN_1.tif Output/NeighborhoodIterators1a.png</span>
+<span class="cm">*/</span>
+
+
+<span class="c1">// This example uses the \doxygen{itk}{NeighborhoodIterator} to implement a simple</span>
+<span class="c1">// Sobel edge detection algorithm \cite{Gonzalez1993}.  The algorithm uses the</span>
+<span class="c1">// neighborhood iterator to iterate through an input image and calculate a</span>
+<span class="c1">// series of finite difference derivatives.  Since the derivative results</span>
+<span class="c1">// cannot be written back to the input image without affecting later</span>
+<span class="c1">// calculations, they are written instead to a second, output image.  Most</span>
+<span class="c1">// neighborhood processing algorithms follow this read-only model on their</span>
+<span class="c1">// inputs.</span>
+<span class="c1">//</span>
+<span class="c1">// We begin by including the proper header files.  The</span>
+<span class="c1">// \doxygen{itk}{ImageRegionIterator} will be used to write the results of</span>
+<span class="c1">// computations to the output image.  A const version of the neighborhood</span>
+<span class="c1">// iterator is used because the input image is read-only.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;itkConstNeighborhoodIterator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkImageRegionIterator.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing parameters. &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImageFile outputImageFile&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The finite difference calculations</span>
+  <span class="c1">// in this algorithm require floating point values.  Hence, we define the image</span>
+  <span class="c1">// pixel type to be \code{float} and the file reader will</span>
+  <span class="c1">// automatically cast fixed-point data to \code{float}.</span>
+  <span class="c1">//</span>
+  <span class="c1">// We declare the iterator types using the image type as</span>
+  <span class="c1">// the template parameter. The second template parameter of the</span>
+  <span class="c1">// neighborhood iterator, which specifies</span>
+  <span class="c1">// the boundary condition, has been omitted because the default condition is</span>
+  <span class="c1">// appropriate for this algorithm.</span>
+
+  <span class="k">typedef</span> <span class="kt">float</span>                           <span class="n">PixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>        <span class="n">ImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ConstNeighborhoodIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">NeighborhoodIteratorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>       <span class="n">IteratorType</span><span class="p">;</span>
+
+  <span class="c1">// The following code creates and executes the OTB image reader.</span>
+  <span class="c1">// The \code{Update}</span>
+  <span class="c1">// call on the reader object is surrounded by the standard \code{try/catch}</span>
+  <span class="c1">// blocks to handle any exceptions that may be thrown by the reader.</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">reader</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  We can now create a neighborhood iterator to range over the output of the</span>
+  <span class="c1">//  reader. For Sobel edge-detection in 2D, we need a square iterator that</span>
+  <span class="c1">//  extends one pixel away from the neighborhood center in every dimension.</span>
+
+  <span class="n">NeighborhoodIteratorType</span><span class="o">::</span><span class="n">RadiusType</span> <span class="n">radius</span><span class="p">;</span>
+  <span class="n">radius</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">NeighborhoodIteratorType</span> <span class="n">it</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">(),</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+
+  <span class="c1">// The following code creates an output image and iterator.</span>
+
+  <span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">output</span> <span class="o">=</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">SetRegions</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+  <span class="n">output</span><span class="o">-&gt;</span><span class="n">Allocate</span><span class="p">();</span>
+
+  <span class="n">IteratorType</span> <span class="n">out</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+
+  <span class="c1">// Sobel edge detection uses weighted finite difference calculations to</span>
+  <span class="c1">// construct an edge magnitude image.  Normally the edge magnitude is the</span>
+  <span class="c1">// root sum of squares of partial derivatives in all directions, but for</span>
+  <span class="c1">// simplicity this example only calculates the $x$ component. The result is a</span>
+  <span class="c1">// derivative image biased toward maximally vertical edges.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The finite differences are computed from pixels at six locations in the</span>
+  <span class="c1">// neighborhood.  In this example, we use the iterator \code{GetPixel()}</span>
+  <span class="c1">// method to query the values from their offsets in the neighborhood.</span>
+  <span class="c1">// The example in Section~\ref{sec:NeighborhoodExample2} uses convolution</span>
+  <span class="c1">// with a Sobel kernel instead.</span>
+  <span class="c1">//</span>
+  <span class="c1">// Six positions in the neighborhood are necessary for the finite difference</span>
+  <span class="c1">// calculations. These positions are recorded in \code{offset1} through</span>
+  <span class="c1">// \code{offset6}.</span>
+
+  <span class="n">NeighborhoodIteratorType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">offset1</span> <span class="o">=</span> <span class="p">{{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
+  <span class="n">NeighborhoodIteratorType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">offset2</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
+  <span class="n">NeighborhoodIteratorType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">offset3</span> <span class="o">=</span> <span class="p">{{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
+  <span class="n">NeighborhoodIteratorType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">offset4</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
+  <span class="n">NeighborhoodIteratorType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">offset5</span> <span class="o">=</span> <span class="p">{{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">}};</span>
+  <span class="n">NeighborhoodIteratorType</span><span class="o">::</span><span class="n">OffsetType</span> <span class="n">offset6</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">}};</span>
+
+  <span class="c1">// It is equivalent to use the six corresponding integer array indices instead.</span>
+  <span class="c1">// For example, the offsets \code{(-1, -1)} and \code{(1, -1)} are</span>
+  <span class="c1">// equivalent to the integer indices \code{0} and \code{2}, respectively.</span>
+  <span class="c1">//</span>
+  <span class="c1">// The calculations are done in a \code{for} loop that moves the input and</span>
+  <span class="c1">// output iterators synchronously across their respective images.  The</span>
+  <span class="c1">// \code{sum} variable is used to sum the results of the finite differences.</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">(),</span> <span class="n">out</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span> <span class="o">!</span><span class="n">it</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">,</span> <span class="o">++</span><span class="n">out</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">offset2</span><span class="p">)</span> <span class="o">-</span> <span class="n">it</span><span class="p">.</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">offset1</span><span class="p">);</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">it</span><span class="p">.</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">offset4</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">it</span><span class="p">.</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">offset3</span><span class="p">);</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">it</span><span class="p">.</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">offset6</span><span class="p">)</span> <span class="o">-</span> <span class="n">it</span><span class="p">.</span><span class="n">GetPixel</span><span class="p">(</span><span class="n">offset5</span><span class="p">);</span>
+    <span class="n">out</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The last step is to write the output buffer to an image file.  Writing is</span>
+  <span class="c1">// done inside a \code{try/catch} block to handle any exceptions.  The output</span>
+  <span class="c1">// is rescaled to intensity range $[0, 255]$ and cast to unsigned char so that</span>
+  <span class="c1">// it can be saved and visualized as a PNG image.</span>
+
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                        <span class="n">WritePixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">WritePixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span>        <span class="n">WriteImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">WriteImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">WriteImageType</span><span class="o">&gt;</span> <span class="n">RescaleFilterType</span><span class="p">;</span>
+
+  <span class="n">RescaleFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescaleFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ExceptionObject caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The center image of Figure~\ref{fig:NeighborhoodExamples1} shows the</span>
+  <span class="c1">// output of the Sobel algorithm applied to</span>
+  <span class="c1">// \code{Examples/Data/ROI\_QB\_PAN\_1.tif}.</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure} \centering</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{ROI_QB_PAN_1.eps}</span>
+  <span class="c1">// \includegraphics[width=0.45\textwidth]{NeighborhoodIterators1a.eps}</span>
+  <span class="c1">// \itkcaption[Sobel edge detection results]{Applying the Sobel operator to an image (left) produces $x$ (right)  derivative image.}</span>
+  <span class="c1">// \protect\label{fig:NeighborhoodExamples1}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ImageRandomConstIteratorWithIndex.html" class="btn btn-neutral float-right" title="ImageRandomConstIteratorWithIndex.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ShapedNeighborhoodIterators2.html" class="btn btn-neutral" title="ShapedNeighborhoodIterators2.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

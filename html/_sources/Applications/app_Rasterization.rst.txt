@@ -1,0 +1,130 @@
+.. _app-Rasterization:
+
+Rasterization
+=============
+
+
+Reproject and rasterize a vector dataset
+
+Description
+-----------
+
+Reproject and rasterize a vector dataset. The grid of the rasterized output can be set by using a reference image, or by setting all parmeters (origin, size, spacing) by hand. In the latter case, at least the spacing (ground sampling distance) is needed (other parameters are computed automatically). The rasterized output can also be in a different projection reference system than the input dataset.
+
+There are two rasterize mode available in the application. The first is the binary mode: it allows rendering all pixels belonging to a geometry of the input dataset in the foreground color, while rendering the other in background color. The second one allows rendering pixels belonging to a geometry with respect to an attribute of this geometry. The field of the attribute to render can be set by the user. In the second mode, the background value is still used for unassociated pixels.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Input vector dataset** :code:`-in vectorfile` *Mandatory* |br|
+The input vector dataset to be rasterized
+
+**Output image** :code:`-out image [dtype]` *Mandatory* |br|
+An output image containing the rasterized vector dataset
+
+**Input reference image** :code:`-im image` |br|
+A reference image from which to import output grid and projection reference system information.
+
+**Output size x** :code:`-szx int` |br|
+Output size along x axis (useless if support image is given)
+
+**Output size y** :code:`-szy int` |br|
+Output size along y axis (useless if support image is given)
+
+**Output EPSG code** :code:`-epsg int` |br|
+EPSG code for the output projection reference system (EPSG 4326 for WGS84, 32631 for UTM31N...,useless if support image is given)
+
+**Output Upper-left x** :code:`-orx float` |br|
+Output upper-left corner x coordinate (useless if support image is given)
+
+**Output Upper-left y** :code:`-ory float` |br|
+Output upper-left corner y coordinate (useless if support image is given)
+
+**Spacing (GSD) x** :code:`-spx float` |br|
+Spacing (ground sampling distance) along x axis (useless if support image is given)
+
+**Spacing (GSD) y** :code:`-spy float` |br|
+Spacing (ground sampling distance) along y axis (useless if support image is given)
+
+**Background value** :code:`-background float` *Default value: 0* |br|
+Default value for pixels not belonging to any geometry
+
+**Rasterization mode** :code:`-mode [binary|attribute]` *Default value: binary* |br|
+Choice of rasterization modes
+
+* **Binary mode** |br| In this mode, pixels within a geometry will hold the user-defined foreground value
+
+* **Attribute burning mode** |br| In this mode, pixels within a geometry will hold the value of a user-defined field extracted from this geometry.
+
+
+
+Binary mode options
+^^^^^^^^^^^^^^^^^^^
+
+**Foreground value** :code:`-mode.binary.foreground float` *Default value: 255* |br|
+Value for pixels inside a geometry
+
+Attribute burning mode options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**The attribute field to burn** :code:`-mode.attribute.field string` *Default value: DN* |br|
+Name of the attribute field to burn
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_Rasterization -in qb_RoadExtract_classification.shp -out rasterImage.tif -spx 1. -spy 1.
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("Rasterization")
+
+	app.SetParameterString("in", "qb_RoadExtract_classification.shp")
+	app.SetParameterString("out", "rasterImage.tif")
+	app.SetParameterFloat("spx", 1.)
+	app.SetParameterFloat("spy", 1.)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+See also
+--------
+
+| For now, support of input dataset with multiple layers having different projection reference system is limited.

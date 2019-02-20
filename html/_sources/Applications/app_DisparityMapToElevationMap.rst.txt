@@ -1,0 +1,149 @@
+.. _app-DisparityMapToElevationMap:
+
+DisparityMapToElevationMap
+==========================
+
+
+Projects a disparity map into a regular elevation map.
+
+Description
+-----------
+
+This application uses a disparity map computed from a stereo image pair to produce an elevation map on the ground area covered by the stereo pair.
+
+This application is part of the stereo reconstruction pipeline. It can be used after having computed the disparity map with :ref:`app-BlockMatching`.
+
+The needed inputs are: the disparity map, the stereo pair (in original geometry) and the epipolar deformation grids. These grids (computed by :ref:`app-StereoRectificationGridGenerator`) have to contain the transform between the original geometry (stereo pair) and the epipolar geometry (disparity map). The algorithm for each disparity is the following:
+
+* skip if position is discarded by the disparity mask
+* compute left ray: transform the current position from epipolar geometry to left sensor geometry (left rectification grid)
+* compute right ray: shift the current position with current disparity and transform from epipolar geometry to right sensor (right rectification grid)
+* estimate best 3D intersection between left and right rays
+* for the ground cell of the obtained 3D point, keep its elevation if greater than current elevation (keeps the maximum of elevations of all 3D points in each cell)
+
+Minimum and maximum elevations settings are here to bound the reconstructed DEM.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+Input and output data
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows one to set input images, output images and grids.
+
+**Input disparity map** :code:`-io.in image` *Mandatory* |br|
+The input disparity map (horizontal disparity in first band, vertical in second). This map can be computed by BlockMatching application.
+
+**Left sensor image** :code:`-io.left image` *Mandatory* |br|
+Left image in original (sensor) geometry. Only the geometric model of this image will be used, not the pixel values.
+
+**Right sensor image** :code:`-io.right image` *Mandatory* |br|
+Right image in original (sensor) geometry. Only the geometric model of this image will be used, not the pixel values.
+
+**Left Grid** :code:`-io.lgrid image` *Mandatory* |br|
+Left epipolar grid (deformation grid between left sensor et disparity spaces)
+
+**Right Grid** :code:`-io.rgrid image` *Mandatory* |br|
+Right epipolar grid (deformation grid between right sensor et disparity spaces)
+
+**Output elevation map** :code:`-io.out image [dtype]` *Mandatory* |br|
+Output elevation map in ground projection. Elevation values are in meters. Floating point pixel type are expected.
+
+**Disparity mask** :code:`-io.mask image` |br|
+Masked disparity pixels won't be projected (mask values equal to zero)
+
+
+
+------------
+
+**DEM step** :code:`-step float` *Default value: 5* |br|
+Spacing of the output elevation map (in meters)
+
+**Minimum elevation expected** :code:`-hmin float` *Default value: 0* |br|
+Minimum elevation expected (in meters)
+
+**Maximum elevation expected** :code:`-hmax float` *Default value: 100* |br|
+Maximum elevation expected (in meters)
+
+Elevation management
+^^^^^^^^^^^^^^^^^^^^
+
+
+
+This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.
+
+**DEM directory** :code:`-elev.dem directory` |br|
+This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.
+
+**Geoid File** :code:`-elev.geoid filename [dtype]` |br|
+Use a geoid grid to get the height above the ellipsoid in case there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles. A version of the geoid can be found on the OTB website(https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data/blob/master/Input/DEM/egm96.grd).
+
+**Default elevation** :code:`-elev.default float` *Default value: 0* |br|
+This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.
+
+
+
+------------
+
+**Available RAM (MB)** :code:`-ram int` *Default value: 256* |br|
+Available memory for processing (in MB).
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_DisparityMapToElevationMap -io.in disparity.tif -io.left sensor_left.tif -io.right sensor_right.tif -io.lgrid grid_epi_left.tif -io.rgrid grid_epi_right.tif -io.out dem.tif
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("DisparityMapToElevationMap")
+
+	app.SetParameterString("io.in", "disparity.tif")
+	app.SetParameterString("io.left", "sensor_left.tif")
+	app.SetParameterString("io.right", "sensor_right.tif")
+	app.SetParameterString("io.lgrid", "grid_epi_left.tif")
+	app.SetParameterString("io.rgrid", "grid_epi_right.tif")
+	app.SetParameterString("io.out", "dem.tif")
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+The epipolar deformation grid should be able to entirely fit in memory.
+
+See also
+--------
+
+| [1] :ref:`app-StereoRectificationGridGenerator`
+| [2] :ref:`app-BlockMatching`

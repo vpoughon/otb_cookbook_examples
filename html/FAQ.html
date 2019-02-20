@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Frequently Asked Questions &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributors" href="Contributors.html" />
+    <link rel="prev" title="CorrelChDet.cxx" href="C++/Examples/ChangeDetection/CorrelChDet.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-s-in-otb">What’s in OTB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-otb-s-license">What is OTB’s license?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#am-i-forced-to-distribute-my-code-based-on-otb">Am I forced to distribute my code based on OTB?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#am-i-forced-to-contribute-my-code-based-on-otb-into-the-official-repo">Am I forced to contribute my code based on OTB into the official repo?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#if-i-wanted-to-distribute-an-application-using-otb-what-license-would-i-need-to-use">If I wanted to distribute an application using OTB what license would I need to use?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-am-a-commercial-user-is-there-any-restriction-on-the-use-of-otb">I am a commercial user. Is there any restriction on the use of OTB?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-otb">Using OTB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-the-image-size-limitation-of-otb">What is the image size limitation of OTB ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problems-using-otb-python-wrapping-along-with-other-software">Problems using OTB python wrapping along with other software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+        
+      <li>Frequently Asked Questions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/FAQ.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-s-in-otb">
+<h2>What’s in OTB?<a class="headerlink" href="#what-s-in-otb" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Image access: optimized read/write access for most of remote sensing
+image formats, meta-data access, simple visualization;</li>
+<li>Sensor geometry: sensor models, cartographic projections;</li>
+<li>Radiometry: atmospheric corrections, vegetation indices;</li>
+<li>Filtering: blurring, denoising, enhancement;</li>
+<li>Fusion: image pansharpening;</li>
+<li>Feature extraction: interest points, alignments, lines;</li>
+<li>Image segmentation: region growing, watershed, level sets;</li>
+<li>Classification: K-means, SVM, Markov random fields;</li>
+<li>Change detection.</li>
+<li>Object based image analysis.</li>
+<li>Geospatial analysis.</li>
+</ul>
+<p>For a full list of applications see the chapter <a class="reference internal" href="Applications.html#apprefdoc"><span class="std std-ref">Applications</span></a>.
+For an introduction to the C++ API see the
+<a class="reference external" href="https://www.orfeo-toolbox.org/SoftwareGuide/">Software Guide</a>.
+And for an exhaustive description of the C++ API see the
+<a class="reference external" href="https://www.orfeo-toolbox.org/doxygen/">Doxygen</a>.</p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-otb-s-license">
+<h3>What is OTB’s license?<a class="headerlink" href="#what-is-otb-s-license" title="Permalink to this headline">¶</a></h3>
+<p>OTB is distributed under the permissive open source license Apache
+v2.0 - aka Apache Software License (ASL) v2.0: <a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+</div>
+<div class="section" id="am-i-forced-to-distribute-my-code-based-on-otb">
+<h3>Am I forced to distribute my code based on OTB?<a class="headerlink" href="#am-i-forced-to-distribute-my-code-based-on-otb" title="Permalink to this headline">¶</a></h3>
+<p>No. The license gives you the option to distribute your application if
+you want to. You do not have to exercise this option in the license.</p>
+</div>
+<div class="section" id="am-i-forced-to-contribute-my-code-based-on-otb-into-the-official-repo">
+<h3>Am I forced to contribute my code based on OTB into the official repo?<a class="headerlink" href="#am-i-forced-to-contribute-my-code-based-on-otb-into-the-official-repo" title="Permalink to this headline">¶</a></h3>
+<p>No.</p>
+</div>
+<div class="section" id="if-i-wanted-to-distribute-an-application-using-otb-what-license-would-i-need-to-use">
+<h3>If I wanted to distribute an application using OTB what license would I need to use?<a class="headerlink" href="#if-i-wanted-to-distribute-an-application-using-otb-what-license-would-i-need-to-use" title="Permalink to this headline">¶</a></h3>
+<p>The license of your choice. The OTB license only requires you to include
+a copy of the Apache license and to provide a clear attribution to the
+OTB project in any distribution including a piece of OTB software.</p>
+</div>
+<div class="section" id="i-am-a-commercial-user-is-there-any-restriction-on-the-use-of-otb">
+<h3>I am a commercial user. Is there any restriction on the use of OTB?<a class="headerlink" href="#i-am-a-commercial-user-is-there-any-restriction-on-the-use-of-otb" title="Permalink to this headline">¶</a></h3>
+<p>No. The OTB license only requires you to include a copy of the Apache
+license and to provide a clear attribution to the OTB project in any
+distribution including a piece of OTB software.</p>
+</div>
+</div>
+<div class="section" id="using-otb">
+<h2>Using OTB<a class="headerlink" href="#using-otb" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-the-image-size-limitation-of-otb">
+<h3>What is the image size limitation of OTB ?<a class="headerlink" href="#what-is-the-image-size-limitation-of-otb" title="Permalink to this headline">¶</a></h3>
+<p>The maximum physical space a user can allocate depends on her platform.
+Therefore, image allocation in OTB is restricted by image dimension,
+size, pixel type and number of bands.</p>
+<p>Fortunately, thanks to the streaming mechanism implemented within OTB’s
+pipeline (actually ITK’s), this limitation can be bypassed. The use of
+the at the end of the pipeline, will seamlessly break the large,
+problematic data into small pieces whose allocation is possible. These
+pieces are processed one after the other, so that there is not
+allocation problem anymore. We are often working with images of
+<img class="math" src="_images/math/4973717fb79f38187f52d133c84d79aa68f22592.png" alt="25000 \times 25000"/> pixels.</p>
+<p>For the streaming to work, all the filters in the pipeline must be
+streaming capable (this is the case for most of the filters in OTB). The
+output image format also need to be streamable (not PNG or JPEG, but
+TIFF or ENVI formats, for instance).</p>
+<p>The class manage the steaming process following two strategies: by tile
+or by strip. Different size configuration for these two strategies are
+available into the interface. The default mode use the information about
+how the file is streamed on the disk and will try to minimize the memory
+consumption along the pipeline. More information can be found into the
+documentation of the class.</p>
+</div>
+<div class="section" id="problems-using-otb-python-wrapping-along-with-other-software">
+<h3>Problems using OTB python wrapping along with other software<a class="headerlink" href="#problems-using-otb-python-wrapping-along-with-other-software" title="Permalink to this headline">¶</a></h3>
+<p>If you use OTB standalone binaries, there should not be any dependency conflict
+with other libraries installed on your system. OTB will always try to grab
+supplied libraries in the standalone package.</p>
+<p>However, when using Python wrappings, there can be conflicts if you import
+<em>otbApplication</em> along with other software that share common dependencies with
+OTB. For instance, if you want to use OTB Applications and Fiona in a Python
+script, they both rely on GDAL library. As the libraries loaded by Python must
+be unique, the first library <em>SomeLib</em> loaded will be used by any other binary
+depending on it. Thus, the order of the imports has an effect. In some cases,
+symbol problems have been observed in libcrypto, and the solution was to import
+OTB Applications before importing Fiona.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Contributors.html" class="btn btn-neutral float-right" title="Contributors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="C++/Examples/ChangeDetection/CorrelChDet.html" class="btn btn-neutral" title="CorrelChDet.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

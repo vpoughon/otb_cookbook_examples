@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="AtmosphericCorrectionSequencement.cxx" href="AtmosphericCorrectionSequencement.html" />
+    <link rel="prev" title="NDVIRAndNIRVegetationIndexImageFilter.cxx" href="NDVIRAndNIRVegetationIndexImageFilter.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Radiometry.html">Radiometry</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.html">AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NDVIRAndNIRVegetationIndexImageFilter.html">NDVIRAndNIRVegetationIndexImageFilter.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AtmosphericCorrectionSequencement.html">AtmosphericCorrectionSequencement.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Radiometry.html">Radiometry</a> &raquo;</li>
+        
+      <li>ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Radiometry/ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="arvimultichannelrandbandnirvegetationindeximagefilter-cxx">
+<span id="example-arvimultichannelrandbandnirvegetationindeximagefilter"></span><h1>ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx<a class="headerlink" href="#arvimultichannelrandbandnirvegetationindeximagefilter-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter Input/VegetationIndex.hd <span class="se">\</span>
+                                                        Output/ARVIMultiChannelRAndBAndNIRVegetationIndex.tif <span class="se">\</span>
+                                                        Output/pretty_VegetationIndex.png <span class="se">\</span>
+                                                        Output/pretty_ARVIMultiChannelRAndBAndNIRVegetationIndex.png <span class="se">\</span>
+                                                        <span class="m">1</span> <span class="se">\</span>
+                                                        <span class="m">3</span> <span class="se">\</span>
+                                                        <span class="m">2</span> <span class="se">\</span>
+                                                        <span class="m">0</span>.6
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx?inline=false">ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{otb::MultiChannelRAndBAndNIRIndexImageFilter}</span>
+<span class="c1">// \index{otb::MultiChannelRAndBAndNIRIndexImageFilter!header}</span>
+<span class="c1">// \index{otb::VegetationIndices}</span>
+<span class="c1">// \index{otb::VegetationIndices!header}</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">// The following example illustrates the use of the</span>
+<span class="c1">//  \doxygen{otb}{MultiChannelRAndBAndNIRIndexImageFilter} with the</span>
+<span class="c1">// use of the Atmospherically Resistant Vegetation Index (ARVI) \subdoxygen{otb}{Functor}{ARVI}.  ARVI</span>
+<span class="c1">// is an improved version of the NDVI that is more robust to the</span>
+<span class="c1">// atmospheric effect.  In addition to the red and NIR channels (used</span>
+<span class="c1">// in the NDVI), the ARVI takes advantage of the presence of the blue</span>
+<span class="c1">// channel to accomplish a self-correction process for the atmospheric</span>
+<span class="c1">// effect on the red channel. For this, it uses the difference in the</span>
+<span class="c1">// radiance between the blue and the red channels to correct the</span>
+<span class="c1">// radiance in the red channel.  Let&#39;s define $\rho_{NIR}^{*}$,</span>
+<span class="c1">// $\rho_{r}^{*}$, $\rho_{b}^{*}$ the normalized radiances (that is to</span>
+<span class="c1">// say the radiance normalized to reflectance units) of red, blue and</span>
+<span class="c1">// NIR channels respectively.  $\rho_{rb}^{*}$ is defined as</span>
+<span class="c1">//</span>
+<span class="c1">// \begin{equation}</span>
+<span class="c1">// \rho_{rb}^{*} = \rho_{r}^{*} - \gamma*(\rho_{b}^{*} - \rho_{r}^{*})</span>
+<span class="c1">// \end{equation}</span>
+<span class="c1">//</span>
+<span class="c1">// The ARVI expression is</span>
+<span class="c1">//</span>
+<span class="c1">// \begin{equation}</span>
+<span class="c1">// \mathbf{ARVI} = \frac{\rho_{NIR}^{*}-\rho_{rb}^{*}}{\rho_{NIR}^{*}+\rho_{rb}^{*}}</span>
+<span class="c1">// \end{equation}</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">// This formula can be simplified with :</span>
+<span class="c1">//</span>
+<span class="c1">// \begin{equation}</span>
+<span class="c1">// \mathbf{ARVI} = \frac{ L_{NIR}-L_{rb} }{ L_{NIR}+L_{rb} }</span>
+<span class="c1">// \end{equation}</span>
+<span class="c1">//</span>
+<span class="c1">// For more details, refer to Kaufman and Tanre&#39; work \cite{ARVI}.</span>
+<span class="c1">//</span>
+<span class="c1">//  \relatedClasses</span>
+<span class="c1">//  \begin{itemize}</span>
+<span class="c1">//  \item \subdoxygen{otb}{Functor}{TSARVI}</span>
+<span class="c1">//  \item \subdoxygen{otb}{Functor}{EVI}</span>
+<span class="c1">//  \end{itemize}</span>
+
+<span class="c1">// With the \doxygen{otb}{MultiChannelRAndBAndNIRIndexImageFilter} class the</span>
+<span class="c1">// input has to be a multi channel image and the user has to specify index channel</span>
+<span class="c1">// of the red, blue and NIR channel.</span>
+<span class="c1">//</span>
+<span class="c1">// Let&#39;s look at the minimal code required to use this algorithm. First, the following header</span>
+<span class="c1">// defining the \doxygen{otb}{MultiChannelRAndBAndNIRIndexImageFilter}</span>
+<span class="c1">// class must be included.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelRAndBAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkThresholdImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing Parameters &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputImage , outputImage , prettyInput , prettyOutput , redChannel , blueChannel , nirChannel , gama&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The image types are now defined using pixel types and</span>
+  <span class="c1">// dimension. The input image is defined as an \doxygen{otb}{VectorImage},</span>
+  <span class="c1">// the output is a \doxygen{otb}{Image}.</span>
+
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                                  <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">double</span>                                      <span class="n">InputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="kt">float</span>                                       <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">InputImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>      <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="c1">// We instantiate reader and writer types</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span>  <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="c1">// The ARVI (Atmospherically Resistant Vegetation Index) is</span>
+  <span class="c1">// instantiated using the image pixel types as template parameters.</span>
+  <span class="c1">// Note that we also can use other functors which operate with the</span>
+  <span class="c1">// Red, Blue and Nir channels such as EVI, ARVI and TSARVI.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">ARVI</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">InputPixelType</span><span class="p">,</span> <span class="n">InputPixelType</span><span class="p">,</span> <span class="n">OutputPixelType</span><span class="o">&gt;</span> <span class="n">FunctorType</span><span class="p">;</span>
+
+  <span class="c1">// The</span>
+  <span class="c1">// \doxygen{otb}{MultiChannelRAndBAndNIRIndexImageFilter}</span>
+  <span class="c1">// type is defined using the image types and the ARVI functor as</span>
+  <span class="c1">// template parameters. We then instantiate the filter itself.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelRAndBAndNIRIndexImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">MultiChannelRAndBAndNIRIndexImageFilterType</span><span class="p">;</span>
+
+  <span class="n">MultiChannelRAndBAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">MultiChannelRAndBAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">//  Now the input image is set and a name is given to the output image.</span>
+
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+  <span class="c1">// The three used index bands (red, blue and NIR) are declared.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetBlueIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+
+  <span class="c1">// The $\gamma$ parameter is set. The</span>
+  <span class="c1">// \doxygen{otb}{MultiChannelRAndBAndNIRIndexImageFilter}</span>
+  <span class="c1">// class sets the default value of $\gamma$ to $0.5$.  This parameter</span>
+  <span class="c1">// is used to reduce the atmospheric effect on a global scale.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetGamma</span><span class="p">(</span><span class="o">::</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]));</span>
+
+  <span class="c1">// The filter input is linked to the reader output and</span>
+  <span class="c1">// the filter output is linked to the writer input.</span>
+
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  The invocation of the \code{Update()} method on the writer triggers the</span>
+  <span class="c1">//  execution of the pipeline.  It is recommended to place update calls in a</span>
+  <span class="c1">//  \code{try/catch} block in case errors occur and exceptions are thrown.</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excep</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Pretty image creation for the printing</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                                <span class="n">OutputPrettyImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                          <span class="n">OutputVectorPrettyImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputVectorPrettyImageType</span><span class="o">&gt;</span>                                   <span class="n">WriterVectorPrettyType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputPrettyImageType</span><span class="o">&gt;</span>                                         <span class="n">WriterPrettyType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputPrettyImageType</span><span class="o">&gt;</span>            <span class="n">RescalerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputVectorPrettyImageType</span><span class="o">&gt;</span> <span class="n">VectorRescalerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelExtractROI</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span>                           <span class="n">ChannelExtractorType</span><span class="p">;</span>
+
+  <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">vectRescaler</span>     <span class="o">=</span> <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">Pointer</span>   <span class="n">selecter</span>         <span class="o">=</span> <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterVectorPrettyType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectPrettyWriter</span> <span class="o">=</span> <span class="n">WriterVectorPrettyType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">OutputVectorPrettyImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">;</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">vectRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">vectRescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">vectRescaler</span><span class="o">-&gt;</span><span class="n">SetClampThreshold</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+  <span class="n">vectRescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vectRescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">selecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+  <span class="n">vectPrettyWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">vectPrettyWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">selecter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ThresholdImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">ThresholderType</span><span class="p">;</span>
+
+  <span class="n">ThresholderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">thresholder</span> <span class="o">=</span> <span class="n">ThresholderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">ThresholdOutside</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">rescaler</span>     <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterPrettyType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">prettyWriter</span> <span class="o">=</span> <span class="n">WriterPrettyType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">prettyWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="n">prettyWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">prettyWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+    <span class="n">vectPrettyWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excep</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+
+  <span class="c1">// Let&#39;s now run this example using as input the image</span>
+  <span class="c1">// \code{IndexVegetation.hd} (image kindly and free of charge given</span>
+  <span class="c1">// by SISA and CNES) and $\gamma$=0.6 provided in the</span>
+  <span class="c1">// directory \code{Examples/Data}.</span>
+  <span class="c1">//</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure} \center</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_VegetationIndex.eps}</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_ARVIMultiChannelRAndBAndNIRVegetationIndex.eps}</span>
+  <span class="c1">// \itkcaption[ARVI Example]{ARVI result on the right with the left image in input.}</span>
+  <span class="c1">// \label{fig:ARVIMultiChannelRAndBAndNIRIndexImageFilter}</span>
+  <span class="c1">// \end{figure}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="AtmosphericCorrectionSequencement.html" class="btn btn-neutral float-right" title="AtmosphericCorrectionSequencement.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="NDVIRAndNIRVegetationIndexImageFilter.html" class="btn btn-neutral" title="NDVIRAndNIRVegetationIndexImageFilter.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

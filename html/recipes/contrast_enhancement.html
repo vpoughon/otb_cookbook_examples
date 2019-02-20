@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Enhance local contrast &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Classification" href="pbclassif.html" />
+    <link rel="prev" title="BandMathImageFilterX (based on muParserX)" href="bandmathx.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Enhance local contrast</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#principles">Principles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-parameters">Advanced parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">OTB processing in Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>Enhance local contrast</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/contrast_enhancement.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="enhance-local-contrast">
+<h1>Enhance local contrast<a class="headerlink" href="#enhance-local-contrast" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="principles">
+<h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<p>Sensor images often have a wide dynamic range. While it is helpful to have
+high precision for complex processing, it is generally difficult to display high
+dynamic images, even on modern screen as the dynamic range for basic screen is
+of 8 bits while images can be encoded using 12 or 16 bits (or even more!).</p>
+<p id="figure1"><a class="reference internal" href="../_images/contrast_orig.jpg"><img alt="original" src="../_images/contrast_orig.jpg" style="width: 658.8px; height: 330.3px;" /></a> <a class="reference internal" href="../_images/contrast_result.jpg"><img alt="result" src="../_images/contrast_result.jpg" style="width: 658.8px; height: 330.3px;" /></a></p>
+<p>The <em>ContrastEnhancement</em> application aims to reduce the image dynamic by
+reorganizing it in a smarter way than just linear compression and improve the
+local contrast and enhance the definitions of edges.</p>
+<p id="figure2"><a class="reference internal" href="../_images/contrast1.png"><img alt="image1" src="../_images/contrast1.png" style="width: 192.0px; height: 120.0px;" /></a> <a class="reference internal" href="../_images/contrast2.png"><img alt="image2" src="../_images/contrast2.png" style="width: 192.0px; height: 120.0px;" /></a></p>
+<p>The equalization of histogram creates a look up table in order to maximize the
+dynamic. The target histogram is perfectly flat.  The gain applied on each pixel
+comes from the computation of the transfer function <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/> such that :</p>
+<div class="math">
+<p><img src="../_images/math/175c36ab60f0216693dccce62001be1aa76fbee3.png" alt="\forall i \quad \int_{min}^{i*T(i)}h_{istogram}(j)dj =
+\int_{min}^{i}h_{target}(j)dj"/></p>
+</div><p>where <img class="math" src="../_images/math/7b18efc8563aa69419391b8a6b634c002edaaf0c.png" alt="h_{target}"/> is the corresponding flat histogram with the constraint
+that white and black are still white and black after equalization :</p>
+<div class="math">
+<p><img src="../_images/math/6c714aafaa48fb2f268227d7b8afe038751cdd78.png" alt="T(min) = T(max) = 1"/></p>
+</div><p>You can apply this transformation with the <em>ContrastEnhancement</em> application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ContrastEnhancement</span> <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                           <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span><span class="o">.</span><span class="n">tif</span>
+                           <span class="o">-</span><span class="n">spatial</span> <span class="k">global</span>
+</pre></div>
+</div>
+<p>It compresses the dynamic without losing details and contrast.</p>
+</div>
+<div class="section" id="advanced-parameters">
+<h2>Advanced parameters<a class="headerlink" href="#advanced-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The <em>ContrastEnhancement</em> provides different options to configure the contrast
+enhancement method. Let us see what they are for:</p>
+<p>First what you want to equalize. Two modes are available:</p>
+<ul class="simple">
+<li><strong>luminance:</strong> on 3 band images, the equalization will be done on a single
+band which will be a composition of the original bands. The computed gain will
+then be applied to the different bands. The classical use of this method is to
+conserve the ratio between the different colors and conserve the hue.</li>
+<li><strong>channel:</strong> each band is equalized independently.</li>
+</ul>
+<p>The other option is the local equalization. You can choose a window size that
+will be used to split the image into tiles and histograms will be computed over
+those tiles. Gain will be interpolated between the adjacent tiles in order to
+give a smooth result.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_ContrastEnhancement</span> <span class="o">-</span><span class="ow">in</span> <span class="n">input_image</span><span class="o">.</span><span class="n">tif</span>
+                           <span class="o">-</span><span class="n">out</span> <span class="n">output_image</span><span class="o">.</span><span class="n">tif</span> <span class="n">spatial</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">h</span> <span class="mi">500</span>
+                           <span class="o">-</span><span class="n">spatial</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">w</span> <span class="mi">500</span>
+                           <span class="o">-</span><span class="n">mode</span> <span class="n">lum</span>
+</pre></div>
+</div>
+<p>The <em>ContrastEnhancement</em> application also offers a way of limiting the contrast by
+adjusting the original histogram with the <strong>hfact</strong> parameter. The limitation factor
+represents the limit height that any bucket of the histogram can have; the
+application computes the height of the flat histogram and the maximal height is
+the limitation factor time this “flat height”.</p>
+<p id="figure3"><img alt="image4" src="../_images/contrast4.png" /></p>
+<p>Finally, you can ignore a particular value with the <strong>nodata</strong> parameter, and
+also manually set your minimum and maximum value. Any value out of bound will be
+ignored.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pbclassif.html" class="btn btn-neutral float-right" title="Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bandmathx.html" class="btn btn-neutral" title="BandMathImageFilterX (based on muParserX)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

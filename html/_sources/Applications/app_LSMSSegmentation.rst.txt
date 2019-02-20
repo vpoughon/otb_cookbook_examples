@@ -1,0 +1,115 @@
+.. _app-LSMSSegmentation:
+
+LSMSSegmentation
+================
+
+
+This application performs the second step of the exact Large-Scale Mean-Shift segmentation workflow (LSMS) [1].
+
+Description
+-----------
+
+This application will produce a labeled image where neighbor pixels whose range distance is below range radius (and optionally spatial distance below spatial radius) will be grouped together into the same cluster. For large images one can use the tilesizex and tilesizey parameters for tile-wise processing, with the guarantees of identical results.
+
+Filtered range image and spatial image should be created with the :ref:`app-MeanShiftSmoothing` application outputs (fout and foutpos) [2], with modesearch parameter disabled. If spatial image is not set, the application will only process the range image and spatial radius parameter will not be taken into account.
+
+Please note that this application will generate a lot of temporary files (as many as the number of tiles), and will therefore require twice the size of the final result in term of disk space. The cleanup option (activated by default) allows removing all temporary file as soon as they are not needed anymore (if cleanup is activated, tmpdir set and tmpdir does not exists before running the application, it will be removed as well during cleanup). The tmpdir option allows defining a directory where to write the temporary files.
+
+Please also note that the output image type should be set to uint32 to ensure that there are enough labels available.
+
+The output of this application can be passed to the :ref:`app-LSMSSmallRegionsMerging` [3] or :ref:`app-LSMSVectorization` [4] applications to complete the LSMS workflow.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Filtered image** :code:`-in image` *Mandatory* |br|
+The filtered image, corresponding to the fout output parameter of the MeanShiftSmoothing application.
+
+**Filtered position image** :code:`-inpos image` |br|
+ The filtered position image, corresponding to the foutpos output parameter of the MeanShiftSmoothing application.
+
+**Output labeled Image** :code:`-out image [dtype]` *Mandatory* |br|
+This output contains the segmented image, where each pixel value is the unique integer label of the segment it belongs to. It is recommended to set the pixel type to uint32.
+
+**Spatial radius** :code:`-spatialr float` *Default value: 5* |br|
+Threshold on Spatial distance to consider pixels in the same segment. A good value is half the spatial radius used in the MeanShiftSmoothing application (spatialr parameter).
+
+**Range radius** :code:`-ranger float` *Default value: 15* |br|
+Threshold on spectral signature euclidean distance (expressed in radiometry unit) to consider pixels in the same segment. A good value is half the range radius used in the MeanShiftSmoothing application (ranger parameter).
+
+**Minimum Segment Size** :code:`-minsize int` *Default value: 0* |br|
+Minimum Segment Size. If, after the segmentation, a segment is of size lower than this criterion, the segment is discarded.
+
+**Size of tiles in pixel (X-axis)** :code:`-tilesizex int` *Default value: 500* |br|
+Size of tiles along the X-axis for tile-wise processing.
+
+**Size of tiles in pixel (Y-axis)** :code:`-tilesizey int` *Default value: 500* |br|
+Size of tiles along the Y-axis for tile-wise processing.
+
+**Directory where to write temporary files** :code:`-tmpdir directory` |br|
+This applications need to write temporary files for each tile. This parameter allows choosing the path where to write those files. If disabled, the current path will be used.
+
+**Temporary files cleaning** :code:`-cleanup bool` *Default value: true* |br|
+If activated, the application will try to remove all temporary files it created.
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    otbcli_LSMSSegmentation -in smooth.tif -inpos position.tif -out segmentation.tif -spatialr 5 -ranger 15 -minsize 0 -tilesizex 256 -tilesizey 256
+
+
+From Python:
+
+.. code-block:: python
+
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("LSMSSegmentation")
+
+	app.SetParameterString("in", "smooth.tif")
+	app.SetParameterString("inpos", "position.tif")
+	app.SetParameterString("out", "segmentation.tif")
+	app.SetParameterFloat("spatialr", 5)
+	app.SetParameterFloat("ranger", 15)
+	app.SetParameterInt("minsize", 0)
+	app.SetParameterInt("tilesizex", 256)
+	app.SetParameterInt("tilesizey", 256)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+Limitations
+-----------
+
+This application is part of the Large-Scale Mean-Shift segmentation workflow (LSMS) [1] and may not be suited for any other purpose. This application is not compatible with in-memory connection since it does its own internal streaming.
+
+See also
+--------
+
+| [1] Michel, J., Youssefi, D., & Grizonnet, M. (2015). Stable mean-shift algorithm and its application to the segmentation of arbitrarily large remote sensing images. IEEE Transactions on Geoscience and Remote Sensing, 53(2), 952-964.
+| [2] :ref:`app-MeanShiftSmoothing`
+| [3] :ref:`app-LSMSSmallRegionsMerging`
+| [4] :ref:`app-LSMSVectorization`

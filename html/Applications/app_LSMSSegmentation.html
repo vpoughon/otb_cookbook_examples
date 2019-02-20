@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LSMSSegmentation &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LSMSSmallRegionsMerging" href="app_LSMSSmallRegionsMerging.html" />
+    <link rel="prev" title="HooverCompareSegmentation" href="app_HooverCompareSegmentation.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stereo.html">Stereo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAR.html">SAR</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Segmentation.html">Segmentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_ComputeOGRLayersFeaturesStatistics.html">ComputeOGRLayersFeaturesStatistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_ConnectedComponentSegmentation.html">ConnectedComponentSegmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_HooverCompareSegmentation.html">HooverCompareSegmentation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">LSMSSegmentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_LSMSSmallRegionsMerging.html">LSMSSmallRegionsMerging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LSMSVectorization.html">LSMSVectorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_LargeScaleMeanShift.html">LargeScaleMeanShift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_OGRLayerClassifier.html">OGRLayerClassifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_Segmentation.html">Segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_SmallRegionsMerging.html">SmallRegionsMerging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Vector_Data_Manipulation.html">Vector Data Manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Image_Filtering.html">Image Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Change_Detection.html">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="Segmentation.html">Segmentation</a> &raquo;</li>
+        
+      <li>LSMSSegmentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/Applications/app_LSMSSegmentation.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lsmssegmentation">
+<span id="app-lsmssegmentation"></span><h1>LSMSSegmentation<a class="headerlink" href="#lsmssegmentation" title="Permalink to this headline">¶</a></h1>
+<p>This application performs the second step of the exact Large-Scale Mean-Shift segmentation workflow (LSMS) [1].</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This application will produce a labeled image where neighbor pixels whose range distance is below range radius (and optionally spatial distance below spatial radius) will be grouped together into the same cluster. For large images one can use the tilesizex and tilesizey parameters for tile-wise processing, with the guarantees of identical results.</p>
+<p>Filtered range image and spatial image should be created with the <a class="reference internal" href="app_MeanShiftSmoothing.html#app-meanshiftsmoothing"><span class="std std-ref">MeanShiftSmoothing</span></a> application outputs (fout and foutpos) [2], with modesearch parameter disabled. If spatial image is not set, the application will only process the range image and spatial radius parameter will not be taken into account.</p>
+<p>Please note that this application will generate a lot of temporary files (as many as the number of tiles), and will therefore require twice the size of the final result in term of disk space. The cleanup option (activated by default) allows removing all temporary file as soon as they are not needed anymore (if cleanup is activated, tmpdir set and tmpdir does not exists before running the application, it will be removed as well during cleanup). The tmpdir option allows defining a directory where to write the temporary files.</p>
+<p>Please also note that the output image type should be set to uint32 to ensure that there are enough labels available.</p>
+<p>The output of this application can be passed to the <a class="reference internal" href="app_LSMSSmallRegionsMerging.html#app-lsmssmallregionsmerging"><span class="std std-ref">LSMSSmallRegionsMerging</span></a> [3] or <a class="reference internal" href="app_LSMSVectorization.html#app-lsmsvectorization"><span class="std std-ref">LSMSVectorization</span></a> [4] applications to complete the LSMS workflow.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p><strong>Filtered image</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
+The filtered image, corresponding to the fout output parameter of the MeanShiftSmoothing application.</p>
+<dl class="docutils">
+<dt><strong>Filtered position image</strong> <code class="code docutils literal notranslate"><span class="pre">-inpos</span> <span class="pre">image</span></code> <br /></dt>
+<dd>The filtered position image, corresponding to the foutpos output parameter of the MeanShiftSmoothing application.</dd>
+</dl>
+<p><strong>Output labeled Image</strong> <code class="code docutils literal notranslate"><span class="pre">-out</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <em>Mandatory</em> <br />
+This output contains the segmented image, where each pixel value is the unique integer label of the segment it belongs to. It is recommended to set the pixel type to uint32.</p>
+<p><strong>Spatial radius</strong> <code class="code docutils literal notranslate"><span class="pre">-spatialr</span> <span class="pre">float</span></code> <em>Default value: 5</em> <br />
+Threshold on Spatial distance to consider pixels in the same segment. A good value is half the spatial radius used in the MeanShiftSmoothing application (spatialr parameter).</p>
+<p><strong>Range radius</strong> <code class="code docutils literal notranslate"><span class="pre">-ranger</span> <span class="pre">float</span></code> <em>Default value: 15</em> <br />
+Threshold on spectral signature euclidean distance (expressed in radiometry unit) to consider pixels in the same segment. A good value is half the range radius used in the MeanShiftSmoothing application (ranger parameter).</p>
+<p><strong>Minimum Segment Size</strong> <code class="code docutils literal notranslate"><span class="pre">-minsize</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
+Minimum Segment Size. If, after the segmentation, a segment is of size lower than this criterion, the segment is discarded.</p>
+<p><strong>Size of tiles in pixel (X-axis)</strong> <code class="code docutils literal notranslate"><span class="pre">-tilesizex</span> <span class="pre">int</span></code> <em>Default value: 500</em> <br />
+Size of tiles along the X-axis for tile-wise processing.</p>
+<p><strong>Size of tiles in pixel (Y-axis)</strong> <code class="code docutils literal notranslate"><span class="pre">-tilesizey</span> <span class="pre">int</span></code> <em>Default value: 500</em> <br />
+Size of tiles along the Y-axis for tile-wise processing.</p>
+<p><strong>Directory where to write temporary files</strong> <code class="code docutils literal notranslate"><span class="pre">-tmpdir</span> <span class="pre">directory</span></code> <br />
+This applications need to write temporary files for each tile. This parameter allows choosing the path where to write those files. If disabled, the current path will be used.</p>
+<p><strong>Temporary files cleaning</strong> <code class="code docutils literal notranslate"><span class="pre">-cleanup</span> <span class="pre">bool</span></code> <em>Default value: true</em> <br />
+If activated, the application will try to remove all temporary files it created.</p>
+<p><strong>Load parameters from XML</strong> <code class="code docutils literal notranslate"><span class="pre">-inxml</span> <span class="pre">filename.xml</span></code> <br />
+Load application parameters from an XML file.</p>
+<p><strong>Save parameters to XML</strong> <code class="code docutils literal notranslate"><span class="pre">-outxml</span> <span class="pre">filename.xml</span></code> <br />
+Save application parameters to an XML file.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>From the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_LSMSSegmentation -in smooth.tif -inpos position.tif -out segmentation.tif -spatialr <span class="m">5</span> -ranger <span class="m">15</span> -minsize <span class="m">0</span> -tilesizex <span class="m">256</span> -tilesizey <span class="m">256</span>
+</pre></div>
+</div>
+<p>From Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">otbApplication</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">otbApplication</span><span class="o">.</span><span class="n">Registry</span><span class="o">.</span><span class="n">CreateApplication</span><span class="p">(</span><span class="s2">&quot;LSMSSegmentation&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;smooth.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;inpos&quot;</span><span class="p">,</span> <span class="s2">&quot;position.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;segmentation.tif&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;spatialr&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterFloat</span><span class="p">(</span><span class="s2">&quot;ranger&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;minsize&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;tilesizex&quot;</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterInt</span><span class="p">(</span><span class="s2">&quot;tilesizey&quot;</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>This application is part of the Large-Scale Mean-Shift segmentation workflow (LSMS) [1] and may not be suited for any other purpose. This application is not compatible with in-memory connection since it does its own internal streaming.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">[1] Michel, J., Youssefi, D., &amp; Grizonnet, M. (2015). Stable mean-shift algorithm and its application to the segmentation of arbitrarily large remote sensing images. IEEE Transactions on Geoscience and Remote Sensing, 53(2), 952-964.</div>
+<div class="line">[2] <a class="reference internal" href="app_MeanShiftSmoothing.html#app-meanshiftsmoothing"><span class="std std-ref">MeanShiftSmoothing</span></a></div>
+<div class="line">[3] <a class="reference internal" href="app_LSMSSmallRegionsMerging.html#app-lsmssmallregionsmerging"><span class="std std-ref">LSMSSmallRegionsMerging</span></a></div>
+<div class="line">[4] <a class="reference internal" href="app_LSMSVectorization.html#app-lsmsvectorization"><span class="std std-ref">LSMSVectorization</span></a></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_LSMSSmallRegionsMerging.html" class="btn btn-neutral float-right" title="LSMSSmallRegionsMerging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_HooverCompareSegmentation.html" class="btn btn-neutral" title="HooverCompareSegmentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

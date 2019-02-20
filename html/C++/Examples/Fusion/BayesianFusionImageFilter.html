@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BayesianFusionImageFilter.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Learning" href="../Learning.html" />
+    <link rel="prev" title="PanSharpeningExample.cxx" href="PanSharpeningExample.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Fusion.html">Fusion</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="PanSharpeningExample.html">PanSharpeningExample.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">BayesianFusionImageFilter.cxx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Fusion.html">Fusion</a> &raquo;</li>
+        
+      <li>BayesianFusionImageFilter.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/Fusion/BayesianFusionImageFilter.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bayesianfusionimagefilter-cxx">
+<span id="example-bayesianfusionimagefilter"></span><h1>BayesianFusionImageFilter.cxx<a class="headerlink" href="#bayesianfusionimagefilter-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./BayesianFusionImageFilter Input/multiSpect.tif <span class="se">\</span>
+                            Input/multiSpectInterp.tif <span class="se">\</span>
+                            Input/panchro.tif <span class="se">\</span>
+                            Output/BayesianFusion_0.9999.tif <span class="se">\</span>
+                            Output/pretty_BayesianFusion_0.9999.png <span class="se">\</span>
+                            Output/pretty_multiSpect_0.9999.png <span class="se">\</span>
+                            Output/pretty_multiSpectInterp_0.9999.png <span class="se">\</span>
+                            Output/pretty_panchro_0.9999.png <span class="se">\</span>
+                            <span class="m">0</span>.9999
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Fusion/BayesianFusionImageFilter.cxx?inline=false">BayesianFusionImageFilter.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (C) 1999-2011 Insight Software Consortium</span>
+<span class="cm"> * Copyright (C) 2005-2019 Centre National d&#39;Etudes Spatiales (CNES)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This file is part of Orfeo Toolbox</span>
+<span class="cm"> *</span>
+<span class="cm"> *     https://www.orfeo-toolbox.org/</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+
+
+
+
+
+
+
+<span class="c1">// \index{otb::BayesianFusionFilter}</span>
+<span class="c1">// \index{otb::BayesianFusionFilter!header}</span>
+<span class="c1">//</span>
+<span class="c1">// The following example illustrates the use of the</span>
+<span class="c1">// \doxygen{otb}{BayesianFusionFilter}. The Bayesian data fusion</span>
+<span class="c1">// relies on the idea that variables of interest, denoted as vector $\mathbf{Z}$,</span>
+<span class="c1">// cannot be directly observed. They are linked to the observable variables</span>
+<span class="c1">// $\mathbf{Y}$ through the following error-like model.</span>
+<span class="c1">//</span>
+<span class="c1">// \begin{equation}</span>
+<span class="c1">// \mathbf{Y} = g(\mathbf{Z}) + \mathbf{E}</span>
+<span class="c1">// \end{equation}</span>
+<span class="c1">//</span>
+<span class="c1">// where g($\mathbf{Z}$) is a set of functionals and $\mathbf{E}$ is a</span>
+<span class="c1">// vector of random errors that are stochastically independent from $\mathbf{Z}$.</span>
+<span class="c1">// This algorithm uses elementary probability calculus, and several assumptions to compute</span>
+<span class="c1">// the data fusion. For more explication see Fasbender, Radoux and Bogaert&#39;s</span>
+<span class="c1">// publication \cite{JRadoux}.</span>
+<span class="c1">// Three images are used :</span>
+<span class="c1">// \begin{itemize}</span>
+<span class="c1">// \item a panchromatic image,</span>
+<span class="c1">// \item a multispectral image resampled at the panchromatic image spatial resolution,</span>
+<span class="c1">// \item a multispectral image resampled at the panchromatic image spatial resolution,</span>
+<span class="c1">// using, e.g. a cubic interpolator.</span>
+<span class="c1">// \item a float : $\lambda$, the meaning of the weight to be given to the panchromatic</span>
+<span class="c1">// image compared to the multispectral one.</span>
+<span class="c1">// \end{itemize}</span>
+<span class="c1">//</span>
+<span class="c1">// Let&#39;s look at the minimal code required to use this algorithm. First, the following header</span>
+<span class="c1">// defining the otb::BayesianFusionFilter class must be included.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbBayesianFusionFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkCastImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Missing Parameters &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; inputMultiSpectralImage inputMultiSpectralInterpolatedImage &quot;</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot;inputPanchromatiqueImage outputImage outputImagePrinted &quot;</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot;msPrinted msiPrinted panchroPrinted lambda&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  The image types are now defined using pixel types and particular</span>
+  <span class="c1">//  dimension. The panchromatic image is defined as an \doxygen{otb}{Image}</span>
+  <span class="c1">//  and the multispectral one as \doxygen{otb}{VectorImage}.</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>                                         <span class="n">InternalPixelType</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>                                     <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">InternalPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>       <span class="n">PanchroImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">InternalPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">MultiSpecImageType</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="kt">double</span>                                       <span class="n">OutputPixelType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">OutputPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
+
+  <span class="c1">// We instantiate reader and writer types</span>
+  <span class="c1">//</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">MultiSpecImageType</span><span class="o">&gt;</span> <span class="n">ReaderVectorType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">PanchroImageType</span><span class="o">&gt;</span>   <span class="n">ReaderType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span>    <span class="n">WriterType</span><span class="p">;</span>
+
+  <span class="n">ReaderVectorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">multiSpectReader</span>       <span class="o">=</span> <span class="n">ReaderVectorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ReaderVectorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">multiSpectInterpReader</span> <span class="o">=</span> <span class="n">ReaderVectorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>       <span class="n">panchroReader</span>          <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>       <span class="n">writer</span>                 <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">multiSpectReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">multiSpectInterpReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="n">panchroReader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+
+  <span class="c1">//  The Bayesian data fusion filter type is instantiated using the images types as</span>
+  <span class="c1">//  a template parameters.</span>
+
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">BayesianFusionFilter</span><span class="o">&lt;</span><span class="n">MultiSpecImageType</span><span class="p">,</span> <span class="n">MultiSpecImageType</span><span class="p">,</span> <span class="n">PanchroImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">BayesianFusionFilterType</span><span class="p">;</span>
+
+  <span class="c1">//  Next the filter is created by invoking the \code{New()} method and</span>
+  <span class="c1">//  assigning the result to a \doxygen{itk}{SmartPointer}.</span>
+
+  <span class="n">BayesianFusionFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">bayesianFilter</span> <span class="o">=</span> <span class="n">BayesianFusionFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="c1">//  Now the multi spectral image, the interpolated multi spectral image and</span>
+  <span class="c1">//  the panchromatic image are given as inputs to the filter.</span>
+
+  <span class="n">bayesianFilter</span><span class="o">-&gt;</span><span class="n">SetMultiSpect</span><span class="p">(</span><span class="n">multiSpectReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">bayesianFilter</span><span class="o">-&gt;</span><span class="n">SetMultiSpectInterp</span><span class="p">(</span><span class="n">multiSpectInterpReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">bayesianFilter</span><span class="o">-&gt;</span><span class="n">SetPanchro</span><span class="p">(</span><span class="n">panchroReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">bayesianFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="c1">//  The BayesianFusionFilter requires defining one parameter : $\lambda$.</span>
+  <span class="c1">//  The $\lambda$ parameter can be used to tune the fusion toward either a high color</span>
+  <span class="c1">//  consistency or sharp details. Typical $\lambda$ value range in  $[0.5, 1[$,  where higher</span>
+  <span class="c1">//  values yield sharper details. by default $\lambda$ is set at 0.9999.</span>
+
+  <span class="n">bayesianFilter</span><span class="o">-&gt;</span><span class="n">SetLambda</span><span class="p">(</span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]));</span>
+
+  <span class="c1">//  The invocation of the \code{Update()} method on the writer triggers the</span>
+  <span class="c1">//  execution of the pipeline.  It is recommended to place update calls in a</span>
+  <span class="c1">//  \code{try/catch} block in case errors occur and exceptions are thrown.</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excep</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Create an 3 band images for the software guide</span>
+  <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span>                                                                     <span class="n">OutputPixelType2</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">OutputPixelType2</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                     <span class="n">OutputVectorImageType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputVectorImageType</span><span class="o">&gt;</span>                                       <span class="n">VectorWriterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">MultiSpecImageType</span><span class="p">,</span> <span class="n">OutputVectorImageType</span><span class="o">&gt;</span> <span class="n">VectorRescalerType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="p">,</span> <span class="n">OutputVectorImageType</span><span class="o">&gt;</span>    <span class="n">VectorRescalerBayesianType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToVectorImageCastFilter</span><span class="o">&lt;</span><span class="n">PanchroImageType</span><span class="p">,</span> <span class="n">MultiSpecImageType</span><span class="o">&gt;</span>           <span class="n">CasterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelExtractROI</span><span class="o">&lt;</span><span class="n">OutputPixelType2</span><span class="p">,</span> <span class="n">OutputPixelType2</span><span class="o">&gt;</span>                   <span class="n">ChannelExtractorType</span><span class="p">;</span>
+
+  <span class="n">multiSpectReader</span><span class="o">-&gt;</span><span class="n">GenerateOutputInformation</span><span class="p">();</span>
+  <span class="n">multiSpectInterpReader</span><span class="o">-&gt;</span><span class="n">GenerateOutputInformation</span><span class="p">();</span>
+
+  <span class="n">CasterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">cast</span> <span class="o">=</span> <span class="n">CasterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">cast</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">panchroReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">OutputVectorImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">;</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">multiSpectReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="n">multiSpectReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetNumberOfComponentsPerPixel</span><span class="p">());</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">Pointer</span>         <span class="n">vrms</span>  <span class="o">=</span> <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">Pointer</span>         <span class="n">vrmsi</span> <span class="o">=</span> <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VectorRescalerBayesianType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vrb</span>   <span class="o">=</span> <span class="n">VectorRescalerBayesianType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">vrms</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">multiSpectReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vrms</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">vrms</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">vrms</span><span class="o">-&gt;</span><span class="n">SetClampThreshold</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+
+  <span class="n">vrmsi</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">multiSpectInterpReader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vrmsi</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">vrmsi</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">vrmsi</span><span class="o">-&gt;</span><span class="n">SetClampThreshold</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+
+  <span class="n">vrb</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">bayesianFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vrb</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">vrb</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">vrb</span><span class="o">-&gt;</span><span class="n">SetClampThreshold</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+
+  <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rp</span> <span class="o">=</span> <span class="n">VectorRescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">rp</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">cast</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">minimum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">maximum</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+  <span class="n">rp</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">minimum</span><span class="p">);</span>
+  <span class="n">rp</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">maximum</span><span class="p">);</span>
+  <span class="n">rp</span><span class="o">-&gt;</span><span class="n">SetClampThreshold</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+
+  <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">selecterms</span>  <span class="o">=</span> <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">selectermsi</span> <span class="o">=</span> <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">selecterf</span>   <span class="o">=</span> <span class="n">ChannelExtractorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">selecterms</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vrms</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// selecterms-&gt;SetExtractionRegion(multiSpectReader-&gt;GetOutput()-&gt;GetLargestPossibleRegion());</span>
+  <span class="n">selecterms</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">selecterms</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">selecterms</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+  <span class="n">selectermsi</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vrmsi</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// selectermsi-&gt;SetExtractionRegion(multiSpectInterpReader-&gt;GetOutput()-&gt;GetLargestPossibleRegion());</span>
+  <span class="n">selectermsi</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">selectermsi</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">selectermsi</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+  <span class="n">selecterf</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vrb</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="c1">// selecterf-&gt;SetExtractionRegion(bayesianFilter-&gt;GetOutput()-&gt;GetLargestPossibleRegion());</span>
+  <span class="n">selecterf</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="n">selecterf</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">selecterf</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+  <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectWriterms</span>  <span class="o">=</span> <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectWritermsi</span> <span class="o">=</span> <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectWriterf</span>   <span class="o">=</span> <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">vectWriterp</span>   <span class="o">=</span> <span class="n">VectorWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+  <span class="n">vectWriterf</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+  <span class="n">vectWriterf</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">selecterf</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vectWriterms</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+  <span class="n">vectWriterms</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">selecterms</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vectWritermsi</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+  <span class="n">vectWritermsi</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">selectermsi</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">vectWriterp</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+  <span class="n">vectWriterp</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rp</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="n">vectWriterms</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+    <span class="n">vectWritermsi</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+    <span class="n">vectWriterf</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+    <span class="n">vectWriterp</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excep</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//  Let&#39;s now run this example using as input the images</span>
+  <span class="c1">//  \code{multiSpect.tif} , \code{multiSpectInterp.tif} and \code{panchro.tif}</span>
+  <span class="c1">//  provided in the directory \code{Examples/Data}. The results</span>
+  <span class="c1">//  obtained for 2 different values for $\lambda$ are shown in figure</span>
+  <span class="c1">//  \ref{fig:BayesianImageFusionFilterInput}.</span>
+  <span class="c1">//</span>
+  <span class="c1">//</span>
+  <span class="c1">// \begin{figure} \center</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_multiSpect_0.5.eps}</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_multiSpectInterp_0.5.eps}</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_panchro_0.5.eps}</span>
+  <span class="c1">// \itkcaption[Bayesian Data Fusion Example inputs]{Input</span>
+  <span class="c1">// images used for this example (\copyright European Space Imaging).}</span>
+  <span class="c1">// \label{fig:BayesianImageFusionFilterInput}</span>
+  <span class="c1">// \end{figure}</span>
+
+  <span class="c1">// \begin{figure} \center</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_BayesianFusion_0.5.eps}</span>
+  <span class="c1">// \includegraphics[width=0.24\textwidth]{pretty_BayesianFusion_0.9999.eps}</span>
+  <span class="c1">// \itkcaption[Bayesian Data Fusion results]{Fusion results</span>
+  <span class="c1">// for the Bayesian Data Fusion filter for $\lambda = 0.5$ on the left and $\lambda = 0.9999$ on the right.}</span>
+  <span class="c1">// \label{fig:BayesianImageFusionFilterOutput}</span>
+  <span class="c1">// \end{figure}</span>
+  <span class="c1">//</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Learning.html" class="btn btn-neutral float-right" title="Learning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PanSharpeningExample.html" class="btn btn-neutral" title="PanSharpeningExample.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

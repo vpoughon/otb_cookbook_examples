@@ -1,0 +1,73 @@
+.. _app-ObtainUTMZoneFromGeoPoint:
+
+ObtainUTMZoneFromGeoPoint
+=========================
+
+
+UTM zone determination from a geographic point.
+
+Description
+-----------
+
+This application returns the UTM zone of an input geographic point.
+
+Parameters
+----------
+
+.. contents:: :local:
+
+.. |br| raw:: html
+
+   <br />
+
+.. |em| raw:: html
+
+   &emsp;
+
+**Latitude** :code:`-lat float` *Mandatory* |br|
+Latitude value of desired point.
+
+**Longitude** :code:`-lon float` *Mandatory* |br|
+Longitude value of desired point.
+
+**UTMZone** :code:`-utm int` |br|
+UTM Zone
+
+**Load parameters from XML** :code:`-inxml filename.xml` |br|
+Load application parameters from an XML file.
+
+**Save parameters to XML** :code:`-outxml filename.xml` |br|
+Save application parameters to an XML file.
+
+
+
+Examples
+--------
+
+From the command-line:
+
+.. code-block:: bash
+
+    # Obtain a UTM Zone
+    otbcli_ObtainUTMZoneFromGeoPoint -lat 10.0 -lon 124.0
+
+
+From Python:
+
+.. code-block:: python
+
+	# Obtain a UTM Zone
+	import otbApplication
+
+	app = otbApplication.Registry.CreateApplication("ObtainUTMZoneFromGeoPoint")
+
+	app.SetParameterFloat("lat", 10.0)
+	app.SetParameterFloat("lon", 124.0)
+
+	app.ExecuteAndWriteOutput()
+
+
+
+
+
+

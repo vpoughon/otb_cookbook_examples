@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>KullbackLeiblerProfileChDet.cxx &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DiffChDet.cxx" href="DiffChDet.html" />
+    <link rel="prev" title="MultivariateAlterationDetector.cxx" href="MultivariateAlterationDetector.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OBIA.html">OBIA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Radiometry.html">Radiometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../IO.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Patented.html">Patented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Fusion.html">Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Learning.html">Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Application.html">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Simulation.html">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Projections.html">Projections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Tutorials.html">Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Markov.html">Markov</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Filtering.html">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Iterators.html">Iterators</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../ChangeDetection.html">ChangeDetection</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="KullbackLeiblerDistanceChDet.html">KullbackLeiblerDistanceChDet.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RatioChDet.html">RatioChDet.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MultivariateAlterationDetector.html">MultivariateAlterationDetector.cxx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">KullbackLeiblerProfileChDet.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DiffChDet.html">DiffChDet.cxx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CorrelChDet.html">CorrelChDet.cxx</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../C++.html">C++ API</a> &raquo;</li>
+        
+          <li><a href="../../Examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../ChangeDetection.html">ChangeDetection</a> &raquo;</li>
+        
+      <li>KullbackLeiblerProfileChDet.cxx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Examples/ChangeDetection/KullbackLeiblerProfileChDet.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kullbackleiblerprofilechdet-cxx">
+<span id="example-kullbackleiblerprofilechdet"></span><h1>KullbackLeiblerProfileChDet.cxx<a class="headerlink" href="#kullbackleiblerprofilechdet-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./KullbackLeiblerProfileChDet Input/GomaAvant.png Input/GomaApres.png Output/KLProfileChDet.png <span class="m">5</span> <span class="m">51</span> <span class="m">1</span> <span class="m">12</span> <span class="m">24</span>
+</pre></div>
+</div>
+<p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/KullbackLeiblerProfileChDet.cxx?inline=false">KullbackLeiblerProfileChDet.cxx</a>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the class</span>
+<span class="c1">// \doxygen{otb}{KullbackLeiblerProfileImageFilter} for detecting changes</span>
+<span class="c1">// between pairs of images, according to a range of window size.</span>
+<span class="c1">// This example is very similar, in its principle, to all of the change</span>
+<span class="c1">// detection examples, especially the distance between distributions one</span>
+<span class="c1">// (section~\ref{sec:KullbackLeiblerDistance}) which uses a fixed window size.</span>
+<span class="c1">//</span>
+<span class="c1">// The main differences are:</span>
+<span class="c1">// \begin{enumerate}</span>
+<span class="c1">// \item a set of window range instead of a fixed size of window;</span>
+<span class="c1">// \item an output of type \doxygen{otb}{VectorImage}.</span>
+<span class="c1">// \end{enumerate}</span>
+<span class="c1">// Then, the program begins with the \doxygen{otb}{VectorImage} and the</span>
+<span class="c1">// \doxygen{otb}{KullbackLeiblerProfileImageFilter} header files in addition</span>
+<span class="c1">// to those already details in the \doxygen{otb}{MeanRatioImageFilter} example.</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;otbKullbackLeiblerProfileImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">try</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Change detection based on Kullback-Leibler distance betweenlocal pdf through an Edgeworth approximation</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; imgAv imgAp imgResu winSizeMin winSizeMax outRedIndex outGreenIndex outBlueIndex</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">char</span><span class="o">*</span>        <span class="n">fileName1</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="kt">char</span><span class="o">*</span>        <span class="n">fileName2</span>   <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="kt">char</span><span class="o">*</span>        <span class="n">fileNameOut</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="kt">int</span>          <span class="n">winSizeMin</span>  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+    <span class="kt">int</span>          <span class="n">winSizeMax</span>  <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">ri</span>          <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">gi</span>          <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bi</span>          <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">8</span><span class="p">]);</span>
+
+    <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="kt">double</span>        <span class="n">PixelType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">OutPixelType</span><span class="p">;</span>
+
+    <span class="c1">//  The \doxygen{otb}{KullbackLeiblerProfileImageFilter} is templated over</span>
+    <span class="c1">//  the types of the two input images and the type of the generated change</span>
+    <span class="c1">//  image (which is now of multi-components), in a similar way as the</span>
+    <span class="c1">//  \doxygen{otb}{KullbackLeiblerDistanceImageFilter}.</span>
+
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                              <span class="n">ImageType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                        <span class="n">VectorImageType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">KullbackLeiblerProfileImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
+
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImage</span><span class="o">&lt;</span><span class="n">OutPixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span>                                   <span class="n">OutVectorImageType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>                                             <span class="n">ReaderType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutVectorImageType</span><span class="o">&gt;</span>                                    <span class="n">WriterType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelExtractROI</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">PixelType</span><span class="o">&gt;</span>                           <span class="n">ChannelSelecterType</span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">OutVectorImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
+
+    <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader1</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">reader1</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">fileName1</span><span class="p">);</span>
+
+    <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader2</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">reader2</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">fileName2</span><span class="p">);</span>
+
+    <span class="c1">//  The different elements of the pipeline can now be instantiated in the</span>
+    <span class="c1">//  same way as the ratio of means change detector example.</span>
+    <span class="c1">//</span>
+    <span class="c1">//  Two parameters are now required to give the minimum and the maximum size</span>
+    <span class="c1">//  of the analysis window. The program will begin by performing change</span>
+    <span class="c1">//  detection through the smaller window size and then applying moments update</span>
+    <span class="c1">//  of eq.~\eqref{eqMomentN} by incrementing the radius of the analysis window</span>
+    <span class="c1">//  (i.e. add a ring of width 1 pixel around the current neightborhood shape).</span>
+    <span class="c1">//  The process is applied until the larger window size is reached.</span>
+    <span class="c1">//</span>
+    <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRadius</span><span class="p">((</span><span class="n">winSizeMin</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">winSizeMax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">reader1</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">reader2</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+    <span class="n">ChannelSelecterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">channelSelecter</span> <span class="o">=</span> <span class="n">ChannelSelecterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">channelSelecter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">channelSelecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="n">ri</span><span class="p">);</span>
+    <span class="n">channelSelecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="n">gi</span><span class="p">);</span>
+    <span class="n">channelSelecter</span><span class="o">-&gt;</span><span class="n">SetChannel</span><span class="p">(</span><span class="n">bi</span><span class="p">);</span>
+
+    <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">channelSelecter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">OutVectorImageType</span><span class="o">::</span><span class="n">PixelType</span> <span class="n">min</span><span class="p">,</span> <span class="n">max</span><span class="p">;</span>
+    <span class="n">min</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">max</span><span class="p">.</span><span class="n">SetSize</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">min</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">max</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+    <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMinimum</span><span class="p">(</span><span class="n">min</span><span class="p">);</span>
+    <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetOutputMaximum</span><span class="p">(</span><span class="n">max</span><span class="p">);</span>
+
+    <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">fileNameOut</span><span class="p">);</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+    <span class="c1">// Figure \ref{fig:RESKLPCHDET} shows the result of the change</span>
+    <span class="c1">// detection by computing the Kullback-Leibler distance between</span>
+    <span class="c1">// local pdf through an Edgeworth approximation.</span>
+    <span class="c1">// \begin{figure}</span>
+    <span class="c1">// \center</span>
+    <span class="c1">// \includegraphics[width=0.35\textwidth]{KLProfileChDet.eps}</span>
+    <span class="c1">// \itkcaption[Kullback-Leibler profile Change Detection Results]{Result of the</span>
+    <span class="c1">// Kullback-Leibler profile change detector, colored composition including the first, 12th and 24th</span>
+    <span class="c1">// channel of the generated output.}</span>
+    <span class="c1">// \label{fig:RESKLPCHDET}</span>
+    <span class="c1">// \end{figure}</span>
+  <span class="p">}</span>
+
+  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception itk::ExceptionObject thrown !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">catch</span> <span class="p">(...)</span>
+  <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception thrown !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DiffChDet.html" class="btn btn-neutral float-right" title="DiffChDet.cxx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="MultivariateAlterationDetector.html" class="btn btn-neutral" title="MultivariateAlterationDetector.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

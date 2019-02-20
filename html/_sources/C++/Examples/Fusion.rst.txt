@@ -1,0 +1,9 @@
+Fusion
+======
+
+.. toctree::
+	:maxdepth: 3
+
+
+	Fusion/PanSharpeningExample.rst
+	Fusion/BayesianFusionImageFilter.rst
