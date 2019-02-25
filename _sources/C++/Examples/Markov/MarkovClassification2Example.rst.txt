@@ -7,17 +7,17 @@ MarkovClassification2Example.cxx
 
 
 
+Example usage:
+
+.. code-block:: bash
+
+    ./MarkovClassification2Example Input/QB_Suburb.png Output/MarkovRandomField2.png 1.0 5 1
 
 
 Example source code (`MarkovClassification2Example.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovClassification2Example.cxx?inline=false>`_):
 
 .. code-block:: cpp
 
-    /* Example usage:
-    ./MarkovClassification2Example Input/QB_Suburb.png Output/MarkovRandomField2.png 1.0 5 1
-    */
-    
-    
     // Using a similar structure as the previous program and the same energy
     // function, we are now going to slightly alter the program to use a
     // different sampler and optimizer. The proposed sample is proposed

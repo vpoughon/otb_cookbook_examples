@@ -7,17 +7,17 @@ NeighborhoodIterators1.cxx
 
 
 
+Example usage:
+
+.. code-block:: bash
+
+    ./NeighborhoodIterators1 Input/ROI_QB_PAN_1.tif Output/NeighborhoodIterators1a.png
 
 
 Example source code (`NeighborhoodIterators1.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators1.cxx?inline=false>`_):
 
 .. code-block:: cpp
 
-    /* Example usage:
-    ./NeighborhoodIterators1 Input/ROI_QB_PAN_1.tif Output/NeighborhoodIterators1a.png
-    */
-    
-    
     // This example uses the \doxygen{itk}{NeighborhoodIterator} to implement a simple
     // Sobel edge detection algorithm \cite{Gonzalez1993}.  The algorithm uses the
     // neighborhood iterator to iterate through an input image and calculate a

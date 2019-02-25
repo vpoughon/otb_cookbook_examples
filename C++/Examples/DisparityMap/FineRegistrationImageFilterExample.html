@@ -218,6 +218,20 @@
                                      <span class="m">0</span>.1
 </pre></div>
 </div>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./FineRegistrationImageFilterExample Input/StereoFixed.png <span class="se">\</span>
+                                     Input/StereoMoving.png <span class="se">\</span>
+                                     Output/fcMRSDDisplacementFieldOutput-horizontal.png <span class="se">\</span>
+                                     Output/fcMRSDDisplacementFieldOutput-vertical.png <span class="se">\</span>
+                                     Output/fcMRSDCorrelFieldOutput.png <span class="se">\</span>
+                                     Output/fcMRSDDResampledOutput2.png <span class="se">\</span>
+                                     <span class="m">1</span>.0 <span class="se">\</span>
+                                     <span class="m">5</span> <span class="se">\</span>
+                                     <span class="m">3</span> <span class="se">\</span>
+                                     <span class="m">0</span>.1 <span class="se">\</span>
+                                     mrsd
+</pre></div>
+</div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/FineRegistrationImageFilterExample.cxx?inline=false">FineRegistrationImageFilterExample.cxx</a>):</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example demonstrates the use of the \doxygen{otb}{FineRegistrationImageFilter}. This filter performs deformation estimation</span>
 <span class="c1">// using the classical extrema of image-to-image metric look-up in a search window.</span>

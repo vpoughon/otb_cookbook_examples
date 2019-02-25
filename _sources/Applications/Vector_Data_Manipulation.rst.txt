@@ -13,3 +13,27 @@ Vector Data Manipulation
 	app_VectorDataReprojection
 	app_VectorDataSetField
 	app_VectorDataTransform
+	app_ConcatenateVectorData
+	app_KmzExport
+	app_OSMDownloader
+	app_Rasterization
+	app_VectorDataExtractROI
+	app_VectorDataReprojection
+	app_VectorDataSetField
+	app_VectorDataTransform
+	app_ConcatenateVectorData
+	app_KmzExport
+	app_OSMDownloader
+	app_Rasterization
+	app_VectorDataExtractROI
+	app_VectorDataReprojection
+	app_VectorDataSetField
+	app_VectorDataTransform
+	app_ConcatenateVectorData
+	app_KmzExport
+	app_OSMDownloader
+	app_Rasterization
+	app_VectorDataExtractROI
+	app_VectorDataReprojection
+	app_VectorDataSetField
+	app_VectorDataTransform

@@ -12,6 +12,16 @@ Example usage:
 .. code-block:: bash
 
     ./DEMToRainbowExample Output/DEMToRainbowImageGenerator.png 6.5 45.5 500 500 0.002 -0.002 Input/DEM_srtm
+Example usage:
+
+.. code-block:: bash
+
+    ./DEMToRainbowExample Output/DEMToHotImageGenerator.png 6.5 45.5 500 500 0.002 -0.002 Input/DEM_srtm hot
+Example usage:
+
+.. code-block:: bash
+
+    ./DEMToRainbowExample Output/DEMToReliefImageGenerator.png 6.5 45.5 500 500 0.002 -0.002 Input/DEM_srtm relief
 
 
 Example source code (`DEMToRainbowExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/DEMToRainbowExample.cxx?inline=false>`_):

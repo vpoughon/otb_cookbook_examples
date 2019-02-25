@@ -7,18 +7,19 @@ ShapedNeighborhoodIterators2.cxx
 
 
 
+Example usage:
+
+.. code-block:: bash
+
+    ./ShapedNeighborhoodIterators2 Input/BinaryImage.png \
+                                   Output/ShapedNeighborhoodIterators1b.png \
+                                   4
 
 
 Example source code (`ShapedNeighborhoodIterators2.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ShapedNeighborhoodIterators2.cxx?inline=false>`_):
 
 .. code-block:: cpp
 
-    /* Example usage:
-    ./ShapedNeighborhoodIterators2 Input/BinaryImage.png \
-                                   Output/ShapedNeighborhoodIterators1b.png \
-                                   4
-    */
-    
     #include "otbImage.h"
     #include "otbImageFileReader.h"
     #include "otbImageFileWriter.h"

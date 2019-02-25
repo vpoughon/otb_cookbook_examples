@@ -210,7 +210,7 @@
   <div class="section" id="trainmachinelearningmodelfromsamplesexample-cxx">
 <span id="example-trainmachinelearningmodelfromsamplesexample"></span><h1>TrainMachineLearningModelFromSamplesExample.cxx<a class="headerlink" href="#trainmachinelearningmodelfromsamplesexample-cxx" title="Permalink to this headline">¶</a></h1>
 <p>Example usage:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./TrainMachineLearningModelFromSamplesExample Input/1000 Input/4 Input/5 Input/121212 Output/clSVMModelFromSamples.svm
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./TrainMachineLearningModelFromSamplesExample Output/clSVMModelFromSamples.svm
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/TrainMachineLearningModelFromSamplesExample.cxx?inline=false">TrainMachineLearningModelFromSamplesExample.cxx</a>):</p>
@@ -231,14 +231,6 @@
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
 
-  <span class="cm">/*</span>
-<span class="cm">  if (argc != 6)</span>
-<span class="cm">    {</span>
-<span class="cm">    std::cerr &lt;&lt; &quot;Usage: &quot; &lt;&lt; argv[0] &lt;&lt; &quot; nbSamples nbSampleComponents nbClasses inputSeed outputModelFileName&quot; &lt;&lt; std::endl;</span>
-<span class="cm">    return EXIT_FAILURE;</span>
-<span class="cm">    }</span>
-<span class="cm">  */</span>
-
   <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; outputModelFileName&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -246,21 +238,11 @@
   <span class="p">}</span>
 
   <span class="c1">// The input parameters of the sample generator and of the SVM classifier are initialized.</span>
-
-  <span class="cm">/*</span>
-<span class="cm">  int nbSamples = atoi(argv[1]);</span>
-<span class="cm">  int nbSampleComponents = atoi(argv[2]);</span>
-<span class="cm">  int nbClasses = atoi(argv[3]);</span>
-<span class="cm">  unsigned int inputSeed = atoi(argv[4]);</span>
-<span class="cm">  */</span>
-
   <span class="kt">int</span> <span class="n">nbSamples</span>          <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
   <span class="kt">int</span> <span class="n">nbSampleComponents</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
   <span class="kt">int</span> <span class="n">nbClasses</span>          <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 
-  <span class="c1">//  unsigned int inputSeed = 121212;</span>
-  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputModelFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// argv[5];</span>
-
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">outputModelFileName</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
   <span class="c1">// Two lists are generated into a \subdoxygen{itk}{Statistics}{ListSample} which is the structure</span>
   <span class="c1">// used to handle both lists of samples and of labels for the machine learning classes derived from</span>

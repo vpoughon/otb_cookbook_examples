@@ -21,6 +21,21 @@ Example usage:
                                          5 \
                                          3 \
                                          0.1
+Example usage:
+
+.. code-block:: bash
+
+    ./FineRegistrationImageFilterExample Input/StereoFixed.png \
+                                         Input/StereoMoving.png \
+                                         Output/fcMRSDDisplacementFieldOutput-horizontal.png \
+                                         Output/fcMRSDDisplacementFieldOutput-vertical.png \
+                                         Output/fcMRSDCorrelFieldOutput.png \
+                                         Output/fcMRSDDResampledOutput2.png \
+                                         1.0 \
+                                         5 \
+                                         3 \
+                                         0.1 \
+                                         mrsd
 
 
 Example source code (`FineRegistrationImageFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/FineRegistrationImageFilterExample.cxx?inline=false>`_):

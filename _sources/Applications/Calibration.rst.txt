@@ -7,3 +7,9 @@ Calibration
 
 	app_OpticalCalibration
 	app_SARCalibration
+	app_OpticalCalibration
+	app_SARCalibration
+	app_OpticalCalibration
+	app_SARCalibration
+	app_OpticalCalibration
+	app_SARCalibration

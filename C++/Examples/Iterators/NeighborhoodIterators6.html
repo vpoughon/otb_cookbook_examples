@@ -217,6 +217,18 @@
             
   <div class="section" id="neighborhooditerators6-cxx">
 <span id="example-neighborhooditerators6"></span><h1>NeighborhoodIterators6.cxx<a class="headerlink" href="#neighborhooditerators6-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./NeighborhoodIterators6 Output/NeighborhoodIterators6a.png <span class="m">100</span> <span class="m">100</span>
+</pre></div>
+</div>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./NeighborhoodIterators6 Output/NeighborhoodIterators6b.png <span class="m">50</span> <span class="m">150</span>
+</pre></div>
+</div>
+<p>Example usage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./NeighborhoodIterators6 Output/NeighborhoodIterators6c.png <span class="m">150</span> <span class="m">50</span>
+</pre></div>
+</div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators6.cxx?inline=false">NeighborhoodIterators6.cxx</a>):</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
@@ -228,19 +240,13 @@
 <span class="cp">#include</span> <span class="cpf">&quot;itkFastMarchingImageFilter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;itkAddImageFilter.h&quot;</span><span class="cp"></span>
 
-<span class="cm">/* Example usage:</span>
-<span class="cm">./NeighborhoodIterators6 Output/NeighborhoodIterators6a.png 100 100</span>
-<span class="cm">*/</span>
 
 
-<span class="cm">/* Example usage:</span>
-<span class="cm">./NeighborhoodIterators6 Output/NeighborhoodIterators6b.png 50 150</span>
-<span class="cm">*/</span>
 
 
-<span class="cm">/* Example usage:</span>
-<span class="cm">./NeighborhoodIterators6 Output/NeighborhoodIterators6c.png 150 50</span>
-<span class="cm">*/</span>
+
+
+
 
 
 <span class="c1">// Some image processing routines do not need to visit every pixel in an</span>
