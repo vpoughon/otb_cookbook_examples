@@ -5,18 +5,18 @@ Iterators
 	:maxdepth: 3
 
 
-	Iterators/ShapedNeighborhoodIterators1.rst
-	Iterators/ImageRegionIterator.rst
-	Iterators/NeighborhoodIterators4.rst
-	Iterators/ImageLinearIteratorWithIndex2.rst
-	Iterators/ShapedNeighborhoodIterators2.rst
-	Iterators/NeighborhoodIterators1.rst
-	Iterators/ImageRandomConstIteratorWithIndex.rst
-	Iterators/NeighborhoodIterators5.rst
-	Iterators/ImageRegionIteratorWithIndex.rst
-	Iterators/NeighborhoodIterators3.rst
 	Iterators/ImageLinearIteratorWithIndex.rst
-	Iterators/NeighborhoodIterators2.rst
+	Iterators/ImageLinearIteratorWithIndex2.rst
+	Iterators/ImageRandomConstIteratorWithIndex.rst
+	Iterators/ImageRegionIterator.rst
+	Iterators/ImageRegionIteratorWithIndex.rst
 	Iterators/ImageSliceIteratorWithIndex.rst
 	Iterators/IteratorsExamples.rst
+	Iterators/NeighborhoodIterators1.rst
+	Iterators/NeighborhoodIterators2.rst
+	Iterators/NeighborhoodIterators3.rst
+	Iterators/NeighborhoodIterators4.rst
+	Iterators/NeighborhoodIterators5.rst
 	Iterators/NeighborhoodIterators6.rst
+	Iterators/ShapedNeighborhoodIterators1.rst
+	Iterators/ShapedNeighborhoodIterators2.rst

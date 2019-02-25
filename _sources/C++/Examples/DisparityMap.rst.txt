@@ -5,6 +5,6 @@ DisparityMap
 	:maxdepth: 3
 
 
-	DisparityMap/StereoReconstructionExample.rst
-	DisparityMap/NCCRegistrationFilterExample.rst
 	DisparityMap/FineRegistrationImageFilterExample.rst
+	DisparityMap/NCCRegistrationFilterExample.rst
+	DisparityMap/StereoReconstructionExample.rst

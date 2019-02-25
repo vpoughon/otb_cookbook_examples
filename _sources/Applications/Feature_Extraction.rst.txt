@@ -65,3 +65,18 @@ Feature Extraction
 	app_RadiometricIndices
 	app_SFSTextureExtraction
 	app_VectorDataDSValidation
+	app_BinaryMorphologicalOperation
+	app_ComputePolylineFeatureFromImage
+	app_DSFuzzyModelEstimation
+	app_EdgeExtraction
+	app_GrayScaleMorphologicalOperation
+	app_HaralickTextureExtraction
+	app_HomologousPointsExtraction
+	app_LineSegmentDetection
+	app_LocalStatisticExtraction
+	app_MorphologicalClassification
+	app_MorphologicalMultiScaleDecomposition
+	app_MorphologicalProfilesAnalysis
+	app_RadiometricIndices
+	app_SFSTextureExtraction
+	app_VectorDataDSValidation

@@ -5,13 +5,13 @@ BasicFilters
 	:maxdepth: 3
 
 
-	BasicFilters/HillShadingExample.rst
-	BasicFilters/FrostImageFilter.rst
-	BasicFilters/LeeImageFilter.rst
-	BasicFilters/PrintableImageFilterExample.rst
-	BasicFilters/ScalingFilterExample.rst
-	BasicFilters/MeanShiftSegmentationFilterExample.rst
 	BasicFilters/BandMathFilterExample.rst
 	BasicFilters/BandMathXImageFilterExample.rst
 	BasicFilters/DEMToRainbowExample.rst
+	BasicFilters/FrostImageFilter.rst
+	BasicFilters/HillShadingExample.rst
 	BasicFilters/IndexedToRGBExample.rst
+	BasicFilters/LeeImageFilter.rst
+	BasicFilters/MeanShiftSegmentationFilterExample.rst
+	BasicFilters/PrintableImageFilterExample.rst
+	BasicFilters/ScalingFilterExample.rst

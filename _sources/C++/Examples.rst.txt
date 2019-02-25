@@ -7,25 +7,25 @@ Examples
 	:maxdepth: 3
 
 
-	Examples/Classification.rst
-	Examples/OBIA.rst
-	Examples/Radiometry.rst
+	Examples/Application.rst
 	Examples/BasicFilters.rst
+	Examples/ChangeDetection.rst
+	Examples/Classification.rst
+	Examples/DimensionReduction.rst
+	Examples/DisparityMap.rst
+	Examples/FeatureExtraction.rst
+	Examples/Filtering.rst
+	Examples/Fusion.rst
+	Examples/Hyperspectral.rst
 	Examples/IO.rst
 	Examples/Image.rst
-	Examples/Patented.rst
-	Examples/Fusion.rst
-	Examples/Learning.rst
 	Examples/Installation.rst
-	Examples/Application.rst
-	Examples/DisparityMap.rst
-	Examples/Hyperspectral.rst
-	Examples/FeatureExtraction.rst
-	Examples/Simulation.rst
-	Examples/DimensionReduction.rst
-	Examples/Projections.rst
-	Examples/Tutorials.rst
-	Examples/Markov.rst
-	Examples/Filtering.rst
 	Examples/Iterators.rst
-	Examples/ChangeDetection.rst
+	Examples/Learning.rst
+	Examples/Markov.rst
+	Examples/OBIA.rst
+	Examples/Patented.rst
+	Examples/Projections.rst
+	Examples/Radiometry.rst
+	Examples/Simulation.rst
+	Examples/Tutorials.rst

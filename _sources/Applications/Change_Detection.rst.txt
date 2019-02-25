@@ -9,3 +9,4 @@ Change Detection
 	app_MultivariateAlterationDetector
 	app_MultivariateAlterationDetector
 	app_MultivariateAlterationDetector
+	app_MultivariateAlterationDetector

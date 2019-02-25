@@ -5,14 +5,14 @@ IO
 	:maxdepth: 3
 
 
-	IO/ImageReadCastWrite.rst
-	IO/DEMToImageGenerator.rst
-	IO/ImageReadWrite.rst
-	IO/MultibandImageReadWrite.rst
-	IO/DEMHandlerExample.rst
-	IO/VectorDataIOExample.rst
-	IO/MetadataExample.rst
-	IO/ImageReadRegionOfInterestWrite.rst
-	IO/ExtractROI.rst
 	IO/ComplexImageReadWrite.rst
+	IO/DEMHandlerExample.rst
+	IO/DEMToImageGenerator.rst
+	IO/ExtractROI.rst
+	IO/ImageReadCastWrite.rst
+	IO/ImageReadRegionOfInterestWrite.rst
+	IO/ImageReadWrite.rst
 	IO/ImageSeriesIOExample.rst
+	IO/MetadataExample.rst
+	IO/MultibandImageReadWrite.rst
+	IO/VectorDataIOExample.rst

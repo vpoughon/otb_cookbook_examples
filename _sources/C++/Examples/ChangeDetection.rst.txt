@@ -5,9 +5,9 @@ ChangeDetection
 	:maxdepth: 3
 
 
-	ChangeDetection/KullbackLeiblerDistanceChDet.rst
-	ChangeDetection/RatioChDet.rst
-	ChangeDetection/MultivariateAlterationDetector.rst
-	ChangeDetection/KullbackLeiblerProfileChDet.rst
-	ChangeDetection/DiffChDet.rst
 	ChangeDetection/CorrelChDet.rst
+	ChangeDetection/DiffChDet.rst
+	ChangeDetection/KullbackLeiblerDistanceChDet.rst
+	ChangeDetection/KullbackLeiblerProfileChDet.rst
+	ChangeDetection/MultivariateAlterationDetector.rst
+	ChangeDetection/RatioChDet.rst

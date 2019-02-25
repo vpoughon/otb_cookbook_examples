@@ -5,8 +5,8 @@ Markov
 	:maxdepth: 3
 
 
-	Markov/MarkovClassification3Example.rst
-	Markov/MarkovRestorationExample.rst
 	Markov/MarkovClassification1Example.rst
-	Markov/MarkovRegularizationExample.rst
 	Markov/MarkovClassification2Example.rst
+	Markov/MarkovClassification3Example.rst
+	Markov/MarkovRegularizationExample.rst
+	Markov/MarkovRestorationExample.rst

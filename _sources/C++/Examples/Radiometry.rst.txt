@@ -5,7 +5,7 @@ Radiometry
 	:maxdepth: 3
 
 
-	Radiometry/AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.rst
-	Radiometry/NDVIRAndNIRVegetationIndexImageFilter.rst
 	Radiometry/ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.rst
+	Radiometry/AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.rst
 	Radiometry/AtmosphericCorrectionSequencement.rst
+	Radiometry/NDVIRAndNIRVegetationIndexImageFilter.rst

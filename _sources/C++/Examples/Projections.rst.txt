@@ -5,8 +5,8 @@ Projections
 	:maxdepth: 3
 
 
-	Projections/GeometriesProjectionExample.rst
 	Projections/EstimateRPCSensorModelExample.rst
+	Projections/GeometriesProjectionExample.rst
 	Projections/OrthoRectificationExample.rst
 	Projections/PlaceNameToLonLatExample.rst
 	Projections/VectorDataExtractROIExample.rst

@@ -5,5 +5,5 @@ Fusion
 	:maxdepth: 3
 
 
-	Fusion/PanSharpeningExample.rst
 	Fusion/BayesianFusionImageFilter.rst
+	Fusion/PanSharpeningExample.rst

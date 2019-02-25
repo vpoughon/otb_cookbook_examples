@@ -29,3 +29,9 @@ Image Filtering
 	app_DomainTransform
 	app_MeanShiftSmoothing
 	app_Smoothing
+	app_ContrastEnhancement
+	app_Despeckle
+	app_DimensionalityReduction
+	app_DomainTransform
+	app_MeanShiftSmoothing
+	app_Smoothing

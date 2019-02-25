@@ -5,26 +5,26 @@ FeatureExtraction
 	:maxdepth: 3
 
 
-	FeatureExtraction/CloudDetectionExample.rst
-	FeatureExtraction/TextureExample.rst
-	FeatureExtraction/ExtractRoadByStepsExample.rst
-	FeatureExtraction/ThresholdToPointSetExample.rst
-	FeatureExtraction/ComplexMomentPathExample.rst
-	FeatureExtraction/EdgeDensityExample.rst
-	FeatureExtraction/FlusserMomentsImageFunctionExample.rst
-	FeatureExtraction/HuMomentsImageFunctionExample.rst
-	FeatureExtraction/RightAngleDetectionExample.rst
-	FeatureExtraction/RatioLineDetectorExample.rst
 	FeatureExtraction/AsymmetricFusionOfLineDetectorExample.rst
-	FeatureExtraction/SeamCarvingExample.rst
+	FeatureExtraction/CloudDetectionExample.rst
+	FeatureExtraction/ComplexMomentPathExample.rst
 	FeatureExtraction/ComplexMomentsImageFunctionExample.rst
-	FeatureExtraction/ExtractRoadExample.rst
-	FeatureExtraction/TouziEdgeDetectorExample.rst
-	FeatureExtraction/LineSegmentDetectorExample.rst
-	FeatureExtraction/ParallelLineDetectionExample.rst
 	FeatureExtraction/CorrelationLineDetectorExample.rst
-	FeatureExtraction/PanTexExample.rst
-	FeatureExtraction/SeamCarvingOtherExample.rst
-	FeatureExtraction/SURFExample.rst
-	FeatureExtraction/SFSExample.rst
+	FeatureExtraction/EdgeDensityExample.rst
+	FeatureExtraction/ExtractRoadByStepsExample.rst
+	FeatureExtraction/ExtractRoadExample.rst
+	FeatureExtraction/FlusserMomentsImageFunctionExample.rst
 	FeatureExtraction/HarrisExample.rst
+	FeatureExtraction/HuMomentsImageFunctionExample.rst
+	FeatureExtraction/LineSegmentDetectorExample.rst
+	FeatureExtraction/PanTexExample.rst
+	FeatureExtraction/ParallelLineDetectionExample.rst
+	FeatureExtraction/RatioLineDetectorExample.rst
+	FeatureExtraction/RightAngleDetectionExample.rst
+	FeatureExtraction/SFSExample.rst
+	FeatureExtraction/SURFExample.rst
+	FeatureExtraction/SeamCarvingExample.rst
+	FeatureExtraction/SeamCarvingOtherExample.rst
+	FeatureExtraction/TextureExample.rst
+	FeatureExtraction/ThresholdToPointSetExample.rst
+	FeatureExtraction/TouziEdgeDetectorExample.rst

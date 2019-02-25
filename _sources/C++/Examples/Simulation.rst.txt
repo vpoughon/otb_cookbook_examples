@@ -5,6 +5,6 @@ Simulation
 	:maxdepth: 3
 
 
+	Simulation/LAIAndPROSAILToSensorResponse.rst
 	Simulation/LAIFromNDVIImageTransform.rst
 	Simulation/ProsailModel.rst
-	Simulation/LAIAndPROSAILToSensorResponse.rst

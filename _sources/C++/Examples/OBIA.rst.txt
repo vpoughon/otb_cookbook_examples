@@ -6,5 +6,5 @@ OBIA
 
 
 	OBIA/HooverMetricsEstimation.rst
-	OBIA/RadiometricAttributesLabelMapFilterExample.rst
 	OBIA/LabelMapToVectorData.rst
+	OBIA/RadiometricAttributesLabelMapFilterExample.rst

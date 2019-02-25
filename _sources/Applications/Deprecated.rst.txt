@@ -9,3 +9,4 @@ Deprecated
 	app_Rescale
 	app_Rescale
 	app_Rescale
+	app_Rescale

@@ -5,8 +5,8 @@ Tutorials
 	:maxdepth: 3
 
 
-	Tutorials/HelloWorldOTB.rst
 	Tutorials/FilteringPipeline.rst
+	Tutorials/HelloWorldOTB.rst
 	Tutorials/Multispectral.rst
 	Tutorials/OrthoFusion.rst
 	Tutorials/Pipeline.rst

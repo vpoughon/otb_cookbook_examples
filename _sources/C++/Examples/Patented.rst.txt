@@ -5,7 +5,7 @@ Patented
 	:maxdepth: 3
 
 
-	Patented/SIFTFastExample.rst
 	Patented/SIFTDensityExample.rst
-	Patented/SIFTExample.rst
 	Patented/SIFTDisparityMapEstimation.rst
+	Patented/SIFTExample.rst
+	Patented/SIFTFastExample.rst
