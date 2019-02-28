@@ -1,4 +1,4 @@
-.. _example-TrainMachineLearningModelFromSamplesExample:
+.. _TrainMachineLearningModelFromSamplesExample.cxx:
 
 TrainMachineLearningModelFromSamplesExample.cxx
 ===============================================
@@ -14,7 +14,8 @@ Example usage:
     ./TrainMachineLearningModelFromSamplesExample Output/clSVMModelFromSamples.svm
 
 
-Example source code (`TrainMachineLearningModelFromSamplesExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/TrainMachineLearningModelFromSamplesExample.cxx?inline=false>`_):
+
+Example source code (`TrainMachineLearningModelFromSamplesExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/TrainMachineLearningModelFromSamplesExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

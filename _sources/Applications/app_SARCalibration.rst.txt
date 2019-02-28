@@ -1,4 +1,4 @@
-.. _app-SARCalibration:
+.. _SARCalibration:
 
 SARCalibration
 ==============

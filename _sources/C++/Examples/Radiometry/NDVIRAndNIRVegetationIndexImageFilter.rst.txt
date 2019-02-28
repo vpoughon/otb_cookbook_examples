@@ -1,4 +1,4 @@
-.. _example-NDVIRAndNIRVegetationIndexImageFilter:
+.. _NDVIRAndNIRVegetationIndexImageFilter.cxx:
 
 NDVIRAndNIRVegetationIndexImageFilter.cxx
 =========================================
@@ -19,7 +19,8 @@ Example usage:
                                             Output/pretty_NDVIRAndNIRVegetationIndex.png
 
 
-Example source code (`NDVIRAndNIRVegetationIndexImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/NDVIRAndNIRVegetationIndexImageFilter.cxx?inline=false>`_):
+
+Example source code (`NDVIRAndNIRVegetationIndexImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/NDVIRAndNIRVegetationIndexImageFilter.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

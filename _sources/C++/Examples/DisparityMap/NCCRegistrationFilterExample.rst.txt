@@ -1,4 +1,4 @@
-.. _example-NCCRegistrationFilterExample:
+.. _NCCRegistrationFilterExample.cxx:
 
 NCCRegistrationFilterExample.cxx
 ================================
@@ -21,7 +21,8 @@ Example usage:
                                    2
 
 
-Example source code (`NCCRegistrationFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/NCCRegistrationFilterExample.cxx?inline=false>`_):
+
+Example source code (`NCCRegistrationFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/NCCRegistrationFilterExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _example-BandMathFilterExample:
+.. _BandMathFilterExample.cxx:
 
 BandMathFilterExample.cxx
 =========================
@@ -14,7 +14,8 @@ Example usage:
     ./BandMathFilterExample Input/qb_RoadExtract.tif Output/RoadExtractBandMath.tif Output/qb_BandMath-pretty.jpg
 
 
-Example source code (`BandMathFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/BandMathFilterExample.cxx?inline=false>`_):
+
+Example source code (`BandMathFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/BandMathFilterExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

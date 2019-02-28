@@ -1,4 +1,4 @@
-.. _example-VectorImage:
+.. _VectorImage.cxx:
 
 VectorImage.cxx
 ===============
@@ -9,7 +9,7 @@ VectorImage.cxx
 
 
 
-Example source code (`VectorImage.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Image/VectorImage.cxx?inline=false>`_):
+Example source code (`VectorImage.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Image/VectorImage.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

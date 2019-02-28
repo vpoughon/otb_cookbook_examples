@@ -1,4 +1,4 @@
-.. _app-KMeansClassification:
+.. _KMeansClassification:
 
 KMeansClassification
 ====================
@@ -15,15 +15,15 @@ This application is only available if OTB is compiled with Shark support(CMake o
 
 The steps of this composite application:
 
-1) :ref:`app-ImageEnvelope`: create a shapefile (1 polygon),
-2) :ref:`app-PolygonClassStatistics`: compute the statistics,
-3) :ref:`app-SampleSelection`: select the samples by constant strategy in the shapefile (1000000 samples max),
-4) :ref:`app-SampleExtraction`: extract the samples descriptors (update of :ref:`app-SampleSelection` output file),
-5) :ref:`app-ComputeImagesStatistics`: compute images second order statistics,
-6) :ref:`app-TrainVectorClassifier`: train the SharkKMeans model,
-7) :ref:`app-ImageClassifier`: perform the classification of the input image according to a model file.
+1) :ref:`ImageEnvelope`: create a shapefile (1 polygon),
+2) :ref:`PolygonClassStatistics`: compute the statistics,
+3) :ref:`SampleSelection`: select the samples by constant strategy in the shapefile (1000000 samples max),
+4) :ref:`SampleExtraction`: extract the samples descriptors (update of :ref:`SampleSelection` output file),
+5) :ref:`ComputeImagesStatistics`: compute images second order statistics,
+6) :ref:`TrainVectorClassifier`: train the SharkKMeans model,
+7) :ref:`ImageClassifier`: perform the classification of the input image according to a model file.
 
-It's possible to choice random/periodic modes of the :ref:`app-SampleSelection` application.
+It's possible to choice random/periodic modes of the :ref:`SampleSelection` application.
 If you want keep the temporary files (sample selected, model file, ...), initialize cleanup parameter.
 For more information on shark KMeans algorithm [1].
 
@@ -137,6 +137,6 @@ The application doesn't support NaN in the input image
 See also
 --------
 
-| :ref:`app-ImageEnvelope`, :ref:`app-PolygonClassStatistics`, :ref:`app-SampleSelection`, :ref:`app-SampleExtraction`, :ref:`app-PolygonClassStatistics`, :ref:`app-TrainVectorClassifier`, :ref:`app-ImageClassifier`.
+| :ref:`ImageEnvelope`, :ref:`PolygonClassStatistics`, :ref:`SampleSelection`, :ref:`SampleExtraction`, :ref:`PolygonClassStatistics`, :ref:`TrainVectorClassifier`, :ref:`ImageClassifier`.
 | 
 | [1] http://image.diku.dk/shark/sphinx_pages/build/html/rest_sources/tutorials/algorithms/kmeans.html

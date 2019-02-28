@@ -1,4 +1,4 @@
-.. _app-CompareImages:
+.. _CompareImages:
 
 CompareImages
 =============
@@ -132,4 +132,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-BandMath` application, ImageStatistics
+| :ref:`BandMath` application, ImageStatistics

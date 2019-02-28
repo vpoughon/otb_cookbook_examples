@@ -1,4 +1,4 @@
-.. _example-ImageReadWrite:
+.. _ImageReadWrite.cxx:
 
 ImageReadWrite.cxx
 ==================
@@ -9,7 +9,7 @@ ImageReadWrite.cxx
 
 
 
-Example source code (`ImageReadWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ImageReadWrite.cxx?inline=false>`_):
+Example source code (`ImageReadWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ImageReadWrite.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

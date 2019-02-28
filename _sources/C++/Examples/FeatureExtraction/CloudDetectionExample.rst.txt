@@ -1,4 +1,4 @@
-.. _example-CloudDetectionExample:
+.. _CloudDetectionExample.cxx:
 
 CloudDetectionExample.cxx
 =========================
@@ -24,7 +24,8 @@ Example usage:
                             1.0
 
 
-Example source code (`CloudDetectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/CloudDetectionExample.cxx?inline=false>`_):
+
+Example source code (`CloudDetectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/CloudDetectionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

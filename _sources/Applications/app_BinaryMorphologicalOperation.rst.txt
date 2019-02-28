@@ -1,4 +1,4 @@
-.. _app-BinaryMorphologicalOperation:
+.. _BinaryMorphologicalOperation:
 
 BinaryMorphologicalOperation
 ============================

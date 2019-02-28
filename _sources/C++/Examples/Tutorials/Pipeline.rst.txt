@@ -1,4 +1,4 @@
-.. _example-Pipeline:
+.. _Pipeline.cxx:
 
 Pipeline.cxx
 ============
@@ -14,7 +14,8 @@ Example usage:
     ./Pipeline Input/QB_Suburb.png Output/TutorialsPipelineOutput.png
 
 
-Example source code (`Pipeline.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/Pipeline.cxx?inline=false>`_):
+
+Example source code (`Pipeline.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/Pipeline.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

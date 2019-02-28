@@ -1,4 +1,4 @@
-.. _app-ConcatenateVectorData:
+.. _ConcatenateVectorData:
 
 ConcatenateVectorData
 =====================

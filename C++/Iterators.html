@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Iterators &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Filters" href="Filters.html" />
+    <link rel="prev" title="System Overview" href="SystemOverview.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Iterators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#programming-interface">Programming Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-iterators">Creating Iterators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moving-iterators">Moving Iterators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-data">Accessing Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iteration-loops">Iteration Loops</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-iterators">Image Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#neighborhood-iterators">Neighborhood Iterators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neighborhooditerator">NeighborhoodIterator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shapedneighborhooditerator">ShapedNeighborhoodIterator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>Iterators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Iterators.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="iterators">
+<h1>Iterators<a class="headerlink" href="#iterators" title="Permalink to this headline">¶</a></h1>
+<p>This chapter introduces the <em>image iterator</em>, an important generic
+programming construct for image processing in ITK. An iterator is a
+generalization of the familiar C programming language pointer used to
+reference data in memory. ITK has a wide variety of image iterators,
+some of which are highly specialized to simplify common image processing
+tasks.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Generic programming models define functionally independent components
+called <em>containers</em> and <em>algorithms</em>. Container objects store data and
+algorithms operate on data. To access data in containers, algorithms use
+a third class of objects called <em>iterators</em>. An iterator is an
+abstraction of a memory pointer. Every container type must define its
+own iterator type, but all iterators are written to provide a common
+interface so that algorithm code can reference data in a generic way and
+maintain functional independence from containers.</p>
+<p>The iterator is so named because it is used for <em>iterative</em>, sequential
+access of container values. Iterators appear in <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code>
+loop constructs, visiting each data point in turn. A C pointer, for
+example, is a type of iterator. It can be moved forward (incremented)
+and backward (decremented) through memory to sequentially reference
+elements of an array. Many iterator implementations have an interface
+similar to a C pointer.</p>
+<p>In ITK we use iterators to write generic image processing code for
+images instantiated with different combinations of pixel type, pixel
+container type, and dimensionality. Because ITK image iterators are
+specifically designed to work with <em>image</em> containers, their interface
+and implementation is optimized for image processing tasks. Using the
+ITK iterators instead of accessing data directly through the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a> interface has many advantages. Code is more compact and
+often generalizes automatically to higher dimensions, algorithms run
+much faster, and iterators simplify tasks such as multithreading and
+neighborhood-based image processing.</p>
+</div>
+<div class="section" id="programming-interface">
+<h2>Programming Interface<a class="headerlink" href="#programming-interface" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the standard ITK image iterator programming
+interface. Some specialized image iterators may deviate from this
+standard or provide additional methods.</p>
+<div class="section" id="creating-iterators">
+<h3>Creating Iterators<a class="headerlink" href="#creating-iterators" title="Permalink to this headline">¶</a></h3>
+<p>All image iterators have at least one template parameter that is the
+image type over which they iterate. There is no restriction on the
+dimensionality of the image or on the pixel type of the image.</p>
+<p>An iterator constructor requires at least two arguments, a smart pointer
+to the image to iterate across, and an image region. The image region,
+called the <em>iteration region</em>, is a rectilinear area in which iteration
+is constrained. The iteration region must be wholly contained within the
+image. More specifically, a valid iteration region is any subregion of
+the image within the current <code class="docutils literal notranslate"><span class="pre">BufferedRegion</span></code>.</p>
+<p>There is a const and a non-const version of most ITK image iterators. A
+non-const iterator cannot be instantiated on a non-const image pointer.
+Const versions of iterators may read, but may not write pixel values.</p>
+<p>Here is a simple example that defines and constructs a simple image
+iterator for an <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">ImageType</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionConstIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">ConstIteratorType</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionIterator</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>      <span class="n">IteratorType</span><span class="p">;</span>
+
+<span class="n">ImageType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">image</span> <span class="o">=</span> <span class="n">SomeFilter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">();</span>
+
+<span class="n">ConstIteratorType</span> <span class="nf">constIterator</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+<span class="n">IteratorType</span>      <span class="nf">iterator</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="moving-iterators">
+<h3>Moving Iterators<a class="headerlink" href="#moving-iterators" title="Permalink to this headline">¶</a></h3>
+<p>An iterator is described as <em>walking</em> its iteration region. At any time,
+the iterator will reference, or “point to”, one pixel location in the
+N-dimensional (ND) image. <em>Forward iteration</em> goes from the beginning of
+the iteration region to the end of the iteration region. <em>Reverse
+iteration</em>, goes from just past the end of the region back to the
+beginning. There are two corresponding starting positions for iterators,
+the <em>begin</em> position and the <em>end</em> position. An iterator can be moved
+directly to either of these two positions using:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">GoToBegin()</span></code> Points the iterator to the first valid data
+element in the region.</li>
+<li><code class="docutils literal notranslate"><span class="pre">GoToEnd()</span></code> Points the iterator to <em>one position past</em> the last
+valid element in the region.</li>
+</ul>
+<p>Note that the end position is not actually located within the iteration
+region. This is important to remember because attempting to dereference
+an iterator at its end position will have undefined results.</p>
+<p>ITK iterators are moved back and forth across their iterations using the
+decrement and increment operators:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">operator++()</span></code> Increments the iterator one position in the
+positive direction. Only the prefix increment operator is defined for
+ITK image iterators.</li>
+<li><code class="docutils literal notranslate"><span class="pre">operator–()</span></code> Decrements the iterator one position in the
+negative direction. Only the prefix decrement operator is defined for
+ITK image iterators.</li>
+</ul>
+<p>The figure&nbsp;below illustrates typical iteration over an image
+region. Most iterators increment and decrement in the direction of the
+fastest increasing image dimension, wrapping to the first position in
+the next higher dimension at region boundaries. In other words, an
+iterator first moves across columns, then down rows, then from slice to
+slice, and so on.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/IteratorFigure1.png" src="../_images/IteratorFigure1.png" />
+<p class="caption"><span class="caption-text">Normal path of an iterator through a
+2D image.  The iteration region is shown in a darker shade.  An arrow denotes
+a single iterator step, the result of one ++ operation.</span></p>
+</div>
+<p>In addition to sequential iteration through the image, some iterators
+may define random access operators. Unlike the increment operators,
+random access operators may not be optimized for speed and require some
+knowledge of the dimensionality of the image and the extent of the
+iteration region to use properly.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">operator+=(OffsetType)</span></code> Moves the iterator to the pixel
+position at the current index plus specified <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Offset.html">itk::Offset</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">operator-=(OffsetType)</span></code> Moves the iterator to the pixel
+position at the current index minus specified Offset.</li>
+<li><code class="docutils literal notranslate"><span class="pre">SetPosition(IndexType)</span></code> Moves the iterator to the given
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Index.html">itk::Index</a> position.</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">SetPosition()</span></code> method may be extremely slow for more complicated
+iterator types. In general, it should only be used for setting a
+starting iteration position, like you would use <code class="docutils literal notranslate"><span class="pre">GoToBegin()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">GoToEnd()</span></code>.</p>
+<p>Some iterators do not follow a predictable path through their iteration
+regions and have no fixed beginning or ending pixel locations. A
+conditional iterator, for example, visits pixels only if they have
+certain values or connectivities. Random iterators, increment and
+decrement to random locations and may even visit a given pixel location
+more than once.</p>
+<p>An iterator can be queried to determine if it is at the end or the
+beginning of its iteration region.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">IsAtEnd()</span></code> True if the iterator points to <em>one position
+past</em> the end of the iteration region.</li>
+<li><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">IsAtBegin()</span></code> True if the iterator points to the first
+position in the iteration region. The method is typically used to
+test for the end of reverse iteration.</li>
+</ul>
+<p>An iterator can also report its current image index position.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">IndexType</span> <span class="pre">GetIndex()</span></code> Returns the Index of the image pixel
+that the iterator currently points to.</li>
+</ul>
+<p>For efficiency, most ITK image iterators do not perform bounds checking.
+It is possible to move an iterator outside of its valid iteration
+region. Dereferencing an out-of-bounds iterator will produce undefined
+results.</p>
+</div>
+<div class="section" id="accessing-data">
+<h3>Accessing Data<a class="headerlink" href="#accessing-data" title="Permalink to this headline">¶</a></h3>
+<p>ITK image iterators define two basic methods for reading and writing
+pixel values.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">Get()</span></code> Returns the value of the pixel at the
+iterator position.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Set(PixelType)</span></code> Sets the value of the pixel at the
+iterator position. Not defined for const versions of iterators.</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Get()</span></code> and <code class="docutils literal notranslate"><span class="pre">Set()</span></code> methods are inlined and optimized for speed
+so that their use is equivalent to dereferencing the image buffer
+directly. There are a few common cases, however, where using <code class="docutils literal notranslate"><span class="pre">Get()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Set()</span></code> do incur a penalty. Consider the following code, which
+fetches, modifies, and then writes a value back to the same pixel
+location:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">it</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>As written, this code requires one more memory dereference than is
+necessary. Some iterators define a third data access method that avoids
+this penalty.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">&amp;</span> <span class="pre">Value()</span></code> Returns a reference to the pixel at the
+iterator position.</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Value()</span></code> method can be used as either an lval or an rval in an
+expression. It has all the properties of <code class="docutils literal notranslate"><span class="pre">operator*</span></code>. The <code class="docutils literal notranslate"><span class="pre">Value()</span></code>
+method makes it possible to rewrite our example code more efficiently:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">it</span><span class="p">.</span><span class="n">Value</span><span class="p">()</span><span class="o">++</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Consider using the <code class="docutils literal notranslate"><span class="pre">Value()</span></code> method instead of <code class="docutils literal notranslate"><span class="pre">Get()</span></code> or <code class="docutils literal notranslate"><span class="pre">Set()</span></code>
+when a call to <code class="docutils literal notranslate"><span class="pre">operator=</span></code> on a pixel is non-trivial, such as when
+working with vector pixels, and operations are done in-place in the
+image.</p>
+</div>
+<div class="section" id="iteration-loops">
+<h3>Iteration Loops<a class="headerlink" href="#iteration-loops" title="Permalink to this headline">¶</a></h3>
+<p>Using the methods described in the previous sections, we can now write a
+simple example to do pixel-wise operations on an image. The following
+code calculates the squares of all values in an input image and writes
+them to an output image.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ConstIteratorType</span> <span class="nf">in</span><span class="p">(</span><span class="n">inputImage</span><span class="p">,</span> <span class="n">inputImage</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+<span class="n">IteratorType</span>      <span class="nf">out</span><span class="p">(</span><span class="n">outputImage</span><span class="p">,</span> <span class="n">inputImage</span><span class="o">-&gt;</span><span class="n">GetRequestedRegion</span><span class="p">());</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">(),</span> <span class="n">out</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span> <span class="o">!</span><span class="n">in</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">();</span> <span class="o">++</span><span class="n">in</span><span class="p">,</span> <span class="o">++</span><span class="n">out</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">out</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">Get</span><span class="p">()</span> <span class="o">*</span> <span class="n">in</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Notice that both the input and output iterators are initialized over the
+same region, the <code class="docutils literal notranslate"><span class="pre">RequestedRegion</span></code> of <code class="docutils literal notranslate"><span class="pre">inputImage</span></code>. This is good
+practice because it ensures that the output iterator walks exactly the
+same set of pixel indices as the input iterator, but does not require
+that the output and input be the same size. The only requirement is that
+the input image must contain a region (a starting index and size) that
+matches the <code class="docutils literal notranslate"><span class="pre">RequestedRegion</span></code> of the output image.</p>
+<p>Equivalent code can be written by iterating through the image in
+reverse. The syntax is slightly more awkward because the <em>end</em> of the
+iteration region is not a valid position and we can only test whether
+the iterator is strictly <em>equal</em> to its beginning position. It is often
+more convenient to write reverse iteration in a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">in</span><span class="p">.</span><span class="n">GoToEnd</span><span class="p">();</span>
+<span class="n">out</span><span class="p">.</span><span class="n">GoToEnd</span><span class="p">();</span>
+<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">in</span><span class="p">.</span><span class="n">IsAtBegin</span><span class="p">())</span>
+<span class="p">{</span>
+  <span class="o">--</span><span class="n">in</span><span class="p">;</span>
+  <span class="o">--</span><span class="n">out</span><span class="p">;</span>
+  <span class="n">out</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">Get</span><span class="p">()</span> <span class="o">*</span> <span class="n">in</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="image-iterators">
+<h2>Image Iterators<a class="headerlink" href="#image-iterators" title="Permalink to this headline">¶</a></h2>
+<p>This section describes iterators that walk rectilinear image regions and
+reference a single pixel at a time. The
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageRegionIterator.html">itk::ImageRegionIterator</a> is the most basic ITK image iterator
+and the first choice for most applications. The rest of the iterators in
+this section are specializations of ImageRegionIterator that are
+designed make common image processing tasks more efficient or easier to
+implement.</p>
+<ul class="simple">
+<li>ImageRegionIterator: See example <a class="reference internal" href="Examples/Iterators/ImageRegionIterator.html#imageregioniterator-cxx"><span class="std std-ref">ImageRegionIterator.cxx</span></a></li>
+<li>ImageRegionIteratorWithIndex: See example <a class="reference internal" href="Examples/Iterators/ImageRegionIteratorWithIndex.html#imageregioniteratorwithindex-cxx"><span class="std std-ref">ImageRegionIteratorWithIndex.cxx</span></a></li>
+<li>ImageLinearIteratorWithIndex: See example <a class="reference internal" href="Examples/Iterators/ImageLinearIteratorWithIndex.html#imagelineariteratorwithindex-cxx"><span class="std std-ref">ImageLinearIteratorWithIndex.cxx</span></a></li>
+</ul>
+</div>
+<div class="section" id="neighborhood-iterators">
+<h2>Neighborhood Iterators<a class="headerlink" href="#neighborhood-iterators" title="Permalink to this headline">¶</a></h2>
+<p>In ITK, a pixel neighborhood is loosely defined as a small set of pixels
+that are locally adjacent to one another in an image. The size and shape
+of a neighborhood, as well the connectivity among pixels in a
+neighborhood, may vary with the application.</p>
+<p>Many image processing algorithms are neighborhood-based, that is, the
+result at a pixel <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> is computed from the values of pixels in the
+ND neighborhood of <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>. Consider finite difference operations in
+2D. A derivative at pixel index <img class="math" src="../_images/math/dec5fdbeceed5d678771daa78362e18f1db957db.png" alt="i = (j, k)"/>, for example, is
+taken as a weighted difference of the values at <img class="math" src="../_images/math/03593e0c83d59c6892a79ff4608c53b021deed59.png" alt="(j+1, k)"/> and
+<img class="math" src="../_images/math/a5706516fcd4bfd890bc5250ff1e94f50b4004e8.png" alt="(j-1, k)"/>. Other common examples of neighborhood operations
+include convolution filtering and image morphology.</p>
+<p>This section describes a class of ITK image iterators that are designed
+for working with pixel neighborhoods. An ITK neighborhood iterator walks
+an image region just like a normal image iterator, but instead of only
+referencing a single pixel at each step, it simultaneously points to the
+entire ND neighborhood of pixels. Extensions to the standard iterator
+interface provide read and write access to all neighborhood pixels and
+information such as the size, extent, and location of the neighborhood.</p>
+<p>Neighborhood iterators use the same operators defined in
+Section&nbsp;[sec:IteratorsInterface] and the same code constructs as normal
+iterators for looping through an image.
+Figure&nbsp;[fig:NeighborhoodIteratorFig1] shows a neighborhood iterator
+moving through an iteration region. This iterator defines a <img class="math" src="../_images/math/991193aaf2af0bef9d803ee8d239fe4a5729209b.png" alt="3x3"/>
+neighborhood around each pixel that it visits. The <em>center</em> of the
+neighborhood iterator is always positioned over its current index and
+all other neighborhood pixel indices are referenced as offsets from the
+center index. The pixel under the center of the neighborhood iterator
+and all pixels under the shaded area, or <em>extent</em>, of the iterator can
+be dereferenced.</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/NeighborhoodIteratorFig1.png" src="../_images/NeighborhoodIteratorFig1.png" />
+<p class="caption"><span class="caption-text">Path of a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> neighborhood iterator through a 2D image region. The extent
+of the neighborhood is indicated by the hashing around the iterator
+position. Pixels that lie within this extent are accessible through the
+iterator. An arrow denotes a single iterator step, the result of one ++
+operation.</span></p>
+</div>
+<p>In addition to the standard image pointer and iteration region
+(Section&nbsp;[sec:IteratorsInterface]), neighborhood iterator constructors
+require an argument that specifies the extent of the neighborhood to
+cover. Neighborhood extent is symmetric across its center in each axis
+and is given as an array of <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> distances that are collectively
+called the <em>radius</em>. Each element <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/> of the radius, where
+<img class="math" src="../_images/math/49637bbf4eb5a415944f2e9aad65f442348a3f9c.png" alt="0 &lt; d &lt; N"/> and <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> is the dimensionality of the
+neighborhood, gives the extent of the neighborhood in pixels for
+dimension <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/>. The length of each face of the resulting ND
+hypercube is <img class="math" src="../_images/math/30a4ce27aa792a71fbb092951b8295d577d4a578.png" alt="2d + 1"/> pixels, a distance of <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/> on either
+side of the single pixel at the neighbor center.
+Figure&nbsp;[fig:NeighborhoodIteratorFig2] shows the relationship between the
+radius of the iterator and the size of the neighborhood for a variety of
+2D iterator shapes.</p>
+<p>The radius of the neighborhood iterator is queried after construction by
+calling the <code class="docutils literal notranslate"><span class="pre">GetRadius()</span></code> method. Some other methods provide some
+useful information about the iterator and its underlying image.</p>
+<div class="figure align-center" id="id3" style="width: 75%">
+<img alt="../_images/NeighborhoodIteratorFig2.png" src="../_images/NeighborhoodIteratorFig2.png" />
+<p class="caption"><span class="caption-text">Several possible 2D neighborhood iterator shapes are shown along with their
+radii and sizes. A neighborhood pixel can be dereferenced by its integer
+index (top) or its offset from the center (bottom). The center pixel of each
+iterator is shaded.</span></p>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">SizeType</span> <span class="pre">GetRadius()</span></code> Returns the ND radius of the
+neighborhood as an <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Size.html">itk::Size</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">ImageType</span> <span class="pre">*GetImagePointer()</span></code> Returns the pointer to the
+image referenced by the iterator.</li>
+<li><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">long</span> <span class="pre">Size()</span></code> Returns the size in number of pixels of
+the neighborhood.</li>
+</ul>
+<p>The neighborhood iterator interface extends the normal ITK iterator
+interface for setting and getting pixel values. One way to dereference
+pixels is to think of the neighborhood as a linear array where each
+pixel has a unique integer index. The index of a pixel in the array is
+determined by incrementing from the upper-left-forward corner of the
+neighborhood along the fastest increasing image dimension: first column,
+then row, then slice, and so on. In
+Figure&nbsp;[fig:NeighborhoodIteratorFig2], the unique integer index is shown
+at the top of each pixel. The center pixel is always at position
+<img class="math" src="../_images/math/e3b3fe2f4d76a49fb0ebeb4a5f8423011e0d5cb9.png" alt="n/2"/>, where <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> is the size of the array.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">GetPixel(const</span> <span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">i)</span></code> Returns the value of
+the pixel at neighborhood position <code class="docutils literal notranslate"><span class="pre">i</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetPixel(const</span> <span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">i,</span> <span class="pre">PixelType</span> <span class="pre">p)</span></code> Sets the
+value of the pixel at position <code class="docutils literal notranslate"><span class="pre">i</span></code> to <code class="docutils literal notranslate"><span class="pre">p</span></code>.</li>
+</ul>
+<p>Another way to think about a pixel location in a neighborhood is as an
+ND offset from the neighborhood center. The upper-left-forward corner of
+a <img class="math" src="../_images/math/762405cb98adfc1451c6a8c5ab674a18053a0960.png" alt="3x3x3"/> neighborhood, for example, can be described by offset
+<img class="math" src="../_images/math/d9424118861a3577d3362932c52ff11d3330ef54.png" alt="(-1, -1, -1)"/>. The bottom-right-back corner of the same
+neighborhood is at offset <img class="math" src="../_images/math/036966d8dee8b83677676e87f80ea332008de269.png" alt="(1, 1, 1)"/>. In
+Figure&nbsp;[fig:NeighborhoodIteratorFig2], the offset from center is shown
+at the bottom of each neighborhood pixel.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">GetPixel(const</span> <span class="pre">OffsetType</span> <span class="pre">&amp;o)</span></code> Get the value of the
+pixel at the position offset <code class="docutils literal notranslate"><span class="pre">o</span></code> from the neighborhood center.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetPixel(const</span> <span class="pre">OffsetType</span> <span class="pre">&amp;o,</span> <span class="pre">PixelType</span> <span class="pre">p)</span></code> Set the value
+at the position offset <code class="docutils literal notranslate"><span class="pre">o</span></code> from the neighborhood center to the
+value <code class="docutils literal notranslate"><span class="pre">p</span></code>.</li>
+</ul>
+<p>The neighborhood iterators also provide a shorthand for setting and
+getting the value at the center of the neighborhood.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">GetCenterPixel()</span></code> Gets the value at the center of
+the neighborhood.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetCenterPixel(PixelType</span> <span class="pre">p)</span></code> Sets the value at the center
+of the neighborhood to the value <code class="docutils literal notranslate"><span class="pre">p</span></code></li>
+</ul>
+<p>There is another shorthand for setting and getting values for pixels
+that lie some integer distance from the neighborhood center along one of
+the image axes.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">GetNext(unsigned</span> <span class="pre">int</span> <span class="pre">d)</span></code> Get the value immediately
+adjacent to the neighborhood center in the positive direction along
+the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetNext(unsigned</span> <span class="pre">int</span> <span class="pre">d,</span> <span class="pre">PixelType</span> <span class="pre">p)</span></code> Set the value
+immediately adjacent to the neighborhood center in the positive
+direction along the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis to the value <code class="docutils literal notranslate"><span class="pre">p</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">GetPrevious(unsigned</span> <span class="pre">int</span> <span class="pre">d)</span></code> Get the value
+immediately adjacent to the neighborhood center in the negative
+direction along the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetPrevious(unsigned</span> <span class="pre">int</span> <span class="pre">d,</span> <span class="pre">PixelType</span> <span class="pre">p)</span></code> Set the value
+immediately adjacent to the neighborhood center in the negative
+direction along the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis to the value <code class="docutils literal notranslate"><span class="pre">p</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">GetNext(unsigned</span> <span class="pre">int</span> <span class="pre">d,</span> <span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">s)</span></code> Get the
+value of the pixel located <code class="docutils literal notranslate"><span class="pre">s</span></code> pixels from the neighborhood center
+in the positive direction along the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetNext(unsigned</span> <span class="pre">int</span> <span class="pre">d,</span> <span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">s,</span> <span class="pre">PixelType</span> <span class="pre">p)</span></code> Set
+the value of the pixel located <code class="docutils literal notranslate"><span class="pre">s</span></code> pixels from the neighborhood
+center in the positive direction along the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis to value <code class="docutils literal notranslate"><span class="pre">p</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PixelType</span> <span class="pre">GetPrevious(unsigned</span> <span class="pre">int</span> <span class="pre">d,</span> <span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">s)</span></code> Get the
+value of the pixel located <code class="docutils literal notranslate"><span class="pre">s</span></code> pixels from the neighborhood center
+in the positive direction along the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetPrevious(unsigned</span> <span class="pre">int</span> <span class="pre">d,</span> <span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">s,</span> <span class="pre">PixelType</span> <span class="pre">p)</span></code>
+Set the value of the pixel located <code class="docutils literal notranslate"><span class="pre">s</span></code> pixels from the neighborhood
+center in the positive direction along the <code class="docutils literal notranslate"><span class="pre">d</span></code> axis to value <code class="docutils literal notranslate"><span class="pre">p</span></code>.</li>
+</ul>
+<p>It is also possible to extract or set all of the neighborhood values
+from an iterator at once using a regular ITK neighborhood object. This
+may be useful in algorithms that perform a particularly large number of
+calculations in the neighborhood and would otherwise require multiple
+dereferences of the same pixels.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">NeighborhoodType</span> <span class="pre">GetNeighborhood()</span></code> Return a
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Neighborhood.html">itk::Neighborhood</a> of the same size and shape as the
+neighborhood iterator and contains all of the values at the iterator
+position.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetNeighborhood(NeighborhoodType</span> <span class="pre">&amp;N)</span></code> Set all of the
+values in the neighborhood at the iterator position to those
+contained in Neighborhood <code class="docutils literal notranslate"><span class="pre">N</span></code>, which must be the same size and
+shape as the iterator.</li>
+</ul>
+<p>Several methods are defined to provide information about the
+neighborhood.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">IndexType</span> <span class="pre">GetIndex()</span></code> Return the image index of the center
+pixel of the neighborhood iterator.</li>
+<li><code class="docutils literal notranslate"><span class="pre">IndexType</span> <span class="pre">GetIndex(OffsetType</span> <span class="pre">o)</span></code> Return the image index of
+the pixel at offset <code class="docutils literal notranslate"><span class="pre">o</span></code> from the neighborhood center.</li>
+<li><code class="docutils literal notranslate"><span class="pre">IndexType</span> <span class="pre">GetIndex(unsigned</span> <span class="pre">int</span> <span class="pre">i)</span></code> Return the image index of
+the pixel at array position <code class="docutils literal notranslate"><span class="pre">i</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">OffsetType</span> <span class="pre">GetOffset(unsigned</span> <span class="pre">int</span> <span class="pre">i)</span></code> Return the offset from
+the neighborhood center of the pixel at array position <code class="docutils literal notranslate"><span class="pre">i</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">long</span> <span class="pre">GetNeighborhoodIndex(OffsetType</span> <span class="pre">o)</span></code> Return the
+array position of the pixel at offset <code class="docutils literal notranslate"><span class="pre">o</span></code> from the neighborhood
+center.</li>
+<li><code class="docutils literal notranslate"><span class="pre">std::slice</span> <span class="pre">GetSlice(unsigned</span> <span class="pre">int</span> <span class="pre">n)</span></code> Return a <code class="docutils literal notranslate"><span class="pre">std::slice</span></code>
+through the iterator neighborhood along axis <code class="docutils literal notranslate"><span class="pre">n</span></code>.</li>
+</ul>
+<p>A neighborhood-based calculation in a neighborhood close to an image
+boundary may require data that falls outside the boundary. The iterator
+in Figure&nbsp;[fig:NeighborhoodIteratorFig1], for example, is centered on a
+boundary pixel such that three of its neighbors actually do not exist in
+the image. When the extent of a neighborhood falls outside the image,
+pixel values for missing neighbors are supplied according to a rule,
+usually chosen to satisfy the numerical requirements of the algorithm. A
+rule for supplying out-of-bounds values is called a <em>boundary
+condition</em>.</p>
+<p>ITK neighborhood iterators automatically detect out-of-bounds
+dereferences and will return values according to boundary conditions.
+The boundary condition type is specified by the second, optional
+template parameter of the iterator. By default, neighborhood iterators
+use a Neumann condition where the first derivative across the boundary
+is zero. The Neumann rule simply returns the closest in-bounds pixel
+value to the requested out-of-bounds location. Several other common
+boundary conditions can be found in the ITK toolkit. They include a
+periodic condition that returns the pixel value from the opposite side
+of the data set, and is useful when working with periodic data such as
+Fourier transforms, and a constant value condition that returns a set
+value <img class="math" src="../_images/math/8d230554a01423c4c6560104b2918b65607c9406.png" alt="v"/> for all out-of-bounds pixel dereferences. The constant
+value condition is equivalent to padding the image with value <img class="math" src="../_images/math/8d230554a01423c4c6560104b2918b65607c9406.png" alt="v"/>.</p>
+<p>Bounds checking is a computationally expensive operation because it
+occurs each time the iterator is incremented. To increase efficiency, a
+neighborhood iterator automatically disables bounds checking when it
+detects that it is not necessary. A user may also explicitly disable or
+enable bounds checking. Most neighborhood based algorithms can minimize
+the need for bounds checking through clever definition of iteration
+regions. These techniques are explored in
+Section&nbsp;[sec:NeighborhoodExample3].</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">NeedToUseBoundaryConditionOn()</span></code> Explicitly turn bounds
+checking on. This method should be used with caution because
+unnecessarily enabling bounds checking may result in a significant
+performance decrease. In general you should allow the iterator to
+automatically determine this setting.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">NeedToUseBoundaryConditionOff()</span></code> Explicitly disable
+bounds checking. This method should be used with caution because
+disabling bounds checking when it is needed will result in
+out-of-bounds reads and undefined results.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">OverrideBoundaryCondition(BoundaryConditionType</span> <span class="pre">*b)</span></code>
+Overrides the templated boundary condition, using boundary condition
+object <code class="docutils literal notranslate"><span class="pre">b</span></code> instead. Object <code class="docutils literal notranslate"><span class="pre">b</span></code> should not be deleted until it has
+been released by the iterator. This method can be used to change
+iterator behavior at run-time.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">ResetBoundaryCondition()</span></code> Discontinues the use of any
+run-time specified boundary condition and returns to using the
+condition specified in the template argument.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">SetPixel(unsigned</span> <span class="pre">int</span> <span class="pre">i,</span> <span class="pre">PixelType</span> <span class="pre">p,</span> <span class="pre">bool</span> <span class="pre">status)</span></code> Sets
+the value at neighborhood array position <code class="docutils literal notranslate"><span class="pre">i</span></code> to value <code class="docutils literal notranslate"><span class="pre">p</span></code>. If the
+position <code class="docutils literal notranslate"><span class="pre">i</span></code> is out-of-bounds, <code class="docutils literal notranslate"><span class="pre">status</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>,
+otherwise <code class="docutils literal notranslate"><span class="pre">status</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+</ul>
+<p>The following sections describe the two ITK neighborhood iterator
+classes, <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1NeighborhoodIterator.html">itk::NeighborhoodIterator</a> and
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ShapedNeighborhoodIterator.html">itk::ShapedNeighborhoodIterator</a>. Each has a const and a
+non-const version. The shaped iterator is a refinement of the standard
+NeighborhoodIterator that supports an arbitrarily-shaped
+(non-rectilinear) neighborhood.</p>
+<div class="section" id="neighborhooditerator">
+<h3>NeighborhoodIterator<a class="headerlink" href="#neighborhooditerator" title="Permalink to this headline">¶</a></h3>
+<p>The standard neighborhood iterator class in ITK is the
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1NeighborhoodIterator.html">itk::NeighborhoodIterator</a>. Together with its <code class="docutils literal notranslate"><span class="pre">const</span></code>
+version, <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ConstNeighborhoodIterator.html">itk::ConstNeighborhoodIterator</a>, it implements the
+complete API described above. This section provides several examples to
+illustrate the use of NeighborhoodIterator.</p>
+<ul class="simple">
+<li>Basic neighborhood techniques: edge detection. See example <a class="reference internal" href="Examples/Iterators/NeighborhoodIterators1.html#neighborhooditerators1-cxx"><span class="std std-ref">NeighborhoodIterators1.cxx</span></a></li>
+<li>Convolution filtering: Sobel operator. See example <a class="reference internal" href="Examples/Iterators/NeighborhoodIterators2.html#neighborhooditerators2-cxx"><span class="std std-ref">NeighborhoodIterators2.cxx</span></a></li>
+<li>Optimizing iteration speed. See example <a class="reference internal" href="Examples/Iterators/NeighborhoodIterators3.html#neighborhooditerators3-cxx"><span class="std std-ref">NeighborhoodIterators3.cxx</span></a></li>
+<li>Separable convolution: Gaussian filtering. See example <a class="reference internal" href="Examples/Iterators/NeighborhoodIterators4.html#neighborhooditerators4-cxx"><span class="std std-ref">NeighborhoodIterators4.cxx</span></a></li>
+<li>Random access iteration: See example <a class="reference internal" href="Examples/Iterators/NeighborhoodIterators6.html#neighborhooditerators6-cxx"><span class="std std-ref">NeighborhoodIterators6.cxx</span></a></li>
+</ul>
+</div>
+<div class="section" id="shapedneighborhooditerator">
+<h3>ShapedNeighborhoodIterator<a class="headerlink" href="#shapedneighborhooditerator" title="Permalink to this headline">¶</a></h3>
+<p>This section describes a variation on the neighborhood iterator called a
+<em>shaped</em> neighborhood iterator. A shaped neighborhood is defined like a
+bit mask, or <em>stencil</em>, with different offsets in the rectilinear
+neighborhood of the normal neighborhood iterator turned off or on to
+create a pattern. Inactive positions (those not in the stencil) are not
+updated during iteration and their values cannot be read or written. The
+shaped iterator is implemented in the class
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ShapedNeighborhoodIterator.html">itk::ShapedNeighborhoodIterator</a>, which is a subclass of
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1NeighborhoodIterator.html">itk::NeighborhoodIterator</a>. A const version,
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ConstShapedNeighborhoodIterator.html">itk::ConstShapedNeighborhoodIterator</a>, is also available.</p>
+<p>Like a regular neighborhood iterator, a shaped neighborhood iterator
+must be initialized with an ND radius object, but the radius of the
+neighborhood of a shaped iterator only defines the set of <em>possible</em>
+neighbors. Any number of possible neighbors can then be activated or
+deactivated. The shaped neighborhood iterator defines an API for
+activating neighbors. When a neighbor location, defined relative to the
+center of the neighborhood, is activated, it is placed on the <em>active
+list</em> and is then part of the stencil. An iterator can be “reshaped” at
+any time by adding or removing offsets from the active list.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">ActivateOffset(OffsetType</span> <span class="pre">&amp;o)</span></code> Include the offset <code class="docutils literal notranslate"><span class="pre">o</span></code>
+in the stencil of active neighborhood positions. Offsets are relative
+to the neighborhood center.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">DeactivateOffset(OffsetType</span> <span class="pre">&amp;o)</span></code> Remove the offset <code class="docutils literal notranslate"><span class="pre">o</span></code>
+from the stencil of active neighborhood positions. Offsets are
+relative to the neighborhood center.</li>
+<li><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">ClearActiveList()</span></code> Deactivate all positions in the
+iterator stencil by clearing the active list.</li>
+<li><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">int</span> <span class="pre">GetActiveIndexListSize()</span></code> Return the number of
+pixel locations that are currently active in the shaped iterator
+stencil.</li>
+</ul>
+<p>Because the neighborhood is less rigidly defined in the shaped iterator,
+the set of pixel access methods is restricted. Only the <code class="docutils literal notranslate"><span class="pre">GetPixel()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">SetPixel()</span></code> methods are available, and calling these methods on
+an inactive neighborhood offset will return undefined results.</p>
+<p>For the common case of traversing all pixel offsets in a neighborhood,
+the shaped iterator class provides an iterator through the active
+offsets in its stencil. This <em>stencil iterator</em> can be incremented or
+decremented and defines <code class="docutils literal notranslate"><span class="pre">Get()</span></code> and <code class="docutils literal notranslate"><span class="pre">Set()</span></code> for reading and writing
+the values in the neighborhood.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ShapedNeighborhoodIterator::Iterator</span> <span class="pre">Begin()</span></code> Return a const
+or non-const iterator through the shaped iterator stencil that points
+to the first valid location in the stencil.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ShapedNeighborhoodIterator::Iterator</span> <span class="pre">End()</span></code> Return a const or
+non-const iterator through the shaped iterator stencil that points
+<em>one position past</em> the last valid location in the stencil.</li>
+</ul>
+<p>The functionality and interface of the shaped neighborhood iterator is
+best described by example. We will use the ShapedNeighborhoodIterator to
+implement some binary image morphology algorithms.
+The examples that follow implement erosion and dilation.</p>
+<p>For shaped neighborhoods morphological operations, see also examples
+<a class="reference internal" href="Examples/Iterators/ShapedNeighborhoodIterators1.html#shapedneighborhooditerators1-cxx"><span class="std std-ref">ShapedNeighborhoodIterators1.cxx</span></a> and <a class="reference internal" href="Examples/Iterators/ShapedNeighborhoodIterators2.html#shapedneighborhooditerators2-cxx"><span class="std std-ref">ShapedNeighborhoodIterators2.cxx</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Filters.html" class="btn btn-neutral float-right" title="Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SystemOverview.html" class="btn btn-neutral" title="System Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

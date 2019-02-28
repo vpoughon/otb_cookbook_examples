@@ -1,4 +1,4 @@
-.. _example-ImageSeriesIOExample:
+.. _ImageSeriesIOExample.cxx:
 
 ImageSeriesIOExample.cxx
 ========================
@@ -9,7 +9,7 @@ ImageSeriesIOExample.cxx
 
 
 
-Example source code (`ImageSeriesIOExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ImageSeriesIOExample.cxx?inline=false>`_):
+Example source code (`ImageSeriesIOExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ImageSeriesIOExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

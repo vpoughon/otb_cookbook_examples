@@ -1,4 +1,4 @@
-.. _example-AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter:
+.. _AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx:
 
 AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx
 ========================================================
@@ -23,7 +23,8 @@ Example usage:
                                                            830
 
 
-Example source code (`AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx?inline=false>`_):
+
+Example source code (`AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

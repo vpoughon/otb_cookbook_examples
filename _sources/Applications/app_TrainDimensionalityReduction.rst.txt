@@ -1,4 +1,4 @@
-.. _app-TrainDimensionalityReduction:
+.. _TrainDimensionalityReduction:
 
 TrainDimensionalityReduction
 ============================
@@ -10,7 +10,7 @@ Description
 -----------
 
 Trainer for dimensionality reduction algorithms (autoencoders, PCA, SOM). All input samples are used to compute the model, like other machine learning models.
-The model can be used in the :ref:`app-ImageDimensionalityReduction` and :ref:`app-VectorDimensionalityReduction` applications.
+The model can be used in the :ref:`ImageDimensionalityReduction` and :ref:`VectorDimensionalityReduction` applications.
 
 Parameters
 ----------
@@ -172,4 +172,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-ImageDimensionalityReduction`, :ref:`app-VectorDimensionalityReduction`
+| :ref:`ImageDimensionalityReduction`, :ref:`VectorDimensionalityReduction`

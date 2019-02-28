@@ -1,4 +1,4 @@
-.. _example-Multispectral:
+.. _Multispectral.cxx:
 
 Multispectral.cxx
 =================
@@ -14,7 +14,8 @@ Example usage:
     ./Multispectral Input/qb_RoadExtract.tif Output/qb_blue.tif Output/qb_shiftscale.tif
 
 
-Example source code (`Multispectral.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/Multispectral.cxx?inline=false>`_):
+
+Example source code (`Multispectral.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/Multispectral.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

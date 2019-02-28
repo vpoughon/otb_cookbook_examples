@@ -1,4 +1,4 @@
-.. _example-AtmosphericCorrectionSequencement:
+.. _AtmosphericCorrectionSequencement.cxx:
 
 AtmosphericCorrectionSequencement.cxx
 =====================================
@@ -31,7 +31,8 @@ Example usage:
                                         0.020
 
 
-Example source code (`AtmosphericCorrectionSequencement.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/AtmosphericCorrectionSequencement.cxx?inline=false>`_):
+
+Example source code (`AtmosphericCorrectionSequencement.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/AtmosphericCorrectionSequencement.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

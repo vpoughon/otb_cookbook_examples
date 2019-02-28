@@ -1,4 +1,4 @@
-.. _app-VectorClassifier:
+.. _VectorClassifier:
 
 VectorClassifier
 ================
@@ -9,7 +9,7 @@ Performs a classification of the input vector data according to a model file.
 Description
 -----------
 
-This application performs a vector data classification based on a model file produced by the :ref:`app-TrainVectorClassifier` application.Features of the vector data output will contain the class labels decided by the classifier (maximal class label = 65535). 
+This application performs a vector data classification based on a model file produced by the :ref:`TrainVectorClassifier` application.Features of the vector data output will contain the class labels decided by the classifier (maximal class label = 65535). 
 There are two modes: 
 1) Update mode: add of the 'cfield' field containing the predicted class in the input file. 
 2) Write mode: copies the existing fields of the input file in the output file  and add the 'cfield' field containing the predicted class. 
@@ -104,4 +104,4 @@ Shapefiles are supported. But the SQLite format is only supported in update mode
 See also
 --------
 
-| :ref:`app-TrainVectorClassifier`
+| :ref:`TrainVectorClassifier`

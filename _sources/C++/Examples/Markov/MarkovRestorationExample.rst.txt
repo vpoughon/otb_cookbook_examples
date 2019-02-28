@@ -1,4 +1,4 @@
-.. _example-MarkovRestorationExample:
+.. _MarkovRestorationExample.cxx:
 
 MarkovRestorationExample.cxx
 ============================
@@ -14,7 +14,8 @@ Example usage:
     ./MarkovRestorationExample Input/QB_Suburb.png Input/QB_Suburb.png Output/MarkovRestoration.png 10.0 30 1.0 1
 
 
-Example source code (`MarkovRestorationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovRestorationExample.cxx?inline=false>`_):
+
+Example source code (`MarkovRestorationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovRestorationExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

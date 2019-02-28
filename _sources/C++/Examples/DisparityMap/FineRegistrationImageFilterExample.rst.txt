@@ -1,4 +1,4 @@
-.. _example-FineRegistrationImageFilterExample:
+.. _FineRegistrationImageFilterExample.cxx:
 
 FineRegistrationImageFilterExample.cxx
 ======================================
@@ -21,6 +21,7 @@ Example usage:
                                          5 \
                                          3 \
                                          0.1
+
 Example usage:
 
 .. code-block:: bash
@@ -38,7 +39,8 @@ Example usage:
                                          mrsd
 
 
-Example source code (`FineRegistrationImageFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/FineRegistrationImageFilterExample.cxx?inline=false>`_):
+
+Example source code (`FineRegistrationImageFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/FineRegistrationImageFilterExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

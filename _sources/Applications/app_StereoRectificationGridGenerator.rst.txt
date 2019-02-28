@@ -1,4 +1,4 @@
-.. _app-StereoRectificationGridGenerator:
+.. _StereoRectificationGridGenerator:
 
 StereoRectificationGridGenerator
 ================================
@@ -11,7 +11,7 @@ Description
 
 This application generates a pair of deformation grid to stereo-rectify a pair of stereo images according to sensor modelling and a mean elevation hypothesis.
 
-This application is the first part of the stereo reconstruction framework. The output deformation grids can be passed to the :ref:`app-GridBasedImageResampling` application for actual resampling into epipolar geometry.
+This application is the first part of the stereo reconstruction framework. The output deformation grids can be passed to the :ref:`GridBasedImageResampling` application for actual resampling into epipolar geometry.
 
 There are several ways to set the elevation source:
 
@@ -178,4 +178,4 @@ Generation of the deformation grid is not streamable, pay attention to this fact
 See also
 --------
 
-| otb:ref:`app-GridBasedImageResampling`
+| otb:ref:`GridBasedImageResampling`

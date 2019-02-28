@@ -1,4 +1,4 @@
-.. _app-LineSegmentDetection:
+.. _LineSegmentDetection:
 
 LineSegmentDetection
 ====================

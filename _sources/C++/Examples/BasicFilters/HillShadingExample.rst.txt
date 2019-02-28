@@ -1,4 +1,4 @@
-.. _example-HillShadingExample:
+.. _HillShadingExample.cxx:
 
 HillShadingExample.cxx
 ======================
@@ -14,7 +14,8 @@ Example usage:
     ./HillShadingExample Output/HillShadingExample.png Output/HillShadingColorExample.png 6.5 45.5 500 500 0.002 -0.002 Input/DEM_srtm
 
 
-Example source code (`HillShadingExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/HillShadingExample.cxx?inline=false>`_):
+
+Example source code (`HillShadingExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/HillShadingExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

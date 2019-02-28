@@ -1,4 +1,4 @@
-.. _app-ImageEnvelope:
+.. _ImageEnvelope:
 
 ImageEnvelope
 =============

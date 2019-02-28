@@ -1,0 +1,756 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Filters &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Streaming and Threading" href="StreamingAndThreading.html" />
+    <link rel="prev" title="Iterators" href="Iterators.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terminology">Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overview-of-filter-creation">Overview of Filter Creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-large-data">Streaming Large Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview-of-pipeline-execution">Overview of Pipeline Execution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#details-of-pipeline-execution">Details of Pipeline Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#threaded-filter-execution">Threaded Filter Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-conventions">Filter Conventions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#optional">Optional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#useful-macros">Useful Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#composite-filters">Composite filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>Filters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Filters.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="filters">
+<span id="id1"></span><h1>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h1>
+<p>This purpose of this chapter is help developers create their own filter
+(process object). This chapter is divided into four major parts. An
+initial definition of terms is followed by an overview of the filter
+creation process. Next, data streaming is discussed. The way data is
+streamed in ITK must be understood in order to write correct filters.
+Finally, a section on multithreading describes what you must do in order
+to take advantage of shared memory parallel processing.</p>
+<div class="section" id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h2>
+<p>The following is some basic terminology for the discussion that follows.
+Chapter <a class="reference internal" href="SystemOverview.html#systemoverview"><span class="std std-ref">System Overview</span></a> provides additional background
+information.</p>
+<ul class="simple">
+<li>The <strong>data processing pipeline</strong> is a directed graph of <strong>process</strong>
+and <strong>data objects</strong>. The pipeline inputs, operators on, and outputs
+data.</li>
+<li>A <strong>filter</strong>, or <strong>process object</strong>, has one or more inputs, and one
+or more outputs.</li>
+<li>A <strong>source</strong>, or source process object, initiates the data processing
+pipeline, and has one or more outputs.</li>
+<li>A <strong>mapper</strong>, or mapper process object, terminates the data
+processing pipeline. The mapper has one or more outputs, and may
+write data to disk, interface with a display system, or interface to
+any other system.</li>
+<li>A <strong>data object</strong> represents and provides access to data. In ITK, the
+data object (ITK class <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1DataObject.html">itk::DataObject</a>) is typically of
+type <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a> or <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Mesh.html">itk::Mesh</a>.</li>
+<li>A <strong>region</strong> (ITK class <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Region.html">itk::Region</a>) represents a piece, or
+subset of the entire data set.</li>
+<li>An <strong>image region</strong> (ITK class <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageRegion.html">itk::ImageRegion</a>) represents
+a structured portion of data. ImageRegion is implemented using the
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Index.html">itk::Index</a> and <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Size.html">itk::Size</a> classes</li>
+<li>A <strong>mesh region</strong> (ITK class <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1MeshRegion.html">itk::MeshRegion</a>) represents an
+unstructured portion of data.</li>
+<li>The <strong>LargestPossibleRegion</strong> is the theoretical single, largest
+piece (region) that could represent the entire dataset. The
+LargestPossibleRegion is used in the system as the measure of the
+largest possible data size.</li>
+<li>The <strong>BufferedRegion</strong> is a contiguous block of memory that is less
+than or equal to in size to the LargestPossibleRegion. The buffered
+region is what has actually been allocated by a filter to hold its
+output.</li>
+<li>The <strong>RequestedRegion</strong> is the piece of the dataset that a filter is
+required to produce. The RequestedRegion is less than or equal in
+size to the BufferedRegion. The RequestedRegion may differ in size
+from the BufferedRegion due to performance reasons. The
+RequestedRegion may be set by a user, or by an application that needs
+just a portion of the data.</li>
+<li>The <strong>modified time</strong> (represented by ITK class
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1TimeStamp.html">itk::TimeStamp</a>) is a monotonically increasing integer value
+that characterizes a point in time when an object was last modified.</li>
+<li><strong>Downstream</strong> is the direction of dataflow, from sources to mappers.</li>
+<li><strong>Upstream</strong> is the opposite of downstream, from mappers to sources.</li>
+<li>The <strong>pipeline modified time</strong> for a particular data object is the
+maximum modified time of all upstream data objects and process
+objects.</li>
+<li>The term <strong>information</strong> refers to metadata that characterizes data.
+For example, index and dimensions are information characterizing an
+image region.</li>
+</ul>
+</div>
+<div class="section" id="overview-of-filter-creation">
+<h2>Overview of Filter Creation<a class="headerlink" href="#overview-of-filter-creation" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="../_images/DataPipelineOneConnection.png" src="../_images/DataPipelineOneConnection.png" />
+</div>
+<p>Filters are defined with respect to the type of data they input (if
+any), and the type of data they output (if any). The key to writing a
+ITK filter is to identify the number and types of input and output.
+Having done so, there are often superclasses that simplify this task via
+class derivation. For example, most filters in ITK take a single image
+as input, and produce a single image on output. The superclass
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageToImageFilter.html">itk::ImageToImageFilter</a> is a convenience class that provide
+most of the functionality needed for such a filter.</p>
+<p>Some common base classes for new filters include:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ImageToImageFilter</span></code>: the most common filter base for segmentation
+algorithms. Takes an image and produces a new image, by default of
+the same dimensions. Override <code class="docutils literal notranslate"><span class="pre">GenerateOutputInformation</span></code> to
+produce a different size.</li>
+<li><code class="docutils literal notranslate"><span class="pre">UnaryFunctorImageFilter</span></code>: used when defining a filter that applies
+a function to an image.</li>
+<li><code class="docutils literal notranslate"><span class="pre">BinaryFunctorImageFilter</span></code>: used when defining a filter that
+applies an operation to two images.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ImageFunction</span></code>: a functor that can be applied to an image,
+evaluating <img class="math" src="../_images/math/eda52292f6952f7e27fef52e7ce8393981770d2c.png" alt="f(x)"/> at each point in the image.</li>
+<li><code class="docutils literal notranslate"><span class="pre">MeshToMeshFilter</span></code>: a filter that transforms meshes, such as
+tessellation, polygon reduction, and so on.</li>
+<li><code class="docutils literal notranslate"><span class="pre">LightObject</span></code>: abstract base for filters that don’t fit well
+anywhere else in the class hierarchy. Also useful for “calculator”
+filters; ie. a sink filter that takes an input and calculates a
+result which is retrieved using a <code class="docutils literal notranslate"><span class="pre">Get()</span></code> method.</li>
+</ul>
+<p>Once the appropriate superclass is identified, the filter writer
+implements the class defining the methods required by most all ITK
+objects: <code class="docutils literal notranslate"><span class="pre">New()</span></code>, <code class="docutils literal notranslate"><span class="pre">PrintSelf()</span></code>, and protected constructor, copy
+constructor, delete, and operator=, and so on. Also, don’t forget
+standard typedefs like <code class="docutils literal notranslate"><span class="pre">Self</span></code>, <code class="docutils literal notranslate"><span class="pre">Superclass</span></code>, <code class="docutils literal notranslate"><span class="pre">Pointer</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">ConstPointer</span></code>. Then the filter writer can focus on the most important
+parts of the implementation: defining the API, data members, and other
+implementation details of the algorithm. In particular, the filter
+writer will have to implement either a <code class="docutils literal notranslate"><span class="pre">GenerateData()</span></code> (non-threaded)
+or <code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code> method. (See Section&nbsp;[sec:MultiThreading]
+for an overview of multi-threading in ITK.)</p>
+<p>An important note: the GenerateData() method is required to allocate
+memory for the output. The ThreadedGenerateData() method is not. In
+default implementation (see <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageSource.html">itk::ImageSource</a>, a superclass of
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageToImageFilter.html">itk::ImageToImageFilter</a>) <code class="docutils literal notranslate"><span class="pre">GenerateData()</span></code> allocates memory
+and then invokes <code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code>.</p>
+<p>One of the most important decisions that the developer must make is
+whether the filter can stream data; that is, process just a portion of
+the input to produce a portion of the output. Often superclass behavior
+works well: if the filter processes the input using single pixel access,
+then the default behavior is adequate. If not, then the user may have to
+a) find a more specialized superclass to derive from, or b) override one
+or more methods that control how the filter operates during pipeline
+execution. The next section describes these methods.</p>
+</div>
+<div class="section" id="streaming-large-data">
+<span id="streaminglargedata"></span><h2>Streaming Large Data<a class="headerlink" href="#streaming-large-data" title="Permalink to this headline">¶</a></h2>
+<p>The data associated with multi-dimensional images is large and becoming
+larger. This trend is due to advances in scanning resolution, as well as
+increases in computing capability. Any practical segmentation and
+registration software system must address this fact in order to be
+useful in application. ITK addresses this problem via its data streaming
+facility.</p>
+<p>In ITK, streaming is the process of dividing data into pieces, or
+regions, and then processing this data through the data pipeline. Recall
+that the pipeline consists of process objects that generate data
+objects, connected into a pipeline topology. The input to a process
+object is a data object (unless the process initiates the pipeline and
+then it is a source process object). These data objects in turn are
+consumed by other process objects, and so on, until a directed graph of
+data flow is constructed. Eventually the pipeline is terminated by one
+or more mappers, that may write data to storage, or interface with a
+graphics or other system. This is illustrated in figures
+[fig:DataPipeLineOneConnection] and [fig:DataPipeLine].</p>
+<p>A significant benefit of this architecture is that the relatively
+complex process of managing pipeline execution is designed into the
+system. This means that keeping the pipeline up to date, executing only
+those portions of the pipeline that have changed, multithreading
+execution, managing memory allocation, and streaming is all built into
+the architecture. However, these features do introduce complexity into
+the system, the bulk of which is seen by class developers. The purpose
+of this chapter is to describe the pipeline execution process in detail,
+with a focus on data streaming.</p>
+<div class="section" id="overview-of-pipeline-execution">
+<h3>Overview of Pipeline Execution<a class="headerlink" href="#overview-of-pipeline-execution" title="Permalink to this headline">¶</a></h3>
+<p>The pipeline execution process performs several important functions.</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/DataPipeline.png" src="../_images/DataPipeline.png" />
+<p class="caption"><span class="caption-text">The Data Pipeline</span></p>
+</div>
+<ol class="arabic simple">
+<li>It determines which filters, in a pipeline of filters, need to
+execute. This prevents redundant execution and minimizes overall
+execution time.</li>
+<li>It initializes the (filter’s) output data objects, preparing them for
+new data. In addition, it determines how much memory each filter must
+allocate for its output, and allocates it.</li>
+<li>The execution process determines how much data a filter must process
+in order to produce an output of sufficient size for downstream
+filters; it also takes into account any limits on memory or special
+filter requirements. Other factors include the size of data
+processing kernels, that affect how much data input data (extra
+padding) is required.</li>
+<li>It subdivides data into subpieces for multithreading. (Note that the
+division of data into subpieces is exactly same problem as dividing
+data into pieces for streaming; hence multithreading comes for free
+as part of the streaming architecture.)</li>
+<li>It may free (or release) output data if filters no longer need it to
+compute, and the user requests that data is to be released. (Note: a
+filter’s output data object may be considered a “cache”. If the cache
+is allowed to remain (<code class="docutils literal notranslate"><span class="pre">ReleaseDataFlagOff()</span></code>) between pipeline
+execution, and the filter, or the input to the filter, never changes,
+then process objects downstream of the filter just reuse the filter’s
+cache to re-execute.)</li>
+</ol>
+<p>To perform these functions, the execution process negotiates with the
+filters that define the pipeline. Only each filter can know how much
+data is required on input to produce a particular output. For example, a
+shrink filter with a shrink factor of two requires an image twice as
+large (in terms of its x-y dimensions) on input to produce a particular
+size output. An image convolution filter would require extra input
+(boundary padding) depending on the size of the convolution kernel. Some
+filters require the entire input to produce an output (for example, a
+histogram), and have the option of requesting the entire input. (In this
+case streaming does not work unless the developer creates a filter that
+can request multiple pieces, caching state between each piece to
+assemble the final output.)</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/DataPipelineUpdate.png" src="../_images/DataPipelineUpdate.png" />
+<p class="caption"><span class="caption-text">Sequence of the Data Pipeline updating mechanism</span></p>
+</div>
+<p>Ultimately the negotiation process is controlled by the request for data
+of a particular size (i.e., region). It may be that the user asks to
+process a region of interest within a large image, or that memory
+limitations result in processing the data in several pieces. For
+example, an application may compute the memory required by a pipeline,
+and then use <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1StreamingImageFilter.html">itk::StreamingImageFilter</a> to break the data
+processing into several pieces. The data request is propagated through
+the pipeline in the upstream direction, and the negotiation process
+configures each filter to produce output data of a particular size.</p>
+<p>The secret to creating a streaming filter is to understand how this
+negotiation process works, and how to override its default behavior by
+using the appropriate virtual functions defined in
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ProcessObject.html">itk::ProcessObject</a>. The next section describes the specifics
+of these methods, and when to override them. Examples are provided along
+the way to illustrate concepts.</p>
+</div>
+<div class="section" id="details-of-pipeline-execution">
+<h3>Details of Pipeline Execution<a class="headerlink" href="#details-of-pipeline-execution" title="Permalink to this headline">¶</a></h3>
+<p>Typically pipeline execution is initiated when a process object receives
+the <code class="docutils literal notranslate"><span class="pre">ProcessObject::Update()</span></code> method invocation. This method is simply
+delegated to the output of the filter, invoking the
+<code class="docutils literal notranslate"><span class="pre">DataObject::Update()</span></code> method. Note that this behavior is typical of
+the interaction between ProcessObject and DataObject: a method invoked
+on one is eventually delegated to the other. In this way the data
+request from the pipeline is propagated upstream, initiating data flow
+that returns downstream.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DataObject::Update()</span></code> method in turn invokes three other methods:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">DataObject::UpdateOutputInformation()</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">DataObject::PropagateRequestedRegion()</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">DataObject::UpdateOutputData()</span></code></li>
+</ul>
+<div class="section" id="updateoutputinformation">
+<h4>UpdateOutputInformation()<a class="headerlink" href="#updateoutputinformation" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">UpdateOutputInformation()</span></code> method determines the pipeline
+modified time. It may set the RequestedRegion and the
+LargestPossibleRegion depending on how the filters are configured. (The
+RequestedRegion is set to process all the data, i.e., the
+LargestPossibleRegion, if it has not been set.) The
+UpdateOutputInformation() propagates upstream through the entire
+pipeline and terminates at the sources.</p>
+<p>During <code class="docutils literal notranslate"><span class="pre">UpdateOutputInformation()</span></code>, filters have a chance to override
+the <code class="docutils literal notranslate"><span class="pre">ProcessObject::GenerateOutputInformation()</span></code> method
+(<code class="docutils literal notranslate"><span class="pre">GenerateOutputInformation()</span></code> is invoked by
+<code class="docutils literal notranslate"><span class="pre">UpdateOutputInformation()</span></code>). The default behavior is for the
+<code class="docutils literal notranslate"><span class="pre">GenerateOutputInformation()</span></code> to copy the metadata describing the
+input to the output (via <code class="docutils literal notranslate"><span class="pre">DataObject::CopyInformation()</span></code>). Remember,
+information is metadata describing the output, such as the origin,
+spacing, and LargestPossibleRegion (i.e., largest possible size) of an
+image.</p>
+<p>A good example of this behavior is <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ShrinkImageFilter.html">itk::ShrinkImageFilter</a>.
+This filter takes an input image and shrinks it by some integral value.
+The result is that the spacing and LargestPossibleRegion of the output
+will be different to that of the input. Thus,
+<code class="docutils literal notranslate"><span class="pre">GenerateOutputInformation()</span></code> is overloaded.</p>
+</div>
+<div class="section" id="propagaterequestedregion">
+<h4>PropagateRequestedRegion()<a class="headerlink" href="#propagaterequestedregion" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">PropagateRequestedRegion()</span></code> call propagates upstream to satisfy a
+data request. In typical application this data request is usually the
+LargestPossibleRegion, but if streaming is necessary, or the user is
+interested in updating just a portion of the data, the RequestedRegion
+may be any valid region within the LargestPossibleRegion.</p>
+<p>The function of <code class="docutils literal notranslate"><span class="pre">PropagateRequestedRegion()</span></code> is, given a request for
+data (the amount is specified by RequestedRegion), propagate upstream
+configuring the filter’s input and output process object’s to the
+correct size. Eventually, this means configuring the BufferedRegion,
+that is the amount of data actually allocated.</p>
+<p>The reason for the buffered region is this: the output of a filter may
+be consumed by more than one downstream filter. If these consumers each
+request different amounts of input (say due to kernel requirements or
+other padding needs), then the upstream, generating filter produces the
+data to satisfy both consumers, that may mean it produces more data than
+one of the consumers needs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ProcessObject::PropagateRequestedRegion()</span></code> method invokes three
+methods that the filter developer may choose to overload.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">EnlargeOutputRequestedRegion(DataObject</span> <span class="pre">*output)</span></code> gives the
+(filter) subclass a chance to indicate that it will provide more data
+than required for the output. This can happen, for example, when a
+source can only produce the whole output (i.e., the
+LargestPossibleRegion).</li>
+<li><code class="docutils literal notranslate"><span class="pre">GenerateOutputRequestedRegion(DataObject</span> <span class="pre">*output)</span></code> gives the
+subclass a chance to define how to set the requested regions for each
+of its outputs, given this output’s requested region. The default
+implementation is to make all the output requested regions the same.
+A subclass may need to override this method if each output is a
+different resolution. This method is only overridden if a filter has
+multiple outputs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">GenerateInputRequestedRegion()</span></code> gives the subclass a chance to
+request a larger requested region on the inputs. This is necessary
+when, for example, a filter requires more data at the “internal”
+boundaries to produce the boundary values - due to kernel operations
+or other region boundary effects.</li>
+</ul>
+<p><a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1RGBGibbsPriorFilter.html">itk::RGBGibbsPriorFilter</a> is an example of a filter that needs
+to invoke <code class="docutils literal notranslate"><span class="pre">EnlargeOutputRequestedRegion()</span></code>. The designer of this
+filter decided that the filter should operate on all the data. Note that
+a subtle interplay between this method and
+<code class="docutils literal notranslate"><span class="pre">GenerateInputRequestedRegion()</span></code> is occurring here. The default
+behavior of <code class="docutils literal notranslate"><span class="pre">GenerateInputRequestedRegion()</span></code> (at least for
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageToImageFilter.html">itk::ImageToImageFilter</a>) is to set the input RequestedRegion
+to the output’s ReqestedRegion. Hence, by overriding the method
+<code class="docutils literal notranslate"><span class="pre">EnlargeOutputRequestedRegion()</span></code> to set the output to the
+LargestPossibleRegion, effectively sets the input to this filter to the
+LargestPossibleRegion (and probably causing all upstream filters to
+process their LargestPossibleRegion as well. This means that the filter,
+and therefore the pipeline, does not stream. This could be fixed by
+reimplementing the filter with the notion of streaming built in to the
+algorithm.)</p>
+<p><a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1GradientMagnitudeImageFilter.html">itk::GradientMagnitudeImageFilter</a> is an example of a filter
+that needs to invoke <code class="docutils literal notranslate"><span class="pre">GenerateInputRequestedRegion()</span></code>. It needs a
+larger input requested region because a kernel is required to compute
+the gradient at a pixel. Hence the input needs to be “padded out” so the
+filter has enough data to compute the gradient at each output pixel.</p>
+</div>
+<div class="section" id="updateoutputdata">
+<h4>UpdateOutputData()<a class="headerlink" href="#updateoutputdata" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">UpdateOutputData()</span></code> is the third and final method as a result of the
+<code class="docutils literal notranslate"><span class="pre">Update()</span></code> method. The purpose of this method is to determine whether
+a particular filter needs to execute in order to bring its output up to
+date. (A filter executes when its <code class="docutils literal notranslate"><span class="pre">GenerateData()</span></code> method is invoked.)
+Filter execution occurs when a) the filter is modified as a result of
+modifying an instance variable; b) the input to the filter changes; c)
+the input data has been released; or d) an invalid RequestedRegion was
+set previously and the filter did not produce data. Filters execute in
+order in the downstream direction. Once a filter executes, all filters
+downstream of it must also execute.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DataObject::UpdateOutputData()</span></code> is delegated to the DataObject’s
+source (i.e., the ProcessObject that generated it) only if the
+DataObject needs to be updated. A comparison of modified time, pipeline
+time, release data flag, and valid requested region is made. If any one
+of these conditions indicate that the data needs regeneration, then the
+source’s <code class="docutils literal notranslate"><span class="pre">ProcessObject::UpdateOutputData()</span></code> is invoked. These calls
+are made recursively up the pipeline until a source filter object is
+encountered, or the pipeline is determined to be up to date and valid.
+At this point, the recursion unrolls, and the execution of the filter
+proceeds. (This means that the output data is initialized, StartEvent is
+invoked, the filters <code class="docutils literal notranslate"><span class="pre">GenerateData()</span></code> is called, EndEvent is invoked,
+and input data to this filter may be released, if requested. In
+addition, this filter’s InformationTime is updated to the current time.)</p>
+<p>The developer will never override <code class="docutils literal notranslate"><span class="pre">UpdateOutputData()</span></code>. The developer
+need only write the <code class="docutils literal notranslate"><span class="pre">GenerateData()</span></code> method (non-threaded) or
+<code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code> method. A discussion of threading follows in
+the next section.</p>
+</div>
+</div>
+</div>
+<div class="section" id="threaded-filter-execution">
+<span id="threadedfilterexecution"></span><h2>Threaded Filter Execution<a class="headerlink" href="#threaded-filter-execution" title="Permalink to this headline">¶</a></h2>
+<p>Filters that can process data in pieces can typically multi-process
+using the data parallel, shared memory implementation built into the
+pipeline execution process. To create a multithreaded filter, simply
+define and implement a <code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code> method. For example, a
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageToImageFilter.html">itk::ImageToImageFilter</a> would create the method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">ThreadedGenerateData</span><span class="p">(</span><span class="k">const</span> <span class="n">OutputImageRegionType</span><span class="o">&amp;</span> <span class="n">outputRegionForThread</span><span class="p">,</span> <span class="n">itk</span><span class="o">::</span><span class="n">ThreadIdType</span> <span class="n">threadId</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The key to threading is to generate output for the output region given
+(as the first parameter in the argument list above). In ITK, this is
+simple to do because an output iterator can be created using the region
+provided. Hence the output can be iterated over, accessing the
+corresponding input pixels as necessary to compute the value of the
+output pixel.</p>
+<p>Multi-threading requires caution when performing I/O (including using
+<code class="docutils literal notranslate"><span class="pre">cout</span></code> or <code class="docutils literal notranslate"><span class="pre">cerr</span></code>) or invoking events. A safe practice is to allow
+only thread id zero to perform I/O or generate events. (The thread id is
+passed as argument into <code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code>). If more than one
+thread tries to write to the same place at the same time, the program
+can behave badly, and possibly even deadlock or crash.</p>
+</div>
+<div class="section" id="filter-conventions">
+<h2>Filter Conventions<a class="headerlink" href="#filter-conventions" title="Permalink to this headline">¶</a></h2>
+<p>In order to fully participate in the ITK pipeline, filters are expected
+to follow certain conventions, and provide certain interfaces. This
+section describes the minimum requirements for a filter to integrate
+into the ITK framework.</p>
+<p>The class declaration for a filter should include the macro
+<code class="docutils literal notranslate"><span class="pre">ITK_EXPORT</span></code>, so that on certain platforms an export declaration can
+be included.</p>
+<p>A filter should define public types for the class itself (<code class="docutils literal notranslate"><span class="pre">Self</span></code>) and
+its <code class="docutils literal notranslate"><span class="pre">Superclass</span></code>, and <code class="docutils literal notranslate"><span class="pre">const</span></code> and non-<code class="docutils literal notranslate"><span class="pre">const</span></code> smart pointers,
+thus:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">ExampleImageFilter</span>                <span class="n">Self</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">ImageToImageFilter</span><span class="o">&lt;</span><span class="n">TImage</span><span class="p">,</span><span class="n">TImage</span><span class="o">&gt;</span> <span class="n">Superclass</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="n">Self</span><span class="o">&gt;</span>                <span class="n">Pointer</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">SmartPointer</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Self</span><span class="o">&gt;</span>          <span class="n">ConstPointer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Pointer</span></code> type is particularly useful, as it is a smart pointer
+that will be used by all client code to hold a reference-counted
+instantiation of the filter.</p>
+<p>Once the above types have been defined, you can use the following
+convenience macros, which permit your filter to participate in the
+object factory mechanism, and to be created using the canonical
+<code class="docutils literal notranslate"><span class="pre">::New()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Method for creation through the object factory. */</span>
+<span class="n">itkNewMacro</span><span class="p">(</span><span class="n">Self</span><span class="p">);</span>
+
+<span class="cm">/** Run-time type information (and related methods). */</span>
+<span class="n">itkTypeMacro</span><span class="p">(</span><span class="n">ExampleImageFilter</span><span class="p">,</span> <span class="n">ImageToImageFilter</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The default constructor should be <code class="docutils literal notranslate"><span class="pre">protected</span></code>, and provide sensible
+defaults (usually zero) for all parameters. The copy constructor and
+assignment operator should be declared <code class="docutils literal notranslate"><span class="pre">private</span></code> and not implemented,
+to prevent instantiating the filter without the factory methods (above).</p>
+<p>Finally, the template implementation code (in the <code class="docutils literal notranslate"><span class="pre">.hxx</span></code> file) should
+be included, bracketed by a test for manual instantiation, thus:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef ITK_MANUAL_INSTANTIATION</span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkExampleFilter.hxx&quot;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<div class="section" id="optional">
+<h3>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h3>
+<p>A filter can be printed to an <code class="docutils literal notranslate"><span class="pre">std::ostream</span></code> (such as <code class="docutils literal notranslate"><span class="pre">std::cout</span></code>)
+by implementing the following method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">PrintSelf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="n">Indent</span> <span class="n">indent</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and writing the name-value pairs of the filter parameters to the
+supplied output stream. This is particularly useful for debugging.</p>
+</div>
+<div class="section" id="useful-macros">
+<h3>Useful Macros<a class="headerlink" href="#useful-macros" title="Permalink to this headline">¶</a></h3>
+<p>Many convenience macros are provided by ITK, to simplify filter coding.
+Some of these are described below:</p>
+<dl class="docutils">
+<dt>itkStaticConstMacro</dt>
+<dd>Declares a static variable of the given type, with the specified
+initial value.</dd>
+<dt>itkGetMacro</dt>
+<dd>Defines an accessor method for the specified scalar data member. The
+convention is for data members to have a prefix of <code class="docutils literal notranslate"><span class="pre">m_</span></code>.</dd>
+<dt>itkSetMacro</dt>
+<dd>Defines a mutator method for the specified scalar data member, of
+the supplied type. This will automatically set the <code class="docutils literal notranslate"><span class="pre">Modified</span></code>
+flag, so the filter stage will be executed on the next <code class="docutils literal notranslate"><span class="pre">Update()</span></code>.</dd>
+<dt>itkBooleanMacro</dt>
+<dd>Defines a pair of <code class="docutils literal notranslate"><span class="pre">OnFlag</span></code> and <code class="docutils literal notranslate"><span class="pre">OffFlag</span></code> methods for a boolean
+variable <code class="docutils literal notranslate"><span class="pre">m_Flag</span></code>.</dd>
+<dt>itkGetObjectMacro, itkSetObjectMacro</dt>
+<dd>Defines an accessor and mutator for an ITK object. The Get form
+returns a smart pointer to the object.</dd>
+</dl>
+<p>Much more useful information can be learned from browsing the source in
+<code class="docutils literal notranslate"><span class="pre">Code/Common/itkMacro.h</span></code> and for the <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Object.html">itk::Object</a> and
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1LightObject.html">itk::LightObject</a> classes.</p>
+</div>
+</div>
+<div class="section" id="composite-filters">
+<h2>Composite filters<a class="headerlink" href="#composite-filters" title="Permalink to this headline">¶</a></h2>
+<p>In general, most ITK/OTB filters implement one particular algorithm,
+whether it be image filtering, an information metric, or a segmentation
+algorithm. In the previous section, we saw how to write new filters from
+scratch. However, it is often very useful to be able to make a new
+filter by combining two or more existing filters, which can then be used
+as a building block in a complex pipeline. This approach follows the
+Composite pattern, whereby the composite
+filter itself behaves just as a regular filter, providing its own
+(potentially higher level) interface and using other filters (whose
+detail is hidden to users of the class) for the implementation. This
+composite structure is shown in Figure&nbsp;[fig:CompositeFilterStages],
+where the various <code class="docutils literal notranslate"><span class="pre">Stage-n</span></code> filters are combined into one by the
+<code class="docutils literal notranslate"><span class="pre">Composite</span></code> filter. The <code class="docutils literal notranslate"><span class="pre">Source</span></code> and <code class="docutils literal notranslate"><span class="pre">Sink</span></code> filters only see the
+interface published by the <code class="docutils literal notranslate"><span class="pre">Composite</span></code>. Using the Composite pattern, a
+composite filter can encapsulate a pipeline of arbitrary complexity.
+These can in turn be nested inside other pipelines.</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/CompositeFilterStages.png" src="../_images/CompositeFilterStages.png" />
+<p class="caption"><span class="caption-text">A Composite filter encapsulates a number of other filters.</span></p>
+</div>
+<p>There are a few considerations to take into account when implementing a
+composite filter. All the usual requirements for filters apply (as
+discussed above), but the following guidelines should be considered:</p>
+<ol class="arabic simple">
+<li>The template arguments it takes must be sufficient to instantiate all
+of the component filters. Each component filter needs a type supplied
+by either the implementor or the enclosing class. For example, an
+<code class="docutils literal notranslate"><span class="pre">ImageToImageFilter</span></code> normally takes an input and output image type
+(which may be the same). But if the output of the composite filter is
+a classified image, we need to either decide on the output type
+inside the composite filter, or restrict the choices of the user when
+she/he instantiates the filter.</li>
+<li>The types of the component filters should be declared in the header,
+preferably with <code class="docutils literal notranslate"><span class="pre">protected</span></code> visibility. This is because the
+internal structure normally should not be visible to users of the
+class, but should be to descendent classes that may need to modify or
+customize the behavior.</li>
+<li>The component filters should be private data members of the composite
+class, as in <code class="docutils literal notranslate"><span class="pre">FilterType::Pointer</span></code>.</li>
+<li>The default constructor should build the pipeline by creating the
+stages and connect them together, along with any default parameter
+settings, as appropriate.</li>
+<li>The input and output of the composite filter need to be grafted on to
+the head and tail (respectively) of the component filters.</li>
+</ol>
+<div class="figure align-center" id="id5">
+<img alt="../_images/CompositeExamplePipeline.png" src="../_images/CompositeExamplePipeline.png" />
+<p class="caption"><span class="caption-text">Example of a typical composite filter. Note that the output of the last filter in the internal pipeline must be grafted into the output of the composite filter.</span></p>
+</div>
+<p>See example <a class="reference internal" href="Examples/Filtering/CompositeFilterExample.html#compositefilterexample-cxx"><span class="std std-ref">CompositeFilterExample.cxx</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="StreamingAndThreading.html" class="btn btn-neutral float-right" title="Streaming and Threading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Iterators.html" class="btn btn-neutral" title="Iterators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

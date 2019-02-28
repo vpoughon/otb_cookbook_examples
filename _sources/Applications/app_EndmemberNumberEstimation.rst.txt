@@ -1,4 +1,4 @@
-.. _app-EndmemberNumberEstimation:
+.. _EndmemberNumberEstimation:
 
 EndmemberNumberEstimation
 =========================
@@ -104,4 +104,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-VertexComponentAnalysis`, :ref:`app-HyperspectralUnmixing`
+| :ref:`VertexComponentAnalysis`, :ref:`HyperspectralUnmixing`

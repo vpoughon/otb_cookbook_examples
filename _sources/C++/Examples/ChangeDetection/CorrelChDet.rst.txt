@@ -1,4 +1,4 @@
-.. _example-CorrelChDet:
+.. _CorrelChDet.cxx:
 
 CorrelChDet.cxx
 ===============
@@ -14,7 +14,8 @@ Example usage:
     ./CorrelChDet Input/ERSBefore.png Input/ERSAfter.png Output/CorrChDet.tif 15
 
 
-Example source code (`CorrelChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/CorrelChDet.cxx?inline=false>`_):
+
+Example source code (`CorrelChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/CorrelChDet.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _example-SIFTDensityExample:
+.. _SIFTDensityExample.cxx:
 
 SIFTDensityExample.cxx
 ======================
@@ -14,7 +14,8 @@ Example usage:
     ./SIFTDensityExample Input/suburb2.jpeg Output/SIFTDensityOutput.tif Output/PrettySIFTDensityOutput.png 3 3 7
 
 
-Example source code (`SIFTDensityExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTDensityExample.cxx?inline=false>`_):
+
+Example source code (`SIFTDensityExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTDensityExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

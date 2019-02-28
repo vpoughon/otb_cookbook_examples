@@ -1,4 +1,4 @@
-.. _example-ImageSliceIteratorWithIndex:
+.. _ImageSliceIteratorWithIndex.cxx:
 
 ImageSliceIteratorWithIndex.cxx
 ===============================
@@ -9,7 +9,7 @@ ImageSliceIteratorWithIndex.cxx
 
 
 
-Example source code (`ImageSliceIteratorWithIndex.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageSliceIteratorWithIndex.cxx?inline=false>`_):
+Example source code (`ImageSliceIteratorWithIndex.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageSliceIteratorWithIndex.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

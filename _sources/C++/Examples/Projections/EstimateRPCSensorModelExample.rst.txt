@@ -1,4 +1,4 @@
-.. _example-EstimateRPCSensorModelExample:
+.. _EstimateRPCSensorModelExample.cxx:
 
 EstimateRPCSensorModelExample.cxx
 =================================
@@ -9,7 +9,7 @@ EstimateRPCSensorModelExample.cxx
 
 
 
-Example source code (`EstimateRPCSensorModelExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/EstimateRPCSensorModelExample.cxx?inline=false>`_):
+Example source code (`EstimateRPCSensorModelExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/EstimateRPCSensorModelExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

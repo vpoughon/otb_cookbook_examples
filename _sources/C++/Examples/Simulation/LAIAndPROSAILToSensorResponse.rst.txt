@@ -1,4 +1,4 @@
-.. _example-LAIAndPROSAILToSensorResponse:
+.. _LAIAndPROSAILToSensorResponse.cxx:
 
 LAIAndPROSAILToSensorResponse.cxx
 =================================
@@ -21,7 +21,8 @@ Example usage:
                                     5
 
 
-Example source code (`LAIAndPROSAILToSensorResponse.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Simulation/LAIAndPROSAILToSensorResponse.cxx?inline=false>`_):
+
+Example source code (`LAIAndPROSAILToSensorResponse.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Simulation/LAIAndPROSAILToSensorResponse.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

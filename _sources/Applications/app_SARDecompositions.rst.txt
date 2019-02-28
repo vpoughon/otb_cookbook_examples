@@ -1,4 +1,4 @@
-.. _app-SARDecompositions:
+.. _SARDecompositions:
 
 SARDecompositions
 =================
@@ -122,4 +122,4 @@ Users should pay attention to extract the real part of the results provided by t
 See also
 --------
 
-| :ref:`app-SARPolarMatrixConvert`, :ref:`app-SARPolarSynth`
+| :ref:`SARPolarMatrixConvert`, :ref:`SARPolarSynth`

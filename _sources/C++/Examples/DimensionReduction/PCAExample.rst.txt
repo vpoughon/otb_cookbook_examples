@@ -1,4 +1,4 @@
-.. _example-PCAExample:
+.. _PCAExample.cxx:
 
 PCAExample.cxx
 ==============
@@ -20,7 +20,8 @@ Example usage:
                  8
 
 
-Example source code (`PCAExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/PCAExample.cxx?inline=false>`_):
+
+Example source code (`PCAExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/PCAExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

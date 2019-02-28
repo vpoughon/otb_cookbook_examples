@@ -1,4 +1,4 @@
-.. _example-SeamCarvingOtherExample:
+.. _SeamCarvingOtherExample.cxx:
 
 SeamCarvingOtherExample.cxx
 ===========================
@@ -14,7 +14,8 @@ Example usage:
     ./SeamCarvingOtherExample Input/QB_Suburb.png Output/SeamCarvingOtherExampleOutput.png 50
 
 
-Example source code (`SeamCarvingOtherExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/SeamCarvingOtherExample.cxx?inline=false>`_):
+
+Example source code (`SeamCarvingOtherExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/SeamCarvingOtherExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _app-ComputeImagesStatistics:
+.. _ComputeImagesStatistics:
 
 ComputeImagesStatistics
 =======================
@@ -9,7 +9,7 @@ Computes global mean and standard deviation for each band from a set of images a
 Description
 -----------
 
-This application computes a global mean and standard deviation for each band of a set of images and optionally saves the results in an XML file. The output XML is intended to be used as an input for the :ref:`app-TrainImagesClassifier` application to normalize samples before learning. You can also normalize the image with the XML file in the :ref:`app-ImageClassifier` application.
+This application computes a global mean and standard deviation for each band of a set of images and optionally saves the results in an XML file. The output XML is intended to be used as an input for the :ref:`TrainImagesClassifier` application to normalize samples before learning. You can also normalize the image with the XML file in the :ref:`ImageClassifier` application.
 
 Parameters
 ----------
@@ -77,4 +77,4 @@ Each image of the set must contain the same bands as the others (i.e. same types
 See also
 --------
 
-| Documentation of the :ref:`app-TrainImagesClassifier` and :ref:`app-ImageClassifier` application.
+| Documentation of the :ref:`TrainImagesClassifier` and :ref:`ImageClassifier` application.

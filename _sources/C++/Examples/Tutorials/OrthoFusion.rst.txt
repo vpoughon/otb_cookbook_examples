@@ -1,4 +1,4 @@
-.. _example-OrthoFusion:
+.. _OrthoFusion.cxx:
 
 OrthoFusion.cxx
 ===============
@@ -9,7 +9,7 @@ OrthoFusion.cxx
 
 
 
-Example source code (`OrthoFusion.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/OrthoFusion.cxx?inline=false>`_):
+Example source code (`OrthoFusion.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/OrthoFusion.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

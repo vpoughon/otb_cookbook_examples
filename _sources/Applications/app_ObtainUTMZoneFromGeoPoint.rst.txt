@@ -1,4 +1,4 @@
-.. _app-ObtainUTMZoneFromGeoPoint:
+.. _ObtainUTMZoneFromGeoPoint:
 
 ObtainUTMZoneFromGeoPoint
 =========================

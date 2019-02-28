@@ -1,4 +1,4 @@
-.. _app-PixelValue:
+.. _PixelValue:
 
 PixelValue
 ==========

@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Examples" href="C++/Examples.html" />
+    <link rel="next" title="System Overview" href="C++/SystemOverview.html" />
     <link rel="prev" title="Rescale" href="Applications/app_Rescale.html" /> 
 
   
@@ -97,6 +97,13 @@
 <li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">C++ API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html">Adding New Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="C++/Examples.html">Examples</a></li>
 </ul>
 </li>
@@ -172,203 +179,84 @@
 <span id="cpp-api"></span><h1>C++ API<a class="headerlink" href="#c-api" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="C++/SystemOverview.html">System Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#system-organization">System Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#essential-system-concepts">Essential System Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#data-representation">Data Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#data-processing-pipeline">Data Processing Pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/Iterators.html">Iterators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/Iterators.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Iterators.html#programming-interface">Programming Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Iterators.html#image-iterators">Image Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Iterators.html#neighborhood-iterators">Neighborhood Iterators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/Filters.html">Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html#terminology">Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html#overview-of-filter-creation">Overview of Filter Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html#streaming-large-data">Streaming Large Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html#threaded-filter-execution">Threaded Filter Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html#filter-conventions">Filter Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html#composite-filters">Composite filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/StreamingAndThreading.html">Streaming and Threading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/StreamingAndThreading.html#streaming-and-threading-in-otb">Streaming and threading in OTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/StreamingAndThreading.html#division-strategies">Division strategies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/PersistentFilters.html">Persistent filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/PersistentFilters.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/PersistentFilters.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/PersistentFilters.html#an-end-to-end-example">An end-to-end example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/WriteAnApplication.html">How to write an application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html#application-design">Application design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html#architecture-of-the-class">Architecture of the class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html#composite-application">Composite application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html#compile-your-application">Compile your application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html#execute-your-application">Execute your application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html#testing-your-application">Testing your application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html#application-example">Application Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/AddingNewModules.html">Adding New Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#how-to-write-a-module">How to Write a Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#the-otb-module-cmake-file">The otb-module.cmake file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#the-cmakelists-txt-file">The CMakeLists.txt file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#the-include-folder">The include folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#the-src-folder">The src folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#the-app-folder">The app folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#the-test-folder">The test folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html#including-a-remote-module-in-otb">Including a remote module in OTB</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="C++/Examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Application.html">Application</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Application/ApplicationExample.html">ApplicationExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/BasicFilters.html">BasicFilters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/BandMathFilterExample.html">BandMathFilterExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/BandMathXImageFilterExample.html">BandMathXImageFilterExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/DEMToRainbowExample.html">DEMToRainbowExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/FrostImageFilter.html">FrostImageFilter.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/HillShadingExample.html">HillShadingExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/IndexedToRGBExample.html">IndexedToRGBExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/LeeImageFilter.html">LeeImageFilter.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/MeanShiftSegmentationFilterExample.html">MeanShiftSegmentationFilterExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/PrintableImageFilterExample.html">PrintableImageFilterExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/BasicFilters/ScalingFilterExample.html">ScalingFilterExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/ChangeDetection.html">ChangeDetection</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/ChangeDetection/CorrelChDet.html">CorrelChDet.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/ChangeDetection/DiffChDet.html">DiffChDet.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/ChangeDetection/KullbackLeiblerDistanceChDet.html">KullbackLeiblerDistanceChDet.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/ChangeDetection/KullbackLeiblerProfileChDet.html">KullbackLeiblerProfileChDet.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/ChangeDetection/MultivariateAlterationDetector.html">MultivariateAlterationDetector.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/ChangeDetection/RatioChDet.html">RatioChDet.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Classification.html">Classification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Classification/ClassificationMapRegularizationExample.html">ClassificationMapRegularizationExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Classification/DempsterShaferFusionOfClassificationMapsExample.html">DempsterShaferFusionOfClassificationMapsExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Classification/SOMImageClassificationExample.html">SOMImageClassificationExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Classification/SupervisedImageClassificationExample.html">SupervisedImageClassificationExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/DimensionReduction.html">DimensionReduction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DimensionReduction/ICAExample.html">ICAExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DimensionReduction/MNFExample.html">MNFExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DimensionReduction/MaximumAutocorrelationFactor.html">MaximumAutocorrelationFactor.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DimensionReduction/NAPCAExample.html">NAPCAExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DimensionReduction/PCAExample.html">PCAExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/DisparityMap.html">DisparityMap</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DisparityMap/FineRegistrationImageFilterExample.html">FineRegistrationImageFilterExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DisparityMap/NCCRegistrationFilterExample.html">NCCRegistrationFilterExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/DisparityMap/StereoReconstructionExample.html">StereoReconstructionExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/FeatureExtraction.html">FeatureExtraction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/AsymmetricFusionOfLineDetectorExample.html">AsymmetricFusionOfLineDetectorExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/CloudDetectionExample.html">CloudDetectionExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/ComplexMomentPathExample.html">ComplexMomentPathExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/ComplexMomentsImageFunctionExample.html">ComplexMomentsImageFunctionExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/CorrelationLineDetectorExample.html">CorrelationLineDetectorExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/EdgeDensityExample.html">EdgeDensityExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/ExtractRoadByStepsExample.html">ExtractRoadByStepsExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/ExtractRoadExample.html">ExtractRoadExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/FlusserMomentsImageFunctionExample.html">FlusserMomentsImageFunctionExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/HarrisExample.html">HarrisExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/HuMomentsImageFunctionExample.html">HuMomentsImageFunctionExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/LineSegmentDetectorExample.html">LineSegmentDetectorExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/PanTexExample.html">PanTexExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/ParallelLineDetectionExample.html">ParallelLineDetectionExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/RatioLineDetectorExample.html">RatioLineDetectorExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/RightAngleDetectionExample.html">RightAngleDetectionExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/SFSExample.html">SFSExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/SURFExample.html">SURFExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/SeamCarvingExample.html">SeamCarvingExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/SeamCarvingOtherExample.html">SeamCarvingOtherExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/TextureExample.html">TextureExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/ThresholdToPointSetExample.html">ThresholdToPointSetExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/FeatureExtraction/TouziEdgeDetectorExample.html">TouziEdgeDetectorExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Filtering.html">Filtering</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Filtering/CompositeFilterExample.html">CompositeFilterExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Filtering/DanielssonDistanceMapImageFilter.html">DanielssonDistanceMapImageFilter.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Filtering/SecondDerivativeRecursiveGaussianImageFilter.html">SecondDerivativeRecursiveGaussianImageFilter.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Fusion.html">Fusion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Fusion/BayesianFusionImageFilter.html">BayesianFusionImageFilter.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Fusion/PanSharpeningExample.html">PanSharpeningExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Hyperspectral.html">Hyperspectral</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Hyperspectral/HyperspectralUnmixingExample.html">HyperspectralUnmixingExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/IO.html">IO</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/ComplexImageReadWrite.html">ComplexImageReadWrite.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/DEMHandlerExample.html">DEMHandlerExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/DEMToImageGenerator.html">DEMToImageGenerator.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/ExtractROI.html">ExtractROI.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/ImageReadCastWrite.html">ImageReadCastWrite.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/ImageReadRegionOfInterestWrite.html">ImageReadRegionOfInterestWrite.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/ImageReadWrite.html">ImageReadWrite.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/ImageSeriesIOExample.html">ImageSeriesIOExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/MetadataExample.html">MetadataExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/MultibandImageReadWrite.html">MultibandImageReadWrite.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/IO/VectorDataIOExample.html">VectorDataIOExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Image.html">Image</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Image/Image1.html">Image1.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Image/Image2.html">Image2.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Image/Image3.html">Image3.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Image/Image4.html">Image4.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Image/Image5.html">Image5.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Image/ImageListExample.html">ImageListExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Image/VectorImage.html">VectorImage.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Installation.html">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Installation/HelloWorld.html">HelloWorld.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Iterators.html">Iterators</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ImageLinearIteratorWithIndex.html">ImageLinearIteratorWithIndex.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ImageLinearIteratorWithIndex2.html">ImageLinearIteratorWithIndex2.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ImageRandomConstIteratorWithIndex.html">ImageRandomConstIteratorWithIndex.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ImageRegionIterator.html">ImageRegionIterator.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ImageRegionIteratorWithIndex.html">ImageRegionIteratorWithIndex.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ImageSliceIteratorWithIndex.html">ImageSliceIteratorWithIndex.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/IteratorsExamples.html">IteratorsExamples.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/NeighborhoodIterators1.html">NeighborhoodIterators1.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/NeighborhoodIterators2.html">NeighborhoodIterators2.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/NeighborhoodIterators3.html">NeighborhoodIterators3.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/NeighborhoodIterators4.html">NeighborhoodIterators4.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/NeighborhoodIterators5.html">NeighborhoodIterators5.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/NeighborhoodIterators6.html">NeighborhoodIterators6.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ShapedNeighborhoodIterators1.html">ShapedNeighborhoodIterators1.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Iterators/ShapedNeighborhoodIterators2.html">ShapedNeighborhoodIterators2.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Learning.html">Learning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Learning/GenerateTrainingImageExample.html">GenerateTrainingImageExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Learning/SEMModelEstimatorExample.html">SEMModelEstimatorExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Learning/SOMClassifierExample.html">SOMClassifierExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Learning/SOMExample.html">SOMExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Learning/SVMImageEstimatorClassificationMultiExample.html">SVMImageEstimatorClassificationMultiExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Learning/TrainMachineLearningModelFromImagesExample.html">TrainMachineLearningModelFromImagesExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Learning/TrainMachineLearningModelFromSamplesExample.html">TrainMachineLearningModelFromSamplesExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Markov.html">Markov</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Markov/MarkovClassification1Example.html">MarkovClassification1Example.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Markov/MarkovClassification2Example.html">MarkovClassification2Example.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Markov/MarkovClassification3Example.html">MarkovClassification3Example.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Markov/MarkovRegularizationExample.html">MarkovRegularizationExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Markov/MarkovRestorationExample.html">MarkovRestorationExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/OBIA.html">OBIA</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/OBIA/HooverMetricsEstimation.html">HooverMetricsEstimation.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/OBIA/LabelMapToVectorData.html">LabelMapToVectorData.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/OBIA/RadiometricAttributesLabelMapFilterExample.html">RadiometricAttributesLabelMapFilterExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Patented.html">Patented</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Patented/SIFTDensityExample.html">SIFTDensityExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Patented/SIFTDisparityMapEstimation.html">SIFTDisparityMapEstimation.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Patented/SIFTExample.html">SIFTExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Patented/SIFTFastExample.html">SIFTFastExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Projections.html">Projections</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Projections/EstimateRPCSensorModelExample.html">EstimateRPCSensorModelExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Projections/GeometriesProjectionExample.html">GeometriesProjectionExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Projections/OrthoRectificationExample.html">OrthoRectificationExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Projections/PlaceNameToLonLatExample.html">PlaceNameToLonLatExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Projections/VectorDataExtractROIExample.html">VectorDataExtractROIExample.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Projections/VectorDataProjectionExample.html">VectorDataProjectionExample.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Radiometry.html">Radiometry</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Radiometry/ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.html">ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Radiometry/AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.html">AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Radiometry/AtmosphericCorrectionSequencement.html">AtmosphericCorrectionSequencement.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Radiometry/NDVIRAndNIRVegetationIndexImageFilter.html">NDVIRAndNIRVegetationIndexImageFilter.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Simulation.html">Simulation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Simulation/LAIAndPROSAILToSensorResponse.html">LAIAndPROSAILToSensorResponse.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Simulation/LAIFromNDVIImageTransform.html">LAIFromNDVIImageTransform.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Simulation/ProsailModel.html">ProsailModel.cxx</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Tutorials.html">Tutorials</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Tutorials/FilteringPipeline.html">FilteringPipeline.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Tutorials/HelloWorldOTB.html">HelloWorldOTB.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Tutorials/Multispectral.html">Multispectral.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Tutorials/OrthoFusion.html">OrthoFusion.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Tutorials/Pipeline.html">Pipeline.cxx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="C++/Examples/Tutorials/ScalingPipeline.html">ScalingPipeline.cxx</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Application.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/ChangeDetection.html">ChangeDetection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Classification.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Filtering.html">Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Fusion.html">Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/IO.html">IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Markov.html">Markov</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/OBIA.html">OBIA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Patented.html">Patented</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Radiometry.html">Radiometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Simulation.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Tutorials.html">Tutorials</a></li>
 </ul>
 </li>
 </ul>
@@ -383,7 +271,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="C++/Examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="C++/SystemOverview.html" class="btn btn-neutral float-right" title="System Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Applications/app_Rescale.html" class="btn btn-neutral" title="Rescale" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

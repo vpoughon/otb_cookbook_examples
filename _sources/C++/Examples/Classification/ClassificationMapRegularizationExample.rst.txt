@@ -1,4 +1,4 @@
-.. _example-ClassificationMapRegularizationExample:
+.. _ClassificationMapRegularizationExample.cxx:
 
 ClassificationMapRegularizationExample.cxx
 ==========================================
@@ -9,7 +9,7 @@ ClassificationMapRegularizationExample.cxx
 
 
 
-Example source code (`ClassificationMapRegularizationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/ClassificationMapRegularizationExample.cxx?inline=false>`_):
+Example source code (`ClassificationMapRegularizationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/ClassificationMapRegularizationExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

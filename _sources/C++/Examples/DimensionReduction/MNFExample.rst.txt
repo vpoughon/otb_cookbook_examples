@@ -1,4 +1,4 @@
-.. _example-MNFExample:
+.. _MNFExample.cxx:
 
 MNFExample.cxx
 ==============
@@ -22,7 +22,8 @@ Example usage:
                  1
 
 
-Example source code (`MNFExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/MNFExample.cxx?inline=false>`_):
+
+Example source code (`MNFExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/MNFExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

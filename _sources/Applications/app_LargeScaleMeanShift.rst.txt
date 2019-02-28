@@ -1,4 +1,4 @@
-.. _app-LargeScaleMeanShift:
+.. _LargeScaleMeanShift:
 
 LargeScaleMeanShift
 ===================
@@ -9,7 +9,7 @@ Large-scale segmentation using MeanShift
 Description
 -----------
 
-This application chains together the 4 steps of the MeanShit framework, that is the :ref:`app-MeanShiftSmoothing`, the :ref:`app-LSMSSegmentation`, the :ref:`app-LSMSSmallRegionsMerging` and the :ref:`app-LSMSVectorization`.
+This application chains together the 4 steps of the MeanShit framework, that is the :ref:`MeanShiftSmoothing`, the :ref:`LSMSSegmentation`, the :ref:`LSMSSmallRegionsMerging` and the :ref:`LSMSVectorization`.
 
 This application can be a preliminary step for an object-based analysis.
 
@@ -121,7 +121,7 @@ From Python:
 See also
 --------
 
-| :ref:`app-MeanShiftSmoothing`
-| :ref:`app-LSMSSegmentation`
-| :ref:`app-LSMSSmallRegionsMerging`
-| :ref:`app-LSMSVectorization`
+| :ref:`MeanShiftSmoothing`
+| :ref:`LSMSSegmentation`
+| :ref:`LSMSSmallRegionsMerging`
+| :ref:`LSMSVectorization`

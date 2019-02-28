@@ -1,4 +1,4 @@
-.. _app-SARDeburst:
+.. _SARDeburst:
 
 SARDeburst
 ==========
@@ -81,4 +81,4 @@ See also
 --------
 
 | [1] Sentinel1 User Handbook, p. 52: https://sentinel.esa.int/documents/247904/685163/Sentinel-1_User_Handbook
-| [2] :ref:`app-OrthoRectification` application
+| [2] :ref:`OrthoRectification` application

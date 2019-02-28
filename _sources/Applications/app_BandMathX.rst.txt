@@ -1,4 +1,4 @@
-.. _app-BandMathX:
+.. _BandMathX:
 
 BandMathX
 =========
@@ -9,11 +9,11 @@ This application performs mathematical operations on several multiband images.
 Description
 -----------
 
-This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the :ref:`app-BandMath` OTB-application). The mathematical formula is done by the muParserX library.
+This application performs a mathematical operation on several multi-band images and outputs the result into an image (multi- or mono-band, as opposed to the :ref:`BandMath` OTB-application). The mathematical formula is done by the muParserX library.
 
 The list of features and the syntax of muParserX is available at [1].
 
-As opposed to muParser (and thus the :ref:`app-BandMath` OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.
+As opposed to muParser (and thus the :ref:`BandMath` OTB-application [2]), muParserX supports vector expressions which allows outputting multi-band images.
 
 Hereafter is a brief reference of the muParserX syntax
 
@@ -184,4 +184,4 @@ See also
 
 | [1] http://articles.beltoforion.de/article.php?a=muparserx
 | 
-| [2] :ref:`app-BandMath`
+| [2] :ref:`BandMath`

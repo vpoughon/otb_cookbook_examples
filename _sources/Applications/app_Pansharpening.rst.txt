@@ -1,4 +1,4 @@
-.. _app-Pansharpening:
+.. _Pansharpening:
 
 Pansharpening
 =============
@@ -9,7 +9,7 @@ Perform P+XS pansharpening
 Description
 -----------
 
-This application performs P+XS pansharpening. :ref:`app-Pansharpening` is a process of merging high-resolution panchromatic and lower resolution multispectral imagery to create a single high-resolution color image. Algorithms available in the applications are: RCS, bayesian fusion and Local Mean and Variance Matching(LMVM).
+This application performs P+XS pansharpening. :ref:`Pansharpening` is a process of merging high-resolution panchromatic and lower resolution multispectral imagery to create a single high-resolution color image. Algorithms available in the applications are: RCS, bayesian fusion and Local Mean and Variance Matching(LMVM).
 
 Parameters
 ----------

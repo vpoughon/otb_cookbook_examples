@@ -1,4 +1,4 @@
-.. _example-HelloWorld:
+.. _HelloWorld.cxx:
 
 HelloWorld.cxx
 ==============
@@ -9,7 +9,7 @@ HelloWorld.cxx
 
 
 
-Example source code (`HelloWorld.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Installation/HelloWorld.cxx?inline=false>`_):
+Example source code (`HelloWorld.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Installation/HelloWorld.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

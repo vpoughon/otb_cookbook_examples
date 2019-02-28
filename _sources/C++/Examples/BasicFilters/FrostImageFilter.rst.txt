@@ -1,4 +1,4 @@
-.. _example-FrostImageFilter:
+.. _FrostImageFilter.cxx:
 
 FrostImageFilter.cxx
 ====================
@@ -14,7 +14,8 @@ Example usage:
     ./FrostImageFilter Input/GomaSmall.png Output/GomaSmallFrostFiltered.png 5 0.1
 
 
-Example source code (`FrostImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/FrostImageFilter.cxx?inline=false>`_):
+
+Example source code (`FrostImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/FrostImageFilter.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

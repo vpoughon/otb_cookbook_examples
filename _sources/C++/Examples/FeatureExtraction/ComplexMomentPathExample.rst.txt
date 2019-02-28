@@ -1,4 +1,4 @@
-.. _example-ComplexMomentPathExample:
+.. _ComplexMomentPathExample.cxx:
 
 ComplexMomentPathExample.cxx
 ============================
@@ -14,7 +14,8 @@ Example usage:
     ./ComplexMomentPathExample 1 1
 
 
-Example source code (`ComplexMomentPathExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ComplexMomentPathExample.cxx?inline=false>`_):
+
+Example source code (`ComplexMomentPathExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ComplexMomentPathExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

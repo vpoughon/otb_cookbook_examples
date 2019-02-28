@@ -1,4 +1,4 @@
-.. _app-PredictRegression:
+.. _PredictRegression:
 
 PredictRegression
 =================
@@ -9,7 +9,7 @@ Performs a prediction of the input image according to a regression model file.
 Description
 -----------
 
-This application predict output values from an input image, based on a regression model file produced by the :ref:`app-TrainRegression` application. Pixels of the output image will contain the predicted values fromthe regression model (single band). The input pixels can be optionally centered and reduced according to the statistics file produced by the :ref:`app-ComputeImagesStatistics` application. An optional input mask can be provided, in which case only input image pixels whose corresponding mask value is greater than 0 will be processed. The remaining of pixels will be given the value 0 in the output image.
+This application predict output values from an input image, based on a regression model file produced by the :ref:`TrainRegression` application. Pixels of the output image will contain the predicted values fromthe regression model (single band). The input pixels can be optionally centered and reduced according to the statistics file produced by the :ref:`ComputeImagesStatistics` application. An optional input mask can be provided, in which case only input image pixels whose corresponding mask value is greater than 0 will be processed. The remaining of pixels will be given the value 0 in the output image.
 
 Parameters
 ----------
@@ -85,4 +85,4 @@ The input image must contain the feature bands used for the model training (with
 See also
 --------
 
-| :ref:`app-TrainRegression`, :ref:`app-ComputeImagesStatistics`
+| :ref:`TrainRegression`, :ref:`ComputeImagesStatistics`

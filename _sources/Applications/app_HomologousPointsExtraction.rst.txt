@@ -1,4 +1,4 @@
-.. _app-HomologousPointsExtraction:
+.. _HomologousPointsExtraction:
 
 HomologousPointsExtraction
 ==========================
@@ -160,4 +160,4 @@ Full mode does not handle large images.
 See also
 --------
 
-| :ref:`app-RefineSensorModel`
+| :ref:`RefineSensorModel`

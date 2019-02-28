@@ -1,4 +1,4 @@
-.. _example-SFSExample:
+.. _SFSExample.cxx:
 
 SFSExample.cxx
 ==============
@@ -31,7 +31,8 @@ Example usage:
                  0.6
 
 
-Example source code (`SFSExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/SFSExample.cxx?inline=false>`_):
+
+Example source code (`SFSExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/SFSExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

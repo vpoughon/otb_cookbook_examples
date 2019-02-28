@@ -1,4 +1,4 @@
-.. _app-GeneratePlyFile:
+.. _GeneratePlyFile:
 
 GeneratePlyFile
 ===============
@@ -11,7 +11,7 @@ Description
 
 The application converts an image containing elevations into a PLY file, which is a file format to store 3D models. This format is adpated for visualization on software such as MeshLab [2] or CloudCompare [3]
 
-This application is part of the stereo reconstruction framework. The input data can be produced by the application :ref:`app-DisparityMapToElevationMap`.
+This application is part of the stereo reconstruction framework. The input data can be produced by the application :ref:`DisparityMapToElevationMap`.
 
 There are two types of supported input images:
 
@@ -127,6 +127,6 @@ The input DEM image has to entirely fit into memory.
 See also
 --------
 
-| - [1] :ref:`app-DisparityMapToElevationMap` 
+| - [1] :ref:`DisparityMapToElevationMap` 
 | - [2] http://www.meshlab.net/ 
 | - [3] http://www.cloudcompare.org/

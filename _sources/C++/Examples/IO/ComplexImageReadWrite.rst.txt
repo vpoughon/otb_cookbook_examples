@@ -1,4 +1,4 @@
-.. _example-ComplexImageReadWrite:
+.. _ComplexImageReadWrite.cxx:
 
 ComplexImageReadWrite.cxx
 =========================
@@ -9,7 +9,7 @@ ComplexImageReadWrite.cxx
 
 
 
-Example source code (`ComplexImageReadWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ComplexImageReadWrite.cxx?inline=false>`_):
+Example source code (`ComplexImageReadWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ComplexImageReadWrite.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

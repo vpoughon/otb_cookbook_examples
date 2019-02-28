@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Persistent filters &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to write an application" href="WriteAnApplication.html" />
+    <link rel="prev" title="Streaming and Threading" href="StreamingAndThreading.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Persistent filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#architecture">Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-persistent-filter-class">The persistent filter class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-streaming-decorator-class">The streaming decorator class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#an-end-to-end-example">An end-to-end example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#first-step-writing-a-persistent-filter">First step: writing a persistent filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-step-decorating-the-filter-and-using-it">Second step: Decorating the filter and using it</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#third-step-one-class-to-rule-them-all">Third step: one class to rule them all</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>Persistent filters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/PersistentFilters.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="persistent-filters">
+<h1>Persistent filters<a class="headerlink" href="#persistent-filters" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>As presented in chapter&nbsp;<a class="reference internal" href="StreamingAndThreading.html#streamingandthreading"><span class="std std-ref">Streaming and Threading</span></a>, OTB has two main mechanisms
+to handle large data: streaming allows to process image piece-wise, and
+multi-threading allows to process concurrently several pieces of one streaming
+block. Using these concepts, one can easily write pixel-wise or
+neighborhood-based filters and insert them into a pipeline which will be
+scalable with respect to the input image size.</p>
+<p>Yet, sometimes we need to compute global features on the whole image.
+One example is to determine image mean and variance of the input image
+in order to produce a centered and reduced image. The operation of
+centering and reducing each pixel is fully compliant with streaming and
+threading, but one has to first estimate the mean and variance of the
+image. This first step requires to walk the whole image once, and
+traditional streaming and multi-threading based filter architecture is
+of no help here.</p>
+<p>This is because there is a fundamental difference between these two
+operations: one supports streaming, and the other needs to perform
+streaming. In fact we would like to stream the whole image piece by
+piece through some filter that will collect and keep mean and variance
+cumulants, and then synthetize theses cumulants to compute the final
+mean and variance once the full image as been streamed. Each stream
+would also benefit from parallel processing. This is exactly what
+persistent filters are for.</p>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>There are two main objects in the persistent filters framework. The
+first is the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentImageFilter.html">otb::PersistentImageFilter</a>, the second is the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentFilterStreamingDecorator.html">otb::PersistentFilterStreamingDecorator</a>.</p>
+<div class="section" id="the-persistent-filter-class">
+<h3>The persistent filter class<a class="headerlink" href="#the-persistent-filter-class" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentImageFilter.html">otb::PersistentImageFilter</a> class is a regular
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageToImageFilter.html">itk::ImageToImageFilter</a>, with two additional pure virtual
+methods: the <code class="docutils literal notranslate"><span class="pre">Synthetize()</span></code> and the <code class="docutils literal notranslate"><span class="pre">Reset()</span></code> methods.</p>
+<p>Imagine that the <code class="docutils literal notranslate"><span class="pre">GenerateData()</span></code> or <code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code>
+progressively computes some global feature of the whole image, using
+some member of the class to store intermediate results. The
+<code class="docutils literal notranslate"><span class="pre">Synthetize()</span></code> is an additional method which is designed to be called
+one the whole image has been processed, in order to compute the final
+results from the intermediate results. The <code class="docutils literal notranslate"><span class="pre">Reset()</span></code> method is
+designed to allow the reset of the intermediate results members so as to
+start a fresh processing.</p>
+<p>Any sub-class of the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentImageFilter.html">otb::PersistentImageFilter</a> can be used as a
+regular <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageToImageFilter.html">itk::ImageToImageFilter</a> (provided that both
+<code class="docutils literal notranslate"><span class="pre">Synthetize()</span></code> and <code class="docutils literal notranslate"><span class="pre">Reset()</span></code> have been implemented, but the real
+interest of these filters is to be used with the streaming decorator
+class presented in the next section.</p>
+</div>
+<div class="section" id="the-streaming-decorator-class">
+<h3>The streaming decorator class<a class="headerlink" href="#the-streaming-decorator-class" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentFilterStreamingDecorator.html">otb::PersistentFilterStreamingDecorator</a> is a class designed to
+be templated with subclasses of the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentImageFilter.html">otb::PersistentImageFilter</a>. It
+provides the mechanism to stream the whole image through the templated
+filter, using a third class called
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1StreamingImageVirtualWriter.html">otb::StreamingImageVirtualWriter</a>. When the <code class="docutils literal notranslate"><span class="pre">Update()</span></code> method is
+called on a <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentFilterStreamingDecorator.html">otb::PersistentFilterStreamingDecorator</a>, a pipeline
+plugging the templated subclass of the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentImageFilter.html">otb::PersistentImageFilter</a>
+to an instance of <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1StreamingImageVirtualWriter.html">otb::StreamingImageVirtualWriter</a> is created. The
+latter is then updated, and acts like a regular
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1ImageFileWriter.html">otb::ImageFileWriter</a> but it does not actually write anything to
+the disk : streaming pieces are requested and immediately discarded. The
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentFilterStreamingDecorator.html">otb::PersistentFilterStreamingDecorator</a> also calls the <code class="docutils literal notranslate"><span class="pre">Reset()</span></code>
+method at the beginning and the <code class="docutils literal notranslate"><span class="pre">Synthetize()</span></code> method at the end of
+the streaming process. Therefore, it packages the whole mechanism for
+the use of a <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentImageFilter.html">otb::PersistentImageFilter</a>:</p>
+<ol class="arabic simple">
+<li>Call the <code class="docutils literal notranslate"><span class="pre">Reset()</span></code> method on the filter so as to reset any
+temporary results members,</li>
+<li>Stream the image piece-wise through the filter,</li>
+<li>Call the <code class="docutils literal notranslate"><span class="pre">Synthetize()</span></code> method on the filter so as to compute the
+final results.</li>
+</ol>
+<p>There are some methods that allows to tune the behavior of the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1StreamingImageVirtualWriter.html">otb::StreamingImageVirtualWriter</a>, allowing to change the image
+splitting methods (tiles or strips) or the size of the streams with
+respect to some target available amount of memory. Please see the class
+documentation for details. The instance of the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1StreamingImageVirtualWriter.html">otb::StreamingImageVirtualWriter</a> can be retrieved from the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentFilterStreamingDecorator.html">otb::PersistentFilterStreamingDecorator</a> through the
+<code class="docutils literal notranslate"><span class="pre">GetStreamer()</span></code> method.</p>
+<p>Though the internal filter of the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentFilterStreamingDecorator.html">otb::PersistentFilterStreamingDecorator</a> can be accessed through
+the <code class="docutils literal notranslate"><span class="pre">GetFilter()</span></code> method, the class is often derived to package the
+streaming-decorated filter and wrap the parameters setters and getters.</p>
+</div>
+</div>
+<div class="section" id="an-end-to-end-example">
+<h2>An end-to-end example<a class="headerlink" href="#an-end-to-end-example" title="Permalink to this headline">¶</a></h2>
+<p>This is an end-to-end example to compute the mean over a full image,
+using a streaming and threading-enabled filter. Please note that only
+specific details are explained here. For more general information on how
+to write a filter, please refer to section&nbsp;<a class="reference internal" href="Filters.html#filters"><span class="std std-ref">Filters</span></a>.</p>
+<div class="section" id="first-step-writing-a-persistent-filter">
+<h3>First step: writing a persistent filter<a class="headerlink" href="#first-step-writing-a-persistent-filter" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to write a persistent mean image filter. We need to
+include the appropriate header :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbPersistentImageFilter.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Then, we declare the class prototype as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TInputImage</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ITK_EXPORT</span> <span class="nl">PersistentMeanImageFilter</span> <span class="p">:</span>
+  <span class="k">public</span> <span class="n">PersistentImageFilter</span><span class="o">&lt;</span><span class="n">TInputImage</span><span class="p">,</span> <span class="n">TInputImage</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Since the output image will only be used for streaming purpose, we do
+not need to declare different input and output template types.</p>
+<p>In the <em>private</em> section of the class, we will declare a member which
+will be used to store temporary results, and a member which will be used
+to store the final result.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="o">:</span>
+  <span class="c1">// Temporary results container</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span> <span class="n">m_TemporarySums</span><span class="p">;</span>
+
+  <span class="c1">// Final result member</span>
+  <span class="kt">double</span> <span class="n">m_Mean</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next, we will write the <code class="docutils literal notranslate"><span class="pre">Reset()</span></code> method implementation in the
+<em>protected</em> section of the class. Proper allocation of the temporary
+results container with respect to the number of threads is handled here.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">protected</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Reset</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="c1">// Retrieve the number of threads</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">numberOfThreads</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">GetNumberOfThreads</span><span class="p">();</span>
+
+    <span class="c1">// Reset the temporary results container</span>
+    <span class="n">m_TemporarySums</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">numberOfThreads</span><span class="p">,</span> <span class="n">itk</span><span class="o">::</span><span class="n">NumericTraits</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;::</span><span class="n">Zero</span><span class="p">);</span>
+
+    <span class="c1">// Reset the final result</span>
+    <span class="n">m_Mean</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">;</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, we need to write the <code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code> methods (also in
+the <em>protected</em> section), were temporary results will be computed for
+each piece of stream.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">void</span> <span class="nf">ThreadedGenerateData</span><span class="p">(</span><span class="k">const</span> <span class="n">RegionType</span><span class="o">&amp;</span>
+                                  <span class="n">outputRegionForThread</span><span class="p">,</span>
+                                  <span class="n">itk</span><span class="o">::</span><span class="n">ThreadIdType</span> <span class="n">threadId</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Enable progress reporting</span>
+  <span class="n">itk</span><span class="o">::</span><span class="n">ProgressReporter</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="n">threadId</span><span class="p">,</span><span class="n">outputRegionForThread</span><span class="p">.</span><span class="n">GetNumberOfPixels</span><span class="p">());</span>
+
+  <span class="c1">// Retrieve the input pointer</span>
+  <span class="n">InputImagePointer</span> <span class="n">inputPtr</span> <span class="o">=</span> <span class="k">const_cast</span><span class="o">&lt;</span><span class="n">TInputImage</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">GetInput</span><span class="p">());</span>
+
+  <span class="c1">// Declare an iterator on the region</span>
+  <span class="n">itk</span><span class="o">::</span><span class="n">ImageRegionConstIteratorWithIndex</span><span class="o">&lt;</span><span class="n">TInputImage</span><span class="o">&gt;</span> <span class="n">it</span><span class="p">(</span><span class="n">inputPtr</span><span class="p">,</span>
+  <span class="n">outputRegionForThread</span><span class="p">);</span>
+
+  <span class="c1">// Walk the region of the image with the iterator</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">GoToBegin</span><span class="p">();</span> <span class="o">!</span><span class="n">it</span><span class="p">.</span><span class="n">IsAtEnd</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">,</span> <span class="n">progress</span><span class="p">.</span><span class="n">CompletedPixel</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="c1">// Retrieve pixel value</span>
+    <span class="k">const</span> <span class="n">PixelType</span><span class="o">&amp;</span> <span class="n">value</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">Get</span><span class="p">();</span>
+
+    <span class="c1">// Update temporary results for the current thread</span>
+    <span class="n">m_TemporarySums</span><span class="p">[</span><span class="n">threadId</span><span class="p">]</span><span class="o">+=</span> <span class="n">value</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Last, we need to define the <code class="docutils literal notranslate"><span class="pre">Synthetize()</span></code> method (still in the
+<em>protected</em> section), which will yield the final results:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Synthetize</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="c1">// For each thread</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">threadId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">threadId</span> <span class="o">&lt;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">GetNumberOfThreads</span><span class="p">();</span><span class="o">++</span><span class="n">threadId</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Update final result</span>
+    <span class="n">m_Mean</span><span class="o">+=</span><span class="n">m_TemporarySums</span><span class="p">[</span><span class="n">threadId</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Complete calculus by dividing by the total number of pixels</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nbPixels</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">GetInput</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetLargestPossibleRegion</span><span class="p">().</span><span class="n">GetNumberOfPixels</span><span class="p">();</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">nbPixels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">m_Mean</span> <span class="o">/=</span> <span class="n">nbPixels</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="second-step-decorating-the-filter-and-using-it">
+<h3>Second step: Decorating the filter and using it<a class="headerlink" href="#second-step-decorating-the-filter-and-using-it" title="Permalink to this headline">¶</a></h3>
+<p>Now, to use the filter, one only has to decorate it with the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1PersistentFilterStreamingDecorator.html">otb::PersistentFilterStreamingDecorator</a>. First step is to include
+the appropriate header:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbPersistentMeanImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbPersistentFilterStreamingDecorator.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Then, we decorate the filter with some typedefs:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PersistentMeanImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">PersitentMeanFilterType</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PersistentFilterStreamingDecorator</span> <span class="o">&lt;</span><span class="n">PersitentMeanFilterType</span><span class="o">&gt;</span> <span class="n">StreamingMeanFilterType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now, the decorated filter can be used like any standard filter:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">StreamingMeanFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">StreamingMeanFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+
+<span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+<span class="n">filter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="third-step-one-class-to-rule-them-all">
+<h3>Third step: one class to rule them all<a class="headerlink" href="#third-step-one-class-to-rule-them-all" title="Permalink to this headline">¶</a></h3>
+<p>It is often convenient to avoid the few typedefs of the previous section
+by deriving a new class from the decorated filter:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TInputImage</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ITK_EXPORT</span> <span class="nl">StreamingMeanImageFilter</span> <span class="p">:</span>
+  <span class="k">public</span> <span class="n">PersistentFilterStreamingDecorator</span><span class="o">&lt;</span><span class="n">PersistentImageFilter</span><span class="o">&lt;</span><span class="n">TInputImage</span><span class="p">,</span> <span class="n">TInputImage</span><span class="o">&gt;&gt;</span>
+</pre></div>
+</div>
+<p>This also allows to redefine setters and getters for parameters,
+avoiding to call the <code class="docutils literal notranslate"><span class="pre">GetFilter()</span></code> method to set them.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="WriteAnApplication.html" class="btn btn-neutral float-right" title="How to write an application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="StreamingAndThreading.html" class="btn btn-neutral" title="Streaming and Threading" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

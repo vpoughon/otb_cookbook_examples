@@ -1,4 +1,4 @@
-.. _example-SupervisedImageClassificationExample:
+.. _SupervisedImageClassificationExample.cxx:
 
 SupervisedImageClassificationExample.cxx
 ========================================
@@ -9,7 +9,7 @@ SupervisedImageClassificationExample.cxx
 
 
 
-Example source code (`SupervisedImageClassificationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/SupervisedImageClassificationExample.cxx?inline=false>`_):
+Example source code (`SupervisedImageClassificationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/SupervisedImageClassificationExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

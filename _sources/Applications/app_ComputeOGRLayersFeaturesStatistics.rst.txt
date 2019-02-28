@@ -1,4 +1,4 @@
-.. _app-ComputeOGRLayersFeaturesStatistics:
+.. _ComputeOGRLayersFeaturesStatistics:
 
 ComputeOGRLayersFeaturesStatistics
 ==================================
@@ -74,4 +74,4 @@ Experimental. For now only shapefiles are supported.
 See also
 --------
 
-| :ref:`app-OGRLayerClassifier`,:ref:`app-TrainVectorClassifier`
+| :ref:`OGRLayerClassifier`,:ref:`TrainVectorClassifier`

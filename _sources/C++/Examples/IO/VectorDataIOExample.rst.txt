@@ -1,4 +1,4 @@
-.. _example-VectorDataIOExample:
+.. _VectorDataIOExample.cxx:
 
 VectorDataIOExample.cxx
 =======================
@@ -9,7 +9,7 @@ VectorDataIOExample.cxx
 
 
 
-Example source code (`VectorDataIOExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/VectorDataIOExample.cxx?inline=false>`_):
+Example source code (`VectorDataIOExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/VectorDataIOExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

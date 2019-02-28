@@ -1,4 +1,4 @@
-.. _example-LAIFromNDVIImageTransform:
+.. _LAIFromNDVIImageTransform.cxx:
 
 LAIFromNDVIImageTransform.cxx
 =============================
@@ -19,7 +19,8 @@ Example usage:
                                 4
 
 
-Example source code (`LAIFromNDVIImageTransform.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Simulation/LAIFromNDVIImageTransform.cxx?inline=false>`_):
+
+Example source code (`LAIFromNDVIImageTransform.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Simulation/LAIFromNDVIImageTransform.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

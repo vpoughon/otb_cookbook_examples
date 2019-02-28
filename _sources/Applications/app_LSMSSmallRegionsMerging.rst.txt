@@ -1,4 +1,4 @@
-.. _app-LSMSSmallRegionsMerging:
+.. _LSMSSmallRegionsMerging:
 
 LSMSSmallRegionsMerging
 =======================
@@ -9,11 +9,11 @@ This application performs the third (optional) step of the exact Large-Scale Mea
 Description
 -----------
 
-Given a segmentation result (can be the out output parameter of the :ref:`app-LSMSSegmentation` application [2]) and the original image, it will merge segments whose size in pixels is lower than minsize parameter with the adjacent segments with the adjacent segment with closest radiometry and acceptable size.
+Given a segmentation result (can be the out output parameter of the :ref:`LSMSSegmentation` application [2]) and the original image, it will merge segments whose size in pixels is lower than minsize parameter with the adjacent segments with the adjacent segment with closest radiometry and acceptable size.
 
 Small segments will be processed by increasing size: first all segments for which area is equal to 1 pixel will be merged with adjacent segments, then all segments of area equal to 2 pixels will be processed, until segments of area minsize. For large images one can use the tilesizex and tilesizey parameters for tile-wise processing, with the guarantees of identical results.
 
-The output of this application can be passed to the :ref:`app-LSMSVectorization` application [3] to complete the LSMS workflow.
+The output of this application can be passed to the :ref:`LSMSVectorization` application [3] to complete the LSMS workflow.
 
 Parameters
 ----------
@@ -95,5 +95,5 @@ See also
 --------
 
 | [1] Michel, J., Youssefi, D., & Grizonnet, M. (2015). Stable mean-shift algorithm and its application to the segmentation of arbitrarily large remote sensing images. IEEE Transactions on Geoscience and Remote Sensing, 53(2), 952-964.
-| [2] LSM:ref:`app-Segmentation`
-| [3] :ref:`app-LSMSVectorization`
+| [2] LSM:ref:`Segmentation`
+| [3] :ref:`LSMSVectorization`

@@ -1,4 +1,4 @@
-.. _example-ComplexMomentsImageFunctionExample:
+.. _ComplexMomentsImageFunctionExample.cxx:
 
 ComplexMomentsImageFunctionExample.cxx
 ======================================
@@ -14,7 +14,8 @@ Example usage:
     ./ComplexMomentsImageFunctionExample Input/ROISpot5.png 2 2
 
 
-Example source code (`ComplexMomentsImageFunctionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ComplexMomentsImageFunctionExample.cxx?inline=false>`_):
+
+Example source code (`ComplexMomentsImageFunctionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ComplexMomentsImageFunctionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

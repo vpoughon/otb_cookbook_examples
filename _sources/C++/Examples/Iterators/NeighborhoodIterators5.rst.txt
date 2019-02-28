@@ -1,4 +1,4 @@
-.. _example-NeighborhoodIterators5:
+.. _NeighborhoodIterators5.cxx:
 
 NeighborhoodIterators5.cxx
 ==========================
@@ -9,7 +9,7 @@ NeighborhoodIterators5.cxx
 
 
 
-Example source code (`NeighborhoodIterators5.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators5.cxx?inline=false>`_):
+Example source code (`NeighborhoodIterators5.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators5.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

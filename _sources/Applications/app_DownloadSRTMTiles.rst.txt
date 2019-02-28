@@ -1,4 +1,4 @@
-.. _app-DownloadSRTMTiles:
+.. _DownloadSRTMTiles:
 
 DownloadSRTMTiles
 =================

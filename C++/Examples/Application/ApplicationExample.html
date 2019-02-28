@@ -97,6 +97,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../Recipes.html">Recipes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Applications.html">Applications</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../AddingNewModules.html">Adding New Modules</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../Examples.html">Examples</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../Application.html">Application</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">ApplicationExample.cxx</a></li>
@@ -202,11 +209,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="applicationexample-cxx">
-<span id="example-applicationexample"></span><h1>ApplicationExample.cxx<a class="headerlink" href="#applicationexample-cxx" title="Permalink to this headline">¶</a></h1>
-<p>Example usage:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./ApplicationExample Input/QB_Suburb.png Output/ApplicationExample.png
-</pre></div>
-</div>
+<span id="id1"></span><h1>ApplicationExample.cxx<a class="headerlink" href="#applicationexample-cxx" title="Permalink to this headline">¶</a></h1>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Application/ApplicationExample.cxx?inline=false">ApplicationExample.cxx</a>):</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the creation of an application.</span>
 <span class="c1">// A new application is a class, which derives from \subdoxygen{otb}{Wrapper}{Application} class.</span>
@@ -397,9 +400,7 @@
 <span class="p">}</span> <span class="c1">// namespace otb</span>
 
 <span class="c1">// Finally \code{OTB\_APPLICATION\_EXPORT} is called:</span>
-<span class="c1">//  Software Guide :BeginCodeSnippet</span>
 <span class="n">OTB_APPLICATION_EXPORT</span><span class="p">(</span><span class="n">otb</span><span class="o">::</span><span class="n">Wrapper</span><span class="o">::</span><span class="n">ApplicationExample</span><span class="p">)</span>
-<span class="c1">//  Software Guide :EndCodeSnippet</span>
 </pre></div>
 </div>
 </div>

@@ -1,4 +1,4 @@
-.. _example-NeighborhoodIterators1:
+.. _NeighborhoodIterators1.cxx:
 
 NeighborhoodIterators1.cxx
 ==========================
@@ -14,7 +14,8 @@ Example usage:
     ./NeighborhoodIterators1 Input/ROI_QB_PAN_1.tif Output/NeighborhoodIterators1a.png
 
 
-Example source code (`NeighborhoodIterators1.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators1.cxx?inline=false>`_):
+
+Example source code (`NeighborhoodIterators1.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators1.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

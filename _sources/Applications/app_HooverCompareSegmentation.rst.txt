@@ -1,4 +1,4 @@
-.. _app-HooverCompareSegmentation:
+.. _HooverCompareSegmentation:
 
 HooverCompareSegmentation
 =========================

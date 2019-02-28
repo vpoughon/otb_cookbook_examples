@@ -1,4 +1,4 @@
-.. _example-ImageReadRegionOfInterestWrite:
+.. _ImageReadRegionOfInterestWrite.cxx:
 
 ImageReadRegionOfInterestWrite.cxx
 ==================================
@@ -9,7 +9,7 @@ ImageReadRegionOfInterestWrite.cxx
 
 
 
-Example source code (`ImageReadRegionOfInterestWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ImageReadRegionOfInterestWrite.cxx?inline=false>`_):
+Example source code (`ImageReadRegionOfInterestWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ImageReadRegionOfInterestWrite.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

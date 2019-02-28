@@ -1,4 +1,4 @@
-.. _app-MultiImageSamplingRate:
+.. _MultiImageSamplingRate:
 
 MultiImageSamplingRate
 ======================
@@ -9,7 +9,7 @@ Compute sampling rate for an input set of images.
 Description
 -----------
 
-The application computes sampling rates for a set of input images. Before calling this application, each pair of image and training vectors has to be analysed with the application :ref:`app-PolygonClassStatistics`. The statistics file is then used to compute the sampling rates for each class in each image. Several types of sampling  are implemented. Each one is a combination of a mono-image strategy and a multi-image mode. The mono-image strategies are:
+The application computes sampling rates for a set of input images. Before calling this application, each pair of image and training vectors has to be analysed with the application :ref:`PolygonClassStatistics`. The statistics file is then used to compute the sampling rates for each class in each image. Several types of sampling  are implemented. Each one is a combination of a mono-image strategy and a multi-image mode. The mono-image strategies are:
 
 * smallest (default): select the same number of sample in each class so that the smallest one is fully sampled.
 * constant: select the same number of samples N in each class (with N below or equal to the size of the smallest class).

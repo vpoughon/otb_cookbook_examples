@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>System Overview &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Iterators" href="Iterators.html" />
+    <link rel="prev" title="C++ API" href="../C++.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">System Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-organization">System Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#essential-system-concepts">Essential System Concepts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generic-programming">Generic Programming</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#include-files-and-class-definitions">Include Files and Class Definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#object-factories">Object Factories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#smart-pointers-and-memory-management">Smart Pointers and Memory Management</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-representation">Data Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-processing-pipeline">Data Processing Pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>System Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/SystemOverview.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="system-overview">
+<span id="systemoverview"></span><h1>System Overview<a class="headerlink" href="#system-overview" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this chapter is to provide you with an overview of the
+<em>ORFEO Toolbox</em> system. We recommend that you read this chapter to gain
+an appreciation for the breadth and area of application of OTB. In this
+chapter, we will make reference either to <em>OTB features</em> or <em>ITK
+features</em> without distinction. Bear in mind that OTB uses ITK as its
+core element, so all the fundamental elements of OTB come from ITK. OTB
+extends the functionalities of ITK for the remote sensing image
+processing community. We benefit from the Open Source development
+approach chosen for ITK, which allows us to provide an impressive set of
+functionalities with much less effort than would have been the case in a
+closed source universe!</p>
+<div class="section" id="system-organization">
+<h2>System Organization<a class="headerlink" href="#system-organization" title="Permalink to this headline">¶</a></h2>
+<p>The Orfeo Toolbox consists of several subsystems:</p>
+<dl class="docutils">
+<dt>Essential System Concepts</dt>
+<dd>Like any software system, OTB is built around some core design
+concepts. OTB uses those of ITK. Some of the more important concepts
+include generic programming, smart pointers for memory management,
+object factories for adaptable object instantiation, event
+management using the command/observer design paradigm, and
+multithreading support.</dd>
+<dt>Numerics</dt>
+<dd>OTB, as ITK uses VXL’s VNL numerics libraries. These are easy-to-use
+C++ wrappers around the Netlib Fortran numerical analysis routines
+(<a class="reference external" href="http://www.netlib.org">http://www.netlib.org</a>).</dd>
+<dt>Data Representation and Access</dt>
+<dd>Two principal classes are used to represent data: the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a> and <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Mesh.html">itk::Mesh</a> classes. In addition,
+various types of iterators and containers are used in ITK to hold
+and traverse the data. Other important but less popular classes are
+also used to represent data such as histograms.</dd>
+<dt>ITK’s Data Processing Pipeline</dt>
+<dd>The data representation classes (known as <em>data objects</em>) are
+operated on by <em>filters</em> that in turn may be organized into data
+flow <em>pipelines</em>. These pipelines maintain state and therefore
+execute only when necessary. They also support multi-threading, and
+are streaming capable (i.e., can operate on pieces of data to
+minimize the memory footprint).</dd>
+<dt>IO Framework</dt>
+<dd>Associated with the data processing pipeline are <em>sources</em>, filters
+that initiate the pipeline, and <em>mappers</em>, filters that terminate
+the pipeline. The standard examples of sources and mappers are
+<em>readers</em> and <em>writers</em> respectively. Readers input data (typically
+from a file), and writers output data from the pipeline. <em>Viewers</em>
+are another example of mappers.</dd>
+<dt>Spatial Objects</dt>
+<dd>Geometric shapes are represented in OTB using the ITK spatial object
+hierarchy. These classes are intended to support modeling of
+anatomical structures in ITK. OTB uses them in order to model
+cartographic elements. Using a common basic interface, the spatial
+objects are capable of representing regions of space in a variety of
+different ways. For example: mesh structures, image masks, and
+implicit equations may be used as the underlying representation
+scheme. Spatial objects are a natural data structure for
+communicating the results of segmentation methods and for
+introducing geometrical priors in both segmentation and registration
+methods.</dd>
+<dt>ITK’s Registration Framework</dt>
+<dd>A flexible framework for registration supports four different types
+of registration: image registration, multiresolution registration,
+PDE-based registration, and FEM (finite element method)
+registration.</dd>
+<dt>FEM Framework</dt>
+<dd>ITK includes a subsystem for solving general FEM problems, in
+particular non-rigid registration. The FEM package includes mesh
+definition (nodes and elements), loads, and boundary conditions.</dd>
+<dt>Level Set Framework</dt>
+<dd>The level set framework is a set of classes for creating filters to
+solve partial differential equations on images using an iterative,
+finite difference update scheme. The level set framework consists of
+finite difference solvers including a sparse level set solver, a
+generic level set segmentation filter, and several specific
+subclasses including threshold, Canny, and Laplacian based methods.</dd>
+<dt>Wrapping</dt>
+<dd>ITK uses a unique, powerful system for producing interfaces (i.e.,
+“wrappers”) to interpreted languages such as Tcl and Python. The
+GCC_XML tool is used to produce an XML description of arbitrarily
+complex C++ code; CSWIG is then used to transform the XML
+description into wrappers using the <a class="reference external" href="http://www.swig.org/">SWIG</a>
+package. OTB does not use this system at present.</dd>
+</dl>
+</div>
+<div class="section" id="essential-system-concepts">
+<h2>Essential System Concepts<a class="headerlink" href="#essential-system-concepts" title="Permalink to this headline">¶</a></h2>
+<p>This section describes some of the core concepts and implementation
+features found in ITK and therefore also in OTB.</p>
+<div class="section" id="generic-programming">
+<h3>Generic Programming<a class="headerlink" href="#generic-programming" title="Permalink to this headline">¶</a></h3>
+<p>Generic programming is a method of organizing libraries consisting of
+generic—or reusable—software components. The idea is to make software
+that is capable of “plugging together” in an efficient, adaptable
+manner. The essential ideas of generic programming are <em>containers</em> to
+hold data, <em>iterators</em> to access the data, and <em>generic algorithms</em> that
+use containers and iterators to create efficient, fundamental algorithms
+such as sorting. Generic programming is implemented in C++ with the
+<em>template</em> programming mechanism and the use of the STL Standard
+Template Library.</p>
+<p>C++ templating is a programming technique allowing users to write
+software in terms of one or more unknown types <code class="docutils literal notranslate"><span class="pre">T</span></code>. To create
+executable code, the user of the software must specify all types <code class="docutils literal notranslate"><span class="pre">T</span></code>
+(known as <em>template instantiation</em>) and successfully process the code
+with the compiler. The <code class="docutils literal notranslate"><span class="pre">T</span></code> may be a native type such as <code class="docutils literal notranslate"><span class="pre">float</span></code> or
+<code class="docutils literal notranslate"><span class="pre">int</span></code>, or <code class="docutils literal notranslate"><span class="pre">T</span></code> may be a user-defined type (e.g., <code class="docutils literal notranslate"><span class="pre">class</span></code>). At
+compile-time, the compiler makes sure that the templated types are
+compatible with the instantiated code and that the types are supported
+by the necessary methods and operators.</p>
+<p>ITK uses the techniques of generic programming in its implementation.
+The advantage of this approach is that an almost unlimited variety of
+data types are supported simply by defining the appropriate template
+types. For example, in OTB it is possible to create images consisting of
+almost any type of pixel. In addition, the type resolution is performed
+at compile-time, so the compiler can optimize the code to deliver
+maximal performance. The disadvantage of generic programming is that
+many compilers still do not support these advanced concepts and cannot
+compile OTB. And even if they do, they may produce completely
+undecipherable error messages due to even the simplest syntax errors.</p>
+</div>
+<div class="section" id="include-files-and-class-definitions">
+<h3>Include Files and Class Definitions<a class="headerlink" href="#include-files-and-class-definitions" title="Permalink to this headline">¶</a></h3>
+<p>In ITK and OTB classes are defined by a maximum of two files: a header
+<code class="docutils literal notranslate"><span class="pre">.h</span></code> file and an implementation file—<code class="docutils literal notranslate"><span class="pre">.cxx</span></code> if a non-templated
+class, and a <code class="docutils literal notranslate"><span class="pre">.hxx</span></code> if a templated class. The header files contain
+class declarations and formatted comments that are used by the Doxygen
+documentation system to automatically produce HTML manual pages.</p>
+<p>In addition to class headers, there are a few other important ITK header
+files.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">itkMacro.h</span></code></dt>
+<dd>defines standard system-wide macros (such as <code class="docutils literal notranslate"><span class="pre">Set/Get</span></code>, constants,
+and other parameters).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">itkNumericTraits.h</span></code></dt>
+<dd>defines numeric characteristics for native types such as its maximum
+and minimum possible values.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">itkWin32Header.h</span></code></dt>
+<dd>is used to define operating system parameters to control the
+compilation process.</dd>
+</dl>
+</div>
+<div class="section" id="object-factories">
+<h3>Object Factories<a class="headerlink" href="#object-factories" title="Permalink to this headline">¶</a></h3>
+<p>Most classes in OTB are instantiated through an <em>object factory</em>
+mechanism. That is, rather than using the standard C++ class constructor
+and destructor, instances of an OTB class are created with the static
+class <code class="docutils literal notranslate"><span class="pre">New()</span></code> method. In fact, the constructor and destructor are
+<code class="docutils literal notranslate"><span class="pre">protected:</span></code> so it is generally not possible to construct an OTB
+instance on the heap. (Note: this behavior pertains to classes that are
+derived from <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1LightObject.html">itk::LightObject</a>. In some cases the need for
+speed or reduced memory footprint dictates that a class not be derived
+from LightObject and in this case instances may be created on the heap.
+An example of such a class is <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1EventObject.html">itk::EventObject</a>.)</p>
+<p>The object factory enables users to control run-time instantiation of
+classes by registering one or more factories with
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ObjectFactoryBase.html">itk::ObjectFactoryBase</a>. These registered factories support the
+method <code class="docutils literal notranslate"><span class="pre">CreateInstance(classname)</span></code> which takes as input the name of a
+class to create. The factory can choose to create the class based on a
+number of factors including the computer system configuration and
+environment variables. For example, in a particular application an OTB
+user may wish to deploy their own class implemented using specialized
+image processing hardware (i.e., to realize a performance gain). By
+using the object factory mechanism, it is possible at run-time to
+replace the creation of a particular OTB filter with such a custom
+class. (Of course, the class must provide the exact same API as the one
+it is replacing.) To do this, the user compiles their class (using the
+same compiler, build options, etc.) and inserts the object code into a
+shared library or DLL. The library is then placed in a directory
+referred to by the <code class="docutils literal notranslate"><span class="pre">OTB_AUTOLOAD_PATH</span></code> environment variable. On
+instantiation, the object factory will locate the library, determine
+that it can create a class of a particular name with the factory, and
+use the factory to create the instance. (Note: if the
+<code class="docutils literal notranslate"><span class="pre">CreateInstance()</span></code> method cannot find a factory that can create the
+named class, then the instantiation of the class falls back to the usual
+constructor.)</p>
+<p>In practice object factories are used mainly (and generally
+transparently) by the OTB input/output (IO) classes. For most users the
+greatest impact is on the use of the <code class="docutils literal notranslate"><span class="pre">New()</span></code> method to create a class.
+Generally the <code class="docutils literal notranslate"><span class="pre">New()</span></code> method is declared and implemented via the macro
+<code class="docutils literal notranslate"><span class="pre">itkNewMacro()</span></code> found in <code class="docutils literal notranslate"><span class="pre">Modules/Core/Common/include/itkMacro.h</span></code>.</p>
+</div>
+<div class="section" id="smart-pointers-and-memory-management">
+<h3>Smart Pointers and Memory Management<a class="headerlink" href="#smart-pointers-and-memory-management" title="Permalink to this headline">¶</a></h3>
+<p>By their nature object-oriented systems represent and operate on data
+through a variety of object types, or classes. When a particular class
+is instantiated to produce an instance of that class, memory allocation
+occurs so that the instance can store data attribute values and method
+pointers (i.e., the vtable). This object may then be referenced by other
+classes or data structures during normal operation of the program.
+Typically during program execution all references to the instance may
+disappear at which point the instance must be deleted to recover memory
+resources. Knowing when to delete an instance, however, is difficult.
+Deleting the instance too soon results in program crashes; deleting it
+too late and memory leaks (or excessive memory consumption) will occur.
+This process of allocating and releasing memory is known as memory
+management.</p>
+<p>In ITK, memory management is implemented through reference counting.
+This compares to another popular approach—garbage collection—used by
+many systems including Java. In reference counting, a count of the
+number of references to each instance is kept. When the reference goes
+to zero, the object destroys itself. In garbage collection, a background
+process sweeps the system identifying instances no longer referenced in
+the system and deletes them. The problem with garbage collection is that
+the actual point in time at which memory is deleted is variable. This is
+unacceptable when an object size may be gigantic (think of a large 3D
+volume gigabytes in size). Reference counting deletes memory immediately
+(once all references to an object disappear).</p>
+<p>Reference counting is implemented through a <code class="docutils literal notranslate"><span class="pre">Register()</span></code>/<code class="docutils literal notranslate"><span class="pre">Delete()</span></code>
+member function interface. All instances of an OTB object have a
+<code class="docutils literal notranslate"><span class="pre">Register()</span></code> method invoked on them by any other object that
+references an them. The <code class="docutils literal notranslate"><span class="pre">Register()</span></code> method increments the instances’
+reference count. When the reference to the instance disappears, a
+<code class="docutils literal notranslate"><span class="pre">Delete()</span></code> method is invoked on the instance that decrements the
+reference count—this is equivalent to an <code class="docutils literal notranslate"><span class="pre">UnRegister()</span></code> method. When
+the reference count returns to zero, the instance is destroyed.</p>
+<p>This protocol is greatly simplified by using a helper class called a
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1SmartPointer.html">itk::SmartPointer</a>. The smart pointer acts like a regular
+pointer (e.g. supports operators <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">*</span></code>) but automagically
+performs a <code class="docutils literal notranslate"><span class="pre">Register()</span></code> when referring to an instance, and an
+<code class="docutils literal notranslate"><span class="pre">UnRegister()</span></code> when it no longer points to the instance. Unlike most
+other instances in OTB, SmartPointers can be allocated on the program
+stack, and are automatically deleted when the scope that the
+SmartPointer was created is closed. As a result, you should <em>rarely if
+ever call Register() or Delete()</em> in OTB. For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">MyRegistrationFunction</span><span class="p">()</span>
+<span class="p">{</span> <span class="c1">// Start of scope</span>
+  <span class="c1">// here an interpolator is created and associated to the</span>
+  <span class="c1">// SmartPointer &quot;interp&quot;.</span>
+  <span class="n">InterpolatorType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">interp</span> <span class="o">=</span> <span class="n">InterpolatorType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+<span class="p">}</span> <span class="c1">// End of scope</span>
+</pre></div>
+</div>
+<p>In this example, reference counted objects are created (with the
+<code class="docutils literal notranslate"><span class="pre">New()</span></code> method) with a reference count of one. Assignment to the
+SmartPointer <code class="docutils literal notranslate"><span class="pre">interp</span></code> does not change the reference count. At the end
+of scope, <code class="docutils literal notranslate"><span class="pre">interp</span></code> is destroyed, the reference count of the actual
+interpolator object (referred to by <code class="docutils literal notranslate"><span class="pre">interp</span></code>) is decremented, and if
+it reaches zero, then the interpolator is also destroyed.</p>
+<p>Note that in ITK SmartPointers are always used to refer to instances of
+classes derived from <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1LightObject.html">itk::LightObject</a>. Method invocations and
+function calls often return “real” pointers to instances, but they are
+immediately assigned to a SmartPointer. Raw pointers are used for
+non-LightObject classes when the need for speed and/or memory demands a
+smaller, faster class.</p>
+</div>
+</div>
+<div class="section" id="data-representation">
+<h2>Data Representation<a class="headerlink" href="#data-representation" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a> represents an <em>n</em>-dimensional, regular sampling of
+data. The sampling direction is parallel to each of the coordinate axes,
+and the origin of the sampling, inter-pixel spacing, and the number of
+samples in each direction (i.e., image dimension) can be specified. The
+sample, or pixel, type in OTB is arbitrary—a template parameter
+<code class="docutils literal notranslate"><span class="pre">TPixel</span></code> specifies the type upon template instantiation. (The
+dimensionality of the image must also be specified when the image class
+is instantiated.) The key is that the pixel type must support certain
+operations (for example, addition or difference) if the code is to
+compile in all cases (for example, to be processed by a particular
+filter that uses these operations). In practice the OTB user will use a
+C++ simple type (e.g., <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>) or a pre-defined pixel type
+and will rarely create a new type of pixel class.</p>
+<p>One of the important ITK concepts regarding images is that rectangular,
+continuous pieces of the image are known as <em>regions</em>. Regions are used
+to specify which part of an image to process, for example in
+multithreading, or which part to hold in memory. In ITK there are three
+common types of regions:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">LargestPossibleRegion</span></code> —the image in its entirety.</li>
+<li><code class="docutils literal notranslate"><span class="pre">BufferedRegion</span></code> —the portion of the image retained in memory.</li>
+<li><code class="docutils literal notranslate"><span class="pre">RequestedRegion</span></code> —the portion of the region requested by a filter
+or other class when operating on the image.</li>
+</ol>
+<p>The <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a> class extends the functionalities of the
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1Image.html">itk::Image</a> in order to take into account particular remote
+sensing features as geographical projections, etc.</p>
+</div>
+<div class="section" id="data-processing-pipeline">
+<h2>Data Processing Pipeline<a class="headerlink" href="#data-processing-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>While data objects (e.g., images) are used to represent data, <em>process
+objects</em> are classes that operate on data objects and may produce new
+data objects. Process objects are classed as <em>sources</em>, <em>filter
+objects</em>, or <em>mappers</em>. Sources (such as readers) produce data, filter
+objects take in data and process it to produce new data, and mappers
+accept data for output either to a file or some other system. Sometimes
+the term <em>filter</em> is used broadly to refer to all three types.</p>
+<p>The data processing pipeline ties together data objects (e.g., images)
+and process objects. The pipeline supports an automatic updating
+mechanism that causes a filter to execute if and only if its input or
+its internal state changes. Further, the data pipeline supports
+<em>streaming</em>, the ability to automatically break data into smaller
+pieces, process the pieces one by one, and reassemble the processed data
+into a final result.</p>
+<p>Typically data objects and process objects are connected together using
+the <code class="docutils literal notranslate"><span class="pre">SetInput()</span></code> and <code class="docutils literal notranslate"><span class="pre">GetOutput()</span></code> methods as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">FloatImage2DType</span><span class="p">;</span>
+
+<span class="n">itk</span><span class="o">::</span><span class="n">RandomImageSource</span><span class="o">&lt;</span><span class="n">FloatImage2DType</span><span class="o">&gt;::</span><span class="n">Pointer</span> <span class="n">random</span><span class="p">;</span>
+<span class="n">random</span> <span class="o">=</span> <span class="n">itk</span><span class="o">::</span><span class="n">RandomImageSource</span><span class="o">&lt;</span><span class="n">FloatImage2DType</span><span class="o">&gt;::</span><span class="n">New</span><span class="p">();</span>
+<span class="n">random</span><span class="o">-&gt;</span><span class="n">SetMin</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="n">random</span><span class="o">-&gt;</span><span class="n">SetMax</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="n">itk</span><span class="o">::</span><span class="n">ShrinkImageFilter</span><span class="o">&lt;</span><span class="n">FloatImage2DType</span><span class="p">,</span><span class="n">FloatImage2DType</span><span class="o">&gt;::</span><span class="n">Pointer</span> <span class="n">shrink</span><span class="p">;</span>
+<span class="n">shrink</span> <span class="o">=</span> <span class="n">itk</span><span class="o">::</span><span class="n">ShrinkImageFilter</span><span class="o">&lt;</span><span class="n">FloatImage2DType</span><span class="p">,</span><span class="n">FloatImage2DType</span><span class="o">&gt;::</span><span class="n">New</span><span class="p">();</span>
+<span class="n">shrink</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">random</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+<span class="n">shrink</span><span class="o">-&gt;</span><span class="n">SetShrinkFactors</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">::</span><span class="n">Pointer</span><span class="o">&lt;</span><span class="n">FloatImage2DType</span><span class="o">&gt;</span> <span class="n">writer</span><span class="p">;</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">::</span><span class="n">Pointer</span><span class="o">&lt;</span><span class="n">FloatImage2DType</span><span class="o">&gt;::</span><span class="n">New</span><span class="p">();</span>
+<span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span> <span class="p">(</span><span class="n">shrink</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+<span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="s">&quot;test.raw&quot;</span><span class="p">);</span>
+<span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In this example the source object <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1RandomImageSource.html">itk::RandomImageSource</a> is
+connected to the <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ShrinkImageFilter.html">itk::ShrinkImageFilter</a>, and the shrink filter
+is connected to the mapper <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1ImageFileWriter.html">otb::ImageFileWriter</a>. When the
+<code class="docutils literal notranslate"><span class="pre">Update()</span></code> method is invoked on the writer, the data processing
+pipeline causes each of these filters in order, culminating in writing
+the final data to a file on disk.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Iterators.html" class="btn btn-neutral float-right" title="Iterators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../C++.html" class="btn btn-neutral" title="C++ API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

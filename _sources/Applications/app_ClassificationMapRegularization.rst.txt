@@ -1,4 +1,4 @@
-.. _app-ClassificationMapRegularization:
+.. _ClassificationMapRegularization:
 
 ClassificationMapRegularization
 ===============================

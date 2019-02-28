@@ -1,4 +1,4 @@
-.. _app-DynamicConvert:
+.. _DynamicConvert:
 
 DynamicConvert
 ==============
@@ -163,4 +163,4 @@ The application does not support complex pixel types as output.
 See also
 --------
 
-| :ref:`app-Rescale`
+| :ref:`Rescale`

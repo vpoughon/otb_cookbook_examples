@@ -1,4 +1,4 @@
-.. _example-HelloWorldOTB:
+.. _HelloWorldOTB.cxx:
 
 HelloWorldOTB.cxx
 =================
@@ -9,7 +9,7 @@ HelloWorldOTB.cxx
 
 
 
-Example source code (`HelloWorldOTB.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/HelloWorldOTB.cxx?inline=false>`_):
+Example source code (`HelloWorldOTB.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/HelloWorldOTB.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

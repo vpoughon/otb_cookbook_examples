@@ -1,4 +1,4 @@
-.. _app-RadiometricIndices:
+.. _RadiometricIndices:
 
 RadiometricIndices
 ==================

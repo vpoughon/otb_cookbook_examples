@@ -1,4 +1,4 @@
-.. _example-CompositeFilterExample:
+.. _CompositeFilterExample.cxx:
 
 CompositeFilterExample.cxx
 ==========================
@@ -9,7 +9,7 @@ CompositeFilterExample.cxx
 
 
 
-Example source code (`CompositeFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/CompositeFilterExample.cxx?inline=false>`_):
+Example source code (`CompositeFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/CompositeFilterExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

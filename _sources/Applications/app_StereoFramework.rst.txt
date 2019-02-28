@@ -1,4 +1,4 @@
-.. _app-StereoFramework:
+.. _StereoFramework:
 
 StereoFramework
 ===============
@@ -13,9 +13,9 @@ Compute the ground elevation with a stereo block matching algorithm between one 
 
 This application is chaining different processing steps. Some of them are also performed by other applications in the stereo-reconstruction framework:
 
-* :ref:`app-StereoRectificationGridGenerator`: for the generation of deformation grids
-* :ref:`app-GridBasedImageResampling`: resampling into epipolar geometry
-* :ref:`app-BlockMatching`: estimation of dense disparity maps
+* :ref:`StereoRectificationGridGenerator`: for the generation of deformation grids
+* :ref:`GridBasedImageResampling`: resampling into epipolar geometry
+* :ref:`BlockMatching`: estimation of dense disparity maps
 
 The pipeline executes the following steps on each stereo pair:
 
@@ -307,6 +307,6 @@ Limitations
 See also
 --------
 
-| :ref:`app-StereoRectificationGridGenerator`
-| :ref:`app-GridBasedImageResampling`
-| :ref:`app-BlockMatching`
+| :ref:`StereoRectificationGridGenerator`
+| :ref:`GridBasedImageResampling`
+| :ref:`BlockMatching`

@@ -111,54 +111,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_DisparityMapToElevationMap.html">DisparityMapToElevationMap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">StereoRectificationGridGenerator</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_DisparityMapToElevationMap.html">DisparityMapToElevationMap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">StereoRectificationGridGenerator</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_DisparityMapToElevationMap.html">DisparityMapToElevationMap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">StereoRectificationGridGenerator</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_DisparityMapToElevationMap.html">DisparityMapToElevationMap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">StereoRectificationGridGenerator</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
@@ -247,12 +199,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="stereorectificationgridgenerator">
-<span id="app-stereorectificationgridgenerator"></span><h1>StereoRectificationGridGenerator<a class="headerlink" href="#stereorectificationgridgenerator" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>StereoRectificationGridGenerator<a class="headerlink" href="#stereorectificationgridgenerator" title="Permalink to this headline">¶</a></h1>
 <p>Generates two deformation fields to resample in epipolar geometry, a pair of stereo images up to the sensor model precision</p>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>This application generates a pair of deformation grid to stereo-rectify a pair of stereo images according to sensor modelling and a mean elevation hypothesis.</p>
-<p>This application is the first part of the stereo reconstruction framework. The output deformation grids can be passed to the <a class="reference internal" href="app_GridBasedImageResampling.html#app-gridbasedimageresampling"><span class="std std-ref">GridBasedImageResampling</span></a> application for actual resampling into epipolar geometry.</p>
+<p>This application is the first part of the stereo reconstruction framework. The output deformation grids can be passed to the <a class="reference internal" href="app_GridBasedImageResampling.html#gridbasedimageresampling"><span class="std std-ref">GridBasedImageResampling</span></a> application for actual resampling into epipolar geometry.</p>
 <p>There are several ways to set the elevation source:</p>
 <ul class="simple">
 <li>An arbitrary constant elevation</li>
@@ -265,15 +217,15 @@
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#input-and-output-data" id="id1">Input and output data</a></li>
-<li><a class="reference internal" href="#epipolar-geometry-and-grid-parameters" id="id2">Epipolar  geometry and grid parameters</a></li>
-<li><a class="reference internal" href="#elevation-management" id="id3">Elevation management</a></li>
-<li><a class="reference internal" href="#average-elevation-computed-from-dem" id="id4">Average elevation computed from DEM</a></li>
-<li><a class="reference internal" href="#write-inverse-fields" id="id5">Write inverse fields</a></li>
+<li><a class="reference internal" href="#input-and-output-data" id="id2">Input and output data</a></li>
+<li><a class="reference internal" href="#epipolar-geometry-and-grid-parameters" id="id3">Epipolar  geometry and grid parameters</a></li>
+<li><a class="reference internal" href="#elevation-management" id="id4">Elevation management</a></li>
+<li><a class="reference internal" href="#average-elevation-computed-from-dem" id="id5">Average elevation computed from DEM</a></li>
+<li><a class="reference internal" href="#write-inverse-fields" id="id6">Write inverse fields</a></li>
 </ul>
 </div>
 <div class="section" id="input-and-output-data">
-<h3><a class="toc-backref" href="#id1">Input and output data</a><a class="headerlink" href="#input-and-output-data" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id2">Input and output data</a><a class="headerlink" href="#input-and-output-data" title="Permalink to this headline">¶</a></h3>
 <p>This group of parameters allows setting the input and output images.</p>
 <p><strong>Left input image</strong> <code class="code docutils literal notranslate"><span class="pre">-io.inleft</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
 The left image from the stereo pair, in sensor geometry.</p>
@@ -285,11 +237,11 @@ The deformation grid to resample the left image from sensor geometry to epipolar
 The deformation grid to resample the right image from sensor geometry to epipolar geometry.</p>
 </div>
 <div class="section" id="epipolar-geometry-and-grid-parameters">
-<h3><a class="toc-backref" href="#id2">Epipolar  geometry and grid parameters</a><a class="headerlink" href="#epipolar-geometry-and-grid-parameters" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">Epipolar  geometry and grid parameters</a><a class="headerlink" href="#epipolar-geometry-and-grid-parameters" title="Permalink to this headline">¶</a></h3>
 <p>Parameters of the epipolar geometry and output grids</p>
 </div>
 <div class="section" id="elevation-management">
-<h3><a class="toc-backref" href="#id3">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
 <p>This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.</p>
 <p><strong>DEM directory</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.dem</span> <span class="pre">directory</span></code> <br />
 This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.</p>
@@ -299,7 +251,7 @@ Use a geoid grid to get the height above the ellipsoid in case there is no DEM a
 This parameter allows setting the default height above ellipsoid when there is no DEM available, no coverage for some points or pixels with no_data in the DEM tiles, and no geoid file has been set. This is also used by some application as an average elevation value.</p>
 </div>
 <div class="section" id="average-elevation-computed-from-dem">
-<h3><a class="toc-backref" href="#id4">Average elevation computed from DEM</a><a class="headerlink" href="#average-elevation-computed-from-dem" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">Average elevation computed from DEM</a><a class="headerlink" href="#average-elevation-computed-from-dem" title="Permalink to this headline">¶</a></h3>
 <p>Average elevation computed from the provided DEM</p>
 <p><strong>Sub-sampling step</strong> <code class="code docutils literal notranslate"><span class="pre">-epi.elevation.avgdem.step</span> <span class="pre">int</span></code> <em>Default value: 1</em> <br />
 Step of sub-sampling for average elevation estimation</p>
@@ -322,7 +274,7 @@ The application computes the optimal rectified image size so that the whole left
 This parameter is the mean value, in pixels.meters^-1, of the baseline to sensor altitude ratio. It can be used to convert disparities to physical elevation, since a disparity of one pixel will correspond to an elevation offset of the invert of this value with respect to the mean elevation.</p>
 </div>
 <div class="section" id="write-inverse-fields">
-<h3><a class="toc-backref" href="#id5">Write inverse fields</a><a class="headerlink" href="#write-inverse-fields" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">Write inverse fields</a><a class="headerlink" href="#write-inverse-fields" title="Permalink to this headline">¶</a></h3>
 <p>This group of parameter allows generating the inverse fields as well</p>
 <p><strong>Left inverse deformation grid</strong> <code class="code docutils literal notranslate"><span class="pre">-inverse.outleft</span> <span class="pre">image</span> <span class="pre">[dtype]</span></code> <br />
 The deformation grid to resample the left image from the epipolar geometry back into its original sensor geometry.</p>
@@ -365,7 +317,7 @@ Save application parameters to an XML file.</p>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
-<div class="line">otb:ref:<cite>app-GridBasedImageResampling</cite></div>
+<div class="line">otb:ref:<cite>GridBasedImageResampling</cite></div>
 </div>
 </div>
 </div>

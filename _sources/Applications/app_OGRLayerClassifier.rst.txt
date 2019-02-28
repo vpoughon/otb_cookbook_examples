@@ -1,4 +1,4 @@
-.. _app-OGRLayerClassifier:
+.. _OGRLayerClassifier:
 
 OGRLayerClassifier
 ==================
@@ -81,4 +81,4 @@ Experimental. Only shapefiles are supported for now.
 See also
 --------
 
-| :ref:`app-ComputeOGRLayersFeaturesStatistics`
+| :ref:`ComputeOGRLayersFeaturesStatistics`

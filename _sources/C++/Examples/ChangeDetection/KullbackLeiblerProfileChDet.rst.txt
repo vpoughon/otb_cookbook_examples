@@ -1,4 +1,4 @@
-.. _example-KullbackLeiblerProfileChDet:
+.. _KullbackLeiblerProfileChDet.cxx:
 
 KullbackLeiblerProfileChDet.cxx
 ===============================
@@ -14,7 +14,8 @@ Example usage:
     ./KullbackLeiblerProfileChDet Input/GomaAvant.png Input/GomaApres.png Output/KLProfileChDet.png 5 51 1 12 24
 
 
-Example source code (`KullbackLeiblerProfileChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/KullbackLeiblerProfileChDet.cxx?inline=false>`_):
+
+Example source code (`KullbackLeiblerProfileChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/KullbackLeiblerProfileChDet.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _app-SARPolarMatrixConvert:
+.. _SARPolarMatrixConvert:
 
 SARPolarMatrixConvert
 =====================
@@ -149,4 +149,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-SARPolarSynth`, :ref:`app-SARDecompositions`
+| :ref:`SARPolarSynth`, :ref:`SARDecompositions`

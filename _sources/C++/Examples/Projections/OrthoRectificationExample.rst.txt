@@ -1,4 +1,4 @@
-.. _example-OrthoRectificationExample:
+.. _OrthoRectificationExample.cxx:
 
 OrthoRectificationExample.cxx
 =============================
@@ -9,7 +9,7 @@ OrthoRectificationExample.cxx
 
 
 
-Example source code (`OrthoRectificationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/OrthoRectificationExample.cxx?inline=false>`_):
+Example source code (`OrthoRectificationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/OrthoRectificationExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

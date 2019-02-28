@@ -1,4 +1,4 @@
-.. _example-NAPCAExample:
+.. _NAPCAExample.cxx:
 
 NAPCAExample.cxx
 ================
@@ -22,7 +22,8 @@ Example usage:
                    1
 
 
-Example source code (`NAPCAExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/NAPCAExample.cxx?inline=false>`_):
+
+Example source code (`NAPCAExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/NAPCAExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

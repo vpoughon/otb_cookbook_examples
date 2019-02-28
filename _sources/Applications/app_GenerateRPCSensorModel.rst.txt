@@ -1,4 +1,4 @@
-.. _app-GenerateRPCSensorModel:
+.. _GenerateRPCSensorModel:
 
 GenerateRPCSensorModel
 ======================
@@ -126,4 +126,4 @@ From Python:
 See also
 --------
 
-| OrthoRectication,:ref:`app-HomologousPointsExtraction`,:ref:`app-RefineSensorModel`
+| OrthoRectication,:ref:`HomologousPointsExtraction`,:ref:`RefineSensorModel`

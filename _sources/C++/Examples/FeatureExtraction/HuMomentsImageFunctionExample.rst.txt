@@ -1,4 +1,4 @@
-.. _example-HuMomentsImageFunctionExample:
+.. _HuMomentsImageFunctionExample.cxx:
 
 HuMomentsImageFunctionExample.cxx
 =================================
@@ -14,7 +14,8 @@ Example usage:
     ./HuMomentsImageFunctionExample Input/ROISpot5.png 2
 
 
-Example source code (`HuMomentsImageFunctionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/HuMomentsImageFunctionExample.cxx?inline=false>`_):
+
+Example source code (`HuMomentsImageFunctionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/HuMomentsImageFunctionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

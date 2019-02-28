@@ -1,4 +1,4 @@
-.. _example-ImageLinearIteratorWithIndex:
+.. _ImageLinearIteratorWithIndex.cxx:
 
 ImageLinearIteratorWithIndex.cxx
 ================================
@@ -9,7 +9,7 @@ ImageLinearIteratorWithIndex.cxx
 
 
 
-Example source code (`ImageLinearIteratorWithIndex.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageLinearIteratorWithIndex.cxx?inline=false>`_):
+Example source code (`ImageLinearIteratorWithIndex.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageLinearIteratorWithIndex.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

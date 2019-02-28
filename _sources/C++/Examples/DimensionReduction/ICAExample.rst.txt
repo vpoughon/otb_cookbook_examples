@@ -1,4 +1,4 @@
-.. _example-ICAExample:
+.. _ICAExample.cxx:
 
 ICAExample.cxx
 ==============
@@ -22,7 +22,8 @@ Example usage:
                  1.
 
 
-Example source code (`ICAExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/ICAExample.cxx?inline=false>`_):
+
+Example source code (`ICAExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/ICAExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

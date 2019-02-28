@@ -1,4 +1,4 @@
-.. _example-VectorDataProjectionExample:
+.. _VectorDataProjectionExample.cxx:
 
 VectorDataProjectionExample.cxx
 ===============================
@@ -9,7 +9,7 @@ VectorDataProjectionExample.cxx
 
 
 
-Example source code (`VectorDataProjectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/VectorDataProjectionExample.cxx?inline=false>`_):
+Example source code (`VectorDataProjectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/VectorDataProjectionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

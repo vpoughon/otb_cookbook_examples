@@ -1,4 +1,4 @@
-.. _example-ExtractRoadExample:
+.. _ExtractRoadExample.cxx:
 
 ExtractRoadExample.cxx
 ======================
@@ -14,7 +14,8 @@ Example usage:
     ./ExtractRoadExample Input/qb_RoadExtract.tif Output/ExtractRoadOutput.png 337 557 432 859 1.0 0.00005 1.0 0.39269 1.0 10.0 25.
 
 
-Example source code (`ExtractRoadExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ExtractRoadExample.cxx?inline=false>`_):
+
+Example source code (`ExtractRoadExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ExtractRoadExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

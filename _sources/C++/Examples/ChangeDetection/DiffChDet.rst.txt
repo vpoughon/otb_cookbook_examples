@@ -1,4 +1,4 @@
-.. _example-DiffChDet:
+.. _DiffChDet.cxx:
 
 DiffChDet.cxx
 =============
@@ -14,7 +14,8 @@ Example usage:
     ./DiffChDet Input/SpotBefore.png Input/SpotAfter.png Output/DiffChDet.tif 3
 
 
-Example source code (`DiffChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/DiffChDet.cxx?inline=false>`_):
+
+Example source code (`DiffChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/DiffChDet.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

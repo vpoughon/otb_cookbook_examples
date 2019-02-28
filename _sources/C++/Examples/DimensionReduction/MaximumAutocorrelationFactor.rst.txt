@@ -1,4 +1,4 @@
-.. _example-MaximumAutocorrelationFactor:
+.. _MaximumAutocorrelationFactor.cxx:
 
 MaximumAutocorrelationFactor.cxx
 ================================
@@ -14,7 +14,8 @@ Example usage:
     ./MaximumAutocorrelationFactor Input/wv2_cannes_8bands.tif Output/MAFOutput.tif Output/maf-input.png Output/maf-output.png
 
 
-Example source code (`MaximumAutocorrelationFactor.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/MaximumAutocorrelationFactor.cxx?inline=false>`_):
+
+Example source code (`MaximumAutocorrelationFactor.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DimensionReduction/MaximumAutocorrelationFactor.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _example-SIFTFastExample:
+.. _SIFTFastExample.cxx:
 
 SIFTFastExample.cxx
 ===================
@@ -14,7 +14,8 @@ Example usage:
     ./SIFTFastExample Input/ROISpot5.png Output/ROISpot5SIFTFast.png 3
 
 
-Example source code (`SIFTFastExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTFastExample.cxx?inline=false>`_):
+
+Example source code (`SIFTFastExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTFastExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

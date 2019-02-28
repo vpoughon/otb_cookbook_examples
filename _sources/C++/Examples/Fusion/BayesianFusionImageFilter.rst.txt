@@ -1,4 +1,4 @@
-.. _example-BayesianFusionImageFilter:
+.. _BayesianFusionImageFilter.cxx:
 
 BayesianFusionImageFilter.cxx
 =============================
@@ -20,6 +20,7 @@ Example usage:
                                 Output/pretty_multiSpectInterp_0.9999.png \
                                 Output/pretty_panchro_0.9999.png \
                                 0.9999
+
 Example usage:
 
 .. code-block:: bash
@@ -35,7 +36,8 @@ Example usage:
                                 0.5
 
 
-Example source code (`BayesianFusionImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Fusion/BayesianFusionImageFilter.cxx?inline=false>`_):
+
+Example source code (`BayesianFusionImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Fusion/BayesianFusionImageFilter.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

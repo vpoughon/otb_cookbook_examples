@@ -9,19 +9,3 @@ Hyperspectral
 	app_HyperspectralUnmixing
 	app_LocalRxDetection
 	app_VertexComponentAnalysis
-	app_EndmemberNumberEstimation
-	app_HyperspectralUnmixing
-	app_LocalRxDetection
-	app_VertexComponentAnalysis
-	app_EndmemberNumberEstimation
-	app_HyperspectralUnmixing
-	app_LocalRxDetection
-	app_VertexComponentAnalysis
-	app_EndmemberNumberEstimation
-	app_HyperspectralUnmixing
-	app_LocalRxDetection
-	app_VertexComponentAnalysis
-	app_EndmemberNumberEstimation
-	app_HyperspectralUnmixing
-	app_LocalRxDetection
-	app_VertexComponentAnalysis

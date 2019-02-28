@@ -1,4 +1,4 @@
-.. _app-ComputeModulusAndPhase:
+.. _ComputeModulusAndPhase:
 
 ComputeModulusAndPhase
 ======================
@@ -83,4 +83,4 @@ The application takes as input single band image with complex pixels or a 2 band
 See also
 --------
 
-| :ref:`app-Despeckle`, :ref:`app-SARPolarMatrixConvert`, :ref:`app-SARPolarSynth`
+| :ref:`Despeckle`, :ref:`SARPolarMatrixConvert`, :ref:`SARPolarSynth`

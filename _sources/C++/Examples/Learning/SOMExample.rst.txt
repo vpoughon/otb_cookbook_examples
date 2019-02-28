@@ -1,4 +1,4 @@
-.. _example-SOMExample:
+.. _SOMExample.cxx:
 
 SOMExample.cxx
 ==============
@@ -14,7 +14,8 @@ Example usage:
     ./SOMExample Input/ROI_QB_MUL_1.png Output/ROI_QB_MUL_SOM.png Output/ROI_QB_MUL_SOMACT.png 4 4 4 4 20 1.0 0.1 128
 
 
-Example source code (`SOMExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SOMExample.cxx?inline=false>`_):
+
+Example source code (`SOMExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SOMExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

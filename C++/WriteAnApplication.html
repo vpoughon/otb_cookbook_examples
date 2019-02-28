@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to write an application &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Adding New Modules" href="AddingNewModules.html" />
+    <link rel="prev" title="Persistent filters" href="PersistentFilters.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to write an application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-design">Application design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#architecture-of-the-class">Architecture of the class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#doinit">DoInit()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doupdateparameters">DoUpdateParameters()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doexecute">DoExecute()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters-selection">Parameters selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters-description">Parameters description</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#composite-application">Composite application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-internal-applications">Creating internal applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#connecting-parameters">Connecting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#orchestration">Orchestration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-your-application">Compile your application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#execute-your-application">Execute your application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-your-application">Testing your application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-example">Application Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>How to write an application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/WriteAnApplication.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-write-an-application">
+<h1>How to write an application<a class="headerlink" href="#how-to-write-an-application" title="Permalink to this headline">¶</a></h1>
+<p>This chapter presents the different steps to write your own application,
+and the framework surrounding it.</p>
+<div class="section" id="application-design">
+<h2>Application design<a class="headerlink" href="#application-design" title="Permalink to this headline">¶</a></h2>
+<p>The first logical step is to define the role of your application:</p>
+<ul class="simple">
+<li>What is the function of your application? Try to draw a box diagram
+to describe the design of your application. Note that you don’t have
+to worry about opening and saving images (or vector data) files, this
+is handled by the framework.</li>
+<li>What variables (or data objects) must be exposed outside the
+application? Try to make a list of the inputs, outputs and
+parameters of your application.</li>
+</ul>
+<p>Then you should have a good vision of your application pipeline.
+Depending on the different filters used, the application can be streamed
+and threaded. The threading capabilities can be different between the
+filters so there is no overall threading parameter (by default, each
+filter has its own threading settings).</p>
+<p>It is a different story for streaming. Since the image writers are
+handled within the framework and outside the reach of the developer, the
+default behaviour is to use streaming. If one of the filters doesn’t
+support streaming, it will enlarge the requested output region to the
+largest possible region and the entire image will be processed at once.
+As a result, the developer doesn’t have to handle streaming nor
+threading. However, there is a way to choose the number of streaming
+divisions (see section <a class="reference internal" href="#appparam"><span class="std std-ref">Parameters selection</span></a>).</p>
+</div>
+<div class="section" id="architecture-of-the-class">
+<h2>Architecture of the class<a class="headerlink" href="#architecture-of-the-class" title="Permalink to this headline">¶</a></h2>
+<p>Every application derives from the class <a class="reference external" href="https://www.orfeo-toolbox.org/doxygen/classotb_1_1Wrapper_1_1Application.html">otb::Wrapper::Application</a>. An application can’t be
+templated. It must contain the standard class typedefs and a call to the
+<code class="docutils literal notranslate"><span class="pre">OTB_APPLICATION_EXPORT</span></code> macro.</p>
+<p>You need also to define standard macros <code class="docutils literal notranslate"><span class="pre">itk::NewMacro</span></code> and
+<code class="docutils literal notranslate"><span class="pre">itk::TypeMacro</span></code>.</p>
+<p>It is also mandatory to implement three methods in a new application:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">DoInit()</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">DoUpdateParameters()</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">DoExecute()</span></code></li>
+</ul>
+<div class="section" id="doinit">
+<h3>DoInit()<a class="headerlink" href="#doinit" title="Permalink to this headline">¶</a></h3>
+<p>This method is called once, when the application is instantiated. It
+should contain the following actions:</p>
+<ul class="simple">
+<li>Set the name and the description of the application</li>
+<li>Fill the documentation and give an example</li>
+<li>Declare all the parameters</li>
+<li>Define the documentation link: using for contrib application use <code class="docutils literal notranslate"><span class="pre">SetDocLink(&quot;docLink&quot;)</span></code>, for official application use <code class="docutils literal notranslate"><span class="pre">SetOfficialDocLink()</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="doupdateparameters">
+<h3>DoUpdateParameters()<a class="headerlink" href="#doupdateparameters" title="Permalink to this headline">¶</a></h3>
+<p>This method is called after every modification of a parameter value.
+With the command line launcher, it is called each time a parameter is
+loaded. With the Qt launcher, it is called each time a parameter field
+is modified. It can be used to maintain consistency and relationship
+between parameters (e.g. in ExtractROI: when changing the input image,
+maybe the ROI size has to be updated).</p>
+</div>
+<div class="section" id="doexecute">
+<h3>DoExecute()<a class="headerlink" href="#doexecute" title="Permalink to this headline">¶</a></h3>
+<p>This method contains the real action of the application. This is where
+the pipeline must be set up. The application framework provides
+different methods to get a value or an object associated to a parameter:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">GetParameterInt(key)</span></code> : get the integer value of a parameter</li>
+<li><code class="docutils literal notranslate"><span class="pre">GetParameterFloat(key)</span></code> : get the float value of a parameter</li>
+<li><code class="docutils literal notranslate"><span class="pre">GetParameterString(key)</span></code> : get the string value of a parameter</li>
+<li><code class="docutils literal notranslate"><span class="pre">GetParameterImage(key)</span></code> : get a pointer to an image object, read
+from the file name given in input</li>
+<li>…</li>
+</ul>
+<p>where <code class="docutils literal notranslate"><span class="pre">key</span></code> refers to parameter key, defined using <code class="docutils literal notranslate"><span class="pre">AddParameter()</span></code>
+method in <code class="docutils literal notranslate"><span class="pre">DoInit()</span></code> method.</p>
+<p>Similar methods exist for binding a data object to an output parameter:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">SetParameterOutputImage(key,data)</span></code> : link the image object to the
+given output parameter</li>
+<li><code class="docutils literal notranslate"><span class="pre">SetParameterComplexOutputImage(key,data)</span></code> : link the complex image
+object to the given output parameter</li>
+<li><code class="docutils literal notranslate"><span class="pre">SetParameterOutputVectorData(key,data)</span></code> : link the vector data
+object to the given output parameter</li>
+</ul>
+<p>If possible, no filter update should be called inside this function. The
+update will be automatically called afterwards : for every image or
+vector data output, a writer is created and updated.</p>
+</div>
+<div class="section" id="parameters-selection">
+<span id="appparam"></span><h3>Parameters selection<a class="headerlink" href="#parameters-selection" title="Permalink to this headline">¶</a></h3>
+<p>In the new application framework, every input, output or parameter
+derive from <a class="reference external" href="https://www.orfeo-toolbox.org/doxygen/classotb_1_1Wrapper_1_1Parameter.html">otb::Wrapper::Parameter</a>. The application engine supplies the following types of
+parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_Bool</span></code> : parameter storing a boolean.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_Int</span></code> : parameter storing an integer.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_Radius</span></code> : parameter storing a radius.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_Float</span></code> : parameter storing a float.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_String</span></code> : parameter storing character string.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_StringList</span></code> : parameter storing a list of character
+string.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputFilename</span></code> : parameter storing an input file
+name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputFilenameList</span></code> : parameter storing a list of
+input file names.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_Directory</span></code> : parameter storing a folder name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_Group</span></code> : parameter storing children parameters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_Choice</span></code> : parameter storing a list of choices
+(doesn’t support multi-choice). It also allows to create specific
+sub-parameters for each available choice.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_ListView</span></code> : parameter storing a list of choices
+(support multi-choice and single-choice).</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputImage</span></code> : parameter storing an input image.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputImageList</span></code> : parameter storing a list of input
+image.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_ComplexInputImage</span></code> : parameter storing a complex
+input image.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputVectorData</span></code> : parameter storing input vector
+data.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputVectorDataList</span></code> : parameter storing a list of
+input vector data.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputProcessXML</span></code> : parameter storing an input XML
+file name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputFilename</span></code> : parameter storing an output file
+name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputImage</span></code> : parameter storing an output image.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_ComplexOutputImage</span></code> : parameter storing a complex
+output image.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputVectorData</span></code> : parameter storing an output
+vector data.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputProcessXML</span></code> : parameter storing an output XML
+file name.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ParameterType_RAM</span></code> : parameter storing the maximum amount of RAM
+to be used.</li>
+</ul>
+</div>
+<div class="section" id="parameters-description">
+<h3>Parameters description<a class="headerlink" href="#parameters-description" title="Permalink to this headline">¶</a></h3>
+<p>Each created parameter has a unique key and several boolean flags to
+represent its state. These flags can be used to set a parameter optional
+or test if the user has modified the parameter value. The parameters are
+created in the <code class="docutils literal notranslate"><span class="pre">DoInit()</span></code> method, then the framework will set their
+value (either by parsing the command line or reading the graphical user
+interface). The <code class="docutils literal notranslate"><span class="pre">DoExecute()</span></code> method is called when all mandatory
+parameters have been given a value, which can be obtained with “Get”
+methods defined in <a class="reference external" href="https://www.orfeo-toolbox.org/doxygen/classotb_1_1Wrapper_1_1Application.html">otb::Wrapper::Application</a>. Parameters are set mandatory (or not) using
+<code class="docutils literal notranslate"><span class="pre">MandatoryOn(key)</span></code> method (<code class="docutils literal notranslate"><span class="pre">MandatoryOff(key)</span></code>).</p>
+<p>Some functions are specific to numeric parameters, such as
+<code class="docutils literal notranslate"><span class="pre">SetMinimumParameterIntValue(key,value)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">SetMaximumParameterFloatValue(key,value)</span></code>. By default, numeric
+parameters are treated as inputs. If your application outputs a number,
+you can use a numeric parameter and change its role by calling
+<code class="docutils literal notranslate"><span class="pre">SetParameterRole(key,Role_Output)</span></code>.</p>
+<p>The input types <code class="docutils literal notranslate"><span class="pre">InputImage</span></code>, <code class="docutils literal notranslate"><span class="pre">InputImageList</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ComplexInputImage</span></code>, <code class="docutils literal notranslate"><span class="pre">InputVectorData</span></code> and <code class="docutils literal notranslate"><span class="pre">InputVectorDataList</span></code>
+store the name of the files to load, but they also encapsulate the
+readers needed to produce the input data.</p>
+<p>The output types <code class="docutils literal notranslate"><span class="pre">OutputImage</span></code>, <code class="docutils literal notranslate"><span class="pre">ComplexOutputImage</span></code> and
+<code class="docutils literal notranslate"><span class="pre">OutputVectorData</span></code> store the name of the files to write, but they also
+encapsulate the corresponding writers.</p>
+</div>
+</div>
+<div class="section" id="composite-application">
+<h2>Composite application<a class="headerlink" href="#composite-application" title="Permalink to this headline">¶</a></h2>
+<p>The application framework has been extended to allow the implementation
+of composite applications : <strong>applications that use other
+applications</strong>. The concept is simple : you have two applications A and
+B that you want to chain in order to build a third application C. Rather
+than writing C by copying the code of A and B, you would like to re-use
+applications A and B. This plain example will be re-used in this section
+for explanations.</p>
+<p>A dedicated class <a class="reference external" href="https://www.orfeo-toolbox.org/doxygen/classotb_1_1Wrapper_1_1CompositeApplication.html">otb::Wrapper::CompositeApplication</a> exists to create such applications. If you
+derive this class to implement application C, you will be able to create
+a composite application.</p>
+<div class="section" id="creating-internal-applications">
+<h3>Creating internal applications<a class="headerlink" href="#creating-internal-applications" title="Permalink to this headline">¶</a></h3>
+<p>Like with standard applications, you have to write a <code class="docutils literal notranslate"><span class="pre">DoInit()</span></code>
+function. In this function, you should first clean any internal
+application with the function <code class="docutils literal notranslate"><span class="pre">ClearApplications()</span></code> (the <code class="docutils literal notranslate"><span class="pre">DoInit()</span></code>
+function is called twice in some cases). Then you can instantiate the
+internal applications that you want to use (for instance A and B). The
+function <code class="docutils literal notranslate"><span class="pre">AddApplication()</span></code> will do that, based on :</p>
+<ul class="simple">
+<li>The application type (i.e. its official name, such as ExtractROI,
+BandMath, …)</li>
+<li>An identifier : like with parameter keys, you have to specify an
+identifier to refer to this internal application. Use the same naming
+conventions as parameters.</li>
+<li>A description : give a small description of the role of this internal
+application.</li>
+</ul>
+<p>Using the function <code class="docutils literal notranslate"><span class="pre">GetInternalApplication()</span></code>, you can get a pointer
+to the internal application corresponding to a given identifier.</p>
+<p>In the example given in introduction, we assume that :</p>
+<ul class="simple">
+<li>An internal application of type A has been added with identifier
+<code class="docutils literal notranslate"><span class="pre">a</span></code></li>
+<li>An internal application of type B has been added with identifier
+<code class="docutils literal notranslate"><span class="pre">b</span></code></li>
+</ul>
+</div>
+<div class="section" id="connecting-parameters">
+<h3>Connecting parameters<a class="headerlink" href="#connecting-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Once you have internal applications, you may want to setup their
+parameters. There are typically 3 cases.</p>
+<p>You may want to expose a parameter of an internal application as a
+parameter of your composite application. Let say you want to expose
+parameter <code class="docutils literal notranslate"><span class="pre">io.in</span></code> from application <code class="docutils literal notranslate"><span class="pre">a</span></code> into your composite
+application C with the key <code class="docutils literal notranslate"><span class="pre">input</span></code>. You can call the function :</p>
+<p><code class="docutils literal notranslate"><span class="pre">ShareParameter(input,a.io.in)</span></code></p>
+<p>As a result, the parameters <code class="docutils literal notranslate"><span class="pre">input</span></code> in application C and <code class="docutils literal notranslate"><span class="pre">io.in</span></code> in
+application <code class="docutils literal notranslate"><span class="pre">a</span></code> will point to the same object. Under the two parameter
+keys, there is a unique value. These two parameters can be considered as
+synchronized.</p>
+<p>This leads to the second case : you may want to synchronize two
+parameters from internal applications. Let say you want to synchronize
+parameter <code class="docutils literal notranslate"><span class="pre">field</span></code> from application <code class="docutils literal notranslate"><span class="pre">a</span></code> with parameter <code class="docutils literal notranslate"><span class="pre">fname</span></code> from
+application <code class="docutils literal notranslate"><span class="pre">b</span></code>. You can call the function :</p>
+<p><code class="docutils literal notranslate"><span class="pre">Connect(a.field,b.fname)</span></code></p>
+<p>Note that the functions <code class="docutils literal notranslate"><span class="pre">ShareParameter()</span></code> and <code class="docutils literal notranslate"><span class="pre">Connect()</span></code> :</p>
+<ul class="simple">
+<li>Use the same syntax to access internal parameters (“application
+identifier” dot “parameter key”).</li>
+<li>Shall be used in the DoInit() function, after the internal
+applications have been added.</li>
+</ul>
+<p>In this synchronization, the two parameters should have the same type,
+or have a similar interface, such as input and output filenames that are
+both accessed using <code class="docutils literal notranslate"><span class="pre">GetParameterString()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">SetParameterString()</span></code>.</p>
+<p>This type of connection is a transition to the third case : you may want
+to connect the output of an internal application to the input of an
+other internal application. Here the difficulty is that the two
+parameters to connect probably have different types. Let say you want to
+connect parameter <code class="docutils literal notranslate"><span class="pre">a.out</span></code> to parameter <code class="docutils literal notranslate"><span class="pre">b.in</span></code>. The “Connect()”
+function may work in favorable cases (see previous paragraph), but for
+images, you have two options :</p>
+<ul class="simple">
+<li>Explicitly copy the image pointer from the output image parameter in
+the input image parameter (with functions
+<code class="docutils literal notranslate"><span class="pre">SetParameterInputImage()</span></code> and <code class="docutils literal notranslate"><span class="pre">GetParameterOutputImage()</span></code>). It
+will connect the pipelines in applications A and B, to form an
+“in-memory” connexion. This has to be done between the calls to
+<code class="docutils literal notranslate"><span class="pre">DoExecute()</span></code> of application A and B.</li>
+<li>Use a temporary filename to store the output image <code class="docutils literal notranslate"><span class="pre">a.out</span></code> and read
+it with <code class="docutils literal notranslate"><span class="pre">b.in</span></code>. In this case, you have to manually call the writers
+of parameter <code class="docutils literal notranslate"><span class="pre">a.out</span></code>.</li>
+</ul>
+<p>At the moment, the in-memory connexion of vector data parameters is not
+supported.</p>
+</div>
+<div class="section" id="orchestration">
+<h3>Orchestration<a class="headerlink" href="#orchestration" title="Permalink to this headline">¶</a></h3>
+<p>In the <code class="docutils literal notranslate"><span class="pre">DoUpdateParameters()</span></code> of your composite application, you can
+call the same function on an internal application with the function
+<code class="docutils literal notranslate"><span class="pre">UpdateInternalParameters()</span></code>. This is needed only if your internal
+applications have a specific behaviour during parameter update.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">DoExecute()</span></code> of your composite application, you have to call
+<code class="docutils literal notranslate"><span class="pre">ExecuteInternal()</span></code> in order to launch each internal application. The
+order should be compatible with image parameter connexions. If you want
+to do “in-memory” connexions, you can do it between two calls to
+<code class="docutils literal notranslate"><span class="pre">ExecuteInternal()</span></code>, for instance :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ExecuteInternal</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">);</span>
+<span class="n">GetInternalApplication</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">SetParameterInputImage</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="n">GetInternalApplication</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetParameterOutputImage</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">));</span>
+<span class="n">ExecuteInternal</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The application <a class="reference internal" href="../Applications/app_BundleToPerfectSensor.html#bundletoperfectsensor"><span class="std std-ref">BundleToPerfectSensor</span></a> is a simple example of composite
+applications. For a more complex example, you can check the application
+TrainImagesClassifier.</p>
+</div>
+</div>
+<div class="section" id="compile-your-application">
+<h2>Compile your application<a class="headerlink" href="#compile-your-application" title="Permalink to this headline">¶</a></h2>
+<p>In order to compile your application you must call the macro
+<code class="docutils literal notranslate"><span class="pre">OTB_CREATE_APPLICATION</span></code> in the <em>CMakelists.txt</em> file. This macro
+generates the lib <em>otbapp_XXX.so</em>, in
+(OTB_BINARY_DIR/lib/otb/applications), where <em>XXX</em> refers to the class
+name.</p>
+</div>
+<div class="section" id="execute-your-application">
+<h2>Execute your application<a class="headerlink" href="#execute-your-application" title="Permalink to this headline">¶</a></h2>
+<p>There are different ways to launch applicatons :</p>
+<dl class="docutils">
+<dt>CommandLine :</dt>
+<dd>The command line option is invoked using
+<em>otbApplicationLauncherCommandLine</em> executable followed by the
+classname, the application dir and the application parameters.</dd>
+<dt>QT :</dt>
+<dd>Application can be encapsuled in Qt framework using
+<em>otbApplicationLauncherQt</em> executable followed by the classname and
+the application dir.</dd>
+<dt>Python :</dt>
+<dd>A Python wrapper is also available.</dd>
+</dl>
+</div>
+<div class="section" id="testing-your-application">
+<h2>Testing your application<a class="headerlink" href="#testing-your-application" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to write application tests. They are quite similar to
+filters tests. The macro <code class="docutils literal notranslate"><span class="pre">OTB_TEST_APPLICATION</span></code> makes it easy to
+define a new test.</p>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="#application-example" title="Permalink to this headline">¶</a></h2>
+<p>See example <a class="reference internal" href="Examples/Application/ApplicationExample.html#applicationexample-cxx"><span class="std std-ref">ApplicationExample.cxx</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="AddingNewModules.html" class="btn btn-neutral float-right" title="Adding New Modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PersistentFilters.html" class="btn btn-neutral" title="Persistent filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

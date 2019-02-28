@@ -1,4 +1,4 @@
-.. _example-ApplicationExample:
+.. _ApplicationExample.cxx:
 
 ApplicationExample.cxx
 ======================
@@ -7,14 +7,9 @@ ApplicationExample.cxx
 
 
 
-Example usage:
-
-.. code-block:: bash
-
-    ./ApplicationExample Input/QB_Suburb.png Output/ApplicationExample.png
 
 
-Example source code (`ApplicationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Application/ApplicationExample.cxx?inline=false>`_):
+Example source code (`ApplicationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Application/ApplicationExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 
@@ -207,6 +202,4 @@ Example source code (`ApplicationExample.cxx <https://gitlab.orfeo-toolbox.org/o
     } // namespace otb
     
     // Finally \code{OTB\_APPLICATION\_EXPORT} is called:
-    //  Software Guide :BeginCodeSnippet
     OTB_APPLICATION_EXPORT(otb::Wrapper::ApplicationExample)
-    //  Software Guide :EndCodeSnippet

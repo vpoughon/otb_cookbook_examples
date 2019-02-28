@@ -1,4 +1,4 @@
-.. _example-LineSegmentDetectorExample:
+.. _LineSegmentDetectorExample.cxx:
 
 LineSegmentDetectorExample.cxx
 ==============================
@@ -14,7 +14,8 @@ Example usage:
     ./LineSegmentDetectorExample Input/Scene.png Output/LSDOutput.shp
 
 
-Example source code (`LineSegmentDetectorExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/LineSegmentDetectorExample.cxx?inline=false>`_):
+
+Example source code (`LineSegmentDetectorExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/LineSegmentDetectorExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

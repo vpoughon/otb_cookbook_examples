@@ -1,4 +1,4 @@
-.. _app-ColorMapping:
+.. _ColorMapping:
 
 ColorMapping
 ============

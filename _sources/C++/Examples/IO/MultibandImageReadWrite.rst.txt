@@ -1,4 +1,4 @@
-.. _example-MultibandImageReadWrite:
+.. _MultibandImageReadWrite.cxx:
 
 MultibandImageReadWrite.cxx
 ===========================
@@ -9,7 +9,7 @@ MultibandImageReadWrite.cxx
 
 
 
-Example source code (`MultibandImageReadWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/MultibandImageReadWrite.cxx?inline=false>`_):
+Example source code (`MultibandImageReadWrite.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/MultibandImageReadWrite.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

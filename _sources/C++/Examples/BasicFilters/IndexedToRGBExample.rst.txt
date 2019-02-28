@@ -1,4 +1,4 @@
-.. _example-IndexedToRGBExample:
+.. _IndexedToRGBExample.cxx:
 
 IndexedToRGBExample.cxx
 =======================
@@ -14,7 +14,8 @@ Example usage:
     ./IndexedToRGBExample Input/buildingExtractionIndexed.tif Output/buildingExtractionRGB.png Output/buildingExtractionIndexed_scaled.png
 
 
-Example source code (`IndexedToRGBExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/IndexedToRGBExample.cxx?inline=false>`_):
+
+Example source code (`IndexedToRGBExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/IndexedToRGBExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

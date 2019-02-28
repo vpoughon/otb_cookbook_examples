@@ -1,4 +1,4 @@
-.. _example-PlaceNameToLonLatExample:
+.. _PlaceNameToLonLatExample.cxx:
 
 PlaceNameToLonLatExample.cxx
 ============================
@@ -9,7 +9,7 @@ PlaceNameToLonLatExample.cxx
 
 
 
-Example source code (`PlaceNameToLonLatExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/PlaceNameToLonLatExample.cxx?inline=false>`_):
+Example source code (`PlaceNameToLonLatExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/PlaceNameToLonLatExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

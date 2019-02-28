@@ -1,4 +1,4 @@
-.. _app-SmallRegionsMerging:
+.. _SmallRegionsMerging:
 
 SmallRegionsMerging
 ===================
@@ -81,4 +81,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-Segmentation`
+| :ref:`Segmentation`

@@ -1,4 +1,4 @@
-.. _example-TextureExample:
+.. _TextureExample.cxx:
 
 TextureExample.cxx
 ==================
@@ -17,7 +17,8 @@ Example usage:
     ./TextureExample Input/ADS40RoiSmall.png Output/TextureOutput.tif Output/pretty_TextureOutput.png 2 1 1
 
 
-Example source code (`TextureExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/TextureExample.cxx?inline=false>`_):
+
+Example source code (`TextureExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/TextureExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

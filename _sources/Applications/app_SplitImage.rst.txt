@@ -1,4 +1,4 @@
-.. _app-SplitImage:
+.. _SplitImage:
 
 SplitImage
 ==========
@@ -71,4 +71,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-ConcatenateImages`
+| :ref:`ConcatenateImages`

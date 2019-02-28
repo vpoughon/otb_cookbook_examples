@@ -1,4 +1,4 @@
-.. _example-SVMImageEstimatorClassificationMultiExample:
+.. _SVMImageEstimatorClassificationMultiExample.cxx:
 
 SVMImageEstimatorClassificationMultiExample.cxx
 ===============================================
@@ -18,7 +18,8 @@ Example usage:
                                                   Output/ROI_mask_multi.png
 
 
-Example source code (`SVMImageEstimatorClassificationMultiExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SVMImageEstimatorClassificationMultiExample.cxx?inline=false>`_):
+
+Example source code (`SVMImageEstimatorClassificationMultiExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SVMImageEstimatorClassificationMultiExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

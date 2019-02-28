@@ -1,4 +1,4 @@
-.. _app-ConcatenateImages:
+.. _ConcatenateImages:
 
 ConcatenateImages
 =================
@@ -74,4 +74,4 @@ All input images must have the same size.
 See also
 --------
 
-| :ref:`app-Rescale` application, :ref:`app-DynamicConvert`, :ref:`app-SplitImage`
+| :ref:`Rescale` application, :ref:`DynamicConvert`, :ref:`SplitImage`

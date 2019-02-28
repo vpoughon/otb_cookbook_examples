@@ -1,4 +1,4 @@
-.. _example-DEMToImageGenerator:
+.. _DEMToImageGenerator.cxx:
 
 DEMToImageGenerator.cxx
 =======================
@@ -14,7 +14,8 @@ Example usage:
     ./DEMToImageGenerator Output/DEMToImageGenerator.tif Output/pretty_DEMToImageGenerator.png 6.5 45.5 500 500 0.002 -0.002 Input/DEM_srtm
 
 
-Example source code (`DEMToImageGenerator.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/DEMToImageGenerator.cxx?inline=false>`_):
+
+Example source code (`DEMToImageGenerator.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/DEMToImageGenerator.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _example-SIFTDisparityMapEstimation:
+.. _SIFTDisparityMapEstimation.cxx:
 
 SIFTDisparityMapEstimation.cxx
 ==============================
@@ -14,7 +14,8 @@ Example usage:
     ./SIFTDisparityMapEstimation Input/ROISpot5.png Input/ROISpot5Warped.png Output/SIFTdeformationFieldOutput.png
 
 
-Example source code (`SIFTDisparityMapEstimation.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTDisparityMapEstimation.cxx?inline=false>`_):
+
+Example source code (`SIFTDisparityMapEstimation.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Patented/SIFTDisparityMapEstimation.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

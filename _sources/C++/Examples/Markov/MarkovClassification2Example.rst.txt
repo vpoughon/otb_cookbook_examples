@@ -1,4 +1,4 @@
-.. _example-MarkovClassification2Example:
+.. _MarkovClassification2Example.cxx:
 
 MarkovClassification2Example.cxx
 ================================
@@ -14,7 +14,8 @@ Example usage:
     ./MarkovClassification2Example Input/QB_Suburb.png Output/MarkovRandomField2.png 1.0 5 1
 
 
-Example source code (`MarkovClassification2Example.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovClassification2Example.cxx?inline=false>`_):
+
+Example source code (`MarkovClassification2Example.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovClassification2Example.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

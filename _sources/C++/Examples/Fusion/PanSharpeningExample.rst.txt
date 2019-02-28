@@ -1,4 +1,4 @@
-.. _example-PanSharpeningExample:
+.. _PanSharpeningExample.cxx:
 
 PanSharpeningExample.cxx
 ========================
@@ -19,7 +19,8 @@ Example usage:
               Output/pretty_QB_Toulouse_Ortho_XS.png
 
 
-Example source code (`PanSharpeningExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Fusion/PanSharpeningExample.cxx?inline=false>`_):
+
+Example source code (`PanSharpeningExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Fusion/PanSharpeningExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

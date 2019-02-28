@@ -1,4 +1,4 @@
-.. _example-RatioLineDetectorExample:
+.. _RatioLineDetectorExample.cxx:
 
 RatioLineDetectorExample.cxx
 ============================
@@ -14,7 +14,8 @@ Example usage:
     ./RatioLineDetectorExample Input/amst2.png Output/amstLineRatios.png Output/amstLineRatioDirections.png 5 1
 
 
-Example source code (`RatioLineDetectorExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/RatioLineDetectorExample.cxx?inline=false>`_):
+
+Example source code (`RatioLineDetectorExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/RatioLineDetectorExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

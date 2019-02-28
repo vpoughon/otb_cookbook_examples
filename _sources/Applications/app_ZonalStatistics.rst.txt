@@ -1,4 +1,4 @@
-.. _app-ZonalStatistics:
+.. _ZonalStatistics:
 
 ZonalStatistics
 ===============
@@ -142,4 +142,4 @@ Limitations
 See also
 --------
 
-| :ref:`app-ComputeImagesStatistics`
+| :ref:`ComputeImagesStatistics`

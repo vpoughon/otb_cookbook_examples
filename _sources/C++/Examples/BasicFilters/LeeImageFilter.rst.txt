@@ -1,4 +1,4 @@
-.. _example-LeeImageFilter:
+.. _LeeImageFilter.cxx:
 
 LeeImageFilter.cxx
 ==================
@@ -26,7 +26,8 @@ Example usage:
     ./LeeImageFilter Input/GomaSmall.png Output/GomaSmallLeeFiltered.png 3 1
 
 
-Example source code (`LeeImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/LeeImageFilter.cxx?inline=false>`_):
+
+Example source code (`LeeImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/LeeImageFilter.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

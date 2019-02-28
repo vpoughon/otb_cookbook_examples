@@ -1,4 +1,4 @@
-.. _app-LSMSSegmentation:
+.. _LSMSSegmentation:
 
 LSMSSegmentation
 ================
@@ -11,13 +11,13 @@ Description
 
 This application will produce a labeled image where neighbor pixels whose range distance is below range radius (and optionally spatial distance below spatial radius) will be grouped together into the same cluster. For large images one can use the tilesizex and tilesizey parameters for tile-wise processing, with the guarantees of identical results.
 
-Filtered range image and spatial image should be created with the :ref:`app-MeanShiftSmoothing` application outputs (fout and foutpos) [2], with modesearch parameter disabled. If spatial image is not set, the application will only process the range image and spatial radius parameter will not be taken into account.
+Filtered range image and spatial image should be created with the :ref:`MeanShiftSmoothing` application outputs (fout and foutpos) [2], with modesearch parameter disabled. If spatial image is not set, the application will only process the range image and spatial radius parameter will not be taken into account.
 
 Please note that this application will generate a lot of temporary files (as many as the number of tiles), and will therefore require twice the size of the final result in term of disk space. The cleanup option (activated by default) allows removing all temporary file as soon as they are not needed anymore (if cleanup is activated, tmpdir set and tmpdir does not exists before running the application, it will be removed as well during cleanup). The tmpdir option allows defining a directory where to write the temporary files.
 
 Please also note that the output image type should be set to uint32 to ensure that there are enough labels available.
 
-The output of this application can be passed to the :ref:`app-LSMSSmallRegionsMerging` [3] or :ref:`app-LSMSVectorization` [4] applications to complete the LSMS workflow.
+The output of this application can be passed to the :ref:`LSMSSmallRegionsMerging` [3] or :ref:`LSMSVectorization` [4] applications to complete the LSMS workflow.
 
 Parameters
 ----------
@@ -110,6 +110,6 @@ See also
 --------
 
 | [1] Michel, J., Youssefi, D., & Grizonnet, M. (2015). Stable mean-shift algorithm and its application to the segmentation of arbitrarily large remote sensing images. IEEE Transactions on Geoscience and Remote Sensing, 53(2), 952-964.
-| [2] :ref:`app-MeanShiftSmoothing`
-| [3] :ref:`app-LSMSSmallRegionsMerging`
-| [4] :ref:`app-LSMSVectorization`
+| [2] :ref:`MeanShiftSmoothing`
+| [3] :ref:`LSMSSmallRegionsMerging`
+| [4] :ref:`LSMSVectorization`

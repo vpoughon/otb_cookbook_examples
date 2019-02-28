@@ -1,4 +1,4 @@
-.. _app-SampleSelection:
+.. _SampleSelection:
 
 SampleSelection
 ===============
@@ -11,7 +11,7 @@ Description
 
 The application selects a set of samples from geometries intended for training (they should have a field giving the associated class). 
 
-First of all, the geometries must be analyzed by the :ref:`app-PolygonClassStatistics` application to compute statistics about the geometries, which are summarized in an xml file. 
+First of all, the geometries must be analyzed by the :ref:`PolygonClassStatistics` application to compute statistics about the geometries, which are summarized in an xml file. 
 Then, this xml file must be given as input to this application (parameter instats).
 
 The input support image and the input training vectors shall be given in parameters 'in' and 'vec' respectively. Only the sampling grid (origin, size, spacing)will be read in the input image.
@@ -39,7 +39,7 @@ The other parameters to look at are :
   - mask : an optional raster mask can be used to discard samples.
   - outrates : allows outputting a CSV file that summarizes the sampling rates for each class.
 
-As with the :ref:`app-PolygonClassStatistics` application, different types  of geometry are supported : polygons, lines, points. 
+As with the :ref:`PolygonClassStatistics` application, different types  of geometry are supported : polygons, lines, points. 
 The behavior of this application is different for each type of geometry : 
 
   - polygon: select points whose center is inside the polygon

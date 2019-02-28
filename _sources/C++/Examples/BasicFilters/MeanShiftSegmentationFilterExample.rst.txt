@@ -1,4 +1,4 @@
-.. _example-MeanShiftSegmentationFilterExample:
+.. _MeanShiftSegmentationFilterExample.cxx:
 
 MeanShiftSegmentationFilterExample.cxx
 ======================================
@@ -23,7 +23,8 @@ Example usage:
                                          0.1
 
 
-Example source code (`MeanShiftSegmentationFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/MeanShiftSegmentationFilterExample.cxx?inline=false>`_):
+
+Example source code (`MeanShiftSegmentationFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/MeanShiftSegmentationFilterExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

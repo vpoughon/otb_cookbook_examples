@@ -1,4 +1,4 @@
-.. _app-DimensionalityReduction:
+.. _DimensionalityReduction:
 
 DimensionalityReduction
 =======================

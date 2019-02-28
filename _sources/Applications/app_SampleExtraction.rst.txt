@@ -1,4 +1,4 @@
-.. _app-SampleExtraction:
+.. _SampleExtraction:
 
 SampleExtraction
 ================

@@ -1,4 +1,4 @@
-.. _example-RatioChDet:
+.. _RatioChDet.cxx:
 
 RatioChDet.cxx
 ==============
@@ -14,7 +14,8 @@ Example usage:
     ./RatioChDet Input/GomaAvant.png Input/GomaApres.png Output/RatioChDet.tif 3
 
 
-Example source code (`RatioChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/RatioChDet.cxx?inline=false>`_):
+
+Example source code (`RatioChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/RatioChDet.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

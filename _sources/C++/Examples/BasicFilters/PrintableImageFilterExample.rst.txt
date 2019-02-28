@@ -1,4 +1,4 @@
-.. _example-PrintableImageFilterExample:
+.. _PrintableImageFilterExample.cxx:
 
 PrintableImageFilterExample.cxx
 ===============================
@@ -12,6 +12,7 @@ Example usage:
 .. code-block:: bash
 
     ./PrintableImageFilterExample Input/IMAGERY_SSECH.tif Output/PrintableExampleOutput1.jpg 1 2 3
+
 Example usage:
 
 .. code-block:: bash
@@ -19,7 +20,8 @@ Example usage:
     ./PrintableImageFilterExample Input/IMAGERY_SSECH.tif Output/PrintableExampleOutput2.jpg 1 4 2
 
 
-Example source code (`PrintableImageFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/PrintableImageFilterExample.cxx?inline=false>`_):
+
+Example source code (`PrintableImageFilterExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/PrintableImageFilterExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

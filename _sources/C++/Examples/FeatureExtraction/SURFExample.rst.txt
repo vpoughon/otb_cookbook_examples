@@ -1,4 +1,4 @@
-.. _example-SURFExample:
+.. _SURFExample.cxx:
 
 SURFExample.cxx
 ===============
@@ -14,7 +14,8 @@ Example usage:
     ./SURFExample Input/ROISpot5.png Output/ROISpot5SURF.png 3 3
 
 
-Example source code (`SURFExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/SURFExample.cxx?inline=false>`_):
+
+Example source code (`SURFExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/SURFExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

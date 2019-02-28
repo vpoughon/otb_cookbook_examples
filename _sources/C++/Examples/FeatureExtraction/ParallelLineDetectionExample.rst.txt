@@ -1,4 +1,4 @@
-.. _example-ParallelLineDetectionExample:
+.. _ParallelLineDetectionExample.cxx:
 
 ParallelLineDetectionExample.cxx
 ================================
@@ -14,7 +14,8 @@ Example usage:
     ./ParallelLineDetectionExample Output/Lines.png Output/ParallelLines.png 20 2 10
 
 
-Example source code (`ParallelLineDetectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ParallelLineDetectionExample.cxx?inline=false>`_):
+
+Example source code (`ParallelLineDetectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ParallelLineDetectionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _example-MarkovRegularizationExample:
+.. _MarkovRegularizationExample.cxx:
 
 MarkovRegularizationExample.cxx
 ===============================
@@ -14,7 +14,8 @@ Example usage:
     ./MarkovRegularizationExample Input/ROI_QB_MUL_1_SVN_CLASS_MULTI.png Output/MarkovRegularization.png Output/MarkovRegularization-scaled.png 0.2 20 0.0 1
 
 
-Example source code (`MarkovRegularizationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovRegularizationExample.cxx?inline=false>`_):
+
+Example source code (`MarkovRegularizationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Markov/MarkovRegularizationExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

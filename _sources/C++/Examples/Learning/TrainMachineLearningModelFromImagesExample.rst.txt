@@ -1,4 +1,4 @@
-.. _example-TrainMachineLearningModelFromImagesExample:
+.. _TrainMachineLearningModelFromImagesExample.cxx:
 
 TrainMachineLearningModelFromImagesExample.cxx
 ==============================================
@@ -14,7 +14,8 @@ Example usage:
     ./TrainMachineLearningModelFromImagesExample Input/QB_1_ortho.tif Input/VectorData_QB1.shp Output/clLIBSVMModelQB1.libsvm
 
 
-Example source code (`TrainMachineLearningModelFromImagesExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/TrainMachineLearningModelFromImagesExample.cxx?inline=false>`_):
+
+Example source code (`TrainMachineLearningModelFromImagesExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/TrainMachineLearningModelFromImagesExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

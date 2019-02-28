@@ -1,4 +1,4 @@
-.. _app-VectorDataTransform:
+.. _VectorDataTransform:
 
 VectorDataTransform
 ===================
@@ -106,5 +106,5 @@ From Python:
 See also
 --------
 
-| [1] :ref:`app-RigidTransformResample`
-| [2] :ref:`app-ImageEnvelope`
+| [1] :ref:`RigidTransformResample`
+| [2] :ref:`ImageEnvelope`

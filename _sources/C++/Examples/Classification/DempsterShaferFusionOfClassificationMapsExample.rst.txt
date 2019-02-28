@@ -1,4 +1,4 @@
-.. _example-DempsterShaferFusionOfClassificationMapsExample:
+.. _DempsterShaferFusionOfClassificationMapsExample.cxx:
 
 DempsterShaferFusionOfClassificationMapsExample.cxx
 ===================================================
@@ -9,7 +9,7 @@ DempsterShaferFusionOfClassificationMapsExample.cxx
 
 
 
-Example source code (`DempsterShaferFusionOfClassificationMapsExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/DempsterShaferFusionOfClassificationMapsExample.cxx?inline=false>`_):
+Example source code (`DempsterShaferFusionOfClassificationMapsExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/DempsterShaferFusionOfClassificationMapsExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

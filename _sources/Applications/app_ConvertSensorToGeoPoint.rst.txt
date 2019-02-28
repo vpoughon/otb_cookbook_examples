@@ -1,4 +1,4 @@
-.. _app-ConvertSensorToGeoPoint:
+.. _ConvertSensorToGeoPoint:
 
 ConvertSensorToGeoPoint
 =======================
@@ -102,4 +102,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-ConvertCartoToGeoPoint` application, otb:ref:`app-ObtainUTMZoneFromGeoPoint`
+| :ref:`ConvertCartoToGeoPoint` application, otb:ref:`ObtainUTMZoneFromGeoPoint`

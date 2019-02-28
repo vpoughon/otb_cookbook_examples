@@ -1,4 +1,4 @@
-.. _example-KullbackLeiblerDistanceChDet:
+.. _KullbackLeiblerDistanceChDet.cxx:
 
 KullbackLeiblerDistanceChDet.cxx
 ================================
@@ -14,7 +14,8 @@ Example usage:
     ./KullbackLeiblerDistanceChDet Input/GomaAvant.png Input/GomaApres.png Output/KLdistanceChDet.png 35
 
 
-Example source code (`KullbackLeiblerDistanceChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/KullbackLeiblerDistanceChDet.cxx?inline=false>`_):
+
+Example source code (`KullbackLeiblerDistanceChDet.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/KullbackLeiblerDistanceChDet.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

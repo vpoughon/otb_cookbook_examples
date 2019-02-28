@@ -116,38 +116,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="app_SARCalibration.html">SARCalibration</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">OpticalCalibration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_SARCalibration.html">SARCalibration</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">OpticalCalibration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_SARCalibration.html">SARCalibration</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">OpticalCalibration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_SARCalibration.html">SARCalibration</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">OpticalCalibration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_SARCalibration.html">SARCalibration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Deprecated.html">Deprecated</a></li>
@@ -227,7 +195,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="opticalcalibration">
-<span id="app-opticalcalibration"></span><h1>OpticalCalibration<a class="headerlink" href="#opticalcalibration" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>OpticalCalibration<a class="headerlink" href="#opticalcalibration" title="Permalink to this headline">¶</a></h1>
 <p>Perform optical calibration TOA/TOC (Top Of Atmosphere/Top Of Canopy). Supported sensors: QuickBird, Ikonos, WorldView2, Formosat, Spot5, Pleiades, Spot6, Spot7. For other sensors the application also allows providing calibration parameters manually.</p>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
@@ -289,10 +257,10 @@ Instead of providing the date of acquisition, the user can also provide a flux n
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#acquisition-parameters" id="id1">Acquisition parameters</a></li>
-<li><a class="reference internal" href="#sun-angles" id="id2">Sun angles</a></li>
-<li><a class="reference internal" href="#viewing-angles" id="id3">Viewing angles</a></li>
-<li><a class="reference internal" href="#atmospheric-parameters-for-toc" id="id4">Atmospheric parameters (for TOC)</a></li>
+<li><a class="reference internal" href="#acquisition-parameters" id="id2">Acquisition parameters</a></li>
+<li><a class="reference internal" href="#sun-angles" id="id3">Sun angles</a></li>
+<li><a class="reference internal" href="#viewing-angles" id="id4">Viewing angles</a></li>
+<li><a class="reference internal" href="#atmospheric-parameters-for-toc" id="id5">Atmospheric parameters (for TOC)</a></li>
 </ul>
 </div>
 <p><strong>Input</strong> <code class="code docutils literal notranslate"><span class="pre">-in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
@@ -311,7 +279,7 @@ This allows saving the image with integer pixel type (in the range [0, 1000]  in
 <p><strong>Clamp of reflectivity values between [0, 1]</strong> <code class="code docutils literal notranslate"><span class="pre">-clamp</span> <span class="pre">bool</span></code> <em>Default value: true</em> <br />
 Clamping in the range [0, 1]. It can be useful to preserve area with specular reflectance.</p>
 <div class="section" id="acquisition-parameters">
-<h3><a class="toc-backref" href="#id1">Acquisition parameters</a><a class="headerlink" href="#acquisition-parameters" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id2">Acquisition parameters</a><a class="headerlink" href="#acquisition-parameters" title="Permalink to this headline">¶</a></h3>
 <p>This group allows setting the parameters related to the acquisition conditions.</p>
 <p><strong>Minute</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.minute</span> <span class="pre">int</span></code> <em>Default value: 0</em> <br />
 Minute (0-59)</p>
@@ -329,7 +297,7 @@ Flux Normalization Coefficient</p>
 Solar distance (in AU)</p>
 </div>
 <div class="section" id="sun-angles">
-<h3><a class="toc-backref" href="#id2">Sun angles</a><a class="headerlink" href="#sun-angles" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">Sun angles</a><a class="headerlink" href="#sun-angles" title="Permalink to this headline">¶</a></h3>
 <p>This group contains the sun angles</p>
 <p><strong>Sun elevation angle (deg)</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.sun.elev</span> <span class="pre">float</span></code> <em>Default value: 90</em> <br />
 Sun elevation angle (in degrees)</p>
@@ -337,7 +305,7 @@ Sun elevation angle (in degrees)</p>
 Sun azimuth angle (in degrees)</p>
 </div>
 <div class="section" id="viewing-angles">
-<h3><a class="toc-backref" href="#id3">Viewing angles</a><a class="headerlink" href="#viewing-angles" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">Viewing angles</a><a class="headerlink" href="#viewing-angles" title="Permalink to this headline">¶</a></h3>
 <p>This group contains the sensor viewing angles</p>
 <p><strong>Viewing elevation angle (deg)</strong> <code class="code docutils literal notranslate"><span class="pre">-acqui.view.elev</span> <span class="pre">float</span></code> <em>Default value: 90</em> <br />
 Viewing elevation angle (in degrees)</p>
@@ -350,7 +318,7 @@ Gains or biases</p>
 Solar illuminations (one value per band)</p>
 </div>
 <div class="section" id="atmospheric-parameters-for-toc">
-<h3><a class="toc-backref" href="#id4">Atmospheric parameters (for TOC)</a><a class="headerlink" href="#atmospheric-parameters-for-toc" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">Atmospheric parameters (for TOC)</a><a class="headerlink" href="#atmospheric-parameters-for-toc" title="Permalink to this headline">¶</a></h3>
 <p>This group allows setting the atmospheric parameters.</p>
 <p><strong>Aerosol Model</strong> <code class="code docutils literal notranslate"><span class="pre">-atmo.aerosol</span> <span class="pre">[noaersol|continental|maritime|urban|desertic]</span></code> <em>Default value: noaersol</em> <br /></p>
 <ul class="simple">

@@ -1,4 +1,4 @@
-.. _example-NeighborhoodIterators6:
+.. _NeighborhoodIterators6.cxx:
 
 NeighborhoodIterators6.cxx
 ==========================
@@ -12,11 +12,13 @@ Example usage:
 .. code-block:: bash
 
     ./NeighborhoodIterators6 Output/NeighborhoodIterators6a.png 100 100
+
 Example usage:
 
 .. code-block:: bash
 
     ./NeighborhoodIterators6 Output/NeighborhoodIterators6b.png 50 150
+
 Example usage:
 
 .. code-block:: bash
@@ -24,7 +26,8 @@ Example usage:
     ./NeighborhoodIterators6 Output/NeighborhoodIterators6c.png 150 50
 
 
-Example source code (`NeighborhoodIterators6.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators6.cxx?inline=false>`_):
+
+Example source code (`NeighborhoodIterators6.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/NeighborhoodIterators6.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

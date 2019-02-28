@@ -1,4 +1,4 @@
-.. _example-ShapedNeighborhoodIterators1:
+.. _ShapedNeighborhoodIterators1.cxx:
 
 ShapedNeighborhoodIterators1.cxx
 ================================
@@ -9,7 +9,7 @@ ShapedNeighborhoodIterators1.cxx
 
 
 
-Example source code (`ShapedNeighborhoodIterators1.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ShapedNeighborhoodIterators1.cxx?inline=false>`_):
+Example source code (`ShapedNeighborhoodIterators1.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ShapedNeighborhoodIterators1.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

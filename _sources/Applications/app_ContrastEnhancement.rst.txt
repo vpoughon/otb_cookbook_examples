@@ -1,4 +1,4 @@
-.. _app-ContrastEnhancement:
+.. _ContrastEnhancement:
 
 ContrastEnhancement
 ===================

@@ -1,4 +1,4 @@
-.. _example-ThresholdToPointSetExample:
+.. _ThresholdToPointSetExample.cxx:
 
 ThresholdToPointSetExample.cxx
 ==============================
@@ -14,7 +14,8 @@ Example usage:
     ./ThresholdToPointSetExample Input/ROISpot5.png 250 252
 
 
-Example source code (`ThresholdToPointSetExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ThresholdToPointSetExample.cxx?inline=false>`_):
+
+Example source code (`ThresholdToPointSetExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/ThresholdToPointSetExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

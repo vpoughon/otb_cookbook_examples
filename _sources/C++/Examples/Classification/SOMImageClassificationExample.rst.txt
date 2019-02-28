@@ -1,4 +1,4 @@
-.. _example-SOMImageClassificationExample:
+.. _SOMImageClassificationExample.cxx:
 
 SOMImageClassificationExample.cxx
 =================================
@@ -9,7 +9,7 @@ SOMImageClassificationExample.cxx
 
 
 
-Example source code (`SOMImageClassificationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/SOMImageClassificationExample.cxx?inline=false>`_):
+Example source code (`SOMImageClassificationExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Classification/SOMImageClassificationExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

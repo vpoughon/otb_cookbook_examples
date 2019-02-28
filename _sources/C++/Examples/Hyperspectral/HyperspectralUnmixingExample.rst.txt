@@ -1,4 +1,4 @@
-.. _example-HyperspectralUnmixingExample:
+.. _HyperspectralUnmixingExample.cxx:
 
 HyperspectralUnmixingExample.cxx
 ================================
@@ -19,7 +19,8 @@ Example usage:
                                    16
 
 
-Example source code (`HyperspectralUnmixingExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Hyperspectral/HyperspectralUnmixingExample.cxx?inline=false>`_):
+
+Example source code (`HyperspectralUnmixingExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Hyperspectral/HyperspectralUnmixingExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

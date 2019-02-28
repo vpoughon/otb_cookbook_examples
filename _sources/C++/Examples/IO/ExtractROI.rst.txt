@@ -1,4 +1,4 @@
-.. _example-ExtractROI:
+.. _ExtractROI.cxx:
 
 ExtractROI.cxx
 ==============
@@ -14,7 +14,8 @@ Example usage:
     ./ExtractROI Input/IMAGERY_SSECH.tif Output/ROI_IMAGERY_RGB.png Output/ROI_IMAGERY_MIR.png 0 0 100 100
 
 
-Example source code (`ExtractROI.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ExtractROI.cxx?inline=false>`_):
+
+Example source code (`ExtractROI.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/IO/ExtractROI.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

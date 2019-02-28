@@ -1,4 +1,4 @@
-.. _app-VectorDimensionalityReduction:
+.. _VectorDimensionalityReduction:
 
 VectorDimensionalityReduction
 =============================
@@ -9,7 +9,7 @@ Performs dimensionality reduction of the input vector data according to a model 
 Description
 -----------
 
-This application performs a vector data dimensionality reduction based on a model file produced by the :ref:`app-TrainDimensionalityReduction` application.
+This application performs a vector data dimensionality reduction based on a model file produced by the :ref:`TrainDimensionalityReduction` application.
 
 Parameters
 ----------
@@ -116,4 +116,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-TrainDimensionalityReduction`
+| :ref:`TrainDimensionalityReduction`

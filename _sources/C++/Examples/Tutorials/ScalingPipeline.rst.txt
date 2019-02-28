@@ -1,4 +1,4 @@
-.. _example-ScalingPipeline:
+.. _ScalingPipeline.cxx:
 
 ScalingPipeline.cxx
 ===================
@@ -14,7 +14,8 @@ Example usage:
     ./ScalingPipeline Input/QB_Suburb.png Output/TutorialsScalingPipelineOutput.png
 
 
-Example source code (`ScalingPipeline.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/ScalingPipeline.cxx?inline=false>`_):
+
+Example source code (`ScalingPipeline.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Tutorials/ScalingPipeline.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

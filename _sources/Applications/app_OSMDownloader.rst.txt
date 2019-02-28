@@ -1,4 +1,4 @@
-.. _app-OSMDownloader:
+.. _OSMDownloader:
 
 OSMDownloader
 =============
@@ -105,5 +105,5 @@ This application requires an Internet access.
 See also
 --------
 
-| [1] :ref:`app-TrainImagesClassifier` 
+| [1] :ref:`TrainImagesClassifier` 
 | [2] http://www.openstreetmap.fr/

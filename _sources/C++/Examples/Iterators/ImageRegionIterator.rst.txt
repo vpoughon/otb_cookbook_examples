@@ -1,4 +1,4 @@
-.. _example-ImageRegionIterator:
+.. _ImageRegionIterator.cxx:
 
 ImageRegionIterator.cxx
 =======================
@@ -14,7 +14,8 @@ Example usage:
     ./ImageRegionIterator Input/QB_Suburb.png Output/ImageRegionIteratorOutput.png 10 10 110 140
 
 
-Example source code (`ImageRegionIterator.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageRegionIterator.cxx?inline=false>`_):
+
+Example source code (`ImageRegionIterator.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageRegionIterator.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

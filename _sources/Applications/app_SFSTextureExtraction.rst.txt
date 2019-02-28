@@ -1,4 +1,4 @@
-.. _app-SFSTextureExtraction:
+.. _SFSTextureExtraction:
 
 SFSTextureExtraction
 ====================
@@ -9,7 +9,7 @@ Computes Structural Feature Set textures on every pixel of the input image selec
 Description
 -----------
 
-Structural Feature Set [1] are based on the histograms of the pixels in multiple directions of the image. The :ref:`app-SFSTextureExtraction` application computes the  6 following features: SFS'Length, SFS'Width, SFS'PSI, SFS'W-Mean, SFS'Ratio and SFS'SD (Standard Deviation). The texture indices are computed from the neighborhood of each pixel. It is possible to change the length of the calculation line (spatial threshold), as well as the maximum difference between a pixel of the line and the pixel at the center of the neighborhood (spectral threshold) [2].
+Structural Feature Set [1] are based on the histograms of the pixels in multiple directions of the image. The :ref:`SFSTextureExtraction` application computes the  6 following features: SFS'Length, SFS'Width, SFS'PSI, SFS'W-Mean, SFS'Ratio and SFS'SD (Standard Deviation). The texture indices are computed from the neighborhood of each pixel. It is possible to change the length of the calculation line (spatial threshold), as well as the maximum difference between a pixel of the line and the pixel at the center of the neighborhood (spectral threshold) [2].
 
 Parameters
 ----------

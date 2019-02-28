@@ -1,4 +1,4 @@
-.. _example-SecondDerivativeRecursiveGaussianImageFilter:
+.. _SecondDerivativeRecursiveGaussianImageFilter.cxx:
 
 SecondDerivativeRecursiveGaussianImageFilter.cxx
 ================================================
@@ -9,7 +9,7 @@ SecondDerivativeRecursiveGaussianImageFilter.cxx
 
 
 
-Example source code (`SecondDerivativeRecursiveGaussianImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/SecondDerivativeRecursiveGaussianImageFilter.cxx?inline=false>`_):
+Example source code (`SecondDerivativeRecursiveGaussianImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/SecondDerivativeRecursiveGaussianImageFilter.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

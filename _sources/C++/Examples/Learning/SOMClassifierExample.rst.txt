@@ -1,4 +1,4 @@
-.. _example-SOMClassifierExample:
+.. _SOMClassifierExample.cxx:
 
 SOMClassifierExample.cxx
 ========================
@@ -14,7 +14,8 @@ Example usage:
     ./SOMClassifierExample Input/ROI_QB_MUL_1.png Input/ROI_QB_MUL_SOM.png Output/ROI_QB_MUL_SOMCLASS.png
 
 
-Example source code (`SOMClassifierExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SOMClassifierExample.cxx?inline=false>`_):
+
+Example source code (`SOMClassifierExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/SOMClassifierExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

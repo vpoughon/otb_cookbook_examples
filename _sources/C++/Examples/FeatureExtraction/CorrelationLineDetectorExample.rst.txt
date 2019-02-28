@@ -1,4 +1,4 @@
-.. _example-CorrelationLineDetectorExample:
+.. _CorrelationLineDetectorExample.cxx:
 
 CorrelationLineDetectorExample.cxx
 ==================================
@@ -14,7 +14,8 @@ Example usage:
     ./CorrelationLineDetectorExample Input/amst2.png Output/amstLineCorrelations.png Output/amstLineCorrelationDirections.png 5 1
 
 
-Example source code (`CorrelationLineDetectorExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/CorrelationLineDetectorExample.cxx?inline=false>`_):
+
+Example source code (`CorrelationLineDetectorExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/CorrelationLineDetectorExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

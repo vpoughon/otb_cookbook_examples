@@ -1,4 +1,4 @@
-.. _app-BlockMatching:
+.. _BlockMatching:
 
 BlockMatching
 =============
@@ -11,7 +11,7 @@ Description
 
 This application allows one to performs block-matching to estimate pixel-wise disparities for a pair of images in epipolar geometry.
 
-This application is part of the stereovision pipeline. It can be used after having computed epipolar grids (with :ref:`app-StereoRectificationGridGenerator`) and resampled each input image into epipolar geometry (with :ref:`app-GridBasedImageResampling`).
+This application is part of the stereovision pipeline. It can be used after having computed epipolar grids (with :ref:`StereoRectificationGridGenerator`) and resampled each input image into epipolar geometry (with :ref:`GridBasedImageResampling`).
 
 The application searches locally for the displacement between a reference image and a secondary image. The correspondence is evaluated for each pixel, based on a pair of local neighborhood windows. The displacement evaluated can be 1D (along lines) or 2D. Parameters allow setting the minimum and maximum disparities to search (both for horizontal and vertical directions). A winner-take-all approach is used to select the best match. There are different metrics implemented to evaluate the match between two local windows:
 
@@ -249,5 +249,5 @@ From Python:
 See also
 --------
 
-| [1] :ref:`app-StereoRectificationGridGenerator`
-| [2] :ref:`app-GridBasedImageResampling`
+| [1] :ref:`StereoRectificationGridGenerator`
+| [2] :ref:`GridBasedImageResampling`

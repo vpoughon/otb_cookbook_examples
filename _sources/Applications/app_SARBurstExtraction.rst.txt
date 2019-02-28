@@ -1,4 +1,4 @@
-.. _app-SARBurstExtraction:
+.. _SARBurstExtraction:
 
 SARBurstExtraction
 ==================

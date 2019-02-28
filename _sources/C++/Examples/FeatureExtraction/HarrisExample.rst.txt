@@ -1,4 +1,4 @@
-.. _example-HarrisExample:
+.. _HarrisExample.cxx:
 
 HarrisExample.cxx
 =================
@@ -14,7 +14,8 @@ Example usage:
     ./HarrisExample Input/ROISpot5.png Output/ROISpot5Harris.png 1.5 2 0.1
 
 
-Example source code (`HarrisExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/HarrisExample.cxx?inline=false>`_):
+
+Example source code (`HarrisExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/HarrisExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _example-EdgeDensityExample:
+.. _EdgeDensityExample.cxx:
 
 EdgeDensityExample.cxx
 ======================
@@ -14,7 +14,8 @@ Example usage:
     ./EdgeDensityExample Input/suburb2.jpeg Output/EdgeDensityOutput.tif Output/PrettyEdgeDensityOutput.png 7 50 10 1.0 0.01
 
 
-Example source code (`EdgeDensityExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/EdgeDensityExample.cxx?inline=false>`_):
+
+Example source code (`EdgeDensityExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/EdgeDensityExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

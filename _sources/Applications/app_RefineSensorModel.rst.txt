@@ -1,4 +1,4 @@
-.. _app-RefineSensorModel:
+.. _RefineSensorModel:
 
 RefineSensorModel
 =================
@@ -130,4 +130,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-OrthoRectification`,:ref:`app-HomologousPointsExtraction`
+| :ref:`OrthoRectification`,:ref:`HomologousPointsExtraction`

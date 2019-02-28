@@ -1,4 +1,4 @@
-.. _example-IteratorsExamples:
+.. _IteratorsExamples.cxx:
 
 IteratorsExamples.cxx
 =====================
@@ -9,7 +9,7 @@ IteratorsExamples.cxx
 
 
 
-Example source code (`IteratorsExamples.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/IteratorsExamples.cxx?inline=false>`_):
+Example source code (`IteratorsExamples.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/IteratorsExamples.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

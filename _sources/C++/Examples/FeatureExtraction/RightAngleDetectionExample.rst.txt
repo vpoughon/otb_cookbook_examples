@@ -1,4 +1,4 @@
-.. _example-RightAngleDetectionExample:
+.. _RightAngleDetectionExample.cxx:
 
 RightAngleDetectionExample.cxx
 ==============================
@@ -14,7 +14,8 @@ Example usage:
     ./RightAngleDetectionExample Input/Scene.png Output/rightAngleOutput.shp 0.1 20
 
 
-Example source code (`RightAngleDetectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/RightAngleDetectionExample.cxx?inline=false>`_):
+
+Example source code (`RightAngleDetectionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/RightAngleDetectionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

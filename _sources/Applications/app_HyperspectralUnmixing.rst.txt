@@ -1,4 +1,4 @@
-.. _app-HyperspectralUnmixing:
+.. _HyperspectralUnmixing:
 
 HyperspectralUnmixing
 =====================
@@ -11,7 +11,7 @@ Description
 
 The application applies a linear unmixing algorithm to an hyperspectral data cube. This method supposes that the mixture between aterials in the scene is macroscopic and simulates a linear mixing model of spectra.
 
-The Linear Mixing Model (LMM) acknowledges that reflectance spectrum associated with each pixel is a linear combination of pure materials in the recovery area, commonly known as endmembers. Endmembers can be estimated using the :ref:`app-VertexComponentAnalysis` application.
+The Linear Mixing Model (LMM) acknowledges that reflectance spectrum associated with each pixel is a linear combination of pure materials in the recovery area, commonly known as endmembers. Endmembers can be estimated using the :ref:`VertexComponentAnalysis` application.
 
 The application allows estimating the abundance maps with several algorithms:
 
@@ -97,4 +97,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-VertexComponentAnalysis`
+| :ref:`VertexComponentAnalysis`

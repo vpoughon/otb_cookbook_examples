@@ -1,4 +1,4 @@
-.. _example-FlusserMomentsImageFunctionExample:
+.. _FlusserMomentsImageFunctionExample.cxx:
 
 FlusserMomentsImageFunctionExample.cxx
 ======================================
@@ -14,7 +14,8 @@ Example usage:
     ./FlusserMomentsImageFunctionExample Input/ROISpot5.png 2
 
 
-Example source code (`FlusserMomentsImageFunctionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/FlusserMomentsImageFunctionExample.cxx?inline=false>`_):
+
+Example source code (`FlusserMomentsImageFunctionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/FlusserMomentsImageFunctionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

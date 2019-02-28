@@ -1,4 +1,4 @@
-.. _example-ImageRegionIteratorWithIndex:
+.. _ImageRegionIteratorWithIndex.cxx:
 
 ImageRegionIteratorWithIndex.cxx
 ================================
@@ -14,7 +14,8 @@ Example usage:
     ./ImageRegionIteratorWithIndex Input/ROI_QB_MUL_2.tif Output/ImageRegionIteratorWithIndexOutput.jpg
 
 
-Example source code (`ImageRegionIteratorWithIndex.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageRegionIteratorWithIndex.cxx?inline=false>`_):
+
+Example source code (`ImageRegionIteratorWithIndex.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Iterators/ImageRegionIteratorWithIndex.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

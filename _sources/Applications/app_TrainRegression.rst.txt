@@ -1,4 +1,4 @@
-.. _app-TrainRegression:
+.. _TrainRegression:
 
 TrainRegression
 ===============
@@ -9,7 +9,7 @@ Train a classifier from multiple images to perform regression.
 Description
 -----------
 
-This application trains a classifier from multiple input images or a csv file, in order to perform regression. Predictors are composed of pixel values in each band optionally centered and reduced using an XML statistics file produced by the :ref:`app-ComputeImagesStatistics` application.
+This application trains a classifier from multiple input images or a csv file, in order to perform regression. Predictors are composed of pixel values in each band optionally centered and reduced using an XML statistics file produced by the :ref:`ComputeImagesStatistics` application.
 
 The output value for each predictor is assumed to be the last band (or the last column for CSV files). Training and validation predictor lists are built such that their size is inferior to maximum bounds given by the user, and the proportion corresponds to the balance parameter. Several classifier parameters can be set depending on the chosen classifier. In the validation process, the mean square error is computed between the ground truth and the estimated model.
 

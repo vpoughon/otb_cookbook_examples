@@ -1,4 +1,4 @@
-.. _app-DisparityMapToElevationMap:
+.. _DisparityMapToElevationMap:
 
 DisparityMapToElevationMap
 ==========================
@@ -11,9 +11,9 @@ Description
 
 This application uses a disparity map computed from a stereo image pair to produce an elevation map on the ground area covered by the stereo pair.
 
-This application is part of the stereo reconstruction pipeline. It can be used after having computed the disparity map with :ref:`app-BlockMatching`.
+This application is part of the stereo reconstruction pipeline. It can be used after having computed the disparity map with :ref:`BlockMatching`.
 
-The needed inputs are: the disparity map, the stereo pair (in original geometry) and the epipolar deformation grids. These grids (computed by :ref:`app-StereoRectificationGridGenerator`) have to contain the transform between the original geometry (stereo pair) and the epipolar geometry (disparity map). The algorithm for each disparity is the following:
+The needed inputs are: the disparity map, the stereo pair (in original geometry) and the epipolar deformation grids. These grids (computed by :ref:`StereoRectificationGridGenerator`) have to contain the transform between the original geometry (stereo pair) and the epipolar geometry (disparity map). The algorithm for each disparity is the following:
 
 * skip if position is discarded by the disparity mask
 * compute left ray: transform the current position from epipolar geometry to left sensor geometry (left rectification grid)
@@ -145,5 +145,5 @@ The epipolar deformation grid should be able to entirely fit in memory.
 See also
 --------
 
-| [1] :ref:`app-StereoRectificationGridGenerator`
-| [2] :ref:`app-BlockMatching`
+| [1] :ref:`StereoRectificationGridGenerator`
+| [2] :ref:`BlockMatching`

@@ -1,4 +1,4 @@
-.. _example-GenerateTrainingImageExample:
+.. _GenerateTrainingImageExample.cxx:
 
 GenerateTrainingImageExample.cxx
 ================================
@@ -14,7 +14,8 @@ Example usage:
     ./GenerateTrainingImageExample Input/ROI_QB_MUL_4.tif Input/LearningROIs.txt Output/ROI_QB_MUL_4_training.png
 
 
-Example source code (`GenerateTrainingImageExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/GenerateTrainingImageExample.cxx?inline=false>`_):
+
+Example source code (`GenerateTrainingImageExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Learning/GenerateTrainingImageExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

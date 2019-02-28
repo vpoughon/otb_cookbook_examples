@@ -1,4 +1,4 @@
-.. _app-ComputePolylineFeatureFromImage:
+.. _ComputePolylineFeatureFromImage:
 
 ComputePolylineFeatureFromImage
 ===============================

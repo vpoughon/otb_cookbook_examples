@@ -1,4 +1,4 @@
-.. _app-ComputeConfusionMatrix:
+.. _ComputeConfusionMatrix:
 
 ComputeConfusionMatrix
 ======================

@@ -1,4 +1,4 @@
-.. _example-LabelMapToVectorData:
+.. _LabelMapToVectorData.cxx:
 
 LabelMapToVectorData.cxx
 ========================
@@ -14,7 +14,8 @@ Example usage:
     ./LabelMapToVectorData Input/rcc8_mire1.png Output/rcc8_mire2_vectorizer.shp
 
 
-Example source code (`LabelMapToVectorData.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/OBIA/LabelMapToVectorData.cxx?inline=false>`_):
+
+Example source code (`LabelMapToVectorData.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/OBIA/LabelMapToVectorData.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

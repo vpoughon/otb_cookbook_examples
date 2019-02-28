@@ -1,4 +1,4 @@
-.. _example-ImageListExample:
+.. _ImageListExample.cxx:
 
 ImageListExample.cxx
 ====================
@@ -9,7 +9,7 @@ ImageListExample.cxx
 
 
 
-Example source code (`ImageListExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Image/ImageListExample.cxx?inline=false>`_):
+Example source code (`ImageListExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Image/ImageListExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

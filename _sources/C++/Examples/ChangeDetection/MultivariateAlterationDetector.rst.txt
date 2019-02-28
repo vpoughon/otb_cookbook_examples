@@ -1,4 +1,4 @@
-.. _example-MultivariateAlterationDetector:
+.. _MultivariateAlterationDetector.cxx:
 
 MultivariateAlterationDetector.cxx
 ==================================
@@ -19,7 +19,8 @@ Example usage:
                                      Output/mad-output.png
 
 
-Example source code (`MultivariateAlterationDetector.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/MultivariateAlterationDetector.cxx?inline=false>`_):
+
+Example source code (`MultivariateAlterationDetector.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/ChangeDetection/MultivariateAlterationDetector.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

@@ -1,4 +1,4 @@
-.. _example-StereoReconstructionExample:
+.. _StereoReconstructionExample.cxx:
 
 StereoReconstructionExample.cxx
 ===============================
@@ -14,7 +14,8 @@ Example usage:
     ./StereoReconstructionExample Input/sensor_stereo_left.tif Input/sensor_stereo_right.tif Output/elevationOutput.tif Output/elevationOutputPrintable.png 140
 
 
-Example source code (`StereoReconstructionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/StereoReconstructionExample.cxx?inline=false>`_):
+
+Example source code (`StereoReconstructionExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/DisparityMap/StereoReconstructionExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

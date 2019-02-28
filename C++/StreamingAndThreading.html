@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Streaming and Threading &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Persistent filters" href="PersistentFilters.html" />
+    <link rel="prev" title="Filters" href="Filters.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Streaming and Threading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-and-threading-in-otb">Streaming and threading in OTB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#division-strategies">Division strategies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>Streaming and Threading</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/StreamingAndThreading.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="streaming-and-threading">
+<span id="streamingandthreading"></span><h1>Streaming and Threading<a class="headerlink" href="#streaming-and-threading" title="Permalink to this headline">¶</a></h1>
+<p>Streaming and threading are two
+different things even if they are linked to a certain extent. In OTB:</p>
+<ul class="simple">
+<li>Streaming describes the ability to combine the processing of several
+portion of a big image and to make the output identical as what you
+would have got if the whole image was processed at once. Streaming is
+compulsory when you’re processing gigabyte images.</li>
+<li>Threading is the ability to process simultaneously different parts of
+the image. Threading will give you some benefits only if you have a
+fairly recent processor.</li>
+</ul>
+<p>To sum up: streaming is good if you have big images, threading is good
+if you have several processing units.</p>
+<p>However, these two properties are not unrelated. Both rely on the filter
+ability to process parts of the image and combine the result, that’s what
+the <code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code> method can do.</p>
+<div class="section" id="streaming-and-threading-in-otb">
+<h2>Streaming and threading in OTB<a class="headerlink" href="#streaming-and-threading-in-otb" title="Permalink to this headline">¶</a></h2>
+<p>For OTB, streaming is pipeline related while threading is filter
+related. If you build a pipeline where one filter is not streamable, the
+whole pipeline is not streamable: at one point, you would hold the
+entire image in memory. Whereas you will benefit from a threaded filter
+even if the rest of the pipeline is made of non-threadable filters (the
+processing time will be shorter for this particular filter).</p>
+<p>Even if you use a non streamed writer, each filter which has a
+<code class="docutils literal notranslate"><span class="pre">ThreadedGenerateData()</span></code> will split the image into two and send each part
+to one thread and you will notice two calls to the function.</p>
+<p>If you have some particular requirement and want to use only one thread,
+you can call the <code class="docutils literal notranslate"><span class="pre">SetNumberOfThreads()</span></code> method on each of your filter.</p>
+<p>When you are writing your own filter, you have to follow some rules to
+make your filter streamable and threadable. Some details are provided in
+sections <a class="reference internal" href="Filters.html#streaminglargedata"><span class="std std-ref">Streaming Large Data</span></a> and <a class="reference internal" href="Filters.html#threadedfilterexecution"><span class="std std-ref">Threaded Filter Execution</span></a>.</p>
+</div>
+<div class="section" id="division-strategies">
+<h2>Division strategies<a class="headerlink" href="#division-strategies" title="Permalink to this headline">¶</a></h2>
+<p>The division of the image occurs generally at the writer level.
+Different strategies are available and can be specified explicitly. In
+OTB, these are referred as <em>splitter</em>. Several available splitters are:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageRegionSplitter.html">itk::ImageRegionSplitter</a></li>
+<li><a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageRegionMultidimensionalSplitter.html">itk::ImageRegionMultidimensionalSplitter</a></li>
+<li><a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1ImageRegionNonUniformMultidimensionalSplitter.html">otb::ImageRegionNonUniformMultidimensionalSplitter</a></li>
+</ul>
+<p>You can add your own strategies based on these examples.</p>
+<p>To change the splitting strategy of the writer, you can use the
+following model:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageRegionNonUniformMultidimensionalSplitter</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span> <span class="n">splitterType</span><span class="p">;</span>
+<span class="n">splitterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">splitter</span><span class="o">=</span><span class="n">splitterType</span><span class="o">::</span><span class="n">New</span><span class="p">()</span> <span class="p">;</span>
+<span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetRegionSplitter</span><span class="p">(</span><span class="n">splitter</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PersistentFilters.html" class="btn btn-neutral float-right" title="Persistent filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Filters.html" class="btn btn-neutral" title="Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

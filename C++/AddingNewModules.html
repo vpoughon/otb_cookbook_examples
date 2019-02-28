@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Adding New Modules &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="Examples.html" />
+    <link rel="prev" title="How to write an application" href="WriteAnApplication.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Adding New Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-write-a-module">How to Write a Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-otb-module-cmake-file">The otb-module.cmake file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-cmakelists-txt-file">The CMakeLists.txt file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-include-folder">The include folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-src-folder">The src folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-app-folder">The app folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-test-folder">The test folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#including-a-remote-module-in-otb">Including a remote module in OTB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>Adding New Modules</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/AddingNewModules.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adding-new-modules">
+<h1>Adding New Modules<a class="headerlink" href="#adding-new-modules" title="Permalink to this headline">¶</a></h1>
+<p>This chapter is concerned with the creation of new modules. The
+following sections give precise instructions about:</p>
+<ul class="simple">
+<li>the organization of directories</li>
+<li>the included files</li>
+<li>what they must contain</li>
+<li>…</li>
+</ul>
+<div class="section" id="how-to-write-a-module">
+<h2>How to Write a Module<a class="headerlink" href="#how-to-write-a-module" title="Permalink to this headline">¶</a></h2>
+<p>There is a template of OTB remote module which help you start developing
+a remote module: <a class="reference external" href="https://gitlab.orfeo-toolbox.org/remote_modules/remote-module-template">External Module
+Template</a>.</p>
+<p>Each module is made of different components, described in the
+following sections.</p>
+</div>
+<div class="section" id="the-otb-module-cmake-file">
+<h2>The otb-module.cmake file<a class="headerlink" href="#the-otb-module-cmake-file" title="Permalink to this headline">¶</a></h2>
+<p>This file is mandatory. It follows the CMake syntax, and has two
+purposes:</p>
+<ul class="simple">
+<li>Declare dependencies to other modules,</li>
+<li>Provide a short description of the module purpose.</li>
+</ul>
+<p>These purposes are fulfilled by a single CMake Macro call:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">otb_module</span><span class="p">(</span><span class="s">TheModuleName</span> <span class="s">DEPENDS</span> <span class="s">OTBModule1</span> <span class="s">OTBModule2</span> <span class="s">...</span> <span class="s">OTBModuleN</span> <span class="s">DESCRIPTION</span> <span class="s2">&quot;A description string&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: You can use the keyword <code class="docutils literal notranslate"><span class="pre">TESTDEPENDS</span></code> to declare module
+dependencies that only applies to the tests.</p>
+</div>
+<div class="section" id="the-cmakelists-txt-file">
+<h2>The CMakeLists.txt file<a class="headerlink" href="#the-cmakelists-txt-file" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file is mandatory. It contains only a few things.
+First, it declares a new CMake project with the name of the module:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">TheModuleName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Second, if the module contain a library (see src folder section below),
+it initializes the TheModuleNameLIBRARIES CMake variable (if your module
+only contains headers or template code, skip this line):</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">TheModuleName_LIBRARIES</span> <span class="s">OTBTheModuleName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can build your remote modules inside the OTB source tree by copying
+your source inside the directory <code class="docutils literal notranslate"><span class="pre">Module/Remote</span></code> or against an existing
+OTB build tree (note that it does not work with an install version of
+OTB).</p>
+<p>The configuration below will handle both cases and take care of all the
+CMake plumbing of the module:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">NOT</span> <span class="s">OTB_SOURCE_DIR</span><span class="p">)</span>
+  <span class="nb">find_package</span><span class="p">(</span><span class="s">OTB</span> <span class="s">REQUIRED</span><span class="p">)</span>
+  <span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span> <span class="s">CMAKE_MODULE_PATH</span> <span class="o">${</span><span class="nv">OTB_CMAKE_DIR</span><span class="o">}</span><span class="p">)</span>
+  <span class="nb">include</span><span class="p">(</span><span class="s">OTBModuleExternal</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+  <span class="nb">otb_module_impl</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The overall file should look like this:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.9</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">TheModuleName</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">ExternalTemplate_LIBRARIES</span> <span class="s">OTBTheModuleName</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">NOT</span> <span class="s">OTB_SOURCE_DIR</span><span class="p">)</span>
+  <span class="nb">find_package</span><span class="p">(</span><span class="s">OTB</span> <span class="s">REQUIRED</span><span class="p">)</span>
+  <span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span> <span class="s">CMAKE_MODULE_PATH</span> <span class="o">${</span><span class="nv">OTB_CMAKE_DIR</span><span class="o">}</span><span class="p">)</span>
+  <span class="nb">include</span><span class="p">(</span><span class="s">OTBModuleExternal</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+  <span class="nb">otb_module_impl</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-include-folder">
+<h2>The include folder<a class="headerlink" href="#the-include-folder" title="Permalink to this headline">¶</a></h2>
+<p>The include folder will contain all your headers (<code class="docutils literal notranslate"><span class="pre">*.h</span></code> files) and
+template method files (<code class="docutils literal notranslate"><span class="pre">*.hxx</span></code> or <code class="docutils literal notranslate"><span class="pre">*.hxx</span></code>). It does not require any
+additional file (in particular, no CMakeLists.txt file is required).</p>
+</div>
+<div class="section" id="the-src-folder">
+<h2>The src folder<a class="headerlink" href="#the-src-folder" title="Permalink to this headline">¶</a></h2>
+<p>The src folder contains the internal implementation of your module:</p>
+<ul class="simple">
+<li>It typically contains cxx source files that will be compiled into a
+library.</li>
+<li>It can contain header files for classes used only within the
+implementation files of your module. Any header file present in the
+src folder will not be installed, and will not be available to other
+modules depending on your module.</li>
+</ul>
+<p>If your modules is made of template only code, you do not need a src
+folder at all.</p>
+<p>If present, the src folder requires a CMakeLists.txt file.</p>
+<p>The first part of the CMakeLists.txt file is classical, as it builds the
+library and links it:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">OTBTheModuleName_SRC</span>
+    <span class="s">sourceFile1.cxx</span>
+    <span class="s">sourceFile2.cxx</span>
+    <span class="s">sourceFile3.cxx</span>
+    <span class="s">...</span>
+    <span class="s">sourceFileN.cxx</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="s">OTBTheModuleName</span> <span class="o">${</span><span class="nv">OTBTheModuleName_SRC</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">OTBTheModuleName</span> <span class="o">${</span><span class="nv">OTBModule1_LIBRARIES</span><span class="o">}</span> <span class="o">${</span><span class="nv">OTBModule2_LIBRARIES</span><span class="o">}</span> <span class="s">...</span> <span class="o">${</span><span class="nv">OTBModuleN_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li>Library name should match the one declared in the root CMakeLists.txt
+when setting CMake variable TheModuleNameLIBRARIES,</li>
+<li>Linked libraries should match the dependencies of your module
+declared in the root otb-module.cmake file.</li>
+</ul>
+<p>The last line of CMake code takes care of installation instructions:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">otb_module_target</span><span class="p">(</span><span class="s">TBTheModuleName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The overall CMakeLists.txt file should look like:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">OTBTheModuleName_SRC</span>
+    <span class="s">sourceFile1.cxx</span>
+    <span class="s">sourceFile2.cxx</span>
+    <span class="s">sourceFile3.cxx</span>
+    <span class="s">...</span>
+    <span class="s">sourceFileN.cxx</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="s">OTBTheModuleName</span> <span class="o">${</span><span class="nv">OTBTheModuleName_SRC</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">OTBTheModuleName</span> <span class="o">${</span><span class="nv">OTBModule1_LIBRARIES</span><span class="o">}</span> <span class="o">${</span><span class="nv">OTBModule2_LIBRARIES</span><span class="o">}</span> <span class="s">...</span> <span class="o">${</span><span class="nv">OTBModuleN_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">otb_module_target</span><span class="p">(</span><span class="s">TBTheModuleName</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-app-folder">
+<h2>The app folder<a class="headerlink" href="#the-app-folder" title="Permalink to this headline">¶</a></h2>
+<p>The app folder contains the code of applications shipped with your
+module. If your module has no application, you do not need the app
+folder.</p>
+<p><strong>Notes</strong>: If your module contains application (and an app folder), do
+not forget to add the ApplicationEngine in the dependencies listed in
+the otb-module.cmake file.</p>
+<p>In addition to the applications source code, the app folder should
+contain a CMakeLists.txt file as follows.</p>
+<p>For each application, a single call otbcreateapplication is required:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">otb_create_application</span><span class="p">(</span>
+  <span class="s">NAME</span>           <span class="s">TheModuleApplication1</span>
+  <span class="s">SOURCES</span>        <span class="s">TheModuleApplication1.cxx</span>
+  <span class="s">LINK_LIBRARIES</span> <span class="o">${</span><span class="nv">OTBModule1_LIBRARIES</span><span class="o">}</span> <span class="o">${</span><span class="nv">OTBModule2_LIBRARIES</span><span class="o">}</span> <span class="s">...</span> <span class="o">${</span><span class="nv">OTBModuleN_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-test-folder">
+<h2>The test folder<a class="headerlink" href="#the-test-folder" title="Permalink to this headline">¶</a></h2>
+<p>This folder contains tests of the module. If your module has no test in
+it (which is not recommended, you do not need it).</p>
+<p>The test folder should contain the source files of tests, as well as a
+CMakeLists.txt file. This file will contain the following.</p>
+<p>First, indicate that this folder contains tests.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">otb_module_test</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, build the test driver:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">OTBTheModuleNameTests</span>
+    <span class="s">testFile1.cxx</span>
+    <span class="s">testFile2.cxx</span>
+    <span class="s">...</span>
+    <span class="s">testFileN.cxx</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">otbTheModuleNameTestDriver</span> <span class="o">${</span><span class="nv">OTBTheModuleNameTests</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">otbTheModuleNameTestDriver</span> <span class="o">${</span><span class="nv">OTBTheModuleName-Test_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">otb_module_target_label</span><span class="p">(</span><span class="s">otbTheModuleNameTestDriver</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, you can add your tests:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">otb_add_test</span><span class="p">(</span><span class="s">NAME</span> <span class="s">nameOfTheTest</span> <span class="s">COMMAND</span> <span class="s">otbTheModuleNameTestDriver</span>
+             <span class="s">--compare-image</span> <span class="o">${</span><span class="nv">EPSILON_8</span><span class="o">}</span> <span class="s">...</span> <span class="c"># baseline comparison if needed</span>
+             <span class="s">nameOfTheTestFunction</span>
+             <span class="s">testParameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If your module contains one or more application in the app folder, you
+should also write tests for them, in the test folder. Running an
+application test is easily done with the helper macro
+otbtestapplication:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">otb_test_application</span><span class="p">(</span><span class="s">NAME</span>   <span class="s">nameofApplication1Test1</span>
+                      <span class="s">APP</span>  <span class="s">TheModuleApplication1</span>
+                      <span class="s">OPTIONS</span> <span class="s">-in1</span> <span class="o">${</span><span class="nv">INPUTDATA</span><span class="o">}</span><span class="s">/input1.tif</span>
+                              <span class="s">-in2</span> <span class="o">${</span><span class="nv">INPUTDATA</span><span class="o">}</span><span class="s">/input2.tif</span>
+                              <span class="s">-out</span> <span class="o">${</span><span class="nv">TEMP</span><span class="o">}</span><span class="s">/nameofApplication1Test1_result.tif</span>
+                      <span class="s">VALID</span>   <span class="s">--compare-image</span> <span class="o">${</span><span class="nv">EPSILON_8</span><span class="o">}</span>
+                              <span class="o">${</span><span class="nv">BASELINE</span><span class="o">}</span><span class="s">/nameofApplication1Test1_result.tif</span>
+                              <span class="o">${</span><span class="nv">TEMP</span><span class="o">}</span><span class="s">/nameofApplication1Test1_result.tif</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Overall CMakeLists.txt should look like:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">otb_module_test</span><span class="p">()</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">OTBTheModuleNameTests</span>
+    <span class="s">testFile1.cxx</span>
+    <span class="s">testFile2.cxx</span>
+    <span class="s">...</span>
+    <span class="s">testFileN.cxx</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">otbTheModuleNameTestDriver</span> <span class="o">${</span><span class="nv">OTBTheModuleNameTests</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">otbTheModuleNameTestDriver</span> <span class="o">${</span><span class="nv">OTBTheModuleName-Test_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">otb_module_target_label</span><span class="p">(</span><span class="s">otbTheModuleNameTestDriver</span><span class="p">)</span>
+
+<span class="nb">otb_add_test</span><span class="p">(</span><span class="s">NAME</span> <span class="s">nameOfTheTest</span> <span class="s">COMMAND</span> <span class="s">otbTheModuleNameTestDriver</span>
+             <span class="s">--compare-image</span> <span class="o">${</span><span class="nv">EPSILON_8</span><span class="o">}</span> <span class="s">...</span> <span class="c"># baseline comparison if needed</span>
+             <span class="s">nameOfTheTestFunction</span>
+             <span class="s">testParameters</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="including-a-remote-module-in-otb">
+<h2>Including a remote module in OTB<a class="headerlink" href="#including-a-remote-module-in-otb" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Local build of a remote module</li>
+</ul>
+<p>Your remote module can be build inside the OTB source tree or outside as
+a external CMake project with an existing OTB. Please note in that case
+that you’ll have to set OTBDIR CMake option.</p>
+<p>If OTBDIR is an OTB build tree, there are two ways of compiling:</p>
+<ul class="simple">
+<li>Build as a module, in which case build files will be written to the
+OTB build tree as other modules. Main benefit is that this will
+enrich the current OTB build with your new module, but you need to
+have write access to the build directory.</li>
+<li>Build as a standalone CMake project, in which case build files will
+remain in the module build folder. This build is fully independent
+from the build (or install) directory, but the module will not be
+recognized as an OTB module (still you will be able to use its
+binaries and libraries).</li>
+</ul>
+<p>This behaviour is controlled by the <code class="docutils literal notranslate"><span class="pre">OTB_BUILD_MODULE_AS_STANDALONE</span></code>, which is
+OFF by default (hence first behaviour).</p>
+<p>Note that when dealing with an installed OTB, only the second behaviour
+(build as standalone) is available.</p>
+<p>Optionally, you can build your new remote module inside the OTB source
+tree by simply copy the folder containing the module component to
+Modules/Remote, then run CMake configuration. you should see a new CMake
+option named MODULETheModuleName. Simply turn this option to ON, and
+finish CMake configuration. Your module will be built with the rest of
+the OTB project.</p>
+<ul class="simple">
+<li>Sharing your remote module</li>
+</ul>
+<p>To make your remote module available to others when building OTB, you
+should provide a CMake file named TheModuleName.remote.cmake file for
+inclusion in the Modules/Remote folder in OTB source tree.</p>
+<p>This file should contain the following:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># Contact: Author name &lt;author email address&gt;</span>
+
+<span class="nb">otb_fetch_module</span><span class="p">(</span><span class="s">TheModuleName</span>
+  <span class="s2">&quot;A description of the module, to appear during CMake configuration step&quot;</span>
+
+  <span class="s">GIT_REPOSITORY</span> <span class="s">http_link_to_a_git_repository_hosting</span> <span class="s">the</span> <span class="s">module</span>
+  <span class="s">GIT</span> <span class="s">TAG</span> <span class="s">the</span> <span class="s">git</span> <span class="s">revision</span> <span class="s">to</span> <span class="s">checkout</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This file should be provided along with your remote module inclusion
+proposal email to the otb community list. Please refer to the
+contributors guidelines for more information.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="WriteAnApplication.html" class="btn btn-neutral" title="How to write an application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-.. _example-VectorDataExtractROIExample:
+.. _VectorDataExtractROIExample.cxx:
 
 VectorDataExtractROIExample.cxx
 ===============================
@@ -9,7 +9,7 @@ VectorDataExtractROIExample.cxx
 
 
 
-Example source code (`VectorDataExtractROIExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/VectorDataExtractROIExample.cxx?inline=false>`_):
+Example source code (`VectorDataExtractROIExample.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Projections/VectorDataExtractROIExample.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

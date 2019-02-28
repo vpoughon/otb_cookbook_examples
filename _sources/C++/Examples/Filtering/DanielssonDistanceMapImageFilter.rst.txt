@@ -1,4 +1,4 @@
-.. _example-DanielssonDistanceMapImageFilter:
+.. _DanielssonDistanceMapImageFilter.cxx:
 
 DanielssonDistanceMapImageFilter.cxx
 ====================================
@@ -14,7 +14,8 @@ Example usage:
     ./DanielssonDistanceMapImageFilter Input/FivePoints.png Output/DanielssonDistanceMapImageFilterOutput1.png Output/DanielssonDistanceMapImageFilterOutput2.png
 
 
-Example source code (`DanielssonDistanceMapImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/DanielssonDistanceMapImageFilter.cxx?inline=false>`_):
+
+Example source code (`DanielssonDistanceMapImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Filtering/DanielssonDistanceMapImageFilter.cxx?inline=false>`__):
 
 .. code-block:: cpp
 

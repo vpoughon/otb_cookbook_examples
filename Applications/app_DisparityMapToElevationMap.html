@@ -111,54 +111,6 @@
 <li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
 <li class="toctree-l3"><a class="reference internal" href="app_StereoRectificationGridGenerator.html">StereoRectificationGridGenerator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">DisparityMapToElevationMap</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoRectificationGridGenerator.html">StereoRectificationGridGenerator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">DisparityMapToElevationMap</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoRectificationGridGenerator.html">StereoRectificationGridGenerator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">DisparityMapToElevationMap</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoRectificationGridGenerator.html">StereoRectificationGridGenerator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_BlockMatching.html">BlockMatching</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">DisparityMapToElevationMap</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="app_FineRegistration.html">FineRegistration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoFramework.html">StereoFramework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="app_StereoRectificationGridGenerator.html">StereoRectificationGridGenerator</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Geometry.html">Geometry</a></li>
@@ -247,13 +199,13 @@
            <div itemprop="articleBody">
             
   <div class="section" id="disparitymaptoelevationmap">
-<span id="app-disparitymaptoelevationmap"></span><h1>DisparityMapToElevationMap<a class="headerlink" href="#disparitymaptoelevationmap" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>DisparityMapToElevationMap<a class="headerlink" href="#disparitymaptoelevationmap" title="Permalink to this headline">¶</a></h1>
 <p>Projects a disparity map into a regular elevation map.</p>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>This application uses a disparity map computed from a stereo image pair to produce an elevation map on the ground area covered by the stereo pair.</p>
-<p>This application is part of the stereo reconstruction pipeline. It can be used after having computed the disparity map with <a class="reference internal" href="app_BlockMatching.html#app-blockmatching"><span class="std std-ref">BlockMatching</span></a>.</p>
-<p>The needed inputs are: the disparity map, the stereo pair (in original geometry) and the epipolar deformation grids. These grids (computed by <a class="reference internal" href="app_StereoRectificationGridGenerator.html#app-stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a>) have to contain the transform between the original geometry (stereo pair) and the epipolar geometry (disparity map). The algorithm for each disparity is the following:</p>
+<p>This application is part of the stereo reconstruction pipeline. It can be used after having computed the disparity map with <a class="reference internal" href="app_BlockMatching.html#blockmatching"><span class="std std-ref">BlockMatching</span></a>.</p>
+<p>The needed inputs are: the disparity map, the stereo pair (in original geometry) and the epipolar deformation grids. These grids (computed by <a class="reference internal" href="app_StereoRectificationGridGenerator.html#stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a>) have to contain the transform between the original geometry (stereo pair) and the epipolar geometry (disparity map). The algorithm for each disparity is the following:</p>
 <ul class="simple">
 <li>skip if position is discarded by the disparity mask</li>
 <li>compute left ray: transform the current position from epipolar geometry to left sensor geometry (left rectification grid)</li>
@@ -267,12 +219,12 @@
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#input-and-output-data" id="id1">Input and output data</a></li>
-<li><a class="reference internal" href="#elevation-management" id="id2">Elevation management</a></li>
+<li><a class="reference internal" href="#input-and-output-data" id="id2">Input and output data</a></li>
+<li><a class="reference internal" href="#elevation-management" id="id3">Elevation management</a></li>
 </ul>
 </div>
 <div class="section" id="input-and-output-data">
-<h3><a class="toc-backref" href="#id1">Input and output data</a><a class="headerlink" href="#input-and-output-data" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id2">Input and output data</a><a class="headerlink" href="#input-and-output-data" title="Permalink to this headline">¶</a></h3>
 <p>This group of parameters allows one to set input images, output images and grids.</p>
 <p><strong>Input disparity map</strong> <code class="code docutils literal notranslate"><span class="pre">-io.in</span> <span class="pre">image</span></code> <em>Mandatory</em> <br />
 The input disparity map (horizontal disparity in first band, vertical in second). This map can be computed by BlockMatching application.</p>
@@ -297,7 +249,7 @@ Minimum elevation expected (in meters)</p>
 Maximum elevation expected (in meters)</p>
 </div>
 <div class="section" id="elevation-management">
-<h3><a class="toc-backref" href="#id2">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">Elevation management</a><a class="headerlink" href="#elevation-management" title="Permalink to this headline">¶</a></h3>
 <p>This group of parameters allows managing elevation values. Supported formats are SRTM, DTED or any geotiff. DownloadSRTMTiles application could be a useful tool to list/download tiles related to a product.</p>
 <p><strong>DEM directory</strong> <code class="code docutils literal notranslate"><span class="pre">-elev.dem</span> <span class="pre">directory</span></code> <br />
 This parameter allows selecting a directory containing Digital Elevation Model files. Note that this directory should contain only DEM files. Unexpected behaviour might occurs if other images are found in this directory.</p>
@@ -343,8 +295,8 @@ Save application parameters to an XML file.</p>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
-<div class="line">[1] <a class="reference internal" href="app_StereoRectificationGridGenerator.html#app-stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a></div>
-<div class="line">[2] <a class="reference internal" href="app_BlockMatching.html#app-blockmatching"><span class="std std-ref">BlockMatching</span></a></div>
+<div class="line">[1] <a class="reference internal" href="app_StereoRectificationGridGenerator.html#stereorectificationgridgenerator"><span class="std std-ref">StereoRectificationGridGenerator</span></a></div>
+<div class="line">[2] <a class="reference internal" href="app_BlockMatching.html#blockmatching"><span class="std std-ref">BlockMatching</span></a></div>
 </div>
 </div>
 </div>

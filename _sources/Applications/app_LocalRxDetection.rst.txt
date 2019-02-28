@@ -1,4 +1,4 @@
-.. _app-LocalRxDetection:
+.. _LocalRxDetection:
 
 LocalRxDetection
 ================
@@ -9,7 +9,7 @@ Performs local Rx score computation on an hyperspectral image.
 Description
 -----------
 
-Performs local Rx score computation on an input hyperspectral image. For each hyperspectral pixel, the Rx score is computed using statistics computed on a dual neighborhood. The dual neighborhood is composed of all pixel that are in between two radiuses around the center pixel. This score can then be used to detect anomalies in the image, this can be done for example by thresholding the result of this application with the :ref:`app-BandMath` application.
+Performs local Rx score computation on an input hyperspectral image. For each hyperspectral pixel, the Rx score is computed using statistics computed on a dual neighborhood. The dual neighborhood is composed of all pixel that are in between two radiuses around the center pixel. This score can then be used to detect anomalies in the image, this can be done for example by thresholding the result of this application with the :ref:`BandMath` application.
 
 Parameters
 ----------
@@ -79,4 +79,4 @@ From Python:
 See also
 --------
 
-| :ref:`app-BandMath`
+| :ref:`BandMath`
