@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building simple OTB code &mdash; OTB CookBook 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Iterators" href="Iterators.html" />
+    <link rel="prev" title="System Overview" href="SystemOverview.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index_TOC.html" class="icon icon-home"> OTB CookBook
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Orfeo ToolBox!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OTB-Applications.html">A brief tour of OTB Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGIS-interface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AdvancedUse.html">Advanced Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building simple OTB code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pipeline-basics-read-and-write">Pipeline basics: read and write</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filtering-pipeline">Filtering pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-types-scaling-output">Handling types: scaling output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-multispectral-or-color-images">Working with multispectral or color images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#going-from-raw-satellite-images-to-useful-products">Going from raw satellite images to useful products</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_TOC.html">OTB CookBook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index_TOC.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>Building simple OTB code</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/Tutorial.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-simple-otb-code">
+<h1>Building simple OTB code<a class="headerlink" href="#building-simple-otb-code" title="Permalink to this headline">¶</a></h1>
+<p>Well, that’s it, you’ve just downloaded and installed OTB, lured by the
+promise that you will be able to do everything with it. That’s true, you
+will be able to do everything but - there is always a <em>but</em> - some
+effort is required.</p>
+<p>OTB uses the very powerful systems of generic programming, many classes
+are already available, some powerful tools are defined to help you with
+recurrent tasks, but it is not an easy world to enter.</p>
+<p>These tutorials are designed to help you enter this world and grasp the
+logic behind OTB. Each of these tutorials should not take more than 10
+minutes (typing included) and each is designed to highlight a specific
+point. You may not be concerned by the latest tutorials but it is
+strongly advised to go through the first few which cover the basics
+you’ll use almost everywhere.</p>
+<div class="section" id="hello-world">
+<h2>Hello world<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start by the typical <em>Hello world</em> program. We are going to
+compile this C++ program linking to your new OTB.</p>
+<p>First, create a new folder to put your new programs (all the examples
+from this tutorial) in and go into this folder.</p>
+<p>Since all programs using OTB are handled using the CMake system, we need
+to create a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> that will be used by CMake to compile our
+program. An example of this file can be found in the
+<code class="docutils literal notranslate"><span class="pre">OTB/Examples/Tutorials</span></code> directory. The <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> will be
+very similar between your projects.</p>
+<p>Open the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file and write in the few lines:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">Tutorials</span><span class="p">)</span>
+
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.1.0</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">OTB</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">OTB_FOUND</span><span class="p">)</span>
+  <span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">OTB_USE_FILE</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">(</span><span class="s">OTB_FOUND</span><span class="p">)</span>
+  <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;Cannot build OTB project without OTB.  Please set OTB_DIR.&quot;</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">(</span><span class="s">OTB_FOUND</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">HelloWorldOTB</span> <span class="s">HelloWorldOTB.cxx</span> <span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">HelloWorldOTB</span> <span class="o">${</span><span class="nv">OTB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first line defines the name of your project as it appears in Visual
+Studio (it will have no effect under UNIX or Linux). The second line
+loads a CMake file with a predefined strategy for finding OTB. If
+the strategy for finding OTB fails, CMake will prompt you for the
+directory where OTB is installed in your system. In that case you will
+write this information in the <code class="docutils literal notranslate"><span class="pre">OTB_DIR</span></code> variable. The line
+<code class="docutils literal notranslate"><span class="pre">include(${USE_OTB_FILE})</span></code> loads the <code class="docutils literal notranslate"><span class="pre">UseOTB.cmake</span></code> file to set all
+the configuration information from OTB.</p>
+<p>The line <code class="docutils literal notranslate"><span class="pre">add_executable</span></code> defines as its first argument the name of
+the executable that will be produced as result of this project. The
+remaining arguments of <code class="docutils literal notranslate"><span class="pre">add_executable</span></code> are the names of the source
+files to be compiled and linked. Finally, the <code class="docutils literal notranslate"><span class="pre">target_link_libraries</span></code>
+line specifies which OTB libraries will be linked against this project.</p>
+<p><a class="reference internal" href="Examples/Tutorials/HelloWorldOTB.html#helloworldotb-cxx"><span class="std std-ref">HelloWorldOTB.cxx</span></a></p>
+<p>Once the file is written, run <code class="docutils literal notranslate"><span class="pre">ccmake</span></code> on the current directory (that
+is <code class="docutils literal notranslate"><span class="pre">ccmake</span> <span class="pre">./</span></code> under Linux/Unix). If OTB is on a non standard place,
+you will have to tell CMake where it is. Once your done with CMake (you
+shouldn’t have to do it anymore) run <code class="docutils literal notranslate"><span class="pre">make</span></code>.</p>
+<p>You finally have your program. When you run it, you will have the <em>OTB
+Hello World !</em> printed.</p>
+<p>Ok, well done! You’ve just compiled and executed your first OTB program.
+Actually, using OTB for that is not very useful, and we doubt that you
+downloaded OTB only to do that. It’s time to move on to a more advanced
+level.</p>
+</div>
+<div class="section" id="pipeline-basics-read-and-write">
+<h2>Pipeline basics: read and write<a class="headerlink" href="#pipeline-basics-read-and-write" title="Permalink to this headline">¶</a></h2>
+<p>OTB is designed to read images, process them and write them to disk or
+view the result. In this tutorial, we are going to see how to read and
+write images and the basics of the pipeline system.</p>
+<p>First, let’s add the following lines at the end of the
+<code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">Pipeline</span> <span class="s">Pipeline.cxx</span> <span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">Pipeline</span> <span class="o">${</span><span class="nv">OTB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, create a <code class="docutils literal notranslate"><span class="pre">Pipeline.cxx</span></code> file: <a class="reference internal" href="Examples/Tutorials/Pipeline.html#pipeline-cxx"><span class="std std-ref">Pipeline.cxx</span></a>.</p>
+<p>Once this file is written you just have to run <code class="docutils literal notranslate"><span class="pre">make</span></code>. The <code class="docutils literal notranslate"><span class="pre">ccmake</span></code>
+call is not required anymore.</p>
+<p>Get one image from the <code class="docutils literal notranslate"><span class="pre">OTB-Data/Examples</span></code> directory from the OTB-Data
+repository. You can get it either by cloning the OTB data repository
+(<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb-data.git</span></code>),
+but that might be quite long as this also gets the data to run the
+tests. Alternatively, you can get it from
+<a class="reference external" href="http://www.orfeo-toolbox.org/packages/OTB-Data-Examples.tgz">http://www.orfeo-toolbox.org/packages/OTB-Data-Examples.tgz</a>. Take for
+example get <code class="docutils literal notranslate"><span class="pre">QB_Suburb.png</span></code>.</p>
+<p>Now, run your new program as <code class="docutils literal notranslate"><span class="pre">Pipeline</span> <span class="pre">QB_Suburb.png</span> <span class="pre">output.png</span></code>. You
+obtain the file <code class="docutils literal notranslate"><span class="pre">output.png</span></code> which is the same image as
+<code class="docutils literal notranslate"><span class="pre">QB_Suburb.png</span></code>. When you triggered the <code class="docutils literal notranslate"><span class="pre">Update()</span></code> method, OTB
+opened the original image and wrote it back under another name.</p>
+<p>Well…that’s nice but a bit complicated for a copy program!</p>
+<p>Wait a minute! We didn’t specify the file format anywhere! Let’s try
+<code class="docutils literal notranslate"><span class="pre">Pipeline</span> <span class="pre">QB_Suburb.png</span> <span class="pre">output.jpg</span></code>. And voila! The output image is a
+jpeg file.</p>
+<p>That’s starting to be a bit more interesting: this is not just a program
+to copy image files, but also to convert between image formats.</p>
+<p>You have just experienced the pipeline structure which executes the
+filters only when needed and the automatic image format detection.</p>
+<p>Now it’s time to do some processing in between.</p>
+</div>
+<div class="section" id="filtering-pipeline">
+<h2>Filtering pipeline<a class="headerlink" href="#filtering-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>We are now going to insert a simple filter to do some processing between
+the reader and the writer.</p>
+<p>Let’s first add the 2 following lines to the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">FilteringPipeline</span> <span class="s">FilteringPipeline.cxx</span> <span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">FilteringPipeline</span> <span class="o">${</span><span class="nv">OTB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See example <a class="reference internal" href="Examples/Tutorials/FilteringPipeline.html#filteringpipeline-cxx"><span class="std std-ref">FilteringPipeline.cxx</span></a></p>
+<p>Compile with <code class="docutils literal notranslate"><span class="pre">make</span></code> and execute as
+<code class="docutils literal notranslate"><span class="pre">FilteringPipeline</span> <span class="pre">QB_Suburb.png</span> <span class="pre">output.png</span></code>.</p>
+<p>You have the filtered version of your image in the <code class="docutils literal notranslate"><span class="pre">output.png</span></code> file.</p>
+<p>Now, you can practice a bit and try to replace the filter by one of the
+150+ filters which inherit from the <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ImageToImageFilter.html">itk::ImageToImageFilter</a>
+class. You will definitely find some useful filters here!</p>
+</div>
+<div class="section" id="handling-types-scaling-output">
+<h2>Handling types: scaling output<a class="headerlink" href="#handling-types-scaling-output" title="Permalink to this headline">¶</a></h2>
+<p>If you tried some other filter in the previous example, you may have
+noticed that in some cases, it does not make sense to save the output
+directly as an integer. This is the case if you tried the
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1CannyEdgeDetectionImageFilter.html">itk::CannyEdgeDetectionImageFilter</a>. If you tried to use it
+directly in the previous example, you will have some warning about
+converting to unsigned char from double.</p>
+<p>The output of the Canny edge detection is a floating point number. A
+simple solution would be to used double as the pixel type.
+Unfortunately, most image formats use integer typed and you should
+convert the result to an integer image if you still want to visualize
+your images with your usual viewer (we will see in a tutorial later how
+you can avoid that using the built-in viewer).</p>
+<p>To realize this conversion, we will use the
+<a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1RescaleIntensityImageFilter.html">itk::RescaleIntensityImageFilter</a>.</p>
+<p>Add the two lines to the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">ScalingPipeline</span> <span class="s">ScalingPipeline.cxx</span> <span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">ScalingPipeline</span> <span class="o">${</span><span class="nv">OTB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See example <a class="reference internal" href="Examples/Tutorials/ScalingPipeline.html#scalingpipeline-cxx"><span class="std std-ref">ScalingPipeline.cxx</span></a></p>
+<p>As you should be getting used to it by now, compile with <code class="docutils literal notranslate"><span class="pre">make</span></code> and
+execute as <code class="docutils literal notranslate"><span class="pre">ScalingPipeline</span> <span class="pre">QB_Suburb.png</span> <span class="pre">output.png</span></code>.</p>
+<p>You have the filtered version of your image in the <code class="docutils literal notranslate"><span class="pre">output.png</span></code> file.</p>
+</div>
+<div class="section" id="working-with-multispectral-or-color-images">
+<h2>Working with multispectral or color images<a class="headerlink" href="#working-with-multispectral-or-color-images" title="Permalink to this headline">¶</a></h2>
+<p>So far, as you may have noticed, we have been working with grey level
+images, i.e. with only one spectral band. If you tried to process a
+color image with some of the previous examples you have probably
+obtained a deceiving grey result.</p>
+<p>Often, satellite images combine several spectral band to help the
+identification of materials: this is called multispectral imagery. In
+this tutorial, we are going to explore some of the mechanisms used by
+OTB to process multispectral images.</p>
+<p>Add the following lines in the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">Multispectral</span> <span class="s">Multispectral.cxx</span> <span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">Multispectral</span> <span class="o">${</span><span class="nv">OTB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See example <a class="reference internal" href="Examples/Tutorials/Multispectral.html#multispectral-cxx"><span class="std std-ref">Multispectral.cxx</span></a></p>
+<p>Compile with <code class="docutils literal notranslate"><span class="pre">make</span></code> and execute as
+<code class="docutils literal notranslate"><span class="pre">./Multispectral</span> <span class="pre">qb_RoadExtract.tif</span> <span class="pre">qb_blue.tif</span> <span class="pre">qb_shiftscale.tif</span></code>.</p>
+</div>
+<div class="section" id="going-from-raw-satellite-images-to-useful-products">
+<h2>Going from raw satellite images to useful products<a class="headerlink" href="#going-from-raw-satellite-images-to-useful-products" title="Permalink to this headline">¶</a></h2>
+<p>Quite often, when you buy satellite images, you end up with several
+images. In the case of optical satellite, you often have a panchromatic
+spectral band with the highest spatial resolution and a multispectral
+product of the same area with a lower resolution. The resolution ratio
+is likely to be around 4.</p>
+<p>To get the best of the image processing algorithms, you want to combine
+these data to produce a new image with the highest spatial resolution
+and several spectral band. This step is called fusion and you can find
+more details about it in [sec:Fusion]. However, the fusion suppose that
+your two images represents exactly the same area. There are different
+solutions to process your data to reach this situation. Here we are
+going to use the metadata available with the images to produce an
+orthorectification as detailed in [sec:Ortho].</p>
+<p>First you need to add the following lines in the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>
+file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">OrthoFusion</span>  <span class="s">OrthoFusion.cxx</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">OrthoFusion</span> <span class="o">${</span><span class="nv">OTB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See example <a class="reference internal" href="Examples/Tutorials/OrthoFusion.html#orthofusion-cxx"><span class="std std-ref">OrthoFusion.cxx</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Iterators.html" class="btn btn-neutral float-right" title="Iterators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SystemOverview.html" class="btn btn-neutral" title="System Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
