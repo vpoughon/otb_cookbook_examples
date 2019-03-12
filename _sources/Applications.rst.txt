@@ -1,7 +1,7 @@
 .. _apprefdoc:
 
-Applications
-============
+All Applications
+================
 
 .. toctree::
 	:maxdepth: 2

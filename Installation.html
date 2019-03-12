@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; OTB CookBook 6.7.0 documentation</title>
+  <title>Installation &mdash; Orfeo ToolBox 6.7.0 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Compiling OTB from source" href="CompilingOTBFromSource.html" />
+    <link rel="next" title="Monteverdi" href="Monteverdi.html" />
     <link rel="prev" title="Welcome to Orfeo ToolBox!" href="index.html" /> 
 
   
@@ -49,12 +49,12 @@
           
 
           
-            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+            <a href="index.html">
           
 
           
             
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <img src="_static/logo-with-text.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -86,18 +86,19 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#python-bindings">Python bindings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes:</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#system-dependencies">System dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caveat-on-otb-6-0">Caveat on OTB 6.0</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Python bindings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Notes:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#faq">FAQ</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#q-unable-to-import-otbapplication-library-with-python3">Q: Unable to import otbApplication library with Python3</a></li>
 </ul>
@@ -105,8 +106,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#macos-x">MacOS X</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Python bindings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Python bindings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Notes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">FAQ</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#q-i-am-getting-an-error-message">Q: I am getting an error message…</a></li>
 </ul>
 </li>
@@ -120,13 +122,22 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CliInterface.html">Command-line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphicalInterface.html">Graphical interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGISInterface.html">QGIS interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="EnvironmentVariables.html">Environment variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExtendedFilenames.html">Extended filenames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
@@ -144,7 +155,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index_TOC.html">OTB CookBook</a>
+          <a href="index.html">Orfeo ToolBox</a>
         
       </nav>
 
@@ -173,7 +184,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Installation</li>
     
@@ -208,8 +219,7 @@
 Debian/Ubuntu packages, OpenSuse packages), however be advised that they
 may not be up-to-date nor delivered with full features. If you want to
 build from source or if we don’t provide packages for your system,
-information is available in the <a class="reference external" href="http://orfeo-toolbox.org/SoftwareGuide/">Software Guide</a>,
-in the section “Building from Source”.</p>
+information is available in the <a class="reference internal" href="CompilingOTBFromSource.html#compilingfromsource"><span class="std std-ref">Compiling OTB from source</span></a> section.</p>
 <p>You can get latest binary packages from our <a class="reference external" href="https://www.orfeo-toolbox.org/download">Download page</a>.</p>
 <div class="section" id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
@@ -246,23 +256,18 @@ The script <code class="docutils literal notranslate"><span class="pre">start_de
 start Visual Studio.</p>
 <div class="section" id="python-bindings">
 <h3>Python bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h3>
-<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
-package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+<p>Since OTB 6.7.0 OTB bindings for Python 3.5 are distributed as a binary
+package.
 Please note that using a different Python version may not be compatible with
-OTB wrappings. If no compatible Python 2.x version is found a
-notification is generated during the installation process.  If the installation completes
+OTB wrappings. If the installation completes
 without issue, information relating to your Python bindings will be provided.</p>
 <p>You must have Python numpy bindings installed in your system. They can be installed locally
 without admin rights as follows: “pip install –user numpy”. This is to give users the option
 to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
-<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
-If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
-</ul>
+<p>By default, bindings for Python 3.5 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.</p>
 </div>
 <div class="section" id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<h3>Notes:<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>You must have “Visual C++ Redistributable for Visual Studio 2015” installed for using this package.
 It can be downloaded freely from <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">microsoft</a></li>
@@ -337,21 +342,18 @@ necessary to install one of the following packages:</p>
 </div>
 <div class="section" id="id1">
 <h3>Python bindings<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
-package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+<p>Since OTB 6.7.0 OTB bindings for Python 3.5 are distributed as a binary
+package.
 Please note that using a different Python version may not be compatible with
-OTB wrappings. If no compatible Python 2.x version is found a
-notification is generated during the installation process.  If the installation completes
+OTB wrappings. If the installation completes
 without issue, information relating to your Python bindings will be provided.</p>
 <p>You must have Python NumPy bindings installed in your system. They can be installed locally
 without admin rights as follows: “pip install –user numpy”. This is to give users the option
-to select their own existing Python installation rather than the one distributed by the OTB package.</p>
-<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
-If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
-</ul>
-<p>Notes:</p>
+to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
+<p>By default, bindings for Python 3.5 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.</p>
+</div>
+<div class="section" id="id2">
+<h3>Notes:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>You must use monteverdi and mapla through <code class="docutils literal notranslate"><span class="pre">mapla.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">monteverdi.sh</span></code> helper scripts in extracted directory.</li>
 <li>The helper scripts for monteverdi and mapla set required environment variables</li>
@@ -413,23 +415,20 @@ and headers are included). If you want to build OTB from source using this
 package, you should first uninstall the specific OTB files from the package to
 leave only the dependencies (what we call an XDK). You can do it using the
 supplied script <code class="docutils literal notranslate"><span class="pre">tools/uninstall_otb.sh</span></code>.</p>
-<div class="section" id="id2">
-<h3>Python bindings<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
-package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+<div class="section" id="id3">
+<h3>Python bindings<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Since OTB 6.7.0 OTB bindings for Python 3.5 are distributed as a binary
+package.
 Please note that using a different Python version may not be compatible with
-OTB wrappings. If no compatible Python 2.x version is found a
-notification is generated during the installation process.  If the installation completes
+OTB wrappings. If the installation completes
 without issue, information relating to your Python bindings will be provided.</p>
 <p>You must have Python numpy bindings installed in your system. They can be installed locally
 without admin rights as follows: “pip install –user numpy”. This is to give users the option
 to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
-<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
-If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
-</ul>
-<p>Notes:</p>
+<p>By default, bindings for Python 3.5 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.</p>
+</div>
+<div class="section" id="id4">
+<h3>Notes:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>If you want to use the otbcli and otbgui launchers, you must access
 them via a terminal prompt.</li>
@@ -441,8 +440,8 @@ deleting OTB-6.7.0-Darwin64 after extraction. In case you need to have OTB
 installed in some other directory. Extract the .run file there.</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>FAQ<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>FAQ<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="q-i-am-getting-an-error-message">
 <h4>Q: I am getting an error message…<a class="headerlink" href="#q-i-am-getting-an-error-message" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcrun</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">active</span> <span class="n">developer</span> <span class="n">path</span>
@@ -566,7 +565,7 @@ following repositories with these command-lines:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="CompilingOTBFromSource.html" class="btn btn-neutral float-right" title="Compiling OTB from source" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Monteverdi.html" class="btn btn-neutral float-right" title="Monteverdi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Welcome to Orfeo ToolBox!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python bindings &mdash; OTB CookBook 6.7.0 documentation</title>
+  <title>Python bindings &mdash; Orfeo ToolBox 6.7.0 documentation</title>
   
 
   
@@ -47,12 +47,12 @@
           
 
           
-            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+            <a href="index.html">
           
 
           
             
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <img src="_static/logo-with-text.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -84,16 +84,25 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CliInterface.html">Command-line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphicalInterface.html">Graphical interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGISInterface.html">QGIS interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="EnvironmentVariables.html">Environment variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExtendedFilenames.html">Extended filenames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
@@ -111,7 +120,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index_TOC.html">OTB CookBook</a>
+          <a href="index.html">Orfeo ToolBox</a>
         
       </nav>
 
@@ -140,7 +149,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Python bindings</li>
     
@@ -197,21 +206,18 @@ leave only the dependencies (what we call an XDK). You can do it using the
 supplied script <code class="docutils literal notranslate"><span class="pre">tools/uninstall_otb.sh</span></code>.</p>
 <div class="section" id="python-bindings">
 <h1>Python bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h1>
-<p>Starting from OTB 5.8.0, OTB bindings for Python 2.7 are distributed as a binary
-package. With OTB 6.4.0, additional bindings for Python 3.5 are also included.
+<p>Since OTB 6.7.0 OTB bindings for Python 3.5 are distributed as a binary
+package.
 Please note that using a different Python version may not be compatible with
-OTB wrappings. If no compatible Python 2.x version is found a
-notification is generated during the installation process.  If the installation completes
+OTB wrappings. If the installation completes
 without issue, information relating to your Python bindings will be provided.</p>
 <p>You must have Python numpy bindings installed in your system. They can be installed locally
 without admin rights as follows: “pip install –user numpy”. This is to give users the option
 to select their own existing Python installation rather than the one dibstributed by the OTB package.</p>
-<p>By default, bindings for Python 2.7 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.
-If you want to use bindings for Python 3.5, you can copy this script and modify:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">lib/python</span></code> into <code class="docutils literal notranslate"><span class="pre">lib/python3</span></code>, for variable PYTHONPATH</li>
-</ul>
-<p>Notes:</p>
+<p>By default, bindings for Python 3.5 will be enabled with the <code class="docutils literal notranslate"><span class="pre">otbenv</span></code> script.</p>
+</div>
+<div class="section" id="notes">
+<h1>Notes:<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li>If you want to use the otbcli and otbgui launchers, you must access
 them via a terminal prompt.</li>

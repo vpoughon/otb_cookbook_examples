@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Extended filenames &mdash; Orfeo ToolBox 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Compiling OTB from source" href="CompilingOTBFromSource.html" />
+    <link rel="prev" title="Environment variables" href="EnvironmentVariables.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo-with-text.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CliInterface.html">Command-line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphicalInterface.html">Graphical interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGISInterface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="EnvironmentVariables.html">Environment variables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Extended filenames</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reader-options">Reader options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writer-options">Writer options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ogr-datasource-options">OGR DataSource options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Orfeo ToolBox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Extended filenames</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/ExtendedFilenames.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="extended-filenames">
+<span id="id1"></span><h1>Extended filenames<a class="headerlink" href="#extended-filenames" title="Permalink to this headline">¶</a></h1>
+<p>Extended filenames are an interesting feature of OTB. With them, it is possible to control
+several aspects of the behavior of OTB in the OTB-Applications or in our
+own C++ applications. Historically this feature was designed to facilitate
+how geo-referencing information was handled.</p>
+<p>Indeed, there are multiple ways to define geo-referencing information. For
+instance, one can use a geographic transform, a cartographic projection,
+or a sensor model with RPC coefficients. A single image may contain
+several of these elements, such as in the “ortho-ready” products: this
+is a type of product that is still in sensor geometry (the sensor model is
+supplied with the image) but it also contains an approximative
+geographic transform that can be used to have a quick estimate of the
+image localisation. For instance, your product may contain a “.TIF” file
+for the image, along with a “.RPB” file that contains the sensor model
+coefficients and an “.IMD” file that contains a cartographic projection.</p>
+<p>This case leads to the following question: which geo-referencing
+element should be used when the image is opened in OTB. In
+fact, it depends on the user’s requirements. For an orthorectification
+application, the sensor model must be used. In order to specify which
+information should be skipped, a syntax of extended filenames has been
+developed for both reading and writing.</p>
+<p>Since the development of this feature, we have extended this mechanism for
+other aspects. This includes band or overview selection in reader part or support
+create option of GDAL in writer part. The reader and writer extended filename
+support is based on the same syntax, only the options are different.
+To benefit from the extended filename mechanism, the following syntax
+should be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Path/Image.ext?&amp;key1=&lt;value1&gt;&amp;key2=&lt;value2&gt;
+</pre></div>
+</div>
+<p><strong>Note that you’ll probably need to “quote” the filename, especially if calling
+applications from the bash command line.</strong></p>
+<div class="section" id="reader-options">
+<h2>Reader options<a class="headerlink" href="#reader-options" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">geom</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">filename</span><span class="o">.</span><span class="n">geom</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Contains the filename of a valid geom file</li>
+<li>Use the content of the specified geom file instead of
+image-embedded geometric information</li>
+<li>empty by default, use the image-embedded information if available</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">sdataidx</span><span class="o">=&lt;</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">idx</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Select the sub-dataset to read</li>
+<li>0 by default</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">resol</span><span class="o">=&lt;</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">resolution</span> <span class="n">factor</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Select the JPEG2000 sub-resolution image to read</li>
+<li>0 by default</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">bands</span><span class="o">=</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">rn</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Select a subset of bands from the input image</li>
+<li>The syntax is inspired by the Python indexing syntax with
+bands=r1,r2,r3,…,rn where each ri is a band range that can be:<ul>
+<li>a single index (1-based) :<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">2</span></code> means the second band</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-1</span></code> means last band</li>
+</ul>
+</li>
+<li>or a range of bands :<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">3:</span></code> means from the third band until the last band</li>
+<li><code class="code docutils literal notranslate"><span class="pre">:-2</span></code> means the first band up until the penultimate band</li>
+<li><code class="code docutils literal notranslate"><span class="pre">2:4</span></code> means bands 2,3 and 4</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>empty by default (all bands are read from the input image)</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">skipcarto</span><span class="o">=&lt;</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span><span class="n">true</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Skip the cartographic information</li>
+<li>Clears the projectionref, set the origin to <img class="math" src="_images/math/08c4ee18461dcdbc0c200ae95f75a0a74ba0af9a.png" alt="[0,0]"/> and the
+spacing to <img class="math" src="_images/math/cd00702a890f9d803f66cd75a00851852d80b634.png" alt="[1/max(1,r),1/max(1,r)]"/> where <img class="math" src="_images/math/eaa6ad49a7f78fe5a13b486690163bf2dc7e3e60.png" alt="r"/> is the resolution
+factor.</li>
+<li>Keeps the keyword list</li>
+<li>false by default</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">skipgeom</span><span class="o">=&lt;</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span><span class="n">true</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Skip the geometric information</li>
+<li>Clears the keyword list</li>
+<li>Keeps the projectionref and the origin/spacing information</li>
+<li>false by default.</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">skiprpctag</span><span class="o">=&lt;</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span><span class="n">true</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Skip the reading of internal RPC tags (see
+[sec:TypesofSensorModels] for details)</li>
+<li>false by default.</li>
+</ul>
+</div>
+<div class="section" id="writer-options">
+<h2>Writer options<a class="headerlink" href="#writer-options" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">writegeom</span><span class="o">=&lt;</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span><span class="n">false</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>To activate writing of external geom file</li>
+<li>true by default</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">writerpctags</span><span class="o">=&lt;</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span><span class="n">true</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>To activate writing of RPC tags in TIFF files</li>
+<li>false by default</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gdal</span><span class="p">:</span><span class="n">co</span><span class="p">:</span><span class="o">&lt;</span><span class="n">GDALKEY</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>To specify a GDAL creation option</li>
+<li>For GDAL creation option information, see the dedicated GDAL documentation for each driver. For example, you can find <a class="reference external" href="http://www.gdal.org/frmt_gtiff.html">here</a> the information about the GeoTiff create options</li>
+<li>None by default</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">streaming</span><span class="p">:</span><span class="nb">type</span><span class="o">=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Activates configuration of streaming through extended filenames</li>
+<li>Override any previous configuration of streaming</li>
+<li>Allows to configure the kind of streaming to perform</li>
+<li>Available values are:<ul>
+<li>auto: tiled or stripped streaming mode chosen automatically
+depending on TileHint read from input files</li>
+<li>tiled: tiled streaming mode</li>
+<li>stripped: stripped streaming mode</li>
+<li>none: explicitly deactivate streaming</li>
+</ul>
+</li>
+<li>Not set by default</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">streaming</span><span class="p">:</span><span class="n">sizemode</span><span class="o">=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Provides the option to choose how the size of the streaming pieces is computed</li>
+<li>Available values are:<ul>
+<li>auto: size is estimated from the available memory setting by
+evaluating pipeline memory print</li>
+<li>height: size is set by setting height of strips or tiles</li>
+<li>nbsplits: size is computed from a given number of splits</li>
+</ul>
+</li>
+<li>Default is auto</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">streaming</span><span class="p">:</span><span class="n">sizevalue</span><span class="o">=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Parameter for size of streaming pieces computation</li>
+<li>Value is :<ul>
+<li>if sizemode=auto: available memory in Mb</li>
+<li>if sizemode=height: height of the strip or tile in pixels</li>
+<li>if sizemode=nbsplits: number of requested splits for streaming</li>
+</ul>
+</li>
+<li>If not provided, the default value is set to 0 and results in
+different behaviours depending on sizemode (if set to height or
+nbsplits, streaming is deactivated, if set to auto, value is
+fetched from configuration or cmake configuration file)</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">box</span><span class="o">=&lt;</span><span class="n">startx</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">starty</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">sizex</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">sizey</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>User defined parameters of output image region</li>
+<li>The region must be set with 4 unsigned integers (the separator
+used is the colon ’:’). Values are:<ul>
+<li>startx: first index on X (starting with 0)</li>
+<li>starty: first index on Y (starting with 0)</li>
+<li>sizex: size along X</li>
+<li>sizey: size along Y</li>
+</ul>
+</li>
+<li>The definition of the region follows the same convention as
+itk::Region definition in C++. A region is defined by two classes:
+the itk::Index and itk::Size classes. The origin of the region
+within the image with which it is associated is defined by Index</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">bands</span><span class="o">=</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">rn</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Select a subset of bands from the output image</li>
+<li>The syntax is inspired by Python indexing syntax with
+bands=r1,r2,r3,…,rn where each ri is a band range that can be :<ul>
+<li>a single index (1-based) :<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">2</span></code> means 2nd band</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-1</span></code> means last band</li>
+</ul>
+</li>
+<li>or a range of bands :<ul>
+<li><code class="code docutils literal notranslate"><span class="pre">3:</span></code> means 3rd band until the last one</li>
+<li><code class="code docutils literal notranslate"><span class="pre">:-2</span></code> means the first bands until the second to last</li>
+<li><code class="code docutils literal notranslate"><span class="pre">2:4</span></code> means bands 2,3 and 4</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Empty by default (all bands are write from the output image)</li>
+</ul>
+<p>The available syntax for boolean options are:</p>
+<ul class="simple">
+<li>ON, On, on, true, True, 1 are available for setting a ’true’ boolean
+value</li>
+<li>OFF, Off, off, false, False, 0 are available for setting a ’false’
+boolean value</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">nodata</span><span class="o">=</span><span class="p">(</span><span class="n">double</span><span class="p">)</span> <span class="n">value</span> <span class="o">/</span> <span class="p">[</span><span class="nb">int</span><span class="p">:</span><span class="n">double</span><span class="p">,</span> <span class="nb">int</span><span class="p">:</span><span class="n">double</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>This options allows one to set specific nodata values for all or selected bands. The nodata values can be set in two ways: either using a simple scalar value or band,value pairs. OTB will select either one of them depending on the type of nodata value string specified.</li>
+<li>If the value is scalar (without bandindex), it will be applied only to the first band of the image.</li>
+<li>If the value is given as “bandindex:value” pair separated by a “:” then
+the nodata value is applied to only those selected band.</li>
+<li>By default OTB will not alter any existing nodata value.</li>
+<li>The following examples illustrate the above-mentioned points:</li>
+<li>Scalar value syntax : “image_filename?&amp;nodata=-999” -&gt; nodata value equal to -999 will be assigned to all bands</li>
+<li>“Band/Value pair” syntax: “image_filename?&amp;nodata=0:-999,1:255,2:254” -&gt; nodata value corresponds to pixels with values [-999,255,254]</li>
+<li>It is important to note that the band numbering in the nodata writer option follows the GDAL convention and starts at 1.</li>
+</ul>
+</div>
+<div class="section" id="ogr-datasource-options">
+<h2>OGR DataSource options<a class="headerlink" href="#ogr-datasource-options" title="Permalink to this headline">¶</a></h2>
+<p>We extended this process to OGR DataSource. There are three different types of
+options: open, creation and layer creation, which come directly from the GDAL
+API. In order to use them, one just needs to specify the family that the option is
+from.</p>
+<p>For open option :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gdal</span><span class="p">:</span><span class="n">oo</span><span class="p">:</span><span class="o">&lt;</span><span class="n">GDALKEY</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For creation option :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gdal</span><span class="p">:</span><span class="n">co</span><span class="p">:</span><span class="o">&lt;</span><span class="n">GDALKEY</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For layer creation option :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gdal</span><span class="p">:</span><span class="n">lco</span><span class="p">:</span><span class="o">&lt;</span><span class="n">GDALKEY</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Some examples are provided below:</p>
+<ul class="simple">
+<li>Write a file with blockSize equal to 256 and with DEFLATE compression</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ otbcli_DynamicConvert -in OTB-Data/Examples/QB_1_ortho.tif -out &quot;/tmp/example1.tif?&amp;gdal:co:TILED=YES&amp;gdal:co:COMPRESS=DEFLATE&quot;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Process only first band from a file</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ otbcli_DynamicConvert -in &quot;OTB-Data/Examples/QB_1_ortho.tif?&amp;bands=1&quot; -out /tmp/example2.tif
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CompilingOTBFromSource.html" class="btn btn-neutral float-right" title="Compiling OTB from source" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="EnvironmentVariables.html" class="btn btn-neutral" title="Environment variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

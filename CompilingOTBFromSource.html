@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Compiling OTB from source &mdash; OTB CookBook 6.7.0 documentation</title>
+  <title>Compiling OTB from source &mdash; Orfeo ToolBox 6.7.0 documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="_static/css/otb_theme.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="A brief tour of OTB Applications" href="OTB-Applications.html" />
-    <link rel="prev" title="Installation" href="Installation.html" /> 
+    <link rel="next" title="C++ API" href="C++.html" />
+    <link rel="prev" title="Extended filenames" href="ExtendedFilenames.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -49,12 +49,12 @@
           
 
           
-            <a href="index_TOC.html" class="icon icon-home"> OTB CookBook
+            <a href="index.html">
           
 
           
             
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <img src="_static/logo-with-text.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -86,9 +86,24 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Orfeo ToolBox!</a></li>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CliInterface.html">Command-line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphicalInterface.html">Graphical interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QGISInterface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="EnvironmentVariables.html">Environment variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Compiling OTB from source</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#gnu-linux-and-macos">GNU/Linux and macOS</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#setting-up-the-build-environment">Setting up the build environment</a></li>
@@ -101,12 +116,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#tests">Tests</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="OTB-Applications.html">A brief tour of OTB Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="QGIS-interface.html">QGIS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Monteverdi.html">Monteverdi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AdvancedUse.html">Advanced Use</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
@@ -124,7 +133,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index_TOC.html">OTB CookBook</a>
+          <a href="index.html">Orfeo ToolBox</a>
         
       </nav>
 
@@ -153,7 +162,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index_TOC.html">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Compiling OTB from source</li>
     
@@ -177,7 +186,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="compiling-otb-from-source">
-<h1>Compiling OTB from source<a class="headerlink" href="#compiling-otb-from-source" title="Permalink to this headline">¶</a></h1>
+<span id="compilingfromsource"></span><h1>Compiling OTB from source<a class="headerlink" href="#compiling-otb-from-source" title="Permalink to this headline">¶</a></h1>
 <p>This section covers the compilation of OTB from source code using <a class="reference external" href="http://www.cmake.org">CMake</a>. If you just need to install OTB and Monteverdi, follow
 instructions from the <a class="reference internal" href="Installation.html"><span class="doc">Installation</span></a> section.</p>
 <p>OTB is known to work on:</p>
@@ -597,10 +606,10 @@ files or <code class="docutils literal notranslate"><span class="pre">ctest</spa
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="OTB-Applications.html" class="btn btn-neutral float-right" title="A brief tour of OTB Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="C++.html" class="btn btn-neutral float-right" title="C++ API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ExtendedFilenames.html" class="btn btn-neutral" title="Extended filenames" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
