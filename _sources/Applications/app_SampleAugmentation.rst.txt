@@ -65,7 +65,7 @@ The noise added to the input samples will have the standard deviation of the inp
 Smote input samples options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Number of nearest neighbors** :code:`-strategy.smote.neighbors int` *Mandatory* |br|
+**Number of nearest neighbors** :code:`-strategy.smote.neighbors int` *Default value: 5* |br|
 Number of nearest neighbors to be used in the SMOTE algorithm
 
 
