@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hyperspectral image processing &mdash; Orfeo ToolBox 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="All Applications" href="../Applications.html" />
+    <link rel="prev" title="Stereoscopic reconstruction from VHR optical images pair" href="stereo.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo-with-text.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CliInterface.html">Command-line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hyperspectral image processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unmixing">Unmixing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#anomaly-detection">Anomaly detection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Orfeo ToolBox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
+        
+      <li>Hyperspectral image processing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/hyperspectral.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hyperspectral-image-processing">
+<h1>Hyperspectral image processing<a class="headerlink" href="#hyperspectral-image-processing" title="Permalink to this headline">¶</a></h1>
+<p>Hyperspectral sensors produce images with hundreds of narrow spectral bands
+within the visible, near-infrared, mid-infrared and short wave infrared portions
+of the electromagnetic spectrum. This means that an entire spectrum is acquired
+at each point. The richness of this information is useful in many applications,
+like geology and agriculture.</p>
+<p>This section presents OTB applications for hyperspectral image processing.</p>
+<div class="section" id="unmixing">
+<h2>Unmixing<a class="headerlink" href="#unmixing" title="Permalink to this headline">¶</a></h2>
+<p>Because of the low spatial resolution of hyperspectral sensors, microscopic
+material mixing and multiple scattering, measured spectra are a mixture
+of the spectra of the materials actually in the scene. Thus, pixels are assumed
+to be mixtures of a few materials, called endmembers. In this section the mixing
+is assumed to be linear, i.e.</p>
+<div class="math">
+<p><img src="../_images/math/8fed87e2aef20d3549601c1f514352d793da9f14.png" alt="R = A.S + N"/></p>
+</div><p>where, if <cite>l</cite> is the number of bands of the hyperspectral image, <cite>n</cite> the number of pixels
+and <cite>k</cite> the number of endmember:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> is the matrix of observed pixel, of size <cite>l.n</cite></li>
+<li><img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/> is the endmember matrix, of size <cite>l.k</cite></li>
+<li><img class="math" src="../_images/math/1dbc400fcc213305415872f9f625cd2828f97a00.png" alt="S"/> is the abundance matrix, of size <cite>k.n</cite></li>
+<li><img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> is the noise matrix, of size <cite>l.n</cite></li>
+</ul>
+<p>The unmixing problem is to estimate matrices <cite>A</cite> and <cite>S</cite> from <cite>R</cite>.
+The following presents an example of hyperspectral unmixing on a scene composed
+of several geological materials. The scene is an extract from the Cuprite dataset
+acquired by the AVIRIS sensor. The extract is available <a class="reference external" href="http://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Cuprite">here</a> and the whole dataset
+can be retrieved from  <a class="reference external" href="https://aviris.jpl.nasa.gov/">AVIRIS</a> NASA site.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/cuprite_rgb.png"><img alt="../_images/cuprite_rgb.png" src="../_images/cuprite_rgb.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Cuprite image considered, here bands 16, 100 and 180 are displayed.</span></p>
+</div>
+<p>As the number of endmembers of the input image is unknown, the first step
+of the hyperspectral unmixing is to estimate this number. Here a HFC virtual
+dimensionality algorithm is used.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_EndmemberNumberEstimation</span>  <span class="o">-</span><span class="ow">in</span> <span class="n">inputImage</span><span class="o">.</span><span class="n">tif</span>
+                                  <span class="o">-</span><span class="n">algo</span> <span class="n">vd</span>
+                                  <span class="o">-</span><span class="n">algo</span><span class="o">.</span><span class="n">vd</span><span class="o">.</span><span class="n">far</span> <span class="mf">1e-5</span>
+</pre></div>
+</div>
+<p>This algorithm uses a Neyman-Pearson statistical test on the difference between
+the eigenvalues of the covariance matrix and those of the correlation matrice to estimate the
+number of endmembers. If the difference between the eigenvalues for one component is null, this
+means that no endmember is contributing to the correlation eigenvalue in addition to noise
+for that particular component, since the noise energy is represented by the
+covariance eigenvalue. The output of the algorithm is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span> <span class="n">parameters</span> <span class="n">value</span><span class="p">:</span>
+<span class="n">number</span><span class="p">:</span> <span class="mi">19</span>
+</pre></div>
+</div>
+<p>The next step of the hyperspectral is to estimate the endmembers. This can
+be done using the Vertex Component Analysis algorithm (VCA).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_VertexComponentAnalysis</span>  <span class="o">-</span><span class="ow">in</span> <span class="n">inputImage</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">ne</span> <span class="mi">19</span>
+                                <span class="o">-</span><span class="n">outendm</span> <span class="n">endmembers</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>The output of the application is an image containing <cite>k</cite> pixels, each pixel
+representing an endmember.</p>
+<p>This algorithm is based on the research of the endmembers among the data.
+This means that a minimum of one pure pixel must be associated with each endmembers.
+The rationale behind this idea is that the hyperspectral mixed data is contained
+in a simplex of dimension <cite>k</cite>, where the endmembers are the vertices of the simplex.
+This algorithm is widely used in hyperspectral unmixing because of its low algorithmic
+complexity and the fact that the endmembers estimation is unbiased in absence of noise.
+However if the pure pixel hypothesis is not respected, there will be an estimation
+error on the endmembers.</p>
+<p>The last step of the unmixing is to estimates the abundance matrix using an
+optimization algorithm.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_HyperspectralUnmixing</span>  <span class="o">-</span><span class="ow">in</span> <span class="n">inputImage</span><span class="o">.</span><span class="n">tif</span>
+                              <span class="o">-</span><span class="n">ie</span> <span class="n">endmembers</span><span class="o">.</span><span class="n">tif</span>
+                              <span class="o">-</span><span class="n">out</span> <span class="n">unmixedImage</span><span class="o">.</span><span class="n">tif</span>
+                              <span class="o">-</span><span class="n">ua</span> <span class="n">ucls</span>
+</pre></div>
+</div>
+<p>Here an unconstrained least square algorithm has been used. The resulting abundance
+image is shown below:</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/hyperspectralUnmixing_rgb.png"><img alt="../_images/hyperspectralUnmixing_rgb.png" src="../_images/hyperspectralUnmixing_rgb.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Resulting unmixed image, here the first three bands are displayed.</span></p>
+</div>
+</div>
+<div class="section" id="anomaly-detection">
+<h2>Anomaly detection<a class="headerlink" href="#anomaly-detection" title="Permalink to this headline">¶</a></h2>
+<p>An anomaly is an element that is not expected to be found in a scene. The unusual element
+is likely different from its environment and its presence is in the minority scene. Typically,
+a rock in a field, a wooden hut in a forest are anomalies that can be desired to detect using
+hyperspectral imagery. Here an anomaly detection algorithm, the local Rx
+detector, will be used to detect small objects in urban environment. The input image
+has been acquired over <a class="reference external" href="http://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Pavia_University_scene">Pavia</a> University by the ROSIS sensor and has 103 spectral bands.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/pavia.png"><img alt="../_images/pavia.png" src="../_images/pavia.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Hyperspectral image of the Pavia university,  here bands 50, 30 and 10 are displayed.</span></p>
+</div>
+<p>A first optional step is to reduce the dimensionality of the input image in order to
+reduce the size of spectral data while maintaining information related to
+anomalies, here a Principal Component Analysis algorithm is used.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_DimensionalityReduction</span>  <span class="o">-</span><span class="ow">in</span> <span class="n">inputImage</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">out</span> <span class="n">reducedData</span><span class="o">.</span><span class="n">tif</span>
+                                <span class="o">-</span><span class="n">method</span> <span class="n">pca</span>
+                                <span class="o">-</span><span class="n">nbcomp</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>As the local Rx needs to compute and invert a correlation matrix on each pixel, applying dimensionality reduction
+as a preprocessing step will significantly reduce the computational cost of the algorithm.</p>
+<p>The local Rx detection use a sliding window to compute an anomaly score on each pixel.
+This window consists of two sub windows, of radius <cite>ir</cite> and <cite>er</cite>, with <cite>ir &lt; er</cite>,
+and centered on the pixel of interest. The local Rx score is computed by comparing the
+center pixel with the pixel belonging to the annulus.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_LocalRxDetection</span>  <span class="o">-</span><span class="ow">in</span> <span class="n">reducedData</span><span class="o">.</span><span class="n">tif</span>
+                         <span class="o">-</span><span class="n">out</span> <span class="n">RxScore</span><span class="o">.</span><span class="n">tif</span>
+                         <span class="o">-</span><span class="n">ir</span> <span class="mi">1</span>
+                         <span class="o">-</span><span class="n">er</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Here anomalies are supposed to be small, hence a small internal radius should be chosen e.g.
+<cite>ir=1</cite>. Also as the environment is urban, and because the sensor has a low spatial resolution,
+the statistic of the background varies rapidly with the distance,
+so the external radius should not be too big, here <cite>er=5</cite> has been chosen.
+These parameters really depend on the input image and on the objects of interest.</p>
+<p>A threshold can then be applied on the resulting score image to produce an
+anomaly map.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">otbcli_BandMath</span>  <span class="o">-</span><span class="n">il</span> <span class="n">RxScore</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">out</span> <span class="n">anomalyMap</span><span class="o">.</span><span class="n">tif</span>
+                 <span class="o">-</span><span class="n">exp</span> <span class="s2">&quot;im1b1&gt;100&quot;</span>
+</pre></div>
+</div>
+<p>The value of the threshold depends on how sensitive the anomaly detector should be.</p>
+<table border="1" class="docutils" id="figure1">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image_1" src="../_images/rx_score.png" /></td>
+<td><img alt="image_2" src="../_images/rx_detection.png" /></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div>Left: Computed Rx score, right: detected anomalies (in red)</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Applications.html" class="btn btn-neutral float-right" title="All Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="stereo.html" class="btn btn-neutral" title="Stereoscopic reconstruction from VHR optical images pair" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/js/versions.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

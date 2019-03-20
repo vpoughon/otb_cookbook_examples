@@ -1,0 +1,1597 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Users’ Guide &mdash; Orfeo ToolBox 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to write an application" href="WriteAnApplication.html" />
+    <link rel="prev" title="Persistent filters" href="PersistentFilters.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo-with-text.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CliInterface.html">Command-line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Users’ Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#image-data-representation">Image Data Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-and-writing-images">Reading and Writing Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-and-writing-vector-images">Reading and Writing Vector Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-and-writing-auxiliary-data">Reading and Writing Auxiliary Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-filtering">Basic Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disparity-map-estimation">Disparity Map Estimation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#geometric-deformation-modeling">Geometric deformation modeling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#similarity-measures">Similarity measures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-correlation-coefficient">The correlation coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#orthorectification-and-map-projection">Orthorectification and Map Projection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#limits-of-the-approach">Limits of the Approach</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#radiometry">Radiometry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#radiometric-indices">Radiometric Indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#atmospheric-corrections">Atmospheric Corrections</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-fusion">Image Fusion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simple-pan-sharpening">Simple Pan Sharpening</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bayesian-data-fusion">Bayesian Data Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-extraction">Feature Extraction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#textures">Textures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#interest-points">Interest Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#density-features">Density Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#geometric-moments">Geometric Moments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#road-and-cloud-extraction">Road and cloud extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-simulation">Image Simulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prosail-model">PROSAIL model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Image Simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dimension-reduction">Dimension Reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classification">Classification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#machine-learning-framework">Machine Learning Framework</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unsupervised-classification">Unsupervised classification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fusion-of-classification-maps">Fusion of Classification maps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#object-based-image-analysis">Object-based Image Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#change-detection">Change Detection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mean-difference">Mean Difference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ratio-of-means">Ratio Of Means</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#statistical-detectors">Statistical Detectors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-scale-detectors">Multi-Scale Detectors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-components-detectors">Multi-components detectors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-visualization-and-output">Image Visualization and output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#images">Images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Orfeo ToolBox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../C++.html">C++ API</a> &raquo;</li>
+        
+      <li>Users’ Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/UsersGuide.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="users-guide">
+<h1>Users’ Guide<a class="headerlink" href="#users-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="image-data-representation">
+<h2>Image Data Representation<a class="headerlink" href="#image-data-representation" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a> class follows the spirit of <a class="reference external" href="http://www.boost.org/more/generic_programming.html">Generic
+Programming</a>,
+where types are separated from the algorithmic behavior of the class.
+OTB supports images with any pixel type and any spatial dimension.</p>
+<ul class="simple">
+<li>Creating an Image. See example <a class="reference internal" href="Examples/Image/Image1.html#image1-cxx"><span class="std std-ref">Image1.cxx</span></a>.</li>
+<li>Reading an Image from a File. See example <a class="reference internal" href="Examples/Image/Image2.html#image2-cxx"><span class="std std-ref">Image2.cxx</span></a>.</li>
+<li>Accessing Pixel Data. See example <a class="reference internal" href="Examples/Image/Image3.html#image3-cxx"><span class="std std-ref">Image3.cxx</span></a>.</li>
+<li>Defining Origin and Spacing. See example <a class="reference internal" href="Examples/Image/Image4.html#image4-cxx"><span class="std std-ref">Image4.cxx</span></a>.</li>
+<li>Accessing Image Metadata. See example <a class="reference internal" href="Examples/IO/MetadataExample.html#metadataexample-cxx"><span class="std std-ref">MetadataExample.cxx</span></a>.</li>
+<li>Vector Images. See example <a class="reference internal" href="Examples/Image/VectorImage.html#vectorimage-cxx"><span class="std std-ref">VectorImage.cxx</span></a>.</li>
+<li>Importing Image Data from a Buffer. See example <a class="reference internal" href="Examples/Image/Image5.html#image5-cxx"><span class="std std-ref">Image5.cxx</span></a>.</li>
+<li>Image Lists. See example <a class="reference internal" href="Examples/Image/ImageListExample.html#imagelistexample-cxx"><span class="std std-ref">ImageListExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="reading-and-writing-images">
+<h2>Reading and Writing Images<a class="headerlink" href="#reading-and-writing-images" title="Permalink to this headline">¶</a></h2>
+<p>This chapter describes the toolkit architecture supporting reading and
+writing of images to files. OTB does not enforce any particular file
+format, instead, it provides a structure inherited from ITK, supporting
+a variety of formats that can be easily extended by the user as new
+formats become available.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/ImageIOCollaborationDiagram.png"><img alt="../_images/ImageIOCollaborationDiagram.png" src="../_images/ImageIOCollaborationDiagram.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Collaboration diagram of the ImageIO classes.</span></p>
+</div>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/ImageIOFactoriesUseCases.png"><img alt="../_images/ImageIOFactoriesUseCases.png" src="../_images/ImageIOFactoriesUseCases.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Use cases of ImageIO factories.</span></p>
+</div>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/ImageIOFactoriesClassDiagram.png"><img alt="../_images/ImageIOFactoriesClassDiagram.png" src="../_images/ImageIOFactoriesClassDiagram.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Class diagram of the ImageIO factories.</span></p>
+</div>
+<ul class="simple">
+<li>Basic Example. See example <a class="reference internal" href="Examples/IO/ImageReadWrite.html#imagereadwrite-cxx"><span class="std std-ref">ImageReadWrite.cxx</span></a>.</li>
+<li>Reading, Casting and Writing Images. See example <a class="reference internal" href="Examples/IO/ImageReadCastWrite.html#imagereadcastwrite-cxx"><span class="std std-ref">ImageReadCastWrite.cxx</span></a>.</li>
+<li>Extracting Regions. See example <a class="reference internal" href="Examples/IO/ImageReadRegionOfInterestWrite.html#imagereadregionofinterestwrite-cxx"><span class="std std-ref">ImageReadRegionOfInterestWrite.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="reading-and-writing-vector-images">
+<h2>Reading and Writing Vector Images<a class="headerlink" href="#reading-and-writing-vector-images" title="Permalink to this headline">¶</a></h2>
+<p>Images whose pixel type is a Vector, a CovariantVector, an Array, or a
+Complex are quite common in image processing. One of the uses of these
+tye of images is the processing of SLC SAR images, which are complex.</p>
+<ul class="simple">
+<li>Reading and Writing Complex Images. See example <a class="reference internal" href="Examples/IO/ComplexImageReadWrite.html#compleximagereadwrite-cxx"><span class="std std-ref">ComplexImageReadWrite.cxx</span></a>.</li>
+<li>Reading and Writing Multiband Images. See example <a class="reference internal" href="Examples/IO/MultibandImageReadWrite.html#multibandimagereadwrite-cxx"><span class="std std-ref">MultibandImageReadWrite.cxx</span></a>.</li>
+<li>Extracting ROIs. See example <a class="reference internal" href="Examples/IO/ExtractROI.html#extractroi-cxx"><span class="std std-ref">ExtractROI.cxx</span></a>.</li>
+<li>Reading Image Series. See example <a class="reference internal" href="Examples/IO/ImageSeriesIOExample.html#imageseriesioexample-cxx"><span class="std std-ref">ImageSeriesIOExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="reading-and-writing-auxiliary-data">
+<h2>Reading and Writing Auxiliary Data<a class="headerlink" href="#reading-and-writing-auxiliary-data" title="Permalink to this headline">¶</a></h2>
+<p>As we have seen in the previous chapter, OTB has a great capability to
+read and process images. However, images are not the only type of data
+we will need to manipulate. Images are characterized by a regular
+sampling grid. For some data, such as Digital Elevation Models (DEM) or
+Lidar, this is too restrictive and we need other representations.</p>
+<p>Vector data are also used to represent cartographic objects,
+segmentation results, etc: basically, everything which can be seen as
+points, lines or polygons. OTB provides functionnalities for accessing
+this kind of data.</p>
+<ul class="simple">
+<li>Reading DEM Files. See example <a class="reference internal" href="Examples/IO/DEMToImageGenerator.html#demtoimagegenerator-cxx"><span class="std std-ref">DEMToImageGenerator.cxx</span></a>.</li>
+<li>Elevation management with OTB. See example <a class="reference internal" href="Examples/IO/DEMHandlerExample.html#demhandlerexample-cxx"><span class="std std-ref">DEMHandlerExample.cxx</span></a>.</li>
+</ul>
+<p>More examples about representing DEM are presented in
+section&nbsp;[sec:ViewingAltitudeImages].</p>
+<ul class="simple">
+<li>Reading and Writing Shapefiles and KML. See example <a class="reference internal" href="Examples/IO/VectorDataIOExample.html#vectordataioexample-cxx"><span class="std std-ref">VectorDataIOExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="basic-filtering">
+<h2>Basic Filtering<a class="headerlink" href="#basic-filtering" title="Permalink to this headline">¶</a></h2>
+<p>This chapter introduces the most commonly used filters found in OTB.
+Most of these filters are intended to process images. They will accept
+one or more images as input and will produce one or more images as
+output. OTB is based ITK’s data pipeline architecture in which the
+output of one filter is passed as input to another filter. (See Section
+[sec:DataProcessingPipeline] on page for more information.)</p>
+<p>The thresholding operation is used to change or identify pixel values
+based on specifying one or more values (called the <em>threshold</em> value).
+The following sections describe how to perform thresholding operations
+using OTB.</p>
+<ul class="simple">
+<li>Threshold to Point Set. See example <a class="reference internal" href="Examples/FeatureExtraction/ThresholdToPointSetExample.html#thresholdtopointsetexample-cxx"><span class="std std-ref">ThresholdToPointSetExample.cxx</span></a>.</li>
+</ul>
+<p>OTB and ITK provide a lot of filters allowing to perform basic
+operations on image layers (thresholding, ratio, layers
+combinations…). It allows to create a processing chain defining at
+each step operations and to combine them in the data pipeline. But the
+library offers also the possibility to perform more generic complex
+mathematical operation on images in a single filter: the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1BandMathImageFilter.html">otb::BandMathImageFilter</a> and more recently the
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1BandMathImageFilterX.html">otb::BandMathImageFilterX</a>.</p>
+<p>A new version of the BandMath filter is now available; among the new
+functionalities, variables representing multi-band pixels were
+introduced, as well as variables representing neighborhoods of pixels.
+The class name is <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1BandMathImageFilterX.html">otb::BandMathImageFilterX</a>.</p>
+<ul class="simple">
+<li>BandMath filter. See example <a class="reference internal" href="Examples/BasicFilters/BandMathFilterExample.html#bandmathfilterexample-cxx"><span class="std std-ref">BandMathFilterExample.cxx</span></a>.</li>
+<li>BandMathX filter. See example <a class="reference internal" href="Examples/BasicFilters/BandMathXImageFilterExample.html#bandmathximagefilterexample-cxx"><span class="std std-ref">BandMathXImageFilterExample.cxx</span></a>.</li>
+<li>Ratio of Means Detector. See example <a class="reference internal" href="Examples/FeatureExtraction/TouziEdgeDetectorExample.html#touziedgedetectorexample-cxx"><span class="std std-ref">TouziEdgeDetectorExample.cxx</span></a>.</li>
+<li>Mean Shift filtering and clustering. See example <a class="reference internal" href="Examples/BasicFilters/MeanShiftSegmentationFilterExample.html#meanshiftsegmentationfilterexample-cxx"><span class="std std-ref">MeanShiftSegmentationFilterExample.cxx</span></a>.</li>
+<li>Edge Preserving Speckle Reduction Filters. See example <a class="reference internal" href="Examples/BasicFilters/LeeImageFilter.html#leeimagefilter-cxx"><span class="std std-ref">LeeImageFilter.cxx</span></a>. See example <a class="reference internal" href="Examples/BasicFilters/FrostImageFilter.html#frostimagefilter-cxx"><span class="std std-ref">FrostImageFilter.cxx</span></a>.</li>
+<li>Edge preserving Markov Random Field. See example <a class="reference internal" href="Examples/Markov/MarkovRestorationExample.html#markovrestorationexample-cxx"><span class="std std-ref">MarkovRestorationExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="disparity-map-estimation">
+<h2>Disparity Map Estimation<a class="headerlink" href="#disparity-map-estimation" title="Permalink to this headline">¶</a></h2>
+<p>This chapter introduces the tools available in OTB for the estimation of
+geometric disparities between images.</p>
+<p>The problem we want to deal with is the one of the automatic disparity map
+estimation of images acquired with different sensors. By different sensors, we
+mean sensors which produce images with different radiometric properties, that
+is, sensors which measure different physical magnitudes: optical sensors
+operating in different spectral bands, radar and optical sensors, etc.</p>
+<p>For this kind of image pairs, the classical approach of fine correlation , can
+not always be used to provide the required accuracy, since this similarity
+measure (the correlation coefficient) can only measure similarities up to an
+affine transformation of the radiometries.</p>
+<p>There are two main questions which can be asked about what we want to do:</p>
+<ol class="arabic simple">
+<li>Can we define what the similarity is between, for instance, a radar
+and an optical image?</li>
+<li>What does <em>fine registration</em> mean in the case where the geometric
+distortions are so big and the source of information can be located
+in different places (for instance, the same edge can be produced by
+the edge of the roof of a building in an optical image and by the
+wall-ground bounce in a radar image)?</li>
+</ol>
+<p>We can answer by saying that the images of the same object obtained by different
+sensors are two different representations of the same reality. For the same
+spatial location, we have two different measures. Both information come from the
+same source and thus they have a lot of common information. This relationship
+may not be perfect, but it can be evaluated in a relative way: different
+geometrical distortions are compared and the one leading to the strongest link
+between the two measures is kept.</p>
+<p>When working with images acquired with the same (type of) sensor one can use a
+very effective approach. Since a correlation coefficient measure is robust and
+fast for similar images, one can afford to apply it in every pixel of one image
+in order to search for the corresponding HP in the other image. One can thus
+build a deformation grid (a sampling of the deformation map). If the sampling
+step of this grid is short enough, the interpolation using an analytical model
+is not needed and high frequency deformations can be estimated. The obtained
+grid can be used as a re-sampling grid and thus obtain the registered images.</p>
+<p>No doubt, this approach, combined with image interpolation techniques (in order
+to estimate sub-pixel deformations) and multi-resolution strategies allows for
+obtaining the best performances in terms of deformation estimation, and hence
+for the automatic image registration.</p>
+<p>Unfortunately, in the multi-sensor case, the correlation coefficient can not be
+used. We will thus try to find similarity measures which can be applied in the
+multi-sensor case with the same approach as the correlation coefficient.</p>
+<p>We start by giving several definitions which allow for the formalization of the
+image registration problem. First of all, we define the master image and the
+slave image:</p>
+<p>Master image: image to which other images will be registered; its
+geometry is considered as the reference.</p>
+<p>Slave image: image to be geometrically transformed in order to be
+registered to the master image.</p>
+<p>Two main concepts are the one of <em>similarity measure</em> and the one of
+<em>geometric transformation</em>:</p>
+<p>Let <img class="math" src="../_images/math/d2ed2630e579be280a30b6646f4d706103c337ce.png" alt="I"/> and <img class="math" src="../_images/math/ca54d3a4a8a221da5f7a13a28ec6a45b4abcc5a5.png" alt="J"/> be two images and let <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/> a
+similarity criterion, we call similarity measure any scalar, strictly
+positive function:</p>
+<div class="math">
+<p><img src="../_images/math/976eaea90c5417febbe95e0c4f3fdc521b58faef.png" alt="S_c(I,J) = f(I,J,c)."/></p>
+</div><p><img class="math" src="../_images/math/9fa3915b4177ca9d1f482decaebb1a047e6087ec.png" alt="S_c"/> has an absolute maximum when the two images <img class="math" src="../_images/math/d2ed2630e579be280a30b6646f4d706103c337ce.png" alt="I"/> and <img class="math" src="../_images/math/ca54d3a4a8a221da5f7a13a28ec6a45b4abcc5a5.png" alt="J"/>
+are <em>identical</em> in the sense of the criterion <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>.</p>
+<p>A geometric transformation <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/> is an operator which,
+applied to the coordinates <img class="math" src="../_images/math/497184a5e83d0159a4bf15b0bb89dc5aa40cce7d.png" alt="(x,y)"/> of a point in the slave image,
+gives the coordinates <img class="math" src="../_images/math/87de40372497e003e8fa17dd00e8894d13052ed0.png" alt="(u,v)"/> of its HP in the master image:</p>
+<div class="math">
+<p><img src="../_images/math/ae3eeac83931a3f3a117602ce0ef5a55b41f389a.png" alt="\left( \begin{array}{c}
+u\\
+v\\
+\end{array}\right) = T \left( \begin{array}{c}
+x\\
+y\\
+\end{array}\right)
+\label{Tgeom}"/></p>
+</div><p>Finally we introduce a definition for the image registration problem:</p>
+<p>Registration problem:</p>
+<ol class="arabic">
+<li><p class="first">determine a geometric transformation <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/> which maximizes the
+similarity between a master image <img class="math" src="../_images/math/d2ed2630e579be280a30b6646f4d706103c337ce.png" alt="I"/> and the result of the
+transformation <img class="math" src="../_images/math/2354facdd8d1b36179cd86d243af6b21fd1df195.png" alt="T\circ J"/>:</p>
+<div class="math">
+<p><img src="../_images/math/c568d18da6d5a7b5ca2db972cf7c70f5b7ea5cb4.png" alt="Arg \max_T(S_c(I,T\circ J));"/></p>
+</div></li>
+<li><p class="first">re-sampling of <img class="math" src="../_images/math/ca54d3a4a8a221da5f7a13a28ec6a45b4abcc5a5.png" alt="J"/> by applying <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/>.</p>
+</li>
+</ol>
+<div class="section" id="geometric-deformation-modeling">
+<h3>Geometric deformation modeling<a class="headerlink" href="#geometric-deformation-modeling" title="Permalink to this headline">¶</a></h3>
+<p>The geometric transformation of definition [defin-T] is used for the
+correction of the existing deformation between the two images to be
+registered. This deformation contains information which are linked to
+the observed scene and the acquisition conditions. They can be
+classified into 3 classes depending on their physical source:</p>
+<ol class="arabic simple">
+<li>deformations linked to the mean attitude of the sensor (incidence
+angle, presence or absence of yaw steering, etc.);</li>
+<li>deformations linked to a stereo vision (mainly due to the
+topography);</li>
+<li>deformations linked to attitude evolution during the acquisition
+(vibrations which are mainly present in push-broom sensors).</li>
+</ol>
+<p>These deformations are characterized by their spatial frequencies and
+intensities which are summarized in table [tab-deform].</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="23%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">Intensity</th>
+<th class="head">Spatial Frequency</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Mean Attitude</td>
+<td>Strong</td>
+<td>Low</td>
+</tr>
+<tr class="row-odd"><td>Stereo</td>
+<td>Medium</td>
+<td>High and Medium</td>
+</tr>
+<tr class="row-even"><td>Attitude evolution</td>
+<td>Low</td>
+<td>Low to Medium</td>
+</tr>
+</tbody>
+</table>
+<p>Table: Characterization of the geometric deformation sources</p>
+<p>Depending on the type of deformation to be corrected, its model will be
+different. For example, if the only deformation to be corrected is the one
+introduced by the mean attitude, a physical model for the acquisition geometry
+(independent of the image contents) will be enough. If the sensor is not well
+known, this deformation can be approximated by a simple analytical model. When
+the deformations to be modeled are high frequency, analytical (parametric)
+models are not suitable for a fine registration. In this case, one has to use a
+fine sampling of the deformation, that means the use of deformation grids.
+These grids give, for a set of pixels of the master image, their location in
+the slave image.</p>
+<p>The following points summarize the problem of the deformation
+modeling:</p>
+<ol class="arabic simple">
+<li>An analytical model is just an approximation of the deformation. It
+is often obtained as follows:<ol class="arabic">
+<li>Directly from a physical model without using any image content
+information.</li>
+<li>By estimation of the parameters of an a priori model (polynomial,
+affine, etc.). These parameters can be estimated:<ol class="arabic">
+<li>Either by solving the equations obtained by taking HP. The HP
+can be manually or automatically extracted.</li>
+<li>Or by maximization of a global similarity measure.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>A deformation grid is a sampling of the deformation map.</li>
+</ol>
+<p>The last point implies that the sampling period of the grid must be
+short enough in order to account for high frequency deformations
+(Shannon theorem). Of course, if the deformations are non stationary
+(it is usually the case of topographic deformations), the sampling can
+be irregular.</p>
+<p>As a conclusion, we can say that definition [defin-recal] poses the
+registration problem as an optimization problem. This optimization can
+be either global or local with a similarity measure which can also be
+either local or global. All this is synthesized in table
+[tab-approches].</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="32%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Geometric model</th>
+<th class="head">Similarity measure</th>
+<th class="head">Optimization</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Physical model</td>
+<td>None</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Analytical model</td>
+<td>Local</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>with a priori HP</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Analytical model</td>
+<td>Global</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>without a priori HP</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Grid</td>
+<td>Local</td>
+<td>Local</td>
+</tr>
+</tbody>
+</table>
+<p>Table: Approaches to image registration</p>
+<p>The ideal approach would consist in a registration which is locally
+optimized, both in similarity and deformation, in order to have the
+best registration quality. This is the case when deformation grids
+with dense sampling are used. Unfortunately, this case is the most
+computationally heavy and one often uses either a low sampling rate of
+the grid, or the evaluation of the similarity in a small set of pixels
+for the estimation of an analytical model. Both of these choices lead
+to local registration errors which, depending on the topography, can
+amount several pixels.</p>
+<p>Even if this registration accuracy can be enough in many applications,
+(ortho-registration, import into a GIS, etc.), it is not acceptable in
+the case of data fusion, multi-channel segmentation or change
+detection. This is why we will focus on
+the problem of deformation estimation using dense grids.</p>
+</div>
+<div class="section" id="similarity-measures">
+<h3>Similarity measures<a class="headerlink" href="#similarity-measures" title="Permalink to this headline">¶</a></h3>
+<p>The fine modeling of the geometric deformation we are looking for
+needs for the estimation of the coordinates of nearly every pixel in
+the master image inside the slave image. In the classical mono-sensor
+case where we use the correlation coefficient we proceed as follows.</p>
+<p>The geometric deformation is modeled by local rigid displacements. One
+wants to estimate the coordinates of each pixel of the master image
+inside the slave image. This can be represented by a displacement
+vector associated to every pixel of the master image. Each of the two
+components (lines and columns) of this vector field will be called
+deformation grid.</p>
+<p>We use a small window taken in the master image and we test the
+similarity for every possible shift within an exploration area inside
+the slave image (figure [zones]).</p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/SimilarityMeasures.png"><img alt="../_images/SimilarityMeasures.png" src="../_images/SimilarityMeasures.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Estimation of the correlation surface.</span></p>
+</div>
+<p>That means that for each position we compute the correlation
+coefficient. The result is a correlation surface whose maximum gives the
+most likely local shift between both images:</p>
+<div class="math">
+<p><img src="../_images/math/7c8d2f4e2218afa612330c911d48dbb4bff71fa6.png" alt="&amp;\rho_{I,J}(\Delta x, \Delta y) = \\
+&amp;\frac{1}{N}\frac{\sum_{x,y}(I(x,y)-m_I)(J(x+\Delta x,y+\Delta y)-m_J)}{\sigma_I
+\sigma_J}."/></p>
+</div><p>In this expression, <img class="math" src="../_images/math/f4170ed8938b79490d8923857962695514a8e4cb.png" alt="N"/> is the number of pixels of the analysis
+window, <img class="math" src="../_images/math/8a4f7f89dbd2fb6e58b8763f23b6447864e5bf11.png" alt="m_I"/> and <img class="math" src="../_images/math/fa9b859a7ab35e867e28a71a0bc5cf4490c8743c.png" alt="m_J"/> are the estimated mean values
+inside the analysis window of respectively image <img class="math" src="../_images/math/d2ed2630e579be280a30b6646f4d706103c337ce.png" alt="I"/> and image
+<img class="math" src="../_images/math/ca54d3a4a8a221da5f7a13a28ec6a45b4abcc5a5.png" alt="J"/> and <img class="math" src="../_images/math/59f9da8ee04b208e267b602f7c168bbed045b7f6.png" alt="\sigma_I"/> and <img class="math" src="../_images/math/a00a081b31dfb314416e321614556b8c836ae5bb.png" alt="\sigma_J"/> are their standard
+deviations.</p>
+<p>Quality criteria can be applied to the estimated maximum in order to
+give a confidence factor to the estimated shift: width of the peak,
+maximum value, etc. Sub-pixel shifts can be measured by applying
+fractional shifts to the sliding window. This can be done by image
+interpolation.</p>
+<p>The interesting parameters of the procedure are:</p>
+<ul class="simple">
+<li>The size of the exploration area: it determines the computational
+load of the algorithm (we want to reduce it), but it has to be large
+enough in order to cope with large deformations.</li>
+<li>The size of the sliding window: the robustness of the correlation
+coefficient estimation increases with the window size, but the
+hypothesis of local rigid shifts may not be valid for large windows.</li>
+</ul>
+<p>The correlation coefficient cannot be used with original grey-level
+images in the multi-sensor case. It could be used on extracted
+features (edges, etc.), but the feature extraction can introduce
+localization errors. Also, when the images come from sensors using
+very different modalities, it can be difficult to find similar
+features in both images. In this case, one can try to find the
+similarity at the pixel level, but with other similarity measures and
+apply the same approach as we have just described.</p>
+<p>The concept of similarity measure has been presented in definition
+[def-simil]. The difficulty of the procedure lies in finding the
+function <img class="math" src="../_images/math/875eb40014526135383caa89fd500ae40a835f56.png" alt="f"/> which properly represents the criterion <img class="math" src="../_images/math/ae12a24f88803b5895632e4848d87d46483c492c.png" alt="c"/>.
+We also need that <img class="math" src="../_images/math/875eb40014526135383caa89fd500ae40a835f56.png" alt="f"/> be easily and robustly estimated with
+small windows.</p>
+</div>
+<div class="section" id="the-correlation-coefficient">
+<h3>The correlation coefficient<a class="headerlink" href="#the-correlation-coefficient" title="Permalink to this headline">¶</a></h3>
+<p>We remind here the computation of the correlation coefficient between
+two image windows <img class="math" src="../_images/math/d2ed2630e579be280a30b6646f4d706103c337ce.png" alt="I"/> and <img class="math" src="../_images/math/ca54d3a4a8a221da5f7a13a28ec6a45b4abcc5a5.png" alt="J"/>. The coordinates of the pixels
+inside the windows are represented by <img class="math" src="../_images/math/497184a5e83d0159a4bf15b0bb89dc5aa40cce7d.png" alt="(x,y)"/>:</p>
+<div class="math">
+<p><img src="../_images/math/2451ea8e865d8cf76426a8d3c88bd189890e3c60.png" alt="\rho(I,J) = \frac{1}{N}\frac{\sum_{x,y}(I(x,y)-m_I)(J(x,y)-m_J)}{\sigma_I
+\sigma_J}.
+\label{coeffcorr}"/></p>
+</div><p>In order to qualitatively characterize the different similarity
+measures we propose the following experiment. We take two images which
+are perfectly registered and we extract a small window of size
+<img class="math" src="../_images/math/965070d81307f781d8fc6652081f4d8d87009a3c.png" alt="N\times M"/> from each of the images (this size is set to
+<img class="math" src="../_images/math/0b0c4fa16398f727f39b56e4c0f0da0febea7bd8.png" alt="101\times 101"/> for this experiment). For the master image, the
+window will be centered on coordinates <img class="math" src="../_images/math/bff9a267cb6f682582dc2ace8834af3b581ae699.png" alt="(x_0,
+y_0)"/> (the center of the image) and for the slave image, it will be
+centered on coordinates <img class="math" src="../_images/math/23a885da6fcd1e6bdd0a9008872f7c3f3846f941.png" alt="(x_0+\Delta x,
+y_0)"/>. With different values of <img class="math" src="../_images/math/05899b70d35eb61a85aaaba3affb9c7363f0d633.png" alt="\Delta x"/> (from -10 pixels to
+10 pixels in our experiments), we obtain an estimate of
+<img class="math" src="../_images/math/f9e824db1c91016ea421a8582cc0738b75928256.png" alt="\rho(I,J)"/> as a function of <img class="math" src="../_images/math/05899b70d35eb61a85aaaba3affb9c7363f0d633.png" alt="\Delta x"/>, which we write as
+<img class="math" src="../_images/math/1e5e9a92cab677bdb028c3fd88c50ee4d90094e6.png" alt="\rho(\Delta x)"/> for short. The obtained curve should have a
+maximum for <img class="math" src="../_images/math/6124460220b6bea154759fbd74a210cdf52267f5.png" alt="\Delta x =0"/>, since the images are perfectly
+registered. We would also like to have an absolute maximum with a high
+value and with a sharp peak, in order to have a good precision for the
+shift estimate.</p>
+<ul class="simple">
+<li>Regular grid disparity map estimation. See example <a class="reference internal" href="Examples/DisparityMap/FineRegistrationImageFilterExample.html#fineregistrationimagefilterexample-cxx"><span class="std std-ref">FineRegistrationImageFilterExample.cxx</span></a>.</li>
+<li>Stereo reconstruction. See example <a class="reference internal" href="Examples/DisparityMap/StereoReconstructionExample.html#stereoreconstructionexample-cxx"><span class="std std-ref">StereoReconstructionExample.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="orthorectification-and-map-projection">
+<h2>Orthorectification and Map Projection<a class="headerlink" href="#orthorectification-and-map-projection" title="Permalink to this headline">¶</a></h2>
+<p>If no appropriate sensor model is available in the image meta-data, OTB
+offers the possibility to estimate a sensor model from the image.</p>
+<ul class="simple">
+<li>Evaluating Sensor Model. See example <a class="reference internal" href="Examples/Projections/EstimateRPCSensorModelExample.html#estimaterpcsensormodelexample-cxx"><span class="std std-ref">EstimateRPCSensorModelExample.cxx</span></a>.</li>
+</ul>
+<div class="section" id="limits-of-the-approach">
+<h3>Limits of the Approach<a class="headerlink" href="#limits-of-the-approach" title="Permalink to this headline">¶</a></h3>
+<p>As you may understand by now, accurate geo-referencing needs accurate
+DEM and also accurate sensor models and parameters. In the case where
+we have several images acquired over the same area by different
+sensors or different geometric configurations, geo-referencing
+(geographical coordinates) or ortho-rectification (cartographic
+coordinates) is not usually enough. Indeed, when working with image
+series we usually want to compare them (fusion, change detection,
+etc.) at the pixel level.</p>
+<p>Since common DEM and sensor parameters do not allow for such an
+accuracy, we have to use clever strategies to improve the
+co-registration of the images. The classical one consists in refining
+the sensor parameters by taking homologous points between the images
+to co-register. This is called bundle block adjustment and will be
+implemented in coming versions of OTB.</p>
+<p>Even if the model parameters are refined, errors due to DEM accuracy can
+not be eliminated. In this case, image to image registration can be
+applied. These approaches are presented in chapters
+[chap:ImageRegistration] and [sec:DisparityMapEstimation].</p>
+<ul class="simple">
+<li>Orthorectification with OTB. See example <a class="reference internal" href="Examples/Projections/OrthoRectificationExample.html#orthorectificationexample-cxx"><span class="std std-ref">OrthoRectificationExample.cxx</span></a>.</li>
+<li>Vector data projection manipulation. See example <a class="reference internal" href="Examples/Projections/VectorDataProjectionExample.html#vectordataprojectionexample-cxx"><span class="std std-ref">VectorDataProjectionExample.cxx</span></a>.</li>
+<li>Geometries projection manipulation. See example <a class="reference internal" href="Examples/Projections/GeometriesProjectionExample.html#geometriesprojectionexample-cxx"><span class="std std-ref">GeometriesProjectionExample.cxx</span></a>.</li>
+<li>Vector data area extraction. See example <a class="reference internal" href="Examples/Projections/VectorDataExtractROIExample.html#vectordataextractroiexample-cxx"><span class="std std-ref">VectorDataExtractROIExample.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="radiometry">
+<h2>Radiometry<a class="headerlink" href="#radiometry" title="Permalink to this headline">¶</a></h2>
+<p>Remote sensing is not just a matter of taking pictures, but also –
+mostly – a matter of measuring physical values. In order to properly
+deal with physical magnitudes, the numerical values provided by the
+sensors have to be calibrated. After that, several indices with physical
+meaning can be computed.</p>
+<div class="section" id="radiometric-indices">
+<h3>Radiometric Indices<a class="headerlink" href="#radiometric-indices" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p>With multispectral sensors, several indices can be computed, combining
+several spectral bands to show features that are not obvious using only
+one band. Indices can show:</p>
+<ul class="simple">
+<li>Vegetation (Tab&nbsp;[tab:vegetationindices])</li>
+<li>Soil (Tab&nbsp;[tab:soilindices])</li>
+<li>Water (Tab&nbsp;[tab:waterindices])</li>
+<li>Built up areas (Tab&nbsp;[tab:builtupindices])</li>
+</ul>
+<p>A vegetation index is a quantitative measure used to measure biomass or
+vegetative vigor, usually formed from combinations of several spectral
+bands, whose values are added, divided, or multiplied in order to yield
+a single value that indicates the amount or vigor of vegetation.</p>
+<p>Numerous indices are available in OTB and are listed in
+table&nbsp;[tab:vegetationindices] to [tab:builtupindices] with their
+references.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>NDVI</td>
+<td>Normalized Difference Vegetation Index</td>
+</tr>
+<tr class="row-even"><td>RVI</td>
+<td>Ratio Vegetation Index</td>
+</tr>
+<tr class="row-odd"><td>PVI</td>
+<td>Perpendicular Vegetation Index</td>
+</tr>
+<tr class="row-even"><td>SAVI</td>
+<td>Soil Adjusted Vegetation Index</td>
+</tr>
+<tr class="row-odd"><td>TSAVI</td>
+<td>Transformed Soil Adjusted Vegetation Index</td>
+</tr>
+<tr class="row-even"><td>MSAVI</td>
+<td>Modified Soil Adjusted Vegetation Index</td>
+</tr>
+<tr class="row-odd"><td>MSAVI2</td>
+<td>Modified Soil Adjusted Vegetation Index</td>
+</tr>
+<tr class="row-even"><td>GEMI</td>
+<td>Global Environment Monitoring Index</td>
+</tr>
+<tr class="row-odd"><td>WDVI</td>
+<td>Weighted Difference Vegetation Index</td>
+</tr>
+<tr class="row-even"><td>AVI</td>
+<td>Angular Vegetation Index</td>
+</tr>
+<tr class="row-odd"><td>ARVI</td>
+<td>Atmospherically Resistant Vegetation Index</td>
+</tr>
+<tr class="row-even"><td>TSARVI</td>
+<td>Transformed Soil Adjusted Vegetation Index</td>
+</tr>
+<tr class="row-odd"><td>EVI</td>
+<td>Enhanced Vegetation Index</td>
+</tr>
+<tr class="row-even"><td>IPVI</td>
+<td>Infrared Percentage Vegetation Index</td>
+</tr>
+<tr class="row-odd"><td>TNDVI</td>
+<td>Transformed NDVI</td>
+</tr>
+</tbody>
+</table>
+<p>Table: Vegetation indices</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>IR</td>
+<td>Redness Index</td>
+</tr>
+<tr class="row-even"><td>IC</td>
+<td>Color Index</td>
+</tr>
+<tr class="row-odd"><td>IB</td>
+<td>Brilliance Index</td>
+</tr>
+<tr class="row-even"><td>IB2</td>
+<td>Brilliance Index</td>
+</tr>
+</tbody>
+</table>
+<p>Table: Soil indices</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>SRWI</td>
+<td>Simple Ratio Water Index</td>
+</tr>
+<tr class="row-even"><td>NDWI</td>
+<td>Normalized Difference Water Index</td>
+</tr>
+<tr class="row-odd"><td>NDWI2</td>
+<td>Normalized Difference Water Index</td>
+</tr>
+<tr class="row-even"><td>MNDWI</td>
+<td>Modified Normalized Difference Water Index</td>
+</tr>
+<tr class="row-odd"><td>NDPI</td>
+<td>Normalized Difference Pond Index</td>
+</tr>
+<tr class="row-even"><td>NDTI</td>
+<td>Normalized Difference Turbidity Index</td>
+</tr>
+<tr class="row-odd"><td>SA</td>
+<td>Spectral Angle</td>
+</tr>
+</tbody>
+</table>
+<p>Table: Water indices</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>NDBI</td>
+<td>Normalized Difference Built Up Index</td>
+</tr>
+<tr class="row-even"><td>ISU</td>
+<td>Index Surfaces Built</td>
+</tr>
+</tbody>
+</table>
+<p>Table: Built-up indices</p>
+<p>The use of the different indices is very similar, and only few example
+are given in the next sections.</p>
+</div>
+<div class="section" id="ndvi">
+<h4>NDVI<a class="headerlink" href="#ndvi" title="Permalink to this headline">¶</a></h4>
+<p>NDVI was one of the most successful of many attempts to simply and
+quickly identify vegetated areas and their <em>condition</em>, and it remains
+the most well-known and used index to detect live green plant canopies
+in multispectral remote sensing data. Once the feasibility to detect
+vegetation had been demonstrated, users tended to also use the NDVI to
+quantify the photosynthetic capacity of plant canopies. This, however,
+can be a rather more complex undertaking if not done properly.</p>
+<ul class="simple">
+<li>NDVI. See example <a class="reference internal" href="Examples/Radiometry/NDVIRAndNIRVegetationIndexImageFilter.html#ndvirandnirvegetationindeximagefilter-cxx"><span class="std std-ref">NDVIRAndNIRVegetationIndexImageFilter.cxx</span></a>.</li>
+<li>ARVI. See example <a class="reference internal" href="Examples/Radiometry/ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.html#arvimultichannelrandbandnirvegetationindeximagefilter-cxx"><span class="std std-ref">ARVIMultiChannelRAndBAndNIRVegetationIndexImageFilter.cxx</span></a>.</li>
+<li>AVI. See example <a class="reference internal" href="Examples/Radiometry/AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.html#avimultichannelrandgandnirvegetationindeximagefilter-cxx"><span class="std std-ref">AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="atmospheric-corrections">
+<h3>Atmospheric Corrections<a class="headerlink" href="#atmospheric-corrections" title="Permalink to this headline">¶</a></h3>
+<p>See example <a class="reference internal" href="Examples/Radiometry/AtmosphericCorrectionSequencement.html#atmosphericcorrectionsequencement-cxx"><span class="std std-ref">AtmosphericCorrectionSequencement.cxx</span></a>.</p>
+</div>
+</div>
+<div class="section" id="image-fusion">
+<h2>Image Fusion<a class="headerlink" href="#image-fusion" title="Permalink to this headline">¶</a></h2>
+<p>Satellite sensors present an important diversity in terms of
+characteristics. Some provide a high spatial resolution while other
+focus on providing several spectral bands. The fusion process brings the
+information from different sensors with different characteristics
+together to get the best of both worlds.</p>
+<p>Most of the fusion methods in the remote sensing community deal with the
+<em>pansharpening technique</em>. This fusion combines the image from the
+PANchromatic sensor of one satellite (high spatial resolution data) with
+the multispectral (XS) data (lower resolution in several spectral bands)
+to generate images with a high resolution and several spectral bands.
+Several advantages make this situation easier:</p>
+<ul class="simple">
+<li>PAN and XS images are taken simultaneously from the same satellite
+(or with a very short delay);</li>
+<li>the imaged area is common to both scenes;</li>
+<li>many satellites provide these data (SPOT 1-5, Quickbird, Pleiades)</li>
+</ul>
+<p>This case is well-studied in the literature and many methods exist. Only
+very few are available in OTB now but this should evolve soon.</p>
+<div class="section" id="simple-pan-sharpening">
+<h3>Simple Pan Sharpening<a class="headerlink" href="#simple-pan-sharpening" title="Permalink to this headline">¶</a></h3>
+<p>A simple way to view the pan-sharpening of data is to consider that, at
+the same resolution, the panchromatic channel is the sum of the XS
+channel. After putting the two images in the same geometry, after
+orthorectification (see chapter [sec:Ortho]) with an oversampling of the
+XS image, we can proceed to the data fusion.</p>
+<p>The idea is to apply a low pass filter to the panchromatic band to give
+it a spectral content (in the Fourier domain) equivalent to the XS data.
+Then we normalize the XS data with this low-pass panchromatic and
+multiply the result with the original panchromatic band.</p>
+<p>The process is described on figure [fig:PanSharpening].</p>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/Pansharpening.png"><img alt="../_images/Pansharpening.png" src="../_images/Pansharpening.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Simple pan-sharpening procedure.</span></p>
+</div>
+<p>See example <a class="reference internal" href="Examples/Fusion/PanSharpeningExample.html#pansharpeningexample-cxx"><span class="std std-ref">PanSharpeningExample.cxx</span></a>.</p>
+</div>
+<div class="section" id="bayesian-data-fusion">
+<h3>Bayesian Data Fusion<a class="headerlink" href="#bayesian-data-fusion" title="Permalink to this headline">¶</a></h3>
+<p>See example <a class="reference internal" href="Examples/Fusion/BayesianFusionImageFilter.html#bayesianfusionimagefilter-cxx"><span class="std std-ref">BayesianFusionImageFilter.cxx</span></a>.</p>
+</div>
+</div>
+<div class="section" id="feature-extraction">
+<h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="textures">
+<h3>Textures<a class="headerlink" href="#textures" title="Permalink to this headline">¶</a></h3>
+<p>See example <a class="reference internal" href="Examples/FeatureExtraction/TextureExample.html#textureexample-cxx"><span class="std std-ref">TextureExample.cxx</span></a>.</p>
+<p>See example <a class="reference internal" href="Examples/FeatureExtraction/PanTexExample.html#pantexexample-cxx"><span class="std std-ref">PanTexExample.cxx</span></a>.</p>
+<p>See example <a class="reference internal" href="Examples/FeatureExtraction/SFSExample.html#sfsexample-cxx"><span class="std std-ref">SFSExample.cxx</span></a>.</p>
+</div>
+<div class="section" id="interest-points">
+<h3>Interest Points<a class="headerlink" href="#interest-points" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Harris detector. See example <a class="reference internal" href="Examples/FeatureExtraction/HarrisExample.html#harrisexample-cxx"><span class="std std-ref">HarrisExample.cxx</span></a>.</li>
+<li>SURF detector. See example <a class="reference internal" href="Examples/FeatureExtraction/SURFExample.html#surfexample-cxx"><span class="std std-ref">SURFExample.cxx</span></a>.</li>
+<li>Line Detection.
+See example <a class="reference internal" href="Examples/FeatureExtraction/RatioLineDetectorExample.html#ratiolinedetectorexample-cxx"><span class="std std-ref">RatioLineDetectorExample.cxx</span></a>.
+See example <a class="reference internal" href="Examples/FeatureExtraction/CorrelationLineDetectorExample.html#correlationlinedetectorexample-cxx"><span class="std std-ref">CorrelationLineDetectorExample.cxx</span></a>.
+See example <a class="reference internal" href="Examples/FeatureExtraction/AsymmetricFusionOfLineDetectorExample.html#asymmetricfusionoflinedetectorexample-cxx"><span class="std std-ref">AsymmetricFusionOfLineDetectorExample.cxx</span></a>.
+See example <a class="reference internal" href="Examples/FeatureExtraction/ParallelLineDetectionExample.html#parallellinedetectionexample-cxx"><span class="std std-ref">ParallelLineDetectionExample.cxx</span></a>.</li>
+<li>Segment Extraction. See example <a class="reference internal" href="Examples/FeatureExtraction/LineSegmentDetectorExample.html#linesegmentdetectorexample-cxx"><span class="std std-ref">LineSegmentDetectorExample.cxx</span></a>.</li>
+<li>Right Angle Detector. See example <a class="reference internal" href="Examples/FeatureExtraction/RightAngleDetectionExample.html#rightangledetectionexample-cxx"><span class="std std-ref">RightAngleDetectionExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="density-features">
+<h3>Density Features<a class="headerlink" href="#density-features" title="Permalink to this headline">¶</a></h3>
+<p>An interesting approach to feature extraction consists in computing the
+density of previously detected features as simple edges or interest
+points.</p>
+<ul class="simple">
+<li>Edge Density. See example <a class="reference internal" href="Examples/FeatureExtraction/EdgeDensityExample.html#edgedensityexample-cxx"><span class="std std-ref">EdgeDensityExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="geometric-moments">
+<h3>Geometric Moments<a class="headerlink" href="#geometric-moments" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="complex-moments">
+<h4>Complex Moments<a class="headerlink" href="#complex-moments" title="Permalink to this headline">¶</a></h4>
+<p>The complex geometric moments are defined as:</p>
+<div class="math">
+<p><img src="../_images/math/ee69eb1b30c8a2c4984923abd82b1414392b5204.png" alt="c_{pq} = \int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty}(x + iy)^p(x- iy)^qf(x,y)dxdy,
+\label{2.2}"/></p>
+</div><p>where <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> and <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> are the coordinates of the image
+<img class="math" src="../_images/math/2fa25ba9bafbb16982a4fbbf314728fa4b8b05a1.png" alt="f(x,y)"/>, <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> is the imaginary unit and <img class="math" src="../_images/math/06e6f3c46fa01e13cbb38a7a7e24c7ed8114fb40.png" alt="p+q"/> is the
+order of <img class="math" src="../_images/math/a1d005b719fc74cef0aa05247538310cd029dbc4.png" alt="c_{pq}"/>. The geometric moments are particularly useful
+in the case of scale changes.</p>
+<ul class="simple">
+<li>Complex Moments for Images. See example <a class="reference internal" href="Examples/FeatureExtraction/ComplexMomentsImageFunctionExample.html#complexmomentsimagefunctionexample-cxx"><span class="std std-ref">ComplexMomentsImageFunctionExample.cxx</span></a>.</li>
+<li>Complex Moments for Paths. See example <a class="reference internal" href="Examples/FeatureExtraction/ComplexMomentPathExample.html#complexmomentpathexample-cxx"><span class="std std-ref">ComplexMomentPathExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="hu-moments">
+<h4>Hu Moments<a class="headerlink" href="#hu-moments" title="Permalink to this headline">¶</a></h4>
+<p>Using the algebraic moment theory, H. Ming-Kuel obtained a family of 7
+invariants with respect to planar transformations called Hu invariants,
+. Those invariants can be seen as nonlinear
+combinations of the complex moments. Hu invariants have been very much
+used in object recognition during the last 30 years, since they are
+invariant to rotation, scaling and translation.</p>
+<div class="math">
+<p><img src="../_images/math/dc36d76dcd540323c57eda572d6505e0f788ec57.png" alt="\begin{array}{cccc}
+\phi_1 = c_{11};&amp; \phi_2 = c_{20}c_{02};&amp; \phi_3 = c_{30}c_{03};&amp; \phi_4 = c_{21}c_{12};\\
+\phi_5 = Re(c_{30}c_{12}^3);&amp; \phi_6 = Re(c_{21}c_{12}^2);&amp; \phi_7 = Im(c_{30}c_{12}^3).&amp;\\
+\end{array}"/></p>
+</div><p>have used these invariants for the
+recognition of aircraft silhouettes. Flusser and Suk have used them for
+image registration,.</p>
+<ul class="simple">
+<li>Hu Moments for Images. See example <a class="reference internal" href="Examples/FeatureExtraction/HuMomentsImageFunctionExample.html#humomentsimagefunctionexample-cxx"><span class="std std-ref">HuMomentsImageFunctionExample.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="flusser-moments">
+<h4>Flusser Moments<a class="headerlink" href="#flusser-moments" title="Permalink to this headline">¶</a></h4>
+<p>The Hu invariants have been modified and improved by several authors.
+Flusser used these moments in order to produce a new family of
+descriptors of order higher than 3,.
+These descriptors are invariant to scale and rotation. They have the
+following expressions:</p>
+<div class="math">
+<p><img src="../_images/math/772832db94f5ffc253cf1bd42b1078b1ad29ad7e.png" alt="\begin{array}{ccc}
+\psi_1  = c_{11} = \phi_1; &amp;  \psi_2  = c_{21}c_{12} = \phi_4; &amp; \psi_3  = Re(c_{20}c_{12}^2) = \phi_6;\\
+\psi_4  = Im(c_{20}c_{12}^2); &amp; \psi_5  = Re(c_{30}c_{12}^3) = \phi_5;
+&amp; \psi_6  = Im(c_{30}c_{12}^3) = \phi_7.\\
+\psi_7  = c_{22}; &amp; \psi_8  = Re(c_{31}c_{12}^2); &amp; \psi_9  = Im(c_{31}c_{12}~2);\\
+\psi_{10} = Re(c_{40}c_{12}^4); &amp; \psi_{11} = Im(c_{40}c_{12}^2). &amp;\\
+
+\end{array}"/></p>
+</div><ul class="simple">
+<li>Flusser Moments for Images. See example <a class="reference internal" href="Examples/FeatureExtraction/FlusserMomentsImageFunctionExample.html#flussermomentsimagefunctionexample-cxx"><span class="std std-ref">FlusserMomentsImageFunctionExample.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="road-and-cloud-extraction">
+<h3>Road and cloud extraction<a class="headerlink" href="#road-and-cloud-extraction" title="Permalink to this headline">¶</a></h3>
+<p>Road extraction is a critical feature for an efficient use of high
+resolution satellite images. There are many applications of road
+extraction: update of GIS database, reference for image registration,
+help for identification algorithms and rapid mapping for example. Road
+network can be used to register an optical image with a map or an
+optical image with a radar image for example. Road network extraction
+can help for other algorithms: isolated building detection, bridge
+detection. In these cases, a rough extraction can be sufficient. In the
+context of response to crisis, a fast mapping is necessary: within
+6&nbsp;hours, infrastructures for the designated area are required. Within
+this timeframe, a manual extraction is inconceivable and an automatic
+help is necessary.</p>
+<ul class="simple">
+<li>Road extraction filter. See example <a class="reference internal" href="Examples/FeatureExtraction/ExtractRoadExample.html#extractroadexample-cxx"><span class="std std-ref">ExtractRoadExample.cxx</span></a>.</li>
+<li>Step by step road extraction. See example <a class="reference internal" href="Examples/FeatureExtraction/ExtractRoadByStepsExample.html#extractroadbystepsexample-cxx"><span class="std std-ref">ExtractRoadByStepsExample.cxx</span></a>.</li>
+<li>Cloud Detection. See example <a class="reference internal" href="Examples/FeatureExtraction/CloudDetectionExample.html#clouddetectionexample-cxx"><span class="std std-ref">CloudDetectionExample.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="image-simulation">
+<h2>Image Simulation<a class="headerlink" href="#image-simulation" title="Permalink to this headline">¶</a></h2>
+<p>This chapter deals with image simulation algorithm. Using objects
+transmittance and reflectance and sensor characteristics, it can be
+possible to generate realistic hyperspectral synthetic set of data. This
+chapter includes PROSPECT (leaf optical properties) and SAIL (canopy
+bidirectional reflectance) model. Vegetation optical properties are
+modeled using PROSPECT model.</p>
+<div class="section" id="prosail-model">
+<h3>PROSAIL model<a class="headerlink" href="#prosail-model" title="Permalink to this headline">¶</a></h3>
+<p>PROSAIL model is the combinaison of
+PROSPECT leaf optical properties model and SAIL canopy bidirectional
+reflectance model. PROSAIL has also been used to develop new methods for
+retrieval of vegetation biophysical properties. It links the spectral
+variation of canopy reflectance, which is mainly related to leaf
+biochemical contents, with its directional variation, which is primarily
+related to canopy architecture and soil/vegetation contrast. This link
+is key to simultaneous estimation of canopy biophysical/structural
+variables for applications in agriculture, plant physiology, or ecology,
+at different scales. PROSAIL has become one of the most popular
+radiative transfer tools due to its ease of use, general robustness, and
+consistent validation by lab/field/space experiments over the years.
+Here we present a first example, which returns Hemispheric and Viewing
+reflectance for wavelength sampled from <img class="math" src="../_images/math/4dfccc0991f089a04392410da748f9e1639f5b23.png" alt="400"/> to <img class="math" src="../_images/math/635ca943711fb218d1cd0e5837b29b8adce51d55.png" alt="2500 nm"/>.
+Inputs are leaf and Sensor (intrinsic and extrinsic) characteristics.</p>
+<p>See example <a class="reference internal" href="Examples/Simulation/ProsailModel.html#prosailmodel-cxx"><span class="std std-ref">ProsailModel.cxx</span></a>.</p>
+</div>
+<div class="section" id="id1">
+<h3>Image Simulation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Here we present a complete pipeline to simulate image using sensor
+characteristics and objects reflectance and transmittance properties.
+This example use :</p>
+<ul class="simple">
+<li>input image</li>
+<li>label image : describes image object properties.</li>
+<li>label properties : describes each label characteristics.</li>
+<li>mask : vegetation image mask.</li>
+<li>cloud mask (optional).</li>
+<li>acquisition rarameter file : file containing the parameters for the
+acquisition.</li>
+<li>RSR File : File name for the relative spectral response to be used.</li>
+<li>sensor FTM file : File name for sensor spatial interpolation.</li>
+</ul>
+<p>Algorithm is divided in following step :</p>
+<ol class="arabic simple">
+<li>LAI (Leaf Area Index) image estimation using NDVI formula.</li>
+<li>Sensor Reduce Spectral Response (RSR) using PROSAIL reflectance
+output interpolated at sensor spectral bands.</li>
+<li>Simulated image using Sensor RSR and Sensor FTM.</li>
+</ol>
+<ul class="simple">
+<li>LAI image estimation. See example <a class="reference internal" href="Examples/Simulation/LAIFromNDVIImageTransform.html#laifromndviimagetransform-cxx"><span class="std std-ref">LAIFromNDVIImageTransform.cxx</span></a>.</li>
+<li>Sensor RSR Image Simulation. See example <a class="reference internal" href="Examples/Simulation/LAIAndPROSAILToSensorResponse.html#laiandprosailtosensorresponse-cxx"><span class="std std-ref">LAIAndPROSAILToSensorResponse.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="dimension-reduction">
+<h2>Dimension Reduction<a class="headerlink" href="#dimension-reduction" title="Permalink to this headline">¶</a></h2>
+<p>Dimension reduction is a statistical process, which concentrates the
+amount of information in multivariate data into a fewer number of
+variables (or dimensions). An interesting review of the domain has been
+done by Fodor&nbsp;.</p>
+<p>Though there are plenty of non-linear methods in the litterature, OTB
+provides only linear dimension reduction techniques applied to images
+for now.</p>
+<p>Usually, linear dimension-reduction algorithms try to find a set of
+linear combinations of the input image bands that maximise a given
+criterion, often chosen so that image information concentrates on the
+first components. Algorithms differs by the criterion to optimise and
+also by their handling of the signal or image noise.</p>
+<p>In remote-sensing images processing, dimension reduction algorithms are
+of great interest for denoising, or as a preliminary processing for
+classification of feature images or unmixing of hyperspectral images. In
+addition to the denoising effect, the advantage of dimension reduction
+in the two latter is that it lowers the size of the data to be analysed,
+and as such, speeds up the processing time without too much loss of
+accuracy.</p>
+<ul class="simple">
+<li>Principal Component Analysis. See example <a class="reference internal" href="Examples/DimensionReduction/PCAExample.html#pcaexample-cxx"><span class="std std-ref">PCAExample.cxx</span></a>.</li>
+<li>Noise-Adjusted Principal Components Analysis. See example <a class="reference internal" href="Examples/DimensionReduction/NAPCAExample.html#napcaexample-cxx"><span class="std std-ref">NAPCAExample.cxx</span></a>.</li>
+<li>Maximum Noise Fraction. See example <a class="reference internal" href="Examples/DimensionReduction/MNFExample.html#mnfexample-cxx"><span class="std std-ref">MNFExample.cxx</span></a>.</li>
+<li>Fast Independent Component Analysis. See example <a class="reference internal" href="Examples/DimensionReduction/ICAExample.html#icaexample-cxx"><span class="std std-ref">ICAExample.cxx</span></a>.</li>
+<li>Maximum Autocorrelation Factor. See example <a class="reference internal" href="Examples/DimensionReduction/MaximumAutocorrelationFactor.html#maximumautocorrelationfactor-cxx"><span class="std std-ref">MaximumAutocorrelationFactor.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="machine-learning-framework">
+<h3>Machine Learning Framework<a class="headerlink" href="#machine-learning-framework" title="Permalink to this headline">¶</a></h3>
+<p>The OTB classification is implemented as a generic Machine Learning
+framework, supporting several possible machine learning libraries as
+backends. The base class <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1MachineLearningModel.html">otb::MachineLearningModel</a> defines this
+framework. As of now libSVM (the machine learning library historically
+integrated in OTB), machine learning methods of OpenCV library
+() and also Shark machine learning
+library () are available. Both
+supervised and unsupervised classifiers are supported in the framework.</p>
+<p>The current list of classifiers available through the same generic
+interface within the OTB is:</p>
+<ul class="simple">
+<li><strong>LibSVM</strong>: Support Vector Machines classifier based on libSVM.</li>
+<li><strong>SVM</strong>: Support Vector Machines classifier based on OpenCV, itself
+based on libSVM.</li>
+<li><strong>Bayes</strong>: Normal Bayes classifier based on OpenCV.</li>
+<li><strong>Boost</strong>: Boost classifier based on OpenCV.</li>
+<li><strong>DT</strong>: Decision Tree classifier based on OpenCV.</li>
+<li><strong>RF</strong>: Random Forests classifier based on the Random Trees in
+OpenCV.</li>
+<li><strong>KNN</strong>: K-Nearest Neighbors classifier based on OpenCV.</li>
+<li><strong>ANN</strong>: Artificial Neural Network classifier based on OpenCV.</li>
+<li><strong>SharkRF</strong> : Random Forests classifier based on Shark.</li>
+<li><strong>SharkKM</strong> : KMeans unsupervised classifier based on Shark.</li>
+</ul>
+<p>These models have a common interface, with the following major
+functions:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">SetInputListSample(InputListSampleType*</span> <span class="pre">in)</span></code>: set the list of input samples</li>
+<li><code class="docutils literal notranslate"><span class="pre">SetTargetListSample(TargetListSampleType*</span> <span class="pre">in)</span></code>: set the list of target samples</li>
+<li><code class="docutils literal notranslate"><span class="pre">Train()</span></code>: train the model based on input samples</li>
+<li><code class="docutils literal notranslate"><span class="pre">Save()</span></code>: saves the model to file</li>
+<li><code class="docutils literal notranslate"><span class="pre">Load()</span></code>: load a model from file</li>
+<li><code class="docutils literal notranslate"><span class="pre">Predict()</span></code>: predict a target value for an input sample</li>
+<li><code class="docutils literal notranslate"><span class="pre">PredictBatch()</span></code>: prediction on a list of input samples</li>
+</ul>
+<p>The function can be multi-threaded when called either from a
+multi-threaded filter, or from a single location. In the later case, it
+creates several threads using OpenMP. There is a factory mechanism on
+top of the model class (see <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1MachineLearningModelFactory.html">otb::MachineLearningModelFactory</a>).
+Given an input file, the static function is able to instantiate a model
+of the right type.</p>
+<p>For unsupervised models, the target samples <strong>still have to be set</strong>.
+They won’t be used so you can fill a ListSample with zeros.</p>
+<div class="section" id="training-a-model">
+<h4>Training a model<a class="headerlink" href="#training-a-model" title="Permalink to this headline">¶</a></h4>
+<p>The models are trained from a list of input samples, stored in a . For
+supervised classifiers, they also need a list of targets associated to
+each input sample. Whatever the source of samples, it has to be
+converted into a before being fed into the model.</p>
+<p>Then, model-specific parameters can be set. And finally, the method
+starts the learning step. Once the model is trained it can be saved to
+file using the function . The following examples show how to do that.</p>
+<p>See example <a class="reference internal" href="Examples/Learning/TrainMachineLearningModelFromSamplesExample.html#trainmachinelearningmodelfromsamplesexample-cxx"><span class="std std-ref">TrainMachineLearningModelFromSamplesExample.cxx</span></a>.</p>
+<p>See example <a class="reference internal" href="Examples/Learning/TrainMachineLearningModelFromImagesExample.html#trainmachinelearningmodelfromimagesexample-cxx"><span class="std std-ref">TrainMachineLearningModelFromImagesExample.cxx</span></a>.</p>
+</div>
+<div class="section" id="prediction-of-a-model">
+<h4>Prediction of a model<a class="headerlink" href="#prediction-of-a-model" title="Permalink to this headline">¶</a></h4>
+<p>For the prediction step, the usual process is to:</p>
+<ul class="simple">
+<li>Load an existing model from a file.</li>
+<li>Convert the data to predict into a .</li>
+<li>Run the function.</li>
+</ul>
+<p>There is an image filter that perform this step on a whole image,
+supporting streaming and multi-threading:
+<a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1ImageClassificationFilter.html">otb::ImageClassificationFilter</a>.</p>
+<p>See example <a class="reference internal" href="Examples/Classification/SupervisedImageClassificationExample.html#supervisedimageclassificationexample-cxx"><span class="std std-ref">SupervisedImageClassificationExample.cxx</span></a>.</p>
+</div>
+<div class="section" id="integration-in-applications">
+<h4>Integration in applications<a class="headerlink" href="#integration-in-applications" title="Permalink to this headline">¶</a></h4>
+<p>The classifiers are integrated in several OTB Applications. There is a
+base class that provides an easy access to all the classifiers:
+LearningApplicationBase. As each machine learning
+model has a specific set of parameters, the base class knows how to
+expose each type of classifier with its dedicated parameters (a task
+that is a bit tedious so we want to implement it only once). The method
+creates a choice parameter named which contains the different supported
+classifiers along with their parameters.</p>
+<p>The function provide an easy way to train the selected classifier, with
+the corresponding parameters, and save the model to file.</p>
+<p>On the other hand, the function allows to load a model from file and
+apply it on a list of samples.</p>
+</div>
+</div>
+<div class="section" id="unsupervised-classification">
+<h3>Unsupervised classification<a class="headerlink" href="#unsupervised-classification" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="k-means-classification">
+<h4>K-Means Classification<a class="headerlink" href="#k-means-classification" title="Permalink to this headline">¶</a></h4>
+<p>The KMeans algorithm has been implemented in Shark library, and has been
+wrapped in the OTB machine learning framework. It is the first
+unsupervised algorithm in this framework. It can be used in the same way
+as other machine learning models. Remember that even if unsupervised
+model don’t use a label information on the samples, the target
+ListSample still has to be set in . A ListSample filled with zeros can
+be used.</p>
+<p>This model uses a hard clustering model with the following parameters:</p>
+<ul class="simple">
+<li>The maximum number of iterations</li>
+<li>The number of centroids (K)</li>
+<li>An option to normalize input samples</li>
+</ul>
+<p>As with Shark Random Forests, the training step is parallel.</p>
+</div>
+<div class="section" id="kohonens-self-organizing-map">
+<h4>Kohonen’s Self Organizing Map<a class="headerlink" href="#kohonens-self-organizing-map" title="Permalink to this headline">¶</a></h4>
+<p>The Self Organizing Map, SOM, introduced by Kohonen is a non-supervised
+neural learning algorithm. The map is composed of neighboring cells
+which are in competition by means of mutual interactions and they adapt
+in order to match characteristic patterns of the examples given during
+the learning. The SOM is usually on a plane (2D).</p>
+<p>The algorithm implements a nonlinear projection from a high dimensional
+feature space to a lower dimension space, usually 2D. It is able to find
+the correspondence between a set of structured data and a network of
+much lower dimension while keeping the topological relationships
+existing in the feature space. Thanks to this topological organization,
+the final map presents clusters and their relationships.</p>
+<div class="line-block">
+<div class="line">Kohonen’s SOM is usually represented as an array of cells where each
+cell is, <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>, associated to a feature (or weight) vector
+<img class="math" src="../_images/math/08b7ef9d2b9540f87c2b8debd4a724da060d21d8.png" alt="\underline m_i = \left[m_{i1},m_{i2},\cdots,m_{in}\right]^T\in
+\mathbb{R}^n"/> (figure [carte]).</div>
+</div>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/KohonenMap.png"><img alt="../_images/KohonenMap.png" src="../_images/KohonenMap.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Kohonen’s Self Organizing Map</span></p>
+</div>
+<p>A cell (or neuron) in the map is a good detector for a given input
+vector <img class="math" src="../_images/math/a1e59b27e698e8f92ed622c0547a7e33582eb779.png" alt="\underline x = \left[x_{1},x_{2},\cdots,x_{n}\right]^T\in
+\mathbb{R}^n"/> if the latter is <em>close</em> to the former. This distance
+between vectors can be represented by the scalar product
+<img class="math" src="../_images/math/909b019830e6e4c5259278dc8208d100f42d53e8.png" alt="\underline{x}^T\cdot\underline{m_i}"/>, but for most of the cases
+other distances can be used, as for instance the Euclidean one. The cell
+having the weight vector closest to the input vector is called the
+<em>winner</em>.</p>
+<p>The goal of the learning step is to get a map which is representative of
+an input example set. It is an iterative procedure which consists in
+passing each input example to the map, testing the response of each
+neuron and modifying the map to get it closer to the examples.</p>
+<p>SOM learning:</p>
+<ol class="arabic">
+<li><p class="first"><img class="math" src="../_images/math/c9c0db14206d811c979283bc2269384bec23557d.png" alt="t=0"/>.</p>
+</li>
+<li><p class="first">Initialize the weight vectors of the map (randomly, for instance).</p>
+</li>
+<li><p class="first">While <img class="math" src="../_images/math/ee9425c046fdb91416b301be05dc12f01948a26c.png" alt="t&lt;"/> number of iterations, do:</p>
+<ol class="arabic">
+<li><p class="first"><img class="math" src="../_images/math/bc37fb6f186e2b76055e72b6196c830f1ae7f4e9.png" alt="k=0"/>.</p>
+</li>
+<li><p class="first">While <img class="math" src="../_images/math/88e741504689ac09ad4f1dd73a8808ad5334f602.png" alt="k&lt;"/> number of examples, do:</p>
+<ol class="arabic">
+<li><p class="first">Find the vector <img class="math" src="../_images/math/ef3ce26c2d4a6362a63e957ad035696e7fc3a66c.png" alt="\underline{m}_i(t)"/> which minimizes the
+distance <img class="math" src="../_images/math/9c10e6816e50de8b58e65c6355bcdb35c3a84696.png" alt="d(\underline{x}_k,\underline{m}_i(t))"/></p>
+</li>
+<li><p class="first">For a neighborhood <img class="math" src="../_images/math/2b1c5774d0f884da1ff82419b8a8aefab9f6d9b9.png" alt="N_c(t)"/> around the winner cell, apply
+the transformation:</p>
+<div class="math">
+<p><img src="../_images/math/c73ba5ac43e0729981518283de095076ab301534.png" alt="\underline{m}_i(t+1)=\underline{m}_i(t)+\beta(t)\left[\underline{x}_k(t)-\underline{m}_i(t)\right]
+\label{khoupdate}"/></p>
+</div></li>
+<li><p class="first"><img class="math" src="../_images/math/1844e3df5d09aa06a109edfa1f871fb66ef04a74.png" alt="k=k+1"/></p>
+</li>
+</ol>
+</li>
+<li><p class="first"><img class="math" src="../_images/math/707304f2fbd560e9f5b1563fa4521d51f64cf0cf.png" alt="t=t+1"/>.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>In [khoupdate], <img class="math" src="../_images/math/fc5b96bf1183882fb38a2e92ff1ef119ce995519.png" alt="\beta(t)"/> is a decreasing function with the
+geometrical distance to the winner cell. For instance:</p>
+<blockquote>
+<div><div class="math">
+<p><img src="../_images/math/aa89336bafcf19b57bed95dbbe9f063e58f949f8.png" alt="\beta(t)=\beta_0(t)e^{-\frac{\parallel \underline{r}_i -  \underline{r}_c\parallel^2}{\sigma^2(t)}},"/></p>
+</div></div></blockquote>
+<p>with <img class="math" src="../_images/math/57261f8f87bf10580771800602a04ac067d8b2c7.png" alt="\beta_0(t)"/> and <img class="math" src="../_images/math/cf06cd0acb6528a6fa13931c5d396cd86df8864a.png" alt="\sigma(t)"/> decreasing functions
+with time and <img class="math" src="../_images/math/5b7cd3343997f5ac3eaa8744e2ac0571a04f23a2.png" alt="\underline{r}"/> the cell coordinates in the output
+map space.</p>
+<p>Therefore the algorithm consists in getting the map closer to the
+learning set. The use of a neighborhood around the winner cell allows
+the organization of the map into areas which specialize in the
+recognition of different patterns. This neighborhood also ensures that
+cells which are topologically close are also close in terms of the
+distance defined in the feature space.</p>
+<ul class="simple">
+<li>Building a color table. See example <a class="reference internal" href="Examples/Learning/SOMExample.html#somexample-cxx"><span class="std std-ref">SOMExample.cxx</span></a>.</li>
+<li>SOM Classification. See example <a class="reference internal" href="Examples/Learning/SOMClassifierExample.html#somclassifierexample-cxx"><span class="std std-ref">SOMClassifierExample.cxx</span></a>.</li>
+<li>Multi-band, streamed classification. See example <a class="reference internal" href="Examples/Classification/SOMImageClassificationExample.html#somimageclassificationexample-cxx"><span class="std std-ref">SOMImageClassificationExample.cxx</span></a>..tex</li>
+</ul>
+</div>
+<div class="section" id="stochastic-expectation-maximization">
+<h4>Stochastic Expectation Maximization<a class="headerlink" href="#stochastic-expectation-maximization" title="Permalink to this headline">¶</a></h4>
+<p>The Stochastic Expectation Maximization (SEM) approach is a stochastic
+version of the EM mixture estimation seen on
+section&nbsp;[sec:ExpectationMaximizationMixtureModelEstimation]. It has been
+introduced by to prevent convergence of the
+EM approach from local minima. It avoids the analytical maximization
+issued by integrating a stochastic sampling procedure in the estimation
+process. It induces an almost sure (a.s.) convergence to the algorithm.</p>
+<p>From the initial two step formulation of the EM mixture estimation, the
+SEM may be decomposed into 3 steps:</p>
+<ol class="arabic simple">
+<li><strong>E-step</strong>, calculates the expected membership values for each
+measurement vector to each classes.</li>
+<li><strong>S-step</strong>, performs a stochastic sampling of the membership vector
+to each classes, according to the membership values computed in the
+E-step.</li>
+<li><strong>M-step</strong>, updates the parameters of the membership probabilities
+(parameters to be defined through the class and its inherited
+classes).</li>
+</ol>
+<p>The implementation of the SEM has been turned to a contextual SEM in the
+sense where the evaluation of the membership parameters is conditioned
+to membership values of the spatial neighborhood of each pixels.</p>
+<p>See example <a class="reference internal" href="Examples/Learning/SEMModelEstimatorExample.html#semmodelestimatorexample-cxx"><span class="std std-ref">SEMModelEstimatorExample.cxx</span></a>.</p>
+</div>
+<div class="section" id="markov-random-fields">
+<h4>Markov Random Fields<a class="headerlink" href="#markov-random-fields" title="Permalink to this headline">¶</a></h4>
+<p>Markov Random Fields are probabilistic models that use the statistical
+dependency between pixels in a neighborhood to infeer the value of a
+give pixel.</p>
+<p>See example <a class="reference internal" href="Examples/Markov/MarkovClassification1Example.html#markovclassification1example-cxx"><span class="std std-ref">MarkovClassification1Example.cxx</span></a>.</p>
+<p>See example <a class="reference internal" href="Examples/Markov/MarkovClassification2Example.html#markovclassification2example-cxx"><span class="std std-ref">MarkovClassification2Example.cxx</span></a>.</p>
+<p>See example <a class="reference internal" href="Examples/Markov/MarkovClassification3Example.html#markovclassification3example-cxx"><span class="std std-ref">MarkovClassification3Example.cxx</span></a>.</p>
+<p>See example <a class="reference internal" href="Examples/Markov/MarkovRegularizationExample.html#markovregularizationexample-cxx"><span class="std std-ref">MarkovRegularizationExample.cxx</span></a>.</p>
+</div>
+</div>
+<div class="section" id="fusion-of-classification-maps">
+<h3>Fusion of Classification maps<a class="headerlink" href="#fusion-of-classification-maps" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dempster-shafer">
+<h4>Dempster Shafer<a class="headerlink" href="#dempster-shafer" title="Permalink to this headline">¶</a></h4>
+<p>A more adaptive fusion method using the Dempster Shafer theory
+(<a class="reference external" href="http://en.wikipedia.org/wiki/Dempster-Shafer_theory">http://en.wikipedia.org/wiki/Dempster-Shafer_theory</a>) is available
+within the OTB. This method is adaptive as it is based on the so-called
+belief function of each class label for each classification map. Thus,
+each classified pixel is associated to a degree of confidence according
+to the classifier used. In the Dempster Shafer framework, the expert’s
+point of view (i.e. with a high belief function) is considered as the
+truth. In order to estimate the belief function of each class label, we
+use the Dempster Shafer combination of masses of belief for each class
+label and for each classification map. In this framework, the output
+fused label of each pixel is the one with the maximal belief function.</p>
+<p>Like for the majority voting method, the Dempster Shafer fusion handles
+not unique class labels with the maximal belief function. In this case,
+the output fused pixels are set to the undecided value.</p>
+<p>The confidence levels of all the class labels are estimated from a
+comparison of the classification maps to fuse with a ground truth, which
+results in a confusion matrix. For each classification maps, these
+confusion matrices are then used to estimate the mass of belief of each
+class label.</p>
+</div>
+<div class="section" id="mathematical-formulation-of-the-combination-algorithm">
+<h4>Mathematical formulation of the combination algorithm<a class="headerlink" href="#mathematical-formulation-of-the-combination-algorithm" title="Permalink to this headline">¶</a></h4>
+<p>A description of the mathematical formulation of the Dempster Shafer
+combination algorithm is available in the following OTB Wiki page:
+<a class="reference external" href="http://wiki.orfeo-toolbox.org/index.php/Information_fusion_framework">http://wiki.orfeo-toolbox.org/index.php/Information_fusion_framework</a>.</p>
+<ul class="simple">
+<li>An example of Dempster Shafer fusion. See example <a class="reference internal" href="Examples/Classification/DempsterShaferFusionOfClassificationMapsExample.html#dempstershaferfusionofclassificationmapsexample-cxx"><span class="std std-ref">DempsterShaferFusionOfClassificationMapsExample.cxx</span></a>.</li>
+<li>Classification map regularization. See example <a class="reference internal" href="Examples/Classification/ClassificationMapRegularizationExample.html#classificationmapregularizationexample-cxx"><span class="std std-ref">ClassificationMapRegularizationExample.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="object-based-image-analysis">
+<h2>Object-based Image Analysis<a class="headerlink" href="#object-based-image-analysis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Object Filtering based on radiometric and statistics attributes. See example <a class="reference internal" href="Examples/OBIA/RadiometricAttributesLabelMapFilterExample.html#radiometricattributeslabelmapfilterexample-cxx"><span class="std std-ref">RadiometricAttributesLabelMapFilterExample.cxx</span></a>.</li>
+<li>Hoover metrics to compare segmentations. See example <a class="reference internal" href="Examples/OBIA/HooverMetricsEstimation.html#hoovermetricsestimation-cxx"><span class="std std-ref">HooverMetricsEstimation.cxx</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="change-detection">
+<h2>Change Detection<a class="headerlink" href="#change-detection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mean-difference">
+<h3>Mean Difference<a class="headerlink" href="#mean-difference" title="Permalink to this headline">¶</a></h3>
+<p>The simplest change detector is based on the pixel-wise differencing of
+image values:</p>
+<div class="math">
+<p><img src="../_images/math/b00bc5587311e9d2267589a99628bc0aacc63c54.png" alt="I_{D}(i,j)=I_{2}(i,j)-I_{1}(i,j)."/></p>
+</div><p>In order to make the algorithm robust to noise, one actually uses local
+means instead of pixel values.</p>
+<p>See example <a class="reference internal" href="Examples/ChangeDetection/DiffChDet.html#diffchdet-cxx"><span class="std std-ref">DiffChDet.cxx</span></a>.</p>
+</div>
+<div class="section" id="ratio-of-means">
+<h3>Ratio Of Means<a class="headerlink" href="#ratio-of-means" title="Permalink to this headline">¶</a></h3>
+<p>This detector is similar to the previous one except that it uses a ratio
+instead of the difference:</p>
+<div class="math">
+<p><img src="../_images/math/28e1f66336ef10362ac6450766229aa51a733d81.png" alt="\displaystyle I_{R}(i,j) = \frac{\displaystyle I_{2}(i,j)}{\displaystyle I_{1}(i,j)}."/></p>
+</div><p>The use of the ratio makes this detector robust to multiplicative noise
+which is a good model for the speckle phenomenon which is present in
+radar images.</p>
+<p>In order to have a bounded and normalized detector the following
+expression is actually used:</p>
+<div class="math">
+<p><img src="../_images/math/85b9a18e1ff2228951d9e1d859a1889c5d8741a1.png" alt="\displaystyle I_{R}(i,j) = 1 - min \left(\frac{\displaystyle I_{2}(i,j)}{\displaystyle I_{1}(i,j)},\frac{\displaystyle I_{1}(i,j)}{\displaystyle I_{2}(i,j)}\right)."/></p>
+</div><p>See example <a class="reference internal" href="Examples/ChangeDetection/RatioChDet.html#ratiochdet-cxx"><span class="std std-ref">RatioChDet.cxx</span></a>.</p>
+</div>
+<div class="section" id="statistical-detectors">
+<h3>Statistical Detectors<a class="headerlink" href="#statistical-detectors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="distance-between-local-distributions">
+<h4>Distance between local distributions<a class="headerlink" href="#distance-between-local-distributions" title="Permalink to this headline">¶</a></h4>
+<p>This detector is similar to the ratio of means detector (seen in the
+previous section page&nbsp;). Nevertheless, instead of the comparison of
+means, the comparison is performed to the complete distribution of the
+two Random Variables (RVs)&nbsp;.</p>
+<p>The detector is based on the Kullback-Leibler distance between
+probability density functions (pdfs). In the neighborhood of each pixel
+of the pair of images <img class="math" src="../_images/math/1b853f5bc0069e27cb4542c5b49226370cbd92a6.png" alt="I_1"/> and <img class="math" src="../_images/math/4245dc6316456edc531d829792bb71bf806b6ce4.png" alt="I_2"/> to be compared, the
+distance between local pdfs <img class="math" src="../_images/math/09968cb620b9b121ddcc33bb90eab038355375ab.png" alt="f_1"/> and <img class="math" src="../_images/math/a23addf1349384bc83f74ce7c550fe98bbdc2b48.png" alt="f_2"/> of RVs
+<img class="math" src="../_images/math/3362680381e165e1e5ba7d02e55e09d198290431.png" alt="X_1"/> and <img class="math" src="../_images/math/6a2b7e3a7c036f38cbe76c1b4617c7687f4eafcc.png" alt="X_2"/> is evaluated by:</p>
+<div class="math">
+<p><img src="../_images/math/d8e4306d1403966aac9ae4b74f3238e9af623073.png" alt="{\cal K}(X_1,X_2) &amp;= K(X_1|X_2) + K(X_2|X_1) \\
+\text{with} \qquad K(X_j | X_i) = \int_{R}
+    \log \frac{f_{X_i}(x)}{f_{X_j}(x)} f_{X_i}(x) dx,\qquad i,j=1,2."/></p>
+</div><p>In order to reduce the computational time, the local pdfs <img class="math" src="../_images/math/09968cb620b9b121ddcc33bb90eab038355375ab.png" alt="f_1"/>
+and <img class="math" src="../_images/math/a23addf1349384bc83f74ce7c550fe98bbdc2b48.png" alt="f_2"/> are not estimated through histogram computations but
+rather by a cumulant expansion, namely the Edgeworth expansion, with is
+based on the cumulants of the RVs:</p>
+<div class="math">
+<p><img src="../_images/math/cf998b07e96afe11e0ba5f38e45228745bc5f6d1.png" alt="\label{eqEdgeworthExpansion}
+f_X(x) = \left( 1 + \frac{\kappa_{X;3}}{6} H_3(x)
+                    + \frac{\kappa_{X;4}}{24} H_4(x)
+                    + \frac{\kappa_{X;5}}{120} H_5(x)
+                    + \frac{\kappa_{X;6}+10 \kappa_{X;3}^2}{720} H_6(x) \right) {\cal G}_X(x)."/></p>
+</div><p>In eq.&nbsp;, <img class="math" src="../_images/math/cadec5eee789079cc0ced14af422750b5df4709e.png" alt="{\cal G}_X"/> stands for the Gaussian pdf which has the
+same mean and variance as the RV <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>. The <img class="math" src="../_images/math/329ef9bb1534a7bf9d6b8558476a632e3279cf3f.png" alt="\kappa_{X;k}"/>
+coefficients are the cumulants of order <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>, and <img class="math" src="../_images/math/12a7ecc30050ef8401f4a567c8009bcd7ed87d64.png" alt="H_k(x)"/>
+are the Chebyshev-Hermite polynomials of order <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>
+(see&nbsp; for deeper explanations).</p>
+<p>See example <a class="reference internal" href="Examples/ChangeDetection/KullbackLeiblerDistanceChDet.html#kullbackleiblerdistancechdet-cxx"><span class="std std-ref">KullbackLeiblerDistanceChDet.cxx</span></a>.</p>
+</div>
+<div class="section" id="local-correlation">
+<h4>Local Correlation<a class="headerlink" href="#local-correlation" title="Permalink to this headline">¶</a></h4>
+<p>The correlation coefficient measures the likelihood of a linear
+relationship between two random variables:</p>
+<div class="math">
+<p><img src="../_images/math/b795aaf236f681e666c67014f28a45e0bb76b9e9.png" alt="I_\rho(i,j) &amp;= \frac{1}{N}\frac{\sum_{i,j}(I_1(i,j)-m_{I_1})(I_2(i,j)-m_{I_2})}{\sigma_{I_1}
+\sigma_{I_2}}\\
+&amp; = \sum_{(I_1(i,j),I_2(i,j))}\frac{(I_1(i,j)-m_{I_1})(I_2(i,j)-m_{I_2})}{\sigma_{I_1}
+\sigma_{I_2}}p_{ij}"/></p>
+</div><p>where <img class="math" src="../_images/math/7e9ffe8fcdf51334a92c9e46c378d832fa09f9f7.png" alt="I_1(i,j)"/> and <img class="math" src="../_images/math/a9232848b08e4d5ce9090f5708539c1be73739de.png" alt="I_2(i,j)"/> are the pixel values of the
+2 images and <img class="math" src="../_images/math/5f1e53ae6223be8bf41c94b6c64495f9ae42cf10.png" alt="p_{ij}"/> is the joint probability density. This is
+like using a linear model:</p>
+<div class="math">
+<p><img src="../_images/math/24eb9b48402b09f321e4b8c3290b7231bbdae09d.png" alt="I_2(i,j) = (I_1(i,j)-m_{I_1})\frac{\sigma_{I_2}}{\sigma_{I_1}}+m_{I_2}"/></p>
+</div><p>for which we evaluate the likelihood with <img class="math" src="../_images/math/5f1e53ae6223be8bf41c94b6c64495f9ae42cf10.png" alt="p_{ij}"/>.</p>
+<p>With respect to the difference detector, this one will be robust to
+illumination changes.</p>
+<p>See example <a class="reference internal" href="Examples/ChangeDetection/CorrelChDet.html#correlchdet-cxx"><span class="std std-ref">CorrelChDet.cxx</span></a>.</p>
+</div>
+</div>
+<div class="section" id="multi-scale-detectors">
+<h3>Multi-Scale Detectors<a class="headerlink" href="#multi-scale-detectors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="kullback-leibler-distance-between-distributions">
+<h4>Kullback-Leibler Distance between distributions<a class="headerlink" href="#kullback-leibler-distance-between-distributions" title="Permalink to this headline">¶</a></h4>
+<p>This technique is an extension of the distance between distributions
+change detector presented in section&nbsp;[sec:KullbackLeiblerDistance].
+Since this kind of detector is based on cumulants estimations through a
+sliding window, the idea is just to upgrade the estimation of the
+cumulants by considering new samples as soon as the sliding window is
+increasing in size.</p>
+<p>Let’s consider the following problem: how to update the moments when a
+<img class="math" src="../_images/math/31d8a82d721bfeb78c1258ebd5f52f6c27bff5f9.png" alt="N+1^{th}"/> observation <img class="math" src="../_images/math/6a19332882bd0a8a637fec34f41389ceabf5b7b2.png" alt="x_{N+1}"/> is added to a set of
+observations <img class="math" src="../_images/math/9982c40ca654aba6603c829850ca5e30c0fee5b5.png" alt="\{x_1, x_2, \ldots,
+x_N\}"/> already considered. The evolution of the central moments may be
+characterized by:</p>
+<div class="math">
+<p><img src="../_images/math/c3a22cbdd3d77947a051037014104656f4c887e6.png" alt="\mu_{1,[N]} &amp; = \frac{1}{N} s_{1,[N]} \\
+\mu_{r,[N]} &amp; = \frac{1}{N} \sum_{\ell = 0}^r \binom{r}{\ell}
+                                \left( -\mu_{1,[N]} \right)^{r-\ell}
+                                s_{\ell,[N]}"/></p>
+</div><p>where the notation <img class="math" src="../_images/math/ad01227577c0f0b975c5338287b7eea8c4bf413b.png" alt="s_{r,[N]} = \sum_{i=1}^N x_i^r"/> has been
+used. Then, Edgeworth series is updated also by transforming moments to
+cumulants by using:</p>
+<div class="math">
+<p><img src="../_images/math/51b73499180e2e50fe94c4f53d37cf5b1efcd797.png" alt="\kappa_{X;1} &amp;= \mu_{X;1}\\
+\kappa_{X;2} &amp;= \mu_{X;2}-\mu_{X;1}^2\\
+\kappa_{X;3} &amp;= \mu_{X;3} - 3\mu_{X;2} \mu_{X;1} + 2\mu_{X;1}^3\\
+\kappa_{X;4} &amp;= \mu_{X;4} - 4\mu_{X;3} \mu_{X;1} - 3\mu_{X;2}^2 + 12 \mu_{X;2} \mu_{X;1}^2 - 6\mu_{X;1}^4."/></p>
+</div><p>It yields a set of images that represent the change measure according
+to an increasing size of the analysis window.</p>
+<p>See example <a class="reference internal" href="Examples/ChangeDetection/KullbackLeiblerProfileChDet.html#kullbackleiblerprofilechdet-cxx"><span class="std std-ref">KullbackLeiblerProfileChDet.cxx</span></a>.</p>
+</div>
+</div>
+<div class="section" id="multi-components-detectors">
+<h3>Multi-components detectors<a class="headerlink" href="#multi-components-detectors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Multivariate Alteration Detector. See example <a class="reference internal" href="Examples/ChangeDetection/MultivariateAlterationDetector.html#multivariatealterationdetector-cxx"><span class="std std-ref">MultivariateAlterationDetector.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="image-visualization-and-output">
+<h2>Image Visualization and output<a class="headerlink" href="#image-visualization-and-output" title="Permalink to this headline">¶</a></h2>
+<p>After processing your images with OTB, you probably want to see the
+result. As it is quite straightforward in some situation, if can be a
+bit trickier in other. For example, some filters will give you a list of
+polygons as an output. Other can return an image with each region
+labelled by a unique index. In this section we are going to provide few
+examples to help you produce beautiful output ready to be included in
+your publications/presentations.</p>
+<div class="section" id="images">
+<h3>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Grey Level Images. See example <a class="reference internal" href="Examples/BasicFilters/ScalingFilterExample.html#scalingfilterexample-cxx"><span class="std std-ref">ScalingFilterExample.cxx</span></a>.</li>
+<li>Multiband Images. See example <a class="reference internal" href="Examples/BasicFilters/PrintableImageFilterExample.html#printableimagefilterexample-cxx"><span class="std std-ref">PrintableImageFilterExample.cxx</span></a>.</li>
+<li>Indexed Images. See example <a class="reference internal" href="Examples/BasicFilters/IndexedToRGBExample.html#indexedtorgbexample-cxx"><span class="std std-ref">IndexedToRGBExample.cxx</span></a>.</li>
+<li>Altitude Images. See example <a class="reference internal" href="Examples/BasicFilters/DEMToRainbowExample.html#demtorainbowexample-cxx"><span class="std std-ref">DEMToRainbowExample.cxx</span></a>.
+See example <a class="reference internal" href="Examples/BasicFilters/HillShadingExample.html#hillshadingexample-cxx"><span class="std std-ref">HillShadingExample.cxx</span></a>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="WriteAnApplication.html" class="btn btn-neutral float-right" title="How to write an application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PersistentFilters.html" class="btn btn-neutral" title="Persistent filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/js/versions.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
