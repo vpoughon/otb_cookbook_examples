@@ -97,7 +97,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">All Applications</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
@@ -127,12 +126,32 @@
 </ul>
 </li>
 </ul>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/improc.html">Image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../C++/SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/UserGuide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/BandMathX.html">BandMathImageFilterX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/Examples.html">C++ Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/DeveloperGuide.html">Developer Guide</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Advanced use</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
 </ul>
@@ -212,7 +231,7 @@
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>Estimate the number of endmembers in a hyperspectral image. First, compute statistics on the image and then apply an endmember number estimation algorithm using these statistics. Two algorithms are available:</p>
 <ol class="arabic simple">
-<li>Virtual Dimensionality (VD) [1][2]</li>
+<li>Virtual Dimensionality (HFC-VD) [1][2]</li>
 <li>Eigenvalue Likelihood Maximization (ELM) [3][4]</li>
 </ol>
 <p>The application then returns the estimated number of endmembers.</p>
@@ -235,8 +254,8 @@ The output estimated number of endmembers</p>
 <p><strong>Unmixing algorithm</strong> <code class="code docutils literal notranslate"><span class="pre">-algo</span> <span class="pre">[elm|vd]</span></code> <em>Default value: elm</em> <br />
 The algorithm to use for the estimation</p>
 <ul class="simple">
-<li><strong>Eigenvalue Likelihood Maximization</strong> <br /></li>
-<li><strong>Virtual Dimensionality</strong> <br /></li>
+<li><strong>Eigenvalue Likelihood Maximization</strong> <br /> Eigenvalue Likelihood Maximization algorithm</li>
+<li><strong>Virtual Dimensionality</strong> <br /> HFC Virtual Dimensionality algorithm</li>
 </ul>
 <div class="section" id="virtual-dimensionality-options">
 <h3><a class="toc-backref" href="#id2">Virtual Dimensionality options</a><a class="headerlink" href="#virtual-dimensionality-options" title="Permalink to this headline">¶</a></h3>

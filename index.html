@@ -96,15 +96,34 @@
 <li class="toctree-l1"><a class="reference internal" href="GraphicalInterface.html">Graphical interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="QGISInterface.html">QGIS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="recipes/optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/improc.html">Image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="C++/SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++/Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++/UserGuide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++/BandMathX.html">BandMathImageFilterX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++/Examples.html">C++ Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C++/DeveloperGuide.html">Developer Guide</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Advanced use</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
 </ul>
@@ -201,10 +220,6 @@ joining <a class="reference external" href="https://www.orfeo-toolbox.org/commun
 <p>For other documentation, be sure to read:</p>
 <ul class="simple">
 <li>OTB’s website: <a class="reference external" href="https://www.orfeo-toolbox.org/">www.orfeo-toolbox.org</a></li>
-<li><a class="reference external" href="http://orfeo-toolbox.org/SoftwareGuide/">OTB Software Guide</a> for advanced users and developers.
-The software guide contains documented code examples,
-descriptions of the ITK pipeline model, multithreading and
-streaming functionalities, and an introduction to the C++ API.</li>
 <li><a class="reference external" href="http://orfeo-toolbox.org/doxygen/">Doxygen</a>, for exhaustive documentation
 of the C++ API.</li>
 </ul>
@@ -260,19 +275,6 @@ of the C++ API.</li>
 <li class="toctree-l2"><a class="reference internal" href="QGISInterface.html#using-the-processing-toolbox-for-qgis-3-0">Using the processing toolbox (for QGIS &lt; 3.0)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Recipes.html">Recipes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="recipes/optpreproc.html">From raw image to calibrated product</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/sarprocessing.html">SAR processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/residual_registration.html">Residual registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/improc.html">Image processing and information extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/contrast_enhancement.html">Enhance local contrast</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/pbclassif.html">Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/featextract.html">Feature extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recipes/hyperspectral.html">Hyperspectral image processing</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="Applications.html">All Applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Applications/Image_Manipulation.html">Image Manipulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Applications/Feature_Extraction.html">Feature Extraction</a></li>
@@ -292,12 +294,162 @@ of the C++ API.</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="recipes/optpreproc.html">From raw image to calibrated product</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/optpreproc.html#optical-radiometric-calibration">Optical radiometric calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/optpreproc.html#pan-sharpening">Pan-sharpening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/optpreproc.html#digital-elevation-model-management">Digital Elevation Model management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/optpreproc.html#ortho-rectification-and-map-projections">Ortho-rectification and map projections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/sarprocessing.html">SAR processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/sarprocessing.html#calibration">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/sarprocessing.html#despeckle">Despeckle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/sarprocessing.html#polarimetry">Polarimetry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/residual_registration.html">Residual registration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/residual_registration.html#extract-metadata-from-the-image-reference">Extract metadata from the image reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/residual_registration.html#extract-homologous-points-from-images">Extract homologous points from images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/residual_registration.html#geometry-refinement-using-homologous-points">Geometry refinement using homologous points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/residual_registration.html#orthorectify-image-using-the-affine-geometry">Orthorectify image using the affine geometry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/improc.html">Image processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/improc.html#simple-calculus-with-channels">Simple calculus with channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/improc.html#images-with-no-data-values">Images with no-data values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/improc.html#segmentation">Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/improc.html#large-scale-mean-shift-lsms-segmentation">Large-Scale Mean-Shift (LSMS) segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/improc.html#dempster-shafer-based-classifier-fusion">Dempster Shafer based Classifier Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/contrast_enhancement.html">Enhance local contrast</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/contrast_enhancement.html#principles">Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/contrast_enhancement.html#advanced-parameters">Advanced parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/pbclassif.html">Classification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/pbclassif.html#feature-classification-and-training">Feature classification and training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/pbclassif.html#pixel-based-classification">Pixel based classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/pbclassif.html#unsupervised-learning">Unsupervised learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/pbclassif.html#fusion-of-classification-maps">Fusion of classification maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/pbclassif.html#majority-voting-based-classification-map-regularization">Majority voting based classification map regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/pbclassif.html#regression">Regression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/featextract.html">Feature extraction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/featextract.html#local-statistics-extraction">Local statistics extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/featextract.html#edge-extraction">Edge extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/featextract.html#radiometric-indices-extraction">Radiometric indices extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/featextract.html#morphological-features-extraction">Morphological features extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/featextract.html#textural-features-extraction">Textural features extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/stereo.html">Stereoscopic reconstruction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html#estimate-epipolar-geometry-transformation">Estimate epipolar geometry transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html#resample-images-in-epipolar-geometry">Resample images in epipolar geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html#disparity-estimation-block-matching-along-epipolar-lines">Disparity estimation: Block matching along epipolar lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html#from-disparity-to-digital-surface-model">From disparity to Digital Surface Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html#one-application-to-rule-them-all-in-multi-stereo-framework-scheme">One application to rule them all in multi stereo framework scheme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html#stereo-reconstruction-good-practices">Stereo reconstruction good practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/stereo.html#algorithm-outline">Algorithm outline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes/hyperspectral.html">Hyperspectral image processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes/hyperspectral.html#unmixing">Unmixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes/hyperspectral.html#anomaly-detection">Anomaly detection</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="C++/SystemOverview.html">System Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#system-organization">System Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#essential-system-concepts">Essential System Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#data-representation">Data Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/SystemOverview.html#data-processing-pipeline">Data Processing Pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/Tutorial.html">Building simple OTB code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/Tutorial.html#hello-world">Hello world</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Tutorial.html#pipeline-basics-read-and-write">Pipeline basics: read and write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Tutorial.html#filtering-pipeline">Filtering pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Tutorial.html#handling-types-scaling-output">Handling types: scaling output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Tutorial.html#working-with-multispectral-or-color-images">Working with multispectral or color images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Tutorial.html#going-from-raw-satellite-images-to-useful-products">Going from raw satellite images to useful products</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/UserGuide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#image-data-representation">Image Data Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#reading-and-writing-images">Reading and Writing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#reading-and-writing-vector-images">Reading and Writing Vector Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#reading-and-writing-auxiliary-data">Reading and Writing Auxiliary Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#basic-filtering">Basic Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#disparity-map-estimation">Disparity Map Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#orthorectification-and-map-projection">Orthorectification and Map Projection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#radiometry">Radiometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#image-fusion">Image Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#feature-extraction">Feature Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#image-simulation">Image Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#dimension-reduction">Dimension Reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#object-based-image-analysis">Object-based Image Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#change-detection">Change Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/UserGuide.html#image-visualization-and-output">Image Visualization and output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/BandMathX.html">BandMathImageFilterX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/BandMathX.html#fundamentals-headers-declaration-and-instantiation">Fundamentals: headers, declaration and instantiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/BandMathX.html#syntax-first-elements">Syntax: first elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/BandMathX.html#new-operators-and-functions">New operators and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/BandMathX.html#application-programming-interface-api">Application Programming Interface (API)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/Examples.html">C++ Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Application.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/BasicFilters.html">BasicFilters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/ChangeDetection.html">ChangeDetection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Classification.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/DimensionReduction.html">DimensionReduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/DisparityMap.html">DisparityMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/FeatureExtraction.html">FeatureExtraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Filtering.html">Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Fusion.html">Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Hyperspectral.html">Hyperspectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/IO.html">IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Learning.html">Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Markov.html">Markov</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/OBIA.html">OBIA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Patented.html">Patented</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Radiometry.html">Radiometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Simulation.html">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Examples/Tutorials.html">Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C++/DeveloperGuide.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C++/Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C++/AddingNewModules.html">Adding New Modules</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Advanced use</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
 </ul>

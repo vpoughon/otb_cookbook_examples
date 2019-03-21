@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developer Guide &mdash; Orfeo ToolBox 6.7.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Iterators" href="Iterators.html" />
+    <link rel="prev" title="ScalingPipeline.cxx" href="Examples/Tutorials/ScalingPipeline.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo-with-text.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CliInterface.html">Command-line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/improc.html">Image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserGuide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BandMathX.html">BandMathImageFilterX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">C++ Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Orfeo ToolBox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Developer Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/DeveloperGuide.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developer-guide">
+<h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Iterators.html">Iterators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html#programming-interface">Programming Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Iterators.html#creating-iterators">Creating Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Iterators.html#moving-iterators">Moving Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Iterators.html#accessing-data">Accessing Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Iterators.html#iteration-loops">Iteration Loops</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html#image-iterators">Image Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Iterators.html#neighborhood-iterators">Neighborhood Iterators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Iterators.html#neighborhooditerator">NeighborhoodIterator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Iterators.html#shapedneighborhooditerator">ShapedNeighborhoodIterator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Filters.html">Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html#terminology">Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html#overview-of-filter-creation">Overview of Filter Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html#streaming-large-data">Streaming Large Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Filters.html#overview-of-pipeline-execution">Overview of Pipeline Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Filters.html#details-of-pipeline-execution">Details of Pipeline Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Filters.html#updateoutputinformation">UpdateOutputInformation()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Filters.html#propagaterequestedregion">PropagateRequestedRegion()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Filters.html#updateoutputdata">UpdateOutputData()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html#threaded-filter-execution">Threaded Filter Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html#filter-conventions">Filter Conventions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Filters.html#optional">Optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Filters.html#useful-macros">Useful Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Filters.html#composite-filters">Composite filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html#streaming-and-threading-in-otb">Streaming and threading in OTB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html#division-strategies">Division strategies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PersistentFilters.html#the-persistent-filter-class">The persistent filter class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PersistentFilters.html#the-streaming-decorator-class">The streaming decorator class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html#an-end-to-end-example">An end-to-end example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PersistentFilters.html#first-step-writing-a-persistent-filter">First step: writing a persistent filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PersistentFilters.html#second-step-decorating-the-filter-and-using-it">Second step: Decorating the filter and using it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PersistentFilters.html#third-step-one-class-to-rule-them-all">Third step: one class to rule them all</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html#application-design">Application design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html#architecture-of-the-class">Architecture of the class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#doinit">DoInit()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#doupdateparameters">DoUpdateParameters()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#doexecute">DoExecute()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#parameters-selection">Parameters selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#parameters-description">Parameters description</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html#composite-application">Composite application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#creating-internal-applications">Creating internal applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#connecting-parameters">Connecting parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WriteAnApplication.html#orchestration">Orchestration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html#compile-your-application">Compile your application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html#execute-your-application">Execute your application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html#testing-your-application">Testing your application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html#application-example">Application Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#how-to-write-a-module">How to Write a Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#the-otb-module-cmake-file">The otb-module.cmake file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#the-cmakelists-txt-file">The CMakeLists.txt file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#the-include-folder">The include folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#the-src-folder">The src folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#the-app-folder">The app folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#the-test-folder">The test folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html#including-a-remote-module-in-otb">Including a remote module in OTB</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Iterators.html" class="btn btn-neutral float-right" title="Iterators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Examples/Tutorials/ScalingPipeline.html" class="btn btn-neutral" title="ScalingPipeline.cxx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019 CNES. The OTB CookBook is licensed under a Creative Commons Attribution-ShareAlike 4.0 International license (CC-BY-SA).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/js/versions.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 .. _cpp-examples:
 
-Examples
-========
+C++ Examples
+============
 
 .. toctree::
 	:maxdepth: 3

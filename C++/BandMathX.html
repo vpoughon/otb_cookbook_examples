@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>BandMathImageFilterX (based on muParserX) &mdash; Orfeo ToolBox 6.7.0 documentation</title>
+  <title>BandMathImageFilterX &mdash; Orfeo ToolBox 6.7.0 documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Enhance local contrast" href="contrast_enhancement.html" />
-    <link rel="prev" title="Image processing and information extraction" href="improc.html" /> 
+    <link rel="next" title="C++ Examples" href="Examples.html" />
+    <link rel="prev" title="User Guide" href="UserGuide.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -92,38 +92,45 @@
 <li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Applications</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../CliInterface.html">Command-line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">BandMathImageFilterX (based on muParserX)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fundamentals-headers-declaration-and-instantiation">Fundamentals: headers, declaration and instantiation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#syntax-first-elements">Syntax: first elements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#new-operators-and-functions">New operators and functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#application-programming-interface-api">Application Programming Interface (API)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="contrast_enhancement.html">Enhance local contrast</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hyperspectral.html">Hyperspectral image processing</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/improc.html">Image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserGuide.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BandMathImageFilterX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fundamentals-headers-declaration-and-instantiation">Fundamentals: headers, declaration and instantiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#syntax-first-elements">Syntax: first elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#new-operators-and-functions">New operators and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-programming-interface-api">Application Programming Interface (API)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">C++ Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloperGuide.html">Developer Guide</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Advanced use</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
 </ul>
@@ -171,16 +178,14 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
-        
-      <li>BandMathImageFilterX (based on muParserX)</li>
+      <li>BandMathImageFilterX</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/recipes/bandmathx.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/BandMathX.rst" class="fa fa-gitlab"> Edit on GitLab</a>
             
           
         
@@ -194,8 +199,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="bandmathimagefilterx-based-on-muparserx">
-<h1>BandMathImageFilterX (based on muParserX)<a class="headerlink" href="#bandmathimagefilterx-based-on-muparserx" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="bandmathimagefilterx">
+<h1>BandMathImageFilterX<a class="headerlink" href="#bandmathimagefilterx" title="Permalink to this headline">¶</a></h1>
 <p>This section describes how to use the BandMathImageFilterX.</p>
 <div class="section" id="fundamentals-headers-declaration-and-instantiation">
 <h2>Fundamentals: headers, declaration and instantiation<a class="headerlink" href="#fundamentals-headers-declaration-and-instantiation" title="Permalink to this headline">¶</a></h2>
@@ -732,10 +737,10 @@ reusable by the ImportContext function (see above).</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="contrast_enhancement.html" class="btn btn-neutral float-right" title="Enhance local contrast" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Examples.html" class="btn btn-neutral float-right" title="C++ Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="improc.html" class="btn btn-neutral" title="Image processing and information extraction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="UserGuide.html" class="btn btn-neutral" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

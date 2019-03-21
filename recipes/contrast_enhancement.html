@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Classification" href="pbclassif.html" />
-    <link rel="prev" title="BandMathImageFilterX (based on muParserX)" href="bandmathx.html" /> 
+    <link rel="prev" title="Image processing" href="improc.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -92,36 +92,43 @@
 <li class="toctree-l1"><a class="reference internal" href="../Monteverdi.html">Monteverdi</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Applications</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../CliInterface.html">Command-line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../Recipes.html">Recipes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="improc.html">Image processing and information extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bandmathx.html">BandMathImageFilterX (based on muParserX)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Enhance local contrast</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#principles">Principles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#advanced-parameters">Advanced parameters</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pbclassif.html">Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction from VHR optical images pair</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hyperspectral.html">Hyperspectral image processing</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../Applications.html">All Applications</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improc.html">Image processing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Enhance local contrast</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#principles">Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-parameters">Advanced parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../C++/SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/UserGuide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/BandMathX.html">BandMathImageFilterX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/Examples.html">C++ Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/DeveloperGuide.html">Developer Guide</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Advanced use</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
 </ul>
@@ -168,8 +175,6 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../Recipes.html">Recipes</a> &raquo;</li>
         
       <li>Enhance local contrast</li>
     
@@ -268,7 +273,7 @@ ignored.</p>
         <a href="pbclassif.html" class="btn btn-neutral float-right" title="Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="bandmathx.html" class="btn btn-neutral" title="BandMathImageFilterX (based on muParserX)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="improc.html" class="btn btn-neutral" title="Image processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

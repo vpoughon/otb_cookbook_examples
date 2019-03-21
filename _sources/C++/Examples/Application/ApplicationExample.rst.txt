@@ -80,9 +80,7 @@ Example source code (`ApplicationExample.cxx <https://gitlab.orfeo-toolbox.org/o
         SetDocLongDescription(
             "The purpose of this application is "
             "to present parameters types,"
-            " and Application class framework. "
-            "It is used to generate Software guide documentation"
-            " for Application chapter example.");
+            " and Application class framework. ");
         SetDocLimitations("None");
         SetDocAuthors("OTB-Team");
         SetDocSeeAlso(" ");
@@ -177,14 +175,12 @@ Example source code (`ApplicationExample.cxx <https://gitlab.orfeo-toolbox.org/o
     
       // \code{DoUpdateParameters()} is called as soon as a parameter value change. Section \ref{sec:appDoUpdateParameters}
       // gives a complete description of this method.
-      //  Software Guide :BeginCodeSnippet
       void DoUpdateParameters() override
       {
       }
     
       // \code{DoExecute()} contains the application core. Section \ref{sec:appDoExecute}
       // gives a complete description of this method.
-      //  Software Guide :BeginCodeSnippet
       void DoExecute() override
       {
         FloatVectorImageType::Pointer inImage = GetParameterImage("in");
@@ -196,7 +192,6 @@ Example source code (`ApplicationExample.cxx <https://gitlab.orfeo-toolbox.org/o
     
         SetParameterOutputImage("out", inImage);
       }
-      //  Software Guide :EndCodeSnippet
     };
     } // namespace Wrapper
     } // namespace otb

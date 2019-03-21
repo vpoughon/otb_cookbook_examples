@@ -17,7 +17,7 @@ This application computes three sets of Haralick features [1][2].
 
 * higher: a set of 11 higher Haralick features: Short Run Emphasis (measures the texture sharpness), Long Run Emphasis (measures the texture roughness), Grey-Level Nonuniformity, Run Length Nonuniformity, Run Percentage (measures the texture sharpness homogeneity), Low Grey-Level Run Emphasis, High Grey-Level Run Emphasis, Short Run Low Grey-Level Emphasis, Short Run High Grey-Level Emphasis, Long Run Low Grey-Level Emphasis and Long Run High Grey-Level Emphasis.
 
-The documentation of textures (description are formulas) are available in the OTB Software Guide (section Textures) and also in corresponding doxygen documentation of filters (see section *Detailed Description* in doxygen):
+The documentation of textures (description are formulas) are available in the OTB CookBook (section Textures) and also in corresponding doxygen documentation of filters (see section *Detailed Description* in doxygen):
 * **simple**: otbScalarImageToTexturesFilter
 * **advanced**: otbScalarImageToAdvancedTexturesFilter
 * **higher**: otbScalarImageToHigherOrderTexturesFilter

@@ -97,7 +97,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../Applications.html">All Applications</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Image_Manipulation.html">Image Manipulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Feature_Extraction.html">Feature Extraction</a></li>
@@ -116,7 +115,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="app_Pansharpening.html">Pansharpening</a></li>
@@ -137,12 +135,32 @@
 </ul>
 </li>
 </ul>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/improc.html">Image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../C++/SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/UserGuide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/BandMathX.html">BandMathImageFilterX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/Examples.html">C++ Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../C++/DeveloperGuide.html">Developer Guide</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Advanced use</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../C++.html">C++ API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
 </ul>
@@ -362,12 +380,6 @@ Save application parameters to an XML file.</p>
 <dt>Supported sensors (both optical and radar) are: GeoEye, Ikonos, Pleiades, Quickbird, RadarSat, Sentinel-1, SPOT5 (TIF format), SPOT6/7, TerraSAR-X, Worldview 1/2/3, and any TIF image with embedded RPC tags.</dt>
 <dd>Also note that the opt.gridspacing default value may not be suitable for all sensors. In particular, if this value is lower than the target ground sampling distance, the processing time may increase a lot. A warning is issued in this case. Typical values should be half the DEM ground sampling distance.</dd>
 </dl>
-</div>
-<div class="section" id="see-also">
-<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
-<div class="line-block">
-<div class="line">Ortho-rectification chapter from the OTB Software Guide</div>
-</div>
 </div>
 </div>
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Users’ Guide &mdash; Orfeo ToolBox 6.7.0 documentation</title>
+  <title>User Guide &mdash; Orfeo ToolBox 6.7.0 documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How to write an application" href="WriteAnApplication.html" />
-    <link rel="prev" title="Persistent filters" href="PersistentFilters.html" /> 
+    <link rel="next" title="BandMathImageFilterX" href="BandMathX.html" />
+    <link rel="prev" title="Building simple OTB code" href="Tutorial.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -97,87 +97,125 @@
 <li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Applications.html">All Applications</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Advanced use</span></p>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/improc.html">Image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Building simple OTB code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#image-data-representation">Image Data Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-and-writing-images">Reading and Writing Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-and-writing-vector-images">Reading and Writing Vector Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-and-writing-auxiliary-data">Reading and Writing Auxiliary Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-filtering">Basic Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disparity-map-estimation">Disparity Map Estimation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#geometric-deformation-modeling">Geometric deformation modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#similarity-measures">Similarity measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-correlation-coefficient">The correlation coefficient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#orthorectification-and-map-projection">Orthorectification and Map Projection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#limits-of-the-approach">Limits of the Approach</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#radiometry">Radiometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#radiometric-indices">Radiometric Indices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ndvi">NDVI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#atmospheric-corrections">Atmospheric Corrections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-fusion">Image Fusion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simple-pan-sharpening">Simple Pan Sharpening</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bayesian-data-fusion">Bayesian Data Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#feature-extraction">Feature Extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#textures">Textures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interest-points">Interest Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#density-features">Density Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geometric-moments">Geometric Moments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#complex-moments">Complex Moments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hu-moments">Hu Moments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flusser-moments">Flusser Moments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#road-and-cloud-extraction">Road and cloud extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-simulation">Image Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prosail-model">PROSAIL model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Image Simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dimension-reduction">Dimension Reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#machine-learning-framework">Machine Learning Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#training-a-model">Training a model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prediction-of-a-model">Prediction of a model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#integration-in-applications">Integration in applications</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#unsupervised-classification">Unsupervised classification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#k-means-classification">K-Means Classification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kohonens-self-organizing-map">Kohonen’s Self Organizing Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stochastic-expectation-maximization">Stochastic Expectation Maximization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#markov-random-fields">Markov Random Fields</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fusion-of-classification-maps">Fusion of Classification maps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dempster-shafer">Dempster Shafer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mathematical-formulation-of-the-combination-algorithm">Mathematical formulation of the combination algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#object-based-image-analysis">Object-based Image Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#change-detection">Change Detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mean-difference">Mean Difference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ratio-of-means">Ratio Of Means</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statistical-detectors">Statistical Detectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#distance-between-local-distributions">Distance between local distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#local-correlation">Local Correlation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-scale-detectors">Multi-Scale Detectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#kullback-leibler-distance-between-distributions">Kullback-Leibler Distance between distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-components-detectors">Multi-components detectors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-visualization-and-output">Image Visualization and output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#images">Images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="BandMathX.html">BandMathImageFilterX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">C++ Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloperGuide.html">Developer Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Tutorial.html">Building simple OTB code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Users’ Guide</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#image-data-representation">Image Data Representation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reading-and-writing-images">Reading and Writing Images</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reading-and-writing-vector-images">Reading and Writing Vector Images</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reading-and-writing-auxiliary-data">Reading and Writing Auxiliary Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#basic-filtering">Basic Filtering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#disparity-map-estimation">Disparity Map Estimation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#geometric-deformation-modeling">Geometric deformation modeling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#similarity-measures">Similarity measures</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-correlation-coefficient">The correlation coefficient</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#orthorectification-and-map-projection">Orthorectification and Map Projection</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#limits-of-the-approach">Limits of the Approach</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#radiometry">Radiometry</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#radiometric-indices">Radiometric Indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#atmospheric-corrections">Atmospheric Corrections</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#image-fusion">Image Fusion</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#simple-pan-sharpening">Simple Pan Sharpening</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bayesian-data-fusion">Bayesian Data Fusion</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#feature-extraction">Feature Extraction</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#textures">Textures</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#interest-points">Interest Points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#density-features">Density Features</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#geometric-moments">Geometric Moments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#road-and-cloud-extraction">Road and cloud extraction</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#image-simulation">Image Simulation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#prosail-model">PROSAIL model</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Image Simulation</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#dimension-reduction">Dimension Reduction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#classification">Classification</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#machine-learning-framework">Machine Learning Framework</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#unsupervised-classification">Unsupervised classification</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fusion-of-classification-maps">Fusion of Classification maps</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#object-based-image-analysis">Object-based Image Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#change-detection">Change Detection</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mean-difference">Mean Difference</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ratio-of-means">Ratio Of Means</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#statistical-detectors">Statistical Detectors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#multi-scale-detectors">Multi-Scale Detectors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#multi-components-detectors">Multi-components detectors</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#image-visualization-and-output">Image Visualization and output</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#images">Images</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
 </ul>
@@ -225,16 +263,14 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../C++.html">C++ API</a> &raquo;</li>
-        
-      <li>Users’ Guide</li>
+      <li>User Guide</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/UsersGuide.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+              <a href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/OTB/blob/develop/Documentation/Cookbook/rst/C++/UserGuide.rst" class="fa fa-gitlab"> Edit on GitLab</a>
             
           
         
@@ -248,8 +284,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="users-guide">
-<h1>Users’ Guide<a class="headerlink" href="#users-guide" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="image-data-representation">
 <h2>Image Data Representation<a class="headerlink" href="#image-data-representation" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1Image.html">otb::Image</a> class follows the spirit of <a class="reference external" href="http://www.boost.org/more/generic_programming.html">Generic
@@ -426,14 +462,13 @@ are <em>identical</em> in the sense of the criterion <img class="math" src="../_
 applied to the coordinates <img class="math" src="../_images/math/497184a5e83d0159a4bf15b0bb89dc5aa40cce7d.png" alt="(x,y)"/> of a point in the slave image,
 gives the coordinates <img class="math" src="../_images/math/87de40372497e003e8fa17dd00e8894d13052ed0.png" alt="(u,v)"/> of its HP in the master image:</p>
 <div class="math">
-<p><img src="../_images/math/ae3eeac83931a3f3a117602ce0ef5a55b41f389a.png" alt="\left( \begin{array}{c}
+<p><img src="../_images/math/49fd7b50977874be960a46fdb27abf83c0988ee1.png" alt="\left( \begin{array}{c}
 u\\
 v\\
 \end{array}\right) = T \left( \begin{array}{c}
 x\\
 y\\
-\end{array}\right)
-\label{Tgeom}"/></p>
+\end{array}\right)"/></p>
 </div><p>Finally we introduce a definition for the image registration problem:</p>
 <p>Registration problem:</p>
 <ol class="arabic">
@@ -1543,10 +1578,10 @@ See example <a class="reference internal" href="Examples/BasicFilters/HillShadin
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="WriteAnApplication.html" class="btn btn-neutral float-right" title="How to write an application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="BandMathX.html" class="btn btn-neutral float-right" title="BandMathImageFilterX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="PersistentFilters.html" class="btn btn-neutral" title="Persistent filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Tutorial.html" class="btn btn-neutral" title="Building simple OTB code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

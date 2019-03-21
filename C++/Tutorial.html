@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../_static/css/otb_theme.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Iterators" href="Iterators.html" />
+    <link rel="next" title="User Guide" href="UserGuide.html" />
     <link rel="prev" title="System Overview" href="SystemOverview.html" /> 
 
   
@@ -97,35 +97,42 @@
 <li class="toctree-l1"><a class="reference internal" href="../GraphicalInterface.html">Graphical interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PythonAPI.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../QGISInterface.html">QGIS interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Recipes.html">Recipes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Applications.html">All Applications</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Advanced use</span></p>
+<p class="caption"><span class="caption-text">Recipes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/optpreproc.html">From raw image to calibrated product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/sarprocessing.html">SAR processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/residual_registration.html">Residual registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/improc.html">Image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/contrast_enhancement.html">Enhance local contrast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/pbclassif.html">Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/featextract.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/stereo.html">Stereoscopic reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../recipes/hyperspectral.html">Hyperspectral image processing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building simple OTB code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hello-world">Hello world</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline-basics-read-and-write">Pipeline basics: read and write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filtering-pipeline">Filtering pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-types-scaling-output">Handling types: scaling output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-multispectral-or-color-images">Working with multispectral or color images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#going-from-raw-satellite-images-to-useful-products">Going from raw satellite images to useful products</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UserGuide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BandMathX.html">BandMathImageFilterX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">C++ Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloperGuide.html">Developer Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced use</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../EnvironmentVariables.html">Environment variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExtendedFilenames.html">Extended filenames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CompilingOTBFromSource.html">Compiling OTB from source</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../C++.html">C++ API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="SystemOverview.html">System Overview</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Building simple OTB code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#hello-world">Hello world</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pipeline-basics-read-and-write">Pipeline basics: read and write</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#filtering-pipeline">Filtering pipeline</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#handling-types-scaling-output">Handling types: scaling output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#working-with-multispectral-or-color-images">Working with multispectral or color images</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#going-from-raw-satellite-images-to-useful-products">Going from raw satellite images to useful products</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="Iterators.html">Iterators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Filters.html">Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="StreamingAndThreading.html">Streaming and Threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PersistentFilters.html">Persistent filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="UsersGuide.html">Users’ Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WriteAnApplication.html">How to write an application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="AddingNewModules.html">Adding New Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
 </ul>
@@ -172,8 +179,6 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../C++.html">C++ API</a> &raquo;</li>
         
       <li>Building simple OTB code</li>
     
@@ -393,7 +398,7 @@ file:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Iterators.html" class="btn btn-neutral float-right" title="Iterators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="UserGuide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="SystemOverview.html" class="btn btn-neutral" title="System Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
