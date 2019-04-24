@@ -392,12 +392,13 @@ otbcli_Segmentation -in QB_Toulouse_Ortho_PAN.tif -mode raster -mode.raster.out 
 <h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
 <p>In raster mode, the application can not handle large input images. Stitching step of vector mode might become slow with very large input images.
 MeanShift filter results depends on the number of threads used.
-Watershed and multiscale geodesic morphology segmentation will be performed on the amplitude  of the input image.</p>
+Watershed and multiscale geodesic morphology segmentation will be performed on the amplitude  of the input image.
+This application does not handle no data values. No data pixels will be treated as regular pixels, This may lead to unexpected segmentation results and crashes.</p>
 </div>
 <div class="section" id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
-<div class="line">MeanShift:ref:<cite>Segmentation</cite></div>
+<div class="line"><a class="reference internal" href="app_LargeScaleMeanShift.html#largescalemeanshift"><span class="std std-ref">LargeScaleMeanShift</span></a></div>
 </div>
 </div>
 </div>

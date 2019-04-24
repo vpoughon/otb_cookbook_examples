@@ -235,39 +235,44 @@
             
   <div class="section" id="frostimagefilter-cxx">
 <span id="id1"></span><h1>FrostImageFilter.cxx<a class="headerlink" href="#frostimagefilter-cxx" title="Permalink to this headline">¶</a></h1>
+<p>This example illustrates the use of the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1FrostImageFilter.html">otb::FrostImageFilter</a>.
+This filter belongs to the family of the edge-preserving smoothing
+filters which are usually used for speckle reduction in radar
+images.</p>
+<p>This filter uses a negative exponential convolution kernel.
+The output of the filter for pixel p is:</p>
+<div class="math">
+<p><img src="../../../_images/math/b2e21f1fb06b0be74c9fff66a4e07c160fc2f1ea.png" alt="\hat I_{s}=\sum_{p\in\eta_{p}} m_{p}I_{p}
+
+m_{p}=\frac{KC_{s}^{2}\exp(-KC_{s}^{2}d_{s, p})}{\sum_{p\in\eta_{p}} KC_{s}^{2}\exp(-KC_{s}^{2}d_{s, p})}
+
+d_{s, p}=\sqrt{(i-i_{p})^2+(j-j_{p})^2}"/></p>
+</div><p>where:</p>
+<ul class="simple">
+<li><img class="math" src="../../../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/>: the decrease coefficient</li>
+<li><img class="math" src="../../../_images/math/ea396577e21019436fd9cffcd5f316bff45588b0.png" alt="(i, j)"/>: the coordinates of the pixel inside the region defined by <img class="math" src="../../../_images/math/a90f8889b878e1b22e3fa51c133672c94844b4f0.png" alt="\eta_{s}"/></li>
+<li><img class="math" src="../../../_images/math/547d1c125c4b5a4cac751f8bbc659fe6c0fe2e8f.png" alt="(i_{p}, j_{p})"/>: the coordinates of the pixels belonging to <img class="math" src="../../../_images/math/25003187a7fc41b91e5467c0f6fa1a68fc703282.png" alt="\eta_{p} \subset \eta_{s}"/></li>
+<li><img class="math" src="../../../_images/math/39cde447f66f301ee80fc8ff7ac5d7abecaad586.png" alt="C_{s}"/>: the variation coefficient computed over <img class="math" src="../../../_images/math/5ede0154655fdc0cb454ea775313f19761b4bdcc.png" alt="\eta_{p}"/></li>
+</ul>
+<table border="1" class="docutils" id="figure1">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image1" src="../../../_images/GomaSmall.png" /></td>
+<td><img alt="image2" src="../../../_images/GomaSmallFrostFiltered.png" /></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div>Result of applying the FrostImageFilter to a SAR image.</div></blockquote>
 <p>Example usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./FrostImageFilter Input/GomaSmall.png Output/GomaSmallFrostFiltered.png <span class="m">5</span> <span class="m">0</span>.1
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/FrostImageFilter.cxx?inline=false">FrostImageFilter.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This example illustrates the use of the \doxygen{otb}{FrostImageFilter}.</span>
-<span class="c1">// This filter belongs to the family of the edge-preserving smoothing</span>
-<span class="c1">// filters which are usually used for speckle reduction in radar</span>
-<span class="c1">// images.</span>
-<span class="c1">//</span>
-<span class="c1">// This filter uses a negative exponential convolution kernel.</span>
-<span class="c1">// The output of the filter for pixel p is:</span>
-<span class="c1">//      $ \hat I_{s}=\sum_{p\in\eta_{p}} m_{p}I_{p} $</span>
-<span class="c1">//</span>
-<span class="c1">// where :   $ m_{p}=\frac{KC_{s}^{2}\exp(-KC_{s}^{2}d_{s, p})}{\sum_{p\in\eta_{p}} KC_{s}^{2}\exp(-KC_{s}^{2}d_{s, p})} $</span>
-<span class="c1">//    and  $ d_{s, p}=\sqrt{(i-i_{p})^2+(j-j_{p})^2} $</span>
-<span class="c1">//</span>
-<span class="c1">// \begin{itemize}</span>
-<span class="c1">// \item $ K $     : the decrease coefficient</span>
-<span class="c1">// \item $ (i, j)$ : the coordinates of the pixel inside the region</span>
-<span class="c1">// defined by $ \eta_{s} $</span>
-<span class="c1">// \item $ (i_{p}, j_{p})$ : the coordinates of the pixels belonging to $ \eta_{p} \subset \eta_{s} $</span>
-<span class="c1">// \item $ C_{s}$ : the variation coefficient computed over $ \eta_{p}$</span>
-<span class="c1">// \end{itemize}</span>
-<span class="c1">//</span>
-<span class="c1">//</span>
-<span class="c1">//</span>
-<span class="c1">// Most of this example is similar to the previous one and only the differences</span>
-<span class="c1">// will be highlighted.</span>
-<span class="c1">//</span>
-<span class="c1">// First, we need to include the header:</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;otbFrostImageFilter.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbFrostImageFilter.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
@@ -284,16 +289,12 @@
   <span class="p">}</span>
 
   <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">PixelType</span><span class="p">;</span>
-
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">InputImageType</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">OutputImageType</span><span class="p">;</span>
 
-  <span class="c1">//  The filter can be instantiated using the image types defined previously.</span>
-
+  <span class="c1">// The filter can be instantiated using the image types defined previously.</span>
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">FrostImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
-
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span> <span class="n">ReaderType</span><span class="p">;</span>
-
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
 
   <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
@@ -303,22 +304,12 @@
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
   <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
-  <span class="c1">//  The image obtained with the reader is passed as input to the</span>
-  <span class="c1">//  \doxygen{otb}{FrostImageFilter}.</span>
-  <span class="c1">//</span>
-  <span class="c1">//  \index{otb::FrostImageFilter!SetInput()}</span>
-  <span class="c1">//  \index{otb::FileImageReader!GetOutput()}</span>
-
+  <span class="c1">// The image obtained with the reader is passed as input to the FrostImageFilter</span>
   <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
 
-  <span class="c1">//  The method \code{SetRadius()} defines the size of the window to</span>
-  <span class="c1">//  be used for the computation of the local statistics. The method</span>
-  <span class="c1">//  \code{SetDeramp()} sets the $K$ coefficient.</span>
-  <span class="c1">//</span>
-  <span class="c1">//  \index{otb::FrostImageFilter!SetRadius()}</span>
-  <span class="c1">//  \index{otb::FrostImageFilter!SetDeramp()}</span>
-  <span class="c1">//  \index{SetDeramp()!otb::FrostImageFilter}</span>
-
+  <span class="c1">// The method SetRadius() defines the size of the window to</span>
+  <span class="c1">// be used for the computation of the local statistics. The method</span>
+  <span class="c1">// SetDeramp() sets the K coefficient.</span>
   <span class="n">FilterType</span><span class="o">::</span><span class="n">SizeType</span> <span class="n">Radius</span><span class="p">;</span>
   <span class="n">Radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
   <span class="n">Radius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
@@ -328,24 +319,6 @@
 
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-
-  <span class="c1">// Figure~\ref{fig:FROST_FILTER} shows the result of applying the Frost</span>
-  <span class="c1">// filter to a SAR image.</span>
-  <span class="c1">// \begin{figure}</span>
-  <span class="c1">// \center</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{GomaSmall.eps}</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{GomaSmallFrostFiltered.eps}</span>
-  <span class="c1">// \itkcaption[Frost Filter Application]{Result of applying the</span>
-  <span class="c1">// \doxygen{otb}{FrostImageFilter} to a SAR image.}</span>
-  <span class="c1">// \label{fig:FROST_FILTER}</span>
-  <span class="c1">// \end{figure}</span>
-  <span class="c1">//</span>
-  <span class="c1">//  \relatedClasses</span>
-  <span class="c1">//  \begin{itemize}</span>
-  <span class="c1">//  \item \doxygen{otb}{LeeImageFilter}</span>
-  <span class="c1">//  \end{itemize}</span>
-
-  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

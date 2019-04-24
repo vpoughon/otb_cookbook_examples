@@ -246,7 +246,7 @@
 <span class="c1">// the one defining the different projections available in OTB.</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;otbOrthoRectificationFilter.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;otbMapProjections.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbSpatialReference.h&quot;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
@@ -284,8 +284,11 @@
   <span class="c1">// the cartographic projection. We define therefore the</span>
   <span class="c1">// type of the projection we want, which is an UTM projection for this case.</span>
 
-  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">UtmInverseProjection</span>                                                             <span class="n">utmMapProjectionType</span><span class="p">;</span>
-  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">OrthoRectificationFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="p">,</span> <span class="n">utmMapProjectionType</span><span class="o">&gt;</span> <span class="n">OrthoRectifFilterType</span><span class="p">;</span>
+<span class="c1">// Software Guide : BeginCodeSnippet</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">GenericMapProjection</span><span class="o">&lt;</span><span class="n">otb</span><span class="o">::</span><span class="n">TransformDirection</span><span class="o">::</span><span class="n">FORWARD</span><span class="o">&gt;</span> <span class="n">MapProjectionType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">OrthoRectificationFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="p">,</span>
+      <span class="n">MapProjectionType</span><span class="o">&gt;</span>
+  <span class="n">OrthoRectifFilterType</span><span class="p">;</span>
 
   <span class="n">OrthoRectifFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">orthoRectifFilter</span> <span class="o">=</span> <span class="n">OrthoRectifFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
 
@@ -293,9 +296,9 @@
   <span class="c1">// instantiate the map projection, set the {\em zone} and {\em hemisphere}</span>
   <span class="c1">// parameters and pass this projection to the orthorectification filter.</span>
 
-  <span class="n">utmMapProjectionType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">utmMapProjection</span> <span class="o">=</span> <span class="n">utmMapProjectionType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
-  <span class="n">utmMapProjection</span><span class="o">-&gt;</span><span class="n">SetZone</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]));</span>
-  <span class="n">utmMapProjection</span><span class="o">-&gt;</span><span class="n">SetHemisphere</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]));</span>
+  <span class="n">MapProjectionType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">utmMapProjection</span> <span class="o">=</span> <span class="n">MapProjectionType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">utmMapProjection</span><span class="o">-&gt;</span><span class="n">SetWkt</span><span class="p">(</span><span class="n">otb</span><span class="o">::</span><span class="n">SpatialReference</span><span class="o">::</span><span class="n">FromUTM</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span><span class="o">*</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;N&#39;</span><span class="o">?</span> <span class="n">otb</span><span class="o">::</span><span class="n">SpatialReference</span><span class="o">::</span><span class="n">hemisphere</span><span class="o">::</span><span class="nl">north</span> <span class="p">:</span> <span class="n">otb</span><span class="o">::</span><span class="n">SpatialReference</span><span class="o">::</span><span class="n">hemisphere</span><span class="o">::</span><span class="n">south</span><span class="p">).</span><span class="n">ToWkt</span><span class="p">());</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">utmMapProjection</span><span class="o">-&gt;</span><span class="n">GetWkt</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
   <span class="n">orthoRectifFilter</span><span class="o">-&gt;</span><span class="n">SetMapProjection</span><span class="p">(</span><span class="n">utmMapProjection</span><span class="p">);</span>
 
   <span class="c1">// We then wire the input image to the orthorectification filter.</span>

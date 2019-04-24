@@ -253,7 +253,7 @@
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/FeatureExtraction/HarrisExample.cxx?inline=false">HarrisExample.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbMacro.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
@@ -398,7 +398,7 @@
   <span class="p">{</span>
     <span class="k">typedef</span> <span class="n">OutputPointSetType</span><span class="o">::</span><span class="n">PointType</span> <span class="n">OutputPointType</span><span class="p">;</span>
     <span class="n">OutputPointType</span>                       <span class="n">pCoordinate</span> <span class="o">=</span> <span class="p">(</span><span class="n">itList</span><span class="p">.</span><span class="n">Value</span><span class="p">());</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">pCoordinate</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">otbLogMacro</span><span class="p">(</span><span class="n">Debug</span><span class="p">,</span> <span class="o">&lt;&lt;</span> <span class="n">pCoordinate</span><span class="p">);</span>
     <span class="o">++</span><span class="n">itList</span><span class="p">;</span>
   <span class="p">}</span>
 

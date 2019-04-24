@@ -267,7 +267,7 @@
 
 <span class="cp">#include</span> <span class="cpf">&quot;otbSailModel.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbProspectModel.h&quot;</span><span class="cp"></span>
-
+<span class="cp">#include</span> <span class="cpf">&quot;otbMacro.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
@@ -384,13 +384,12 @@
 
   <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetViewingReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;wavelength  : &quot;</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetViewingReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;. Viewing reflectance &quot;</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetViewingReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;. Hemispherical reflectance &quot;</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetHemisphericalReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">otbLogMacro</span><span class="p">(</span><span class="n">Debug</span><span class="p">,</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;wavelength  : &quot;</span>
+       <span class="o">&lt;&lt;</span> <span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetViewingReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span>
+       <span class="o">&lt;&lt;</span> <span class="s">&quot;. Viewing reflectance &quot;</span>
+       <span class="o">&lt;&lt;</span> <span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetViewingReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span>
+       <span class="o">&lt;&lt;</span> <span class="s">&quot;. Hemispherical reflectance &quot;</span>
+       <span class="o">&lt;&lt;</span> <span class="n">sail</span><span class="o">-&gt;</span><span class="n">GetHemisphericalReflectance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetResponse</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">outputFile</span><span class="p">(</span><span class="n">OutputName</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>

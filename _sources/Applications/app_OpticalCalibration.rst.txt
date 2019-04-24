@@ -167,7 +167,7 @@ Viewing azimuth angle (in degrees)
 Gains or biases
 
 **Solar illuminations** :code:`-acqui.solarilluminations filename [dtype]` |br|
-Solar illuminations (one value per band)
+Solar illuminations (one value per band, in W/m^2/micron)
 
 Atmospheric parameters (for TOC)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -191,17 +191,17 @@ This group allows setting the atmospheric parameters.
 
 
 
-**Ozone Amount** :code:`-atmo.oz float` *Default value: 0* |br|
-Ozone Amount
+**Ozone Amount (cm-atm)** :code:`-atmo.oz float` *Default value: 0* |br|
+Stratospheric ozone layer content (in cm-atm)
 
-**Water Vapor Amount** :code:`-atmo.wa float` *Default value: 2.5* |br|
-Water Vapor Amount (in saturation fraction of water)
+**Water Vapor Amount (g/cm2)** :code:`-atmo.wa float` *Default value: 2.5* |br|
+Total water vapor content over vertical atmospheric column (in g/cm2)
 
-**Atmospheric Pressure** :code:`-atmo.pressure float` *Default value: 1030* |br|
+**Atmospheric Pressure (hPa)** :code:`-atmo.pressure float` *Default value: 1030* |br|
 Atmospheric Pressure (in hPa)
 
 **Aerosol Optical Thickness** :code:`-atmo.opt float` *Default value: 0.2* |br|
-Aerosol Optical Thickness
+Aerosol Optical Thickness (unitless)
 
 **Aeronet File** :code:`-atmo.aeronet filename [dtype]` |br|
 Aeronet file containing atmospheric parameters
@@ -214,7 +214,7 @@ By default the application gets this information in the metadata
 Window radius for adjacency effects correctionsSetting this parameters will enable the correction ofadjacency effects
 
 **Pixel size (in km)** :code:`-atmo.pixsize float` *Default value: 1* |br|
-Pixel size (in km )used tocompute adjacency effects, it doesn't have tomatch the image spacing
+Pixel size (in km) used tocompute adjacency effects, it doesn't have tomatch the image spacing
 
 
 

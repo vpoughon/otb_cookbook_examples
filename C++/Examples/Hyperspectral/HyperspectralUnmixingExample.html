@@ -255,6 +255,8 @@
 <span class="cp">#include</span> <span class="cpf">&quot;otbVcaImageFilter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbUnConstrainedLeastSquareImageFilter.h&quot;</span><span class="cp"></span>
 
+<span class="cp">#include</span> <span class="cpf">&quot;itkMersenneTwisterRandomVariateGenerator.h&quot;</span><span class="cp"></span>
+
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">)</span>
@@ -281,6 +283,10 @@
 
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorRescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">VectorImageToMatrixImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span>               <span class="n">VectorImageToMatrixImageFilterType</span><span class="p">;</span>
+
+  <span class="c1">// We set the seed of the random number generator.</span>
+
+  <span class="n">itk</span><span class="o">::</span><span class="n">Statistics</span><span class="o">::</span><span class="n">MersenneTwisterRandomVariateGenerator</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetSeed</span><span class="p">(</span><span class="mi">121212</span><span class="p">);</span>
 
   <span class="c1">// We instantiate now the image reader and we set the image file name.</span>
 

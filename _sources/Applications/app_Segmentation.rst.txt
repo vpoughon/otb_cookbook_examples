@@ -224,9 +224,10 @@ Limitations
 
 In raster mode, the application can not handle large input images. Stitching step of vector mode might become slow with very large input images. 
 MeanShift filter results depends on the number of threads used. 
-Watershed and multiscale geodesic morphology segmentation will be performed on the amplitude  of the input image.
+Watershed and multiscale geodesic morphology segmentation will be performed on the amplitude  of the input image. 
+This application does not handle no data values. No data pixels will be treated as regular pixels, This may lead to unexpected segmentation results and crashes.
 
 See also
 --------
 
-| MeanShift:ref:`Segmentation`
+| :ref:`LargeScaleMeanShift`

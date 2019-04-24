@@ -36,8 +36,6 @@ Example source code (`AtmosphericCorrectionSequencement.cxx <https://gitlab.orfe
 
 .. code-block:: cpp
 
-    // \index{otb::MultiChannelRAndBAndNIRVegetationIndexImageFilter}
-    // \index{otb::MultiChannelRAndBAndNIRVegetationIndexImageFilter!header}
     // \index{otb::VegetationIndex}
     // \index{otb::VegetationIndex!header}
     //

@@ -67,7 +67,7 @@ From the command-line:
 
 .. code-block:: bash
 
-    otbcli_BandMath -il verySmallFSATSW_r.tif verySmallFSATSW_nir.tif verySmallFSATSW.tif -out apTvUtBandMathOutput.tif -exp 'cos( im1b1 ) > cos( im2b1 ) ? im3b1 : im3b2'
+    otbcli_BandMath -il verySmallFSATSW_r.tif verySmallFSATSW_nir.tif verySmallFSATSW.tif -out apTvUtBandMathOutput.tif -exp "cos( im1b1 ) > cos( im2b1 ) ? im3b1 : im3b2"
 
 
 From Python:
@@ -80,7 +80,7 @@ From Python:
 
 	app.SetParameterStringList("il", ['verySmallFSATSW_r.tif', 'verySmallFSATSW_nir.tif', 'verySmallFSATSW.tif'])
 	app.SetParameterString("out", "apTvUtBandMathOutput.tif")
-	app.SetParameterString("exp", "'cos( im1b1 ) > cos( im2b1 ) ? im3b1 : im3b2'")
+	app.SetParameterString("exp", "cos( im1b1 ) > cos( im2b1 ) ? im3b1 : im3b2")
 
 	app.ExecuteAndWriteOutput()
 

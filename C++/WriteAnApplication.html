@@ -306,8 +306,6 @@ method in <code class="docutils literal notranslate"><span class="pre">DoInit()<
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">SetParameterOutputImage(key,data)</span></code> : link the image object to the
 given output parameter</li>
-<li><code class="docutils literal notranslate"><span class="pre">SetParameterComplexOutputImage(key,data)</span></code> : link the complex image
-object to the given output parameter</li>
 <li><code class="docutils literal notranslate"><span class="pre">SetParameterOutputVectorData(key,data)</span></code> : link the vector data
 object to the given output parameter</li>
 </ul>
@@ -342,8 +340,6 @@ sub-parameters for each available choice.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputImage</span></code> : parameter storing an input image.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputImageList</span></code> : parameter storing a list of input
 image.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ParameterType_ComplexInputImage</span></code> : parameter storing a complex
-input image.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputVectorData</span></code> : parameter storing input vector
 data.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_InputVectorDataList</span></code> : parameter storing a list of
@@ -353,8 +349,6 @@ file name.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputFilename</span></code> : parameter storing an output file
 name.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputImage</span></code> : parameter storing an output image.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ParameterType_ComplexOutputImage</span></code> : parameter storing a complex
-output image.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputVectorData</span></code> : parameter storing an output
 vector data.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ParameterType_OutputProcessXML</span></code> : parameter storing an output XML
@@ -381,10 +375,10 @@ parameters are treated as inputs. If your application outputs a number,
 you can use a numeric parameter and change its role by calling
 <code class="docutils literal notranslate"><span class="pre">SetParameterRole(key,Role_Output)</span></code>.</p>
 <p>The input types <code class="docutils literal notranslate"><span class="pre">InputImage</span></code>, <code class="docutils literal notranslate"><span class="pre">InputImageList</span></code>,
-<code class="docutils literal notranslate"><span class="pre">ComplexInputImage</span></code>, <code class="docutils literal notranslate"><span class="pre">InputVectorData</span></code> and <code class="docutils literal notranslate"><span class="pre">InputVectorDataList</span></code>
-store the name of the files to load, but they also encapsulate the
+<code class="docutils literal notranslate"><span class="pre">InputVectorData</span></code> and <code class="docutils literal notranslate"><span class="pre">InputVectorDataList</span></code> store
+the name of the files to load, but they also encapsulate the
 readers needed to produce the input data.</p>
-<p>The output types <code class="docutils literal notranslate"><span class="pre">OutputImage</span></code>, <code class="docutils literal notranslate"><span class="pre">ComplexOutputImage</span></code> and
+<p>The output types <code class="docutils literal notranslate"><span class="pre">OutputImage</span></code> and
 <code class="docutils literal notranslate"><span class="pre">OutputVectorData</span></code> store the name of the files to write, but they also
 encapsulate the corresponding writers.</p>
 </div>

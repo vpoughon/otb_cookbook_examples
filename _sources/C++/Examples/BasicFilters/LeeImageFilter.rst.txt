@@ -5,18 +5,25 @@ LeeImageFilter.cxx
 
 
 
-This example illustrates the use of the LeeImageFilter.
+This example illustrates the use of the :doxygen:`LeeImageFilter`.
 This filter belongs to the family of the edge-preserving smoothing
 filters which are usually used for speckle reduction in radar
 images. The LeeFilter aplies a linear regression
 which minimizes the mean-square error in the frame of a
 multiplicative speckle model.
 
-.. figure:: /Input/GomaSmall.png
+.. |image1| image:: /Input/GomaSmall.png
 
-.. figure:: /Output/GomaSmallLeeFiltered.png
+.. |image2| image:: /Output/GomaSmallLeeFiltered.png
+
+.. _Figure1:
+
++--------------------------+-------------------------+
+|        |image1|          |         |image2|        |
++--------------------------+-------------------------+
 
     Result of applying the Lee filter to a SAR image.
+
 
 
 Example usage:
@@ -55,16 +62,16 @@ Example source code (`LeeImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeo
       // The filter can be instantiated using the image types defined above.
       typedef otb::LeeImageFilter<InputImageType, OutputImageType> FilterType;
     
-      //  An ImageFileReader class is also instantiated in order to read
-      //  image data from a file.
+      // An ImageFileReader class is also instantiated in order to read
+      // image data from a file.
       typedef otb::ImageFileReader<InputImageType> ReaderType;
     
-      // An \doxygen{otb}{ImageFileWriter} is instantiated in order to write the
+      // An ImageFileWriter is instantiated in order to write the
       // output image to a file.
       typedef otb::ImageFileWriter<OutputImageType> WriterType;
     
-      //  Both the filter and the reader are created by invoking their \code{New()}
-      //  methods and assigning the result to SmartPointers.
+      // Both the filter and the reader are created by invoking their New()
+      // methods and assigning the result to SmartPointers.
       ReaderType::Pointer reader = ReaderType::New();
       FilterType::Pointer filter = FilterType::New();
     
@@ -72,8 +79,8 @@ Example source code (`LeeImageFilter.cxx <https://gitlab.orfeo-toolbox.org/orfeo
       writer->SetInput(filter->GetOutput());
       reader->SetFileName(argv[1]);
     
-      //  The image obtained with the reader is passed as input to the
-      //  LeeImageFilter.
+      // The image obtained with the reader is passed as input to the
+      // LeeImageFilter.
       filter->SetInput(reader->GetOutput());
     
       // The method SetRadius() defines the size of the window to

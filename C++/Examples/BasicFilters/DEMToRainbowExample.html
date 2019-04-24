@@ -235,6 +235,29 @@
             
   <div class="section" id="demtorainbowexample-cxx">
 <span id="id1"></span><h1>DEMToRainbowExample.cxx<a class="headerlink" href="#demtorainbowexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>In some situation, it is desirable to represent a gray scale image in color for easier
+interpretation. This is particularly the case if pixel values in the image are used
+to represent some data such as elevation, deformation map,
+interferogram. In this case, it is important to ensure that similar
+values will get similar colors. You can notice how this requirement
+differs from the previous case.</p>
+<p>The following example illustrates the use of the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1DEMToImageGenerator.html">otb::DEMToImageGenerator</a>
+class combined with the <cite>ScalarToRainbowRGBPixelFunctor</cite>. You can refer to the
+source code for the DEM conversion to image, we will focus on the color
+conversion part here.</p>
+<table border="1" class="docutils" id="figure1">
+<colgroup>
+<col width="34%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image1" src="../../../_images/DEMToRainbowImageGenerator.png" /></td>
+<td><img alt="image2" src="../../../_images/DEMToHotImageGenerator.png" /></td>
+<td><img alt="image3" src="../../../_images/DEMToReliefImageGenerator.png" /></td>
+</tr>
+</tbody>
+</table>
 <p>Example usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./DEMToRainbowExample Output/DEMToRainbowImageGenerator.png <span class="m">6</span>.5 <span class="m">45</span>.5 <span class="m">500</span> <span class="m">500</span> <span class="m">0</span>.002 -0.002 Input/DEM_srtm
 </pre></div>
@@ -248,19 +271,7 @@
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/DEMToRainbowExample.cxx?inline=false">DEMToRainbowExample.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In some situation, it is desirable to represent a gray scale image in color for easier</span>
-<span class="c1">// interpretation. This is particularly the case if pixel values in the image are used</span>
-<span class="c1">// to represent some data such as elevation, deformation map,</span>
-<span class="c1">// interferogram. In this case, it is important to ensure that similar</span>
-<span class="c1">// values will get similar colors. You can notice how this requirement</span>
-<span class="c1">// differs from the previous case.</span>
-<span class="c1">//</span>
-<span class="c1">// The following example illustrates the use of the \doxygen{otb}{DEMToImageGenerator} class</span>
-<span class="c1">// combined with the \doxygen{otb}{ScalarToRainbowRGBPixelFunctor}. You can refer to the</span>
-<span class="c1">// source code or to section \ref{sec:ReadDEM} for the DEM conversion to image,</span>
-<span class="c1">// we will focus on the color conversion part here.</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;itkScalarToRGBColormapImageFilter.h&quot;</span><span class="cp"></span>
@@ -317,9 +328,9 @@
 
   <span class="n">demToImage</span><span class="o">-&gt;</span><span class="n">SetOutputSpacing</span><span class="p">(</span><span class="n">spacing</span><span class="p">);</span>
 
-  <span class="c1">// As in the previous example, the \doxygen{itk}{ScalarToRGBColormapImageFilter} is</span>
+  <span class="c1">// The ScalarToRGBColormapImageFilter is</span>
   <span class="c1">// the filter in charge of calling the functor we specify to do the work for</span>
-  <span class="c1">// each pixel. Here it is the \doxygen{otb}{ScalarToRainbowRGBPixelFunctor}.</span>
+  <span class="c1">// each pixel. Here it is the ScalarToRainbowRGBPixelFunctor.</span>
 
   <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">ScalarToRGBColormapImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">RGBImageType</span><span class="o">&gt;</span> <span class="n">ColorMapFilterType</span><span class="p">;</span>
   <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                          <span class="n">colormapper</span> <span class="o">=</span> <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
@@ -360,36 +371,7 @@
 
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">colormapper</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
 
-  <span class="k">try</span>
-  <span class="p">{</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-  <span class="p">}</span>
-  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excep</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">catch</span> <span class="p">(...)</span>
-  <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="c1">// Figure~\ref{fig:RAINBOW_FILTER} shows the effect of applying the filter to</span>
-  <span class="c1">// a gray scale image.</span>
-  <span class="c1">//</span>
-  <span class="c1">// \begin{figure}</span>
-  <span class="c1">// \center</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{pretty_DEMToImageGenerator.eps}</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{DEMToRainbowImageGenerator.eps}</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{DEMToHotImageGenerator.eps}</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{DEMToReliefImageGenerator.eps}</span>
-  <span class="c1">// \itkcaption[Grayscale to color]{The gray level DEM extracted from SRTM</span>
-  <span class="c1">// data (top-left) and the same area represented in color.}</span>
-  <span class="c1">// \label{fig:RAINBOW_FILTER}</span>
-  <span class="c1">// \end{figure}</span>
-
-  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>

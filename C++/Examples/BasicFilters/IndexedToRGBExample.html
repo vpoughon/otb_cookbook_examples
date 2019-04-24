@@ -235,30 +235,39 @@
             
   <div class="section" id="indexedtorgbexample-cxx">
 <span id="id1"></span><h1>IndexedToRGBExample.cxx<a class="headerlink" href="#indexedtorgbexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Some algorithms produce an indexed image as output. In such images,
+each pixel is given a value according to the region number it belongs to.
+This value starting at 0 or 1 is usually an integer value.
+Often, such images are produced by segmentation or classification algorithms.</p>
+<p>If such regions are easy to manipulate – it is easier and faster to compare two integers
+than a RGB value – it is different when it comes to displaying the results.</p>
+<p>Here we present a convient way to convert such indexed image to a color image. In
+such conversion, it is important to ensure that neighborhood region, which are
+likely to have consecutive number have easily dicernable colors. This is done
+randomly using a hash function by <code class="docutils literal notranslate"><span class="pre">ScalarToRGBPixelFunctor</span></code>.</p>
+<table border="1" class="docutils" id="figure1">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image1" src="../../../_images/buildingExtractionIndexed_scaled.png" /></td>
+<td><img alt="image2" src="../../../_images/buildingExtractionRGB.png" /></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div>The original indexed image (left) and the conversion to color image.</div></blockquote>
 <p>Example usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./IndexedToRGBExample Input/buildingExtractionIndexed.tif Output/buildingExtractionRGB.png Output/buildingExtractionIndexed_scaled.png
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/IndexedToRGBExample.cxx?inline=false">IndexedToRGBExample.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  Some algorithms produce an indexed image as output. In such images,</span>
-<span class="c1">// each pixel is given a value according to the region number it belongs to.</span>
-<span class="c1">// This value starting at 0 or 1 is usually an integer value.</span>
-<span class="c1">// Often, such images are produced by segmentation or classification algorithms.</span>
-<span class="c1">//</span>
-<span class="c1">// If such regions are easy to manipulate -- it is easier and faster to compare two integers</span>
-<span class="c1">// than a RGB value -- it is different when it comes to displaying the results.</span>
-<span class="c1">//</span>
-<span class="c1">// Here we present a convient way to convert such indexed image to a color image. In</span>
-<span class="c1">// such conversion, it is important to ensure that neighborhood region, which are</span>
-<span class="c1">// likely to have consecutive number have easily dicernable colors. This is done</span>
-<span class="c1">// randomly using a hash function by the \doxygen{itk}{ScalarToRGBPixelFunctor}.</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;itkScalarToRGBPixelFunctor.h&quot;</span><span class="cp"></span>
-
 <span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
@@ -281,10 +290,8 @@
 
   <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputFilename</span><span class="p">);</span>
 
-  <span class="c1">//  The \doxygen{itk}{UnaryFunctorImageFilter} is the filter in charge of</span>
-  <span class="c1">// calling the functor we specify to do the work for each pixel. Here it is the</span>
-  <span class="c1">// \doxygen{itk}{ScalarToRGBPixelFunctor}.</span>
-
+  <span class="c1">// The UnaryFunctorImageFilter is the filter in charge of calling the functor</span>
+  <span class="c1">// we specify to do the work for each pixel. Here it is the ScalarToRGBPixelFunctor</span>
   <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">ScalarToRGBPixelFunctor</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">&gt;</span>                       <span class="n">ColorMapFunctorType</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">UnaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">RGBImageType</span><span class="p">,</span> <span class="n">ColorMapFunctorType</span><span class="o">&gt;</span> <span class="n">ColorMapFilterType</span><span class="p">;</span>
   <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">Pointer</span>                                                        <span class="n">colormapper</span> <span class="o">=</span> <span class="n">ColorMapFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
@@ -309,19 +316,6 @@
   <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputScaledFilename</span><span class="p">);</span>
   <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
   <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-
-  <span class="c1">// Figure~\ref{fig:INDEXTORGB_FILTER} shows the result of the conversion</span>
-  <span class="c1">// from an indexed image to a color image.</span>
-  <span class="c1">// \begin{figure}</span>
-  <span class="c1">// \center</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{buildingExtractionIndexed_scaled.eps}</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{buildingExtractionRGB.eps}</span>
-  <span class="c1">// \itkcaption[Scaling images]{The original indexed image (left) and the</span>
-  <span class="c1">// conversion to color image.}</span>
-  <span class="c1">// \label{fig:INDEXTORGB_FILTER}</span>
-  <span class="c1">// \end{figure}</span>
-
-  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

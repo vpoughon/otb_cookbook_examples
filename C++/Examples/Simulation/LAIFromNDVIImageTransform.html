@@ -245,11 +245,9 @@
 <span class="c1">// Let&#39;s look at the minimal code required to use this algorithm. First, the</span>
 <span class="c1">// following headers must be included.</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelRAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
-
+<span class="cp">#include</span> <span class="cpf">&quot;otbVegetationIndicesFunctor.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
@@ -273,19 +271,19 @@
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">WriterType</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageVisuType</span><span class="o">&gt;</span>   <span class="n">VisuWriterType</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">&gt;</span>  <span class="n">InWriterType</span><span class="p">;</span>
-  <span class="c1">// Filter type is a generic \doxygen{otb}{MultiChannelRAndNIRIndexImageFilter} using Formosat2 specific LAI</span>
+  <span class="c1">// Filter type is a generic \doxygen{itk}{UnaryFunctorImageFilter} using Formosat2 specific LAI</span>
   <span class="c1">//  \doxygen{otb}{LAIFromNDVIFormosat2Functor}.</span>
 
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">LAIFromNDVIFormosat2Functor</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="o">::</span><span class="n">InternalPixelType</span><span class="p">,</span> <span class="n">InputImageType</span><span class="o">::</span><span class="n">InternalPixelType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">::</span><span class="n">PixelType</span><span class="o">&gt;</span>
                                                                                                  <span class="n">FunctorType</span><span class="p">;</span>
-  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelRAndNIRIndexImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">MultiChannelRAndNIRIndexImageFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">UnaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">LAIFRomNDVIImageFilterType</span><span class="p">;</span>
 
   <span class="c1">// Instantiating object</span>
 
   <span class="c1">//  Next the filter is created by invoking the \code{New()}~method and</span>
   <span class="c1">//  assigning the result to a \doxygen{itk}{SmartPointer}.</span>
 
-  <span class="n">MultiChannelRAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">MultiChannelRAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">LAIFRomNDVIImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">LAIFRomNDVIImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
 
   <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">reader</span>     <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>     <span class="n">writer</span>     <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
@@ -308,8 +306,8 @@
   <span class="c1">//</span>
   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">redChannel</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nirChannel</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
-  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="n">redChannel</span><span class="p">);</span>
-  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="n">nirChannel</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="n">redChannel</span><span class="p">);</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="n">nirChannel</span><span class="p">);</span>
 
   <span class="c1">//  The invocation of the \code{Update()} method triggers the</span>
   <span class="c1">//  execution of the pipeline.</span>

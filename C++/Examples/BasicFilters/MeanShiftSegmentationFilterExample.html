@@ -235,6 +235,28 @@
             
   <div class="section" id="meanshiftsegmentationfilterexample-cxx">
 <span id="id1"></span><h1>MeanShiftSegmentationFilterExample.cxx<a class="headerlink" href="#meanshiftsegmentationfilterexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>This example demonstrates the use of the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1MeanShiftSegmentationFilter.html">otb::MeanShiftSegmentationFilter</a>
+class which implements filtering and clustering using the mean shift algorithm.
+For a given pixel, the mean shift will build a set of neighboring pixels within
+a given spatial radius and a color range. The spatial and color center of this
+set is then computed and the algorithm iterates with this new spatial and color
+center. The Mean Shift can be used for edge-preserving smoothing, or for
+clustering.</p>
+<table border="1" class="docutils" id="figure1">
+<colgroup>
+<col width="34%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image1" src="../../../_images/ROI_QB_MUL_1.png" /></td>
+<td><img alt="image2" src="../../../_images/MSClusteredOutput-pretty.png" /></td>
+<td><img alt="image3" src="../../../_images/MSLabeledOutput-pretty.png" /></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div>Original image, image filtered by mean shift after clustering, and labeled image.</div></blockquote>
 <p>Example usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./MeanShiftSegmentationFilterExample Input/ROI_QB_MUL_1.png <span class="se">\</span>
                                      Output/MSLabeledOutput.tif <span class="se">\</span>
@@ -249,28 +271,15 @@
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/MeanShiftSegmentationFilterExample.cxx?inline=false">MeanShiftSegmentationFilterExample.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  This example demonstrates the use of the</span>
-<span class="c1">//  \doxygen{otb}{MeanShiftSegmentationFilter} class which implements</span>
-<span class="c1">//  filtering and clustering using the mean shift algorithm</span>
-<span class="c1">//  \cite{Comaniciu2002}. For a given pixel, the mean shift will</span>
-<span class="c1">//  build a set of neighboring pixels within a given spatial radius</span>
-<span class="c1">//  and a color range. The spatial and color center of this set is</span>
-<span class="c1">//  then computed and the algorithm iterates with this new spatial and</span>
-<span class="c1">//  color center. The Mean Shift can be used for edge-preserving</span>
-<span class="c1">//  smoothing, or for clustering.</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbVectorImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbPrintableImageFilter.h&quot;</span><span class="cp"></span>
-
 <span class="cp">#include</span> <span class="cpf">&quot;itkScalarToRGBPixelFunctor.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
-
-<span class="c1">//  We start by including the needed header file.</span>
-
 <span class="cp">#include</span> <span class="cpf">&quot;otbMeanShiftSegmentationFilter.h&quot;</span><span class="cp"></span>
+
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">11</span><span class="p">)</span>
@@ -291,9 +300,6 @@
   <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">maxiter</span>         <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">9</span><span class="p">]);</span>
   <span class="k">const</span> <span class="kt">double</span>       <span class="n">thres</span>           <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span>
 
-  <span class="c1">//  We start by the classical \code{typedef}s needed for reading and</span>
-  <span class="c1">//  writing the images.</span>
-
   <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
   <span class="k">typedef</span> <span class="kt">float</span>                        <span class="n">PixelType</span><span class="p">;</span>
@@ -310,36 +316,39 @@
 
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MeanShiftSegmentationFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">LabelImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">FilterType</span><span class="p">;</span>
 
-  <span class="c1">//  We instantiate the filter, the reader, and 2 writers (for the</span>
-  <span class="c1">//  labeled and clustered images).</span>
+  <span class="c1">// We instantiate the filter, the reader, and 2 writers (for the</span>
+  <span class="c1">// labeled and clustered images).</span>
 
   <span class="n">FilterType</span><span class="o">::</span><span class="n">Pointer</span>      <span class="n">filter</span>  <span class="o">=</span> <span class="n">FilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>      <span class="n">reader</span>  <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>      <span class="n">writer1</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">LabelWriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer2</span> <span class="o">=</span> <span class="n">LabelWriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
 
-  <span class="c1">//  We set the file names for the reader and the writers:</span>
-
+  <span class="c1">// We set the file names for the reader and the writers:</span>
   <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">infname</span><span class="p">);</span>
   <span class="n">writer1</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">clusteredfname</span><span class="p">);</span>
   <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">labeledfname</span><span class="p">);</span>
 
-  <span class="c1">//  We can now set the parameters for the filter. There are 3 main</span>
-  <span class="c1">//  parameters: the spatial radius used for defining the neighborhood,</span>
-  <span class="c1">//  the range radius used for defining the interval in the color space</span>
-  <span class="c1">//  and the minimum size for the regions to be kept after clustering.</span>
+  <span class="c1">// We can now set the parameters for the filter. There are 3 main</span>
+  <span class="c1">// parameters: the spatial radius used for defining the neighborhood,</span>
+  <span class="c1">// the range radius used for defining the interval in the color space</span>
+  <span class="c1">// and the minimum size for the regions to be kept after clustering.</span>
 
   <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetSpatialBandwidth</span><span class="p">(</span><span class="n">spatialRadius</span><span class="p">);</span>
   <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRangeBandwidth</span><span class="p">(</span><span class="n">rangeRadius</span><span class="p">);</span>
   <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetMinRegionSize</span><span class="p">(</span><span class="n">minRegionSize</span><span class="p">);</span>
-  <span class="c1">// Two another parameters can be set  : the maximum iteration number, which defines maximum number of iteration until convergence.</span>
-  <span class="c1">//  Algorithm iterative scheme will stop if convergence hasn&#39;t been reached after the maximum number of iterations.</span>
-  <span class="c1">//  Threshold parameter defines mean-shift vector convergence value. Algorithm iterative scheme will stop if mean-shift vector is below this threshold or if</span>
-  <span class="c1">//  iteration number reached maximum number of iterations.</span>
+
+  <span class="c1">// Two another parameters can be set: the maximum iteration number, which</span>
+  <span class="c1">// defines maximum number of iteration until convergence.  Algorithm</span>
+  <span class="c1">// iterative scheme will stop if convergence hasn&#39;t been reached after the</span>
+  <span class="c1">// maximum number of iterations.  Threshold parameter defines mean-shift</span>
+  <span class="c1">// vector convergence value. Algorithm iterative scheme will stop if</span>
+  <span class="c1">// mean-shift vector is below this threshold or if iteration number reached</span>
+  <span class="c1">// maximum number of iterations.</span>
 
   <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetMaxIterationNumber</span><span class="p">(</span><span class="n">maxiter</span><span class="p">);</span>
   <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetThreshold</span><span class="p">(</span><span class="n">thres</span><span class="p">);</span>
-  <span class="c1">//  We can now plug the pipeline and run it.</span>
+  <span class="c1">// We can now plug the pipeline and run it.</span>
 
   <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
   <span class="n">writer1</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetClusteredOutput</span><span class="p">());</span>
@@ -347,19 +356,6 @@
 
   <span class="n">writer1</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
   <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-
-  <span class="c1">// Figure~\ref{fig:MeanShiftSegmentationFilter} shows the result of applying the mean shift</span>
-  <span class="c1">// to a Quickbird image.</span>
-  <span class="c1">// \begin{figure}</span>
-  <span class="c1">// \center</span>
-  <span class="c1">// \includegraphics[width=0.40\textwidth]{ROI_QB_MUL_1.eps}</span>
-  <span class="c1">// \includegraphics[width=0.40\textwidth]{MSClusteredOutput-pretty.eps}</span>
-  <span class="c1">// \includegraphics[width=0.40\textwidth]{MSLabeledOutput-pretty.eps}</span>
-  <span class="c1">// \itkcaption[Mean Shift]{From top to bottom and left to right:</span>
-  <span class="c1">// Original image, image filtered by</span>
-  <span class="c1">// mean shift after clustering , and labeled image.}</span>
-  <span class="c1">// \label{fig:MeanShiftSegmentationFilter}</span>
-  <span class="c1">// \end{figure}</span>
 
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">PrintableImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span> <span class="n">PrintableFilterType</span><span class="p">;</span>
   <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">Pointer</span>                 <span class="n">printableImageFilter</span> <span class="o">=</span> <span class="n">PrintableFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
@@ -392,8 +388,6 @@
   <span class="n">labelRGBWriter</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">labeledpretty</span><span class="p">);</span>
   <span class="n">labelRGBWriter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">labelToRGB</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
   <span class="n">labelRGBWriter</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-
-  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

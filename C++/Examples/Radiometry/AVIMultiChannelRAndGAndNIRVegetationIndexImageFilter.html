@@ -243,14 +243,12 @@
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx?inline=false">AVIMultiChannelRAndGAndNIRVegetationIndexImageFilter.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{otb::MultiChannelRAndGAndNIRIndexImageFilter}</span>
-<span class="c1">// \index{otb::MultiChannelRAndGAndNIRIndexImageFilter!header}</span>
-<span class="c1">// \index{otb::VegetationIndex}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{otb::VegetationIndex}</span>
 <span class="c1">// \index{otb::VegetationIndex!header}</span>
 <span class="c1">//</span>
 <span class="c1">//</span>
 <span class="c1">// The following example illustrates the use of the</span>
-<span class="c1">// otb::MultiChannelRAndGAndNIR VegetationIndexImageFilter with the</span>
+<span class="c1">// itk::UnaryFunctorImageFilter with the</span>
 <span class="c1">// use of the Angular Vegetation Index (AVI).</span>
 <span class="c1">// The equation for the Angular Vegetation Index involves the gren, red</span>
 <span class="c1">// and near infra-red bands. $\lambda_1$, $\lambda_2$ and $\lambda_3$ are the mid-band</span>
@@ -271,17 +269,12 @@
 <span class="c1">//</span>
 <span class="c1">// For more details, refer to Plummer work \cite{AVI}.</span>
 <span class="c1">//</span>
-<span class="c1">// With the</span>
-<span class="c1">// \doxygen{otb}{MultiChannelRAndGAndNIRIndexImageFilter}</span>
-<span class="c1">// class the input has to be a multi channel image and the user has to</span>
-<span class="c1">// specify the channel index of the red, green and NIR channel.</span>
 <span class="c1">//</span>
 <span class="c1">// Let&#39;s look at the minimal code required to use this</span>
-<span class="c1">// algorithm. First, the following header defining the</span>
-<span class="c1">// \doxygen{otb}{MultiChannelRAndGAndNIRIndexImageFilter}</span>
-<span class="c1">// class must be included.</span>
+<span class="c1">// algorithm.</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelRAndGAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVegetationIndicesFunctor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
@@ -322,13 +315,13 @@
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">AVI</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">InputPixelType</span><span class="p">,</span> <span class="n">InputPixelType</span><span class="p">,</span> <span class="n">OutputPixelType</span><span class="o">&gt;</span> <span class="n">FunctorType</span><span class="p">;</span>
 
   <span class="c1">// The</span>
-  <span class="c1">// \doxygen{otb}{MultiChannelRAndGAndNIRIndexImageFilter}</span>
+  <span class="c1">// \doxygen{itk}{UnaryFunctorImageFilter}</span>
   <span class="c1">// type is defined using the image types and the AVI functor as</span>
   <span class="c1">// template parameters. We then instantiate the filter itself.</span>
 
-  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelRAndGAndNIRIndexImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">MultiChannelRAndGAndNIRIndexImageFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">UnaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">AVIImageFilterTypeType</span><span class="p">;</span>
 
-  <span class="n">MultiChannelRAndGAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">MultiChannelRAndGAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">AVIImageFilterTypeType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">AVIImageFilterTypeType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
 
   <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
@@ -340,12 +333,12 @@
 
   <span class="c1">// The three used index bands (red, green and NIR) are declared.</span>
 
-  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
-  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetGreenIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
-  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]));</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetGreenIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]));</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">7</span><span class="p">]));</span>
 
   <span class="c1">// The $\lambda$ R, G and NIR parameters are set. The</span>
-  <span class="c1">// \doxygen{otb}{MultiChannelRAndGAndNIRIndexImageFilter}</span>
+  <span class="c1">// \doxygen{otb::Functor}{AVI}</span>
   <span class="c1">// class sets the default values of $\lambda$ to $660$, $560$ and</span>
   <span class="c1">// $830$.</span>
 

@@ -235,18 +235,30 @@
             
   <div class="section" id="scalingfilterexample-cxx">
 <span id="id1"></span><h1>ScalingFilterExample.cxx<a class="headerlink" href="#scalingfilterexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>On one hand, satellite images are commonly coded on more than 8 bits to provide
+the dynamic range required from shadows to clouds. On the other hand, image formats
+in use for printing and display are usually limited to 8 bits. We need to convert the value
+to enable a proper display. This is usually done using linear scaling. Of course, you have
+to be aware that some information is lost in the process.</p>
+<table border="1" class="docutils" id="figure1">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image1" src="../../../_images/QB_Toulouse_Ortho_PAN_casted.png" /></td>
+<td><img alt="image2" src="../../../_images/QB_Toulouse_Ortho_PAN_rescaled.png" /></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div>On the left, the image obtained by truncated pixel values at the dynamic acceptable for a png file (between 0 and 255). On the right, the same image with a proper rescaling.</div></blockquote>
 <p>Example usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./ScalingFilterExample Input/QB_Toulouse_Ortho_PAN.tif Output/QB_Toulouse_Ortho_PAN_rescaled.png Output/QB_Toulouse_Ortho_PAN_casted.png
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/ScalingFilterExample.cxx?inline=false">ScalingFilterExample.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// On one hand, satellite images are commonly coded on more than 8 bits to provide</span>
-<span class="c1">// the dynamic range required from shadows to clouds. On the other hand, image formats</span>
-<span class="c1">// in use for printing and display are usually limited to 8 bits. We need to convert the value</span>
-<span class="c1">// to enable a proper display. This is usually done using linear scaling. Of course, you have</span>
-<span class="c1">// to be aware that some information is lost in the process.</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
@@ -272,8 +284,7 @@
   <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span>                          <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
-  <span class="c1">//  The \doxygen{itk}{RescaleIntensityImageFilter} is used to rescale the value:</span>
-
+  <span class="c1">// The RescaleIntensityImageFilter is used to rescale the value</span>
   <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">RescaleIntensityImageFilter</span><span class="o">&lt;</span><span class="n">InputImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="o">&gt;</span> <span class="n">RescalerType</span><span class="p">;</span>
   <span class="n">RescalerType</span><span class="o">::</span><span class="n">Pointer</span>                                                     <span class="n">rescaler</span> <span class="o">=</span> <span class="n">RescalerType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">rescaler</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
@@ -291,22 +302,6 @@
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">caster</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-
-  <span class="c1">// Figure~\ref{fig:SCALING_FILTER} illustrates the difference between a proper scaling and</span>
-  <span class="c1">// a simple truncation of the value and demonstrates why it is</span>
-  <span class="c1">// important to keep this in mind.</span>
-  <span class="c1">// \begin{figure}</span>
-  <span class="c1">// \center</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{QB_Toulouse_Ortho_PAN_casted.eps}</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{QB_Toulouse_Ortho_PAN_rescaled.eps}</span>
-  <span class="c1">// \itkcaption[Scaling images]{On the left, the image obtained by truncated pixel values</span>
-  <span class="c1">// at the dynamic acceptable for a png file (between 0 and 255). On the right,</span>
-  <span class="c1">// the same image with</span>
-  <span class="c1">// a proper rescaling}</span>
-  <span class="c1">// \label{fig:SCALING_FILTER}</span>
-  <span class="c1">// \end{figure}</span>
-
-  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

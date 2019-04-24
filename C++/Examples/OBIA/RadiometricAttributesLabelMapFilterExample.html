@@ -245,7 +245,7 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//  This example shows the basic approach to perform object based analysis on a image.</span>
 <span class="c1">//  The input image is firstly segmented using the \doxygen{otb}{MeanShiftSegmentationFilter}</span>
 <span class="c1">//  Then each segmented region is converted to a Map of labeled objects.</span>
-<span class="c1">//  Afterwards the \doxygen{otb}{otbMultiChannelRAndNIRIndexImageFilter} computes</span>
+<span class="c1">//  Afterwards the \doxygen{itk}{UnaryFunctorImageFilter} computes</span>
 <span class="c1">//  radiometric attributes for each object. In this example the NDVI is computed.</span>
 <span class="c1">//  The computed feature is passed to the \doxygen{otb}{BandsStatisticsAttributesLabelMapFilter}</span>
 <span class="c1">//  which computes statistics over the resulting band.</span>
@@ -265,7 +265,8 @@
 <span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelExtractROI.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbAttributesMapOpeningLabelMapFilter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbVectorRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;otbMultiChannelRAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVegetationIndicesFunctor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageToVectorImageCastFilter.h&quot;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
@@ -315,8 +316,8 @@
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">BandsStatisticsAttributesLabelMapFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span> <span class="n">RadiometricLabelMapFilterType</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">AttributesMapOpeningLabelMapFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="o">&gt;</span>                       <span class="n">OpeningLabelMapFilterType</span><span class="p">;</span>
   <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">LabelMapToBinaryImageFilter</span><span class="o">&lt;</span><span class="n">LabelMapType</span><span class="p">,</span> <span class="n">MaskImageType</span><span class="o">&gt;</span>               <span class="n">LabelMapToBinaryImageFilterType</span><span class="p">;</span>
-  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">MultiChannelRAndNIRIndexImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span>        <span class="n">NDVIImageFilterType</span><span class="p">;</span>
-  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToVectorImageCastFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span>               <span class="n">ImageToVectorImageCastFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">UnaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">VectorImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span><span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">NDVI</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span><span class="n">PixelType</span><span class="p">,</span><span class="n">PixelType</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">NDVIImageFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">ImageToVectorImageCastFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">VectorImageType</span><span class="o">&gt;</span>   <span class="n">ImageToVectorImageCastFilterType</span><span class="p">;</span>
 
   <span class="n">ReaderType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">reffname</span><span class="p">);</span>
@@ -374,8 +375,8 @@
   <span class="c1">//  In our case, statistics are computed on the NDVI coefficient on each label object.</span>
   <span class="n">NDVIImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">ndviImageFilter</span> <span class="o">=</span> <span class="n">NDVIImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
 
-  <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
-  <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetRedIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">GetFunctor</span><span class="p">().</span><span class="n">SetNIRIndex</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
   <span class="n">ndviImageFilter</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vreader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
 
   <span class="n">ImageToVectorImageCastFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">ndviVectorImageFilter</span> <span class="o">=</span> <span class="n">ImageToVectorImageCastFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>

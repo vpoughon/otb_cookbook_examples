@@ -239,12 +239,11 @@
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/Radiometry/NDVIRAndNIRVegetationIndexImageFilter.cxx?inline=false">NDVIRAndNIRVegetationIndexImageFilter.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{otb::RAndNIRIndexImageFilter}</span>
-<span class="c1">// \index{otb::VegetationIndicesFunctor}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// \index{otb::VegetationIndicesFunctor}</span>
 <span class="c1">// \index{otb::VegetationIndicesFunctor!header}</span>
 <span class="c1">//</span>
 <span class="c1">// The following example illustrates the use of the</span>
-<span class="c1">// \doxygen{otb}{RAndNIRIndexImageFilter} with the use of the Normalized</span>
+<span class="c1">// \doxygen{itk}{BinaryFunctorImageFilter} with the use of the Normalized</span>
 <span class="c1">// Difference Vegatation Index (NDVI).</span>
 <span class="c1">// NDVI computes the difference between the NIR channel, noted $L_{NIR}$, and the red channel,</span>
 <span class="c1">// noted $L_{r}$ radiances reflected from the surface and transmitted through the atmosphere:</span>
@@ -265,22 +264,15 @@
 <span class="c1">//  \item \subdoxygen{otb}{Functor}{IPVI}</span>
 <span class="c1">//  \item \subdoxygen{otb}{Functor}{TNDVI}</span>
 <span class="c1">//  \end{itemize}</span>
-
-<span class="c1">// With the \doxygen{otb}{RAndNIRIndexImageFilter} class the filter</span>
-<span class="c1">// inputs are one channel images: one inmage represents the NIR channel, the</span>
-<span class="c1">// the other the NIR channel.</span>
 <span class="c1">//</span>
-<span class="c1">// Let&#39;s look at the minimal code required to use this algorithm. First, the following header</span>
-<span class="c1">// defining the \doxygen{otb}{RAndNIRIndexImageFilter}</span>
-<span class="c1">// class must be included.</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;otbRAndNIRIndexImageFilter.h&quot;</span><span class="cp"></span>
+<span class="c1">// Let&#39;s look at the minimal code required to use this algorithm.</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;itkMacro.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImage.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;itkUnaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;itkBinaryFunctorImageFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;otbVegetationIndicesFunctor.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;itkRescaleIntensityImageFilter.h&quot;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
@@ -311,17 +303,17 @@
   <span class="c1">// The NDVI (Normalized Difference Vegetation Index) is instantiated using</span>
   <span class="c1">// the images pixel type as template parameters. It is</span>
   <span class="c1">// implemented as a functor class which will be passed as a</span>
-  <span class="c1">// parameter to an \doxygen{otb}{RAndNIRIndexImageFilter}.</span>
+  <span class="c1">// parameter to an \doxygen{itk}{BinaryFunctorImageFilter}.</span>
 
   <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">Functor</span><span class="o">::</span><span class="n">NDVI</span><span class="o">&lt;</span><span class="n">InputPixelType</span><span class="p">,</span> <span class="n">InputPixelType</span><span class="p">,</span> <span class="n">OutputPixelType</span><span class="o">&gt;</span> <span class="n">FunctorType</span><span class="p">;</span>
 
-  <span class="c1">// The \doxygen{otb}{RAndNIRIndexImageFilter} type is instantiated using the images</span>
+  <span class="c1">// The \doxygen{itk}{BinaryFunctorImageFilter} type is instantiated using the images</span>
   <span class="c1">// types and the NDVI functor as template parameters.</span>
 
-  <span class="k">typedef</span> <span class="n">otb</span><span class="o">::</span><span class="n">RAndNIRIndexImageFilter</span><span class="o">&lt;</span><span class="n">InputRImageType</span><span class="p">,</span> <span class="n">InputNIRImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">RAndNIRIndexImageFilterType</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">itk</span><span class="o">::</span><span class="n">BinaryFunctorImageFilter</span><span class="o">&lt;</span><span class="n">InputRImageType</span><span class="p">,</span> <span class="n">InputNIRImageType</span><span class="p">,</span> <span class="n">OutputImageType</span><span class="p">,</span> <span class="n">FunctorType</span><span class="o">&gt;</span> <span class="n">NDVIImageFilterType</span><span class="p">;</span>
 
   <span class="c1">// Instantiating object</span>
-  <span class="n">RAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span>    <span class="o">=</span> <span class="n">RAndNIRIndexImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">NDVIImageFilterType</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">filter</span>            <span class="o">=</span> <span class="n">NDVIImageFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">RReaderType</span><span class="o">::</span><span class="n">Pointer</span>                 <span class="n">readerR</span>   <span class="o">=</span> <span class="n">RReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">NIRReaderType</span><span class="o">::</span><span class="n">Pointer</span>               <span class="n">readerNIR</span> <span class="o">=</span> <span class="n">NIRReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">WriterType</span><span class="o">::</span><span class="n">Pointer</span>                  <span class="n">writer</span>    <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
@@ -336,8 +328,8 @@
   <span class="c1">// the reader output and the filter output is linked to the writer</span>
   <span class="c1">// input.</span>
 
-  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInputR</span><span class="p">(</span><span class="n">readerR</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
-  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInputNIR</span><span class="p">(</span><span class="n">readerNIR</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput1</span><span class="p">(</span><span class="n">readerR</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">filter</span><span class="o">-&gt;</span><span class="n">SetInput2</span><span class="p">(</span><span class="n">readerNIR</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
 
   <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">filter</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
 

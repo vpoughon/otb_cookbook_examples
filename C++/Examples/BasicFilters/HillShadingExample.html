@@ -235,24 +235,34 @@
             
   <div class="section" id="hillshadingexample-cxx">
 <span id="id1"></span><h1>HillShadingExample.cxx<a class="headerlink" href="#hillshadingexample-cxx" title="Permalink to this headline">¶</a></h1>
+<p>Visualization of digital elevation models (DEM) is often more intuitive by
+simulating a lighting source and generating the corresponding shadows. This
+principle is called hill shading.</p>
+<p>Using <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1HillShadingFilter.html">otb::HillShadingFilter</a> and the DEM image generated
+using the <a class="reference external" href="http://www.orfeo-toolbox.org/doxygen/classotb_1_1DEMToImageGenerator.html">otb::DEMToImageGenerator</a>, you can easily obtain a representation
+of the DEM. Better yet, using the <a class="reference external" href="http://www.itk.org/Doxygen/html/classitk_1_1ScalarToRGBColormapImageFilter.html">itk::ScalarToRGBColormapImageFilter</a>
+combined with the <code class="docutils literal notranslate"><span class="pre">ReliefColormapFunctor</span></code> you can easily generate the
+classic elevation maps.</p>
+<p>This example will focus on the shading itself.</p>
+<table border="1" class="docutils" id="figure1">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="image1" src="../../../_images/HillShadingExample.png" /></td>
+<td><img alt="image2" src="../../../_images/HillShadingColorExample.png" /></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div>Hill shading obtained from SRTM data (left) and combined with the color representation (right)</div></blockquote>
 <p>Example usage:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./HillShadingExample Output/HillShadingExample.png Output/HillShadingColorExample.png <span class="m">6</span>.5 <span class="m">45</span>.5 <span class="m">500</span> <span class="m">500</span> <span class="m">0</span>.002 -0.002 Input/DEM_srtm
 </pre></div>
 </div>
 <p>Example source code (<a class="reference external" href="https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/raw/develop/Examples/BasicFilters/HillShadingExample.cxx?inline=false">HillShadingExample.cxx</a>):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Visualization of digital elevation models (DEM) is often more intuitive by simulating a</span>
-<span class="c1">// lighting source and generating the corresponding shadows. This principle is called</span>
-<span class="c1">// hill shading.</span>
-<span class="c1">//</span>
-<span class="c1">// Using a simple functor \doxygen{otb}{HillShadingFunctor} and the DEM image generated</span>
-<span class="c1">// using the \doxygen{otb}{DEMToImageGenerator} (refer to \ref{sec:ReadDEM}), you can easily</span>
-<span class="c1">// obtain a representation of the DEM. Better yet, using the</span>
-<span class="c1">// \doxygen{otb}{ScalarToRainbowRGBPixelFunctor}, combined with the</span>
-<span class="c1">// \doxygen{otb}{ReliefColormapFunctor} you can easily generate the classic elevation maps.</span>
-<span class="c1">//</span>
-<span class="c1">// This example will focus on the shading itself.</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;otbImageFileReader.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;otbImageFileWriter.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;otbDEMToImageGenerator.h&quot;</span><span class="cp"></span>
@@ -266,7 +276,6 @@
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
-
   <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &lt;output_filename&gt; &lt;output_color_filename&gt; &quot;</span>
@@ -378,21 +387,8 @@
 
   <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">multiply</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
 
-  <span class="k">try</span>
-  <span class="p">{</span>
-    <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-    <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-  <span class="p">}</span>
-  <span class="k">catch</span> <span class="p">(</span><span class="n">itk</span><span class="o">::</span><span class="n">ExceptionObject</span><span class="o">&amp;</span> <span class="n">excep</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Exception caught !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">excep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">catch</span> <span class="p">(...)</span>
-  <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Unknown exception !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
-  <span class="p">}</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+  <span class="n">writer2</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
 
   <span class="n">otb</span><span class="o">::</span><span class="n">WorldFile</span><span class="o">::</span><span class="n">Pointer</span> <span class="n">worldFile</span> <span class="o">=</span> <span class="n">otb</span><span class="o">::</span><span class="n">WorldFile</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
   <span class="n">worldFile</span><span class="o">-&gt;</span><span class="n">SetLonOrigin</span><span class="p">(</span><span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
@@ -404,19 +400,6 @@
   <span class="n">worldFile</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
   <span class="n">worldFile</span><span class="o">-&gt;</span><span class="n">SetImageFilename</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
   <span class="n">worldFile</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
-
-  <span class="c1">// Figure~\ref{fig:HILL_SHADING} shows the hill shading result from SRTM data.</span>
-  <span class="c1">//</span>
-  <span class="c1">// \begin{figure}</span>
-  <span class="c1">// \center</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{HillShadingExample.eps}</span>
-  <span class="c1">// \includegraphics[width=0.44\textwidth]{HillShadingColorExample.eps}</span>
-  <span class="c1">// \itkcaption[Hill shading]{Hill shading obtained from SRTM data (left) and combined with</span>
-  <span class="c1">// the color representation (right)}</span>
-  <span class="c1">// \label{fig:HILL_SHADING}</span>
-  <span class="c1">// \end{figure}</span>
-
-  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

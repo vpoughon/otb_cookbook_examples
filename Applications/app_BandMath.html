@@ -277,7 +277,7 @@ Save application parameters to an XML file.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>From the command-line:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_BandMath -il verySmallFSATSW_r.tif verySmallFSATSW_nir.tif verySmallFSATSW.tif -out apTvUtBandMathOutput.tif -exp <span class="s1">&#39;cos( im1b1 ) &gt; cos( im2b1 ) ? im3b1 : im3b2&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>otbcli_BandMath -il verySmallFSATSW_r.tif verySmallFSATSW_nir.tif verySmallFSATSW.tif -out apTvUtBandMathOutput.tif -exp <span class="s2">&quot;cos( im1b1 ) &gt; cos( im2b1 ) ? im3b1 : im3b2&quot;</span>
 </pre></div>
 </div>
 <p>From Python:</p>
@@ -287,7 +287,7 @@ Save application parameters to an XML file.</p>
 
 <span class="n">app</span><span class="o">.</span><span class="n">SetParameterStringList</span><span class="p">(</span><span class="s2">&quot;il&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;verySmallFSATSW_r.tif&#39;</span><span class="p">,</span> <span class="s1">&#39;verySmallFSATSW_nir.tif&#39;</span><span class="p">,</span> <span class="s1">&#39;verySmallFSATSW.tif&#39;</span><span class="p">])</span>
 <span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;apTvUtBandMathOutput.tif&quot;</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;exp&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;cos( im1b1 ) &gt; cos( im2b1 ) ? im3b1 : im3b2&#39;&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">SetParameterString</span><span class="p">(</span><span class="s2">&quot;exp&quot;</span><span class="p">,</span> <span class="s2">&quot;cos( im1b1 ) &gt; cos( im2b1 ) ? im3b1 : im3b2&quot;</span><span class="p">)</span>
 
 <span class="n">app</span><span class="o">.</span><span class="n">ExecuteAndWriteOutput</span><span class="p">()</span>
 </pre></div>
